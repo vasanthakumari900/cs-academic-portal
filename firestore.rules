@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function userRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+    function isAdmin() {
+      return isSignedIn() && userRole() == 'admin';
+    }
+    function isFaculty() {
+      return isSignedIn() && userRole() == 'faculty';
+    }
+    function isOwner(field) {
+      return isSignedIn() && request.resource.data[field] == request.auth.uid;
+    }
+
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && request.auth.uid == userId;
+      allow update: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    match /videos/{id} {
+      allow read: if true;
+      allow create: if isFaculty() || isAdmin();
+      allow update, delete: if isAdmin() ||
+        (isFaculty() && resource.data.facultyId == request.auth.uid);
+    }
+
+    match /notes/{id} {
+      allow read: if true;
+      allow create: if isFaculty() || isAdmin();
+      allow update, delete: if isAdmin() ||
+        (isFaculty() && resource.data.facultyId == request.auth.uid);
+    }
+
+    match /questionPapers/{id} {
+      allow read: if true;
+      allow create: if isFaculty() || isAdmin();
+      allow update, delete: if isAdmin() ||
+        (isFaculty() && resource.data.facultyId == request.auth.uid);
+    }
+
+    match /placements/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /notifications/{id} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update, delete: if isAdmin();
+    }
+  }
+}
