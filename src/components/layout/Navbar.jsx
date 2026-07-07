@@ -66,9 +66,15 @@ export default function Navbar() {
           </button>
 
           {user ? (
-            <Link to={user.type === "faculty" ? "/faculty/dashboard" : "/student/dashboard"} className="hidden sm:inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 px-4 py-2 text-xs font-semibold text-white shadow-soft hover:shadow-premium transition-all">
-              Dashboard
-            </Link>
+            <div className="hidden sm:flex items-center gap-3">
+              <span className="text-xs font-semibold text-gray-500">
+                Welcome, <span className="text-blue-700">{user.name}</span>
+                {user.section && <span className="ml-1 text-[10px] font-medium text-gray-400">• Sec {user.section}</span>}
+              </span>
+              <Link to={user.type === "faculty" ? "/faculty/dashboard" : "/student/dashboard"} className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 px-4 py-2 text-xs font-semibold text-white shadow-soft hover:shadow-premium transition-all">
+                Dashboard
+              </Link>
+            </div>
           ) : (
             <Link to="/login" className="hidden sm:inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 px-4 py-2 text-xs font-semibold text-white shadow-soft hover:shadow-premium transition-all">
               Login

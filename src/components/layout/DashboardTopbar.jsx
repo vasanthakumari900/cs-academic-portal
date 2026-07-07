@@ -36,8 +36,11 @@ export default function DashboardTopbar({ onMenuClick, title }) {
           className="flex h-9 w-9 items-center justify-center rounded-full text-slate-600 hover:bg-maroon/5 dark:text-slate-300 dark:hover:bg-white/10"
         >
           {theme === "dark" ? <FiSun size={18} /> : <FiMoon size={18} />}
-        </button>
-        <NotificationPanel />
+        </button>          <NotificationPanel />
+        <span className="hidden sm:block text-xs font-medium text-slate-500 dark:text-slate-400">
+          Welcome, <span className="text-maroon dark:text-gold font-semibold">{user?.name || user?.rollNumber}</span>
+          {user?.section && <span className="ml-1 text-[10px] font-medium text-slate-400 dark:text-slate-500">• Sec {user.section}</span>}
+        </span>
         <div className="mx-1 flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-maroon to-gold text-xs font-bold text-white">
           {initials(user?.name || user?.rollNumber?.[0] || "U")}
         </div>

@@ -4,14 +4,117 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext(null);
 
-// Demo student records
-const DEMO_STUDENTS = {
-  "24E3001": { name: "Arun Kumar", rollNumber: "24E3001", dob: "15/06/2005", year: 1, semester: 1, type: "student" },
-  "24E3002": { name: "Priya Sharma", rollNumber: "24E3002", dob: "22/03/2005", year: 1, semester: 1, type: "student" },
-  "24E3003": { name: "Rahul Verma", rollNumber: "24E3003", dob: "10/11/2004", year: 2, semester: 3, type: "student" },
-  "24E3004": { name: "Sneha Patel", rollNumber: "24E3004", dob: "05/09/2005", year: 1, semester: 1, type: "student" },
-  "23E3006": { name: "Divya Nair", rollNumber: "23E3006", dob: "28/07/2004", year: 3, semester: 5, type: "student" },
-  "23E3008": { name: "Ananya Iyer", rollNumber: "23E3008", dob: "30/12/2003", year: 3, semester: 5, type: "student" },
+// 3rd Year A & B Section student records
+const STUDENTS = {
+  "24E3036": { name: "G BHUVANESHWARI", rollNumber: "24E3036", dob: "23/09/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3014": { name: "DEEPIKA T", rollNumber: "24E3014", dob: "30/05/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3013": { name: "MYTHILI B", rollNumber: "24E3013", dob: "10/12/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3055": { name: "PRADHIKSHA B", rollNumber: "24E3055", dob: "27/10/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3034": { name: "RAMYA S", rollNumber: "24E3034", dob: "12/01/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3010": { name: "ROSHITHA N", rollNumber: "24E3010", dob: "26/06/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3002": { name: "SANTHOSHINI R", rollNumber: "24E3002", dob: "13/05/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3029": { name: "SHARMELA", rollNumber: "24E3029", dob: "10/08/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3046": { name: "SREE PRIYA", rollNumber: "24E3046", dob: "19/03/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3004": { name: "SRISAKTHI S", rollNumber: "24E3004", dob: "19/06/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3047": { name: "V SUREKHA", rollNumber: "24E3047", dob: "11/09/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3031": { name: "A S VARSHINEE", rollNumber: "24E3031", dob: "02/02/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3039": { name: "AHMED AADHIL", rollNumber: "24E3039", dob: "26/03/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3012": { name: "S BARATH", rollNumber: "24E3012", dob: "19/07/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3022": { name: "BHARATH A", rollNumber: "24E3022", dob: "13/03/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3026": { name: "S BHUVANESH", rollNumber: "24E3026", dob: "29/10/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3003": { name: "CHANDRU", rollNumber: "24E3003", dob: "28/11/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3041": { name: "DARSHAN N", rollNumber: "24E3041", dob: "03/05/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3019": { name: "DEEPAKRAJA A", rollNumber: "24E3019", dob: "22/01/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3018": { name: "DINESH RAJ S", rollNumber: "24E3018", dob: "19/06/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3005": { name: "GIRITHARAN", rollNumber: "24E3005", dob: "29/01/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3035": { name: "KARAN RAJ .V", rollNumber: "24E3035", dob: "22/08/2002", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3033": { name: "KARTHIKEYAN P", rollNumber: "24E3033", dob: "17/11/2005", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3040": { name: "KARTHIKEYAN", rollNumber: "24E3040", dob: "02/02/2004", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3024": { name: "KEERTHIVASAN", rollNumber: "24E3024", dob: "06/12/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3051": { name: "KIRUBAKARAN", rollNumber: "24E3051", dob: "09/11/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3057": { name: "KISHOREKUMAR I", rollNumber: "24E3057", dob: "09/08/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3011": { name: "KRISHNAKUMAR", rollNumber: "24E3011", dob: "06/12/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3050": { name: "LOKESH", rollNumber: "24E3050", dob: "09/07/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3015": { name: "MUKESH V", rollNumber: "24E3015", dob: "30/03/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3030": { name: "NAVEEN K", rollNumber: "24E3030", dob: "01/09/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3042": { name: "NAVEEN", rollNumber: "24E3042", dob: "01/02/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3044": { name: "PRADEEP M", rollNumber: "24E3044", dob: "05/03/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3056": { name: "PRAKASH K J", rollNumber: "24E3056", dob: "26/08/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3021": { name: "PREMNATH G", rollNumber: "24E3021", dob: "20/04/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3020": { name: "RAJPRIYAN D", rollNumber: "24E3020", dob: "10/08/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3028": { name: "ROHITHRAMANA MOORTHI", rollNumber: "24E3028", dob: "05/07/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3001": { name: "RUBESH R", rollNumber: "24E3001", dob: "26/09/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3023": { name: "R R SAISURIYA", rollNumber: "24E3023", dob: "13/12/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3025": { name: "SANJAY N", rollNumber: "24E3025", dob: "28/12/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3048": { name: "M.B. SHARAN KUMAR", rollNumber: "24E3048", dob: "10/01/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3007": { name: "M SHARATHI", rollNumber: "24E3007", dob: "03/07/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3043": { name: "SHYAM V", rollNumber: "24E3043", dob: "20/07/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3008": { name: "SOWNDER R", rollNumber: "24E3008", dob: "02/12/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3027": { name: "SRI SANJAY R M", rollNumber: "24E3027", dob: "29/05/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3045": { name: "SUDHAN M", rollNumber: "24E3045", dob: "25/06/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3053": { name: "TAMILARASAN R", rollNumber: "24E3053", dob: "12/01/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3006": { name: "THARUN B S", rollNumber: "24E3006", dob: "11/08/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3017": { name: "YUVANRAJKUMAR P", rollNumber: "24E3017", dob: "05/05/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3032": { name: "V GANESH KUMAR", rollNumber: "24E3032", dob: "16/01/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3038": { name: "ASJ POTHI VIGNESWAR", rollNumber: "24E3038", dob: "30/10/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3049": { name: "YASHIKA V", rollNumber: "24E3049", dob: "13/02/2007", year: 3, semester: 5, section: "B", type: "student" },
+
+  // ──── 3rd Year A Section ────
+  "24E2901": { name: "SANTHOSH KUMAR S", rollNumber: "24E2901", dob: "04/05/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2902": { name: "SUJITH G", rollNumber: "24E2902", dob: "11/09/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2903": { name: "MONISHA S", rollNumber: "24E2903", dob: "08/01/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2904": { name: "YUVAN SHANKAR A", rollNumber: "24E2904", dob: "02/06/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2905": { name: "KISHORE S", rollNumber: "24E2905", dob: "26/11/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2906": { name: "MOHAMAD SUHAIB N", rollNumber: "24E2906", dob: "15/01/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2907": { name: "ABIRAMI K", rollNumber: "24E2907", dob: "19/09/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2908": { name: "OVIYA V", rollNumber: "24E2908", dob: "14/06/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2909": { name: "PREM KUMAR C", rollNumber: "24E2909", dob: "06/03/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2910": { name: "THIRU RAGAVAN S P", rollNumber: "24E2910", dob: "02/11/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2912": { name: "RAMYA S", rollNumber: "24E2912", dob: "17/11/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2913": { name: "BALAJI M", rollNumber: "24E2913", dob: "03/02/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2914": { name: "MOHAMMED SHAIK DHAWOOD.N.A", rollNumber: "24E2914", dob: "18/10/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2915": { name: "YOGAS D", rollNumber: "24E2915", dob: "06/08/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2916": { name: "HARISH RAAGAV G", rollNumber: "24E2916", dob: "20/08/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2918": { name: "DHIVESH P", rollNumber: "24E2918", dob: "12/04/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2919": { name: "HARSHIYA BEGAM S", rollNumber: "24E2919", dob: "01/03/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2921": { name: "NITHYA SELVAM P M", rollNumber: "24E2921", dob: "31/08/2005", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2922": { name: "SAI CHARHAN S", rollNumber: "24E2922", dob: "10/12/2005", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2923": { name: "ROKITH K", rollNumber: "24E2923", dob: "26/09/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2924": { name: "GOKUL D", rollNumber: "24E2924", dob: "03/05/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2925": { name: "DINESH PANDIYAN K", rollNumber: "24E2925", dob: "19/03/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2926": { name: "PRIYADHARSHAN T", rollNumber: "24E2926", dob: "15/04/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2927": { name: "KIRAN C", rollNumber: "24E2927", dob: "06/12/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2928": { name: "RAKSHIKA R", rollNumber: "24E2928", dob: "15/12/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2929": { name: "HEMKUMAR B U", rollNumber: "24E2929", dob: "11/11/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2930": { name: "ANU M", rollNumber: "24E2930", dob: "30/10/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2931": { name: "KANISH M", rollNumber: "24E2931", dob: "26/11/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2932": { name: "MONISH G", rollNumber: "24E2932", dob: "21/09/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2933": { name: "NETHRAA D", rollNumber: "24E2933", dob: "11/02/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2934": { name: "ANEESH ASWANTH J", rollNumber: "24E2934", dob: "22/06/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2935": { name: "KRISHNA V", rollNumber: "24E2935", dob: "03/04/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2936": { name: "RANJITH D", rollNumber: "24E2936", dob: "28/05/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2937": { name: "SITHESHWARAN.M", rollNumber: "24E2937", dob: "24/01/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2938": { name: "GOKULAKRISHNAN M", rollNumber: "24E2938", dob: "07/09/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2939": { name: "MALAVIKKA S", rollNumber: "24E2939", dob: "24/08/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2940": { name: "ALEXANDER KELVIN S", rollNumber: "24E2940", dob: "17/08/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2941": { name: "JOHN PAUL J", rollNumber: "24E2941", dob: "01/09/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2942": { name: "MANISH S", rollNumber: "24E2942", dob: "11/12/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2943": { name: "KARTHIKEYAN G", rollNumber: "24E2943", dob: "10/05/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2944": { name: "SHASHANK V C", rollNumber: "24E2944", dob: "09/06/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2945": { name: "MYTHRISH B", rollNumber: "24E2945", dob: "12/11/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2946": { name: "AMBRISH S", rollNumber: "24E2946", dob: "08/09/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2947": { name: "ROHITH R", rollNumber: "24E2947", dob: "13/01/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2948": { name: "PRAVIJITH A V", rollNumber: "24E2948", dob: "02/05/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2949": { name: "GERSHOM ABRAHAM M P", rollNumber: "24E2949", dob: "01/01/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2950": { name: "KARUNYA M", rollNumber: "24E2950", dob: "29/05/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2951": { name: "REETHISH DANIEL D", rollNumber: "24E2951", dob: "14/08/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2952": { name: "GODWIN D", rollNumber: "24E2952", dob: "04/12/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2953": { name: "GUNAL B", rollNumber: "24E2953", dob: "06/05/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2954": { name: "CHELLADURAI P", rollNumber: "24E2954", dob: "16/10/2005", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2955": { name: "JASHVA E", rollNumber: "24E2955", dob: "31/03/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2956": { name: "SHYAM R", rollNumber: "24E2956", dob: "13/10/2006", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2957": { name: "HARSHAK R", rollNumber: "24E2957", dob: "28/02/2007", year: 3, semester: 5, section: "A", type: "student" },
+  "24E2958": { name: "YUVAN YUGANDAR A", rollNumber: "24E2958", dob: "05/08/2006", year: 3, semester: 5, section: "A", type: "student" },
 };
 
 // Demo faculty records
@@ -36,25 +139,11 @@ export function AuthProvider({ children }) {
 
   function login(rollNumber, dob, loginType = "student") {
     const normalizedRoll = rollNumber.trim().toUpperCase();
-    const records = loginType === "faculty" ? DEMO_FACULTY : DEMO_STUDENTS;
+    const records = loginType === "faculty" ? DEMO_FACULTY : STUDENTS;
     const record = records[normalizedRoll];
 
-    // Flexible: accept any 24E30xx format for students, any FACxxx for faculty
     if (!record) {
-      // For students, accept any roll matching 24E30XX pattern
-      if (loginType === "student" && /^24E30\d{2}$/i.test(normalizedRoll)) {
-        const userData = {
-          name: `Student ${normalizedRoll}`,
-          rollNumber: normalizedRoll,
-          year: 1,
-          semester: 1,
-          type: "student",
-        };
-        setUser(userData);
-        localStorage.setItem("ddgdvc_user", JSON.stringify(userData));
-        return userData;
-      }
-      // For faculty, accept any FACXXX
+      // For faculty, accept any FACXXX pattern
       if (loginType === "faculty" && /^FAC\d{3}$/i.test(normalizedRoll)) {
         const userData = {
           name: `Faculty ${normalizedRoll}`,
