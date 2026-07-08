@@ -2,3 +2,7 @@ node_modules
 dist
 .env
 .DS_Store
+*.log
+vite-*.txt
+folder.html
+os_folder.html

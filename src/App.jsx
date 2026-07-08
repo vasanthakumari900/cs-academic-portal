@@ -121,20 +121,25 @@ export default function App() {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<AnimatedPage><Home /></AnimatedPage>} />
-          <Route path="/e-content" element={<AnimatedPage><EContent /></AnimatedPage>} />
-          <Route path="/notes" element={<AnimatedPage><Notes /></AnimatedPage>} />
-          <Route path="/question-papers" element={<AnimatedPage><QuestionPapers /></AnimatedPage>} />
-          <Route path="/placements" element={<AnimatedPage><Placements /></AnimatedPage>} />
-          <Route path="/about" element={<AnimatedPage><About /></AnimatedPage>} />
-          <Route path="/search" element={<AnimatedPage><Search /></AnimatedPage>} />
-          <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
-          <Route path="/register" element={<AnimatedPage><Login /></AnimatedPage>} />
-          <Route path="/forgot-password" element={<AnimatedPage><Login /></AnimatedPage>} />
-        </Route>
+        {/* ─── Auth pages — always public ─── */}
+        <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
+        <Route path="/register" element={<AnimatedPage><Login /></AnimatedPage>} />
+        <Route path="/forgot-password" element={<AnimatedPage><Login /></AnimatedPage>} />
 
+        {/* ─── Everything else requires authentication ─── */}
         <Route element={<ProtectedRoute />}>
+          {/* Public-style pages with navbar & footer (accessible after login) */}
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<AnimatedPage><Home /></AnimatedPage>} />
+            <Route path="/e-content" element={<AnimatedPage><EContent /></AnimatedPage>} />
+            <Route path="/notes" element={<AnimatedPage><Notes /></AnimatedPage>} />
+            <Route path="/question-papers" element={<AnimatedPage><QuestionPapers /></AnimatedPage>} />
+            <Route path="/placements" element={<AnimatedPage><Placements /></AnimatedPage>} />
+            <Route path="/about" element={<AnimatedPage><About /></AnimatedPage>} />
+            <Route path="/search" element={<AnimatedPage><Search /></AnimatedPage>} />
+          </Route>
+
+          {/* Student dashboard */}
           <Route element={<DashboardLayout title="Student Dashboard" />}>
             <Route path="/student/dashboard" element={<AnimatedPage><StudentDashboard /></AnimatedPage>} />
             <Route path="/student/videos" element={<AnimatedPage><StudentEContent /></AnimatedPage>} />
@@ -142,31 +147,33 @@ export default function App() {
             <Route path="/student/question-papers" element={<AnimatedPage><StudentQuestionPapers /></AnimatedPage>} />
             <Route path="/student/placements" element={<AnimatedPage><StudentPlacements /></AnimatedPage>} />
           </Route>
-        </Route>
 
-        <Route element={<ProtectedRoute allowedRoles={[ROLES.FACULTY]} />}>
-          <Route element={<DashboardLayout title="Faculty Dashboard" items={facultyNav} />}>
-            <Route path="/faculty/dashboard" element={<AnimatedPage><FacultyDashboard /></AnimatedPage>} />
-            <Route path="/faculty/upload-video" element={<AnimatedPage><UploadVideo /></AnimatedPage>} />
-            <Route path="/faculty/upload-notes" element={<AnimatedPage><UploadNotes /></AnimatedPage>} />
-            <Route path="/faculty/upload-question-papers" element={<AnimatedPage><UploadQuestionPapers /></AnimatedPage>} />
-            <Route path="/faculty/manage-uploads" element={<AnimatedPage><ManageUploads /></AnimatedPage>} />
-            <Route path="/faculty/profile" element={<AnimatedPage><FacultyProfile /></AnimatedPage>} />
+          {/* Faculty dashboard */}
+          <Route element={<ProtectedRoute allowedRoles={[ROLES.FACULTY]} />}>
+            <Route element={<DashboardLayout title="Faculty Dashboard" items={facultyNav} />}>
+              <Route path="/faculty/dashboard" element={<AnimatedPage><FacultyDashboard /></AnimatedPage>} />
+              <Route path="/faculty/upload-video" element={<AnimatedPage><UploadVideo /></AnimatedPage>} />
+              <Route path="/faculty/upload-notes" element={<AnimatedPage><UploadNotes /></AnimatedPage>} />
+              <Route path="/faculty/upload-question-papers" element={<AnimatedPage><UploadQuestionPapers /></AnimatedPage>} />
+              <Route path="/faculty/manage-uploads" element={<AnimatedPage><ManageUploads /></AnimatedPage>} />
+              <Route path="/faculty/profile" element={<AnimatedPage><FacultyProfile /></AnimatedPage>} />
+            </Route>
           </Route>
-        </Route>
 
-        <Route element={<ProtectedRoute allowedRoles={[ROLES.ADMIN]} />}>
-          <Route element={<DashboardLayout title="Admin Dashboard" items={adminNav} />}>
-            <Route path="/admin/dashboard" element={<AnimatedPage><AdminDashboard /></AnimatedPage>} />
-            <Route path="/admin/users" element={<AnimatedPage><ManageUsers /></AnimatedPage>} />
-            <Route path="/admin/faculty" element={<AnimatedPage><ManageFaculty /></AnimatedPage>} />
-            <Route path="/admin/students" element={<AnimatedPage><ManageStudents /></AnimatedPage>} />
-            <Route path="/admin/videos" element={<AnimatedPage><ManageVideos /></AnimatedPage>} />
-            <Route path="/admin/notes" element={<AnimatedPage><ManageNotes /></AnimatedPage>} />
-            <Route path="/admin/question-papers" element={<AnimatedPage><ManageQuestionPapers /></AnimatedPage>} />
-            <Route path="/admin/placements" element={<AnimatedPage><ManagePlacements /></AnimatedPage>} />
-            <Route path="/admin/analytics" element={<AnimatedPage><Analytics /></AnimatedPage>} />
-            <Route path="/admin/settings" element={<AnimatedPage><Settings /></AnimatedPage>} />
+          {/* Admin dashboard */}
+          <Route element={<ProtectedRoute allowedRoles={[ROLES.ADMIN]} />}>
+            <Route element={<DashboardLayout title="Admin Dashboard" items={adminNav} />}>
+              <Route path="/admin/dashboard" element={<AnimatedPage><AdminDashboard /></AnimatedPage>} />
+              <Route path="/admin/users" element={<AnimatedPage><ManageUsers /></AnimatedPage>} />
+              <Route path="/admin/faculty" element={<AnimatedPage><ManageFaculty /></AnimatedPage>} />
+              <Route path="/admin/students" element={<AnimatedPage><ManageStudents /></AnimatedPage>} />
+              <Route path="/admin/videos" element={<AnimatedPage><ManageVideos /></AnimatedPage>} />
+              <Route path="/admin/notes" element={<AnimatedPage><ManageNotes /></AnimatedPage>} />
+              <Route path="/admin/question-papers" element={<AnimatedPage><ManageQuestionPapers /></AnimatedPage>} />
+              <Route path="/admin/placements" element={<AnimatedPage><ManagePlacements /></AnimatedPage>} />
+              <Route path="/admin/analytics" element={<AnimatedPage><Analytics /></AnimatedPage>} />
+              <Route path="/admin/settings" element={<AnimatedPage><Settings /></AnimatedPage>} />
+            </Route>
           </Route>
         </Route>
 

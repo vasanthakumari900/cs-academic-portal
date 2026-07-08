@@ -1,13 +1,53 @@
 // src/components/ui/SkeletonCard.jsx
-export default function SkeletonCard() {
+import { motion } from "framer-motion";
+
+export default function SkeletonCard({ lines = 3 }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-maroon/5 bg-white/80 shadow-sm dark:border-gold/5 dark:bg-dark-card/80">
-      <div className="h-36 w-full bg-gradient-to-r from-maroon/[0.04] via-white/60 to-maroon/[0.04] bg-[length:1400px_100%] animate-shimmer dark:from-white/[0.02] dark:via-dark-card/50 dark:to-white/[0.02]" />
-      <div className="space-y-3 p-4">
-        <div className="h-4 w-3/4 rounded-full bg-maroon/[0.06] dark:bg-gold/[0.06]" />
-        <div className="h-3 w-1/2 rounded-full bg-maroon/[0.04] dark:bg-gold/[0.04]" />
-        <div className="h-3 w-1/3 rounded-full bg-maroon/[0.03] dark:bg-gold/[0.03]" />
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-soft"
+    >
+      {/* Image placeholder */}
+      <div className="relative h-36 w-full overflow-hidden bg-gray-100">
+        <div className="absolute inset-0 animate-shimmer-fast" />
       </div>
+      {/* Content lines */}
+      <div className="space-y-3 p-4">
+        <div className="relative h-4 w-3/4 overflow-hidden rounded-full bg-gray-100">
+          <div className="absolute inset-0 animate-skeleton bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 rounded-full" />
+        </div>
+        {Array.from({ length: lines - 1 }).map((_, i) => (
+          <div
+            key={i}
+            className="relative h-3 overflow-hidden rounded-full bg-gray-100"
+            style={{ width: `${[50, 35, 65][i] || 45}%` }}
+          >
+            <div
+              className="absolute inset-0 animate-skeleton bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 rounded-full"
+              style={{ animationDelay: `${i * 0.15}s` }}
+            />
+          </div>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+export function SkeletonLine({ width = "100%", height = "h-4", className = "" }) {
+  return (
+    <div className={`relative overflow-hidden rounded-full bg-gray-100 ${height} ${className}`} style={{ width }}>
+      <div className="absolute inset-0 animate-skeleton bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 rounded-full" />
+    </div>
+  );
+}
+
+export function SkeletonCardGrid({ count = 6, lines = 3 }) {
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {Array.from({ length: count }).map((_, i) => (
+        <SkeletonCard key={i} lines={lines} />
+      ))}
     </div>
   );
 }

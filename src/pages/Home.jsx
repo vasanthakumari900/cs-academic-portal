@@ -1,527 +1,296 @@
 // src/pages/Home.jsx
-import { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+// Student home page — CS images + one inspirational quote
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import {
-  FiFileText, FiBriefcase, FiSearch,
-  FiArrowRight, FiUsers, FiBookOpen, FiAward, FiTrendingUp,
-  FiChevronRight, FiChevronLeft, FiStar, FiMonitor,
-  FiDownload, FiBarChart2, FiGrid,
-  FiExternalLink, FiMessageSquare,
+  FiBookOpen, FiStar, FiTrendingUp,
+  FiPlayCircle, FiFileText, FiBriefcase, FiGrid, FiAward,
 } from "react-icons/fi";
-import { useFirestoreList } from "../hooks/useFirestoreList";
-import { SAMPLE_PLACEMENTS } from "../utils/constants";
-import { videoService } from "../services/videoService";
-import { noteService } from "../services/noteService";
-import { placementService } from "../services/placementService";
-import { questionPaperService } from "../services/questionPaperService";
-import { formatDate } from "../utils/helpers";
 
-// ============== Animation variants ==============
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
-const fadeIn = {
-  hidden: { opacity: 0, scale: 0.95 },
-  show: { opacity: 1, scale: 1, transition: { duration: 0.4 } },
-};
-const stagger = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
+// ─── Single Student Quote ───
+const studentQuote = {
+  text: "Education is the most powerful weapon which you can use to change the world.",
+  author: "Nelson Mandela",
 };
 
-// ============== Data ==============
-const features = [
-  { icon: FiMonitor, title: "Video Lectures", desc: "Full lecture videos organized by semester and subject, ready to stream on any device.", gradient: "from-blue-600 to-blue-800" },
-  { icon: FiFileText, title: "Lecture Notes", desc: "Faculty-curated PDF notes with instant preview and one-click download.", gradient: "from-blue-700 to-blue-800" },
-  { icon: FiGrid, title: "Question Papers", desc: "Previous year papers filterable by year, regulation, semester, and subject.", gradient: "from-blue-600 to-cyan-500" },
-  { icon: FiBriefcase, title: "Placements", desc: "Live drives, eligibility criteria, salary packages, and direct apply links.", gradient: "from-blue-700 to-blue-900" },
-  { icon: FiBarChart2, title: "Department Updates", desc: "Stay informed with the latest announcements and academic updates.", gradient: "from-blue-600 to-cyan-500" },
-  { icon: FiSearch, title: "Search Everything", desc: "Universal search across videos, notes, papers, placements, and faculty.", gradient: "from-blue-700 to-blue-800" },
+// ─── Quick Navigation Cards ───
+const quickCards = [
+  {
+    label: "Video Lectures",
+    icon: FiPlayCircle,
+    to: "/e-content",
+    gradient: "from-blue-500 to-indigo-600",
+    desc: "Watch subject-wise lectures",
+  },
+  {
+    label: "Previous Year\nQuestion Papers",
+    icon: FiGrid,
+    to: "/question-papers",
+    gradient: "from-rose-500 to-pink-600",
+    desc: "Practice with past papers",
+  },
+  {
+    label: "Placement Details",
+    icon: FiBriefcase,
+    to: "/placements",
+    gradient: "from-amber-500 to-orange-600",
+    desc: "Explore drives & opportunities",
+  },
+  {
+    label: "Lecture Notes",
+    icon: FiFileText,
+    to: "/notes",
+    gradient: "from-violet-500 to-purple-600",
+    desc: "Download study materials",
+  },
 ];
 
-const quickStats = [
-  { icon: FiUsers, value: "1,200+", label: "Active Students" },
-  { icon: FiBookOpen, value: "180+", label: "Video Lectures" },
-  { icon: FiFileText, value: "350+", label: "Study Materials" },
-  { icon: FiAward, value: "₹18 LPA", label: "Highest Package" },
-];
-
-const faculty = [
-  { name: "Dr. Ananya Rao", role: "Professor & HOD", expertise: "Distributed Systems", initials: "AR", gradient: "from-blue-600 to-blue-800" },
-  { name: "Prof. Karthik Iyer", role: "Associate Professor", expertise: "Artificial Intelligence", initials: "KI", gradient: "from-blue-700 to-blue-900" },
-  { name: "Dr. Meera Nair", role: "Associate Professor", expertise: "Database Systems", initials: "MN", gradient: "from-blue-600 to-cyan-500" },
-  { name: "Prof. Rohan Das", role: "Assistant Professor", expertise: "Software Engineering", initials: "RD", gradient: "from-blue-700 to-blue-800" },
-];
-
-const testimonials = [
-  { name: "Sanjana P.", batch: "2026 Batch", company: "Google", quote: "Every lecture and question paper I needed was in one place. No more chasing PDFs on WhatsApp — everything just works.", rating: 5 },
-  { name: "Vignesh S.", batch: "2025 Batch", company: "Microsoft", quote: "The placement tracker kept me on top of deadlines and the curated notes helped me revise core concepts right before interviews.", rating: 5 },
-  { name: "Divya M.", batch: "2026 Batch", company: "Amazon", quote: "Clean, fast, and it actually works well on my phone between classes. The video lectures are a lifesaver for revision on the go.", rating: 5 },
-  { name: "Arun K.", batch: "2025 Batch", company: "TCS", quote: "Having all previous year question papers organized by semester made exam prep so much easier. Highly recommended for every CS student.", rating: 4 },
-];
-
-// ============== Animated Counter Hook ==============
-function useAnimatedCounter(target, duration = 2000) {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const counted = useRef(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || counted.current) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !counted.current) {
-          counted.current = true;
-          const start = performance.now();
-          function animate(now) {
-            const elapsed = now - start;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.floor(eased * target));
-            if (progress < 1) requestAnimationFrame(animate);
-          }
-          requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0.3 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [target, duration]);
-  return { count, ref };
-}
-
-// ============== Testimonial Carousel ==============
-function TestimonialCarousel({ items }) {
-  const [current, setCurrent] = useState(0);
-  const next = () => setCurrent((c) => (c + 1) % items.length);
-  const prev = () => setCurrent((c) => (c - 1 + items.length) % items.length);
-  useEffect(() => {
-    const t = setInterval(next, 5000);
-    return () => clearInterval(t);
-  }, [items.length]);
-
-  return (
-    <div className="relative mx-auto max-w-2xl">
-      <div className="overflow-hidden rounded-2xl">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current}
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -40 }}
-            transition={{ duration: 0.35 }}
-          >
-            <div className="premium-card p-8 text-center">
-              <FiMessageSquare className="mx-auto mb-4 text-blue-200" size={36} />
-              <p className="mb-6 text-base italic leading-relaxed text-gray-600 md:text-lg">
-                &ldquo;{items[current].quote}&rdquo;
-              </p>
-              <div className="flex items-center justify-center gap-1">
-                {Array.from({ length: items[current].rating }).map((_, i) => (
-                  <FiStar key={i} className="fill-amber-400 text-amber-400" size={16} />
-                ))}
-              </div>
-              <div className="mt-4">
-                <p className="font-semibold text-gray-900">{items[current].name}</p>
-                <p className="text-sm text-gray-500">
-                  {items[current].batch} · Placed at {items[current].company}
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      <div className="mt-6 flex items-center justify-center gap-4">
-        <button onClick={prev} className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 transition-all hover:border-gray-300 hover:text-gray-700">
-          <FiChevronLeft size={18} />
-        </button>
-        <div className="flex gap-2">
-          {items.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrent(i)}
-              className={`h-2 rounded-full transition-all ${i === current ? "w-8 bg-blue-600" : "w-2 bg-gray-200"}`}
-            />
-          ))}
-        </div>
-        <button onClick={next} className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 transition-all hover:border-gray-300 hover:text-gray-700">
-          <FiChevronRight size={18} />
-        </button>
-      </div>
-    </div>
-  );
-}
-
-// ============== Main Component ==============
 export default function Home() {
-  const [heroSearch, setHeroSearch] = useState("");
+  const { user } = useAuth();
   const navigate = useNavigate();
-  const { items: videos } = useFirestoreList(videoService, { max: 4 });
-  const { items: notes } = useFirestoreList(noteService, { max: 4 });
-  const { items: placements } = useFirestoreList(placementService, { max: 4 });
-  const samplePlacements = placements.length > 0 ? placements : SAMPLE_PLACEMENTS;
-  const { items: questionPapers } = useFirestoreList(questionPaperService, { max: 100 });
-
-  const videoCount = useAnimatedCounter(videos.length > 0 ? videos.length : 50, 2000);
-  const noteCount = useAnimatedCounter(notes.length > 0 ? notes.length : 300, 2000);
-  const qpCount = useAnimatedCounter(questionPapers.length > 0 ? questionPapers.length : 200, 2000);
-  const placementCount = useAnimatedCounter(placements.length > 0 ? placements.length : 100, 2000);
-
-  function handleHeroSearch(e) {
-    e.preventDefault();
-    if (heroSearch.trim()) navigate(`/search?q=${encodeURIComponent(heroSearch.trim())}`);
-  }
 
   return (
-    <div>
-      {/* ========================== HERO SECTION ========================== */}
-      <section className="relative min-h-[90vh] flex items-center bg-gradient-hero overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-grid opacity-30" />
-        <div className="relative z-10 mx-auto w-full max-w-5xl px-4 py-24 sm:px-6 lg:px-8">
-          <motion.div initial="hidden" animate="show" variants={stagger} className="text-center">
-            <motion.span variants={fadeUp} className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-xs font-semibold text-blue-700">
-              <span className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse" />
-              Dwarka Doss Goverdhan Doss Vaishnav College — CS Department
-            </motion.span>
+    <div className="min-h-screen bg-animated-gradient">
+      {/* ─── Floating Particles ─── */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <div className="particle h-16 w-16 bg-blue-200/20 blur-xl" style={{top:'10%',left:'5%',width:'80px',height:'80px','--duration':'12s','--delay':'0s'}} />
+        <div className="particle h-12 w-12 bg-indigo-200/20 blur-xl" style={{top:'20%',right:'10%',width:'60px',height:'60px','--duration':'10s','--delay':'2s'}} />
+        <div className="particle h-20 w-20 bg-purple-200/15 blur-xl" style={{bottom:'30%',left:'15%',width:'100px',height:'100px','--duration':'14s','--delay':'1s'}} />
+        <div className="particle h-10 w-10 bg-cyan-200/15 blur-xl" style={{top:'60%',right:'5%',width:'50px',height:'50px','--duration':'9s','--delay':'3s'}} />
+        <div className="particle h-14 w-14 bg-pink-200/10 blur-xl" style={{bottom:'10%',right:'20%',width:'70px',height:'70px','--duration':'11s','--delay':'0.5s'}} />
+        <div className="particle h-8 w-8 bg-emerald-200/10 blur-xl" style={{top:'40%',left:'40%',width:'40px',height:'40px','--duration':'13s','--delay':'4s'}} />
+      </div>
 
-            <motion.h1 variants={fadeUp} className="font-display text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-gray-900">
-              Everything your Computer Science
-              <br />
-              <span className="text-gradient">degree needs, in one portal.</span>
-            </motion.h1>
+      {/* ─── HERO SECTION with CS Illustration ─── */}
+      <section className="relative overflow-hidden px-4 pt-12 pb-12 sm:px-6 lg:px-8">
+        {/* Decorative glow */}
+        <div className="pointer-events-none absolute -top-40 -right-40 h-96 w-96 rounded-full bg-blue-200/20 blur-[120px] animate-pulse-glow" />
+        <div className="pointer-events-none absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-indigo-200/20 blur-[120px] animate-pulse-glow" style={{animationDelay:'1.5s'}} />
 
-            <motion.p variants={fadeUp} className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-500 sm:text-lg">
-              Watch lectures, download notes, access previous year question papers, and explore placement opportunities — all organized by semester and subject, available on every device.
-            </motion.p>
+        <div className="relative mx-auto max-w-5xl">
+          <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-12">
+            {/* Left: Text content */}
+            <div className="flex-1 text-center lg:text-left">
+              {/* Greeting */}
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-4"
+              >
+                <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-100 to-indigo-100 px-4 py-1.5 text-xs font-semibold text-blue-700 border border-blue-200/50">
+                  <FiStar size={12} className="text-amber-500" />
+                  {user ? `${user.name}${user.section ? ` · Sec ${user.section}` : ""}` : "DDGD Vaishnav College"}
+                  <FiStar size={12} className="text-amber-500" />
+                </span>
+              </motion.div>
 
-            <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Link to="/e-content" className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 px-8 py-3.5 text-sm font-semibold text-white shadow-premium transition-all hover:shadow-premium-lg hover:-translate-y-0.5">
-                Explore Portal <FiArrowRight size={16} />
-              </Link>
-            </motion.div>
+              {/* Title */}
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="font-display text-3xl font-extrabold leading-tight text-gray-900 sm:text-4xl md:text-5xl"
+              >
+                {user ? (
+                  <>Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">{user.name}</span>! 👋</>
+                ) : (
+                  <>CS Academic Portal</>
+                )}
+              </motion.h1>
 
-            <motion.form onSubmit={handleHeroSearch} variants={fadeUp}
-              className="mx-auto mt-10 flex max-w-xl items-center gap-2 rounded-2xl border border-gray-100 bg-white/90 p-1.5 shadow-premium backdrop-blur-xl"
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="mt-3 text-sm text-gray-500 sm:text-base max-w-lg"
+              >
+                Your complete learning companion — videos, notes, question papers & placements
+              </motion.p>
+            </div>
+
+            {/* Right: CS-themed SVG Illustration */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="shrink-0"
             >
-              <div className="flex flex-1 items-center gap-2 pl-4">
-                <FiSearch className="text-gray-400 shrink-0" size={18} />
-                <input
-                  value={heroSearch}
-                  onChange={(e) => setHeroSearch(e.target.value)}
-                  placeholder="Search videos, notes, question papers…"
-                  className="w-full bg-transparent py-2.5 text-sm outline-none text-gray-700 placeholder:text-gray-400"
-                />
-              </div>
-              <button type="submit" className="shrink-0 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 px-5 py-2.5 text-xs font-semibold text-white shadow-soft">
-                Search
-              </button>
-            </motion.form>
-
-            {/* Trust indicators */}
-            <motion.div variants={fadeUp} className="mt-12 flex flex-wrap items-center justify-center gap-8 text-xs text-gray-400">
-              <span className="flex items-center gap-1.5"><FiBookOpen size={14} /> 180+ Videos</span>
-              <span className="flex items-center gap-1.5"><FiFileText size={14} /> 350+ Materials</span>
-              <span className="flex items-center gap-1.5"><FiUsers size={14} /> 1,200+ Students</span>
-              <span className="flex items-center gap-1.5"><FiAward size={14} /> 92% Placement</span>
+              <svg width="260" height="200" viewBox="0 0 260 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-52 sm:w-64 lg:w-72">
+                {/* Monitor */}
+                <rect x="30" y="20" width="180" height="130" rx="10" fill="#1e293b" stroke="#3b82f6" strokeWidth="2" />
+                <rect x="38" y="30" width="164" height="100" rx="4" fill="#0f172a" />
+                {/* Code lines on screen */}
+                <line x1="50" y1="48" x2="120" y2="48" stroke="#3b82f6" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="50" y1="62" x2="100" y2="62" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="62" y1="76" x2="140" y2="76" stroke="#eab308" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="50" y1="90" x2="110" y2="90" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="62" y1="104" x2="130" y2="104" stroke="#3b82f6" strokeWidth="2.5" strokeLinecap="round" />
+                <line x1="50" y1="118" x2="90" y2="118" stroke="#eab308" strokeWidth="2.5" strokeLinecap="round" />
+                {/* Monitor stand */}
+                <rect x="100" y="150" width="40" height="8" rx="2" fill="#475569" />
+                <rect x="80" y="158" width="80" height="6" rx="3" fill="#475569" />
+                {/* Gear icons */}
+                <circle cx="225" cy="60" r="18" stroke="#6366f1" strokeWidth="2" fill="none" opacity="0.6" />
+                <circle cx="225" cy="60" r="8" stroke="#6366f1" strokeWidth="2" fill="none" opacity="0.6" />
+                <circle cx="235" cy="140" r="14" stroke="#8b5cf6" strokeWidth="2" fill="none" opacity="0.5" />
+                <circle cx="235" cy="140" r="6" stroke="#8b5cf6" strokeWidth="2" fill="none" opacity="0.5" />
+                {/* Small database icon */}
+                <ellipse cx="50" cy="175" rx="20" ry="8" stroke="#6366f1" strokeWidth="1.5" fill="none" opacity="0.5" />
+                <line x1="30" y1="175" x2="30" y2="185" stroke="#6366f1" strokeWidth="1.5" opacity="0.5" />
+                <line x1="70" y1="175" x2="70" y2="185" stroke="#6366f1" strokeWidth="1.5" opacity="0.5" />
+                <ellipse cx="50" cy="185" rx="20" ry="8" stroke="#6366f1" strokeWidth="1.5" fill="none" opacity="0.5" />
+              </svg>
             </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#F8FAFC] to-transparent" />
-      </section>
-
-      {/* ========================== QUICK STATS GRID ========================== */}
-      <section className="relative -mt-16 z-20 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <motion.div
-            initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4"
-          >
-            {quickStats.map((s) => (
-              <motion.div key={s.label} variants={fadeIn}>
-                <div className="premium-card p-5 sm:p-6 text-center">
-                  <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 text-white shadow-soft">
-                    <s.icon size={18} />
-                  </div>
-                  <p className="font-display text-xl font-bold text-gray-900 sm:text-2xl">{s.value}</p>
-                  <p className="text-xs text-gray-500">{s.label}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ========================== FEATURES SECTION ========================== */}
-      <section className="px-4 py-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="mx-auto mb-14 max-w-2xl text-center"
-          >
-            <span className="mb-3 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-              Everything at your fingertips
-            </span>
-            <h2 className="font-display text-3xl font-bold text-gray-900 sm:text-4xl">
-              Your complete <span className="text-gradient">academic toolkit</span>
-            </h2>
-            <p className="mt-3 text-gray-500">
-              Six modules designed around how the department actually shares material — organized so you find what you need in seconds.
-            </p>
-          </motion.div>
-
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {features.map((f) => (
-              <motion.div key={f.title} variants={fadeUp}>
-                <div className="premium-card-hover group h-full relative overflow-hidden p-6">
-                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${f.gradient}`} />
-                  <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${f.gradient} text-white shadow-soft`}>
-                    <f.icon size={20} />
-                  </div>
-                  <h3 className="mb-1.5 font-semibold text-gray-900">{f.title}</h3>
-                  <p className="text-sm leading-relaxed text-gray-500">{f.desc}</p>
-                  <div className="mt-4 flex items-center gap-1 text-xs font-medium text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span>Explore</span> <FiArrowRight size={12} />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ========================== COUNTERS (Animated) ========================== */}
-      <section className="section-alt px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl" ref={videoCount.ref}>
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="rounded-3xl bg-gradient-cta p-8 text-white shadow-premium sm:p-12"
-          >
-            <div className="mb-6 text-center">
-              <h2 className="font-display text-2xl font-bold sm:text-3xl">By the numbers</h2>
-              <p className="mt-1 text-sm text-white/80">Our growing repository of academic resources</p>
-            </div>
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-              {[
-                { count: videoCount.count, label: "Lecture Videos", icon: FiBookOpen, suffix: "+" },
-                { count: noteCount.count, label: "Notes & Materials", icon: FiFileText, suffix: "+" },
-                { count: qpCount.count, label: "Question Papers", icon: FiGrid, suffix: "+" },
-                { count: placementCount.count, label: "Placement Drives", icon: FiBriefcase, suffix: "+" },
-              ].map((s) => (
-                <div key={s.label} className="text-center">
-                  <s.icon className="mx-auto mb-2 opacity-80" size={24} />
-                  <p className="font-display text-3xl font-extrabold sm:text-4xl tabular-nums">
-                    {s.count}{s.suffix}
-                  </p>
-                  <p className="text-sm text-white/80">{s.label}</p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ========================== LATEST UPLOADS ========================== */}
-      <section className="px-4 py-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="mb-10 flex flex-wrap items-end justify-between gap-4"
-          >
-            <div>
-              <span className="mb-2 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-                Fresh content
-              </span>
-              <h2 className="font-display text-3xl font-bold text-gray-900">Latest Uploads</h2>
-              <p className="mt-1 text-gray-500">New material added by faculty, updated in real time.</p>
-            </div>
-            <Link to="/e-content" className="inline-flex items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-xs font-semibold text-gray-600 transition-all hover:border-gray-300 hover:text-gray-800">
-              Browse All <FiArrowRight size={14} />
-            </Link>
-          </motion.div>
-
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            {[...videos, ...notes].slice(0, 4).map((item) => (
-              <motion.div key={item.id} variants={fadeUp}>
-                <div className="premium-card-hover group h-full p-5">
-                  <div className="mb-3 flex items-center justify-between">
-                    <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider ${
-                      item.fileUrl?.includes(".mp4") || item.fileUrl?.includes("video")
-                        ? "bg-blue-50 text-blue-700"
-                        : "bg-blue-50 text-blue-700"
-                    }`}>
-                      {item.fileUrl?.includes(".mp4") || item.fileUrl?.includes("video") ? <FiMonitor size={12} /> : <FiFileText size={12} />}
-                      {item.fileUrl?.includes(".mp4") || item.fileUrl?.includes("video") ? "Video" : "Note"}
-                    </span>
-                    <span className="text-[10px] text-gray-400">{formatDate(item.createdAt)}</span>
-                  </div>
-                  <h3 className="font-semibold text-sm leading-snug line-clamp-2 text-gray-900 group-hover:text-blue-600 transition-colors">
-                    {item.title}
-                  </h3>
-                  <div className="mt-2 flex items-center gap-2 text-[11px] text-gray-400">
-                    <span className="rounded bg-blue-50 px-1.5 py-0.5 text-blue-700">{item.subject}</span>
-                    <span>Sem {item.semester}</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-            {[...videos, ...notes].length === 0 && (
-              <p className="col-span-full text-center text-sm text-gray-400 py-12">
-                No uploads yet. Content will appear here once faculty start uploading.
-              </p>
-            )}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ========================== FACULTY SECTION ========================== */}
-      <section className="section-alt px-4 py-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="mb-12 text-center"
-          >
-            <span className="mb-3 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-              Our team
-            </span>
-            <h2 className="font-display text-3xl font-bold text-gray-900">Meet the Faculty</h2>
-            <p className="mt-1 text-gray-500">Experts guiding the next generation of technologists.</p>
-          </motion.div>
-
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            {faculty.map((f) => (
-              <motion.div key={f.name} variants={fadeUp}>
-                <div className="premium-card-hover text-center p-6">
-                  <div className="relative mx-auto mb-4">
-                    <div className={`flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br ${f.gradient} text-2xl font-bold text-white shadow-lg mx-auto transition-transform duration-300 group-hover:scale-105`}>
-                      {f.initials}
-                    </div>
-                    <div className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-white text-blue-600 shadow-soft">
-                      <FiStar size={12} className="fill-current" />
-                    </div>
-                  </div>
-                  <h3 className="font-semibold text-gray-900">{f.name}</h3>
-                  <p className="text-xs text-gray-500">{f.role}</p>
-                  <span className="mt-3 inline-block rounded-full bg-blue-50 px-3 py-1 text-[10px] font-medium text-blue-700">
-                    {f.expertise}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ========================== PLACEMENT HIGHLIGHTS ========================== */}
-      <section className="px-4 py-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="mb-12 text-center"
-          >
-            <span className="mb-3 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-              Top recruiters
-            </span>
-            <h2 className="font-display text-3xl font-bold text-gray-900">Placement Highlights</h2>
-            <p className="mt-1 text-gray-500">Our students placed at the world's leading companies.</p>
-          </motion.div>
-
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            {samplePlacements.slice(0, 4).map((p) => (
-              <motion.div key={p.id} variants={fadeUp}>
-                <div className="premium-card-hover h-full text-center p-5">
-                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gray-50 shadow-soft ring-1 ring-gray-100 transition-transform group-hover:scale-110">
-                    {p.logoUrl ? (
-                      <img src={p.logoUrl} alt={p.companyName} className="h-8 w-8 object-contain" />
-                    ) : (
-                      <span className="font-display text-lg font-bold text-blue-600">{p.companyName?.[0]}</span>
-                    )}
-                  </div>
-                  <h3 className="font-semibold text-gray-900">{p.companyName}</h3>
-                  <p className="mt-0.5 text-xs text-gray-500">{p.role}</p>
-                  <div className="mt-3 flex flex-wrap justify-center gap-2">
-                    <span className="rounded-full bg-gradient-to-r from-blue-600 to-blue-800 px-3 py-1 text-xs font-semibold text-white">
-                      ₹{p.package} LPA
-                    </span>
-                    <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
-                      {p.eligibility}
-                    </span>
-                  </div>
-                  <div className="mt-4 pt-3 border-t border-gray-100">
-                    <span className="text-[11px] text-gray-400 flex items-center justify-center gap-1">
-                      <FiExternalLink size={11} /> Apply now
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-            {samplePlacements.length === 0 && (
-              <p className="col-span-full text-center text-sm text-gray-400 py-12">
-                Placement drives will appear here once posted by the department.
-              </p>
-            )}
-          </motion.div>
-
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp} className="mt-10 text-center">
-            <Link to="/placements" className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 px-6 py-3 text-sm font-semibold text-white shadow-premium transition-all hover:shadow-premium-lg hover:-translate-y-0.5">
-              View All Placements <FiArrowRight size={16} />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ========================== TESTIMONIALS CAROUSEL ========================== */}
-      <section className="section-alt px-4 py-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-            className="mb-12 text-center"
-          >
-            <span className="mb-3 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-              Student voices
-            </span>
-            <h2 className="font-display text-3xl font-bold text-gray-900">What our students say</h2>
-            <p className="mt-1 text-gray-500">Hear from the students who use the portal every day.</p>
-          </motion.div>
-
-          <TestimonialCarousel items={testimonials} />
-        </div>
-      </section>
-
-      {/* ========================== CTA SECTION ========================== */}
-      <section className="px-4 py-24 sm:px-6 lg:px-8">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
-          className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl bg-gradient-cta p-10 sm:p-14 text-center text-white shadow-premium-lg"
-        >
-          {/* Decorative dots */}
-          <div className="pointer-events-none absolute inset-0 opacity-10"
-            style={{
-              backgroundImage: `radial-gradient(circle at 25px 25px, white 1px, transparent 0)`,
-              backgroundSize: '40px 40px',
-            }}
-          />
-          <div className="relative z-10">
-            <h2 className="font-display text-3xl font-bold sm:text-4xl">Ready to get started?</h2>
-            <p className="mx-auto mt-3 max-w-lg text-base text-white/80">
-              Log in with your roll number and date of birth to get instant access to lecture videos, notes, question papers, and placement drives.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Link to="/login" className="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-3.5 text-sm font-semibold text-blue-600 shadow-premium transition-all hover:shadow-premium-lg hover:-translate-y-0.5">
-                Access Portal <FiArrowRight size={16} />
-              </Link>
-              <Link to="/about" className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-8 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10">
-                Learn More
-              </Link>
-            </div>
           </div>
-        </motion.div>
+        </div>
+      </section>
+
+      {/* ─── SINGLE STUDENT QUOTE ─── */}
+      <section className="px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="relative rounded-2xl bg-white border border-indigo-100/60 p-6 shadow-lg shadow-indigo-100/20 text-center"
+          >
+            <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-indigo-50 to-blue-50">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-indigo-400">
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/>
+                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>
+              </svg>
+            </div>
+            <blockquote className="text-base font-medium leading-relaxed text-gray-700 sm:text-lg md:text-xl">
+              &ldquo;{studentQuote.text}&rdquo;
+            </blockquote>
+            <p className="mt-3 text-sm font-semibold text-indigo-600">
+              — {studentQuote.author}
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ─── QUICK NAVIGATION CARDS ─── */}
+      <section className="px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="mb-6 text-center font-display text-xl font-bold text-gray-800">
+            What would you like to explore?
+          </h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {quickCards.map((card, i) => (
+              <motion.button
+                key={card.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.08 }}
+                whileHover={{ scale: 1.03, y: -3 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => navigate(card.to)}
+                className="group relative overflow-hidden rounded-xl border border-gray-100 bg-white p-5 text-left shadow-soft hover:shadow-premium transition-all"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-5 transition-opacity`} />
+                <div className="relative flex flex-col items-center text-center gap-3">
+                  <div className={`flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br ${card.gradient} text-white shadow-md`}>
+                    <card.icon size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-sm text-gray-900 whitespace-pre-line leading-snug">
+                      {card.label}
+                    </h3>
+                    <p className="mt-0.5 text-xs text-gray-400">{card.desc}</p>
+                  </div>
+                </div>
+                <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${card.gradient} scale-x-0 group-hover:scale-x-100 transition-transform origin-left`} />
+              </motion.button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CS THEMED VISUAL SECTION ─── */}
+      <section className="px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {/* Card 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="rounded-xl bg-white border border-gray-100 p-5 shadow-soft text-center"
+            >
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-sm text-gray-900">Learn to Code</h3>
+              <p className="mt-1 text-xs text-gray-400">Master programming languages and build real-world projects</p>
+            </motion.div>
+
+            {/* Card 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="rounded-xl bg-white border border-gray-100 p-5 shadow-soft text-center"
+            >
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-amber-50 to-orange-50">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                  <line x1="8" y1="21" x2="16" y2="21" />
+                  <line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-sm text-gray-900">Watch & Learn</h3>
+              <p className="mt-1 text-xs text-gray-400">Video lectures delivered by experienced faculty</p>
+            </motion.div>
+
+            {/* Card 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="rounded-xl bg-white border border-gray-100 p-5 shadow-soft text-center"
+            >
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-sm text-gray-900">Track Progress</h3>
+              <p className="mt-1 text-xs text-gray-400">Stay on top of your academic journey</p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── ACHIEVEMENT TEASER ─── */}
+      <section className="px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-700 p-8 text-white shadow-premium"
+          >
+            <FiAward size={36} className="mx-auto mb-3 opacity-80" />
+            <h2 className="font-display text-xl font-bold">You've got this! 🚀</h2>
+            <p className="mt-2 max-w-lg mx-auto text-sm text-blue-100">
+              Every session you study, every paper you practice, every video you watch — 
+              brings you one step closer to your dreams. Keep going!
+            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs text-blue-200">
+              <span className="flex items-center gap-1"><FiBookOpen size={14} /> Study</span>
+              <span className="flex items-center gap-1"><FiTrendingUp size={14} /> Practice</span>
+              <span className="flex items-center gap-1"><FiStar size={14} /> Succeed</span>
+            </div>
+          </motion.div>
+        </div>
       </section>
     </div>
   );

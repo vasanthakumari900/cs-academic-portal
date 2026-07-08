@@ -193,31 +193,7 @@ export const SAMPLE_PLACEMENTS = [
   },
 ];
 
-// Fallback PDF URL (kept for backward compatibility — real PDFs are generated via pdfGenerator.js)
-const SAMPLE_PDF = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
 
-// Sample notes with metadata — PDFs are generated on-the-fly with real educational content
-export const SAMPLE_NOTES = [
-  { id: "sn-1", title: "Data Structures — Complete Lecture Notes", description: "Comprehensive notes covering arrays, linked lists, trees, graphs, and sorting algorithms with example code in C.", subject: "Data Structures", semester: 3, facultyName: "Dr. Ananya Rao", fileUrl: SAMPLE_PDF, year: 2, pages: 124, downloads: 2300, courseType: "ug" },
-  { id: "sn-2", title: "Operating Systems — Process Management", description: "Detailed notes on processes, threads, CPU scheduling, synchronization, and deadlocks with diagrams.", subject: "Operating Systems", semester: 4, facultyName: "Dr Dharani", fileUrl: SAMPLE_PDF, year: 2, pages: 98, downloads: 1850, courseType: "ug" },
-  { id: "sn-3", title: "Database Systems — SQL & Normalization", description: "SQL queries, joins, normalization forms, ER diagrams, and transaction management explained with examples.", subject: "Database Systems", semester: 4, facultyName: "M P Sudha", fileUrl: SAMPLE_PDF, year: 2, pages: 112, downloads: 2100, courseType: "ug" },
-  { id: "sn-4", title: "Computer Networks — Protocols & Architecture", description: "OSI model, TCP/IP, routing algorithms, HTTP, DNS, and network security fundamentals.", subject: "Computer Networks", semester: 5, facultyName: "Prof. Rohan Das", fileUrl: SAMPLE_PDF, year: 3, pages: 136, downloads: 1650, courseType: "ug" },
-  { id: "sn-5", title: "Machine Learning — Supervised Learning Algorithms", description: "Linear regression, decision trees, SVM, ensemble methods, and model evaluation techniques.", subject: "Machine Learning", semester: 6, facultyName: "Dr. Ananya Rao", fileUrl: SAMPLE_PDF, year: 3, pages: 88, downloads: 3100, courseType: "pg" },
-  { id: "sn-6", title: "Web Technologies — HTML, CSS & JavaScript", description: "Frontend development fundamentals, DOM manipulation, responsive design, and introduction to React.", subject: "Web Technologies", semester: 5, facultyName: "Prof. Rohan Das", fileUrl: SAMPLE_PDF, year: 3, pages: 76, downloads: 4200, courseType: "ug" },
-  { id: "sn-7", title: "Programming in C — Pointers & Memory Management", description: "Deep dive into pointers, dynamic memory allocation, file I/O, and data structures in C.", subject: "Programming in C", semester: 1, facultyName: "Dr. Meera Nair", fileUrl: SAMPLE_PDF, year: 1, pages: 92, downloads: 5400, courseType: "ug" },
-  { id: "sn-8", title: "Python Programming — Object Oriented Concepts", description: "OOP in Python, inheritance, polymorphism, exception handling, and standard library tour.", subject: "Python", semester: 3, facultyName: "Prof. Karthik Iyer", fileUrl: SAMPLE_PDF, year: 2, pages: 68, downloads: 3800, courseType: "pg" },
-];
-
-export const SAMPLE_QUESTION_PAPERS = [
-  { id: "sq-1", title: "Data Structures — End Semester Exam 2025", description: "Full question paper with 5 sections covering all DS topics. Includes algorithm design questions.", subject: "Data Structures", semester: 3, facultyName: "Dr. Ananya Rao", fileUrl: SAMPLE_PDF, year: "2025", regulation: "R2021", pages: 4, downloads: 3200, courseType: "ug" },
-  { id: "sq-2", title: "Operating Systems — Mid Semester 2025", description: "2-hour mid-semester paper covering processes, threads, and CPU scheduling algorithms.", subject: "Operating Systems", semester: 4, facultyName: "Dr Dharani", fileUrl: SAMPLE_PDF, year: "2025", regulation: "R2021", pages: 3, downloads: 2800, courseType: "ug" },
-  { id: "sq-3", title: "Database Systems — End Semester 2024", description: "Comprehensive paper with SQL queries, ER diagrams, normalization, and transaction problems.", subject: "Database Systems", semester: 4, facultyName: "M P Sudha", fileUrl: SAMPLE_PDF, year: "2024", regulation: "R2021", pages: 6, downloads: 4100, courseType: "ug" },
-  { id: "sq-4", title: "Computer Networks — End Semester 2025", description: "Question paper covering OSI layers, routing, TCP/IP, and network security.", subject: "Computer Networks", semester: 5, facultyName: "Prof. Rohan Das", fileUrl: SAMPLE_PDF, year: "2025", regulation: "R2021", pages: 4, downloads: 1900, courseType: "ug" },
-  { id: "sq-5", title: "Machine Learning — Mid Semester 2025", description: "Mid-term paper focused on regression, classification, and evaluation metrics.", subject: "Machine Learning", semester: 6, facultyName: "Dr. Ananya Rao", fileUrl: SAMPLE_PDF, year: "2025", regulation: "R2021", pages: 3, downloads: 3600, courseType: "pg" },
-  { id: "sq-6", title: "Web Technologies — End Semester 2024", description: "Practical paper with HTML/CSS layout tasks, JavaScript programming, and React basics.", subject: "Web Technologies", semester: 5, facultyName: "Prof. Rohan Das", fileUrl: SAMPLE_PDF, year: "2024", regulation: "R2021", pages: 5, downloads: 4500, courseType: "ug" },
-  { id: "sq-7", title: "Programming in C — End Semester 2025", description: "C programming paper with pointer problems, file handling, and data structure implementation.", subject: "Programming in C", semester: 1, facultyName: "Dr. Meera Nair", fileUrl: SAMPLE_PDF, year: "2025", regulation: "R2021", pages: 4, downloads: 5100, courseType: "ug" },
-  { id: "sq-8", title: "Python — End Semester 2024", description: "Python OOP, exception handling, file I/O, and standard library usage questions.", subject: "Python", semester: 3, facultyName: "Prof. Karthik Iyer", fileUrl: SAMPLE_PDF, year: "2024", regulation: "R2021", pages: 3, downloads: 3400, courseType: "pg" },
-];
 
 export const STORAGE_PATHS = {
   VIDEOS: "videos/",

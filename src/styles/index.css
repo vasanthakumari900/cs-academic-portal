@@ -80,6 +80,7 @@
     @apply bg-gradient-to-r from-[#2563EB] via-[#1E40AF] to-[#06B6D4] bg-clip-text text-transparent;
   }
 
+  /* ─── Animated Mesh Background ─── */
   .bg-mesh {
     background-image:
       radial-gradient(at 20% 20%, rgba(37,99,235,0.06) 0px, transparent 50%),
@@ -97,6 +98,69 @@
       linear-gradient(rgba(37,99,235,0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(37,99,235,0.03) 1px, transparent 1px);
     background-size: 64px 64px;
+  }
+
+  /* ─── Animated Gradient Background ─── */
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .bg-animated-gradient {
+    background: linear-gradient(-45deg, #eff6ff, #dbeafe, #e0f2fe, #ede9fe, #fce7f3);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+  }
+
+  /* ─── Floating Particles ─── */
+  @keyframes float-particle {
+    0%, 100% { transform: translateY(0px) translateX(0px) scale(1); opacity: 0.3; }
+    25% { transform: translateY(-20px) translateX(10px) scale(1.1); opacity: 0.5; }
+    50% { transform: translateY(-10px) translateX(-10px) scale(0.9); opacity: 0.2; }
+    75% { transform: translateY(-30px) translateX(5px) scale(1.05); opacity: 0.4; }
+  }
+  .particle {
+    @apply absolute rounded-full pointer-events-none;
+    animation: float-particle var(--duration, 8s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  /* ─── Pulsing Glow ─── */
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+  }
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  /* ─── Shimmer Loading ─── */
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .animate-shimmer-fast {
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.2s ease-in-out infinite;
+  }
+
+  @keyframes skeleton-load {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+  }
+  .animate-skeleton {
+    animation: skeleton-load 1.5s ease-in-out infinite;
+  }
+
+  /* ─── Scroll Reveal ─── */
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 0.5s ease-out forwards;
   }
 
   .bg-gradient-hero {
