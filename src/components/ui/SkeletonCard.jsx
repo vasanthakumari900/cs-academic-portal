@@ -1,4 +1,5 @@
 // src/components/ui/SkeletonCard.jsx
+// Premium skeleton loading placeholders.
 import { motion } from "framer-motion";
 
 export default function SkeletonCard({ lines = 3 }) {
@@ -6,11 +7,11 @@ export default function SkeletonCard({ lines = 3 }) {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-soft"
+      className="overflow-hidden rounded-xl border border-gray-100 bg-white/80 shadow-soft"
     >
       {/* Image placeholder */}
-      <div className="relative h-36 w-full overflow-hidden bg-gray-100">
-        <div className="absolute inset-0 animate-shimmer-fast" />
+      <div className="relative h-36 w-full overflow-hidden bg-gradient-to-br from-gray-100 to-gray-50">
+        <div className="absolute inset-0 shimmer" />
       </div>
       {/* Content lines */}
       <div className="space-y-3 p-4">

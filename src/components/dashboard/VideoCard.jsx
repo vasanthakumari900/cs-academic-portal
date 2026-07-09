@@ -1,58 +1,73 @@
 // src/components/dashboard/VideoCard.jsx
+// Premium video card with glassmorphism overlay.
 import { FiPlay, FiBookmark, FiHeart, FiEye, FiCamera } from "react-icons/fi";
 import { motion } from "framer-motion";
-import GlassCard from "../ui/GlassCard";
 import { truncate } from "../../utils/helpers";
 
 export default function VideoCard({ video, onPlay, onBookmark, bookmarked }) {
   return (
     <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-      <GlassCard className="flex flex-col p-0 overflow-hidden">
-        <button
-          onClick={() => onPlay(video)}
-          className="group relative aspect-video w-full overflow-hidden bg-slate-200 dark:bg-slate-800"
-        >
-          {video.thumbnailUrl ? (
-            <img src={video.thumbnailUrl} alt={video.title} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
-          ) : (
-            <div className="flex h-full items-center justify-center bg-gradient-to-br from-primary/20 to-accent/20">
-              <FiPlay size={32} className="text-maroon dark:text-gold" />
+      <div className="group flex flex-col overflow-hidden rounded-2xl bg-white/80 backdrop-blur-glass border border-white/30 shadow-glass transition-all duration-300 hover:shadow-glass-lg hover:-translate-y-0.5">
+        {/* Video thumbnail area */}
+        <div className="relative">
+          <button
+            onClick={() => onPlay(video)}
+            className="relative aspect-video w-full overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200"
+          >
+            {video.thumbnailUrl ? (
+              <img src={video.thumbnailUrl} alt={video.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+            ) : (
+              <div className="flex h-full items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50">
+                <FiPlay size={36} className="text-blue-400" />
+              </div>
+            )}
+            {video.videoType === "class_recording" && (
+              <span className="absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-amber-500/90 px-3 py-1 text-[10px] font-semibold text-white backdrop-blur-sm border border-white/10">
+                <FiCamera size={10} /> Class Recording
+              </span>
+            )}
+            {/* Hover overlay */}
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/40 via-black/10 to-transparent opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 backdrop-blur-sm shadow-premium transition-transform duration-300 group-hover:scale-110">
+                <FiPlay size={22} className="text-blue-600 ml-0.5" />
+              </div>
             </div>
-          )}
-          {video.videoType === "class_recording" && (
-            <span className="absolute left-2 top-2 z-10 inline-flex items-center gap-1 rounded-full bg-amber-500/90 px-2.5 py-0.5 text-[11px] font-semibold text-white backdrop-blur-sm">
-              <FiCamera size={11} /> Class Recording
-            </span>
-          )}
-          <div className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all group-hover:bg-black/30 group-hover:opacity-100">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-maroon dark:text-gold">
-              <FiPlay size={20} />
-            </div>
-          </div>
-        </button>
+            {/* Bottom gradient */}
+            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/30 to-transparent" />
+          </button>
+        </div>
 
-        <div className="flex flex-1 flex-col gap-2 p-4">
-          <h3 className="font-display text-sm font-semibold text-dark dark:text-white">{video.title}</h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400">{truncate(video.description, 80)}</p>
-          <div className="mt-1 flex items-center justify-between text-xs text-slate-400">
-            <span>
+        {/* Info section */}
+        <div className="flex flex-1 flex-col gap-2.5 p-4">
+          <h3 className="font-display text-sm font-semibold text-gray-900 leading-snug">{video.title}</h3>
+          <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">{truncate(video.description, 80)}</p>
+          
+          <div className="flex items-center justify-between text-xs">
+            <span className="text-gray-500 font-medium">
               {video.subject}
               {video.semester ? ` · Sem ${video.semester}` : ""}
-              {video.year ? ` · Year ${video.year}` : ""}
             </span>
-            <button onClick={() => onBookmark(video.id)} className={bookmarked ? "text-maroon dark:text-gold" : "hover:text-maroon dark:hover:text-gold"}>
+            <button
+              onClick={() => onBookmark(video.id)}
+              className={`rounded-lg p-1.5 transition-all ${
+                bookmarked ? "text-blue-600 bg-blue-50" : "text-gray-400 hover:text-blue-600 hover:bg-blue-50"
+              }`}
+            >
               <FiBookmark size={15} fill={bookmarked ? "currentColor" : "none"} />
             </button>
           </div>
-          <p className="text-[11px] text-slate-500 dark:text-slate-500">
-            {video.facultyName || "Faculty"}{video.duration ? ` · ${video.duration}` : ""}
-          </p>
-          <div className="flex items-center gap-3 text-xs text-slate-400">
-            <span className="flex items-center gap-1"><FiEye size={13} /> {video.views ?? 0}</span>
-            <span className="flex items-center gap-1"><FiHeart size={13} /> {video.likes ?? 0}</span>
+          
+          <div className="flex items-center justify-between text-[11px]">
+            <span className="text-gray-400">
+              {video.facultyName || "Faculty"}{video.duration ? ` · ${video.duration}` : ""}
+            </span>
+            <div className="flex items-center gap-2.5 text-gray-400">
+              <span className="flex items-center gap-1"><FiEye size={12} /> {video.views ?? 0}</span>
+              <span className="flex items-center gap-1"><FiHeart size={12} /> {video.likes ?? 0}</span>
+            </div>
           </div>
         </div>
-      </GlassCard>
+      </div>
     </motion.div>
   );
 }

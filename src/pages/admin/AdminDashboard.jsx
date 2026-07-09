@@ -1,13 +1,13 @@
 // src/pages/admin/AdminDashboard.jsx
-import { FiUsers, FiPlayCircle, FiFileText, FiBriefcase } from "react-icons/fi";
+// Premium admin dashboard with glass cards and chart.
+import { FiPlayCircle, FiFileText, FiBriefcase } from "react-icons/fi";
 import { useFirestoreList } from "../../hooks/useFirestoreList";
 import { videoService } from "../../services/videoService";
 import { noteService } from "../../services/noteService";
 import { questionPaperService } from "../../services/questionPaperService";
 import { placementService } from "../../services/placementService";
 import StatCard from "../../components/ui/StatCard";
-import GlassCard from "../../components/ui/GlassCard";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Cell } from "recharts";
 
 export default function AdminDashboard() {
   const { items: videos } = useFirestoreList(videoService);
@@ -16,40 +16,58 @@ export default function AdminDashboard() {
   const { items: placements } = useFirestoreList(placementService);
 
   const chartData = [
-    { name: "Videos", count: videos.length },
-    { name: "Notes", count: notes.length },
-    { name: "Question Papers", count: papers.length },
-    { name: "Placements", count: placements.length },
+    { name: "Videos", count: videos.length, fill: "#2563EB" },
+    { name: "Notes", count: notes.length, fill: "#06B6D4" },
+    { name: "Papers", count: papers.length, fill: "#10B981" },
+    { name: "Placements", count: placements.length, fill: "#F59E0B" },
   ];
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h2 className="font-display text-2xl font-bold">Admin Overview</h2>
-        <p className="text-slate-500 dark:text-slate-400">A snapshot of everything on the portal.</p>
+    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="font-display text-2xl font-bold text-gray-900">Admin Overview</h1>
+        <p className="mt-1 text-sm text-gray-500">A snapshot of everything on the portal.</p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Stat cards */}
+      <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard icon={FiPlayCircle} label="Total Videos" value={videos.length} accent="primary" />
         <StatCard icon={FiFileText} label="Total Notes" value={notes.length} accent="accent" />
         <StatCard icon={FiFileText} label="Question Papers" value={papers.length} accent="success" />
         <StatCard icon={FiBriefcase} label="Placement Drives" value={placements.length} accent="warning" />
       </div>
 
-      <GlassCard hover={false}>
-        <h3 className="mb-4 font-display font-semibold">Content Overview</h3>
-        <div className="h-64 w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" className="dark:opacity-20" />
-              <XAxis dataKey="name" tick={{ fontSize: 12 }} />
-              <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
-              <Tooltip />
-              <Bar dataKey="count" fill="#2563EB" radius={[6, 6, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+      {/* Chart */}
+      <div className="rounded-2xl bg-white/80 backdrop-blur-glass border border-white/30 shadow-glass overflow-hidden">
+        <div className="border-b border-gray-100 px-5 py-4">
+          <h3 className="font-display text-base font-bold text-gray-900">Content Overview</h3>
         </div>
-      </GlassCard>
+        <div className="p-5">
+          <div className="h-64 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" opacity={0.5} />
+                <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#64748B' }} />
+                <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: '#64748B' }} />
+                <Tooltip
+                  contentStyle={{
+                    borderRadius: '12px',
+                    border: '1px solid #e2e8f0',
+                    boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+                    fontSize: '13px',
+                  }}
+                />
+                <Bar dataKey="count" radius={[8, 8, 0, 0]} barSize={48}>
+                  {chartData.map((entry, index) => (
+                    <Cell key={index} fill={entry.fill} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

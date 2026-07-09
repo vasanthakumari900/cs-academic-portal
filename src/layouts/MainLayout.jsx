@@ -1,5 +1,5 @@
 // src/layouts/MainLayout.jsx
-// Public-facing layout: navbar + page content + footer.
+// Premium public-facing layout with glass navbar + footer.
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
@@ -17,11 +17,11 @@ export default function MainLayout() {
   if (booting) return <LoadingScreen />;
 
   return (
-    <div className="flex min-h-screen flex-col bg-bg text-dark dark:bg-dark dark:text-white">
-      {/* Subtle background pattern */}
-      <div className="fixed inset-0 pointer-events-none bg-grid dark:bg-grid-dark" />
+    <div className="flex min-h-screen flex-col bg-[#FAFBFC]">
+      {/* Premium mesh background */}
+      <div className="fixed inset-0 pointer-events-none bg-mesh" />
       <Navbar />
-      <main className="flex-1">
+      <main className="relative flex-1 pt-16">
         <Outlet />
       </main>
       <Footer />

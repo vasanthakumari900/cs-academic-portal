@@ -1,6 +1,6 @@
 // src/components/layout/DashboardTopbar.jsx
-// Minimal top bar — welcome message + dashboard button at top right
-import { FiLogOut, FiGrid } from "react-icons/fi";
+// Premium glass dashboard topbar.
+import { FiLogOut, FiHome } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -12,52 +12,54 @@ export default function DashboardTopbar() {
 
   async function handleLogout() {
     await logout();
-    toast.success("Signed out");
+    toast.success("Signed out successfully");
     navigate("/login");
   }
 
   const isOnDashboard = location.pathname === "/student/dashboard";
 
   return (
-    <header className="sticky top-0 z-30 border-b border-gray-100 bg-white/90 backdrop-blur-xl">
+    <header className="sticky top-0 z-30 border-b border-white/20 bg-white/70 backdrop-blur-glass-lg shadow-glass">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         {/* Left: Logo + Welcome */}
         <div className="flex items-center gap-3">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 text-white text-xs font-bold shadow-soft">
+          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white text-xs font-bold shadow-soft">
             DV
           </span>
           {user && (
             <div className="hidden sm:block">
-              <p className="text-xs font-semibold text-gray-800 leading-tight">
+              <p className="text-xs font-semibold text-gray-900 leading-tight">
                 {user.name}
               </p>
-              <p className="text-[10px] text-gray-400 -mt-0.5">
+              <p className="text-[10px] text-gray-500 -mt-0.5">
                 {user.rollNumber}{user.section ? ` · Sec ${user.section}` : ""}
               </p>
             </div>
           )}
         </div>
 
-        {/* Right: Dashboard button + Logout */}
+        {/* Right */}
         <div className="flex items-center gap-2">
           {!isOnDashboard && (
             <button
               onClick={() => navigate("/student/dashboard")}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 px-4 py-2 text-xs font-semibold text-white shadow-soft hover:shadow-premium transition-all"
+              className="group inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 px-4 py-2 text-xs font-semibold text-white shadow-soft transition-all duration-300 hover:shadow-neon-primary hover:from-blue-500 hover:to-indigo-600 active:scale-[0.97]"
             >
-              <FiGrid size={14} />
+              <FiHome size={14} />
               Dashboard
             </button>
           )}
           <button
             onClick={handleLogout}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-gray-400 hover:bg-red-50 hover:text-red-500 transition-all"
+            className="group flex h-9 w-9 items-center justify-center rounded-xl text-gray-400 transition-all duration-200 hover:bg-red-50 hover:text-red-500 hover:shadow-soft active:scale-95"
             aria-label="Log out"
+            title="Sign out"
           >
-            <FiLogOut size={18} />
+            <FiLogOut size={16} className="transition-transform group-hover:-translate-x-0.5" />
           </button>
         </div>
       </div>
+      <div className="h-px bg-gradient-to-r from-transparent via-blue-200/20 to-transparent" />
     </header>
   );
 }
