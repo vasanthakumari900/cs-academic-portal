@@ -8,6 +8,8 @@ import {
   FiPlayCircle, FiFileText, FiBriefcase, FiGrid, FiAward,
 } from "react-icons/fi";
 
+
+
 // ─── Single Student Quote ───
 const studentQuote = {
   text: "Education is the most powerful weapon which you can use to change the world.",
@@ -145,7 +147,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ─── SINGLE STUDENT QUOTE ─── */}
       <section className="px-4 py-6 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl">

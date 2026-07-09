@@ -61,10 +61,7 @@ const cards = [
   },
 ];
 
-const quoteOfDay = {
-  text: "The beautiful thing about learning is that nobody can take it away from you.",
-  author: "B.B. King",
-};
+
 
 export default function StudentDashboard() {
   const { user } = useAuth();
@@ -95,7 +92,7 @@ export default function StudentDashboard() {
               )}
               {user?.year && (
                 <span className="rounded-full bg-white/15 px-3 py-0.5 font-semibold">
-                  Year {user.year}
+                  {user.year === 1 ? "First Year" : user.year === 2 ? "Second Year" : "Third Year"}
                 </span>
               )}
             </div>
@@ -106,17 +103,20 @@ export default function StudentDashboard() {
         </div>
       </motion.div>
 
-      {/* Quote */}
+      {/* Academic portal image */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="mb-8 flex items-start gap-3 rounded-xl border border-indigo-100 bg-indigo-50/50 p-4"
+        className="mb-8 overflow-hidden rounded-xl"
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="mt-0.5 shrink-0 text-indigo-400"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
-        <div>
-          <p className="text-sm italic text-gray-600">&ldquo;{quoteOfDay.text}&rdquo;</p>
-          <p className="mt-0.5 text-xs font-semibold text-indigo-500">— {quoteOfDay.author}</p>
+        <div className="relative">
+          <img
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1000&q=80"
+            alt="Students collaborating on academic work"
+            className="h-48 w-full object-cover rounded-xl sm:h-56"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-transparent to-indigo-600/20 rounded-xl" />
         </div>
       </motion.div>
 

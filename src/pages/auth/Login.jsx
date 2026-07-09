@@ -62,8 +62,8 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!/^24E(29|30)\d{2}$/i.test(rollNumber.trim())) {
-      toast.error("Enter a valid roll number (e.g. 24E2901 or 24E3001)");
+    if (!/^(24E(29|30)|25E30)\d{2}$/i.test(rollNumber.trim())) {
+      toast.error("Enter a valid roll number (e.g. 24E2901, 24E3001, or 25E3001)");
       return;
     }
     const displayDob = toDisplayDate(dob);
@@ -182,7 +182,7 @@ export default function Login() {
                   />
                 </div>
                 <p className="mt-1.5 text-[11px] font-medium text-gray-400">
-                  24E29xx (Section A) or 24E30xx (Section B)
+                  24E29xx (3rd Yr A) · 24E30xx (3rd Yr B) · 25E30xx (2nd Yr B)
                 </p>
               </div>
 
