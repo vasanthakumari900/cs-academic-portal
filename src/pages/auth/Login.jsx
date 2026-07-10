@@ -32,10 +32,10 @@ function LiveClock() {
   const dateStr = `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
   const timeStr = now.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
   return (
-    <div className="inline-flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs font-medium text-white/70">
-      <span className="flex items-center gap-1.5"><FiCalendar size={12} /> {dayName}, {dateStr}</span>
+    <div className="inline-flex items-center gap-3 sm:gap-4 text-sm sm:text-base font-medium text-white/70">
+      <span className="flex items-center gap-2"><FiCalendar size={16} /> {dayName}, {dateStr}</span>
       <span className="text-white/20">|</span>
-      <span className="flex items-center gap-1.5 font-mono tracking-wider"><FiClock size={12} /> {timeStr}</span>
+      <span className="flex items-center gap-2 font-mono tracking-wider"><FiClock size={16} /> {timeStr}</span>
     </div>
   );
 }
@@ -83,10 +83,12 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     if (!/^(24E(29|30)|25E(29|30))\d{2}$/i.test(rollNumber.trim())) {
-      toast.error("Enter a valid roll number (e.g. 24E2901, 24E3001, 25E2901, or 25E3001)");
+      toast.error("Enter a valid student roll number (e.g. 24E2901, 24E3001, 25E2901, or 25E3001)");
       return;
     }
+
     const displayDob = toDisplayDate(dob);
     if (!displayDob || !/^\d{2}\/\d{2}\/\d{4}$/.test(displayDob)) {
       toast.error("Please select your date of birth");
@@ -99,9 +101,9 @@ export default function Login() {
     }
     setLoading(true);
     try {
-      const loginResult = await login(rollNumber, displayDob, "student");
-      const studentName = loginResult?.name || rollNumber;
-      toast.success(`Welcome, ${studentName}!`);
+      const loginResult = await login(rollNumber, displayDob);
+      const userName = loginResult?.name || rollNumber;
+      toast.success(`Welcome, ${userName}!`);
       navigate(location.state?.from?.pathname || "/student/dashboard", { replace: true });
     } catch (err) {
       toast.error(err.message);
@@ -111,7 +113,7 @@ export default function Login() {
   return (
     <div className="relative flex min-h-screen overflow-hidden bg-gray-950">
       {/* ─── Animated Gradient Background ─── */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/40 via-purple-700/30 to-cyan-600/40" />
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/40 via-violet-700/30 to-cyan-600/40" />
       <div className="absolute inset-0 bg-gradient-to-t from-gray-950/60 via-transparent to-transparent" />
 
       {/* Floating Orbs */}
@@ -154,7 +156,7 @@ export default function Login() {
                 <img
                   src={collegeLogo}
                   alt="DGVC College Logo"
-                  className="relative h-auto w-72 object-contain drop-shadow-2xl brightness-110"
+                  className="relative h-auto w-[28rem] object-contain drop-shadow-2xl brightness-110"
                 />
               </div>
             </motion.div>
@@ -198,7 +200,7 @@ export default function Login() {
             >
               {["Lecture Notes", "Video Lessons", "Q Papers", "Placements"].map((item) => (
                 <span key={item} className="inline-flex items-center gap-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 px-3.5 py-1.5 text-[11px] font-semibold text-white/70 hover:bg-white/15 hover:text-white/90 transition-all">
-                  <FiStar size={10} className="text-blue-300" />
+                  <FiStar size={10} className="text-indigo-300" />
                   {item}
                 </span>
               ))}
@@ -209,7 +211,7 @@ export default function Login() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.65, duration: 0.6 }}
-              className="mt-10 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 px-5 py-3"
+              className="mt-10 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 px-6 py-4"
             >
               <LiveClock />
             </motion.div>
@@ -232,7 +234,7 @@ export default function Login() {
                 <img
                   src={collegeLogo}
                   alt="DGVC College Logo"
-                  className="mx-auto h-auto w-56 object-contain drop-shadow-2xl brightness-110"
+                  className="mx-auto h-auto w-80 object-contain drop-shadow-2xl brightness-110"
                 />
               </motion.div>
               <motion.h2
@@ -265,18 +267,17 @@ export default function Login() {
             <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.3)] p-8 sm:p-10">
               {/* Glass shine overlay */}
               <div className="pointer-events-none absolute -top-40 -right-40 h-80 w-80 rounded-full bg-white/5 blur-[80px]" />
-              <div className="pointer-events-none absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-blue-500/5 blur-[80px]" />
+              <div className="pointer-events-none absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-indigo-500/5 blur-[80px]" />
 
               <div className="relative">
-                {/* Section badge */}
+                {/* Student Login Header */}
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white/80"
+                  className="mb-6 text-center"
                 >
-                  <FiBookOpen size={12} className="text-blue-300" />
-                  Student Login
+                  <h2 className="font-display text-xl font-bold text-white">Student Login</h2>
+                  <p className="mt-1 text-xs text-white/50">Sign in with your roll number and date of birth</p>
                 </motion.div>
 
                 {/* Form */}
@@ -287,13 +288,13 @@ export default function Login() {
                       Roll Number
                     </label>
                     <div className="relative group">
-                      <FiBookOpen className="absolute left-3.5 top-1/2 -translate-y-1/2 text-blue-300/70 group-focus-within:text-blue-300 z-10 transition-colors" size={15} />
+                      <FiBookOpen className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300/70 group-focus-within:text-indigo-300 z-10 transition-colors" size={15} />
                       <input
                         value={rollNumber}
                         onChange={(e) => setRollNumber(formatRoll(e.target.value))}
                         placeholder="e.g. 24E2901"
                         maxLength={7}
-                        className="w-full rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-11 py-3 font-mono text-sm tracking-wider text-white placeholder:text-white/30 outline-none transition-all focus:border-blue-400/50 focus:ring-2 focus:ring-blue-400/20 focus:bg-white/15"
+                        className="w-full rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-11 py-3 font-mono text-sm tracking-wider text-white placeholder:text-white/30 outline-none transition-all focus:border-indigo-400/50 focus:ring-2 focus:ring-indigo-400/20 focus:bg-white/15"
                         autoFocus
                       />
                     </div>
@@ -308,13 +309,13 @@ export default function Login() {
                       Date of Birth
                     </label>
                     <div className="relative group">
-                      <FiCalendar className="absolute left-3.5 top-1/2 -translate-y-1/2 text-blue-300/70 group-focus-within:text-blue-300 z-10 transition-colors" size={15} />
+                      <FiCalendar className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300/70 group-focus-within:text-indigo-300 z-10 transition-colors" size={15} />
                       <input
                         type="date"
                         value={dob}
                         onChange={(e) => setDob(e.target.value)}
                         max={new Date().toISOString().split("T")[0]}
-                        className="w-full rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-11 py-3 text-sm text-white outline-none transition-all focus:border-blue-400/50 focus:ring-2 focus:ring-blue-400/20 focus:bg-white/15 [color-scheme:dark]"
+                        className="w-full rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-11 py-3 text-sm text-white outline-none transition-all focus:border-indigo-400/50 focus:ring-2 focus:ring-indigo-400/20 focus:bg-white/15 [color-scheme:dark]"
                       />
                     </div>
                     <p className="mt-1.5 text-[10px] font-medium text-white/40">
@@ -328,14 +329,14 @@ export default function Login() {
                       Enter the captcha
                     </label>
                     <div className="relative group">
-                      <FiShield className="absolute left-3.5 top-1/2 -translate-y-1/2 text-blue-300/70 group-focus-within:text-blue-300 z-10 transition-colors" size={15} />
+                      <FiShield className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300/70 group-focus-within:text-indigo-300 z-10 transition-colors" size={15} />
                       <input
                         value={captcha}
                         onChange={(e) => setCaptcha(e.target.value.replace(/[^0-9]/g, "").slice(0, 5))}
                         placeholder="Enter the 5-digit code"
                         maxLength={5}
                         inputMode="numeric"
-                        className="w-full rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-11 py-3 font-mono text-sm tracking-[0.3em] text-white placeholder:text-white/30 placeholder:tracking-wider outline-none transition-all focus:border-blue-400/50 focus:ring-2 focus:ring-blue-400/20 focus:bg-white/15"
+                        className="w-full rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-11 py-3 font-mono text-sm tracking-[0.3em] text-white placeholder:text-white/30 placeholder:tracking-wider outline-none transition-all focus:border-indigo-400/50 focus:ring-2 focus:ring-indigo-400/20 focus:bg-white/15"
                       />
                     </div>
 
@@ -381,7 +382,7 @@ export default function Login() {
                     disabled={loading}
                     whileHover={{ scale: 1.02, boxShadow: "0 8px 30px rgba(37,99,235,0.4)" }}
                     whileTap={{ scale: 0.98 }}
-                    className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-600/25 transition-all hover:shadow-xl hover:shadow-blue-600/30 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                    className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-indigo-600 via-violet-600 to-cyan-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-indigo-600/25 transition-all hover:shadow-xl hover:shadow-indigo-600/30 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
                   >
                     {/* Shimmer effect */}
                     <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />

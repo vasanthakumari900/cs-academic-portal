@@ -46,9 +46,9 @@ export default function ManageUsers() {
       ) : users.length === 0 ? (
         <EmptyState title="No users yet" />
       ) : (
-        <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
+        <div className="overflow-hidden rounded-2xl border border-white/10">
           <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50 text-xs uppercase text-slate-500 dark:bg-white/5 dark:text-slate-400">
+            <thead className="bg-white/5 text-xs uppercase text-white/60">
               <tr>
                 <th className="px-4 py-3">User</th>
                 <th className="px-4 py-3">Email</th>
@@ -56,11 +56,11 @@ export default function ManageUsers() {
                 <th className="px-4 py-3 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+            <tbody className="divide-y divide-white/10">
               {users.map((u) => (
-                <tr key={u.id} className="bg-white dark:bg-dark">
+                <tr key={u.id} className="bg-[#0F172A]/95">
                   <td className="flex items-center gap-2 px-4 py-3 font-medium">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-maroon to-gold text-xs font-bold text-white">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 text-xs font-bold text-white">
                       {initials(u.name)}
                     </span>
                     {u.name}

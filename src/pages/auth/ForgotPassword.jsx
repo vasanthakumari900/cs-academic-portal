@@ -1,59 +1,67 @@
-// src/pages/auth/ForgotPassword.jsx
-import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
-import { FiMail } from "react-icons/fi";
-import { useAuth } from "../../context/AuthContext";
-import Button from "../../components/ui/Button";
-import GlassCard from "../../components/ui/GlassCard";
+import { FiMail, FiArrowLeft } from "react-icons/fi";
 
 export default function ForgotPassword() {
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
-  const { resetPassword } = useAuth();
+  const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  async function onSubmit({ email }) {
-    try {
-      await resetPassword(email);
-      toast.success("Password reset email sent");
-    } catch {
-      toast.error("Couldn't send reset email. Check the address and try again.");
-    }
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (!email.trim()) { toast.error("Please enter your email"); return; }
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+      toast.success("Password reset email sent (demo)");
+    }, 1000);
   }
 
   return (
-    <div className="flex min-h-[85vh] items-center justify-center bg-orbs dark:bg-orbs-dark bg-bg dark:bg-dark px-4 py-12">
-      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md">
-        <GlassCard hover={false}>
-          <h1 className="mb-1 font-display text-2xl font-bold">Reset your password</h1>
-          <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">
-            Enter your email and we'll send you a reset link.
-          </p>
+    <div className="flex min-h-[85vh] items-center justify-center px-4 py-12">
+      <div className="fixed inset-0 pointer-events-none bg-mesh-deep" />
+      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="relative w-full max-w-md">
+        <div className="relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass p-8">
+          <div className="mb-6 text-center">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow-md">
+              <FiMail size={24} />
+            </div>
+            <h1 className="font-display text-2xl font-bold text-white">Reset your password</h1>
+            <p className="mt-1 text-sm text-white/60">Enter your email and we'll send you a reset link.</p>
+          </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="mb-1 block text-sm font-medium">Email</label>
+              <label className="mb-1.5 block text-xs font-semibold text-white/60">Email</label>
               <div className="relative">
-                <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/40" size={16} />
                 <input
                   type="email"
-                  {...register("email", { required: "Email is required" })}
-                  className="input-field pl-10"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full rounded-xl border input-premium px-10"
                   placeholder="you@college.edu"
                 />
               </div>
-              {errors.email && <p className="mt-1 text-xs text-danger">{errors.email.message}</p>}
             </div>
 
-            <Button type="submit" disabled={isSubmitting} className="w-full">
-              {isSubmitting ? "Sending…" : "Send Reset Link"}
-            </Button>
+            <button
+              type="submit"
+              disabled={submitting}
+              className="w-full rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:shadow-lg hover:from-indigo-500 hover:to-violet-600 active:scale-[0.97] disabled:opacity-60"
+            >
+              {submitting ? "Sending…" : "Send Reset Link"}
+            </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
-            Remembered it? <Link to="/login" className="font-semibold text-maroon dark:text-gold hover:underline">Back to login</Link>
+          <p className="mt-6 text-center text-sm text-white/60">
+            Remembered it?{" "}
+            <Link to="/login" className="font-semibold text-cyan-400 hover:text-cyan-300 transition-colors">
+              Back to login
+            </Link>
           </p>
-        </GlassCard>
+        </div>
       </motion.div>
     </div>
   );

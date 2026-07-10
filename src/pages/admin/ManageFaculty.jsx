@@ -40,7 +40,7 @@ export default function ManageFaculty() {
   return (
     <div>
       <h2 className="mb-2 font-display text-2xl font-bold">Manage Faculty</h2>
-      <p className="mb-6 text-slate-500 dark:text-slate-400">View and manage all faculty accounts.</p>
+      <p className="mb-6 text-white/50">View and manage all faculty accounts.</p>
 
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <StatCard icon={FiUserCheck} label="Total Faculty" value={faculty.length} accent="primary" />
@@ -55,9 +55,9 @@ export default function ManageFaculty() {
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {faculty.map((f) => (
-            <div key={f.id} className="rounded-2xl border border-slate-200/80 bg-white/95 p-5 shadow-card dark:border-slate-800/80 dark:bg-dark-card/95">
+            <div key={f.id} className="rounded-2xl border glass-card p-5">
               <div className="flex items-center gap-3">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-maroon to-gold text-sm font-bold text-white">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 text-sm font-bold text-white">
                   {initials(f.name)}
                 </span>
                 <div>
@@ -66,7 +66,7 @@ export default function ManageFaculty() {
                 </div>
               </div>
               <div className="mt-4 flex gap-2">
-                <button onClick={() => demoteToStudent(f.id)} className="flex-1 rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-medium hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-white/5">
+                <button onClick={() => demoteToStudent(f.id)} className="flex-1 rounded-lg border border-white/15 px-3 py-1.5 text-xs font-medium hover:bg-white/10">
                   Demote to Student
                 </button>
                 <button onClick={() => removeUser(f.id)} className="rounded-lg p-2 text-danger hover:bg-danger/10">

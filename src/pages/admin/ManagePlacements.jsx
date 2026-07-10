@@ -63,7 +63,7 @@ export default function ManagePlacements() {
           <GlassCard key={p.id} hover={false} className="flex items-center justify-between">
             <div>
               <p className="font-medium">{p.companyName} — {p.role}</p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">₹{p.package} LPA · Deadline {p.deadline}</p>
+              <p className="text-xs text-white/50">₹{p.package} LPA · Deadline {p.deadline}</p>
             </div>
             <button onClick={() => handleDelete(p.id)} className="rounded-lg p-2 text-danger hover:bg-danger/10">
               <FiTrash2 size={16} />

@@ -1,34 +1,25 @@
-// src/components/ui/Button.jsx
-// Premium Awwwards-inspired buttons.
 import { motion } from "framer-motion";
 import { classNames } from "../../utils/helpers";
 
 const variants = {
-  primary: "bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-soft hover:shadow-premium hover:from-blue-500 hover:to-indigo-600",
-  secondary: "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-soft hover:shadow-premium",
-  ghost: "bg-transparent text-gray-700 hover:bg-gray-100",
-  outline: "border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300",
-  danger: "bg-gradient-to-r from-red-500 to-rose-600 text-white shadow-soft",
-  amber: "bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-soft hover:shadow-premium",
-  emerald: "bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-soft hover:shadow-premium",
+  primary: "bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg hover:shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-500",
+  secondary: "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg hover:shadow-cyan-500/20",
+  ghost: "bg-transparent text-white/70 hover:bg-white/10 hover:text-white",
+  outline: "border border-white/20 text-white/80 hover:bg-white/10 hover:border-white/30 hover:text-white",
+  danger: "bg-gradient-to-r from-red-500 to-rose-600 text-white shadow-lg hover:shadow-red-500/20",
+  amber: "bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-lg hover:shadow-lg",
+  emerald: "bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg hover:shadow-lg",
+  "premium-blue": "bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-700 text-white shadow-lg hover:shadow-xl hover:shadow-indigo-500/25",
 };
 
-const MotionButton = motion.button;
+const sizeClasses = {
+  sm: "px-3.5 py-2 text-xs",
+  md: "px-5 py-2.5 text-sm",
+  lg: "px-6 py-3 text-base",
+  xl: "px-8 py-4 text-lg",
+};
 
-export default function Button({
-  children,
-  variant = "primary",
-  className = "",
-  size = "md",
-  as: Component = "button",
-  ...props
-}) {
-  const sizeClasses = {
-    sm: "px-3.5 py-2 text-xs",
-    md: "px-5 py-2.5 text-sm",
-    lg: "px-6 py-3 text-base",
-  };
-
+export default function Button({ children, variant = "primary", className = "", size = "md", as: Component = "button", ...props }) {
   const baseClasses = classNames(
     "inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-200 disabled:opacity-50 active:scale-[0.97]",
     sizeClasses[size] || sizeClasses.md,
@@ -38,14 +29,9 @@ export default function Button({
 
   if (Component === "button") {
     return (
-      <MotionButton
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.97 }}
-        className={baseClasses}
-        {...props}
-      >
+      <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} className={baseClasses} {...props}>
         {children}
-      </MotionButton>
+      </motion.button>
     );
   }
 

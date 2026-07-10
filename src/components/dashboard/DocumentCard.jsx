@@ -17,24 +17,24 @@ export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, m
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35 }}
     >
-      <div className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl bg-white/80 backdrop-blur-glass border border-white/30 shadow-glass transition-all duration-300 hover:shadow-glass-lg hover:bg-white/90 hover:-translate-y-0.5">
+      <div className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass transition-all duration-300 hover:shadow-glass-lg hover:bg-white/10 hover:-translate-y-0.5">
         {/* Glass shine */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-tr from-transparent via-white/30 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none" />
         
         {/* Top accent */}
-        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-indigo-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         <div className="relative p-5 flex flex-col gap-3">
           <div className="flex items-start gap-3">
             {/* PDF icon */}
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 text-blue-600 transition-transform group-hover:scale-105">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 text-indigo-300 transition-transform group-hover:scale-105">
               <FiFileText size={22} />
             </div>
             <div className="min-w-0 flex-1">
-              <h3 className="truncate font-display text-sm font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">
+              <h3 className="truncate font-display text-sm font-semibold text-white group-hover:text-cyan-300 transition-colors">
                 {doc.title}
               </h3>
-              <p className="mt-0.5 text-xs text-gray-500">
+              <p className="mt-0.5 text-xs text-white/50">
                 {doc.subject}
                 {doc.semester ? ` · Sem ${doc.semester}` : ""}
                 {metaExtra ? ` · ${metaExtra}` : ""}
@@ -44,8 +44,8 @@ export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, m
               onClick={() => onBookmark(doc.id)}
               className={`shrink-0 rounded-lg p-1.5 transition-all ${
                 bookmarked
-                  ? "text-blue-600 bg-blue-50"
-                  : "text-gray-400 hover:text-blue-600 hover:bg-blue-50"
+                  ? "text-cyan-400 bg-cyan-500/20"
+                  : "text-white/40 hover:text-cyan-300 hover:bg-cyan-500/20"
               }`}
               title={bookmarked ? "Remove bookmark" : "Bookmark"}
             >
@@ -53,7 +53,7 @@ export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, m
             </button>
           </div>
 
-          <p className="text-xs leading-relaxed text-gray-500 line-clamp-2">
+          <p className="text-xs leading-relaxed text-white/50 line-clamp-2">
             {truncate(doc.description, 100)}
           </p>
 
@@ -75,7 +75,7 @@ export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, m
               </span>
             )}
             {doc.facultyName && (
-              <span className="text-[11px] text-gray-400">{doc.facultyName}</span>
+              <span className="text-[11px] text-white/40">{doc.facultyName}</span>
             )}
           </div>
 
@@ -83,7 +83,7 @@ export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, m
           <div className="flex gap-2 pt-1">
             <button
               onClick={() => onPreview(doc)}
-              className="group/preview flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-gray-200 bg-white/80 py-2.5 text-xs font-semibold text-gray-700 transition-all hover:bg-blue-600 hover:text-white hover:border-blue-600 active:scale-[0.98]"
+              className="group/preview flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-white/15 bg-white/5 py-2.5 text-xs font-semibold text-white/70 transition-all hover:bg-cyan-500/20 hover:text-cyan-300 hover:border-cyan-400/30 active:scale-[0.98]"
             >
               <FiEye size={14} /> Preview
             </button>
@@ -92,7 +92,7 @@ export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, m
               download
               target="_blank"
               rel="noreferrer"
-              className="group/download flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 py-2.5 text-xs font-semibold text-white shadow-soft transition-all hover:shadow-premium active:scale-[0.98]"
+              className="group/download flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 py-2.5 text-xs font-semibold text-white shadow-soft transition-all hover:shadow-premium active:scale-[0.98]"
             >
               <FiDownload size={14} /> Download
               <FiChevronRight size={12} className="opacity-0 -translate-x-1 group-hover/download:opacity-100 group-hover/download:translate-x-0 transition-all" />

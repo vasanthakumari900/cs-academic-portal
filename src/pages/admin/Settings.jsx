@@ -12,7 +12,7 @@ export default function Settings() {
 
       <GlassCard hover={false}>
         <h3 className="mb-1 font-display font-semibold">Appearance</h3>
-        <p className="mb-4 text-sm text-slate-500 dark:text-slate-400">
+        <p className="mb-4 text-sm text-white/50">
           Choose how the portal looks for you. This only affects your device.
         </p>
         <Button variant="outline" onClick={toggleTheme}>
@@ -22,9 +22,9 @@ export default function Settings() {
 
       <GlassCard hover={false}>
         <h3 className="mb-1 font-display font-semibold">Data</h3>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
+        <p className="text-sm text-white/50">
           Firebase project configuration is managed via environment variables
-          in <code className="rounded bg-slate-100 px-1 py-0.5 dark:bg-white/10">.env</code>. Update Firestore security rules
+          in <code className="rounded bg-white/10 px-1 py-0.5">.env</code>. Update Firestore security rules
           in the Firebase Console to control who can read/write each collection.
         </p>
       </GlassCard>

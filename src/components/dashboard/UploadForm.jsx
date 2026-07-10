@@ -143,9 +143,9 @@ export default function UploadForm({
         {showThumbnail && (
           <div>
             <label className="mb-1 block text-sm font-medium">Thumbnail (optional)</label>
-            <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-slate-300/80 bg-white/60 px-4 py-6 text-center transition-all hover:border-primary/50 hover:bg-white/80 dark:border-slate-700/80 dark:bg-dark-card/40 dark:hover:border-primary/50 dark:hover:bg-dark-card/60">
+            <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-white/15 bg-white/5 px-4 py-6 text-center transition-all hover:border-primary/50 hover:bg-white/80 ">
               <FiUploadCloud size={22} className="text-accent" />
-              <span className="text-sm text-slate-500 dark:text-slate-400">
+              <span className="text-sm text-white/50">
                 {thumbnail ? thumbnail.name : "Click to choose a thumbnail image"}
               </span>
               <input
@@ -160,8 +160,8 @@ export default function UploadForm({
 
         <div>
           <label className="mb-1 block text-sm font-medium">{fileLabel}</label>
-          <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-slate-300/80 bg-white/60 px-4 py-8 text-center transition-all hover:border-primary/50 hover:bg-white/80 dark:border-slate-700/80 dark:bg-dark-card/40 dark:hover:border-primary/50 dark:hover:bg-dark-card/60">              <FiUploadCloud size={26} className="text-maroon dark:text-gold" />
-            <span className="text-sm text-slate-500 dark:text-slate-400">
+          <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-white/15 bg-white/5 px-4 py-8 text-center transition-all hover:border-primary/50 hover:bg-white/80 ">              <FiUploadCloud size={26} className="text-cyan-400" />
+            <span className="text-sm text-white/50">
               {file ? file.name : `Click to choose a ${fileLabel.toLowerCase()}`}
             </span>
             <input
@@ -174,8 +174,8 @@ export default function UploadForm({
         </div>
 
         {progress > 0 && progress < 100 && (
-          <div className="h-2 w-full overflow-hidden rounded-full bg-slate-200/70 dark:bg-slate-700/70">
-            <div className="h-full bg-gradient-to-r from-maroon to-gold transition-all" style={{ width: `${progress}%` }} />
+          <div className="h-2 w-full overflow-hidden rounded-full bg-white/10 ">
+            <div className="h-full bg-gradient-to-r from-indigo-600 to-violet-600 transition-all" style={{ width: `${progress}%` }} />
           </div>
         )}
 

@@ -4,6 +4,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext(null);
 
+// Student login only — faculty login removed.
+
 // 3rd Year A & B Section student records
 const STUDENTS = {
   "24E3036": { name: "G BHUVANESHWARI", rollNumber: "24E3036", dob: "23/09/2006", year: 3, semester: 5, section: "B", type: "student" },
@@ -231,13 +233,7 @@ const STUDENTS = {
   "25E2956": { name: "GOKUL M", rollNumber: "25E2956", dob: "23/04/2007", year: 2, semester: 3, section: "A", type: "student" },
 };
 
-// Demo faculty records
-const DEMO_FACULTY = {
-  "FAC001": { name: "M P Sudha", rollNumber: "FAC001", dob: "12/04/1980", subject: "DBMS", type: "faculty" },
-  "FAC002": { name: "R Saranya", rollNumber: "FAC002", dob: "25/08/1982", subject: "ASP.NET", type: "faculty" },
-  "FAC003": { name: "Dr Dharani", rollNumber: "FAC003", dob: "18/11/1978", subject: "OPERATING SYSTEM", type: "faculty" },
-  "FAC004": { name: "V Ponnila", rollNumber: "FAC004", dob: "05/03/1985", subject: "DMT", type: "faculty" },
-};
+
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null); // { name, rollNumber, type, ... }
@@ -251,24 +247,11 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
-  function login(rollNumber, dob, loginType = "student") {
+  function login(rollNumber, dob) {
     const normalizedRoll = rollNumber.trim().toUpperCase();
-    const records = loginType === "faculty" ? DEMO_FACULTY : STUDENTS;
-    const record = records[normalizedRoll];
+    const record = STUDENTS[normalizedRoll];
 
     if (!record) {
-      // For faculty, accept any FACXXX pattern
-      if (loginType === "faculty" && /^FAC\d{3}$/i.test(normalizedRoll)) {
-        const userData = {
-          name: `Faculty ${normalizedRoll}`,
-          rollNumber: normalizedRoll,
-          subject: "General",
-          type: "faculty",
-        };
-        setUser(userData);
-        localStorage.setItem("ddgdvc_user", JSON.stringify(userData));
-        return userData;
-      }
       throw new Error("Invalid roll number. Please try again.");
     }
 

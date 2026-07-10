@@ -41,14 +41,14 @@ export default function Analytics() {
 
         <GlassCard hover={false}>
           <h3 className="mb-4 font-display font-semibold">Most Watched Videos</h3>
-          <ul className="divide-y divide-slate-100 dark:divide-white/10">
+          <ul className="divide-y divide-white/10">
             {topVideos.map((v) => (
               <li key={v.id} className="flex items-center justify-between py-2.5 text-sm">
                 <span className="truncate">{v.title}</span>
-                <span className="text-xs font-semibold text-maroon dark:text-gold">{v.views ?? 0} views</span>
+                <span className="text-xs font-semibold text-cyan-400">{v.views ?? 0} views</span>
               </li>
             ))}
-            {topVideos.length === 0 && <p className="py-4 text-sm text-slate-400">No data yet.</p>}
+            {topVideos.length === 0 && <p className="py-4 text-sm text-white/40">No data yet.</p>}
           </ul>
         </GlassCard>
       </div>

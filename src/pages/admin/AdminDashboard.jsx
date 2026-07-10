@@ -1,5 +1,3 @@
-// src/pages/admin/AdminDashboard.jsx
-// Premium admin dashboard with glass cards and chart.
 import { FiPlayCircle, FiFileText, FiBriefcase } from "react-icons/fi";
 import { useFirestoreList } from "../../hooks/useFirestoreList";
 import { videoService } from "../../services/videoService";
@@ -24,13 +22,11 @@ export default function AdminDashboard() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-      {/* Header */}
       <div className="mb-8">
-        <h1 className="font-display text-2xl font-bold text-gray-900">Admin Overview</h1>
-        <p className="mt-1 text-sm text-gray-500">A snapshot of everything on the portal.</p>
+        <h1 className="font-display text-2xl font-bold text-white">Admin Overview</h1>
+        <p className="mt-1 text-sm text-white/50">A snapshot of everything on the portal.</p>
       </div>
 
-      {/* Stat cards */}
       <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard icon={FiPlayCircle} label="Total Videos" value={videos.length} accent="primary" />
         <StatCard icon={FiFileText} label="Total Notes" value={notes.length} accent="accent" />
@@ -38,10 +34,9 @@ export default function AdminDashboard() {
         <StatCard icon={FiBriefcase} label="Placement Drives" value={placements.length} accent="warning" />
       </div>
 
-      {/* Chart */}
-      <div className="rounded-2xl bg-white/80 backdrop-blur-glass border border-white/30 shadow-glass overflow-hidden">
-        <div className="border-b border-gray-100 px-5 py-4">
-          <h3 className="font-display text-base font-bold text-gray-900">Content Overview</h3>
+      <div className="rounded-2xl glass-card overflow-hidden">
+        <div className="border-b border-white/10 px-5 py-4">
+          <h3 className="font-display text-base font-bold text-white">Content Overview</h3>
         </div>
         <div className="p-5">
           <div className="h-64 w-full">
@@ -50,18 +45,9 @@ export default function AdminDashboard() {
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" opacity={0.5} />
                 <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#64748B' }} />
                 <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: '#64748B' }} />
-                <Tooltip
-                  contentStyle={{
-                    borderRadius: '12px',
-                    border: '1px solid #e2e8f0',
-                    boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
-                    fontSize: '13px',
-                  }}
-                />
+                <Tooltip contentStyle={{ borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 24px rgba(0,0,0,0.06)', fontSize: '13px' }} />
                 <Bar dataKey="count" radius={[8, 8, 0, 0]} barSize={48}>
-                  {chartData.map((entry, index) => (
-                    <Cell key={index} fill={entry.fill} />
-                  ))}
+                  {chartData.map((entry, index) => (<Cell key={index} fill={entry.fill} />))}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>

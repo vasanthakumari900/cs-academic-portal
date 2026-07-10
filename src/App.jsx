@@ -48,13 +48,7 @@ import StudentNotes from "./pages/Notes";
 import StudentQuestionPapers from "./pages/QuestionPapers";
 import StudentPlacements from "./pages/Placements";
 
-// Faculty (kept for admin panel)
-import FacultyDashboard from "./pages/faculty/FacultyDashboard";
-import UploadVideo from "./pages/faculty/UploadVideo";
-import UploadNotes from "./pages/faculty/UploadNotes";
-import UploadQuestionPapers from "./pages/faculty/UploadQuestionPapers";
-import ManageUploads from "./pages/faculty/ManageUploads";
-import FacultyProfile from "./pages/faculty/Profile";
+
 
 // Admin
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -93,14 +87,6 @@ const studentNav = [
   { to: "/student/profile", label: "Profile", icon: FiUser },
 ];
 
-const facultyNav = [
-  { to: "/faculty/dashboard", label: "Dashboard", icon: FiHome },
-  { to: "/faculty/upload-video", label: "Upload Video", icon: FiUpload },
-  { to: "/faculty/upload-notes", label: "Upload Notes", icon: FiUploadCloud },
-  { to: "/faculty/upload-question-papers", label: "Upload Question Papers", icon: FiFileText },
-  { to: "/faculty/manage-uploads", label: "Manage Uploads", icon: FiList },
-  { to: "/faculty/profile", label: "Profile", icon: FiUser },
-];
 
 const adminNav = [
   { to: "/admin/dashboard", label: "Dashboard", icon: FiHome },
@@ -146,18 +132,6 @@ export default function App() {
             <Route path="/student/notes" element={<AnimatedPage><StudentNotes /></AnimatedPage>} />
             <Route path="/student/question-papers" element={<AnimatedPage><StudentQuestionPapers /></AnimatedPage>} />
             <Route path="/student/placements" element={<AnimatedPage><StudentPlacements /></AnimatedPage>} />
-          </Route>
-
-          {/* Faculty dashboard */}
-          <Route element={<ProtectedRoute allowedRoles={[ROLES.FACULTY]} />}>
-            <Route element={<DashboardLayout title="Faculty Dashboard" items={facultyNav} />}>
-              <Route path="/faculty/dashboard" element={<AnimatedPage><FacultyDashboard /></AnimatedPage>} />
-              <Route path="/faculty/upload-video" element={<AnimatedPage><UploadVideo /></AnimatedPage>} />
-              <Route path="/faculty/upload-notes" element={<AnimatedPage><UploadNotes /></AnimatedPage>} />
-              <Route path="/faculty/upload-question-papers" element={<AnimatedPage><UploadQuestionPapers /></AnimatedPage>} />
-              <Route path="/faculty/manage-uploads" element={<AnimatedPage><ManageUploads /></AnimatedPage>} />
-              <Route path="/faculty/profile" element={<AnimatedPage><FacultyProfile /></AnimatedPage>} />
-            </Route>
           </Route>
 
           {/* Admin dashboard */}

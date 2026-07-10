@@ -40,7 +40,7 @@ export default function ManageStudents() {
   return (
     <div>
       <h2 className="mb-2 font-display text-2xl font-bold">Manage Students</h2>
-      <p className="mb-6 text-slate-500 dark:text-slate-400">View and manage all student accounts.</p>
+      <p className="mb-6 text-white/50">View and manage all student accounts.</p>
 
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <StatCard icon={FiUsers} label="Total Students" value={students.length} accent="accent" />
@@ -53,9 +53,9 @@ export default function ManageStudents() {
       ) : students.length === 0 ? (
         <EmptyState title="No students registered" description="Student accounts appear here when users register." />
       ) : (
-        <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
+        <div className="overflow-hidden rounded-2xl border border-white/10">
           <table className="w-full text-left text-sm">
-            <thead className="bg-slate-50 text-xs uppercase text-slate-500 dark:bg-white/5 dark:text-slate-400">
+            <thead className="bg-white/5 text-xs uppercase text-white/60">
               <tr>
                 <th className="px-4 py-3">Student</th>
                 <th className="px-4 py-3">Email</th>
@@ -63,11 +63,11 @@ export default function ManageStudents() {
                 <th className="px-4 py-3 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+            <tbody className="divide-y divide-white/10">
               {students.map((s) => (
-                <tr key={s.id} className="bg-white dark:bg-dark">
+                <tr key={s.id} className="bg-[#0F172A]/95">
                   <td className="flex items-center gap-2 px-4 py-3 font-medium">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-gold to-accent text-xs font-bold text-white">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 text-xs font-bold text-white">
                       {initials(s.name)}
                     </span>
                     {s.name}

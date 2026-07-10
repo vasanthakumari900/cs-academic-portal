@@ -1,5 +1,3 @@
-// src/components/ui/AnimatedCounter.jsx
-// Premium animated counter that counts up when scrolled into view.
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 
