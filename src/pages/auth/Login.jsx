@@ -263,7 +263,7 @@ export default function Login() {
                 <img
                   src={collegeLogo}
                   alt="DGVC College Logo"
-                  className="mx-auto h-auto w-96 object-contain drop-shadow-2xl brightness-110"
+                  className="mx-auto h-auto w-full max-w-[20rem] object-contain drop-shadow-2xl brightness-110"
                 />
               </motion.div>
               <motion.h2
