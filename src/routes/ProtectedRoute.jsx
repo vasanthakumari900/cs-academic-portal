@@ -16,7 +16,11 @@ export default function ProtectedRoute({ allowedRoles }) {
 
   // Role-based access control — redirect to student dashboard if the user
   // doesn't have the required role for this route tree.
-  if (allowedRoles && !allowedRoles.includes(user.type)) {
+  // Faculty members are also allowed on admin routes.
+  const effectiveRoles = allowedRoles?.includes("admin")
+    ? [...allowedRoles, "faculty"]
+    : allowedRoles;
+  if (effectiveRoles && !effectiveRoles.includes(user.type)) {
     return <Navigate to="/student/dashboard" replace />;
   }
 

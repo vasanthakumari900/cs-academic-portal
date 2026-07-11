@@ -1,5 +1,6 @@
-import { FiPlayCircle, FiFileText, FiBriefcase } from "react-icons/fi";
+import { FiPlayCircle, FiFileText, FiBriefcase, FiUser } from "react-icons/fi";
 import { useFirestoreList } from "../../hooks/useFirestoreList";
+import { useAuth } from "../../context/AuthContext";
 import { videoService } from "../../services/videoService";
 import { noteService } from "../../services/noteService";
 import { questionPaperService } from "../../services/questionPaperService";
@@ -8,6 +9,23 @@ import StatCard from "../../components/ui/StatCard";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Cell } from "recharts";
 
 export default function AdminDashboard() {
+  const { user } = useAuth();
+
+  // Faculty users see an empty slate
+  if (user?.type === "faculty") {
+    return (
+      <div className="mx-auto flex max-w-4xl flex-col items-center justify-center px-4 py-20 sm:px-6">
+        <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/10 bg-white/5">
+          <FiUser size={28} className="text-white/30" />
+        </div>
+        <h1 className="mt-5 font-display text-xl font-semibold text-white/70">
+          Welcome, {user.name}
+        </h1>
+        <div className="mt-2 h-px w-16 bg-white/10" />
+      </div>
+    );
+  }
+
   const { items: videos } = useFirestoreList(videoService);
   const { items: notes } = useFirestoreList(noteService);
   const { items: papers } = useFirestoreList(questionPaperService);

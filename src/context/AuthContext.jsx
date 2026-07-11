@@ -1,10 +1,19 @@
 // src/context/AuthContext.jsx
-// Student & Faculty login with roll number + date of birth.
+// Student & Faculty login
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext(null);
 
-// Student login only — faculty login removed.
+// Common password for all faculty members
+const FACULTY_PASSWORD = "DGVC@1234";
+
+// Faculty members — name must be entered in capital letters as listed here
+const FACULTY_LIST = [
+  "R LALITHA", "P J RAJAM", "K DURGADEVI", "DHARANI",
+  "P REVATHI", "S KARTHIKA", "R SARANYA", "M P SUDHA",
+  "V PONNILA", "R POOJITHA SHREE", "S TAMILARASI", "G SRILAKSHMI",
+  "M SANGEETHA", "A KAVITHA", "P SUGANYA",
+];
 
 // 3rd Year A & B Section student records
 const STUDENTS = {
@@ -266,12 +275,33 @@ export function AuthProvider({ children }) {
     return userData;
   }
 
+  function facultyLogin(name, password) {
+    const trimmedName = name.trim().toUpperCase();
+
+    if (!FACULTY_LIST.includes(trimmedName)) {
+      throw new Error("Faculty name not found. Please check the spelling and try again.");
+    }
+
+    if (password !== FACULTY_PASSWORD) {
+      throw new Error("Incorrect password. Please try again.");
+    }
+
+    const userData = {
+      name: trimmedName,
+      type: "faculty",
+      role: "faculty",
+    };
+    setUser(userData);
+    localStorage.setItem("ddgdvc_user", JSON.stringify(userData));
+    return userData;
+  }
+
   function logout() {
     setUser(null);
     localStorage.removeItem("ddgdvc_user");
   }
 
-  const value = { user, loading, login, logout };
+  const value = { user, loading, login, facultyLogin, logout, FACULTY_LIST };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

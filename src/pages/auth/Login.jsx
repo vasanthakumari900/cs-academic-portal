@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import {
   FiCalendar, FiClock, FiBookOpen, FiStar, FiArrowRight,
-  FiShield,
+  FiShield, FiUser, FiLock,
 } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
 import collegeLogo from "../../assets/college-logo.jpg";
@@ -58,12 +58,15 @@ function FloatingOrb({ className, size, color, delay, duration, x, y }) {
 }
 
 export default function Login() {
+  const [activeTab, setActiveTab] = useState("student"); // "student" | "faculty"
   const [rollNumber, setRollNumber] = useState("");
   const [dob, setDob] = useState("");
+  const [facultyName, setFacultyName] = useState("");
+  const [facultyPassword, setFacultyPassword] = useState("");
   const [captcha, setCaptcha] = useState("");
   const [captchaCode, setCaptchaCode] = useState(generateCaptcha());
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, facultyLogin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -81,7 +84,7 @@ export default function Login() {
     return `${d}/${m}/${y}`;
   }
 
-  async function handleSubmit(e) {
+  async function handleStudentSubmit(e) {
     e.preventDefault();
 
     if (!/^(24E(29|30)|25E(29|30))\d{2}$/i.test(rollNumber.trim())) {
@@ -105,6 +108,32 @@ export default function Login() {
       const userName = loginResult?.name || rollNumber;
       toast.success(`Welcome, ${userName}!`);
       navigate(location.state?.from?.pathname || "/student/dashboard", { replace: true });
+    } catch (err) {
+      toast.error(err.message);
+    } finally { setLoading(false); }
+  }
+
+  async function handleFacultySubmit(e) {
+    e.preventDefault();
+
+    if (!facultyName.trim()) {
+      toast.error("Please enter your faculty name.");
+      return;
+    }
+    if (!facultyPassword.trim()) {
+      toast.error("Please enter your password.");
+      return;
+    }
+    if (captcha.trim() !== captchaCode) {
+      toast.error("Captcha does not match. Please try again.");
+      refreshCaptcha();
+      return;
+    }
+    setLoading(true);
+    try {
+      const result = await facultyLogin(facultyName, facultyPassword);
+      toast.success(`Welcome, ${result.name}!`);
+      navigate("/admin/dashboard", { replace: true });
     } catch (err) {
       toast.error(err.message);
     } finally { setLoading(false); }
@@ -156,7 +185,7 @@ export default function Login() {
                 <img
                   src={collegeLogo}
                   alt="DGVC College Logo"
-                  className="relative h-auto w-[28rem] object-contain drop-shadow-2xl brightness-110"
+                  className="relative h-auto w-[34rem] object-contain drop-shadow-2xl brightness-110"
                 />
               </div>
             </motion.div>
@@ -234,7 +263,7 @@ export default function Login() {
                 <img
                   src={collegeLogo}
                   alt="DGVC College Logo"
-                  className="mx-auto h-auto w-80 object-contain drop-shadow-2xl brightness-110"
+                  className="mx-auto h-auto w-96 object-contain drop-shadow-2xl brightness-110"
                 />
               </motion.div>
               <motion.h2
@@ -270,58 +299,140 @@ export default function Login() {
               <div className="pointer-events-none absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-indigo-500/5 blur-[80px]" />
 
               <div className="relative">
-                {/* Student Login Header */}
+                {/* Tab Switcher */}
+                <div className="mb-6 flex rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm p-1">
+                  <button
+                    type="button"
+                    onClick={() => { setActiveTab("student"); setCaptcha(""); refreshCaptcha(); }}
+                    className={`flex-1 rounded-lg py-2 text-xs font-bold uppercase tracking-wider transition-all ${
+                      activeTab === "student"
+                        ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-md"
+                        : "text-white/50 hover:text-white/80"
+                    }`}
+                  >
+                    Student Login
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setActiveTab("faculty"); setCaptcha(""); refreshCaptcha(); }}
+                    className={`flex-1 rounded-lg py-2 text-xs font-bold uppercase tracking-wider transition-all ${
+                      activeTab === "faculty"
+                        ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md"
+                        : "text-white/50 hover:text-white/80"
+                    }`}
+                  >
+                    Faculty Login
+                  </button>
+                </div>
+
+                {/* Header */}
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="mb-6 text-center"
                 >
-                  <h2 className="font-display text-xl font-bold text-white">Student Login</h2>
-                  <p className="mt-1 text-xs text-white/50">Sign in with your roll number and date of birth</p>
+                  <h2 className="font-display text-xl font-bold text-white">
+                    {activeTab === "student" ? "Student Login" : "Faculty Login"}
+                  </h2>
+                  <p className="mt-1 text-xs text-white/50">
+                    {activeTab === "student"
+                      ? "Sign in with your roll number and date of birth"
+                      : "Sign in with your name and password"}
+                  </p>
                 </motion.div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  {/* Roll Number */}
-                  <div>
-                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-white/60">
-                      Roll Number
-                    </label>
-                    <div className="relative group">
-                      <FiBookOpen className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300/70 group-focus-within:text-indigo-300 z-10 transition-colors" size={15} />
-                      <input
-                        value={rollNumber}
-                        onChange={(e) => setRollNumber(formatRoll(e.target.value))}
-                        placeholder="e.g. 24E2901"
-                        maxLength={7}
-                        className="w-full rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-11 py-3 font-mono text-sm tracking-wider text-white placeholder:text-white/30 outline-none transition-all focus:border-indigo-400/50 focus:ring-2 focus:ring-indigo-400/20 focus:bg-white/15"
-                        autoFocus
-                      />
-                    </div>
-                    <p className="mt-1.5 text-[10px] font-medium text-white/40">
-                      24E29xx (3rd Yr A) · 24E30xx (3rd Yr B) · 25E29xx (2nd Yr A) · 25E30xx (2nd Yr B)
-                    </p>
-                  </div>
+                <form onSubmit={activeTab === "student" ? handleStudentSubmit : handleFacultySubmit} className="space-y-4">
+                  {/* ─── Student Fields ─── */}
+                  {activeTab === "student" && (
+                    <>
+                      {/* Roll Number */}
+                      <div>
+                        <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-white/60">
+                          Roll Number
+                        </label>
+                        <div className="relative group">
+                          <FiBookOpen className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300/70 group-focus-within:text-indigo-300 z-10 transition-colors" size={15} />
+                          <input
+                            value={rollNumber}
+                            onChange={(e) => setRollNumber(formatRoll(e.target.value))}
+                            placeholder="e.g. 24E2901"
+                            maxLength={7}
+                            className="w-full rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-11 py-3 font-mono text-sm tracking-wider text-white placeholder:text-white/30 outline-none transition-all focus:border-indigo-400/50 focus:ring-2 focus:ring-indigo-400/20 focus:bg-white/15"
+                            autoFocus={activeTab === "student"}
+                          />
+                        </div>
+                        <p className="mt-1.5 text-[10px] font-medium text-white/40">
+                          24E29xx (3rd Yr A) · 24E30xx (3rd Yr B) · 25E29xx (2nd Yr A) · 25E30xx (2nd Yr B)
+                        </p>
+                      </div>
 
-                  {/* Date of Birth */}
-                  <div>
-                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-white/60">
-                      Date of Birth
-                    </label>
-                    <div className="relative group">
-                      <FiCalendar className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300/70 group-focus-within:text-indigo-300 z-10 transition-colors" size={15} />
-                      <input
-                        type="date"
-                        value={dob}
-                        onChange={(e) => setDob(e.target.value)}
-                        max={new Date().toISOString().split("T")[0]}
-                        className="w-full rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-11 py-3 text-sm text-white outline-none transition-all focus:border-indigo-400/50 focus:ring-2 focus:ring-indigo-400/20 focus:bg-white/15 [color-scheme:dark]"
-                      />
-                    </div>
-                    <p className="mt-1.5 text-[10px] font-medium text-white/40">
-                      Select your date of birth
-                    </p>
-                  </div>
+                      {/* Date of Birth */}
+                      <div>
+                        <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-white/60">
+                          Date of Birth
+                        </label>
+                        <div className="relative group">
+                          <FiCalendar className="absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300/70 group-focus-within:text-indigo-300 z-10 transition-colors" size={15} />
+                          <input
+                            type="date"
+                            value={dob}
+                            onChange={(e) => setDob(e.target.value)}
+                            max={new Date().toISOString().split("T")[0]}
+                            className="w-full rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-11 py-3 text-sm text-white outline-none transition-all focus:border-indigo-400/50 focus:ring-2 focus:ring-indigo-400/20 focus:bg-white/15 [color-scheme:dark]"
+                          />
+                        </div>
+                        <p className="mt-1.5 text-[10px] font-medium text-white/40">
+                          Select your date of birth
+                        </p>
+                      </div>
+                    </>
+                  )}
+
+                  {/* ─── Faculty Fields ─── */}
+                  {activeTab === "faculty" && (
+                    <>
+                      {/* Faculty Name */}
+                      <div>
+                        <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-white/60">
+                          Faculty Name
+                        </label>
+                        <div className="relative group">
+                          <FiUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-emerald-300/70 group-focus-within:text-emerald-300 z-10 transition-colors" size={15} />
+                          <input
+                            value={facultyName}
+                            onChange={(e) => setFacultyName(e.target.value.toUpperCase())}
+                            placeholder="Enter your name in CAPITAL letters"
+                            className="w-full rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-11 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-all focus:border-emerald-400/50 focus:ring-2 focus:ring-emerald-400/20 focus:bg-white/15"
+                            autoFocus={activeTab === "faculty"}
+                          />
+                        </div>
+                        <p className="mt-1.5 text-[10px] font-medium text-white/40">
+                          Enter your full name in capital letters
+                        </p>
+                      </div>
+
+                      {/* Password */}
+                      <div>
+                        <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-white/60">
+                          Password
+                        </label>
+                        <div className="relative group">
+                          <FiLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-emerald-300/70 group-focus-within:text-emerald-300 z-10 transition-colors" size={15} />
+                          <input
+                            type="password"
+                            value={facultyPassword}
+                            onChange={(e) => setFacultyPassword(e.target.value)}
+                            placeholder="Enter your password"
+                            className="w-full rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm px-11 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-all focus:border-emerald-400/50 focus:ring-2 focus:ring-emerald-400/20 focus:bg-white/15"
+                          />
+                        </div>
+                        <p className="mt-1.5 text-[10px] font-medium text-white/40">
+                          Use the common faculty password provided by the department
+                        </p>
+                      </div>
+                    </>
+                  )}
 
                   {/* CAPTCHA */}
                   <div>
@@ -397,7 +508,7 @@ export default function Login() {
                         </>
                       ) : (
                         <>
-                          Access Student Portal
+                          {activeTab === "student" ? "Access Student Portal" : "Access Faculty Portal"}
                           <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                         </>
                       )}
@@ -407,7 +518,9 @@ export default function Login() {
 
                 {/* Footer */}
                 <p className="mt-5 text-center text-[11px] font-medium text-white/30">
-                  Enter your roll number, date of birth, and the captcha to sign in
+                  {activeTab === "student"
+                    ? "Enter your roll number, date of birth, and the captcha to sign in"
+                    : "Enter your name, password, and the captcha to sign in"}
                 </p>
 
                 {/* Bottom decorative line */}
