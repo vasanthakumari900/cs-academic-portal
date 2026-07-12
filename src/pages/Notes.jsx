@@ -68,7 +68,51 @@ const FIRST_YEAR_SEM1_FACULTY = {
 };
 
 const NOTES_DATA = {
-  "OPERATING SYSTEM": { units: { 1: { title: "Unit I", subtitle: "Introduction to OS", syllabus: "INTRODUCTION - VIEWS AND GOALS - OPERATING-SYSTEM SERVICES - USER AND OPERATING-SYSTEM INTERFACE - SYSTEM CALL - TYPES OF SYSTEM CALLS", files: [{ id: "os-u1-1", title: "OS Introduction", fileName: "OS-INTRO.pptx", fileId: "1GixI9_7uxRNzbf5qSe_wf4McmWaylQDS", type: "pptx" },{ id: "os-u1-2", title: "Session 2 - OS Basics", fileName: "ses-2.pptx", fileId: "1Zny7cAR4GR0YTRr3sIZT-u-FAOIQvQ-d", type: "pptx" },{ id: "os-u1-3", title: "OS Structures - Unit 1", fileName: "os structures-unit 1.pdf", fileId: "1O8-gnDMSgXurNN6O99N4S26z-UlONUbu", type: "pdf" },{ id: "os-u1-4", title: "OS Structures", fileName: "OSStructures.ppt", fileId: "1xqoPAFz_xavBAX8RR8nNErwANXnce-3B", type: "ppt" },{ id: "os-u1-5", title: "Processes", fileName: "os-processes.ppt", fileId: "1MoiwrzKonwOc4MH9wuO_sxKm92coXyYM", type: "ppt" },{ id: "os-u1-6", title: "Interprocess Communication", fileName: "interprocesscommunication-180721182943.pptx", fileId: "14mf_5YIS0TZB00phmq2kTSN8gT1gpfJY", type: "pptx" },{ id: "os-u1-7", title: "Threads - Unit 1", fileName: "threads-unit 1.pdf", fileId: "172mi8UGGUnGPAPF7zOeSKEBkqFucF5SM", type: "pdf" },{ id: "os-u1-8", title: "THREADS", fileName: "THREADS.pptx", fileId: "1uU4O05stk5cg2AVhfQBdC1VifAd_nrgJ", type: "pptx" }] }, 2: { title: "Unit II", subtitle: "Process Scheduling & Synchronization", syllabus: "PROCESS SCHEDULING: BASIC CONCEPTS - SCHEDULING CRITERIA - SCHEDULING ALGORITHMS - MULTIPLE-PROCESSOR SCHEDULING - CPU SCHEDULING. SYNCHRONIZATION: THE CRITICAL-SECTION PROBLEM - SYNCHRONIZATION HARDWARE - SEMAPHORES",          files: [
+  "FUNDAMENTALS OF PYTHON PROGRAMMING": {
+    units: {
+      1: {
+        title: "Unit I",
+        subtitle: "Setting and Checking variables",
+        syllabus: "Setting and Checking variables: Data types - Using Constants - Introduction to Python -Values and types - Variables - Variable names and keywords - Operators and Operands-Expressions and Statements-Order of Operations-Comments.",
+        hrs: 10,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "Unit II",
+        subtitle: "Functions & Recursion",
+        syllabus: "Functions: Function calls-Type conversion functions-Math functions Definitions and uses Parameters arguments Local variables and parameters Fruitful functions Conditionals and Recursion: Modulus operator Boolean expressions Logical operators- Conditional execution-Alternative execution-Chained conditionals-Nested Conditionals-Recursion.",
+        hrs: 10,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "Unit III",
+        subtitle: "Iteration & Strings",
+        syllabus: "Iteration-Multiple assignment-Updating variables-While statement-break- String - Len-FString slices- Looping and counting-String methods-in operator-String comparison.",
+        hrs: 10,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "Unit IV",
+        subtitle: "Lists, Dictionaries & Tuples",
+        syllabus: "Lists: List operations-list slices-list methods-Deleting elements-Lists and strings-Dictionaries: Dictionary as a set of counters-Looping and dictionaries-Reverse lookup-Global Variables, Tuples: Immutable-Tuple assignment-Tuples as return values Lists and tuples Dictionaries and tuples. Files: Reading and writing-Format operator- Filenames and Paths-Catching exceptions.",
+        hrs: 15,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "Unit V",
+        subtitle: "Classes & Objects",
+        syllabus: "Classes and Objects: User-defined types-Attributes- Instances as return values. Classes and functions: Time-Pure functions-Modifiers. Classes and methods: Object oriented features init method-str method-Operator overloading- Polymorphism- Inheritance- Class diagrams- Data encapsulation.",
+        hrs: 15,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "OPERATING SYSTEM": { units: { 1: { title: "Unit I", subtitle: "Introduction to OS", syllabus: "INTRODUCTION - VIEWS AND GOALS - OPERATING-SYSTEM SERVICES - USER AND OPERATING-SYSTEM INTERFACE - SYSTEM CALL - TYPES OF SYSTEM CALLS", files: [{ id: "os-u1-1", title: "OS Introduction", fileName: "OS-INTRO.pptx", fileId: "1GixI9_7uxRNzbf5qSe_wf4McmWaylQDS", type: "pptx" },{ id: "os-u1-2", title: "Session 2 - OS Basics", fileName: "ses-2.pptx", fileId: "1Zny7cAR4GR0YTRr3sIZT-u-FAOIQvQ-d", type: "pptx" },{ id: "os-u1-3", title: "OS Structures - Unit 1", fileName: "os structures-unit 1.pdf", fileId: "1O8-gnDMSgXurNN6O99N4S26z-UlONUbu", type: "pdf" },{ id: "os-u1-4", title: "OS Structures", fileName: "OSStructures.ppt", fileId: "1xqoPAFz_xavBAX8RR8nNErwANXnce-3B", type: "ppt" },{ id: "os-u1-5", title: "Processes", fileName: "os-processes.ppt", fileId: "1MoiwrzKonwOc4MH9wuO_sxKm92coXyYM", type: "ppt" },{ id: "os-u1-6", title: "Interprocess Communication", fileName: "interprocesscommunication-180721182943.pptx", fileId: "14mf_5YIS0TZB00phmq2kTSN8gT1gpfJY", type: "pptx" },{ id: "os-u1-7", title: "Threads - Unit 1", fileName: "threads-unit 1.pdf", fileId: "172mi8UGGUnGPAPF7zOeSKEBkqFucF5SM", type: "pdf" },{ id: "os-u1-8", title: "THREADS", fileName: "THREADS.pptx", fileId: "1uU4O05stk5cg2AVhfQBdC1VifAd_nrgJ", type: "pptx" }] }, 2: { title: "Unit II", subtitle: "Process Scheduling & Synchronization", syllabus: "PROCESS SCHEDULING: BASIC CONCEPTS - SCHEDULING CRITERIA - SCHEDULING ALGORITHON - MULTIPLE-PROCESSOR SCHEDULING - CPU SCHEDULING. SYNCHRONIZATION: THE CRITICAL-SECTION PROBLEM - SYNCHRONIZATION HARDWARE - SEMAPHORES",          files: [
             { id: "os-u2-1", title: "OS Unit 2 - Process Scheduling & Synchronization", fileName: "OS_Unit2.pdf", fileId: "1J8M3d7mVSU4oxkyp6q_Dq-m4tuhdVmLV", type: "pdf" },
             { id: "os-u2-2", title: "CPU Scheduling Algorithms", fileName: "CPU_Scheduling_Algorithms.pdf", fileId: "1_XELBrqMfKayUaj3iU_SqpwY_NQv55Kt", type: "pdf" },
             { id: "os-u2-3", title: "Process Scheduling - Basic Concepts & Criteria", fileName: "Process_Scheduling_Concepts.pdf", fileId: "1G25fBzDLCLnCHNu_dby65kRLi5IUyJRW", type: "pdf" },
@@ -224,100 +268,7 @@ const NOTES_DATA = {
     } },
 };
 
-const SYLLABUS = {
-  "OPERATING SYSTEM": [
-    { sl: 1, module: "INTRODUCTION - VIEWS AND GOALS - OPERATING-SYSTEM SERVICES - USER AND OPERATING-SYSTEM INTERFACE - SYSTEM CALL - TYPES OF SYSTEM CALLS", hrs: 15, co: "CO1" },
-    { sl: 2, module: "PROCESS SCHEDULING: BASIC CONCEPTS - SCHEDULING CRITERIA - SCHEDULING ALGORITHMS - MULTIPLE-PROCESSOR SCHEDULING", hrs: 15, co: "CO2" },
-    { sl: 3, module: "DEADLOCKS: DEADLOCK CHARACTERIZATION - METHODS FOR HANDLING DEADLOCKS - DEADLOCK PREVENTION - DEADLOCK AVOIDANCE", hrs: 15, co: "CO3" },
-    { sl: 4, module: "MEMORY-MANAGEMENT STRATEGIES: SWAPPING - CONTIGUOUS MEMORY ALLOCATION - SEGMENTATION - PAGING", hrs: 15, co: "CO4" },
-    { sl: 5, module: "STORAGE MANAGEMENT: FILE SYSTEM - FILE CONCEPT - ACCESS METHODS - DIRECTORY AND DISK STRUCTURE", hrs: 15, co: "CO5" },
-  ],
-  "DATABASE MANAGEMENT SYSTEM": [
-    { sl: 1, module: "INTRODUCTION - DATABASE SYSTEM - CHARACTERISTICS OF DBMS - ARCHITECTURE - DATABASE MODELS - SDLC - ER MODEL", hrs: 15, co: "CO1" },
-    { sl: 2, module: "INTRODUCTION TO RELATIONAL DATABASE MODEL - KEYS - RELATIONAL ALGEBRA - NORMALIZATION", hrs: 15, co: "CO2" },
-    { sl: 3, module: "SQL: INTRODUCTION - DATA RETRIEVAL - FUNCTIONS - SUB QUERY - JOINS - DML - TCL - VIEW - SEQUENCE - INDEX", hrs: 15, co: "CO3" },
-    { sl: 4, module: "PL/SQL: INTRODUCTION - BASIC - CHARACTER SET - STRUCTURE - SQL CURSOR - SUBPROGRAMS - FUNCTIONS - PROCEDURES", hrs: 15, co: "CO4" },
-    { sl: 5, module: "EXCEPTION HANDLER - TRIGGERS - CURSORS", hrs: 15, co: "CO5" },
-  ],
-  "DATA MINING TECHNIQUES": [
-    { sl: 1, module: "INTRODUCTION - DATA MINING - KINDS OF DATA - KINDS OF PATTERNS - APPLICATIONS - ISSUES", hrs: 15, co: "CO1" },
-    { sl: 2, module: "DATA PREPROCESSING - DATA CLEANING - DATA INTEGRATION - DATA REDUCTION", hrs: 15, co: "CO2" },
-    { sl: 3, module: "MINING FREQUENT PATTERNS - APRIORI ALGORITHM - ASSOCIATION RULES", hrs: 15, co: "CO3" },
-    { sl: 4, module: "CLASSIFICATION - DECISION TREE - BAYES CLASSIFICATION - RULE-BASED CLASSIFICATION", hrs: 15, co: "CO4" },
-    { sl: 5, module: "CLUSTER ANALYSIS - PARTITIONING METHODS - OUTLIER DETECTION", hrs: 15, co: "CO5" },
-  ],
-  "ASP.NET": [
-    { sl: 1, module: "OVERVIEW OF ASP.NET FRAMEWORK - PAGE STRUCTURE - COMPILER DIRECTIVES - NAMESPACE", hrs: 10, co: "CO1" },
-    { sl: 2, module: "UNDERSTANDING ASP.NET CONTROL: STANDARD CONTROLS - DISPLAYING INFORMATION - ACCEPTING USER INPUT", hrs: 10, co: "CO2" },
-    { sl: 3, module: "OVERVIEW OF VALIDATION CONTROL - RICH CONTROLS: ADROTATOR, CALENDAR", hrs: 15, co: "CO3" },
-    { sl: 4, module: "OVERVIEW OF DATA ACCESS: DATA BOUND CONTROL - SQLDATASOURCE - OLEDB - DATASET", hrs: 15, co: "CO4" },
-    { sl: 5, module: "LIST CONTROL: GRID VIEW - REPEATER - DATA LIST - STATE MANAGEMENT", hrs: 10, co: "CO5" },
-  ],
-  "JAVA PROGRAMMING": [
-    { sl: 1, module: "INTRODUCTION TO JAVA - OOP CONCEPTS - JAVA VIRTUAL MACHINE - DATA TYPES - VARIABLES - OPERATORS - CONTROL STATEMENTS - ARRAYS", hrs: 15, co: "CO1" },
-    { sl: 2, module: "CLASSES - OBJECTS - CONSTRUCTORS - INHERITANCE - PACKAGES - INTERFACES - METHOD OVERRIDING", hrs: 15, co: "CO2" },
-    { sl: 3, module: "EXCEPTION HANDLING - TRY CATCH FINALLY - THROW - THROWS - MULTITHREADING - THREAD LIFE CYCLE - SYNCHRONIZATION", hrs: 15, co: "CO3" },
-    { sl: 4, module: "COLLECTIONS FRAMEWORK - LIST - SET - MAP - GENERICS - ITERATOR - COMPARABLE AND COMPARATOR", hrs: 15, co: "CO4" },
-    { sl: 5, module: "APPLETS - AWT - SWING - EVENT HANDLING - JDBC - DATABASE CONNECTIVITY", hrs: 15, co: "CO5" },
-  ],
-  "TAMIL": [
-    { sl: 1, module: "சங்க இலக்கியத் தோற்றம் - சங்க காலம் - சங்க இலக்கியங்கள் - பதினெண் மேல்கணக்கு - பதினெண் கீழ்க்கணக்கு", hrs: 15, co: "CO1" },
-    { sl: 2, module: "சங்க போர்க்களங்கள் - ஐந்திணை - திணைக் கோட்பாடு - திணை மயக்கம்", hrs: 15, co: "CO2" },
-    { sl: 3, module: "சிலப்பதிகாரம் - காப்பியத் தோற்றம் - காப்பிய இலக்கியங்களின் தன்மைகள் - சாதுவின் உண்மை", hrs: 15, co: "CO3" },
-    { sl: 4, module: "மணிமேகலை - புத்தத்த இலக்கியத் தோற்றம் - சாதுகளின் வரையறை - இனக்கம்", hrs: 15, co: "CO4" },
-    { sl: 5, module: "தேவாரம் - பக்தி இலக்கியத் தோற்றம் - நாயன்மார்கள் - நால்வர் - முதல் வரலாறு", hrs: 15, co: "CO5" },
-    { sl: 6, module: "திருவாசகம் - சைவ இலக்கியம் - மாணிக்கவாசகர் - பதிற்றுப்பத்தந்தாதி", hrs: 15, co: "CO6" },
-    { sl: 7, module: "கலித்தொகை - பட்டுப்பாட்டு - முதல் குழு - திணைமலை நூறு - எட்டுத்தொகை", hrs: 15, co: "CO7" },
-    { sl: 8, module: "தொல்காப்பியம் - இலக்கண இலக்கியத் தோற்றம் - எழுத்து, சொல், பொருளதிகாரம் - தொல்காப்பியர்", hrs: 15, co: "CO8" },
-    { sl: 9, module: "பாலைத்திணை - பிரிவுத் துன்பம் - தலைவன் பிரிவு - தலைவி ஏக்கம் - பாலை நில இயற்கை - வழிப்பயண இடையூறுகள்", hrs: 15, co: "CO9" },
-    { sl: 10, module: "குறிஞ்சித்திணை - கபிலர் - மலை நிலம் - தலைவன் தலைவி சந்திப்பு - குறிஞ்சி நில இயற்கை வளம்", hrs: 15, co: "CO10" },
-    { sl: 11, module: "அகநானூறு - முல்லைத்திணை - நெய்தற்றிணை - மருதத்திணை - ஐந்திணை இலக்கணம் - திணைக் கோட்பாடு", hrs: 15, co: "CO11" },
-    { sl: 12, module: "கலித்தொகை - பாலைக்கலி - குறிஞ்சிக்கலி - கலிப்பாடல்கள் - தலைவன் ஒழுக்கம் - கற்பு மற்றும் களவு வாழ்க்கை", hrs: 15, co: "CO12" },
-    { sl: 13, module: "ஐங்குறுநூறு - பாலைப்பாட்டு - குறிஞ்சிப்பாட்டு - சிற்றிலக்கியங்கள் - பத்துப்பாட்டு - எட்டுத்தொகை மரபு", hrs: 15, co: "CO13" },
-  ],
-  "WEB TECHNOLOGY": [
-    { sl: 1, module: "INTRODUCTION TO WEB TECHNOLOGIES - HTML BASICS - CSS FUNDAMENTALS - JAVASCRIPT OVERVIEW - WEB ARCHITECTURE", hrs: 15, co: "CO1" },
-    { sl: 2, module: "HTML FORMS AND TABLES - CSS LAYOUTS - FLEXBOX - GRID - RESPONSIVE DESIGN - CSS FRAMEWORKS", hrs: 15, co: "CO2" },
-    { sl: 3, module: "JAVASCRIPT BASICS - DOM MANIPULATION - EVENTS - VALIDATION - ES6 FEATURES", hrs: 15, co: "CO3" },
-    { sl: 4, module: "SERVER-SIDE PROGRAMMING - PHP/SERVLETS - DATABASE CONNECTIVITY - SESSION MANAGEMENT - CRUD OPERATIONS", hrs: 15, co: "CO4" },
-    { sl: 5, module: "WEB SERVICES - XML - JSON - AJAX - REST API - INTRODUCTION TO FRAMEWORKS", hrs: 15, co: "CO5" },
-  ],
-  "STATISTICAL METHODS FOR COMPUTER SCIENCE - I": [
-    { sl: 1, module: "INTRODUCTION - STATISTICS - MEASURES OF CENTRAL TENDENCY - MEAN, MEDIAN, MODE - MEASURES OF DISPERSION", hrs: 15, co: "CO1" },
-    { sl: 2, module: "PROBABILITY - BASIC CONCEPTS - AXIOMS OF PROBABILITY - CONDITIONAL PROBABILITY - BAYES THEOREM", hrs: 15, co: "CO2" },
-    { sl: 3, module: "PROBABILITY DISTRIBUTIONS - BINOMIAL DISTRIBUTION - POISSON DISTRIBUTION - NORMAL DISTRIBUTION", hrs: 15, co: "CO3" },
-    { sl: 4, module: "SAMPLING THEORY - SAMPLING METHODS - SAMPLING DISTRIBUTION - POINT ESTIMATION - INTERVAL ESTIMATION", hrs: 15, co: "CO4" },
-    { sl: 5, module: "CORRELATION ANALYSIS - REGRESSION ANALYSIS - LINEAR REGRESSION - APPLICATIONS", hrs: 15, co: "CO5" },
-  ],
-  "STATISTICAL METHODS FOR COMPUTER SCIENCE - II": [
-    { sl: 1, module: "INTRODUCTION TO TESTING OF HYPOTHESIS - SAMPLE SPACE - EVENTS - PROBABILITY - NULL AND ALTERNATIVE HYPOTHESIS - TYPE I AND TYPE II ERRORS", hrs: 15, co: "CO1" },
-    { sl: 2, module: "LARGE SAMPLE TESTS - TEST FOR SINGLE MEAN - DIFFERENCE OF MEANS - SINGLE PROPORTION - DIFFERENCE OF PROPORTIONS", hrs: 15, co: "CO2" },
-    { sl: 3, module: "SMALL SAMPLE TESTS - STUDENT'S T-TEST - F-TEST - PAIRED T-TEST - SINGLE MEAN - DIFFERENCE OF MEANS", hrs: 15, co: "CO3" },
-    { sl: 4, module: "CHI-SQUARE DISTRIBUTION - GOODNESS OF FIT - TEST FOR INDEPENDENCE - SAMPLING DISTRIBUTION - STANDARD ERROR", hrs: 15, co: "CO4" },
-    { sl: 5, module: "DESIGN OF EXPERIMENTS - PRINCIPLES - RANDOMIZATION - REPLICATION - LOCAL CONTROL - CRD - RBD - LSD - ANOVA", hrs: 15, co: "CO5" },
-  ],
-  "ANDROID APP DEVELOPMENT": [
-    { sl: 1, module: "INTRODUCTION TO MOBILE APPLICATIONS - MARKET AND BUSINESS DRIVERS FOR MOBILE APPLICATIONS - REQUIREMENTS GATHERING AND VALIDATION FOR MOBILE APPLICATIONS - PUBLISHING AND DELIVERY OF MOBILE APPLICATIONS", hrs: 10, co: "CO1" },
-    { sl: 2, module: "INTRODUCTION TO ANDROID: THE ANDROID PLATFORM - ANDROID SDK - ANDROID DEVELOPMENT BASICS - HARDWARE TOOLS AND SOFTWARE TOOLS - BUILDING YOUR FIRST ANDROID APPLICATION - UNDERSTANDING STRUCTURE OF ANDROID APPLICATION - ANDROID MANIFEST FILE", hrs: 10, co: "CO2" },
-    { sl: 3, module: "ANDROID USER INTERFACE DESIGN ESSENTIALS - USER INTERFACE SCREEN ELEMENTS - DESIGNING USER INTERFACES WITH LAYOUTS - USING INTENT FILTER - PERMISSIONS - CREATING YOUR FIRST ACTIVITY - WORKING WITH THE ANDROID FRAMEWORK CLASSES", hrs: 15, co: "CO3" },
-    { sl: 4, module: "CREATING INSTALLING YOUR APPLICATION - CODING YOUR APPLICATION - UNDERSTANDING ACTIVITIES AND THE ACTIVITY LIFECYCLE - TESTING ANDROID APPLICATIONS - PUBLISHING ANDROID APPLICATION - UNDERSTANDING RESOURCES - WORKING WITH RESOURCES", hrs: 15, co: "CO4" },
-    { sl: 5, module: "INTRODUCTION TO OBJECTIVE C - ANDROID STUDIO PERMISSIONS - WORKING WITH FILES - WORKING WITH THE NETWORK - DEBUGGING ANDROID APPS - PROVIDING FEEDBACK TO THE USER - VIBRATION - SOUND - FLASH - RAW CAMERA USAGE - TOUCH GESTURES", hrs: 10, co: "CO5" },
-  ],
-  "ARTIFICIAL INTELLIGENCE AND EXPERT SYSTEM": [
-    { sl: 1, module: "INTRODUCTION TO ARTIFICIAL INTELLIGENCE - GOALS OF AI - INTELLIGENT AGENTS - PROBLEM SOLVING - STATE SPACE SEARCH - UNINFORMED SEARCH STRATEGIES - INFORMED SEARCH STRATEGIES - GAME PLAYING", hrs: 10, co: "CO1" },
-    { sl: 2, module: "KNOWLEDGE REPRESENTATION - LOGIC - PROPOSITIONAL LOGIC - PREDICATE LOGIC - SEMANTIC NETWORKS - FRAMES - ONTOLOGIES - REASONING MECHANISMS - INFERENCE", hrs: 10, co: "CO2" },
-    { sl: 3, module: "MACHINE LEARNING - SUPERVISED LEARNING - UNSUPERVISED LEARNING - DECISION TREES - NEURAL NETWORKS - PERCEPTRON - BACKPROPAGATION - FUZZY LOGIC - GENETIC ALGORITHMS", hrs: 10, co: "CO3" },
-    { sl: 4, module: "NATURAL LANGUAGE PROCESSING - NLP PIPELINE - TEXT PREPROCESSING - LANGUAGE ANALYSIS - TEXT REPRESENTATION - EMBEDDING TECHNIQUES - NLU - NLG - NLP APPLICATIONS", hrs: 10, co: "CO4" },
-    { sl: 5, module: "EXPERT SYSTEMS - ARCHITECTURE OF ES - KNOWLEDGE BASE - INFERENCE ENGINE - RULE-BASED SYSTEMS - FUZZY EXPERT SYSTEMS - AI APPLICATIONS - ROBOTICS - COMPUTER VISION", hrs: 10, co: "CO5" },
-  ],
-  "SOFTWARE ENGINEERING": [
-    { sl: 1, module: "The Nature of Software - Definition: Software, Software Engineering - Prescriptive Process Models - The Waterfall Model - Incremental Process Model - Evolutionary Process Models - Concurrent Models", hrs: 10, co: "CO1" },
-    { sl: 2, module: "Requirements Analysis - Scenario-Based Modeling - UML Models That Supplement the Use Case - Data Modeling Concepts - Class-Based Modeling - Requirements Modeling Strategies - Flow-Oriented Modeling - Creating a Behavioral Model", hrs: 10, co: "CO2" },
-    { sl: 3, module: "The Design Process - Design Concepts - The Design Model - Designing Class-Based Components: Basic Design Principles - Component-Level Design Guidelines - Cohesion Coupling - Designing Traditional Components - Graphical Design Notation - Tabular Design Notation - Program Design Language", hrs: 10, co: "CO3" },
-    { sl: 4, module: "Elements of Software Quality Assurance - SQA Tasks, goals, and metrics - Software Testing Strategies - Unit Testing - Integration Testing - Validation Testing - Alpha and Beta Testing - System Testing - The Debugging Process - White-Box Testing - Basis Path Testing - Control Structure Testing - Black-Box Testing", hrs: 10, co: "CO4" },
-    { sl: 5, module: "Software Configuration Management - The SCM Repository - The SCM Process - Risk Management - Software Risks - Risk Identification Risk Projection - Risk Refinement Risk Mitigation, Monitoring, and Management - The RMMM Plan - Software Maintenance - Software Supportability - Software Reengineering - Reverse Engineering", hrs: 10, co: "CO5" },
-  ],
-};
+// SYLLABUS constant removed in favor of dynamic parsing from NOTES_DATA
 
 function getDrivePreviewUrl(fileId, type = "pdf") {
   if (type === "doc") return `https://docs.google.com/document/d/${fileId}/preview`;
@@ -415,11 +366,20 @@ export default function Notes() {
       }));
   }, [selectedSubject, uploadedNotes]);
 
-  const syllabusData = !isPlaceholder && selectedSubject
-    ? (SYLLABUS[selectedSubject] && semesterUnitFilter
-      ? SYLLABUS[selectedSubject].filter(s => semesterUnitFilter.has(s.sl))
-      : SYLLABUS[selectedSubject])
-    : null;
+  const syllabusData = useMemo(() => {
+    if (!selectedSubject || isPlaceholder) return null;
+    const subjectData = NOTES_DATA[selectedSubject];
+    if (!subjectData || !subjectData.units) return null;
+    const filter = SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[selectedSubject];
+    return Object.entries(subjectData.units)
+      .filter(([key]) => !filter || filter.has(Number(key)))
+      .map(([key, unit], idx) => ({
+        sl: idx + 1,
+        module: `${unit.title}${unit.subtitle ? ` - ${unit.subtitle}` : ""}: ${unit.syllabus || "Syllabus content to be updated."}`,
+        hrs: unit.hrs || 15,
+        co: unit.co || `CO${key}`,
+      }));
+  }, [selectedSubject, selectedYear, selectedSemester, isPlaceholder]);
 
   if (!selectedYear) {
     return (

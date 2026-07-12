@@ -137,8 +137,8 @@ export default function EContent() {
       .map(([key, unit], idx) => ({
         sl: idx + 1,
         module: `${unit.title}${unit.subtitle ? ` - ${unit.subtitle}` : ""}: ${unit.syllabus || "Syllabus content to be updated."}`,
-        hrs: 15,
-        co: `CO${key}`,
+        hrs: unit.hrs || 15,
+        co: unit.co || `CO${key}`,
       }));
   }, [selectedSubject, selectedYear, selectedSemester, isPlaceholder]);
 
