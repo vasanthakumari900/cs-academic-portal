@@ -21,7 +21,8 @@ export default function ProtectedRoute({ allowedRoles }) {
     ? [...allowedRoles, "faculty"]
     : allowedRoles;
   if (effectiveRoles && !effectiveRoles.includes(user.type)) {
-    return <Navigate to="/student/dashboard" replace />;
+    const dest = user.type === "faculty" ? "/faculty/dashboard" : user.type === "admin" ? "/admin/dashboard" : "/student/dashboard";
+    return <Navigate to={dest} replace />;
   }
 
   return <Outlet />;

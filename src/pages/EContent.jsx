@@ -11,7 +11,8 @@ import { useAuth } from "../context/AuthContext";
 import { STORAGE_PATHS } from "../utils/constants";
 import { uploadFile } from "../services/storageService";
 import toast from "react-hot-toast";
-import { CURRICULUM, NOTES_DATA, SEMESTER_UNITS, NAME_ONLY_MAP } from "./Notes";
+import { NOTES_DATA, SEMESTER_UNITS, NAME_ONLY_MAP } from "./Notes";
+import { CURRICULUM } from "../utils/curriculum";
 
 const FACULTY_MAP = {
   "OPERATING SYSTEM": "DR DHARANI",
@@ -129,6 +130,8 @@ export default function EContent() {
     : [];
   const syllabusData = useMemo(() => {
     if (!selectedSubject || isPlaceholder) return null;
+    // Hide syllabus for Operating System in 2nd Year Sem 1 (E-Content only)
+    if (selectedSubject === "OPERATING SYSTEM" && selectedYear === 2 && selectedSemester === 1) return null;
     const subjectData = NOTES_DATA[selectedSubject];
     if (!subjectData || !subjectData.units) return null;
     const filter = SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[selectedSubject];

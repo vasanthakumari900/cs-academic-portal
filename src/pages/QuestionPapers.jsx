@@ -185,8 +185,8 @@ export default function QuestionPapers() {
   const [uploadRegulation, setUploadRegulation] = useState("R2024");
   const [uploadFileObj, setUploadFileObj] = useState(null);
 
-  const { items: uploadedPapers, refetch } = useFirestoreList(questionPaperService);
-
+ const uploadedPapers = [];
+const refetch = () => {};
   async function handleUpload(e) {
     e.preventDefault();
     if (!uploadFileObj) {
@@ -232,7 +232,7 @@ export default function QuestionPapers() {
 
   const yearData = selectedYear ? CURRICULUM[selectedYear] : null;
   const semesterData = selectedSemester && yearData ? yearData.semesters[selectedSemester] : null;
-  const yearSubjects = semesterData ? semesterData.subjects : (selectedYear ? getSubjectsForYear(selectedYear) : []);
+  const yearSubjects = courseType === "pg" ? [] : (semesterData ? semesterData.subjects : (selectedYear ? getSubjectsForYear(selectedYear) : []));
   const ys = selectedYear ? yearStyles[selectedYear] : yearStyles[1];
 
   const combinedPapers = useMemo(() => {
@@ -339,7 +339,7 @@ export default function QuestionPapers() {
                 <div className="relative p-8 text-center">
                   <div className={`mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${s.gradient} text-2xl font-bold text-white shadow-lg transition-all group-hover:scale-110`}>{CURRICULUM[year].icon}</div>
                   <h2 className={`text-lg font-bold ${s.text}`}>{CURRICULUM[year].label}</h2>
-                  <p className="mt-1 text-xs text-white/50">{getSubjectsForYear(year).length} subjects</p>
+                  {courseType !== "pg" && <p className="mt-1 text-xs text-white/50">{getSubjectsForYear(year).length} subjects</p>}
                 </div>
                 <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${s.gradient} scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500`} />
               </motion.button>
@@ -374,8 +374,7 @@ export default function QuestionPapers() {
               <div className={`absolute inset-0 bg-gradient-to-br ${ys.light} opacity-50 group-hover:opacity-80 transition-opacity`} />
               <div className="relative p-8 text-center">
                 <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br ${ys.gradient} text-xl font-bold text-white shadow-md`}>{semKey === 1 ? "I" : "II"}</div>
-                <h2 className={`text-lg font-bold ${ys.text}`}>{semData.label}</h2>
-                <p className="mt-1 text-xs text-white/50">{semData.subjects.length} subjects</p>
+                <h2 className={`text-lg font-bold ${ys.text}`}>{semData.label}</h2>                  {courseType !== "pg" && <p className="mt-1 text-xs text-white/50">{semData.subjects.length} subjects</p>}
               </div>
             </motion.button>
           ))}

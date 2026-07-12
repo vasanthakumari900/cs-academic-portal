@@ -10,8 +10,9 @@ const cards = [
   { label: "Home", icon: FiHome, to: "/", gradient: "from-emerald-500 to-teal-600", desc: "Inspirational quotes & info" },
   { label: "Video Lectures", icon: FiPlayCircle, to: "/e-content", gradient: "from-indigo-600 to-violet-700", desc: "Year & subject-wise lectures" },
   { label: "Lecture Notes", icon: FiFileText, to: "/notes", gradient: "from-cyan-500 to-teal-600", desc: "Unit-wise PDF notes by subject" },
-  { label: "Question Papers", icon: FiGrid, to: "/question-papers", gradient: "from-rose-500 to-pink-600", desc: "Practice with past papers" },
+  { label: "Semester Question Papers", icon: FiGrid, to: "/question-papers", gradient: "from-rose-500 to-pink-600", desc: "Semester-wise past exam papers" },
   { label: "Placement Details", icon: FiBriefcase, to: "/placements", gradient: "from-amber-500 to-orange-600", desc: "Drives & opportunities" },
+  { label: "CIA Question Papers", icon: FiAward, to: "/student/cia-question-papers", gradient: "from-amber-500 to-orange-600", desc: "CIA 1 & 2 question papers" },
 ];
 
 export default function StudentDashboard() {

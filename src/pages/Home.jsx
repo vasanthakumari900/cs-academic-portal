@@ -37,6 +37,13 @@ export default function Home() {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  const getDashboardPath = () => {
+    if (!user) return "/login";
+    if (user.type === "faculty") return "/faculty/dashboard";
+    if (user.type === "admin") return "/admin/dashboard";
+    return "/student/dashboard";
+  };
+
   return (
     <div className="min-h-screen">
       {/* HERO */}
@@ -85,7 +92,7 @@ export default function Home() {
 
             <motion.div custom={2} initial="hidden" animate="visible" variants={fadeInUp} className="mt-10 flex flex-wrap items-center justify-center gap-4">
               {user ? (
-                <button onClick={() => navigate("/student/dashboard")}
+                <button onClick={() => navigate(getDashboardPath())}
                   className="group inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-[#0F172A] shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 active:scale-[0.97]"
                 >Go to Dashboard <FiArrowRight size={16} className="transition-transform group-hover:translate-x-1" /></button>
               ) : (
@@ -181,7 +188,7 @@ export default function Home() {
                 Every session you study, every paper you practice, every video you watch — brings you one step closer to your dreams. Keep going!
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                <button onClick={() => navigate(user ? "/student/dashboard" : "/login")}
+                <button onClick={() => navigate(getDashboardPath())}
                   className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-[#0F172A] shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 active:scale-[0.97]"
                 >{user ? "Go to Dashboard" : "Get Started"} <FiArrowRight size={16} /></button>
               </div>

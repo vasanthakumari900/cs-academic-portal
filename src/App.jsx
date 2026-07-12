@@ -41,6 +41,7 @@ import Login from "./pages/auth/Login";
 
 // Student Dashboard — shows E-Content directly
 import StudentDashboard from "./pages/student/StudentDashboard";
+import CIAQuestionPapers from "./pages/student/CIAQuestionPapers";
 
 // Public pages also accessible from student dashboard
 import StudentEContent from "./pages/EContent";
@@ -132,6 +133,7 @@ export default function App() {
             <Route path="/e-content" element={<AnimatedPage><EContent /></AnimatedPage>} />
             <Route path="/notes" element={<AnimatedPage><Notes /></AnimatedPage>} />
             <Route path="/question-papers" element={<AnimatedPage><QuestionPapers /></AnimatedPage>} />
+            <Route path="/cia-question-papers" element={<AnimatedPage><CIAQuestionPapers /></AnimatedPage>} />
             <Route path="/placements" element={<AnimatedPage><Placements /></AnimatedPage>} />
             <Route path="/about" element={<AnimatedPage><About /></AnimatedPage>} />
             <Route path="/search" element={<AnimatedPage><Search /></AnimatedPage>} />
@@ -143,6 +145,7 @@ export default function App() {
             <Route path="/student/videos" element={<AnimatedPage><StudentEContent /></AnimatedPage>} />
             <Route path="/student/notes" element={<AnimatedPage><StudentNotes /></AnimatedPage>} />
             <Route path="/student/question-papers" element={<AnimatedPage><StudentQuestionPapers /></AnimatedPage>} />
+            <Route path="/student/cia-question-papers" element={<AnimatedPage><CIAQuestionPapers /></AnimatedPage>} />
             <Route path="/student/placements" element={<AnimatedPage><StudentPlacements /></AnimatedPage>} />
           </Route>
 

@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { FiGrid, FiChevronRight, FiMenu, FiX, FiBookOpen, FiFileText, FiBriefcase, FiHome, FiSearch } from "react-icons/fi";
+import { FiGrid, FiChevronRight, FiMenu, FiX, FiBookOpen, FiFileText, FiBriefcase, FiHome, FiSearch, FiAward } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,6 +9,7 @@ const navLinks = [
   { to: "/e-content", label: "E-Content", icon: FiBookOpen },
   { to: "/notes", label: "Notes", icon: FiFileText },
   { to: "/question-papers", label: "Q Papers", icon: FiFileText },
+  { to: "/cia-question-papers", label: "CIA Papers", icon: FiAward },
   { to: "/placements", label: "Placements", icon: FiBriefcase },
   { to: "/about", label: "About", icon: FiGrid },
 ];
@@ -18,6 +19,13 @@ export default function Navbar() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const getDashboardPath = (user) => {
+    if (!user) return "/login";
+    if (user.type === "faculty") return "/faculty/dashboard";
+    if (user.type === "admin") return "/admin/dashboard";
+    return "/student/dashboard";
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -102,7 +110,7 @@ export default function Navbar() {
                   </span>
                 </span>
                 <Link
-                  to="/student/dashboard"
+                  to={getDashboardPath(user)}
                   className="group inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2 text-xs font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-500 active:scale-[0.97]"
                 >
                   <FiGrid size={14} />
@@ -166,7 +174,7 @@ export default function Navbar() {
                 </Link>
                 {user && (
                   <Link
-                    to="/student/dashboard"
+                    to={getDashboardPath(user)}
                     className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-cyan-300 bg-white/10"
                   >
                     <FiGrid size={16} />

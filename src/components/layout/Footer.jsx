@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
-import { FiGithub, FiLinkedin, FiMail, FiChevronRight, FiBookOpen, FiFileText, FiBriefcase, FiMapPin, FiPhone, FiInstagram, FiTwitter } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiMail, FiChevronRight, FiBookOpen, FiFileText, FiBriefcase, FiMapPin, FiPhone, FiInstagram, FiTwitter, FiAward } from "react-icons/fi";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Footer() {
+  const { user } = useAuth();
+  const getDashboardPath = () => {
+    if (!user) return "/login";
+    if (user.type === "faculty") return "/faculty/dashboard";
+    if (user.type === "admin") return "/admin/dashboard";
+    return "/student/dashboard";
+  };
+
   const links = [
     {
       title: "Resources",
@@ -9,6 +18,7 @@ export default function Footer() {
         { label: "E-Content", to: "/e-content", icon: FiBookOpen },
         { label: "Lecture Notes", to: "/notes", icon: FiFileText },
         { label: "Question Papers", to: "/question-papers", icon: FiFileText },
+        { label: "CIA Papers", to: "/cia-question-papers", icon: FiAward },
         { label: "Placements", to: "/placements", icon: FiBriefcase },
       ],
     },
@@ -24,7 +34,7 @@ export default function Footer() {
       title: "Quick Links",
       items: [
         { label: "Search", to: "/search" },
-        { label: "Student Dashboard", to: "/student/dashboard" },
+        { label: user?.type === "faculty" ? "Faculty Dashboard" : user?.type === "admin" ? "Admin Dashboard" : "Student Dashboard", to: getDashboardPath() },
       ],
     },
   ];

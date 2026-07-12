@@ -11,12 +11,7 @@ import { useAuth } from "../context/AuthContext";
 import { STORAGE_PATHS } from "../utils/constants";
 import { uploadFile } from "../services/storageService";
 import toast from "react-hot-toast";
-
-const CURRICULUM = {
-  1: { label: "1st Year", icon: "Ⅰ", semesters: { 1: { label: "Semester 1", subjects: ["FUNDAMENTALS OF PYTHON PROGRAMMING","FUNDAMENTALS OF DIGITAL ELECTRONICS","MATHEMATICS PAPER - I","TAMIL","ENGLISH","DATA STRUCTURES"] }, 2: { label: "Semester 2", subjects: ["OBJECT ORIENTED PROGRAMMING USING C++","MATHEMATICS PAPER - II","TAMIL","ENGLISH"] } } },
-  2: { label: "2nd Year", icon: "Ⅱ", semesters: { 1: { label: "Semester 1", subjects: ["JAVA PROGRAMMING","WEB TECHNOLOGY","STATISTICAL METHODS FOR COMPUTER SCIENCE - I","TAMIL","ENGLISH","OPERATING SYSTEM","REACT"] }, 2: { label: "Semester 2", subjects: ["ANDROID APP DEVELOPMENT","SOFTWARE ENGINEERING","STATISTICAL METHODS FOR COMPUTER SCIENCE - II","ARTIFICIAL INTELLIGENCE AND EXPERT SYSTEM","TAMIL","ENGLISH"] } } },
-  3: { label: "3rd Year", icon: "Ⅲ", semesters: { 1: { label: "Semester 1", subjects: ["OPERATING SYSTEM","DATA MINING TECHNIQUES","ASP.NET","DATABASE MANAGEMENT SYSTEM"] }, 2: { label: "Semester 2", subjects: [] } } },
-};
+import { CURRICULUM } from "../utils/curriculum";
 
 const yearStyles = {
   1: { gradient: "from-emerald-500 to-teal-600", text: "text-emerald-300" },
@@ -106,6 +101,358 @@ const NOTES_DATA = {
         title: "Unit V",
         subtitle: "Classes & Objects",
         syllabus: "Classes and Objects: User-defined types-Attributes- Instances as return values. Classes and functions: Time-Pure functions-Modifiers. Classes and methods: Object oriented features init method-str method-Operator overloading- Polymorphism- Inheritance- Class diagrams- Data encapsulation.",
+        hrs: 15,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "FUNDAMENTALS OF DIGITAL ELECTRONICS": {
+    units: {
+      1: {
+        title: "Unit I",
+        subtitle: "Number Systems & Codes",
+        syllabus: "Digital Computers and Digital Systems Number Systems & Codes: Number System - Base Conversion Binary Codes Code Conversion. Digital Logic: Logic Gates Truth Tables, Universal Gates,",
+        hrs: 10,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "Unit II",
+        subtitle: "Boolean Algebra & Arithmetic",
+        syllabus: "Boolean Algebra: Laws & Theorems - SOP, POS Methods - Simplification Of Boolean Functions Using Theorems, K-Map, Implementation Using Universal Gates, Binary Arithmetic: Binary Addition - Subtraction - Arithmetic Building Blocks - Adders-",
+        hrs: 10,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "Unit III",
+        subtitle: "Combinational Logic",
+        syllabus: "Subtractors-Combinational Logic: Multiplexers - Demultiplexers - Decoders - Encoders",
+        hrs: 10,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "Unit IV",
+        subtitle: "Sequential Logic & Registers",
+        syllabus: "Sequential Logic: RS, JK, D, And T Flip-Flops - Edge-Triggered - Master-Slave Flip-Flops, Registers: Shift Registers - Types of Shift Register",
+        hrs: 15,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "Unit V",
+        subtitle: "Counters & Memory",
+        syllabus: "Counters: Asynchronous Counters Ripple, Mod, Up-Down Counters- Synchronous Counters - Types of ROM and RAM.",
+        hrs: 15,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "MATHEMATICS PAPER - I": {
+    units: {
+      1: {
+        title: "Unit I",
+        subtitle: "Matrices",
+        syllabus: "Symmetric, skew-symmetric, orthogonal and unitary matrices, eigen values and eigen-vectors (Diagonalization excluded), Cayley-Hamilton theorem (statement only) - verification of Cayley-Hamilton theorem - computation of inverse matrix using Cayley-Hamilton theorem.",
+        hrs: 15,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "Unit II",
+        subtitle: "Trigonometry",
+        syllabus: "Expansion of cos(nθ), sin(nθ) (where n is a positive integer) – Expansion of cos^n(θ), sin^n(θ) in a series of sines and cosines of multiples of θ. Hyperbolic functions - Relations between hyperbolic functions.",
+        hrs: 15,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "Unit III",
+        subtitle: "Trigonometry, Calculus & Fourier Series",
+        syllabus: "Inverse hyperbolic functions sinh^-1(x), cosh^-1(x) and tanh^-1(x) in terms of logarithmic functions. Separation into real and imaginary parts of sin(x+iy), cos(x+iy), and tan^-1(x+iy) - simple problems. INTEGRAL CALCULUS - Bernoulli's formula, reduction formulas for ∫ sin^n(x) dx, ∫ cos^n(x) dx, ∫ sin^m(x) cos^n(x) dx (m, n being positive integers). FOURIER SERIES – Fourier series for functions in (0, 2π).",
+        hrs: 15,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "Unit IV",
+        subtitle: "Differential Calculus",
+        syllabus: "Jacobians, curvature and radius of curvature in Cartesian coordinates, maxima and minima of functions of two variables - Simple problems.",
+        hrs: 15,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "Unit V",
+        subtitle: "Laplace Transforms",
+        syllabus: "Laplace transforms of standard functions. Laplace transform of e^-at f(t), t f(t), f(t)/t. Inverse Laplace transforms - Application to solution of linear differential equations of second order with constant coefficients - simple problems.",
+        hrs: 15,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "PROGRAMMING IN PHP": {
+    units: {
+      1: {
+        title: "Unit I",
+        subtitle: "Variables & Control Flow",
+        syllabus: "Checking variables Data types Using Constants Manipulating Variables with Operators. Controlling Program Flow: Writing Simple Conditional Statements - Writing More Complex Conditional Statements Repeating Action with Loops Working with String and NumericFunctions.",
+        hrs: 15,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "Unit II",
+        subtitle: "Arrays & Date/Time",
+        syllabus: "Working with Arrays: Storing Data in Arrays Processing Arrays with Loops and Iterations Using Arrays with Forms - Working with Array Functions Working with Dates and Times.",
+        hrs: 15,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "Unit III",
+        subtitle: "Functions & Classes",
+        syllabus: "Using Functions and Classes: Creating User-Defined Functions - Creating Classes Using Advanced OOP Concepts.",
+        hrs: 15,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "Unit IV",
+        subtitle: "File Handling & Sessions",
+        syllabus: "Working with Files and Directories: Reading Files-Writing Files- Processing Directories Cookies Session Management.",
+        hrs: 15,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "Unit V",
+        subtitle: "Database & Input Validation",
+        syllabus: "Working MySQL with PHP-database connectivity- Usage of MYSQL commands in PHP - Processing result sets of queries- Validating user input through Database layer and Application layer- Formatting query output with Character, Numeric, Date and time.",
+        hrs: 15,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "CLOUD COMPUTING": {
+    units: {
+      1: {
+        title: "Unit I",
+        subtitle: "Cloud Foundation",
+        syllabus: "Cloud Computing Foundation: Introduction to Cloud Computing Move to Cloud Computing Types of Cloud Working of Cloud Computing",
+        hrs: 15,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "Unit II",
+        subtitle: "Cloud Architecture & Virtualization",
+        syllabus: "Cloud Computing Architecture : Cloud Computing Technology Cloud Architecture Cloud Modeling and Design - Virtualization : Foundation Grid, Cloud and Virtualization Virtualization and Cloud Computing",
+        hrs: 15,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "Unit III",
+        subtitle: "Data Storage & Services",
+        syllabus: "Data Storage and Cloud Computing : Data Storage Cloud Storage Cloud Storage from LANs to WANs Cloud Computing Services : Cloud Services Cloud Computing at Work",
+        hrs: 15,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "Unit IV",
+        subtitle: "Security & Cloud Tools",
+        syllabus: "Cloud Computing and Security : Risks in Cloud Computing Data Security in Cloud Cloud Security Services Cloud Computing Tools : Tools and Technologies for Cloud Cloud Mashaps Apache Hadoop Cloud Tools",
+        hrs: 15,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "Unit V",
+        subtitle: "Cloud Applications",
+        syllabus: "Cloud Applications Moving Applications to the Cloud Microsoft Cloud Services Google Cloud Applications Amazon Cloud Services Cloud Applications",
+        hrs: 15,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "COMPUTER NETWORKS": {
+    units: {
+      1: {
+        title: "Unit I",
+        subtitle: "Network Models",
+        syllabus: "Introduction Uses of Computer Networks Network Hardware- Network Software- OSI Reference Model TCP/IPReference Model.",
+        hrs: 10,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "Unit II",
+        subtitle: "Physical Layer",
+        syllabus: "Physical Layer Guided Transmission media Wireless Transmission Public switched Telephone Network LocalLoop Trunks Multiplexing- Switching.",
+        hrs: 10,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "Unit III",
+        subtitle: "Data Link Layer",
+        syllabus: "Data Link Layer Design Issues- Error Detection and Correction- Simplex Stop andWait Protocol- Sliding Window Protocol.",
+        hrs: 15,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "Unit IV",
+        subtitle: "Network Layer",
+        syllabus: "Network Layer Design Issues Routing Algorithm- IP Protocol IP Addresses- Internet Control Protocols.",
+        hrs: 15,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "Unit V",
+        subtitle: "Transport & Application Layers",
+        syllabus: "Transport Layer: Addressing- Connection Establishment-Connection Release. Internet Transport Protocol: UDP-TCP. Application Layer: DNS- Electronic Mail- World Wide Web.",
+        hrs: 15,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "INTRODUCTION TO DATA SCIENCE": {
+    units: {
+      1: {
+        title: "Unit I",
+        subtitle: "Introduction to Data Science",
+        syllabus: "Introduction to Data Science Benefits and uses Facets of data Data science process Big data Ecosystem and data science",
+        hrs: 15,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "Unit II",
+        subtitle: "Data Science Process",
+        syllabus: "The Data science process Overview research goals - retrieving data - transformation ExploratoryData Analysis Model building",
+        hrs: 15,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "Unit III",
+        subtitle: "Algorithms & Machine Learning",
+        syllabus: "Algorithms - Machine learning algorithms Modeling process Types Supervised Unsupervised -Semi-supervised",
+        hrs: 15,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "Unit IV",
+        subtitle: "Hadoop & NoSQL",
+        syllabus: "Introduction to Hadoop framework Spark replacing MapReduce NoSQL ACID CAP BASE types",
+        hrs: 15,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "Unit V",
+        subtitle: "Case Study",
+        syllabus: "Case Study Prediction of Disease - Setting research goals - Data retrieval preparation - exploration -Disease profiling - presentation and automation",
+        hrs: 15,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "DIGITAL IMAGE PROCESSING": {
+    units: {
+      1: {
+        title: "Unit I",
+        subtitle: "DIP Steps & Color Models",
+        syllabus: "Introduction steps in image processing, Image acquisition, representation, sampling and quantization, relationship between pixels. color models basics of color image processing",
+        hrs: 15,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "Unit II",
+        subtitle: "Spatial Domain Enhancement",
+        syllabus: "Image enhancement in spatial domain some basic gray level transformations histogram processing enhancement using arithmetic, logic operations basics of spatial filtering and smoothing.",
+        hrs: 15,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "Unit III",
+        subtitle: "Frequency Domain Enhancement",
+        syllabus: "Image enhancement in Frequency domain Introduction to Fourier transform: 1-D, 2 D DFT and its inverse transform, smoothing and sharpening filters.",
+        hrs: 15,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "Unit IV",
+        subtitle: "Image Restoration & Segmentation",
+        syllabus: "Image restoration: Model of degradation and restoration process noise models restoration in the presence of noise- periodic noise reduction. Image segmentation: Thresholding and region based segmentation.",
+        hrs: 15,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "Unit V",
+        subtitle: "Image Compression",
+        syllabus: "Image compression: Fundamentals models information theory error free compression Lossy compression: predictive and transform coding. JPEG standard",
+        hrs: 15,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "UNIFIED MODELING LANGUAGE": {
+    units: {
+      1: {
+        title: "Unit I",
+        subtitle: "UML Intro & Conceptual Model",
+        syllabus: "Introduction to UML: Importance of modeling, principles of modeling, object oriented modeling, conceptual model of the UML, Architecture",
+        hrs: 15,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "Unit II",
+        subtitle: "Basic Structural Modeling",
+        syllabus: "Basic Structural Modeling: Classes, Relationships, common Mechanisms, anddiagrams.Interfaces,Types and Roles, Packages. Class & Object Diagrams: Terms, Concepts, modeling techniques for Class & Object Diagrams.",
+        hrs: 15,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "Unit III",
+        subtitle: "Basic Behavioral Modeling",
+        syllabus: "Basic Behavioral Modeling: Interactions, Interaction diagrams. Use cases, Use case Diagrams, Activity Diagrams",
+        hrs: 15,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "Unit IV",
+        subtitle: "Advanced Behavioral Modeling",
+        syllabus: "Advanced Behavioral Modeling: Events and signals, state machines, processes and Threads, time and space, state chart diagrams.",
+        hrs: 15,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "Unit V",
+        subtitle: "Architectural Modeling",
+        syllabus: "Architectural Modeling: Component, Deployment, Component diagrams and Deployment diagrams.",
         hrs: 15,
         co: "CO5",
         files: []
