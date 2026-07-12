@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FiPlayCircle, FiBookOpen, FiArrowLeft, FiMonitor,
   FiYoutube, FiX, FiFilm, FiChevronRight, FiBook, FiLayers,
-  FiStar, FiAward, FiVideo,
+  FiStar, FiAward, FiVideo, FiUploadCloud, FiFileText,
 } from "react-icons/fi";
 import { useFirestoreList } from "../hooks/useFirestoreList";
 import { videoService } from "../services/videoService";
+import { useAuth } from "../context/AuthContext";
+import { STORAGE_PATHS } from "../utils/constants";
+import { uploadFile } from "../services/storageService";
+import toast from "react-hot-toast";
+import { CURRICULUM, NOTES_DATA, SEMESTER_UNITS, NAME_ONLY_MAP } from "./Notes";
 
 const FACULTY_MAP = {
   "OPERATING SYSTEM": "DR DHARANI",
@@ -15,11 +20,7 @@ const FACULTY_MAP = {
   "DATABASE MANAGEMENT SYSTEM": "M P SUDHA",
 };
 
-const CURRICULUM = {
-  1: { label: "1st Year", icon: "Ⅰ", semesters: { 1: { label: "Semester 1", subjects: ["FUNDAMENTALS OF PYTHON PROGRAMMING","FUNDAMENTALS OF DIGITAL ELECTRONICS","MATHEMATICS PAPER - I","TAMIL","ENGLISH"] }, 2: { label: "Semester 2", subjects: ["OBJECT ORIENTED PROGRAMMING USING C++","DATA STRUCTURES","MATHEMATICS PAPER - II","TAMIL","ENGLISH"] } } },
-  2: { label: "2nd Year", icon: "Ⅱ", semesters: { 1: { label: "Semester 1", subjects: ["JAVA PROGRAMMING","WEB TECHNOLOGY","STATISTICAL METHODS FOR COMPUTER SCIENCE - I","TAMIL","ENGLISH"] }, 2: { label: "Semester 2", subjects: ["ANDROID APP DEVELOPMENT","SOFTWARE ENGINEERING","STATISTICAL METHODS FOR COMPUTER SCIENCE - II","TAMIL","ENGLISH"] } } },
-  3: { label: "3rd Year", icon: "Ⅲ", semesters: { 1: { label: "Semester 1", subjects: ["OPERATING SYSTEM","DATA MINING TECHNIQUES","ASP.NET","DATABASE MANAGEMENT SYSTEM"] }, 2: { label: "Semester 2", subjects: [] } } },
-};
+// CURRICULUM imported from Notes.jsx
 
 const yearStyles = {
   1: { gradient: "from-emerald-500 to-teal-600", light: "from-emerald-50 to-teal-50", text: "text-emerald-700" },
@@ -35,49 +36,90 @@ const subjectColors = [
   { from: "from-lime-500", to: "to-green-600", badge: "bg-lime-100 text-lime-800" },
 ];
 
-const SYLLABUS = {
-  "OPERATING SYSTEM": [
-    { sl: 1, module: "INTRODUCTION - VIEWS AND GOALS - OPERATING-SYSTEM SERVICES - USER AND OPERATING-SYSTEM INTERFACE - SYSTEM CALL - TYPES OF SYSTEM CALLS - OPERATING SYSTEM DESIGN AND IMPLEMENTATION - OPERATING-SYSTEM STRUCTURE.", hrs: 15, co: "CO1" },
-    { sl: 2, module: "PROCESS SCHEDULING: BASIC CONCEPTS - SCHEDULING CRITERIA - SCHEDULING ALGORITHMS - MULTIPLE-PROCESSOR SCHEDULING - CPU SCHEDULING.", hrs: 15, co: "CO2" },
-    { sl: 3, module: "DEADLOCKS: DEADLOCK CHARACTERIZATION - METHODS FOR HANDLING DEADLOCKS - DEADLOCK PREVENTION - DEADLOCK AVOIDANCE - DEADLOCK DETECTION - RECOVERY FROM DEADLOCK.", hrs: 15, co: "CO3" },
-    { sl: 4, module: "MEMORY-MANAGEMENT STRATEGIES: SWAPPING - CONTIGUOUS MEMORY ALLOCATION - SEGMENTATION - PAGING - STRUCTURE OF THE PAGE TABLE.", hrs: 15, co: "CO4" },
-    { sl: 5, module: "STORAGE MANAGEMENT: FILE SYSTEM - FILE CONCEPT - ACCESS METHODS - DIRECTORY AND DISK STRUCTURE - FILE SHARING - PROTECTION.", hrs: 15, co: "CO5" },
-  ],
-  "DATABASE MANAGEMENT SYSTEM": [
-    { sl: 1, module: "INTRODUCTION - DATABASE SYSTEM - CHARACTERISTICS OF DBMS - ARCHITECTURE - DATABASE MODELS - SDLC - ENTITY RELATIONSHIP MODEL", hrs: 15, co: "CO1" },
-    { sl: 2, module: "INTRODUCTION TO RELATIONAL DATABASE MODEL - STRUCTURE - KEYS - RELATIONAL ALGEBRA - NORMALIZATION", hrs: 15, co: "CO2" },
-    { sl: 3, module: "SQL: INTRODUCTION - DATA RETRIEVAL - FUNCTIONS - SUB QUERY - JOINS - DML - TCL - VIEW - SEQUENCE - INDEX", hrs: 15, co: "CO3" },
-    { sl: 4, module: "PL/SQL: INTRODUCTION - BASIC - CHARACTER SET - STRUCTURE - SQL CURSOR - SUBPROGRAMS - FUNCTIONS - PROCEDURES", hrs: 15, co: "CO4" },
-    { sl: 5, module: "EXCEPTION HANDLER - INTRODUCTION - TRIGGERS - CURSORS", hrs: 15, co: "CO5" },
-  ],
-  "DATA MINING TECHNIQUES": [
-    { sl: 1, module: "INTRODUCTION - DATA MINING - KINDS OF DATA - KINDS OF PATTERNS - TECHNOLOGIES USED - APPLICATIONS", hrs: 15, co: "CO1" },
-    { sl: 2, module: "DATA PREPROCESSING: AN OVERVIEW - DATA CLEANING - DATA INTEGRATION - DATA REDUCTION", hrs: 15, co: "CO2" },
-    { sl: 3, module: "MINING FREQUENT PATTERNS, ASSOCIATIONS, AND CORRELATIONS: BASIC CONCEPTS - APRIORI ALGORITHM", hrs: 15, co: "CO3" },
-    { sl: 4, module: "CLASSIFICATION: BASIC CONCEPTS - DECISION TREE INDUCTION - BAYES CLASSIFICATION - RULE-BASED CLASSIFICATION", hrs: 15, co: "CO4" },
-    { sl: 5, module: "CLUSTER ANALYSIS: BASIC CONCEPTS - PARTITIONING METHODS - OUTLIER DETECTION", hrs: 15, co: "CO5" },
-  ],
-  "ASP.NET": [
-    { sl: 1, module: "OVERVIEW OF ASP.NET FRAMEWORK - PAGE STRUCTURE - COMPILER DIRECTIVES - NAMESPACE", hrs: 10, co: "CO1" },
-    { sl: 2, module: "UNDERSTANDING ASP.NET CONTROL: STANDARD CONTROLS - DISPLAYING INFORMATION - ACCEPTING USER INPUT", hrs: 10, co: "CO2" },
-    { sl: 3, module: "OVERVIEW OF VALIDATION CONTROL - RICH CONTROLS: ADROTATOR, CALENDAR", hrs: 15, co: "CO3" },
-    { sl: 4, module: "OVERVIEW OF DATA ACCESS: DATA BOUND CONTROL - SQLDATASOURCE - OLEDB - DATASET", hrs: 15, co: "CO4" },
-    { sl: 5, module: "LIST CONTROL: GRID VIEW - REPEATER - DATA LIST - STATE MANAGEMENT", hrs: 10, co: "CO5" },
-  ],
-};
+// SYLLABUS parsed dynamically from NOTES_DATA
 
 export default function EContent() {
+  const { user } = useAuth();
+  const isFaculty = user?.type === "faculty";
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedSemester, setSelectedSemester] = useState(null);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [showVideos, setShowVideos] = useState(false);
   const [playing, setPlaying] = useState(null);
+  const [showUploadForm, setShowUploadForm] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [uploadTitle, setUploadTitle] = useState("");
+  const [uploadDescription, setUploadDescription] = useState("");
+  const [videoType, setVideoType] = useState("lecture");
+  const [uploadMethod, setUploadMethod] = useState("youtube");
+  const [youtubeId, setYoutubeId] = useState("");
+  const [uploadFileObj, setUploadFileObj] = useState(null);
+
+  async function handleUpload(e) {
+    e.preventDefault();
+    if (!uploadTitle.trim()) {
+      toast.error("Please enter a title");
+      return;
+    }
+    if (uploadMethod === "youtube" && !youtubeId.trim()) {
+      toast.error("Please enter a YouTube video ID or link");
+      return;
+    }
+    if (uploadMethod === "file" && !uploadFileObj) {
+      toast.error("Please choose a video file to upload");
+      return;
+    }
+
+    setUploading(true);
+    try {
+      let fileUrl = "";
+      let finalYoutubeId = "";
+
+      if (uploadMethod === "file") {
+        fileUrl = await uploadFile(STORAGE_PATHS.VIDEOS, uploadFileObj, setProgress);
+      } else {
+        const match = youtubeId.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([^?&"'>]+)/);
+        finalYoutubeId = match ? match[1] : youtubeId.trim();
+      }
+
+      await videoService.create({
+        title: uploadTitle.trim(),
+        description: uploadDescription.trim(),
+        videoType,
+        subject: selectedSubject,
+        semester: Number(selectedSemester),
+        year: Number(selectedYear),
+        youtubeId: finalYoutubeId || null,
+        fileUrl: fileUrl || null,
+        facultyName: user.name || "Faculty",
+        facultyId: user.uid || "faculty-id",
+      });
+
+      toast.success("Video uploaded successfully!");
+      setUploadTitle("");
+      setUploadDescription("");
+      setYoutubeId("");
+      setUploadFileObj(null);
+      setShowUploadForm(false);
+      refetch();
+    } catch (err) {
+      toast.error(err.message || "Failed to upload video");
+    } finally {
+      setUploading(false);
+      setProgress(0);
+    }
+  }
 
   const yearData = selectedYear ? CURRICULUM[selectedYear] : null;
   const semesterData = selectedSemester && yearData ? yearData.semesters[selectedSemester] : null;
   const ys = selectedYear ? yearStyles[selectedYear] : yearStyles[1];
-  const { items: firestoreVideos } = useFirestoreList(videoService);
-  const subjectVideos = selectedSubject && selectedYear
+  const { items: firestoreVideos, refetch } = useFirestoreList(videoService);
+  const isPlaceholder = selectedSubject && (
+    NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(selectedSubject)
+  );
+
+  const subjectVideos = selectedSubject && selectedYear && !isPlaceholder
     ? firestoreVideos.filter((v) => {
         const matchesSubject = v.subject?.toUpperCase() === selectedSubject;
         const matchesYear = v.year === selectedYear;
@@ -85,7 +127,23 @@ export default function EContent() {
         return matchesSubject && matchesYear && matchesSemester;
       })
     : [];
-  const syllabusData = selectedSubject ? SYLLABUS[selectedSubject] : null;
+  const syllabusData = useMemo(() => {
+    if (!selectedSubject || isPlaceholder) return null;
+    const subjectData = NOTES_DATA[selectedSubject];
+    if (!subjectData || !subjectData.units) return null;
+    const filter = SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[selectedSubject];
+    return Object.entries(subjectData.units)
+      .filter(([key]) => !filter || filter.has(Number(key)))
+      .map(([key, unit], idx) => ({
+        sl: idx + 1,
+        module: `${unit.title}${unit.subtitle ? ` - ${unit.subtitle}` : ""}: ${unit.syllabus || "Syllabus content to be updated."}`,
+        hrs: 15,
+        co: `CO${key}`,
+      }));
+  }, [selectedSubject, selectedYear, selectedSemester, isPlaceholder]);
+
+  const subjectNotesData = selectedSubject && !isPlaceholder ? NOTES_DATA[selectedSubject] : null;
+  const semesterUnitFilter = selectedSubject && !isPlaceholder ? SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[selectedSubject] : null;
 
   if (!selectedYear) {
     return (
@@ -281,10 +339,150 @@ export default function EContent() {
           </div>
         )}
 
+        {/* ─── Faculty Upload Section ─── */}
+        {isFaculty && selectedSubject && (
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
+            {!showUploadForm ? (
+              <button
+                onClick={() => setShowUploadForm(true)}
+                className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-500 active:scale-[0.97]"
+              >
+                <FiUploadCloud size={18} />
+                Upload Videos
+              </button>
+            ) : (
+              <form onSubmit={handleUpload} className="space-y-4 rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-6 shadow-md">
+                <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+                  <h3 className="font-display text-base font-bold text-white flex items-center gap-2">
+                    <FiUploadCloud size={18} className="text-indigo-400" />
+                    Upload Videos — {selectedSubject}
+                  </h3>
+                  <button
+                    type="button"
+                    onClick={() => setShowUploadForm(false)}
+                    className="rounded-lg px-3 py-1.5 text-xs font-semibold text-white/50 hover:bg-white/10 hover:text-white transition-all"
+                  >
+                    Cancel
+                  </button>
+                </div>
+
+                <div className="space-y-3">
+                  <div>
+                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Title</label>
+                    <input
+                      value={uploadTitle}
+                      onChange={(e) => setUploadTitle(e.target.value)}
+                      required
+                      placeholder="e.g. Binary Search Trees - Unit 1"
+                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400/20 focus:bg-white/10 transition-all"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Description</label>
+                    <textarea
+                      value={uploadDescription}
+                      onChange={(e) => setUploadDescription(e.target.value)}
+                      placeholder="Brief description of the lecture video"
+                      rows={2}
+                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400/20 focus:bg-white/10 transition-all"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Video Type</label>
+                      <select
+                        value={videoType}
+                        onChange={(e) => setVideoType(e.target.value)}
+                        className="w-full rounded-xl border border-white/15 bg-[#0F172A] px-4 py-2.5 text-sm text-white outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400/20 transition-all text-white/80"
+                      >
+                        <option value="lecture">Lecture</option>
+                        <option value="class_recording">Class Recording</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Upload Method</label>
+                      <select
+                        value={uploadMethod}
+                        onChange={(e) => setUploadMethod(e.target.value)}
+                        className="w-full rounded-xl border border-white/15 bg-[#0F172A] px-4 py-2.5 text-sm text-white outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400/20 transition-all text-white/80"
+                      >
+                        <option value="youtube">YouTube Link / ID</option>
+                        <option value="file">Direct Video File Upload</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {uploadMethod === "youtube" ? (
+                    <div>
+                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">YouTube Link or Video ID</label>
+                      <input
+                        value={youtubeId}
+                        onChange={(e) => setYoutubeId(e.target.value)}
+                        required
+                        placeholder="e.g. dQw4w9WgXcQ or https://youtu.be/..."
+                        className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400/20 focus:bg-white/10 transition-all"
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Select Video File</label>
+                      <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-white/15 bg-white/5 px-4 py-6 text-center transition-all hover:border-indigo-500/50 hover:bg-white/10">
+                        <FiUploadCloud size={24} className="text-indigo-400" />
+                        <span className="text-xs text-white/50">
+                          {uploadFileObj ? uploadFileObj.name : "Choose a video file (.mp4, .webm)..."}
+                        </span>
+                        <input
+                          type="file"
+                          accept="video/*"
+                          className="hidden"
+                          onChange={(e) => setUploadFileObj(e.target.files?.[0] ?? null)}
+                          required={!uploading}
+                        />
+                      </label>
+                    </div>
+                  )}
+
+                  {uploading && progress > 0 && progress < 100 && (
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                      <div className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all" style={{ width: `${progress}%` }} />
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={uploading}
+                    className="w-full rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 py-3 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:shadow-indigo-500/20 disabled:opacity-50"
+                  >
+                    {uploading ? `Uploading (${progress}%)...` : "Upload video"}
+                  </button>
+                </div>
+              </form>
+            )}
+          </motion.div>
+        )}
+
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-center">
-          <button onClick={() => setShowVideos(true)}
-            className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-700 px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-600 active:scale-[0.97]"
-          ><FiPlayCircle size={20} /> Watch Videos <FiChevronRight size={14} className="transition-transform group-hover:translate-x-0.5" /></button>
+          <button
+            onClick={() => {
+              if (subjectVideos.length === 0) {
+                toast.error("Videos are not yet available for this subject");
+                return;
+              }
+              setShowVideos(true);
+            }}
+            className={`group inline-flex items-center gap-2 rounded-xl px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all duration-300 active:scale-[0.97] ${
+              subjectVideos.length === 0
+                ? "bg-gray-700 cursor-not-allowed opacity-60"
+                : "bg-gradient-to-r from-indigo-600 to-violet-700 hover:shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-600"
+            }`}
+          >
+            <FiPlayCircle size={20} />
+            Watch Videos
+            <FiChevronRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+          </button>
         </motion.div>
       </div>
     );
@@ -324,11 +522,15 @@ export default function EContent() {
                 className="group w-full overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass transition-all duration-300 hover:shadow-xl hover:-translate-y-1 text-left"
               >
                 <div className="relative aspect-video w-full bg-gradient-to-br from-gray-800 to-gray-900">
-                  {video.youtubeId && (
+                  {video.youtubeId ? (
                     <img src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`} alt={video.title}
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       onError={(e) => { e.target.style.display = "none"; }}
                     />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-indigo-950/40 text-indigo-300">
+                      <FiVideo size={36} className="opacity-45" />
+                    </div>
                   )}
                   <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/40 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 backdrop-blur-sm shadow-lg transition-transform duration-300 group-hover:scale-110">
@@ -353,6 +555,42 @@ export default function EContent() {
         </div>
       )}
 
+      {/* Related Lecture Notes */}
+      {subjectNotesData && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-12">
+          <h2 className="font-display text-lg font-bold text-white mb-4 flex items-center gap-2 border-b border-white/10 pb-2">
+            <FiFileText className="text-emerald-400" />
+            Syllabus &amp; Study Notes
+          </h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {Object.entries(subjectNotesData.units)
+              .filter(([unitKey]) => !semesterUnitFilter || semesterUnitFilter.has(Number(unitKey)))
+              .map(([unitKey, unit]) => {
+                if (unit.files.length === 0) return null;
+                return (
+                  <div key={unitKey} className="rounded-2xl border border-white/5 bg-white/5 p-5 shadow-glass">
+                    <h3 className="font-display text-sm font-bold text-white mb-3">{unit.title} - {unit.subtitle}</h3>
+                    <div className="space-y-2">
+                      {unit.files.map((file) => (
+                        <a
+                          key={file.id}
+                          href={`https://drive.google.com/file/d/${file.fileId}/view`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2.5 rounded-xl bg-white/5 px-4 py-2.5 text-xs font-semibold text-white/80 hover:bg-white/10 hover:text-white transition-all border border-white/10"
+                        >
+                          <FiFileText className="text-emerald-400 shrink-0" />
+                          <span className="truncate flex-1">{file.title}</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+        </motion.div>
+      )}
+
       <AnimatePresence>
         {playing && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
@@ -375,6 +613,8 @@ export default function EContent() {
                   <iframe src={`https://www.youtube.com/embed/${playing.youtubeId}?autoplay=1&rel=0`}
                     title={playing.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen className="h-full w-full" />
+                ) : playing.fileUrl ? (
+                  <video src={playing.fileUrl} controls autoPlay className="h-full w-full" />
                 ) : (
                   <div className="flex h-full items-center justify-center text-white/50 text-sm">Video URL not available</div>
                 )}

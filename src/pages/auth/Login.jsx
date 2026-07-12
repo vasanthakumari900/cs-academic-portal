@@ -133,7 +133,7 @@ export default function Login() {
     try {
       const result = await facultyLogin(facultyName, facultyPassword);
       toast.success(`Welcome, ${result.name}!`);
-      navigate("/admin/dashboard", { replace: true });
+      navigate("/faculty/dashboard", { replace: true });
     } catch (err) {
       toast.error(err.message);
     } finally { setLoading(false); }

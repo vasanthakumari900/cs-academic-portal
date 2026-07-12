@@ -1,4 +1,4 @@
-import { FiPlayCircle, FiFileText, FiBriefcase, FiUser } from "react-icons/fi";
+import { FiPlayCircle, FiFileText, FiBriefcase, FiUser, FiLayers, FiChevronRight } from "react-icons/fi";
 import { useFirestoreList } from "../../hooks/useFirestoreList";
 import { useAuth } from "../../context/AuthContext";
 import { videoService } from "../../services/videoService";
@@ -7,9 +7,11 @@ import { questionPaperService } from "../../services/questionPaperService";
 import { placementService } from "../../services/placementService";
 import StatCard from "../../components/ui/StatCard";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Cell } from "recharts";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminDashboard() {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   // Faculty users see an empty slate
   if (user?.type === "faculty") {

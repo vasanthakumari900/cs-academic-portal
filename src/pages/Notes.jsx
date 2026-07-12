@@ -3,10 +3,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   FiFileText, FiDownload, FiBookOpen,
   FiArrowLeft, FiChevronRight, FiLayers,
-  FiChevronDown, FiExternalLink, FiSearch,
+  FiChevronDown, FiExternalLink, FiSearch, FiUploadCloud,
 } from "react-icons/fi";
 import { useFirestoreList } from "../hooks/useFirestoreList";
 import { noteService } from "../services/noteService";
+import { useAuth } from "../context/AuthContext";
+import { STORAGE_PATHS } from "../utils/constants";
+import { uploadFile } from "../services/storageService";
+import toast from "react-hot-toast";
 
 const CURRICULUM = {
   1: { label: "1st Year", icon: "Ⅰ", semesters: { 1: { label: "Semester 1", subjects: ["FUNDAMENTALS OF PYTHON PROGRAMMING","FUNDAMENTALS OF DIGITAL ELECTRONICS","MATHEMATICS PAPER - I","TAMIL","ENGLISH","DATA STRUCTURES"] }, 2: { label: "Semester 2", subjects: ["OBJECT ORIENTED PROGRAMMING USING C++","MATHEMATICS PAPER - II","TAMIL","ENGLISH"] } } },
@@ -39,15 +43,19 @@ const PLACEHOLDER_SUBJECTS = new Set(["OPERATING SYSTEM"]);
 
 // Subjects that appear name-only in specific year+semester combos (subject listed but no notes/syllabus)
 const NAME_ONLY_MAP = {
-  "1-1": new Set(["TAMIL"]), // 1st Year Sem 1 - TAMIL name only (no notes/syllabus)
-  "1-2": new Set(["TAMIL"]), // 1st Year Sem 2 - TAMIL name only
+  "1-1": new Set(["TAMIL", "ENGLISH"]), // 1st Year Sem 1 - TAMIL & ENGLISH name only
+  "1-2": new Set(["TAMIL", "ENGLISH"]), // 1st Year Sem 2 - TAMIL & ENGLISH name only
+  "2-1": new Set(["ENGLISH"]),          // 2nd Year Sem 1 - ENGLISH name only
+  "2-2": new Set(["ENGLISH"]),          // 2nd Year Sem 2 - ENGLISH name only
 };
 
 // Semester-specific unit keys for subjects shared across different semesters
 // Maps "year-semester" -> subject -> Set of allowed unit numbers
 const SEMESTER_UNITS = {
-  "2-1": { "TAMIL": new Set([1,2,3,4,5,6,7,8]) },  // 2nd Yr Sem 1: old 8 units
-  "2-2": { "TAMIL": new Set([9,10,11,12,13]) },    // 2nd Yr Sem 2: new 5 units
+  "1-1": { "ENGLISH": new Set([1]) },
+  "1-2": { "ENGLISH": new Set([1]) },
+  "2-1": { "TAMIL": new Set([1,2,3,4,5,6,7,8]), "ENGLISH": new Set([2]) },
+  "2-2": { "TAMIL": new Set([9,10,11,12,13]), "ENGLISH": new Set([2]) },
 };
 
 // Teachers exclusive to 1st Year Semester 1
@@ -124,14 +132,14 @@ const NOTES_DATA = {
       3: { title: "செய்யுள் III", subtitle: "சிலப்பதிகாரம் - காப்பிய இலக்கியம்", syllabus: "சிலப்பதிகாரம் - காப்பியத் தோற்றம் - காப்பிய இலக்கியங்களின் தன்மைகள் - சாதுவின் உண்மை", files: [{ id: "tam-u3-1", title: "தமிழ் செய்யுள் 3 - சிலப்பதிகாரம்", fileName: "Tamil_Unit3.pdf", fileId: "1pi3c_P_-ebA-GWVnAIb-803UllYsXErA", type: "pdf" }] },
       4: { title: "செய்யுள் IV", subtitle: "மணிமேகலை - புத்தத்த இலக்கியம்", syllabus: "மணிமேகலை - புத்தத்த இலக்கியத் தோற்றம் - சாதுகளின் வரையறை - இனக்கம்", files: [{ id: "tam-u4-1", title: "தமிழ் செய்யுள் 4 - மணிமேகலை", fileName: "Tamil_Unit4.pdf", fileId: "1q5Tj-YCdd5x4-KtG5Cm9PxsmP9tywZtN", type: "pdf" }] },
       5: { title: "செய்யுள் V", subtitle: "தேவாரம் - பக்தி இலக்கியம்", syllabus: "தேவாரம் - பக்தி இலக்கியத் தோற்றம் - நாயன்மார்கள் - நால்வர் - முதல் வரலாறு", files: [{ id: "tam-u5-1", title: "தமிழ் செய்யுள் 5 - தேவாரம்", fileName: "Tamil_Unit5.pdf", fileId: "112PmbaBnPjUog2Tbwj-FeoOGyoij1k1c", type: "pdf" }] },
-      6: { title: "செய்யுள் VI", subtitle: "திருவாசகம் - சைவ இலக்கியம்", syllabus: "திருவாசகம் - சைவ இலக்கியம் - மாணிக்கவாசகர் - பத்திரிபத்து அந்தாதி", files: [{ id: "tam-u6-1", title: "தமிழ் செய்யுள் 6 - திருவாசகம்", fileName: "Tamil_Unit6.pdf", fileId: "18ZCqfqlvXawkRyeanusTdQp7LHsQwb8e", type: "pdf" }] },
+      6: { title: "செய்யுள் VI", subtitle: "திருவாசகம் - சைவ இலக்கியம்", syllabus: "திருவாசகம் - சைவ இலக்கியம் - மாணிக்கவாசகர் - பதிற்றுப்பத்தந்தாதி", files: [{ id: "tam-u6-1", title: "தமிழ் செய்யுள் 6 - திருவாசகம்", fileName: "Tamil_Unit6.pdf", fileId: "18ZCqfqlvXawkRyeanusTdQp7LHsQwb8e", type: "pdf" }] },
       7: { title: "செய்யுள் VII", subtitle: "கலித்தொகை - பட்டுப்பாட்டு", syllabus: "கலித்தொகை - பட்டுப்பாட்டு - முதல் குழு - திணைமலை நூறு - எட்டுத்தொகை", files: [{ id: "tam-u7-1", title: "தமிழ் செய்யுள் 7 - கலித்தொகை", fileName: "Tamil_Unit7.pdf", fileId: "1il76fMyzY3311msevv5oNsseaMkeXWqx", type: "pdf" }] },
       8: { title: "செய்யுள் VIII", subtitle: "தொல்காப்பியம் - இலக்கண இலக்கியம்", syllabus: "தொல்காப்பியம் - இலக்கண இலக்கியத் தோற்றம் - எழுத்து, சொல், பொருளதிகாரம் - தொல்காப்பியர்", files: [{ id: "tam-u8-1", title: "தமிழ் செய்யுள் 8 - தொல்காப்பியம்", fileName: "Tamil_Unit8.pdf", fileId: "11pNVGPtJUkKb3WzNhdobc2ddet9fk0b2", type: "pdf" }] },
-      9: { title: "செய்யுள் IX", subtitle: "பாலைத்திணை - பிரிவு மற்றும் காதல்", syllabus: "பாலைத்திணை - பிரிவுத் துன்பம் - தலைவன் பிரிவு - தலைவி ஏக்கம் - பாலை நில இயற்கை - வழிப்பயண இடையூறுகள்", files: [{ id: "tam-u9-1", title: "தமிழ் செய்யுள் 9 - பாலைத்திணை", fileName: "Tamil_Unit9.pdf", fileId: "1NiWfJD5z_2lC2jyFne9sc2c57_OIRG6W", type: "pdf" }] },
-      10: { title: "செய்யுள் X", subtitle: "குறிஞ்சித்திணை - கபிலர் பாடல்கள்", syllabus: "குறிஞ்சித்திணை - கபிலர் - மலை நிலம் - தலைவன் தலைவி சந்திப்பு - குறிஞ்சி நில இயற்கை வளம்", files: [{ id: "tam-u10-1", title: "தமிழ் செய்யுள் 10 - குறிஞ்சித்திணை", fileName: "Tamil_Unit10.pdf", fileId: "1Z-7eaIjSCL-pbiyCoeaweIOrdK8gibRJ", type: "pdf" }] },
-      11: { title: "செய்யுள் XI", subtitle: "அகநானூறு - திணைக் கோட்பாடு", syllabus: "அகநானூறு - முல்லைத்திணை - நெய்தற்றிணை - மருதத்திணை - ஐந்திணை இலக்கணம் - திணைக் கோட்பாடு", files: [{ id: "tam-u11-1", title: "தமிழ் செய்யுள் 11 - அகநானூறு", fileName: "Tamil_Unit11.pdf", fileId: "1XwHqqWbQ6fXACwLYcZfNa4VzQTYzj4sq", type: "pdf" }] },
-      12: { title: "செய்யுள் XII", subtitle: "கலித்தொகை - பாலைக்கலி", syllabus: "கலித்தொகை - பாலைக்கலி - குறிஞ்சிக்கலி - கலிப்பாடல்கள் - தலைவன் தலைவி உரையாடல் - கற்பு மற்றும் களவு வாழ்க்கை", files: [{ id: "tam-u12-1", title: "தமிழ் செய்யுள் 12 - கலித்தொகை", fileName: "Tamil_Unit12.pdf", fileId: "1xILKC8OrlJ61HYwTnAsF0v0EWpMKWH6J", type: "pdf" }] },
-      13: { title: "செய்யுள் XIII", subtitle: "ஐங்குறுநூறு - பாலை மற்றும் குறிஞ்சி", syllabus: "ஐங்குறுநூறு - பாலைப்பாட்டு - குறிஞ்சிப்பாட்டு - சிற்றிலக்கியங்கள் - பத்துப்பாட்டு - எட்டுத்தொகை மரபு", files: [{ id: "tam-u13-1", title: "தமிழ் செய்யுள் 13 - ஐங்குறுநூறு", fileName: "Tamil_Unit13.pdf", fileId: "1oU3_V7mFYfYPjJlMbesrdkBWDaVabNjX", type: "pdf" }] }
+      9: { title: "செய்யுள் I", subtitle: "பாலைத்திணை - பிரிவு மற்றும் காதல்", syllabus: "பாலைத்திணை - பிரிவுத் துன்பம் - தலைவன் பிரிவு - தலைவி ஏக்கம் - பாலை நில இயற்கை - வழிப்பயண இடையூறுகள்", files: [{ id: "tam-u9-1", title: "தமிழ் செய்யுள் 9 - பாலைத்திணை", fileName: "Tamil_Unit9.pdf", fileId: "1NiWfJD5z_2lC2jyFne9sc2c57_OIRG6W", type: "pdf" }] },
+      10: { title: "செய்யுள் II", subtitle: "குறிஞ்சித்திணை - கபிலர் பாடல்கள்", syllabus: "குறிஞ்சித்திணை - கபிலர் - மலை நிலம் - தலைவன் தலைவி சந்திப்பு - குறிஞ்சி நில இயற்கை வளம்", files: [{ id: "tam-u10-1", title: "தமிழ் செய்யுள் 10 - குறிஞ்சித்திணை", fileName: "Tamil_Unit10.pdf", fileId: "1Z-7eaIjSCL-pbiyCoeaweIOrdK8gibRJ", type: "pdf" }] },
+      11: { title: "செய்யுள் III", subtitle: "அகநானூறு - திணைக் கோட்பாடு", syllabus: "அகநானூறு - முல்லைத்திணை - நெய்தற்றிணை - மருதத்திணை - ஐந்திணை இலக்கணம் - திணைக் கோட்பாடு", files: [{ id: "tam-u11-1", title: "தமிழ் செய்யுள் 11 - அகநானூறு", fileName: "Tamil_Unit11.pdf", fileId: "1XwHqqWbQ6fXACwLYcZfNa4VzQTYzj4sq", type: "pdf" }] },
+      12: { title: "செய்யுள் IV", subtitle: "கலித்தொகை - பாலைக்கலி", syllabus: "கலித்தொகை - பாலைக்கலி - குறிஞ்சிக்கலி - கலிப்பாடல்கள் - தலைவன் தலைவி உரையாடல் - கற்பு மற்றும் களவு வாழ்க்கை", files: [{ id: "tam-u12-1", title: "தமிழ் செய்யுள் 12 - கலித்தொகை", fileName: "Tamil_Unit12.pdf", fileId: "1xILKC8OrlJ61HYwTnAsF0v0EWpMKWH6J", type: "pdf" }] },
+      13: { title: "செய்யுள் V", subtitle: "ஐங்குறுநூறு - பாலை மற்றும் குறிஞ்சி", syllabus: "ஐங்குறுநூறு - பாலைப்பாட்டு - குறிஞ்சிப்பாட்டு - சிற்றிலக்கியங்கள் - பத்துப்பாட்டு - எட்டுத்தொகை மரபு", files: [{ id: "tam-u13-1", title: "தமிழ் செய்யுள் 13 - ஐங்குறுநூறு", fileName: "Tamil_Unit13.pdf", fileId: "1oU3_V7mFYfYPjJlMbesrdkBWDaVabNjX", type: "pdf" }] }
     } },
  "WEB TECHNOLOGY": { units: {
       1: { title: "Unit I", subtitle: "Introduction to Web Technologies", syllabus: "INTRODUCTION TO WEB TECHNOLOGIES - HTML BASICS - CSS FUNDAMENTALS - JAVASCRIPT OVERVIEW - WEB ARCHITECTURE", files: [{ id: "web-u1-1", title: "Web Tech Unit 1 - Introduction", fileName: "WebTech_Unit1.pptx", fileId: "12dv8jFAYcQwZbXUEfAuFUrKYYuw736OJ", type: "pptx" }] },
@@ -258,7 +266,7 @@ const SYLLABUS = {
     { sl: 3, module: "சிலப்பதிகாரம் - காப்பியத் தோற்றம் - காப்பிய இலக்கியங்களின் தன்மைகள் - சாதுவின் உண்மை", hrs: 15, co: "CO3" },
     { sl: 4, module: "மணிமேகலை - புத்தத்த இலக்கியத் தோற்றம் - சாதுகளின் வரையறை - இனக்கம்", hrs: 15, co: "CO4" },
     { sl: 5, module: "தேவாரம் - பக்தி இலக்கியத் தோற்றம் - நாயன்மார்கள் - நால்வர் - முதல் வரலாறு", hrs: 15, co: "CO5" },
-    { sl: 6, module: "திருவாசகம் - சைவ இலக்கியம் - மாணிக்கவாசகர் - பத்திரிபத்து அந்தாதி", hrs: 15, co: "CO6" },
+    { sl: 6, module: "திருவாசகம் - சைவ இலக்கியம் - மாணிக்கவாசகர் - பதிற்றுப்பத்தந்தாதி", hrs: 15, co: "CO6" },
     { sl: 7, module: "கலித்தொகை - பட்டுப்பாட்டு - முதல் குழு - திணைமலை நூறு - எட்டுத்தொகை", hrs: 15, co: "CO7" },
     { sl: 8, module: "தொல்காப்பியம் - இலக்கண இலக்கியத் தோற்றம் - எழுத்து, சொல், பொருளதிகாரம் - தொல்காப்பியர்", hrs: 15, co: "CO8" },
     { sl: 9, module: "பாலைத்திணை - பிரிவுத் துன்பம் - தலைவன் பிரிவு - தலைவி ஏக்கம் - பாலை நில இயற்கை - வழிப்பயண இடையூறுகள்", hrs: 15, co: "CO9" },
@@ -330,11 +338,56 @@ const unitColors = [
 ];
 
 export default function Notes() {
+  const { user } = useAuth();
+  const isFaculty = user?.type === "faculty";
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedSemester, setSelectedSemester] = useState(null);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [expandedUnit, setExpandedUnit] = useState(null);
   const [viewingPdf, setViewingPdf] = useState(null);
+  const [showUploadForm, setShowUploadForm] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [uploadTitle, setUploadTitle] = useState("");
+  const [uploadDescription, setUploadDescription] = useState("");
+  const [uploadFileObj, setUploadFileObj] = useState(null);
+
+  async function handleUpload(e) {
+    e.preventDefault();
+    if (!uploadFileObj) {
+      toast.error("Please select a file to upload");
+      return;
+    }
+    if (!uploadTitle.trim()) {
+      toast.error("Please enter a title");
+      return;
+    }
+    setUploading(true);
+    try {
+      const fileUrl = await uploadFile(STORAGE_PATHS.NOTES, uploadFileObj, setProgress);
+      await noteService.create({
+        title: uploadTitle.trim(),
+        description: uploadDescription.trim(),
+        subject: selectedSubject,
+        semester: Number(selectedSemester),
+        year: Number(selectedYear),
+        fileUrl,
+        facultyName: user.name || "Faculty",
+        facultyId: user.uid || "faculty-id",
+      });
+      toast.success("Note uploaded successfully!");
+      setUploadTitle("");
+      setUploadDescription("");
+      setUploadFileObj(null);
+      setShowUploadForm(false);
+      refetch();
+    } catch (err) {
+      toast.error(err.message || "Failed to upload");
+    } finally {
+      setUploading(false);
+      setProgress(0);
+    }
+  }
 
   const yearData = selectedYear ? CURRICULUM[selectedYear] : null;
   const semesterData = selectedSemester && yearData ? yearData.semesters[selectedSemester] : null;
@@ -345,7 +398,7 @@ export default function Notes() {
   const subjectNotesData = !isPlaceholder && selectedSubject ? NOTES_DATA[selectedSubject] : null;
   // Semester-specific unit filter for subjects shared across semesters
   const semesterUnitFilter = selectedSubject ? SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[selectedSubject] : null;
-  const { items: uploadedNotes } = useFirestoreList(noteService);
+  const { items: uploadedNotes, refetch } = useFirestoreList(noteService);
 
   // Uploaded notes from Firestore for this subject
   const uploadedSubjectNotes = useMemo(() => {
@@ -512,8 +565,97 @@ export default function Notes() {
   const isEnglish = selectedSubject === "ENGLISH";
   const englishPdf = isEnglish && NOTES_DATA["ENGLISH"]?.units?.[selectedYear === 2 ? 2 : 1]?.files?.[0];
 
+  // Determine the current subject's semester number for pre-filling upload form
+  const currentSemesterNumber = selectedSemester;
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      {/* ─── Faculty Upload Section ─── */}
+      {isFaculty && selectedSubject && (
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
+          {!showUploadForm ? (
+            <button
+              onClick={() => setShowUploadForm(true)}
+              className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-5 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:shadow-emerald-500/30 hover:from-emerald-500 hover:to-teal-500 active:scale-[0.97]"
+            >
+              <FiUploadCloud size={18} />
+              Upload Notes
+            </button>
+          ) : (
+            <form onSubmit={handleUpload} className="space-y-4 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-6 shadow-md">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+                <h3 className="font-display text-base font-bold text-white flex items-center gap-2">
+                  <FiUploadCloud size={18} className="text-emerald-400" />
+                  Upload Notes — {selectedSubject}
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setShowUploadForm(false)}
+                  className="rounded-lg px-3 py-1.5 text-xs font-semibold text-white/50 hover:bg-white/10 hover:text-white transition-all"
+                >
+                  Cancel
+                </button>
+              </div>
+
+              <div className="space-y-3">
+                <div>
+                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Title</label>
+                  <input
+                    value={uploadTitle}
+                    onChange={(e) => setUploadTitle(e.target.value)}
+                    required
+                    placeholder="e.g. Unit 1 Introduction"
+                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/20 focus:bg-white/10 transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Description</label>
+                  <textarea
+                    value={uploadDescription}
+                    onChange={(e) => setUploadDescription(e.target.value)}
+                    placeholder="Brief description of the note"
+                    rows={2}
+                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/20 focus:bg-white/10 transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Select File</label>
+                  <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-white/15 bg-white/5 px-4 py-6 text-center transition-all hover:border-emerald-500/50 hover:bg-white/10">
+                    <FiUploadCloud size={24} className="text-emerald-400" />
+                    <span className="text-xs text-white/50">
+                      {uploadFileObj ? uploadFileObj.name : "Choose a PDF, DOC, PPTX file..."}
+                    </span>
+                    <input
+                      type="file"
+                      accept=".pdf,.doc,.docx,.pptx,.ppt"
+                      className="hidden"
+                      onChange={(e) => setUploadFileObj(e.target.files?.[0] ?? null)}
+                      required={!uploading}
+                    />
+                  </label>
+                </div>
+
+                {uploading && progress > 0 && progress < 100 && (
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                    <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all" style={{ width: `${progress}%` }} />
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={uploading}
+                  className="w-full rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:shadow-emerald-500/20 disabled:opacity-50"
+                >
+                  {uploading ? `Uploading (${progress}%)...` : "Upload note"}
+                </button>
+              </div>
+            </form>
+          )}
+        </motion.div>
+      )}
+
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-6">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setSelectedSubject(null); setExpandedUnit(null); setViewingPdf(null); }}
@@ -663,7 +805,7 @@ export default function Notes() {
                     className={`flex w-full items-center justify-between px-5 py-4 text-left transition-all ${isExpanded ? `${uc.light} border-b border-white/10` : "hover:bg-white/10"}`}
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${uc.from} ${uc.to} text-white text-xs font-bold shadow-sm transition-transform duration-300 ${isExpanded ? 'scale-110' : ''}`}>{unitKey}</div>
+                      <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${uc.from} ${uc.to} text-white text-xs font-bold shadow-sm transition-transform duration-300 ${isExpanded ? 'scale-110' : ''}`}>{idx + 1}</div>
                       <div className="min-w-0">
                         <h3 className="text-sm font-bold text-white">{unit.title}</h3>
                         <p className="text-[11px] text-white/50">{unit.subtitle}</p>
@@ -761,3 +903,5 @@ export default function Notes() {
     </div>
   );
 }
+
+export { CURRICULUM, NOTES_DATA, SEMESTER_UNITS, NAME_ONLY_MAP };

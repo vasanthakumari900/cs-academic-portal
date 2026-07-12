@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FiFileText, FiDownload, FiEye, FiBookOpen,
   FiCalendar, FiSearch, FiAward, FiArrowLeft,
-  FiChevronRight, FiLayers, FiClock, FiUser,
+  FiChevronRight, FiLayers, FiClock, FiUser, FiUploadCloud,
 } from "react-icons/fi";
 import { FACULTY_NAMES } from "../utils/constants";
+import { useAuth } from "../context/AuthContext";
+import { questionPaperService } from "../services/questionPaperService";
+import { STORAGE_PATHS } from "../utils/constants";
+import { useFirestoreList } from "../hooks/useFirestoreList";
+import { uploadFile } from "../services/storageService";
+import toast from "react-hot-toast";
 
 const CURRICULUM = {
   1: { label: "1st Year", icon: "Ⅰ", semesters: { 1: { label: "Semester 1", subjects: ["FUNDAMENTALS OF PYTHON PROGRAMMING","FUNDAMENTALS OF DIGITAL ELECTRONICS","MATHEMATICS PAPER - I","TAMIL","ENGLISH"] }, 2: { label: "Semester 2", subjects: ["OBJECT ORIENTED PROGRAMMING USING C++","DATA STRUCTURES","MATHEMATICS PAPER - II","TAMIL","ENGLISH"] } } },
@@ -161,6 +167,8 @@ const COURSE_OPTIONS = [
 ];
 
 export default function QuestionPapers() {
+  const { user } = useAuth();
+  const isFaculty = user?.type === "faculty";
   const [courseType, setCourseType] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedSemester, setSelectedSemester] = useState(null);
@@ -168,17 +176,109 @@ export default function QuestionPapers() {
   const [previewing, setPreviewing] = useState(null);
   const [downloadingId, setDownloadingId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showUploadForm, setShowUploadForm] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [uploadTitle, setUploadTitle] = useState("");
+  const [uploadDescription, setUploadDescription] = useState("");
+  const [uploadYearVal, setUploadYearVal] = useState("U1819");
+  const [uploadRegulation, setUploadRegulation] = useState("R2024");
+  const [uploadFileObj, setUploadFileObj] = useState(null);
+
+  const { items: uploadedPapers, refetch } = useFirestoreList(questionPaperService);
+
+  async function handleUpload(e) {
+    e.preventDefault();
+    if (!uploadFileObj) {
+      toast.error("Please select a file to upload");
+      return;
+    }
+    if (!uploadTitle.trim()) {
+      toast.error("Please enter a title");
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const fileUrl = await uploadFile(STORAGE_PATHS.QUESTION_PAPERS, uploadFileObj, setProgress);
+      await questionPaperService.create({
+        title: uploadTitle.trim(),
+        description: uploadDescription.trim(),
+        year: uploadYearVal,
+        regulation: uploadRegulation,
+        subject: selectedSubject,
+        semester: Number(selectedSemester),
+        courseType: courseType,
+        fileUrl,
+        facultyName: user.name || "Faculty",
+        facultyId: user.uid || "faculty-id",
+      });
+
+      toast.success("Question paper uploaded successfully!");
+      setUploadTitle("");
+      setUploadDescription("");
+      setUploadYearVal("U1819");
+      setUploadRegulation("R2024");
+      setUploadFileObj(null);
+      setShowUploadForm(false);
+      refetch();
+    } catch (err) {
+      toast.error(err.message || "Failed to upload question paper");
+    } finally {
+      setUploading(false);
+      setProgress(0);
+    }
+  }
 
   const yearData = selectedYear ? CURRICULUM[selectedYear] : null;
   const semesterData = selectedSemester && yearData ? yearData.semesters[selectedSemester] : null;
   const yearSubjects = semesterData ? semesterData.subjects : (selectedYear ? getSubjectsForYear(selectedYear) : []);
   const ys = selectedYear ? yearStyles[selectedYear] : yearStyles[1];
 
-  const filtered = allPapers.map((p) => ({ ...p, facultyName: getFacultyName(p.subject) || p.facultyName })).filter((p) => {
-    if (selectedSubject) { if (!p.subject.toLowerCase().includes(selectedSubject.toLowerCase())) return false; }
-    if (searchQuery) { const q = searchQuery.toLowerCase(); return p.title.toLowerCase().includes(q) || p.subject.toLowerCase().includes(q); }
-    return true;
-  });
+  const combinedPapers = useMemo(() => {
+    const mappedFirestore = uploadedPapers
+      .filter((p) => {
+        const matchesSubject = !selectedSubject || p.subject?.toUpperCase() === selectedSubject.toUpperCase();
+        const matchesCourse = !courseType || p.courseType === courseType;
+        const matchesYear = !selectedYear || p.year === selectedYear;
+        const matchesSem = !selectedSemester || p.semester === selectedSemester;
+        return matchesSubject && matchesCourse && matchesYear && matchesSem;
+      })
+      .map((p) => ({
+        id: p.id,
+        title: p.title,
+        subject: p.subject,
+        facultyName: p.facultyName || "Faculty",
+        description: p.description || "Previous year question paper",
+        year: p.year || "U1819",
+        regulation: p.regulation || "R2024",
+        fileUrl: p.fileUrl,
+        fromFirestore: true,
+      }));
+
+    const mappedLocal = allPapers
+      .filter((p) => {
+        const matchesSubject = !selectedSubject || p.subject?.toUpperCase() === selectedSubject.toUpperCase();
+        const matchesCourse = !courseType || p.courseType === courseType;
+        return matchesSubject && matchesCourse;
+      })
+      .map((p) => ({
+        ...p,
+        facultyName: getFacultyName(p.subject) || p.facultyName,
+      }));
+
+    return [...mappedFirestore, ...mappedLocal];
+  }, [uploadedPapers, selectedSubject, courseType, selectedYear, selectedSemester]);
+
+  const filtered = useMemo(() => {
+    return combinedPapers.filter((p) => {
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        return p.title.toLowerCase().includes(q) || p.subject.toLowerCase().includes(q);
+      }
+      return true;
+    });
+  }, [combinedPapers, searchQuery]);
 
   if (!courseType) {
     return (
@@ -350,6 +450,116 @@ export default function QuestionPapers() {
         </div>
       </motion.div>
 
+      {/* ─── Faculty Upload Section ─── */}
+      {isFaculty && selectedSubject && (
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
+          {!showUploadForm ? (
+            <button
+              onClick={() => setShowUploadForm(true)}
+              className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 px-5 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:shadow-rose-500/30 hover:from-rose-500 hover:to-pink-500 active:scale-[0.97]"
+            >
+              <FiUploadCloud size={18} />
+              Upload Question Papers
+            </button>
+          ) : (
+            <form onSubmit={handleUpload} className="space-y-4 rounded-2xl border border-rose-500/20 bg-rose-500/5 p-6 shadow-md">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+                <h3 className="font-display text-base font-bold text-white flex items-center gap-2">
+                  <FiUploadCloud size={18} className="text-rose-400" />
+                  Upload Question Paper — {selectedSubject}
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setShowUploadForm(false)}
+                  className="rounded-lg px-3 py-1.5 text-xs font-semibold text-white/50 hover:bg-white/10 hover:text-white transition-all"
+                >
+                  Cancel
+                </button>
+              </div>
+
+              <div className="space-y-3">
+                <div>
+                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Title</label>
+                  <input
+                    value={uploadTitle}
+                    onChange={(e) => setUploadTitle(e.target.value)}
+                    required
+                    placeholder="e.g. November 2024 Exam Paper"
+                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400/20 focus:bg-white/10 transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Description</label>
+                  <textarea
+                    value={uploadDescription}
+                    onChange={(e) => setUploadDescription(e.target.value)}
+                    placeholder="Brief description of the question paper"
+                    rows={2}
+                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400/20 focus:bg-white/10 transition-all"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Exam Year</label>
+                    <input
+                      value={uploadYearVal}
+                      onChange={(e) => setUploadYearVal(e.target.value)}
+                      required
+                      placeholder="e.g. U1819"
+                      className="w-full rounded-xl border border-white/15 bg-[#0F172A] px-4 py-2.5 text-sm text-white outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400/20 transition-all"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Regulation</label>
+                    <input
+                      value={uploadRegulation}
+                      onChange={(e) => setUploadRegulation(e.target.value)}
+                      required
+                      placeholder="e.g. R2024"
+                      className="w-full rounded-xl border border-white/15 bg-[#0F172A] px-4 py-2.5 text-sm text-white outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400/20 transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Select PDF File</label>
+                  <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-white/15 bg-white/5 px-4 py-6 text-center transition-all hover:border-rose-500/50 hover:bg-white/10">
+                    <FiUploadCloud size={24} className="text-rose-400" />
+                    <span className="text-xs text-white/50">
+                      {uploadFileObj ? uploadFileObj.name : "Choose a PDF question paper..."}
+                    </span>
+                    <input
+                      type="file"
+                      accept=".pdf"
+                      className="hidden"
+                      onChange={(e) => setUploadFileObj(e.target.files?.[0] ?? null)}
+                      required={!uploading}
+                    />
+                  </label>
+                </div>
+
+                {uploading && progress > 0 && progress < 100 && (
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                    <div className="h-full bg-gradient-to-r from-rose-500 to-pink-500 transition-all" style={{ width: `${progress}%` }} />
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={uploading}
+                  className="w-full rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 py-3 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:shadow-rose-500/20 disabled:opacity-50"
+                >
+                  {uploading ? `Uploading (${progress}%)...` : "Upload question paper"}
+                </button>
+              </div>
+            </form>
+          )}
+        </motion.div>
+      )}
+
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
         <div className="flex items-center gap-4">
           <div className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${sc.from} ${sc.to} text-white shadow-lg`}><FiAward size={28} /></div>
@@ -424,7 +634,17 @@ export default function QuestionPapers() {
                   <button onClick={() => setPreviewing(paper)}
                     className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-white/15 bg-white/5 py-2 text-xs font-semibold text-white/70 transition-all hover:border-white/30 hover:bg-white hover:text-gray-800 active:scale-95"
                   ><FiEye size={13} /> Preview</button>
-                  <button onClick={() => { setDownloadingId(paper.id); setTimeout(() => { window.open(`https://drive.google.com/uc?export=download&id=${paper.driveFileId}`, '_blank'); setDownloadingId(null); }, 400); }}
+                  <button onClick={() => {
+                    if (paper.fileUrl) {
+                      window.open(paper.fileUrl, '_blank');
+                    } else {
+                      setDownloadingId(paper.id);
+                      setTimeout(() => {
+                        window.open(`https://drive.google.com/uc?export=download&id=${paper.driveFileId}`, '_blank');
+                        setDownloadingId(null);
+                      }, 400);
+                    }
+                  }}
                     disabled={downloadingId === paper.id}
                     className={`flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r ${sc.from} ${sc.to} py-2 text-xs font-semibold text-white shadow-md transition-all hover:shadow-lg active:scale-95 disabled:opacity-60`}
                   >{downloadingId === paper.id ? <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> : <><FiDownload size={13} /> Download</>}</button>
@@ -462,7 +682,11 @@ export default function QuestionPapers() {
                 </button>
               </div>
               <div className="aspect-[4/3] w-full bg-gray-100 sm:aspect-[16/10] lg:aspect-[16/9]">
-                <iframe src={`https://drive.google.com/file/d/${previewing.driveFileId}/preview`} title={previewing.title} className="h-full w-full" allowFullScreen />
+                {previewing.driveFileId ? (
+                  <iframe src={`https://drive.google.com/file/d/${previewing.driveFileId}/preview`} title={previewing.title} className="h-full w-full" allowFullScreen />
+                ) : (
+                  <iframe src={previewing.fileUrl} title={previewing.title} className="h-full w-full" allowFullScreen />
+                )}
               </div>
               <div className="border-t border-gray-100 px-5 py-2.5 text-center text-[11px] text-white/50">
                 {previewing.pages && <span>{previewing.pages} pages</span>} · {previewing.subject} · {previewing.year}

@@ -14,7 +14,7 @@ export default function DashboardTopbar({ onMenuToggle }) {
     navigate("/login");
   }
 
-  const isOnDashboard = location.pathname === "/student/dashboard" || location.pathname === "/admin/dashboard";
+  const isOnDashboard = location.pathname === "/student/dashboard" || location.pathname === "/admin/dashboard" || location.pathname === "/faculty/dashboard";
 
   return (
     <header className="sticky top-0 z-30 border-b border-white/10 bg-[#0F172A]/80 backdrop-blur-xl shadow-lg">

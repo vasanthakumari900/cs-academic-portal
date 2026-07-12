@@ -48,7 +48,12 @@ import StudentNotes from "./pages/Notes";
 import StudentQuestionPapers from "./pages/QuestionPapers";
 import StudentPlacements from "./pages/Placements";
 
-
+// Faculty pages
+import FacultyDashboard from "./pages/faculty/FacultyDashboard";
+import FacultyNotes from "./pages/faculty/Notes";
+import FacultyVideos from "./pages/faculty/Videos";
+import FacultyQuestionPapers from "./pages/faculty/QuestionPapers";
+import FacultyPlacements from "./pages/faculty/Placements";
 
 // Admin
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -101,6 +106,13 @@ const adminNav = [
   { to: "/admin/settings", label: "Settings", icon: FiSettings },
 ];
 
+const facultyNav = [
+  { to: "/faculty/dashboard", label: "Dashboard", icon: FiHome },
+  { to: "/faculty/notes", label: "Lecture Notes", icon: FiFileText },
+  { to: "/faculty/videos", label: "Video Lectures", icon: FiPlayCircle },
+  { to: "/faculty/question-papers", label: "Question Papers", icon: FiFileText },
+];
+
 export default function App() {
   const location = useLocation();
 
@@ -132,6 +144,16 @@ export default function App() {
             <Route path="/student/notes" element={<AnimatedPage><StudentNotes /></AnimatedPage>} />
             <Route path="/student/question-papers" element={<AnimatedPage><StudentQuestionPapers /></AnimatedPage>} />
             <Route path="/student/placements" element={<AnimatedPage><StudentPlacements /></AnimatedPage>} />
+          </Route>
+
+          {/* Faculty dashboard */}
+          <Route element={<ProtectedRoute allowedRoles={[ROLES.FACULTY]} />}>
+            <Route element={<DashboardLayout title="Faculty Dashboard" items={facultyNav} />}>
+              <Route path="/faculty/dashboard" element={<AnimatedPage><FacultyDashboard /></AnimatedPage>} />
+              <Route path="/faculty/notes" element={<AnimatedPage><FacultyNotes /></AnimatedPage>} />
+              <Route path="/faculty/videos" element={<AnimatedPage><FacultyVideos /></AnimatedPage>} />
+              <Route path="/faculty/question-papers" element={<AnimatedPage><FacultyQuestionPapers /></AnimatedPage>} />
+            </Route>
           </Route>
 
           {/* Admin dashboard */}
