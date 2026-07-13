@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  FiCalendar, FiDollarSign, FiUsers,
-  FiAward, FiStar, FiTrendingUp, FiCode, FiBriefcase,
-  FiUser, FiMail, FiPhone, FiBook, FiSend, FiCheckCircle,
-  FiX, FiAlertCircle, FiMapPin, FiClock,
+  FiCode, FiBriefcase,
+  FiSend, FiCheckCircle,
+  FiX, FiAlertCircle, FiClock,
 } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { SAMPLE_PLACEMENTS } from "../utils/constants";
 import { formatDate } from "../utils/helpers";
+import PlacementFeedback from "../components/placements/PlacementFeedback";
 
 const mcqQuestions = [
   { id: 1, question: "If all cats are animals and some animals are pets, which of the following must be true?", options: ["All cats are pets", "Some cats are pets", "All pets are cats", "Some animals are cats"], correct: 3 },
@@ -18,11 +18,6 @@ const mcqQuestions = [
   { id: 5, question: "A clock shows 3:15. What is the angle between the hour and minute hands?", options: ["0°", "7.5°", "15°", "30°"], correct: 1 },
 ];
 
-const successStories = [
-  { name: "Sanjana Patel", batch: "2024 Batch", company: "Google", role: "Software Engineer", package: "₹32 LPA", quote: "The portal's curated question papers and placement prep resources were instrumental in my interview preparation.", initials: "SP", color: "from-indigo-600 to-violet-600" },
-  { name: "Vignesh Suresh", batch: "2024 Batch", company: "Microsoft", role: "SDE", package: "₹28 LPA", quote: "Having all placement drives listed in one place with clear eligibility criteria saved me weeks of chasing emails.", initials: "VS", color: "from-emerald-500 to-teal-600" },
-  { name: "Divya Menon", batch: "2025 Batch", company: "Amazon", role: "SDE-1", package: "₹26 LPA", quote: "The portal made it easy to track deadlines and prepare systematically. The video lectures were a lifesaver.", initials: "DM", color: "from-amber-500 to-orange-600" },
-];
 
 function ApplyModal({ drive, onClose }) {
   const [step, setStep] = useState(1);
@@ -180,9 +175,6 @@ export default function Placements() {
   const [applyingTo, setApplyingTo] = useState(null);
   const displayItems = SAMPLE_PLACEMENTS;
 
-  const topPackage = displayItems.reduce((max, p) => Math.max(max, Number(p.package) || 0), 0);
-  const avgPackage = displayItems.reduce((s, p) => s + (Number(p.package) || 0), 0) / (displayItems.length || 1);
-
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center">
@@ -191,26 +183,6 @@ export default function Placements() {
         </div>
         <h1 className="font-display text-4xl font-bold text-white">Placements</h1>
         <p className="mt-2 text-sm text-white/50">Live drives, eligibility criteria and application links from recruiting companies</p>
-      </motion.div>
-
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-        className="mb-10 grid grid-cols-2 gap-4 sm:grid-cols-4"
-      >
-        {[
-          { label: "Active Drives", value: displayItems.length, prefix: "", suffix: "", color: "from-indigo-600 to-violet-600", emoji: "🚀" },
-          { label: "Highest Package", value: topPackage, prefix: "₹", suffix: " LPA", color: "from-emerald-500 to-teal-600", emoji: "🏆" },
-          { label: "Average Package", value: avgPackage, prefix: "₹", suffix: " LPA", decimals: 1, color: "from-amber-500 to-orange-600", emoji: "📊" },
-          { label: "Companies", value: displayItems.length, prefix: "", suffix: "", color: "from-rose-500 to-pink-600", emoji: "🎯" },
-        ].map((s, i) => (
-          <motion.div key={s.label} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}
-            className="glass-card-hover p-5 text-center"
-          >
-            <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${s.color}`} />
-            <p className="text-2xl mb-1">{s.emoji}</p>
-            <p className="font-display text-xl font-bold text-white">{s.prefix}{s.value}{s.suffix}</p>
-            <p className="text-[11px] text-white/40 font-medium mt-0.5">{s.label}</p>
-          </motion.div>
-        ))}
       </motion.div>
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
@@ -248,37 +220,9 @@ export default function Placements() {
         </div>
       </motion.div>
 
-      <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} className="mt-20">
-        <div className="mb-8 text-center">
-          <h2 className="font-display text-2xl font-bold text-white">Success <span className="text-gradient-primary">Stories</span></h2>
-          <p className="mt-1 text-sm text-white/50">Our students placed at top companies across the globe</p>
-        </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {successStories.map((s, i) => (
-            <motion.div key={s.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-              <div className="glass-card-hover flex h-full flex-col gap-4 p-5">
-                <div className={`absolute inset-0 bg-gradient-to-br ${s.color} opacity-[0.03]}`} />
-                <div className="flex items-center gap-3">
-                  <div className={`flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br ${s.color} text-xs font-bold text-white shadow-md`}>{s.initials}</div>
-                  <div>
-                    <p className="font-display text-sm font-bold text-white">{s.name}</p>
-                    <p className="text-xs text-white/50">{s.batch}</p>
-                  </div>
-                  <FiStar className="ml-auto text-amber-400 shrink-0" size={16} />
-                </div>
-                <p className="text-xs italic text-white/50 leading-relaxed">&ldquo;{s.quote}&rdquo;</p>
-                <div className="mt-auto flex items-center gap-2 text-xs border-t border-white/10 pt-3">
-                  <span className="font-bold text-white">{s.company}</span>
-                  <span className="text-white/20">·</span>
-                  <span className="text-white/50">{s.role}</span>
-                  <span className="text-white/20">·</span>
-                  <span className="font-bold text-cyan-400">{s.package}</span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
+
+      {/* ── Placement Feedback Section ── */}
+      <PlacementFeedback />
 
       <AnimatePresence>
         {applyingTo && <ApplyModal drive={applyingTo} onClose={() => setApplyingTo(null)} />}

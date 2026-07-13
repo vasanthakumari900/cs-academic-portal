@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import DashboardTopbar from "../components/layout/DashboardTopbar";
 import Sidebar from "../components/layout/Sidebar";
-
 export default function DashboardLayout({ title, items = [] }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 

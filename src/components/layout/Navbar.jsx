@@ -53,18 +53,11 @@ export default function Navbar() {
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <Link to="/" className="group flex items-center gap-2.5">
-            <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 text-white text-sm font-extrabold shadow-lg transition-all duration-300 group-hover:shadow-indigo-500/30 group-hover:scale-105">
-              DV
+            <span className="relative flex flex-col items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow-lg transition-all duration-300 group-hover:shadow-indigo-500/30 group-hover:scale-105 px-3.5 py-1.5">
+              <span className="text-[11px] font-extrabold leading-tight">DDGDVC</span>
+              <span className="text-[8px] font-semibold leading-tight text-indigo-200">CS PORTAL</span>
               <span className="absolute -inset-0.5 rounded-xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 blur-sm -z-10 opacity-0 group-hover:opacity-100 transition-opacity" />
             </span>
-            <div className="flex flex-col leading-tight">
-              <span className={`text-xs font-bold tracking-tight transition-colors duration-500 ${scrolled ? 'text-white' : 'text-white'}`}>
-                DDGDVC
-              </span>
-              <span className="text-[10px] -mt-0.5 text-white/60">
-                CS Portal
-              </span>
-            </div>
           </Link>
 
           <div className="hidden md:flex items-center gap-1">

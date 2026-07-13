@@ -59,6 +59,7 @@ export const COLLECTIONS = {
   PLACEMENTS: "placements",
   BOOKMARKS: "bookmarks",
   NOTIFICATIONS: "notifications",
+  PLACEMENT_FEEDBACK: "placementFeedback",
 };
 
 // Faculty names per subject (as specified)
@@ -200,4 +201,5 @@ export const STORAGE_PATHS = {
   NOTES: "notes/",
   QUESTION_PAPERS: "questionpapers/",
   LOGOS: "logos/",
+  PLACEMENT_FEEDBACK: "placementfeedback/",
 };

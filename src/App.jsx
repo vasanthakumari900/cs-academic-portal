@@ -67,6 +67,7 @@ import ManageQuestionPapers from "./pages/admin/ManageQuestionPapers";
 import ManagePlacements from "./pages/admin/ManagePlacements";
 import Analytics from "./pages/admin/Analytics";
 import Settings from "./pages/admin/Settings";
+import ChatBot from "./components/chatbot/ChatBot";
 
 const pageVariants = {
   initial: { opacity: 0, y: 12 },
@@ -112,6 +113,7 @@ const facultyNav = [
   { to: "/faculty/notes", label: "Lecture Notes", icon: FiFileText },
   { to: "/faculty/videos", label: "Video Lectures", icon: FiPlayCircle },
   { to: "/faculty/question-papers", label: "Question Papers", icon: FiFileText },
+  { to: "/faculty/placements", label: "Placements", icon: FiBriefcase },
 ];
 
 export default function App() {
@@ -119,6 +121,8 @@ export default function App() {
 
   return (
     <AnimatePresence mode="wait">
+      <>
+      <ChatBot />
       <Routes location={location} key={location.pathname}>
         {/* ─── Auth pages — always public ─── */}
         <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
@@ -156,6 +160,7 @@ export default function App() {
               <Route path="/faculty/notes" element={<AnimatedPage><FacultyNotes /></AnimatedPage>} />
               <Route path="/faculty/videos" element={<AnimatedPage><FacultyVideos /></AnimatedPage>} />
               <Route path="/faculty/question-papers" element={<AnimatedPage><FacultyQuestionPapers /></AnimatedPage>} />
+              <Route path="/faculty/placements" element={<AnimatedPage><FacultyPlacements /></AnimatedPage>} />
             </Route>
           </Route>
 
@@ -178,6 +183,7 @@ export default function App() {
 
         <Route path="*" element={<AnimatedPage><NotFound /></AnimatedPage>} />
       </Routes>
+      </>
     </AnimatePresence>
   );
 }

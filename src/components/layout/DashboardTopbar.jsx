@@ -23,9 +23,14 @@ export default function DashboardTopbar({ onMenuToggle }) {
           <button onClick={onMenuToggle} className="lg:hidden p-1.5 rounded-lg text-white/50 hover:bg-white/10 hover:text-white transition-all">
             <FiMenu size={20} />
           </button>
-          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 text-white text-xs font-bold shadow-md">DV</span>
+          <div className="flex items-center gap-2.5">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 text-white text-xs font-bold shadow-md">DG</span>
+            <div className="hidden sm:block leading-tight">
+              <p className="text-sm font-bold text-white">STUDENT PORTAL</p>
+            </div>
+          </div>
           {user && (
-            <div className="hidden sm:block">
+            <div className="hidden md:block">
               <p className="text-xs font-semibold text-white leading-tight">{user.name}</p>
               <p className="text-[10px] text-white/50 -mt-0.5">
                 {user.rollNumber}{user.section ? ` · Sec ${user.section}` : ""}{user.type === "faculty" ? ` · ${user.subject}` : ""}
