@@ -14,17 +14,17 @@ import toast from "react-hot-toast";
 import { CURRICULUM } from "../utils/curriculum";
 
 const yearStyles = {
-  1: { gradient: "from-emerald-500 to-teal-600", text: "text-emerald-300" },
-  2: { gradient: "from-violet-500 to-purple-600", text: "text-violet-300" },
-  3: { gradient: "from-amber-500 to-orange-600", text: "text-amber-300" },
+  1: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
+  2: { bg: "bg-[#1E88E5] text-white border-[#1565C0]", text: "text-[#1E88E5]" },
+  3: { bg: "bg-[#2E7D32] text-white border-[#1B5E20]", text: "text-[#2E7D32]" },
 };
 
 const subjectColors = [
-  { from: "from-indigo-500", to: "to-violet-600" },
-  { from: "from-rose-500", to: "to-pink-600" },
-  { from: "from-cyan-500", to: "to-sky-600" },
-  { from: "from-amber-500", to: "to-yellow-600" },
-  { from: "from-lime-500", to: "to-green-600" },
+  { from: "bg-[#F0F4F8]", to: "text-[#0F4C81] border-[#D9E2EC]", badge: "bg-[#F0F4F8] text-[#0F4C81]" },
+  { from: "bg-[#E8F5E9]", to: "text-[#2E7D32] border-[#C8E6C9]", badge: "bg-[#E8F5E9] text-[#2E7D32]" },
+  { from: "bg-[#FFF3E0]", to: "text-amber-800 border-[#FFE0B2]", badge: "bg-[#FFF3E0] text-amber-800" },
+  { from: "bg-[#FFEBEE]", to: "text-red-800 border-[#FFCDD2]", badge: "bg-[#FFEBEE] text-red-800" },
+  { from: "bg-[#E8EAF6]", to: "text-[#303F9F] border-[#C5CAE9]", badge: "bg-[#E8EAF6] text-[#303F9F]" },
 ];
 
 const FACULTY_MAP = {
@@ -628,11 +628,11 @@ function getDriveDownloadUrl(fileId, type = "pdf") {
 }
 
 const unitColors = [
-  { from: "from-indigo-500", to: "to-violet-600", light: "bg-indigo-500/10" },
-  { from: "from-emerald-500", to: "to-teal-600", light: "bg-emerald-500/10" },
-  { from: "from-amber-500", to: "to-orange-600", light: "bg-amber-500/10" },
-  { from: "from-rose-500", to: "to-pink-600", light: "bg-rose-500/10" },
-  { from: "from-violet-500", to: "to-purple-600", light: "bg-violet-500/10" },
+  { from: "bg-[#0F4C81]", to: "text-white", light: "bg-[#F0F4F8]" },
+  { from: "bg-[#2E7D32]", to: "text-white", light: "bg-[#E8F5E9]" },
+  { from: "bg-[#1E88E5]", to: "text-white", light: "bg-[#E8EAF6]" },
+  { from: "bg-amber-600", to: "text-white", light: "bg-[#FFF3E0]" },
+  { from: "bg-red-600", to: "text-white", light: "bg-[#FFEBEE]" },
 ];
 
 export default function Notes() {
@@ -730,32 +730,31 @@ export default function Notes() {
 
   if (!selectedYear) {
     return (
-      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center">
-          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-[0_8px_32px_rgba(16,185,129,0.2)]">
+          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm">
             <FiBookOpen size={36} />
           </div>
-          <h1 className="font-display text-4xl font-bold text-white">Lecture Notes</h1>
-          <p className="mt-2 text-sm text-white/50">Select your year to browse faculty-curated PDF notes by subject</p>
+          <h1 className="font-sans text-4xl font-bold text-[#1F2937]">Lecture Notes</h1>
+          <p className="mt-2 text-sm text-[#6B7280]">Select your year to browse faculty-curated PDF notes by subject</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {[1, 2, 3].map((year, i) => {
             const s = yearStyles[year];
             return (
               <motion.button key={year}
-                initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 + i * 0.12, type: "spring", stiffness: 80 }}
-                whileHover={{ y: -8, scale: 1.02 }} whileTap={{ scale: 0.97 }}
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.1, type: "spring", stiffness: 80 }}
+                whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedYear(year)}
-                className="glass-card-hover group"
+                className="glass-card-hover group bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
               >
                 <div className="p-8 text-center">
-                  <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br ${s.gradient} text-3xl font-bold text-white shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl`}>{CURRICULUM[year].icon}</div>
-                  <h2 className={`text-xl font-bold ${s.text}`}>{CURRICULUM[year].label}</h2>
-                  <p className="mt-1.5 text-xs text-white/50">{Object.keys(CURRICULUM[year].semesters).length} Semesters</p>
-                  <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-cyan-400 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">Browse Notes <FiChevronRight size={12} /></div>
+                  <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-xl ${s.bg} text-3xl font-bold transition-all duration-300 group-hover:scale-105 shadow-sm`}>{CURRICULUM[year].icon}</div>
+                  <h2 className="text-xl font-bold text-[#1F2937]">{CURRICULUM[year].label}</h2>
+                  <p className="mt-1.5 text-xs text-[#6B7280]">{Object.keys(CURRICULUM[year].semesters).length} Semesters</p>
+                  <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#0F4C81] opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">Browse Notes <FiChevronRight size={12} /></div>
                 </div>
-                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${s.gradient} scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500`} />
               </motion.button>
             );
           })}
@@ -770,25 +769,25 @@ export default function Notes() {
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setSelectedYear(null); setSelectedSemester(null); setSelectedSubject(null); }}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-white/60 hover:bg-white/10 transition-all"
+          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
         ><FiArrowLeft size={14} /> Back to Years</motion.button>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
-          <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${ys.gradient} text-white shadow-lg`}><FiLayers size={28} /></div>
-          <h1 className={`font-display text-2xl font-bold ${ys.text}`}>{yearData.label}</h1>
-          <p className="mt-1 text-sm text-white/60">Choose a semester</p>
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm"><FiLayers size={28} /></div>
+          <h1 className="font-sans text-2xl font-bold text-[#1F2937]">{yearData.label}</h1>
+          <p className="mt-1 text-sm text-[#6B7280]">Choose a semester</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {sems.map(([semKey, semData], i) => (
             <motion.button key={semKey}
-              initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.1 }}
-              whileHover={{ y: -4, scale: 1.01 }} whileTap={{ scale: 0.97 }}
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.08 }}
+              whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
               onClick={() => setSelectedSemester(Number(semKey))}
-              className="glass-card-hover"
+              className="glass-card-hover bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
             >
               <div className="p-8 text-center">
-                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br ${ys.gradient} text-xl font-bold text-white shadow-md`}>{semKey === 1 ? "I" : "II"}</div>
-                <h2 className={`text-lg font-bold ${ys.text}`}>{semData.label}</h2>
-                <p className="mt-1 text-xs text-white/50">{semData.subjects.length} subjects</p>
+                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl ${ys.bg} text-xl font-bold text-white shadow-sm`}>{semKey === 1 ? "I" : "II"}</div>
+                <h2 className="text-lg font-bold text-[#1F2937]">{semData.label}</h2>
+                <p className="mt-1 text-xs text-[#6B7280]">{semData.subjects.length} subjects</p>
               </div>
             </motion.button>
           ))}
@@ -802,19 +801,19 @@ export default function Notes() {
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => setSelectedSemester(null)}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-white/60 hover:bg-white/10 transition-all"
+          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
         ><FiArrowLeft size={14} /> Back to Semesters</motion.button>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-          <div className="flex items-center gap-2 text-sm text-white/50 mb-3">
+          <div className="flex items-center gap-2 text-sm text-[#6B7280] mb-3">
             <span className={ys.text}>{yearData.label}</span><FiChevronRight size={12} /><span className={ys.text}>{semesterData.label}</span>
           </div>
-          <h1 className={`font-display text-2xl font-bold ${ys.text}`}>Select Subject</h1>
-          <p className="mt-1 text-sm text-white/60">Choose a subject to browse its lecture notes</p>
+          <h1 className="font-sans text-2xl font-bold text-[#1F2937]">Select Subject</h1>
+          <p className="mt-1 text-sm text-[#6B7280]">Choose a subject to browse its lecture notes</p>
         </motion.div>
         {semesterData.subjects.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-white/15 bg-white/5 py-20">
-            <FiBookOpen size={48} className="mb-3 text-white/30" />
-            <p className="text-sm font-medium text-white/60">Subjects will be added soon</p>
+          <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E5E7EB] bg-white py-20 shadow-sm">
+            <FiBookOpen size={48} className="mb-3 text-slate-300" />
+            <p className="text-sm font-medium text-[#4B5563]">Subjects will be added soon</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -838,19 +837,19 @@ export default function Notes() {
               return (
                 <motion.button key={subject}
                   initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
-                  whileHover={{ y: -4, scale: 1.01 }} whileTap={{ scale: 0.97 }}
+                  whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                   onClick={() => setSelectedSubject(subject)}
-                  className="glass-card-hover"
+                  className="glass-card-hover group bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
                 >
-                  <div className="relative flex items-start gap-4 p-5">
-                    <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${sc.from} ${sc.to} text-white shadow-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg`}><FiFileText size={22} /></div>
+                  <div className="relative flex items-start gap-4 p-5 text-left">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm transition-all duration-300 group-hover:scale-105"><FiFileText size={22} /></div>
                     <div className="min-w-0 flex-1 pt-1">
-                      <h3 className="font-display font-bold text-sm text-white leading-snug">{subject}</h3>
-                      {facultyName && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-white/50">{facultyName}</p>}
+                      <h3 className="font-sans font-bold text-sm text-[#1F2937] leading-snug">{subject}</h3>
+                      {facultyName && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-[#6B7280]">{facultyName}</p>}
                       <div className="mt-3 flex items-center gap-2">
-                        <span className="inline-flex items-center gap-1 rounded-full bg-indigo-500/20 text-indigo-300 px-2.5 py-0.5 text-[10px] font-semibold"><FiFileText size={10} /> VIEW NOTES</span>
-                        {hasNotes && <span className="inline-flex items-center rounded-full bg-emerald-500/20 text-emerald-300 px-2 py-0.5 text-[9px] font-bold">{totalFiles} PDFs</span>}
-                        <FiChevronRight size={14} className="text-white/30 group-hover:text-cyan-400 transition-colors ml-auto" />
+                        <span className="inline-flex items-center gap-1 rounded-full bg-[#0F4C81]/10 text-[#0F4C81] px-2.5 py-0.5 text-[10px] font-bold"><FiFileText size={10} /> VIEW NOTES</span>
+                        {hasNotes && <span className="inline-flex items-center rounded-full bg-[#2E7D32]/10 text-[#2E7D32] px-2 py-0.5 text-[9px] font-bold">{totalFiles} PDFs</span>}
+                        <FiChevronRight size={14} className="text-slate-400 group-hover:text-[#1E88E5] transition-colors ml-auto" />
                       </div>
                     </div>
                   </div>
@@ -876,29 +875,29 @@ export default function Notes() {
   const currentSemesterNumber = selectedSemester;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 bg-[#F8FAFC]">
       {/* ─── Faculty Upload Section ─── */}
       {isFaculty && selectedSubject && (
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
           {!showUploadForm ? (
             <button
               onClick={() => setShowUploadForm(true)}
-              className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 px-5 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:shadow-emerald-500/30 hover:from-emerald-500 hover:to-teal-500 active:scale-[0.97]"
+              className="group inline-flex items-center gap-2 rounded-lg bg-[#0F4C81] px-5 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#1E88E5] active:scale-[0.97]"
             >
               <FiUploadCloud size={18} />
               Upload Notes
             </button>
           ) : (
-            <form onSubmit={handleUpload} className="space-y-4 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-6 shadow-md">
-              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
-                <h3 className="font-display text-base font-bold text-white flex items-center gap-2">
-                  <FiUploadCloud size={18} className="text-emerald-400" />
+            <form onSubmit={handleUpload} className="space-y-4 rounded-xl border border-[#E5E7EB] bg-white p-6 shadow-sm">
+              <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-3 mb-4">
+                <h3 className="font-sans text-base font-bold text-[#1F2937] flex items-center gap-2">
+                  <FiUploadCloud size={18} className="text-[#0F4C81]" />
                   Upload Notes — {selectedSubject}
                 </h3>
                 <button
                   type="button"
                   onClick={() => setShowUploadForm(false)}
-                  className="rounded-lg px-3 py-1.5 text-xs font-semibold text-white/50 hover:bg-white/10 hover:text-white transition-all"
+                  className="rounded-lg px-3 py-1.5 text-xs font-semibold text-[#6B7280] hover:bg-[#F8FAFC] transition-all"
                 >
                   Cancel
                 </button>
@@ -906,32 +905,32 @@ export default function Notes() {
 
               <div className="space-y-3">
                 <div>
-                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Title</label>
+                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Title</label>
                   <input
                     value={uploadTitle}
                     onChange={(e) => setUploadTitle(e.target.value)}
                     required
                     placeholder="e.g. Unit 1 Introduction"
-                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/20 focus:bg-white/10 transition-all"
+                    className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-4 py-2.5 text-sm text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Description</label>
+                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Description</label>
                   <textarea
                     value={uploadDescription}
                     onChange={(e) => setUploadDescription(e.target.value)}
                     placeholder="Brief description of the note"
                     rows={2}
-                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/20 focus:bg-white/10 transition-all"
+                    className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-4 py-2.5 text-sm text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Select File</label>
-                  <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-white/15 bg-white/5 px-4 py-6 text-center transition-all hover:border-emerald-500/50 hover:bg-white/10">
-                    <FiUploadCloud size={24} className="text-emerald-400" />
-                    <span className="text-xs text-white/50">
+                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Select File</label>
+                  <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-slate-50 px-4 py-6 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
+                    <FiUploadCloud size={24} className="text-[#0F4C81]" />
+                    <span className="text-xs text-[#6B7280]">
                       {uploadFileObj ? uploadFileObj.name : "Choose a PDF, DOC, PPTX file..."}
                     </span>
                     <input
@@ -945,15 +944,15 @@ export default function Notes() {
                 </div>
 
                 {uploading && progress > 0 && progress < 100 && (
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-                    <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all" style={{ width: `${progress}%` }} />
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-150">
+                    <div className="h-full bg-[#0F4C81] transition-all" style={{ width: `${progress}%` }} />
                   </div>
                 )}
 
                 <button
                   type="submit"
                   disabled={uploading}
-                  className="w-full rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 py-3 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:shadow-emerald-500/20 disabled:opacity-50"
+                  className="w-full rounded-lg bg-[#0F4C81] py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#1E88E5] disabled:opacity-50"
                 >
                   {uploading ? `Uploading (${progress}%)...` : "Upload note"}
                 </button>
@@ -966,20 +965,20 @@ export default function Notes() {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-6">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setSelectedSubject(null); setExpandedUnit(null); setViewingPdf(null); }}
-          className="mb-4 inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-white/60 hover:bg-white/10 transition-all"
+          className="mb-4 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
         ><FiArrowLeft size={14} /> Back to Subjects</motion.button>
-        <div className="flex items-center gap-2 text-xs text-white/50">
-          <span className={ys.text}>{yearData.label}</span><FiChevronRight size={10} /><span className={ys.text}>{semesterData.label}</span><FiChevronRight size={10} /><span className="text-white/80 font-semibold">{selectedSubject}</span>
+        <div className="flex items-center gap-2 text-xs text-[#6B7280]">
+          <span className={ys.text}>{yearData.label}</span><FiChevronRight size={10} /><span className={ys.text}>{semesterData.label}</span><FiChevronRight size={10} /><span className="text-[#1F2937] font-semibold">{selectedSubject}</span>
         </div>
       </motion.div>
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
         <div className="flex items-center gap-4">
-          <div className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${sc.from} ${sc.to} text-white shadow-lg`}><FiBookOpen size={28} /></div>
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiBookOpen size={28} /></div>
           <div>
-            <h1 className="font-display text-2xl font-bold text-white">{selectedSubject}</h1>
+            <h1 className="font-sans text-2xl font-bold text-[#1F2937]">{selectedSubject}</h1>
             <div className="flex items-center gap-3 mt-1">
-              <span className="text-xs text-white/60">{yearData.label} · {semesterData.label}</span>
+              <span className="text-xs text-[#6B7280]">{yearData.label} · {semesterData.label}</span>
               {syllabusData && <span className="badge-primary">{syllabusData.length} modules</span>}
               {totalFiles > 0 && <span className="badge-success">{totalFiles} PDFs</span>}
             </div>
@@ -989,29 +988,29 @@ export default function Notes() {
 
       {!isEnglish && syllabusData ? (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          className="mb-8 glass-card overflow-hidden"
+          className="mb-8 overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm"
         >
-          <div className="bg-gradient-to-r from-indigo-600 to-violet-700 px-5 py-3.5 flex items-center gap-2 text-white">
+          <div className="bg-[#0F4C81] px-5 py-3.5 flex items-center gap-2 text-white">
             <FiBookOpen size={15} />
             <span className="text-xs font-bold uppercase tracking-wider">Syllabus</span>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="bg-white/5 text-white/60">
+                <tr className="bg-[#F8FAFC] text-[#1F2937]">
                   <th className="px-5 py-3 font-bold uppercase tracking-wider w-14">Sl No</th>
                   <th className="px-5 py-3 font-bold uppercase tracking-wider">Contents of Module</th>
                   <th className="px-5 py-3 font-bold uppercase tracking-wider text-center w-20">Hrs</th>
                   <th className="px-5 py-3 font-bold uppercase tracking-wider text-center w-20">COs</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/10">
+              <tbody className="divide-y divide-[#E5E7EB]">
                 {syllabusData.map((row) => (
-                  <tr key={row.sl} className="hover:bg-white/5 transition-colors">
-                    <td className="px-5 py-3.5 font-bold text-white/80 align-top">{row.sl}</td>
-                    <td className="px-5 py-3.5 text-white/60 leading-relaxed font-medium">{row.module}</td>
-                    <td className="px-5 py-3.5 text-center font-semibold text-white/80 align-top">{row.hrs}</td>
-                    <td className="px-5 py-3.5 text-center font-bold text-cyan-400 align-top">{row.co}</td>
+                  <tr key={row.sl} className="hover:bg-[#F0F4F8] transition-colors">
+                    <td className="px-5 py-3.5 font-bold text-[#1F2937] align-top">{row.sl}</td>
+                    <td className="px-5 py-3.5 text-[#4B5563] leading-relaxed font-medium">{row.module}</td>
+                    <td className="px-5 py-3.5 text-center font-semibold text-[#1F2937] align-top">{row.hrs}</td>
+                    <td className="px-5 py-3.5 text-center font-bold text-[#0F4C81] align-top">{row.co}</td>
                   </tr>
                 ))}
               </tbody>
@@ -1019,35 +1018,36 @@ export default function Notes() {
           </div>
         </motion.div>
       ) : !isEnglish ? (
-        <div className="mb-8 rounded-2xl border border-dashed border-white/15 bg-white/5 py-16 text-center">
-          <FiBookOpen size={40} className="mx-auto mb-3 text-white/30" />
-          <p className="text-sm text-white/50">Syllabus not yet available</p>
+        <div className="mb-8 rounded-xl border border-dashed border-[#E5E7EB] bg-white py-16 text-center shadow-sm">
+          <FiBookOpen size={40} className="mx-auto mb-3 text-slate-350" />
+          <p className="text-sm text-[#6B7280]">Syllabus not yet available</p>
         </div>
       ) : null}
 
       {isEnglish && englishPdf && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
-            <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${sc.from} ${sc.to} text-white shadow-lg`}><FiDownload size={18} /></div>
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>
             <div>
-              <h2 className="font-display text-lg font-bold text-white">English - Complete Notes</h2>
-              <p className="text-[11px] text-white/50">Complete English notes PDF for download</p>
+              <h2 className="font-sans text-lg font-bold text-[#1F2937]">English - Complete Notes</h2>
+              <p className="text-[11px] text-[#6B7280]">Complete English notes PDF for download</p>
             </div>
           </div>
-          <div className="glass-card overflow-hidden">
+          <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-sm">
             <div className="p-5">
               <motion.button
                 initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
                 onClick={() => setViewingPdf({ ...englishPdf, subject: "ENGLISH", unit: "Complete Notes" })}
-                className="group flex w-full items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-4 text-left transition-all hover:border-cyan-400/30 hover:bg-cyan-500/10 hover:shadow-lg active:scale-[0.98]"
+                className="group flex w-full items-center gap-3 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] p-4 text-left transition-all hover:bg-[#F0F4F8] hover:border-[#1E88E5]/30 hover:shadow-sm"
               >
-                <div className="flex h-14 w-12 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-red-500/20 to-rose-500/20 text-red-400 shadow-sm">
+                <div className="flex h-14 w-12 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-650 shadow-sm">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-base font-bold text-white group-hover:text-cyan-300 transition-colors">{englishPdf.title}</p>
-                  <p className="text-xs text-white/50">PDF · Complete Notes · 1st Year Semester 1</p>
-                </div>                    <div className="shrink-0 rounded-full bg-white/10 p-2.5 text-white/50 group-hover:bg-cyan-500/20 group-hover:text-cyan-300 transition-all">
+                  <p className="text-base font-bold text-[#1F2937] group-hover:text-[#1E88E5] transition-colors">{englishPdf.title}</p>
+                  <p className="text-xs text-[#6B7280]">PDF · Complete Notes · 1st Year Semester 1</p>
+                </div>
+                <div className="shrink-0 rounded-full bg-white border border-[#E5E7EB] p-2 text-[#4B5563] hover:bg-slate-100 hover:text-slate-900 transition-all">
                   <a href={getDriveDownloadUrl(englishPdf.fileId, englishPdf.type)} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
                     <FiDownload size={16} />
                   </a>
@@ -1062,10 +1062,10 @@ export default function Notes() {
       {uploadedSubjectNotes.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
-            <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${sc.from} ${sc.to} text-white shadow-lg`}><FiDownload size={18} /></div>
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>
             <div>
-              <h2 className="font-display text-lg font-bold text-white">Uploaded Notes</h2>
-              <p className="text-[11px] text-white/50">{uploadedSubjectNotes.length} note{uploadedSubjectNotes.length > 1 ? "s" : ""} uploaded by faculty</p>
+              <h2 className="font-sans text-lg font-bold text-[#1F2937]">Uploaded Notes</h2>
+              <p className="text-[11px] text-[#6B7280]">{uploadedSubjectNotes.length} note{uploadedSubjectNotes.length > 1 ? "s" : ""} uploaded by faculty</p>
             </div>
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -1074,16 +1074,16 @@ export default function Notes() {
                 href={note.fileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4 transition-all hover:border-cyan-400/30 hover:bg-cyan-500/10 hover:shadow-lg active:scale-[0.98]"
+                className="group flex items-center gap-4 rounded-lg border border-[#E5E7EB] bg-white p-4 transition-all hover:bg-[#F8FAFC] hover:border-[#1E88E5]/30 hover:shadow-sm"
               >
-                <div className="flex h-12 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-red-500/20 to-rose-500/20 text-red-400 shadow-sm">
+                <div className="flex h-12 w-10 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-650 shadow-sm">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-semibold text-white truncate group-hover:text-cyan-300 transition-colors">{note.title}</p>
-                  <p className="text-[10px] text-white/50">PDF · {note.subject}</p>
+                  <p className="text-sm font-semibold text-[#1F2937] truncate group-hover:text-[#1E88E5] transition-colors">{note.title}</p>
+                  <p className="text-[10px] text-[#6B7280]">PDF · {note.subject}</p>
                 </div>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/30 group-hover:text-cyan-300 shrink-0"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-slate-400 group-hover:text-[#1E88E5] shrink-0"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               </a>
             ))}
           </div>
@@ -1093,10 +1093,10 @@ export default function Notes() {
       {!isEnglish && subjectNotesData && units.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
-            <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${sc.from} ${sc.to} text-white shadow-md`}><FiDownload size={18} /></div>
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>
             <div>
-              <h2 className="font-display text-lg font-bold text-white">Download Notes</h2>
-              <p className="text-[11px] text-white/50">{totalFiles} PDFs available across {units.length} units</p>
+              <h2 className="font-sans text-lg font-bold text-[#1F2937]">Download Notes</h2>
+              <p className="text-[11px] text-[#6B7280]">{totalFiles} PDFs available across {units.length} units</p>
             </div>
           </div>
           <div className="space-y-3">
@@ -1106,31 +1106,31 @@ export default function Notes() {
               const fileCount = unit.files.length;
               return (
                 <motion.div key={unitKey} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 * idx }}
-                  className="glass-card overflow-hidden transition-all duration-300"
+                  className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden shadow-sm"
                 >
                   <button onClick={() => setExpandedUnit(isExpanded ? null : unitKey)}
-                    className={`flex w-full items-center justify-between px-5 py-4 text-left transition-all ${isExpanded ? `${uc.light} border-b border-white/10` : "hover:bg-white/10"}`}
+                    className={`flex w-full items-center justify-between px-5 py-4 text-left transition-all ${isExpanded ? `${uc.light} border-b border-[#E5E7EB]` : "hover:bg-[#F8FAFC]"}`}
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${uc.from} ${uc.to} text-white text-xs font-bold shadow-sm transition-transform duration-300 ${isExpanded ? 'scale-110' : ''}`}>{idx + 1}</div>
+                      <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${uc.from} ${uc.to} text-xs font-bold shadow-sm transition-transform duration-300 ${isExpanded ? 'scale-105' : ''}`}>{idx + 1}</div>
                       <div className="min-w-0">
-                        <h3 className="text-sm font-bold text-white">{unit.title}</h3>
-                        <p className="text-[11px] text-white/50">{unit.subtitle}</p>
+                        <h3 className="text-sm font-bold text-[#1F2937]">{unit.title}</h3>
+                        <p className="text-[11px] text-[#6B7280]">{unit.subtitle}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
-                      {fileCount > 0 && <span className="rounded-full bg-indigo-500/20 text-indigo-300 px-3 py-0.5 text-[10px] font-bold">{fileCount} PDF{fileCount > 1 ? "s" : ""}</span>}
-                      <FiChevronDown size={16} className={`text-white/40 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
+                      {fileCount > 0 && <span className="rounded-full bg-[#0F4C81]/10 text-[#0F4C81] px-3 py-0.5 text-[10px] font-bold">{fileCount} PDF{fileCount > 1 ? "s" : ""}</span>}
+                      <FiChevronDown size={16} className={`text-slate-400 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
                     </div>
                   </button>
                   <AnimatePresence initial={false}>
                     {isExpanded && (
-                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden">
+                      <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden bg-[#F8FAFC]">
                         <div className="px-5 py-4">
                           {unit.syllabus && (
-                            <div className="mb-4 rounded-xl bg-white/5 px-4 py-3 border border-white/10">
-                              <p className="text-[10px] font-bold text-white/50 uppercase tracking-wider mb-1">Topics Covered</p>
-                              <p className="text-[11px] text-white/60 leading-relaxed">{unit.syllabus}</p>
+                            <div className="mb-4 rounded-lg bg-white px-4 py-3 border border-[#E5E7EB]">
+                              <p className="text-[10px] font-bold text-[#6B7280] uppercase tracking-wider mb-1">Topics Covered</p>
+                              <p className="text-[11px] text-[#4B5563] leading-relaxed">{unit.syllabus}</p>
                             </div>
                           )}
                           {fileCount > 0 ? (
@@ -1138,9 +1138,9 @@ export default function Notes() {
                               {unit.files.map((file, i) => (
                                 <motion.button key={file.id} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
                                   onClick={() => setViewingPdf({ ...file, subject: selectedSubject, unit: unit.title })}
-                                  className="group flex w-full items-center gap-3 rounded-xl border border-white/10 bg-white/5 p-3.5 text-left transition-all hover:border-cyan-400/30 hover:bg-cyan-500/10 hover:shadow-sm active:scale-[0.98]"
+                                  className="group flex w-full items-center gap-3 rounded-lg border border-[#E5E7EB] bg-white p-3.5 text-left transition-all hover:bg-[#F8FAFC] hover:border-[#1E88E5]/30 hover:shadow-sm"
                                 >
-                                  <div className="flex h-11 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-red-500/20 to-rose-500/20 text-red-400 shadow-sm">
+                                  <div className="flex h-11 w-9 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-650 shadow-sm">
                                     {file.type === "doc" ? (
                                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                                     ) : (
@@ -1148,15 +1148,15 @@ export default function Notes() {
                                     )}
                                   </div>
                                   <div className="min-w-0 flex-1">
-                                    <p className="text-sm font-semibold text-white truncate group-hover:text-cyan-300 transition-colors">{file.title}</p>
-                                    <p className="text-[10px] text-white/50">{file.type === "doc" ? "Google Doc" : file.type === "docx" ? "Word" : file.type === "pptx" || file.type === "ppt" ? "PowerPoint" : "PDF"} · {unit.title}</p>
+                                    <p className="text-sm font-semibold text-[#1F2937] truncate group-hover:text-[#1E88E5] transition-colors">{file.title}</p>
+                                    <p className="text-[10px] text-[#6B7280]">{file.type === "doc" ? "Google Doc" : file.type === "docx" ? "Word" : file.type === "pptx" || file.type === "ppt" ? "PowerPoint" : "PDF"} · {unit.title}</p>
                                   </div>
-                                  <div className="shrink-0 rounded-full bg-white/10 p-2 text-white/40 group-hover:bg-cyan-500/20 group-hover:text-cyan-300 transition-all"><FiExternalLink size={12} /></div>
+                                  <div className="shrink-0 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] p-2 text-slate-400 group-hover:bg-[#0F4C81]/10 group-hover:text-[#0F4C81] transition-all"><FiExternalLink size={12} /></div>
                                 </motion.button>
                               ))}
                             </div>
                           ) : (
-                            <div className="flex flex-col items-center py-6 text-white/40">
+                            <div className="flex flex-col items-center py-6 text-slate-400">
                               <FiFileText size={24} className="mb-1 opacity-40" />
                               <p className="text-xs font-medium">No PDFs uploaded yet</p>
                             </div>
@@ -1175,32 +1175,32 @@ export default function Notes() {
       <AnimatePresence>
         {viewingPdf && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/80 p-2 sm:p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-2 sm:p-4"
             onClick={() => setViewingPdf(null)}
           >
             <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="flex w-full max-w-5xl flex-col overflow-hidden rounded-2xl bg-[#0F172A]/95 backdrop-blur-xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.3)]"
+              className="flex w-full max-w-5xl flex-col overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-2xl"
             >
-              <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-gradient-to-r from-indigo-600/20 to-violet-600/20">
+              <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#E5E7EB] bg-[#0F4C81] text-white">
                 <div className="min-w-0 flex-1">
                   <h3 className="truncate text-sm font-bold text-white">{viewingPdf.title}</h3>
-                  <p className="text-[11px] text-white/50">{viewingPdf.subject} · {viewingPdf.unit}</p>
+                  <p className="text-[11px] text-white/80">{viewingPdf.subject} · {viewingPdf.unit}</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <a href={getDriveDownloadUrl(viewingPdf.fileId, viewingPdf.type)} target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-4 py-2 text-xs font-bold text-white shadow-md transition-all duration-300 hover:shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-500"
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-white px-4 py-2 text-xs font-bold text-[#0F4C81] border border-[#E5E7EB] hover:bg-[#F8FAFC] transition-all"
                   ><FiDownload size={14} /> Download</a>
                   <button onClick={() => setViewingPdf(null)}
-                    className="rounded-full bg-white/10 p-1.5 text-white/50 hover:bg-white/20 hover:text-white transition-all">
+                    className="rounded-full bg-white/10 p-1.5 text-white/70 hover:bg-white/20 hover:text-white transition-all">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
                   </button>
                 </div>
               </div>
-              <div className="aspect-[4/3] w-full bg-gray-900 sm:aspect-[16/10] lg:aspect-[16/9]">
+              <div className="aspect-[4/3] w-full bg-slate-900 sm:aspect-[16/10] lg:aspect-[16/9]">
                 <iframe src={getDrivePreviewUrl(viewingPdf.fileId, viewingPdf.type)} title={viewingPdf.title} className="h-full w-full" allowFullScreen />
               </div>
-              <div className="border-t border-white/10 px-5 py-2.5 text-center text-[11px] text-white/40">
+              <div className="border-t border-[#E5E7EB] px-5 py-2.5 text-center text-[11px] text-[#6B7280] bg-[#F8FAFC]">
                 {viewingPdf.fileName} · {viewingPdf.subject} · {viewingPdf.unit}
               </div>
             </motion.div>

@@ -2,14 +2,14 @@ import { motion } from "framer-motion";
 import { classNames } from "../../utils/helpers";
 
 const variants = {
-  primary: "bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg hover:shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-500",
-  secondary: "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg hover:shadow-cyan-500/20",
-  ghost: "bg-transparent text-white/70 hover:bg-white/10 hover:text-white",
-  outline: "border border-white/20 text-white/80 hover:bg-white/10 hover:border-white/30 hover:text-white",
-  danger: "bg-gradient-to-r from-red-500 to-rose-600 text-white shadow-lg hover:shadow-red-500/20",
-  amber: "bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-lg hover:shadow-lg",
-  emerald: "bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg hover:shadow-lg",
-  "premium-blue": "bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-700 text-white shadow-lg hover:shadow-xl hover:shadow-indigo-500/25",
+  primary: "bg-[#0F4C81] text-white shadow-sm hover:bg-[#1E88E5]",
+  secondary: "bg-white text-[#0F4C81] border border-[#0F4C81] hover:bg-[#F0F4F8]",
+  ghost: "bg-transparent text-[#4B5563] hover:bg-slate-150 hover:text-[#1F2937]",
+  outline: "border border-[#E5E7EB] bg-white text-[#4B5563] hover:bg-[#F8FAFC] hover:text-[#1F2937]",
+  danger: "bg-red-650 text-white hover:bg-red-750 shadow-sm",
+  amber: "bg-amber-600 text-white hover:bg-amber-700 shadow-sm",
+  emerald: "bg-[#2E7D32] text-white hover:bg-[#225F26] shadow-sm",
+  "premium-blue": "bg-[#0F4C81] text-white hover:bg-[#1E88E5] shadow-sm",
 };
 
 const sizeClasses = {

@@ -4,7 +4,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
-import { FiMessageSquare, FiX, FiSend, FiMaximize2, FiMinimize2, FiTrash2, FiChevronDown } from "react-icons/fi";
+import { FiMessageSquare, FiX, FiSend, FiMaximize2, FiMinimize2, FiTrash2, FiChevronDown, FiMessageCircle } from "react-icons/fi";
 import { sendMessage, isAiConfigured } from "../../services/groqService";
 import CSAIAgentLogo from "./CSAIAgentLogo";
 
@@ -211,15 +211,15 @@ export default function ChatBot() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className={`${chatWidth} ${chatMaxWidth} ${chatHeight} relative flex flex-col overflow-hidden rounded-2xl border border-white/15 bg-[#0F172A]/90 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_40px_rgba(79,70,229,0.08)]`}
+              className={`${chatWidth} ${chatMaxWidth} ${chatHeight} relative flex flex-col overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-xl`}
             >
               {/* ── Header ── */}
-              <div className="flex shrink-0 items-center justify-between border-b border-white/10 bg-gradient-to-r from-indigo-600/20 to-violet-600/20 px-4 py-3">
+              <div className="flex shrink-0 items-center justify-between border-b border-[#0A3356] bg-[#0F4C81] px-4 py-3 text-white">
                 <div className="flex items-center gap-2.5">
                   <CSAIAgentLogo size={34} />
                   <div className="leading-tight">
                     <p className="text-sm font-bold text-white">CS AI Agent</p>
-                    <p className="text-[10px] text-indigo-300/70">
+                    <p className="text-[10px] text-white/80">
                       {isAiConfigured() ? "● Online" : "○ API key needed"}
                     </p>
                   </div>
@@ -227,21 +227,21 @@ export default function ChatBot() {
                 <div className="flex items-center gap-1">
                   <button
                     onClick={handleClear}
-                    className="rounded-lg p-1.5 text-white/40 transition-all hover:bg-white/10 hover:text-red-400"
+                    className="rounded-lg p-1.5 text-white/70 transition-all hover:bg-white/10 hover:text-red-300"
                     title="Clear chat"
                   >
                     <FiTrash2 size={14} />
                   </button>
                   <button
                     onClick={toggleFullscreen}
-                    className="rounded-lg p-1.5 text-white/40 transition-all hover:bg-white/10 hover:text-white"
+                    className="rounded-lg p-1.5 text-white/70 transition-all hover:bg-white/10 hover:text-white"
                     title={isFullscreen ? "Minimise" : "Maximise"}
                   >
                     {isFullscreen ? <FiMinimize2 size={14} /> : <FiMaximize2 size={14} />}
                   </button>
                   <button
                     onClick={toggleOpen}
-                    className="rounded-lg p-1.5 text-white/40 transition-all hover:bg-white/10 hover:text-white"
+                    className="rounded-lg p-1.5 text-white/70 transition-all hover:bg-white/10 hover:text-white"
                     title="Close"
                   >
                     <FiX size={16} />
@@ -253,7 +253,7 @@ export default function ChatBot() {
               <div
                 ref={chatContainerRef}
                 onScroll={handleScroll}
-                className="flex-1 overflow-y-auto space-y-3 px-4 py-4 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
+                className="flex-1 overflow-y-auto space-y-3 px-4 py-4 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent bg-[#F8FAFC]"
               >
                 {messages.length === 1 && (
                   <div className="flex flex-wrap gap-2 mt-2">
@@ -261,7 +261,7 @@ export default function ChatBot() {
                       <button
                         key={s.label}
                         onClick={() => handleSuggestion(s.query)}
-                        className="rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-semibold text-white/70 transition-all hover:border-indigo-400/30 hover:bg-indigo-500/10 hover:text-indigo-300 active:scale-95"
+                        className="rounded-lg border border-[#E5E7EB] bg-white px-3 py-1.5 text-[11px] font-semibold text-[#4B5563] transition-all hover:border-[#1E88E5]/40 hover:bg-[#F0F4F8] hover:text-[#0F4C81] active:scale-95"
                       >
                         {s.label}
                       </button>
@@ -278,16 +278,16 @@ export default function ChatBot() {
                     className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                   >
                     <div
-                      className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
+                      className={`max-w-[85%] rounded-lg px-3.5 py-2.5 text-sm leading-relaxed ${
                         msg.role === "user"
-                          ? "bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-md"
-                          : "bg-white/10 text-white/90 backdrop-blur-sm border border-white/5"
+                          ? "bg-[#0F4C81] text-white shadow-sm"
+                          : "bg-white text-[#4B5563] border border-[#E5E7EB] shadow-sm"
                       }`}
                     >
                       <p className="whitespace-pre-wrap">{msg.content}</p>
                       <p
                         className={`mt-1 text-[10px] text-right ${
-                          msg.role === "user" ? "text-indigo-200/60" : "text-white/30"
+                          msg.role === "user" ? "text-white/70" : "text-[#6B7280]"
                         }`}
                       >
                         {formatTime(msg.timestamp)}
@@ -302,11 +302,11 @@ export default function ChatBot() {
                     animate={{ opacity: 1 }}
                     className="flex justify-start"
                   >
-                    <div className="rounded-2xl bg-white/10 px-4 py-3 border border-white/5 backdrop-blur-sm">
+                    <div className="rounded-lg bg-white px-4 py-3 border border-[#E5E7EB] shadow-sm">
                       <div className="flex items-center gap-1.5">
-                        <span className="h-2 w-2 animate-bounce rounded-full bg-indigo-400" style={{ animationDelay: "0ms" }} />
-                        <span className="h-2 w-2 animate-bounce rounded-full bg-indigo-400" style={{ animationDelay: "150ms" }} />
-                        <span className="h-2 w-2 animate-bounce rounded-full bg-indigo-400" style={{ animationDelay: "300ms" }} />
+                        <span className="h-2 w-2 animate-bounce rounded-full bg-[#0F4C81]" style={{ animationDelay: "0ms" }} />
+                        <span className="h-2 w-2 animate-bounce rounded-full bg-[#0F4C81]" style={{ animationDelay: "150ms" }} />
+                        <span className="h-2 w-2 animate-bounce rounded-full bg-[#0F4C81]" style={{ animationDelay: "300ms" }} />
                       </div>
                     </div>
                   </motion.div>
@@ -323,7 +323,7 @@ export default function ChatBot() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     onClick={() => scrollToBottom(true)}
-                    className="absolute bottom-16 right-6 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-indigo-600 text-white shadow-lg transition-all hover:bg-indigo-500"
+                    className="absolute bottom-16 right-6 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-[#0F4C81] text-white shadow-md transition-all hover:bg-[#1E88E5]"
                   >
                     <FiChevronDown size={14} />
                   </motion.button>
@@ -333,7 +333,7 @@ export default function ChatBot() {
               {/* ── Input ── */}
               <form
                 onSubmit={handleSend}
-                className="flex shrink-0 items-center gap-2 border-t border-white/10 bg-white/5 px-3 py-3"
+                className="flex shrink-0 items-center gap-2 border-t border-[#E5E7EB] bg-white px-3 py-3"
               >
                 <input
                   ref={inputRef}
@@ -342,20 +342,16 @@ export default function ChatBot() {
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask me anything about the portal..."
                   disabled={isLoading}
-                  className="flex-1 rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm text-white placeholder-white/30 outline-none transition-all focus:border-indigo-400/40 focus:bg-white/10 focus:ring-1 focus:ring-indigo-400/20 disabled:opacity-50"
+                  className="flex-1 rounded-lg border border-[#E5E7EB] bg-slate-50 px-3.5 py-2.5 text-sm text-[#1F2937] placeholder-slate-400 outline-none transition-all focus:border-[#0F4C81] focus:bg-white focus:ring-1 focus:ring-[#0F4C81]/15 disabled:opacity-50"
                 />
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-md transition-all hover:shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-500 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm transition-all hover:bg-[#1E88E5] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <FiSend size={16} />
                 </button>
               </form>
-
-              {/* ── Glow lines ── */}
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-400/30 to-transparent pointer-events-none" />
-              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-400/30 to-transparent pointer-events-none" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -363,15 +359,15 @@ export default function ChatBot() {
         {/* ── FAB ── */}
         <motion.button
           onClick={toggleOpen}
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.92 }}
-          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow-[0_8px_32px_rgba(79,70,229,0.35)] transition-all hover:shadow-[0_8px_32px_rgba(79,70,229,0.5)]"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#DC2626] text-white shadow-lg border-2 border-white transition-all hover:bg-[#B91C1C]"
         >
           {isOpen ? (
             <FiX size={22} />
           ) : (
             <>
-              <FiMessageSquare size={22} />
+              <FiMessageCircle size={24} />
               {hasNewMessage && (
                 <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-rose-500 text-[8px] font-bold text-white shadow-md">
                   ●
@@ -379,9 +375,6 @@ export default function ChatBot() {
               )}
             </>
           )}
-
-          {/* Glow ring */}
-          <span className="absolute inset-0 rounded-full bg-gradient-to-br from-indigo-500/30 to-violet-500/30 blur-md -z-10 opacity-70" />
         </motion.button>
       </div>
     </>

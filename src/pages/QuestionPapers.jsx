@@ -22,17 +22,17 @@ const CURRICULUM = {
 function getSubjectsForYear(year) { const yr = CURRICULUM[year]; if (!yr) return []; const all = []; Object.values(yr.semesters).forEach((sem) => { sem.subjects.forEach((s) => { if (!all.includes(s)) all.push(s); }); }); return all; }
 
 const yearStyles = {
-  1: { gradient: "from-emerald-500 to-teal-600", light: "from-emerald-50 to-teal-50", text: "text-emerald-700" },
-  2: { gradient: "from-violet-500 to-purple-600", light: "from-violet-50 to-purple-50", text: "text-violet-700" },
-  3: { gradient: "from-amber-500 to-orange-600", light: "from-amber-50 to-orange-50", text: "text-amber-700" },
+  1: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
+  2: { bg: "bg-[#1E88E5] text-white border-[#1565C0]", text: "text-[#1E88E5]" },
+  3: { bg: "bg-[#2E7D32] text-white border-[#1B5E20]", text: "text-[#2E7D32]" },
 };
 
 const subjectColors = [
-  { from: "from-indigo-500", to: "to-violet-600", badge: "bg-indigo-500/20 text-indigo-300" },
-  { from: "from-rose-500", to: "to-pink-600", badge: "bg-rose-500/20 text-rose-300" },
-  { from: "from-cyan-500", to: "to-sky-600", badge: "bg-cyan-500/20 text-cyan-300" },
-  { from: "from-amber-500", to: "to-yellow-600", badge: "bg-amber-500/20 text-amber-300" },
-  { from: "from-lime-500", to: "to-green-600", badge: "bg-lime-500/20 text-lime-300" },
+  { from: "bg-[#F0F4F8]", to: "text-[#0F4C81] border-[#D9E2EC]", badge: "bg-[#F0F4F8] text-[#0F4C81]" },
+  { from: "bg-[#E8F5E9]", to: "text-[#2E7D32] border-[#C8E6C9]", badge: "bg-[#E8F5E9] text-[#2E7D32]" },
+  { from: "bg-[#FFF3E0]", to: "text-amber-800 border-[#FFE0B2]", badge: "bg-[#FFF3E0] text-amber-800" },
+  { from: "bg-[#FFEBEE]", to: "text-red-800 border-[#FFCDD2]", badge: "bg-[#FFEBEE] text-red-800" },
+  { from: "bg-[#E8EAF6]", to: "text-[#303F9F] border-[#C5CAE9]", badge: "bg-[#E8EAF6] text-[#303F9F]" },
 ];
 
 const FACULTY_MAP = {
@@ -282,30 +282,32 @@ const refetch = () => {};
 
   if (!courseType) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center">
-          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-[0_8px_32px_rgba(244,63,94,0.2)]">
+          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm">
             <FiAward size={36} />
           </div>
-          <h1 className="font-display text-4xl font-bold text-white">Question Papers</h1>
-          <p className="mt-2 text-sm text-white/60">Select your course to browse previous year exam papers</p>
+          <h1 className="font-sans text-4xl font-bold text-[#1F2937]">Question Papers</h1>
+          <p className="mt-2 text-sm text-[#6B7280]">Select your course to browse previous year exam papers</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {COURSE_OPTIONS.map((course, i) => (
             <motion.button key={course.value}
-              initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.12 }}
-              whileHover={{ y: -6, scale: 1.02 }} whileTap={{ scale: 0.97 }}
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.1 }}
+              whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
               onClick={() => setCourseType(course.value)}
-              className="group relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-lg border border-white/10 shadow-glass transition-all duration-500 hover:shadow-xl hover:bg-white/10"
+              className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-350 hover:shadow-md hover:border-[#1E88E5]/45"
             >
-              <div className={`absolute inset-0 ${course.value === "ug" ? "bg-gradient-to-br from-emerald-50 to-teal-50" : "bg-gradient-to-br from-purple-50 to-violet-50"} opacity-50 group-hover:opacity-80 transition-opacity`} />
-              <div className="relative p-8 text-center">
-                <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br ${course.value === "ug" ? "from-emerald-500 to-teal-600" : "from-purple-500 to-violet-600"} text-3xl font-bold text-white shadow-lg transition-all group-hover:scale-110`}>{course.value === "ug" ? "UG" : "PG"}</div>
-                <h2 className={`text-xl font-bold ${course.value === "ug" ? "text-emerald-700" : "text-violet-700"}`}>{course.label}</h2>
-                <p className="mt-1.5 text-xs text-white/50">{course.desc}</p>
-                <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-rose-600 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">Browse Papers <FiChevronRight size={12} /></div>
+              <div className="relative p-8 text-center flex flex-col items-center">
+                <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-xl ${course.value === "ug" ? "bg-[#0F4C81]" : "bg-[#1E88E5]"} text-3xl font-bold text-white shadow-sm transition-all`}>
+                  {course.value === "ug" ? "UG" : "PG"}
+                </div>
+                <h2 className="text-xl font-bold text-[#1F2937] group-hover:text-[#1E88E5] transition-colors">{course.label}</h2>
+                <p className="mt-1.5 text-xs text-[#6B7280]">{course.desc}</p>
+                <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#1E88E5]">
+                  Browse Papers <FiChevronRight size={12} />
+                </div>
               </div>
-              <div className={`absolute bottom-0 left-0 right-0 h-1 ${course.value === "ug" ? "bg-gradient-to-r from-emerald-500 to-teal-600" : "bg-gradient-to-r from-purple-500 to-violet-600"} scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500`} />
             </motion.button>
           ))}
         </div>
@@ -318,30 +320,28 @@ const refetch = () => {};
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setCourseType(null); setSelectedYear(null); setSelectedSubject(null); }}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-white/60 hover:bg-white/5 transition-all"
+          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
         ><FiArrowLeft size={14} /> Back to Course</motion.button>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 text-white shadow-lg"><FiAward size={28} /></div>
-          <h1 className="font-display text-2xl font-bold text-white">{courseType.toUpperCase()} — Select Year</h1>
-          <p className="mt-1 text-sm text-white/60">Choose your academic year</p>
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm"><FiAward size={28} /></div>
+          <h1 className="font-sans text-2xl font-bold text-[#1F2937]">{courseType.toUpperCase()} — Select Year</h1>
+          <p className="mt-1 text-sm text-[#6B7280]">Choose your academic year</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
           {[1, 2, 3].map((year, i) => {
             const s = yearStyles[year];
             return (
               <motion.button key={year}
-                initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.1 }}
-                whileHover={{ y: -6, scale: 1.02 }} whileTap={{ scale: 0.97 }}
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.08 }}
+                whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedYear(year)}
-                className="group relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-lg border border-white/10 shadow-glass transition-all duration-500 hover:shadow-xl hover:bg-white/10"
+                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${s.light} opacity-50 group-hover:opacity-80 transition-opacity`} />
                 <div className="relative p-8 text-center">
-                  <div className={`mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${s.gradient} text-2xl font-bold text-white shadow-lg transition-all group-hover:scale-110`}>{CURRICULUM[year].icon}</div>
-                  <h2 className={`text-lg font-bold ${s.text}`}>{CURRICULUM[year].label}</h2>
-                  {courseType !== "pg" && <p className="mt-1 text-xs text-white/50">{getSubjectsForYear(year).length} subjects</p>}
+                  <div className={`mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-xl ${s.bg} text-2xl font-bold text-white shadow-sm transition-all`}>{CURRICULUM[year].icon}</div>
+                  <h2 className="text-lg font-bold text-[#1F2937]">{CURRICULUM[year].label}</h2>
+                  {courseType !== "pg" && <p className="mt-1 text-xs text-[#6B7280]">{getSubjectsForYear(year).length} subjects</p>}
                 </div>
-                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${s.gradient} scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500`} />
               </motion.button>
             );
           })}
@@ -356,25 +356,25 @@ const refetch = () => {};
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setSelectedYear(null); setSelectedSemester(null); setSelectedSubject(null); }}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-white/60 hover:bg-white/5 transition-all"
+          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
         ><FiArrowLeft size={14} /> Back to Years</motion.button>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
-          <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${ys.gradient} text-white shadow-lg`}><FiLayers size={28} /></div>
-          <h1 className={`font-display text-2xl font-bold ${ys.text}`}>{yearData.label}</h1>
-          <p className="mt-1 text-sm text-white/60">Choose a semester</p>
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm"><FiLayers size={28} /></div>
+          <h1 className="font-sans text-2xl font-bold text-[#1F2937]">{yearData.label}</h1>
+          <p className="mt-1 text-sm text-[#6B7280]">Choose a semester</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {sems.map(([semKey, semData], i) => (
             <motion.button key={semKey}
-              initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.1 }}
-              whileHover={{ y: -4, scale: 1.01 }} whileTap={{ scale: 0.97 }}
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.08 }}
+              whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
               onClick={() => setSelectedSemester(Number(semKey))}
-              className="group relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-lg border border-white/10 shadow-glass transition-all duration-300 hover:shadow-xl hover:bg-white/10"
+              className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${ys.light} opacity-50 group-hover:opacity-80 transition-opacity`} />
               <div className="relative p-8 text-center">
-                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br ${ys.gradient} text-xl font-bold text-white shadow-md`}>{semKey === 1 ? "I" : "II"}</div>
-                <h2 className={`text-lg font-bold ${ys.text}`}>{semData.label}</h2>                  {courseType !== "pg" && <p className="mt-1 text-xs text-white/50">{semData.subjects.length} subjects</p>}
+                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl ${ys.bg} text-xl font-bold text-white shadow-sm`}>{semKey === 1 ? "I" : "II"}</div>
+                <h2 className="text-lg font-bold text-[#1F2937]">{semData.label}</h2>
+                {courseType !== "pg" && <p className="mt-1 text-xs text-[#6B7280]">{semData.subjects.length} subjects</p>}
               </div>
             </motion.button>
           ))}
@@ -388,20 +388,20 @@ const refetch = () => {};
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => setSelectedSemester(null)}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-white/60 hover:bg-white/5 transition-all"
+          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
         ><FiArrowLeft size={14} /> Back to Semesters</motion.button>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-          <div className="flex items-center gap-2 text-xs text-white/50 mb-3">
-            <span className="uppercase font-semibold text-white/60">{courseType.toUpperCase()}</span><FiChevronRight size={10} />
+          <div className="flex items-center gap-2 text-sm text-[#6B7280] mb-3">
+            <span className="uppercase font-semibold text-[#6B7280]">{courseType.toUpperCase()}</span><FiChevronRight size={10} />
             <span className={ys.text}>{yearData.label}</span><FiChevronRight size={10} /><span className={ys.text}>{semesterData.label}</span>
           </div>
-          <h1 className={`font-display text-2xl font-bold ${ys.text}`}>Select Subject</h1>
-          <p className="mt-1 text-sm text-white/60">Choose a subject to view its previous year question papers</p>
+          <h1 className="font-sans text-2xl font-bold text-[#1F2937]">Select Subject</h1>
+          <p className="mt-1 text-sm text-[#6B7280]">Choose a subject to view its previous year question papers</p>
         </motion.div>
         {yearSubjects.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-white/15 bg-white/5 py-20">
-            <FiBookOpen size={48} className="mb-3 text-white/40" />
-            <p className="text-sm font-medium text-white/60">No subjects available</p>
+          <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E5E7EB] bg-white py-20 shadow-sm">
+            <FiBookOpen size={48} className="mb-3 text-slate-350" />
+            <p className="text-sm font-medium text-[#4B5563]">No subjects available</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -410,18 +410,18 @@ const refetch = () => {};
               return (
                 <motion.button key={subject}
                   initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-                  whileHover={{ y: -4, scale: 1.01 }} whileTap={{ scale: 0.97 }}
+                  whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                   onClick={() => setSelectedSubject(subject)}
-                  className="group relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-lg border border-white/10 shadow-glass transition-all duration-300 hover:shadow-xl hover:bg-white/10"
+                  className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
                 >
-                  <div className="relative flex items-start gap-4 p-5">
-                    <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${sc.from} ${sc.to} text-white shadow-md transition-all group-hover:scale-105 group-hover:shadow-lg`}><FiFileText size={22} /></div>
+                  <div className="relative flex items-start gap-4 p-5 text-left">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm transition-all"><FiFileText size={22} /></div>
                     <div className="min-w-0 flex-1 pt-1">
-                      <h3 className="font-display font-bold text-sm text-white leading-snug">{subject}</h3>
-                      {FACULTY_MAP[subject] && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-white/60">{FACULTY_MAP[subject]}</p>}
+                      <h3 className="font-sans font-bold text-sm text-[#1F2937] leading-snug">{subject}</h3>
+                      {FACULTY_MAP[subject] && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-[#6B7280]">{FACULTY_MAP[subject]}</p>}
                       <div className="mt-3 flex items-center gap-2">
                         <span className={`inline-flex items-center gap-1 rounded-full ${sc.badge} px-2.5 py-0.5 text-[10px] font-semibold`}><FiAward size={10} /> VIEW PAPERS</span>
-                        <FiChevronRight size={14} className="text-white/40 group-hover:text-indigo-400 transition-colors ml-auto" />
+                        <FiChevronRight size={14} className="text-slate-400 group-hover:text-[#1E88E5] transition-colors ml-auto" />
                       </div>
                     </div>
                   </div>
@@ -437,15 +437,15 @@ const refetch = () => {};
   const sc = subjectColors[yearSubjects.indexOf(selectedSubject) % subjectColors.length];
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 bg-[#F8FAFC]">
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-6">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          onClick={() => setSelectedSubject(null)} className="mb-4 inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-white/60 hover:bg-white/5 transition-all"
+          onClick={() => setSelectedSubject(null)} className="mb-4 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
         ><FiArrowLeft size={14} /> Back to Subjects</motion.button>
-        <div className="flex items-center gap-2 text-xs text-white/50">
-          <span className="uppercase font-semibold text-white/60">{courseType.toUpperCase()}</span><FiChevronRight size={10} />
+        <div className="flex items-center gap-2 text-xs text-[#6B7280]">
+          <span className="uppercase font-semibold text-[#6B7280]">{courseType.toUpperCase()}</span><FiChevronRight size={10} />
           <span className={ys.text}>{yearData.label}</span><FiChevronRight size={10} /><span className={ys.text}>{semesterData.label}</span><FiChevronRight size={10} />
-          <span className="text-white/80 font-semibold">{selectedSubject}</span>
+          <span className="text-[#1F2937] font-semibold">{selectedSubject}</span>
         </div>
       </motion.div>
 
@@ -455,22 +455,22 @@ const refetch = () => {};
           {!showUploadForm ? (
             <button
               onClick={() => setShowUploadForm(true)}
-              className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 px-5 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:shadow-rose-500/30 hover:from-rose-500 hover:to-pink-500 active:scale-[0.97]"
+              className="group inline-flex items-center gap-2 rounded-lg bg-[#0F4C81] px-5 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#1E88E5] active:scale-[0.97]"
             >
               <FiUploadCloud size={18} />
               Upload Question Papers
             </button>
           ) : (
-            <form onSubmit={handleUpload} className="space-y-4 rounded-2xl border border-rose-500/20 bg-rose-500/5 p-6 shadow-md">
-              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
-                <h3 className="font-display text-base font-bold text-white flex items-center gap-2">
-                  <FiUploadCloud size={18} className="text-rose-400" />
+            <form onSubmit={handleUpload} className="space-y-4 rounded-xl border border-[#E5E7EB] bg-white p-6 shadow-sm">
+              <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-3 mb-4">
+                <h3 className="font-sans text-base font-bold text-[#1F2937] flex items-center gap-2">
+                  <FiUploadCloud size={18} className="text-[#0F4C81]" />
                   Upload Question Paper — {selectedSubject}
                 </h3>
                 <button
                   type="button"
                   onClick={() => setShowUploadForm(false)}
-                  className="rounded-lg px-3 py-1.5 text-xs font-semibold text-white/50 hover:bg-white/10 hover:text-white transition-all"
+                  className="rounded-lg px-3 py-1.5 text-xs font-semibold text-[#6B7280] hover:bg-[#F8FAFC] transition-all"
                 >
                   Cancel
                 </button>
@@ -478,56 +478,56 @@ const refetch = () => {};
 
               <div className="space-y-3">
                 <div>
-                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Title</label>
+                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Title</label>
                   <input
                     value={uploadTitle}
                     onChange={(e) => setUploadTitle(e.target.value)}
                     required
                     placeholder="e.g. November 2024 Exam Paper"
-                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400/20 focus:bg-white/10 transition-all"
+                    className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-4 py-2.5 text-sm text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Description</label>
+                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Description</label>
                   <textarea
                     value={uploadDescription}
                     onChange={(e) => setUploadDescription(e.target.value)}
                     placeholder="Brief description of the question paper"
                     rows={2}
-                    className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400/20 focus:bg-white/10 transition-all"
+                    className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-4 py-2.5 text-sm text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Exam Year</label>
+                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Exam Year</label>
                     <input
                       value={uploadYearVal}
                       onChange={(e) => setUploadYearVal(e.target.value)}
                       required
                       placeholder="e.g. U1819"
-                      className="w-full rounded-xl border border-white/15 bg-[#0F172A] px-4 py-2.5 text-sm text-white outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400/20 transition-all"
+                      className="w-full rounded-lg border border-[#E5E7EB] bg-white px-4 py-2.5 text-sm text-[#1F2937] outline-none focus:border-[#0F4C81] transition-all"
                     />
                   </div>
 
                   <div>
-                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Regulation</label>
+                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Regulation</label>
                     <input
                       value={uploadRegulation}
                       onChange={(e) => setUploadRegulation(e.target.value)}
                       required
                       placeholder="e.g. R2024"
-                      className="w-full rounded-xl border border-white/15 bg-[#0F172A] px-4 py-2.5 text-sm text-white outline-none focus:border-rose-400 focus:ring-1 focus:ring-rose-400/20 transition-all"
+                      className="w-full rounded-lg border border-[#E5E7EB] bg-white px-4 py-2.5 text-sm text-[#1F2937] outline-none focus:border-[#0F4C81] transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Select PDF File</label>
-                  <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-white/15 bg-white/5 px-4 py-6 text-center transition-all hover:border-rose-500/50 hover:bg-white/10">
-                    <FiUploadCloud size={24} className="text-rose-400" />
-                    <span className="text-xs text-white/50">
+                  <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Select PDF File</label>
+                  <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-slate-50 px-4 py-6 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
+                    <FiUploadCloud size={24} className="text-[#0F4C81]" />
+                    <span className="text-xs text-[#6B7280]">
                       {uploadFileObj ? uploadFileObj.name : "Choose a PDF question paper..."}
                     </span>
                     <input
@@ -541,15 +541,15 @@ const refetch = () => {};
                 </div>
 
                 {uploading && progress > 0 && progress < 100 && (
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-                    <div className="h-full bg-gradient-to-r from-rose-500 to-pink-500 transition-all" style={{ width: `${progress}%` }} />
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-150">
+                    <div className="h-full bg-[#0F4C81] transition-all" style={{ width: `${progress}%` }} />
                   </div>
                 )}
 
                 <button
                   type="submit"
                   disabled={uploading}
-                  className="w-full rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 py-3 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:shadow-rose-500/20 disabled:opacity-50"
+                  className="w-full rounded-lg bg-[#0F4C81] py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#1E88E5] disabled:opacity-50"
                 >
                   {uploading ? `Uploading (${progress}%)...` : "Upload question paper"}
                 </button>
@@ -561,11 +561,11 @@ const refetch = () => {};
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
         <div className="flex items-center gap-4">
-          <div className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${sc.from} ${sc.to} text-white shadow-lg`}><FiAward size={28} /></div>
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiAward size={28} /></div>
           <div>
-            <h1 className="font-display text-2xl font-bold text-white">{selectedSubject}</h1>
+            <h1 className="font-sans text-2xl font-bold text-[#1F2937]">{selectedSubject}</h1>
             <div className="flex items-center gap-3 mt-1">
-              <span className="text-xs text-white/60">{courseType.toUpperCase()} · {yearData.label} · {semesterData.label}</span>
+              <span className="text-xs text-[#6B7280]">{courseType.toUpperCase()} · {yearData.label} · {semesterData.label}</span>
               <span className="badge-primary">{filtered.length} paper{filtered.length !== 1 ? "s" : ""}</span>
             </div>
           </div>
@@ -577,17 +577,17 @@ const refetch = () => {};
           className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4"
         >
           {[
-            { icon: FiFileText, label: "Total Papers", value: filtered.length, color: "from-indigo-600 to-violet-600" },
-            { icon: FiCalendar, label: "Exam Years", value: new Set(filtered.map((p) => p.year)).size, color: "from-amber-500 to-orange-600" },
-            { icon: FiAward, label: "Subjects", value: new Set(filtered.map((p) => p.subject)).size, color: "from-rose-500 to-pink-600" },
-            { icon: FiLayers, label: "Regulations", value: new Set(filtered.map((p) => p.regulation)).size, color: "from-violet-500 to-purple-600" },
+            { icon: FiFileText, label: "Total Papers", value: filtered.length, color: "bg-[#0F4C81]" },
+            { icon: FiCalendar, label: "Exam Years", value: new Set(filtered.map((p) => p.year)).size, color: "bg-[#1E88E5]" },
+            { icon: FiAward, label: "Subjects", value: new Set(filtered.map((p) => p.subject)).size, color: "bg-[#2E7D32]" },
+            { icon: FiLayers, label: "Regulations", value: new Set(filtered.map((p) => p.regulation)).size, color: "bg-[#0F4C81]" },
           ].map((s, i) => (
             <motion.div key={s.label} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-              className="relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-lg border border-white/10 shadow-glass p-4 text-center"
+              className="relative overflow-hidden rounded-lg bg-white border border-[#E5E7EB] shadow-sm p-4 text-center"
             >
-              <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${s.color}`} />
-              <p className="font-display text-lg font-bold text-white">{s.value}</p>
-              <p className="text-[11px] text-white/50 mt-0.5">{s.label}</p>
+              <div className={`absolute top-0 left-0 right-0 h-0.5 ${s.color}`} />
+              <p className="font-sans text-lg font-bold text-[#1F2937]">{s.value}</p>
+              <p className="text-[11px] text-[#6B7280] mt-0.5">{s.label}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -595,10 +595,10 @@ const refetch = () => {};
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
         <div className="relative max-w-md">
-          <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/50" size={14} />
+          <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
           <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search papers by title, subject…"
-            className="w-full rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm py-2.5 pl-9 pr-4 text-sm outline-none ring-1 ring-gray-200/50 focus:ring-2 focus:ring-indigo-400/30 focus:border-indigo-300 transition-all"
+            className="w-full rounded-lg border border-[#E5E7EB] bg-white py-2.5 pl-9 pr-4 text-sm outline-none ring-1 ring-gray-150 focus:ring-2 focus:ring-[#0F4C81]/15 focus:border-[#0F4C81] transition-all"
           />
         </div>
       </motion.div>
@@ -610,28 +610,31 @@ const refetch = () => {};
         >
           {filtered.map((paper, i) => (
             <motion.div key={paper.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}>
-              <div className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl bg-white/5 backdrop-blur-lg border border-white/10 shadow-glass transition-all duration-300 hover:shadow-xl hover:bg-white/10 p-5">
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${sc.from} ${sc.to} opacity-0 group-hover:opacity-100 transition-opacity`} />
+              <div className="group relative flex flex-col gap-3 overflow-hidden rounded-lg bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 p-5">
                 <div className="flex items-start gap-3">
-                  <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${sc.from} ${sc.to} text-white shadow-sm`}><FiFileText size={20} /></div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="truncate font-display text-sm font-semibold text-white group-hover:text-indigo-400 transition-colors">{paper.title}</h3>
-                    <p className="mt-0.5 flex items-center gap-2 text-[11px] text-white/50">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiFileText size={20} /></div>
+                  <div className="min-w-0 flex-1 text-left">
+                    <h3 className="truncate font-sans text-sm font-semibold text-[#1F2937] group-hover:text-[#1E88E5] transition-colors">{paper.title}</h3>
+                    <p className="mt-0.5 flex items-center gap-2 text-[11px] text-[#6B7280]">
                       <span>{paper.subject}</span>
-                      <span className="text-white/40">·</span>
-                      <span className="flex items-center gap-1"><FiUser size={10} /> {paper.facultyName}</span>
+                      {paper.facultyName && (
+                        <>
+                          <span className="text-slate-300">·</span>
+                          <span className="flex items-center gap-1"><FiUser size={10} /> {paper.facultyName}</span>
+                        </>
+                      )}
                     </p>
                   </div>
                 </div>
-                <p className="line-clamp-1 text-xs text-white/60">{paper.description}</p>
-                <div className="flex flex-wrap gap-1.5 text-[10px]">
-                  {paper.pages && <span className="rounded-md bg-white/5 px-2 py-0.5 font-medium text-white/60">📄 {paper.pages}p</span>}
-                  <span className="rounded-md bg-indigo-500/10 px-2 py-0.5 font-semibold text-indigo-300">{paper.year}</span>
-                  <span className="rounded-md bg-white/5 px-2 py-0.5 font-medium text-white/60">{paper.regulation}</span>
+                <p className="line-clamp-1 text-xs text-[#6B7280] text-left">{paper.description}</p>
+                <div className="flex flex-wrap gap-1.5 text-[10px] justify-start">
+                  {paper.pages && <span className="rounded bg-[#F8FAFC] border border-[#E5E7EB] px-2 py-0.5 font-medium text-[#6B7280]">📄 {paper.pages}p</span>}
+                  <span className="rounded bg-[#0F4C81]/10 px-2 py-0.5 font-semibold text-[#0F4C81]">{paper.year}</span>
+                  <span className="rounded bg-[#F8FAFC] border border-[#E5E7EB] px-2 py-0.5 font-medium text-[#6B7280]">{paper.regulation}</span>
                 </div>
                 <div className="mt-auto flex gap-2 pt-1">
                   <button onClick={() => setPreviewing(paper)}
-                    className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-white/15 bg-white/5 py-2 text-xs font-semibold text-white/70 transition-all hover:border-white/30 hover:bg-white hover:text-gray-800 active:scale-95"
+                    className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] py-2 text-xs font-semibold text-[#4B5563] transition-all hover:bg-slate-100 hover:text-slate-900"
                   ><FiEye size={13} /> Preview</button>
                   <button onClick={() => {
                     if (paper.fileUrl) {
@@ -645,17 +648,17 @@ const refetch = () => {};
                     }
                   }}
                     disabled={downloadingId === paper.id}
-                    className={`flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r ${sc.from} ${sc.to} py-2 text-xs font-semibold text-white shadow-md transition-all hover:shadow-lg active:scale-95 disabled:opacity-60`}
+                    className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-2 text-xs font-semibold text-white shadow-sm transition-all disabled:opacity-60"
                   >{downloadingId === paper.id ? <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> : <><FiDownload size={13} /> Download</>}</button>
                 </div>
               </div>
             </motion.div>
           ))}
           {filtered.length === 0 && (
-            <div className="col-span-full flex flex-col items-center py-16 text-white/50">
-              <FiAward size={48} className="mb-3 opacity-30" />
-              <p className="text-sm font-medium text-white/60">No question papers available yet</p>
-              <p className="mt-1 text-xs text-white/50">Papers will be uploaded soon</p>
+            <div className="col-span-full flex flex-col items-center py-16 text-[#6B7280]">
+              <FiAward size={48} className="mb-3 opacity-30 text-slate-400" />
+              <p className="text-sm font-medium text-[#4B5563]">No question papers available yet</p>
+              <p className="mt-1 text-xs text-[#6B7280]">Papers will be uploaded soon</p>
             </div>
           )}
         </motion.div>
@@ -664,30 +667,30 @@ const refetch = () => {};
       <AnimatePresence>
         {previewing && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/80 p-2 sm:p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-2 sm:p-4"
             onClick={() => setPreviewing(null)}
           >
             <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="flex w-full max-w-5xl flex-col overflow-hidden rounded-2xl bg-white shadow-[0_20px_60px_rgba(0,0,0,0.15)]"
+              className="flex w-full max-w-5xl flex-col overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-2xl"
             >
-              <div className="flex items-center justify-between px-5 py-3.5 border-b border-gray-100 bg-gradient-to-r from-indigo-600/20 to-violet-600/20">
+              <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#E5E7EB] bg-[#0F4C81] text-white">
                 <div className="min-w-0 flex-1">
                   <h3 className="truncate text-sm font-bold text-white">{previewing.title}</h3>
-                  <p className="text-[11px] text-white/60">{previewing.subject} · {previewing.regulation}</p>
+                  <p className="text-[11px] text-white/80">{previewing.subject} · {previewing.regulation}</p>
                 </div>
-                <button onClick={() => setPreviewing(null)} className="rounded-full bg-white/5 p-1.5 text-white/60 hover:bg-gray-100 hover:text-white/80 transition-all">
+                <button onClick={() => setPreviewing(null)} className="rounded-full bg-white/10 p-1.5 text-white/70 hover:bg-white/20 hover:text-white transition-all">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
                 </button>
               </div>
-              <div className="aspect-[4/3] w-full bg-gray-100 sm:aspect-[16/10] lg:aspect-[16/9]">
+              <div className="aspect-[4/3] w-full bg-slate-900 sm:aspect-[16/10] lg:aspect-[16/9]">
                 {previewing.driveFileId ? (
                   <iframe src={`https://drive.google.com/file/d/${previewing.driveFileId}/preview`} title={previewing.title} className="h-full w-full" allowFullScreen />
                 ) : (
                   <iframe src={previewing.fileUrl} title={previewing.title} className="h-full w-full" allowFullScreen />
                 )}
               </div>
-              <div className="border-t border-gray-100 px-5 py-2.5 text-center text-[11px] text-white/50">
+              <div className="border-t border-[#E5E7EB] px-5 py-2.5 text-center text-[11px] text-[#6B7280] bg-[#F8FAFC]">
                 {previewing.pages && <span>{previewing.pages} pages</span>} · {previewing.subject} · {previewing.year}
               </div>
             </motion.div>

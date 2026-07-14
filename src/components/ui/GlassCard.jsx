@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { classNames } from "../../utils/helpers";
 
 const cardStyles = {
-  glass: "rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass",
-  "glass-strong": "rounded-2xl bg-white/8 backdrop-blur-xl border border-white/15 shadow-glass-lg",
-  elevated: "rounded-2xl bg-white/5 shadow-lg border border-white/10",
-  flat: "rounded-2xl border border-white/10 bg-white/5",
-  premium: "rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)]",
-  "premium-dark": "rounded-2xl bg-gradient-to-br from-indigo-600/20 via-violet-600/20 to-purple-800/20 border border-white/10 shadow-[0_8px_32px_rgba(79,70,229,0.15)]",
+  glass: "rounded-xl bg-white border border-[#E5E7EB] shadow-sm",
+  "glass-strong": "rounded-xl bg-white border border-[#E5E7EB] shadow-md",
+  elevated: "rounded-xl bg-white border border-[#E5E7EB] shadow-md",
+  flat: "rounded-xl bg-white border border-[#E5E7EB]",
+  premium: "rounded-xl bg-white border border-[#E5E7EB] shadow-md",
+  "premium-dark": "rounded-xl bg-white border border-[#E5E7EB] shadow-md",
 };
 
 export default function GlassCard({ children, className = "", hover = true, variant = "glass" }) {
@@ -19,7 +19,7 @@ export default function GlassCard({ children, className = "", hover = true, vari
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={classNames(
         cardStyles[variant] || cardStyles.glass,
-        hover && "transition-all duration-300 hover:shadow-glass-lg hover:bg-white/10 hover:-translate-y-1",
+        hover && "transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/30 hover:-translate-y-0.5",
         className
       )}
     >

@@ -38,12 +38,12 @@ export default function ManageStudents() {
   }
 
   return (
-    <div>
-      <h2 className="mb-2 font-display text-2xl font-bold">Manage Students</h2>
-      <p className="mb-6 text-white/50">View and manage all student accounts.</p>
+    <div className="max-w-6xl mx-auto py-8 px-4 text-left bg-[#F8FAFC]">
+      <h2 className="mb-2 font-sans text-2xl font-bold text-[#1F2937]">Manage Students</h2>
+      <p className="mb-6 text-sm text-[#6B7280]">View and manage all student accounts.</p>
 
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <StatCard icon={FiUsers} label="Total Students" value={students.length} accent="accent" />
+        <StatCard icon={FiUsers} label="Total Students" value={students.length} accent="primary" />
       </div>
 
       {loading ? (
@@ -53,32 +53,32 @@ export default function ManageStudents() {
       ) : students.length === 0 ? (
         <EmptyState title="No students registered" description="Student accounts appear here when users register." />
       ) : (
-        <div className="overflow-hidden rounded-2xl border border-white/10">
+        <div className="overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-sm">
           <table className="w-full text-left text-sm">
-            <thead className="bg-white/5 text-xs uppercase text-white/60">
+            <thead className="bg-[#F8FAFC] border-b border-[#E5E7EB] text-xs uppercase text-[#6B7280] font-semibold">
               <tr>
-                <th className="px-4 py-3">Student</th>
-                <th className="px-4 py-3">Email</th>
-                <th className="px-4 py-3">Bookmarks</th>
-                <th className="px-4 py-3 text-right">Actions</th>
+                <th className="px-4 py-3.5">Student</th>
+                <th className="px-4 py-3.5">Email</th>
+                <th className="px-4 py-3.5">Bookmarks</th>
+                <th className="px-4 py-3.5 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/10">
+            <tbody className="divide-y divide-[#E5E7EB]">
               {students.map((s) => (
-                <tr key={s.id} className="bg-[#0F172A]/95">
-                  <td className="flex items-center gap-2 px-4 py-3 font-medium">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 text-xs font-bold text-white">
+                <tr key={s.id} className="bg-white hover:bg-slate-50 transition-colors">
+                  <td className="flex items-center gap-2 px-4 py-3.5 font-medium text-[#1F2937]">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0F4C81] text-xs font-bold text-white shadow-sm">
                       {initials(s.name)}
                     </span>
                     {s.name}
                   </td>
-                  <td className="px-4 py-3 text-slate-500">{s.email}</td>
-                  <td className="px-4 py-3 text-slate-500">{s.bookmarks?.length ?? 0}</td>
-                  <td className="px-4 py-3 text-right">
-                    <button onClick={() => promoteToFaculty(s.id)} className="mr-2 rounded-lg border border-slate-200 px-2 py-1 text-xs hover:bg-slate-50 dark:border-slate-700">
+                  <td className="px-4 py-3.5 text-[#6B7280]">{s.email}</td>
+                  <td className="px-4 py-3.5 text-[#6B7280]">{s.bookmarks?.length ?? 0}</td>
+                  <td className="px-4 py-3.5 text-right">
+                    <button onClick={() => promoteToFaculty(s.id)} className="mr-2 rounded-lg border border-[#E5E7EB] bg-white px-2.5 py-1.5 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all">
                       Promote
                     </button>
-                    <button onClick={() => removeUser(s.id)} className="rounded-lg p-2 text-danger hover:bg-danger/10">
+                    <button onClick={() => removeUser(s.id)} className="rounded-lg p-2 text-red-650 hover:bg-red-50 hover:text-red-800 transition-colors">
                       <FiTrash2 size={15} />
                     </button>
                   </td>

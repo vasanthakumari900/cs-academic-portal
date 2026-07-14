@@ -6,17 +6,7 @@ export default function DashboardLayout({ title, items = [] }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#080D1A]">
-      {/* Dark mesh background */}
-      <div className="fixed inset-0 pointer-events-none bg-mesh-deep" />
-      
-      {/* Floating orbs */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div className="orb h-32 w-32 bg-blue-500/5" style={{top:'10%',right:'5%','--duration':'7s','--delay':'0s'}} />
-        <div className="orb h-40 w-40 bg-indigo-500/5" style={{bottom:'15%',left:'3%','--duration':'9s','--delay':'2s'}} />
-        <div className="orb h-24 w-24 bg-cyan-500/5" style={{top:'50%',right:'15%','--duration':'8s','--delay':'1s'}} />
-        <div className="absolute inset-0 bg-grid-subtle" />
-      </div>
+    <div className="flex min-h-screen flex-col bg-[#F8FAFC]">
 
       {items.length > 0 && (
         <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">

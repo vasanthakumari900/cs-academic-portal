@@ -38,9 +38,9 @@ export default function ManageFaculty() {
   }
 
   return (
-    <div>
-      <h2 className="mb-2 font-display text-2xl font-bold">Manage Faculty</h2>
-      <p className="mb-6 text-white/50">View and manage all faculty accounts.</p>
+    <div className="max-w-6xl mx-auto py-8 px-4 text-left bg-[#F8FAFC]">
+      <h2 className="mb-2 font-sans text-2xl font-bold text-[#1F2937]">Manage Faculty</h2>
+      <p className="mb-6 text-sm text-[#6B7280]">View and manage all faculty accounts.</p>
 
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <StatCard icon={FiUserCheck} label="Total Faculty" value={faculty.length} accent="primary" />
@@ -55,21 +55,21 @@ export default function ManageFaculty() {
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {faculty.map((f) => (
-            <div key={f.id} className="rounded-2xl border glass-card p-5">
+            <div key={f.id} className="rounded-xl border border-[#E5E7EB] bg-white p-5 shadow-sm hover:shadow-md transition-all text-left">
               <div className="flex items-center gap-3">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 text-sm font-bold text-white">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0F4C81] text-sm font-bold text-white shadow-sm">
                   {initials(f.name)}
                 </span>
                 <div>
-                  <p className="font-semibold">{f.name}</p>
-                  <p className="text-sm text-slate-500">{f.email}</p>
+                  <p className="font-semibold text-[#1F2937]">{f.name}</p>
+                  <p className="text-sm text-[#6B7280]">{f.email}</p>
                 </div>
               </div>
               <div className="mt-4 flex gap-2">
-                <button onClick={() => demoteToStudent(f.id)} className="flex-1 rounded-lg border border-white/15 px-3 py-1.5 text-xs font-medium hover:bg-white/10">
+                <button onClick={() => demoteToStudent(f.id)} className="flex-1 rounded-lg border border-[#E5E7EB] bg-white px-3 py-1.5 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all">
                   Demote to Student
                 </button>
-                <button onClick={() => removeUser(f.id)} className="rounded-lg p-2 text-danger hover:bg-danger/10">
+                <button onClick={() => removeUser(f.id)} className="rounded-lg p-2 text-red-650 hover:bg-red-50 hover:text-red-800 transition-colors">
                   <FiTrash2 size={15} />
                 </button>
               </div>

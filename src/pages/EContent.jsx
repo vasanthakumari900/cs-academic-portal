@@ -24,17 +24,17 @@ const FACULTY_MAP = {
 // CURRICULUM imported from Notes.jsx
 
 const yearStyles = {
-  1: { gradient: "from-emerald-500 to-teal-600", light: "from-emerald-50 to-teal-50", text: "text-emerald-700" },
-  2: { gradient: "from-violet-500 to-purple-600", light: "from-violet-50 to-purple-50", text: "text-violet-700" },
-  3: { gradient: "from-amber-500 to-orange-600", light: "from-amber-50 to-orange-50", text: "text-amber-700" },
+  1: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
+  2: { bg: "bg-[#1E88E5] text-white border-[#1565C0]", text: "text-[#1E88E5]" },
+  3: { bg: "bg-[#2E7D32] text-white border-[#1B5E20]", text: "text-[#2E7D32]" },
 };
 
 const subjectColors = [
-  { from: "from-indigo-500", to: "to-violet-600", badge: "bg-indigo-500/20 text-indigo-300" },
-  { from: "from-rose-500", to: "to-pink-600", badge: "bg-rose-100 text-rose-800" },
-  { from: "from-cyan-500", to: "to-sky-600", badge: "bg-cyan-100 text-cyan-800" },
-  { from: "from-amber-500", to: "to-yellow-600", badge: "bg-amber-100 text-amber-800" },
-  { from: "from-lime-500", to: "to-green-600", badge: "bg-lime-100 text-lime-800" },
+  { from: "bg-white", to: "bg-white", badge: "bg-[#F0F4F8] text-[#0F4C81] border border-[#D9E2EC]" },
+  { from: "bg-white", to: "bg-white", badge: "bg-[#E8F5E9] text-[#2E7D32] border border-[#C8E6C9]" },
+  { from: "bg-white", to: "bg-white", badge: "bg-[#FFF3E0] text-amber-800 border border-[#FFE0B2]" },
+  { from: "bg-white", to: "bg-white", badge: "bg-[#FFEBEE] text-red-800 border border-[#FFCDD2]" },
+  { from: "bg-white", to: "bg-white", badge: "bg-[#E8EAF6] text-[#303F9F] border border-[#C5CAE9]" },
 ];
 
 // SYLLABUS parsed dynamically from NOTES_DATA
@@ -150,37 +150,35 @@ export default function EContent() {
 
   if (!selectedYear) {
     return (
-      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center">
-          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-indigo-600 to-violet-700 text-white shadow-[0_8px_32px_rgba(79,70,229,0.2)]">
+          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm">
             <FiPlayCircle size={36} />
           </div>
-          <h1 className="font-display text-4xl font-bold text-white">Video Lectures</h1>
-          <p className="mt-2 text-sm text-white/60">Select your year to browse subject-wise lectures &amp; syllabus</p>
+          <h1 className="font-sans text-4xl font-bold text-[#1F2937]">Video Lectures</h1>
+          <p className="mt-2 text-sm text-[#6B7280]">Select your year to browse subject-wise lectures &amp; syllabus</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {[1, 2, 3].map((year, i) => {
             const s = yearStyles[year];
             return (
               <motion.button key={year}
-                initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 + i * 0.12, type: "spring", stiffness: 80 }}
-                whileHover={{ y: -8, scale: 1.02 }} whileTap={{ scale: 0.97 }}
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.1, type: "spring", stiffness: 80 }}
+                whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedYear(year)}
-                className="group relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass transition-all duration-500 hover:shadow-xl hover:bg-white/90"
+                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${s.light} opacity-60 group-hover:opacity-90 transition-opacity duration-500`} />
                 <div className="relative p-8 text-center">
-                  <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br ${s.gradient} text-3xl font-bold text-white shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl`}>
+                  <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-xl ${s.bg} text-3xl font-bold transition-all duration-300 group-hover:scale-105 shadow-sm`}>
                     {CURRICULUM[year].icon}
                   </div>
-                  <h2 className={`text-xl font-bold ${s.text}`}>{CURRICULUM[year].label}</h2>
-                  <p className="mt-1.5 text-xs text-white/50">{Object.keys(CURRICULUM[year].semesters).length} Semesters</p>
-                  <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-indigo-400 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
+                  <h2 className="text-xl font-bold text-[#1F2937]">{CURRICULUM[year].label}</h2>
+                  <p className="mt-1.5 text-xs text-[#6B7280]">{Object.keys(CURRICULUM[year].semesters).length} Semesters</p>
+                  <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#0F4C81] opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
                     Browse Lectures <FiChevronRight size={12} />
                   </div>
                 </div>
-                <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${s.gradient} scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500`} />
               </motion.button>
             );
           })}
@@ -195,26 +193,25 @@ export default function EContent() {
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setSelectedYear(null); setSelectedSemester(null); setSelectedSubject(null); }}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-gray-500 hover:bg-white/5 transition-all"
+          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
         ><FiArrowLeft size={14} /> Back to Years</motion.button>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
-          <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${ys.gradient} text-white shadow-lg`}><FiLayers size={28} /></div>
-          <h1 className={`font-display text-2xl font-bold ${ys.text}`}>{yearData.label}</h1>
-          <p className="mt-1 text-sm text-white/60">Choose a semester</p>
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm"><FiLayers size={28} /></div>
+          <h1 className="font-sans text-2xl font-bold text-[#1F2937]">{yearData.label}</h1>
+          <p className="mt-1 text-sm text-[#6B7280]">Choose a semester</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {sems.map(([semKey, semData], i) => (
             <motion.button key={semKey}
-              initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.1 }}
-              whileHover={{ y: -4, scale: 1.01 }} whileTap={{ scale: 0.97 }}
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.08 }}
+              whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
               onClick={() => setSelectedSemester(Number(semKey))}
-              className="group relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass transition-all duration-300 hover:shadow-xl hover:bg-white/90"
+              className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${ys.light} opacity-50 group-hover:opacity-80 transition-opacity`} />
               <div className="relative p-8 text-center">
-                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br ${ys.gradient} text-xl font-bold text-white shadow-glass`}>{semKey === 1 ? "I" : "II"}</div>
-                <h2 className={`text-lg font-bold ${ys.text}`}>{semData.label}</h2>
-                <p className="mt-1 text-xs text-white/50">{semData.subjects.length} subjects</p>
+                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl ${ys.bg} text-xl font-bold text-white shadow-sm`}>{semKey === 1 ? "I" : "II"}</div>
+                <h2 className="text-lg font-bold text-[#1F2937]">{semData.label}</h2>
+                <p className="mt-1 text-xs text-[#6B7280]">{semData.subjects.length} subjects</p>
               </div>
             </motion.button>
           ))}
@@ -228,20 +225,20 @@ export default function EContent() {
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => setSelectedSemester(null)}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-gray-500 hover:bg-white/5 transition-all"
+          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
         ><FiArrowLeft size={14} /> Back to Semesters</motion.button>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-          <div className="flex items-center gap-2 text-sm text-white/50 mb-3">
+          <div className="flex items-center gap-2 text-sm text-[#6B7280] mb-3">
             <span className={ys.text}>{yearData.label}</span><FiChevronRight size={12} /><span className={ys.text}>{semesterData.label}</span>
           </div>
-          <h1 className={`font-display text-2xl font-bold ${ys.text}`}>Select Subject</h1>
-          <p className="mt-1 text-sm text-white/60">Choose a subject to view its syllabus &amp; video lectures</p>
+          <h1 className="font-sans text-2xl font-bold text-[#1F2937]">Select Subject</h1>
+          <p className="mt-1 text-sm text-[#6B7280]">Choose a subject to view its syllabus &amp; video lectures</p>
         </motion.div>
         {semesterData.subjects.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-white/15 bg-white/5 py-20">
-            <FiBookOpen size={48} className="mb-3 text-gray-300" />
-            <p className="text-sm font-medium text-white/60">Subjects will be added soon</p>
-            <p className="mt-1 text-xs text-white/50">This semester's curriculum is being updated</p>
+          <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E5E7EB] bg-white py-20 shadow-sm">
+            <FiBookOpen size={48} className="mb-3 text-slate-300" />
+            <p className="text-sm font-medium text-[#4B5563]">Subjects will be added soon</p>
+            <p className="mt-1 text-xs text-[#6B7280]">This semester's curriculum is being updated</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -250,20 +247,20 @@ export default function EContent() {
               return (
                 <motion.button key={subject}
                   initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
-                  whileHover={{ y: -4, scale: 1.01 }} whileTap={{ scale: 0.97 }}
+                  whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                   onClick={() => { setSelectedSubject(subject); setShowVideos(false); }}
-                  className="group relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass transition-all duration-300 hover:shadow-xl hover:bg-white/90"
+                  className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
                 >
                   <div className="relative flex items-start gap-4 p-5">
-                    <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${sc.from} ${sc.to} text-white shadow-glass transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg`}>
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm transition-all duration-300 group-hover:scale-105">
                       <FiBook size={22} />
                     </div>
-                    <div className="min-w-0 flex-1 pt-1">
-                      <h3 className="font-display font-bold text-sm text-white leading-snug">{subject}</h3>
-                      {FACULTY_MAP[subject] && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-white/60">{FACULTY_MAP[subject]}</p>}
+                    <div className="min-w-0 flex-1 pt-1 text-left">
+                      <h3 className="font-sans font-bold text-sm text-[#1F2937] leading-snug">{subject}</h3>
+                      {FACULTY_MAP[subject] && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-[#6B7280]">{FACULTY_MAP[subject]}</p>}
                       <div className="mt-3 flex items-center gap-2">
                         <span className={`inline-flex items-center gap-1 rounded-full ${sc.badge} px-2.5 py-0.5 text-[10px] font-semibold`}><FiBookOpen size={10} /> VIEW SYLLABUS</span>
-                        <FiChevronRight size={14} className="text-white/40 group-hover:text-indigo-400 transition-colors ml-auto" />
+                        <FiChevronRight size={14} className="text-slate-400 group-hover:text-[#1E88E5] transition-colors ml-auto" />
                       </div>
                     </div>
                   </div>
@@ -282,22 +279,22 @@ export default function EContent() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setSelectedSubject(null); }}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-gray-500 hover:bg-white/5 transition-all"
+          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
         ><FiArrowLeft size={14} /> Back to Subjects</motion.button>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-4 flex items-center gap-2 text-xs text-white/50">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-4 flex items-center gap-2 text-xs text-[#6B7280]">
           <span className={ys.text}>{yearData.label}</span><FiChevronRight size={10} />
           <span className={ys.text}>{semesterData.label}</span><FiChevronRight size={10} />
-          <span className="text-white/80 font-semibold">{selectedSubject}</span>
+          <span className="text-[#1F2937] font-semibold">{selectedSubject}</span>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="flex items-center gap-4">
-            <div className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${sc.from} ${sc.to} text-white shadow-lg`}><FiBookOpen size={28} /></div>
+            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiBookOpen size={28} /></div>
             <div>
-              <h1 className="font-display text-2xl font-bold text-white">{selectedSubject}</h1>
+              <h1 className="font-sans text-2xl font-bold text-[#1F2937]">{selectedSubject}</h1>
               <div className="flex items-center gap-3 mt-1">
-                <span className="text-xs text-white/60">{yearData.label} · {semesterData.label}</span>
+                <span className="text-xs text-[#6B7280]">{yearData.label} · {semesterData.label}</span>
                 <span className="badge-primary">{syllabusData?.length || 0} modules</span>
               </div>
             </div>
@@ -306,29 +303,29 @@ export default function EContent() {
 
         {syllabusData ? (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            className="mb-8 overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass"
+            className="mb-8 overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm"
           >
-            <div className="bg-gradient-to-r from-indigo-600 to-violet-700 px-5 py-3.5 flex items-center gap-2 text-white">
+            <div className="bg-[#0F4C81] px-5 py-3.5 flex items-center gap-2 text-white">
               <FiBookOpen size={15} />
               <span className="text-xs font-bold uppercase tracking-wider">Syllabus</span>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="bg-white/5 text-white/70">
+                  <tr className="bg-[#F8FAFC] text-[#1F2937]">
                     <th className="px-5 py-3 font-bold uppercase tracking-wider w-14">Sl No</th>
                     <th className="px-5 py-3 font-bold uppercase tracking-wider">Contents of Module</th>
                     <th className="px-5 py-3 font-bold uppercase tracking-wider text-center w-20">Hrs</th>
                     <th className="px-5 py-3 font-bold uppercase tracking-wider text-center w-20">COs</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50">
+                <tbody className="divide-y divide-[#E5E7EB]">
                   {syllabusData.map((row) => (
-                    <tr key={row.sl} className="hover:bg-indigo-500/10 transition-colors">
-                      <td className="px-5 py-3.5 font-bold text-white/80 align-top">{row.sl}</td>
-                      <td className="px-5 py-3.5 text-white/70 leading-relaxed font-medium">{row.module}</td>
-                      <td className="px-5 py-3.5 text-center font-semibold text-white/80 align-top">{row.hrs}</td>
-                      <td className="px-5 py-3.5 text-center font-bold text-indigo-400 align-top">{row.co}</td>
+                    <tr key={row.sl} className="hover:bg-[#F0F4F8] transition-colors">
+                      <td className="px-5 py-3.5 font-bold text-[#1F2937] align-top">{row.sl}</td>
+                      <td className="px-5 py-3.5 text-[#4B5563] leading-relaxed font-medium">{row.module}</td>
+                      <td className="px-5 py-3.5 text-center font-semibold text-[#1F2937] align-top">{row.hrs}</td>
+                      <td className="px-5 py-3.5 text-center font-bold text-[#0F4C81] align-top">{row.co}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -336,9 +333,9 @@ export default function EContent() {
             </div>
           </motion.div>
         ) : (
-          <div className="mb-8 rounded-2xl border border-dashed border-white/15 bg-white/5 py-16 text-center">
-            <FiBookOpen size={40} className="mx-auto mb-3 text-gray-300" />
-            <p className="text-sm text-white/50">Syllabus not yet available for this subject</p>
+          <div className="mb-8 rounded-xl border border-dashed border-[#E5E7EB] bg-white py-16 text-center shadow-sm">
+            <FiBookOpen size={40} className="mx-auto mb-3 text-slate-300" />
+            <p className="text-sm text-[#6B7280]">Syllabus not yet available for this subject</p>
           </div>
         )}
 
@@ -348,22 +345,22 @@ export default function EContent() {
             {!showUploadForm ? (
               <button
                 onClick={() => setShowUploadForm(true)}
-                className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-500 active:scale-[0.97]"
+                className="group inline-flex items-center gap-2 rounded-lg bg-[#0F4C81] px-5 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#1E88E5] active:scale-[0.97]"
               >
                 <FiUploadCloud size={18} />
                 Upload Videos
               </button>
             ) : (
-              <form onSubmit={handleUpload} className="space-y-4 rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-6 shadow-md">
-                <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
-                  <h3 className="font-display text-base font-bold text-white flex items-center gap-2">
-                    <FiUploadCloud size={18} className="text-indigo-400" />
+              <form onSubmit={handleUpload} className="space-y-4 rounded-xl border border-[#E5E7EB] bg-white p-6 shadow-sm">
+                <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-3 mb-4">
+                  <h3 className="font-sans text-base font-bold text-[#1F2937] flex items-center gap-2">
+                    <FiUploadCloud size={18} className="text-[#0F4C81]" />
                     Upload Videos — {selectedSubject}
                   </h3>
                   <button
                     type="button"
                     onClick={() => setShowUploadForm(false)}
-                    className="rounded-lg px-3 py-1.5 text-xs font-semibold text-white/50 hover:bg-white/10 hover:text-white transition-all"
+                    className="rounded-lg px-3 py-1.5 text-xs font-semibold text-[#6B7280] hover:bg-[#F8FAFC] transition-all"
                   >
                     Cancel
                   </button>
@@ -371,34 +368,34 @@ export default function EContent() {
 
                 <div className="space-y-3">
                   <div>
-                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Title</label>
+                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Title</label>
                     <input
                       value={uploadTitle}
                       onChange={(e) => setUploadTitle(e.target.value)}
                       required
                       placeholder="e.g. Binary Search Trees - Unit 1"
-                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400/20 focus:bg-white/10 transition-all"
+                      className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-4 py-2.5 text-sm text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
                     />
                   </div>
 
                   <div>
-                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Description</label>
+                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Description</label>
                     <textarea
                       value={uploadDescription}
                       onChange={(e) => setUploadDescription(e.target.value)}
                       placeholder="Brief description of the lecture video"
                       rows={2}
-                      className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400/20 focus:bg-white/10 transition-all"
+                      className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-4 py-2.5 text-sm text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Video Type</label>
+                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Video Type</label>
                       <select
                         value={videoType}
                         onChange={(e) => setVideoType(e.target.value)}
-                        className="w-full rounded-xl border border-white/15 bg-[#0F172A] px-4 py-2.5 text-sm text-white outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400/20 transition-all text-white/80"
+                        className="w-full rounded-lg border border-[#E5E7EB] bg-white px-4 py-2.5 text-sm text-[#1F2937] outline-none focus:border-[#0F4C81] transition-all"
                       >
                         <option value="lecture">Lecture</option>
                         <option value="class_recording">Class Recording</option>
@@ -406,11 +403,11 @@ export default function EContent() {
                     </div>
 
                     <div>
-                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Upload Method</label>
+                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Upload Method</label>
                       <select
                         value={uploadMethod}
                         onChange={(e) => setUploadMethod(e.target.value)}
-                        className="w-full rounded-xl border border-white/15 bg-[#0F172A] px-4 py-2.5 text-sm text-white outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400/20 transition-all text-white/80"
+                        className="w-full rounded-lg border border-[#E5E7EB] bg-white px-4 py-2.5 text-sm text-[#1F2937] outline-none focus:border-[#0F4C81] transition-all"
                       >
                         <option value="youtube">YouTube Link / ID</option>
                         <option value="file">Direct Video File Upload</option>
@@ -420,21 +417,21 @@ export default function EContent() {
 
                   {uploadMethod === "youtube" ? (
                     <div>
-                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">YouTube Link or Video ID</label>
+                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">YouTube Link or Video ID</label>
                       <input
                         value={youtubeId}
                         onChange={(e) => setYoutubeId(e.target.value)}
                         required
                         placeholder="e.g. dQw4w9WgXcQ or https://youtu.be/..."
-                        className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/30 outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400/20 focus:bg-white/10 transition-all"
+                        className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-4 py-2.5 text-sm text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
                       />
                     </div>
                   ) : (
                     <div>
-                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-white/50">Select Video File</label>
-                      <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-white/15 bg-white/5 px-4 py-6 text-center transition-all hover:border-indigo-500/50 hover:bg-white/10">
-                        <FiUploadCloud size={24} className="text-indigo-400" />
-                        <span className="text-xs text-white/50">
+                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Select Video File</label>
+                      <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-slate-50 px-4 py-6 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
+                        <FiUploadCloud size={24} className="text-[#0F4C81]" />
+                        <span className="text-xs text-[#6B7280]">
                           {uploadFileObj ? uploadFileObj.name : "Choose a video file (.mp4, .webm)..."}
                         </span>
                         <input
@@ -449,15 +446,15 @@ export default function EContent() {
                   )}
 
                   {uploading && progress > 0 && progress < 100 && (
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-                      <div className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all" style={{ width: `${progress}%` }} />
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-slate-150">
+                      <div className="h-full bg-[#0F4C81] transition-all" style={{ width: `${progress}%` }} />
                     </div>
                   )}
 
                   <button
                     type="submit"
                     disabled={uploading}
-                    className="w-full rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 py-3 text-sm font-bold text-white shadow-md transition-all hover:shadow-lg hover:shadow-indigo-500/20 disabled:opacity-50"
+                    className="w-full rounded-lg bg-[#0F4C81] py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#1E88E5] disabled:opacity-50"
                   >
                     {uploading ? `Uploading (${progress}%)...` : "Upload video"}
                   </button>
@@ -476,10 +473,10 @@ export default function EContent() {
               }
               setShowVideos(true);
             }}
-            className={`group inline-flex items-center gap-2 rounded-xl px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all duration-300 active:scale-[0.97] ${
+            className={`group inline-flex items-center gap-2 rounded-lg px-8 py-3.5 text-sm font-bold text-white shadow-sm transition-all active:scale-[0.97] ${
               subjectVideos.length === 0
-                ? "bg-gray-700 cursor-not-allowed opacity-60"
-                : "bg-gradient-to-r from-indigo-600 to-violet-700 hover:shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-600"
+                ? "bg-slate-300 cursor-not-allowed text-slate-500"
+                : "bg-[#0F4C81] hover:bg-[#1E88E5]"
             }`}
           >
             <FiPlayCircle size={20} />
@@ -496,60 +493,60 @@ export default function EContent() {
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
         onClick={() => setShowVideos(false)}
-        className="mb-8 inline-flex items-center gap-1.5 rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm px-4 py-2 text-xs font-semibold text-gray-500 hover:bg-white/5 transition-all"
+        className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
       ><FiArrowLeft size={14} /> Back to Syllabus</motion.button>
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
         <div className="flex items-center gap-4">
-          <div className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${sc.from} ${sc.to} text-white shadow-lg`}><FiMonitor size={28} /></div>
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiMonitor size={28} /></div>
           <div>
-            <h1 className="font-display text-2xl font-bold text-white">{selectedSubject}</h1>
-            <p className="text-xs text-white/60">{yearData.label} · {semesterData.label}</p>
+            <h1 className="font-sans text-2xl font-bold text-[#1F2937]">{selectedSubject}</h1>
+            <p className="text-xs text-[#6B7280]">{yearData.label} · {semesterData.label}</p>
           </div>
         </div>
       </motion.div>
 
       {subjectVideos.length === 0 ? (
-        <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-white/15 bg-white/5 py-24">
-          <div className="mb-5 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500/20 to-violet-500/20 shadow-glass">
-            <FiYoutube size={44} className="text-indigo-300" />
+        <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E5E7EB] bg-white py-24 shadow-sm">
+          <div className="mb-5 flex h-24 w-24 items-center justify-center rounded-full bg-[#0F4C81]/10">
+            <FiYoutube size={44} className="text-[#0F4C81]" />
           </div>
-          <h3 className="text-lg font-bold text-white/80">No Videos Added Yet</h3>
-          <p className="mt-1 max-w-md text-center text-sm text-white/50">Video lectures for {selectedSubject} will be uploaded soon.</p>
+          <h3 className="text-lg font-bold text-[#1F2937]">No Videos Added Yet</h3>
+          <p className="mt-1 max-w-md text-center text-sm text-[#6B7280]">Video lectures for {selectedSubject} will be uploaded soon.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {subjectVideos.map((video, i) => (
             <motion.div key={video.id || i} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
               <button onClick={() => setPlaying(video)}
-                className="group w-full overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass transition-all duration-300 hover:shadow-xl hover:-translate-y-1 text-left"
+                className="group w-full overflow-hidden rounded-lg bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 text-left"
               >
-                <div className="relative aspect-video w-full bg-gradient-to-br from-gray-800 to-gray-900">
+                <div className="relative aspect-video w-full bg-slate-100">
                   {video.youtubeId ? (
                     <img src={`https://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`} alt={video.title}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="absolute inset-0 h-full w-full object-cover"
                       onError={(e) => { e.target.style.display = "none"; }}
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-indigo-950/40 text-indigo-300">
+                    <div className="flex h-full w-full items-center justify-center bg-[#F0F4F8] text-[#0F4C81]">
                       <FiVideo size={36} className="opacity-45" />
                     </div>
                   )}
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/40 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 backdrop-blur-sm shadow-lg transition-transform duration-300 group-hover:scale-110">
-                      <FiPlayCircle size={24} className="text-indigo-400 ml-0.5" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/95 shadow-md">
+                      <FiPlayCircle size={24} className="text-[#0F4C81] ml-0.5" />
                     </div>
                   </div>
                   {video.duration && (
-                    <span className="absolute bottom-3 right-3 rounded-lg bg-black/70 backdrop-blur-sm px-2.5 py-1 text-[10px] font-mono text-white border border-white/10">{video.duration}</span>
+                    <span className="absolute bottom-3 right-3 rounded bg-black/75 px-2.5 py-1 text-[10px] font-mono text-white">{video.duration}</span>
                   )}
                 </div>
-                <div className="p-4">
-                  <h3 className="line-clamp-1 font-display text-sm font-bold text-white group-hover:text-indigo-400 transition-colors">{video.title || "Lecture Video"}</h3>
-                  {video.description && <p className="mt-0.5 text-xs text-gray-500 line-clamp-1">{video.description}</p>}
+                <div className="p-4 bg-white">
+                  <h3 className="line-clamp-1 font-sans text-sm font-bold text-[#1F2937] group-hover:text-[#1E88E5] transition-colors">{video.title || "Lecture Video"}</h3>
+                  {video.description && <p className="mt-0.5 text-xs text-[#6B7280] line-clamp-1">{video.description}</p>}
                   <div className="mt-2 flex items-center gap-2">
                     <span className="badge-primary">Lecture</span>
-                    {video.facultyName && <span className="text-[10px] text-white/50">{video.facultyName}</span>}
+                    {video.facultyName && <span className="text-[10px] text-[#6B7280]">{video.facultyName}</span>}
                   </div>
                 </div>
               </button>
@@ -561,8 +558,8 @@ export default function EContent() {
       {/* Related Lecture Notes */}
       {subjectNotesData && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mt-12">
-          <h2 className="font-display text-lg font-bold text-white mb-4 flex items-center gap-2 border-b border-white/10 pb-2">
-            <FiFileText className="text-emerald-400" />
+          <h2 className="font-sans text-lg font-bold text-[#1F2937] mb-4 flex items-center gap-2 border-b border-[#E5E7EB] pb-2">
+            <FiFileText className="text-[#2E7D32]" />
             Syllabus &amp; Study Notes
           </h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -571,8 +568,8 @@ export default function EContent() {
               .map(([unitKey, unit]) => {
                 if (unit.files.length === 0) return null;
                 return (
-                  <div key={unitKey} className="rounded-2xl border border-white/5 bg-white/5 p-5 shadow-glass">
-                    <h3 className="font-display text-sm font-bold text-white mb-3">{unit.title} - {unit.subtitle}</h3>
+                  <div key={unitKey} className="rounded-lg border border-[#E5E7EB] bg-white p-5 shadow-sm">
+                    <h3 className="font-sans text-sm font-bold text-[#1F2937] mb-3">{unit.title} - {unit.subtitle}</h3>
                     <div className="space-y-2">
                       {unit.files.map((file) => (
                         <a
@@ -580,9 +577,9 @@ export default function EContent() {
                           href={`https://drive.google.com/file/d/${file.fileId}/view`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2.5 rounded-xl bg-white/5 px-4 py-2.5 text-xs font-semibold text-white/80 hover:bg-white/10 hover:text-white transition-all border border-white/10"
+                          className="flex items-center gap-2.5 rounded-lg bg-[#F8FAFC] px-4 py-2.5 text-xs font-semibold text-[#4B5563] hover:bg-[#F0F4F8] hover:text-[#0F4C81] transition-all border border-[#E5E7EB]"
                         >
-                          <FiFileText className="text-emerald-400 shrink-0" />
+                          <FiFileText className="text-[#2E7D32] shrink-0" />
                           <span className="truncate flex-1">{file.title}</span>
                         </a>
                       ))}
@@ -597,19 +594,19 @@ export default function EContent() {
       <AnimatePresence>
         {playing && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/80 p-4 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
             onClick={() => setPlaying(null)}
           >
             <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-4xl overflow-hidden rounded-2xl bg-[#0F172A]/95 backdrop-blur-xl border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.3)]"
+              className="w-full max-w-4xl overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-2xl"
             >
-              <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-gradient-to-r from-indigo-600/20 to-violet-600/20">
+              <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#E5E7EB] bg-[#0F4C81] text-white">
                 <div className="min-w-0 flex-1">
                   <h3 className="truncate text-sm font-bold text-white">{playing.title || "Lecture"}</h3>
-                  <p className="text-[11px] text-white/50">{selectedSubject}</p>
+                  <p className="text-[11px] text-white/80">{selectedSubject}</p>
                 </div>
-                <button onClick={() => setPlaying(null)} className="rounded-full bg-white/10 p-2 text-white/50 hover:bg-white/20 hover:text-white transition-all"><FiX size={16} /></button>
+                <button onClick={() => setPlaying(null)} className="rounded-full bg-white/10 p-2 text-white/70 hover:bg-white/20 hover:text-white transition-all"><FiX size={16} /></button>
               </div>
               <div className="aspect-video w-full bg-black">
                 {playing.youtubeId ? (

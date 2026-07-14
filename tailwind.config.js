@@ -5,47 +5,41 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Premium dark palette
         dark: {
-          DEFAULT: "#080D1A",     // Deeper navy background
-          50: "#111827",
-          100: "#1E293B",
-          200: "#334155",
+          DEFAULT: "#1F2937",
+          50: "#F8FAFC",
+          100: "#F1F5F9",
+          200: "#E2E8F0",
         },
-        // Indigo primary
         primary: {
-          DEFAULT: "#4F46E5",
-          light: "#6366F1",
-          dark: "#4338CA",
-          50: "#EEF2FF",
-          100: "#E0E7FF",
+          DEFAULT: "#0F4C81",
+          light: "#1E88E5",
+          dark: "#0A3356",
+          50: "#F0F4F8",
+          100: "#D9E2EC",
         },
-        // Violet secondary
         secondary: {
-          DEFAULT: "#8B5CF6",
-          light: "#A78BFA",
-          dark: "#7C3AED",
+          DEFAULT: "#1E88E5",
+          light: "#42A5F5",
+          dark: "#1565C0",
         },
-        // Cyan accent
         accent: {
-          DEFAULT: "#06B6D4",
-          light: "#22D3EE",
-          dark: "#0891B2",
+          DEFAULT: "#2E7D32",
+          light: "#4CAF50",
+          dark: "#1B5E20",
         },
-        // Surfaces
         surface: {
-          DEFAULT: "rgba(255,255,255,0.05)",
-          light: "rgba(255,255,255,0.08)",
-          medium: "rgba(255,255,255,0.12)",
+          DEFAULT: "#FFFFFF",
+          light: "#F8FAFC",
+          medium: "#F1F5F9",
         },
-        // Text
-        heading: "#F8FAFC",
-        body: "#CBD5E1",
-        muted: "#64748B",
-        border: "#334155",
-        success: "#22C55E",
-        warning: "#F59E0B",
-        error: "#EF4444",
+        heading: "#1F2937",
+        body: "#4B5563",
+        muted: "#6B7280",
+        border: "#E5E7EB",
+        success: "#2E7D32",
+        warning: "#D97706",
+        error: "#DC2626",
       },
       fontFamily: {
         sans: ["Inter", "Plus Jakarta Sans", "system-ui", "-apple-system", "sans-serif"],

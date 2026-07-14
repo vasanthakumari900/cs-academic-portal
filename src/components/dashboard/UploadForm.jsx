@@ -1,7 +1,4 @@
 // src/components/dashboard/UploadForm.jsx
-// Shared upload form for videos / notes / question papers. Faculty pages
-// pass the storage path, Firestore service and any extra fields (e.g. year,
-// regulation for question papers).
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -9,8 +6,6 @@ import { FiUploadCloud } from "react-icons/fi";
 import { SEMESTERS, SUBJECTS, YEARS, VIDEO_TYPES } from "../../utils/constants";
 import { uploadFile } from "../../services/storageService";
 import { useAuth } from "../../context/AuthContext";
-import Button from "../ui/Button";
-import GlassCard from "../ui/GlassCard";
 
 export default function UploadForm({
   service,
@@ -21,7 +16,7 @@ export default function UploadForm({
   showThumbnail = false,
   showYear = false,
   showVideoType = false,
-  extraFields, // array of { name, label, type }
+  extraFields,
   onUploaded,
 }) {
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm();
@@ -62,34 +57,34 @@ export default function UploadForm({
   }
 
   return (
-    <GlassCard hover={false} className="max-w-2xl">
+    <div className="max-w-2xl bg-white border border-[#E5E7EB] rounded-xl p-6 shadow-sm text-left">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="mb-1 block text-sm font-medium">Title</label>
+          <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Title</label>
           <input
             {...register("title", { required: "Title is required" })}
-            className="input-field"
+            className="input-premium"
             placeholder="e.g. Binary Search Trees — Full Lecture"
           />
-          {errors.title && <p className="mt-1 text-xs text-danger">{errors.title.message}</p>}
+          {errors.title && <p className="mt-1 text-xs text-red-600">{errors.title.message}</p>}
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-medium">Description</label>
+          <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Description</label>
           <textarea
             {...register("description")}
             rows={3}
-            className="input-field"
+            className="input-premium"
             placeholder="Short description shown to students"
           />
         </div>
 
         {showVideoType && (
           <div>
-            <label className="mb-1 block text-sm font-medium">Video Type</label>
+            <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Video Type</label>
             <select
               {...register("videoType", { required: true })}
-              className="input-field"
+              className="input-premium bg-white"
             >
               {VIDEO_TYPES.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
             </select>
@@ -98,10 +93,10 @@ export default function UploadForm({
 
         {showYear && (
           <div>
-            <label className="mb-1 block text-sm font-medium">Year</label>
+            <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Year</label>
             <select
               {...register("year", { required: true })}
-              className="input-field"
+              className="input-premium bg-white"
             >
               {YEARS.map((y) => <option key={y.value} value={y.value}>{y.label}</option>)}
             </select>
@@ -110,19 +105,19 @@ export default function UploadForm({
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="mb-1 block text-sm font-medium">Semester</label>
+            <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Semester</label>
             <select
               {...register("semester", { required: true })}
-              className="input-field"
+              className="input-premium bg-white"
             >
               {SEMESTERS.map((s) => <option key={s} value={s}>Semester {s}</option>)}
             </select>
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium">Subject</label>
+            <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Subject</label>
             <select
               {...register("subject", { required: true })}
-              className="input-field"
+              className="input-premium bg-white"
             >
               {SUBJECTS.map((s) => <option key={s} value={s}>{s}</option>)}
             </select>
@@ -131,21 +126,21 @@ export default function UploadForm({
 
         {extraFields?.map((f) => (
           <div key={f.name}>
-            <label className="mb-1 block text-sm font-medium">{f.label}</label>
+            <label className="mb-1 block text-sm font-semibold text-[#4B5563]">{f.label}</label>
             <input
               type={f.type || "text"}
               {...register(f.name, { required: f.required })}
-              className="input-field"
+              className="input-premium"
             />
           </div>
         ))}
 
         {showThumbnail && (
           <div>
-            <label className="mb-1 block text-sm font-medium">Thumbnail (optional)</label>
-            <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-white/15 bg-white/5 px-4 py-6 text-center transition-all hover:border-primary/50 hover:bg-white/80 ">
-              <FiUploadCloud size={22} className="text-accent" />
-              <span className="text-sm text-white/50">
+            <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Thumbnail (optional)</label>
+            <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-slate-50 px-4 py-6 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
+              <FiUploadCloud size={22} className="text-[#0F4C81]" />
+              <span className="text-sm text-[#6B7280]">
                 {thumbnail ? thumbnail.name : "Click to choose a thumbnail image"}
               </span>
               <input
@@ -159,9 +154,10 @@ export default function UploadForm({
         )}
 
         <div>
-          <label className="mb-1 block text-sm font-medium">{fileLabel}</label>
-          <label className="flex cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-dashed border-white/15 bg-white/5 px-4 py-8 text-center transition-all hover:border-primary/50 hover:bg-white/80 ">              <FiUploadCloud size={26} className="text-cyan-400" />
-            <span className="text-sm text-white/50">
+          <label className="mb-1 block text-sm font-semibold text-[#4B5563]">{fileLabel}</label>
+          <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-slate-50 px-4 py-8 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
+            <FiUploadCloud size={26} className="text-[#0F4C81]" />
+            <span className="text-sm text-[#6B7280]">
               {file ? file.name : `Click to choose a ${fileLabel.toLowerCase()}`}
             </span>
             <input
@@ -174,15 +170,15 @@ export default function UploadForm({
         </div>
 
         {progress > 0 && progress < 100 && (
-          <div className="h-2 w-full overflow-hidden rounded-full bg-white/10 ">
-            <div className="h-full bg-gradient-to-r from-indigo-600 to-violet-600 transition-all" style={{ width: `${progress}%` }} />
+          <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
+            <div className="h-full bg-[#0F4C81] transition-all" style={{ width: `${progress}%` }} />
           </div>
         )}
 
-        <Button type="submit" disabled={isSubmitting} className="w-full">
-          {isSubmitting ? "Uploading…" : "Upload"}
-        </Button>
+        <button type="submit" disabled={isSubmitting} className="w-full rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-3 text-sm font-bold text-white shadow-sm transition-all disabled:opacity-50 mt-4">
+          {isSubmitting ? "Uploading…" : "Upload Content"}
+        </button>
       </form>
-    </GlassCard>
+    </div>
   );
 }
