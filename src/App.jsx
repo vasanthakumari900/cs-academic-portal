@@ -54,7 +54,6 @@ import FacultyDashboard from "./pages/faculty/FacultyDashboard";
 import FacultyNotes from "./pages/faculty/Notes";
 import FacultyVideos from "./pages/faculty/Videos";
 import FacultyQuestionPapers from "./pages/faculty/QuestionPapers";
-import FacultyPlacements from "./pages/faculty/Placements";
 
 // Admin
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -113,7 +112,6 @@ const facultyNav = [
   { to: "/faculty/notes", label: "Lecture Notes", icon: FiFileText },
   { to: "/faculty/videos", label: "Video Lectures", icon: FiPlayCircle },
   { to: "/faculty/question-papers", label: "Question Papers", icon: FiFileText },
-  { to: "/faculty/placements", label: "Placements", icon: FiBriefcase },
 ];
 
 export default function App() {
@@ -160,7 +158,6 @@ export default function App() {
               <Route path="/faculty/notes" element={<AnimatedPage><FacultyNotes /></AnimatedPage>} />
               <Route path="/faculty/videos" element={<AnimatedPage><FacultyVideos /></AnimatedPage>} />
               <Route path="/faculty/question-papers" element={<AnimatedPage><FacultyQuestionPapers /></AnimatedPage>} />
-              <Route path="/faculty/placements" element={<AnimatedPage><FacultyPlacements /></AnimatedPage>} />
             </Route>
           </Route>
 

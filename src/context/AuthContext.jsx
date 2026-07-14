@@ -4,16 +4,28 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext(null);
 
-// Common password for all faculty members
-const FACULTY_PASSWORD = "DGVC@1234";
+// Faculty credentials — name → unique password mapping
+// Name must be entered in capital letters as listed here
+const FACULTY_CREDENTIALS = {
+  "R LALITHA": "DGVC@0001",
+  "P J RAJAM": "DGVC@0002",
+  "K DURGADEVI": "DGVC@0003",
+  "DHARANI": "DGVC@0004",
+  "P REVATHI": "DGVC@0005",
+  "S KARTHIKA": "DGVC@0006",
+  "R SARANYA": "DGVC@0007",
+  "M P SUDHA": "DGVC@0008",
+  "V PONNILA": "DGVC@0009",
+  "R POOJITHA SHREE": "DGVC@0010",
+  "S TAMILARASI": "DGVC@0011",
+  "G SRILAKSHMI": "DGVC@0012",
+  "M SANGEETHA": "DGVC@0013",
+  "A KAVITHA": "DGVC@0014",
+  "P SUGANYA": "DGVC@0015",
+};
 
-// Faculty members — name must be entered in capital letters as listed here
-const FACULTY_LIST = [
-  "R LALITHA", "P J RAJAM", "K DURGADEVI", "DHARANI",
-  "P REVATHI", "S KARTHIKA", "R SARANYA", "M P SUDHA",
-  "V PONNILA", "R POOJITHA SHREE", "S TAMILARASI", "G SRILAKSHMI",
-  "M SANGEETHA", "A KAVITHA", "P SUGANYA",
-];
+// Derived list of faculty names (for backward compatibility)
+const FACULTY_LIST = Object.keys(FACULTY_CREDENTIALS);
 
 // 3rd Year A & B Section student records
 const STUDENTS = {
@@ -278,11 +290,13 @@ export function AuthProvider({ children }) {
   function facultyLogin(name, password) {
     const trimmedName = name.trim().toUpperCase();
 
-    if (!FACULTY_LIST.includes(trimmedName)) {
+    const expectedPassword = FACULTY_CREDENTIALS[trimmedName];
+
+    if (!expectedPassword) {
       throw new Error("Faculty name not found. Please check the spelling and try again.");
     }
 
-    if (password !== FACULTY_PASSWORD) {
+    if (password !== expectedPassword) {
       throw new Error("Incorrect password. Please try again.");
     }
 
@@ -301,7 +315,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("ddgdvc_user");
   }
 
-  const value = { user, loading, login, facultyLogin, logout, FACULTY_LIST };
+  const value = { user, loading, login, facultyLogin, logout, FACULTY_LIST, FACULTY_CREDENTIALS };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

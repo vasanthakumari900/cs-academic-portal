@@ -428,7 +428,7 @@ export default function Login() {
                           />
                         </div>
                         <p className="mt-1.5 text-[10px] font-medium text-white/40">
-                          Use the common faculty password provided by the department
+                          Use your assigned password (e.g. DGVC@0001)
                         </p>
                       </div>
                     </>

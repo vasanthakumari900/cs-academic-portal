@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import {
-  FiHome, FiPlayCircle, FiBriefcase, FiGrid,
-  FiFileText, FiChevronRight, FiBookOpen, FiUploadCloud, FiUser,
+  FiHome, FiPlayCircle, FiGrid,
+  FiFileText, FiChevronRight, FiUser,
 } from "react-icons/fi";
 
 const cards = [
