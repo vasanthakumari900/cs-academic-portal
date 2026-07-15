@@ -45,7 +45,7 @@ export default function StudentDashboard() {
         {/* Navigation Cards */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
           <div className="mb-5 text-center">
-            <h2 className="font-sans text-xl font-bold text-[#1F2937]">Quick Access</h2>
+            <h2 className="font-sans text-xl font-bold text-[#0F4C81]">Quick Access</h2>
             <p className="mt-1 text-sm text-[#6B7280]">Navigate to any section of the academic portal</p>
           </div>
 
@@ -55,14 +55,14 @@ export default function StudentDashboard() {
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
                 whileHover={{ y: -3 }} whileTap={{ scale: 0.98 }}
                 onClick={() => navigate(card.to)}
-                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
+                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
               >
                 <div className="relative flex items-center gap-4 p-5">
                   <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-lg ${card.bg} text-white shadow-sm transition-all`}>
                     <card.icon size={24} />
                   </div>
                   <div className="min-w-0 flex-1 text-left">
-                    <h3 className="font-sans text-base font-bold text-[#1F2937]">{card.label}</h3>
+                    <h3 className="font-sans text-base font-bold text-[#0F4C81]">{card.label}</h3>
                     <p className="mt-0.5 text-xs text-[#6B7280]">{card.desc}</p>
                   </div>
                   <FiChevronRight size={16} className="text-slate-400 group-hover:text-[#1E88E5] transition-all" />

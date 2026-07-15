@@ -26,14 +26,14 @@ export default function DashboardTopbar({ onMenuToggle }) {
           <div className="flex items-center gap-2.5">
             <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0F4C81] text-white text-xs font-bold shadow-sm">DG</span>
             <div className="hidden sm:block leading-tight">
-              <p className="text-sm font-bold text-[#1F2937]">
+              <p className="text-sm font-bold text-[#0F4C81]">
                 {user?.type === "faculty" ? "FACULTY PORTAL" : user?.type === "admin" ? "ADMIN PORTAL" : "STUDENT PORTAL"}
               </p>
             </div>
           </div>
           {user && (
-            <div className="hidden md:block text-left border-l border-slate-200 pl-3">
-              <p className="text-xs font-semibold text-[#1F2937] leading-tight">{user.name}</p>
+            <div className="hidden md:block text-left border-l border-[#E5E7EB] pl-3">
+              <p className="text-xs font-semibold text-[#0F4C81] leading-tight">{user.name}</p>
               <p className="text-[10px] text-[#6B7280]">
                 {user.type === "faculty"
                   ? "Faculty"

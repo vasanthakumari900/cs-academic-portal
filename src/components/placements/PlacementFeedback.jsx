@@ -180,7 +180,7 @@ export default function PlacementFeedback() {
   return (
     <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-16 text-left">
       <div className="mb-8 text-center border-t border-[#E5E7EB] pt-12">
-        <h2 className="font-sans text-2xl font-bold text-[#1F2937]">
+        <h2 className="font-sans text-2xl font-bold text-[#0F4C81]">
           Placement Experiences
         </h2>
         <p className="mt-1 text-sm text-[#6B7280]">
@@ -210,7 +210,7 @@ export default function PlacementFeedback() {
             <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
             <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by company, name, role..."
-              className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 py-2 pl-9 pr-3 text-xs text-[#1F2937] placeholder-slate-400 outline-none focus:border-[#0F4C81] transition-all"
+              className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] py-2 pl-9 pr-3 text-xs text-[#0F4C81] placeholder-slate-400 outline-none focus:border-[#0F4C81] transition-all"
             />
           </div>
           <select value={filterCompany} onChange={(e) => setFilterCompany(e.target.value)}
@@ -257,7 +257,7 @@ export default function PlacementFeedback() {
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {paginatedFeedbacks.map((fb, i) => (
           <motion.div key={fb.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}>
-            <div className="group relative h-full rounded-xl border border-[#E5E7EB] bg-white p-5 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col text-left">
+            <div className="group relative h-full rounded-xl border border-[#E5E7EB] bg-white p-5 shadow-sm hover:shadow-sm transition-all duration-300 flex flex-col text-left">
 
               {/* Header */}
               <div className="flex items-center gap-3 mb-3">
@@ -265,7 +265,7 @@ export default function PlacementFeedback() {
                   {fb.fullName?.split(" ").map((n) => n[0]).join("").slice(0, 2)}
                 </div>
                 <div className="min-w-0 flex-1 text-left">
-                  <p className="truncate text-sm font-bold text-[#1F2937]">{fb.fullName}</p>
+                  <p className="truncate text-sm font-bold text-[#0F4C81]">{fb.fullName}</p>
                   <p className="text-[11px] text-[#6B7280]">{fb.batch || "Batch not specified"}</p>
                 </div>
                 <DifficultyBadge level={fb.overallDifficulty} />
@@ -289,7 +289,7 @@ export default function PlacementFeedback() {
               )}
 
               {/* Footer */}
-              <div className="mt-auto border-t border-slate-100 pt-3 flex items-center justify-between">
+              <div className="mt-auto border-t border-[#E5E7EB]/50 pt-3 flex items-center justify-between">
                 <span className="text-[10px] text-[#6B7280]">
                   {fb.createdAt ? formatDate(fb.createdAt) : "Just now"}
                 </span>
@@ -315,7 +315,7 @@ export default function PlacementFeedback() {
               className={`h-8 w-8 rounded-lg text-xs font-bold transition-all ${
                 currentPage === idx + 1
                   ? "bg-[#0F4C81] text-white shadow-sm"
-                  : "bg-white border border-[#E5E7EB] text-[#4B5563] hover:bg-slate-50"
+                  : "bg-white border border-[#E5E7EB] text-[#4B5563] hover:bg-[#F8FAFC]"
               }`}
             >
               {idx + 1}
@@ -351,7 +351,7 @@ export default function PlacementFeedback() {
 
                 {/* ── Student Information ── */}
                 <div>
-                  <h4 className="mb-3 flex items-center gap-2 text-sm font-bold text-[#1F2937]">
+                  <h4 className="mb-3 flex items-center gap-2 text-sm font-bold text-[#0F4C81]">
                     <FiUser size={14} className="text-[#0F4C81]" /> Student & Recruitment Information
                   </h4>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -388,7 +388,7 @@ export default function PlacementFeedback() {
 
                 {/* ── Selection Process ── */}
                 <div>
-                  <h4 className="mb-3 flex items-center gap-2 text-sm font-bold text-[#1F2937]">
+                  <h4 className="mb-3 flex items-center gap-2 text-sm font-bold text-[#0F4C81]">
                     <FiBriefcase size={14} className="text-[#0F4C81]" /> Selection Process
                   </h4>
                   <div className="space-y-4">
@@ -411,7 +411,7 @@ export default function PlacementFeedback() {
 
                 {/* ── Interview Details ── */}
                 <div>
-                  <h4 className="mb-3 flex items-center gap-2 text-sm font-bold text-[#1F2937]">
+                  <h4 className="mb-3 flex items-center gap-2 text-sm font-bold text-[#0F4C81]">
                     <FiMessageSquare size={14} className="text-[#0F4C81]" /> Interview Details
                   </h4>
                   <div className="space-y-4">
@@ -440,7 +440,7 @@ export default function PlacementFeedback() {
 
                 {/* ── Preparation & Advice ── */}
                 <div>
-                  <h4 className="mb-3 flex items-center gap-2 text-sm font-bold text-[#1F2937]">
+                  <h4 className="mb-3 flex items-center gap-2 text-sm font-bold text-[#0F4C81]">
                     <FiBook size={14} className="text-[#0F4C81]" /> Preparation & Advice
                   </h4>
                   <div className="space-y-4">
@@ -473,7 +473,7 @@ export default function PlacementFeedback() {
                             className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all ${
                               selectedResources.includes(res)
                                 ? "bg-[#0F4C81] text-white shadow-sm"
-                                : "bg-slate-50 border border-[#E5E7EB] text-[#4B5563] hover:bg-slate-100"
+                                : "bg-[#F8FAFC] border border-[#E5E7EB] text-[#4B5563] hover:bg-slate-100"
                             }`}
                           >
                             {res}
@@ -484,7 +484,7 @@ export default function PlacementFeedback() {
 
                     {/* File Upload */}
                     <FormField label="Upload supporting file (PDF)">
-                      <label className="flex cursor-pointer items-center gap-3 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-slate-50 px-4 py-3 transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
+                      <label className="flex cursor-pointer items-center gap-3 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-[#F8FAFC] px-4 py-3 transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
                         <FiUpload className="text-[#0F4C81] shrink-0" size={18} />
                         <span className="text-xs text-[#6B7280]">
                           {uploadFileObj ? uploadFileObj.name : "Choose PDF or document..."}
@@ -535,7 +535,7 @@ export default function PlacementFeedback() {
                 {/* Form Actions */}
                 <div className="flex items-center justify-end gap-3 border-t border-[#E5E7EB] pt-4">
                   <button type="button" onClick={() => setShowForm(false)} disabled={submitting}
-                    className="rounded-lg border border-[#E5E7EB] bg-white px-5 py-2.5 text-xs font-semibold text-[#4B5563] transition-all hover:bg-slate-50">
+                    className="rounded-lg border border-[#E5E7EB] bg-white px-5 py-2.5 text-xs font-semibold text-[#4B5563] transition-all hover:bg-[#F8FAFC]">
                     Cancel
                   </button>
                   <button type="submit" disabled={submitting}
@@ -642,7 +642,7 @@ export default function PlacementFeedback() {
 
                 {selectedFeedback.comments && <Section title="Additional Comments" text={selectedFeedback.comments} />}
 
-                <div className="flex items-center gap-2 pt-2 border-t border-slate-100">
+                <div className="flex items-center gap-2 pt-2 border-t border-[#E5E7EB]/50">
                   {selectedFeedback.recommend === "Strongly Recommend" || selectedFeedback.recommend === "Yes" ? (
                     <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#2E7D32]"><FiThumbsUp size={12} /> {selectedFeedback.recommend === "Strongly Recommend" ? "Strongly recommends this company" : "Recommends this company"}</span>
                   ) : selectedFeedback.recommend === "No" || selectedFeedback.recommend === "Strongly Not Recommend" ? (

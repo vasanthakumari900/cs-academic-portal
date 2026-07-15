@@ -38,7 +38,7 @@ export default function ManagePlacements() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 max-w-6xl mx-auto py-8 px-4 text-left bg-[#F8FAFC]">
       <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm lg:col-span-1 h-fit">
-        <h3 className="mb-4 flex items-center gap-2 font-sans font-bold text-[#1F2937] border-b border-[#E5E7EB] pb-2"><FiPlus className="text-[#0F4C81]" /> New Drive</h3>
+        <h3 className="mb-4 flex items-center gap-2 font-sans font-bold text-[#0F4C81] border-b border-[#E5E7EB] pb-2"><FiPlus className="text-[#0F4C81]" /> New Drive</h3>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <input {...register("companyName", { required: true })} placeholder="Company name" className="input-premium" />
           <input {...register("role", { required: true })} placeholder="Role" className="input-premium" />
@@ -58,12 +58,12 @@ export default function ManagePlacements() {
       </div>
 
       <div className="space-y-3 lg:col-span-2">
-        <h3 className="font-sans font-bold text-[#1F2937] border-b border-[#E5E7EB] pb-2 text-left">Active Drives</h3>
+        <h3 className="font-sans font-bold text-[#0F4C81] border-b border-[#E5E7EB] pb-2 text-left">Active Drives</h3>
         {!loading && items.length === 0 && <EmptyState title="No drives yet" description="Add your first placement drive using the form." />}
         {items.map((p) => (
-          <div key={p.id} className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm hover:shadow-md transition-all flex items-center justify-between">
+          <div key={p.id} className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm hover:shadow-sm transition-all flex items-center justify-between">
             <div className="text-left">
-              <p className="font-bold text-[#1F2937]">{p.companyName} — <span className="text-[#6B7280] font-normal">{p.role}</span></p>
+              <p className="font-bold text-[#0F4C81]">{p.companyName} — <span className="text-[#6B7280] font-normal">{p.role}</span></p>
               <p className="text-xs text-[#6B7280] mt-1">₹{p.package} LPA · Deadline {p.deadline}</p>
             </div>
             <button onClick={() => handleDelete(p.id)} className="rounded-lg p-2 text-red-650 hover:bg-red-50 hover:text-red-800 transition-colors">

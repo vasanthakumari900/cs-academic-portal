@@ -38,7 +38,7 @@ export default function FacultyDashboard() {
         {/* Navigation Cards */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
           <div className="mb-5 text-center">
-            <h2 className="font-sans text-xl font-bold text-[#1F2937]">Quick Actions</h2>
+            <h2 className="font-sans text-xl font-bold text-[#0F4C81]">Quick Actions</h2>
             <p className="mt-1 text-sm text-[#6B7280]">Upload and manage academic content</p>
           </div>
 
@@ -48,14 +48,14 @@ export default function FacultyDashboard() {
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
                 whileHover={{ y: -3 }} whileTap={{ scale: 0.98 }}
                 onClick={() => navigate(card.to)}
-                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40 text-left h-full flex flex-col w-full"
+                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40 text-left h-full flex flex-col w-full"
               >
                 <div className="relative flex flex-col items-center p-6 text-center h-full justify-between w-full flex-1">
                   <div className={`flex h-14 w-14 items-center justify-center rounded-lg ${card.bg} text-white shadow-sm transition-all`}>
                     <card.icon size={24} />
                   </div>
                   <div className="mt-4 flex-1">
-                    <h3 className="font-sans text-base font-bold text-[#1F2937] group-hover:text-[#1E88E5] transition-colors">{card.label}</h3>
+                    <h3 className="font-sans text-base font-bold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">{card.label}</h3>
                     <p className="mt-1.5 text-xs text-[#6B7280] leading-relaxed">{card.desc}</p>
                   </div>
                   <div className="mt-5 inline-flex items-center gap-1 text-[11px] font-semibold text-[#1E88E5] transition-all">

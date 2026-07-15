@@ -43,7 +43,7 @@ export default function AdminDashboard() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 bg-[#F8FAFC] text-left">
       <div className="mb-8">
-        <h1 className="font-sans text-2xl font-bold text-[#1F2937]">Admin Overview</h1>
+        <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">Admin Overview</h1>
         <p className="mt-1 text-sm text-[#6B7280]">A snapshot of everything on the portal.</p>
       </div>
 
@@ -56,13 +56,13 @@ export default function AdminDashboard() {
 
       <div className="rounded-xl border border-[#E5E7EB] bg-white shadow-sm overflow-hidden">
         <div className="border-b border-[#E5E7EB] px-5 py-4 bg-[#F8FAFC]">
-          <h3 className="font-sans text-base font-bold text-[#1F2937]">Content Overview</h3>
+          <h3 className="font-sans text-base font-bold text-[#0F4C81]">Content Overview</h3>
         </div>
         <div className="p-5">
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" opacity={0.5} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" opacity={0.5} />
                 <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#64748B' }} />
                 <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: '#64748B' }} />
                 <Tooltip contentStyle={{ borderRadius: '8px', border: '1px solid #E5E7EB', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', fontSize: '13px', backgroundColor: '#FFFFFF' }} />

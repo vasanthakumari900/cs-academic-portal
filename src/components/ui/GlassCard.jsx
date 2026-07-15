@@ -3,11 +3,11 @@ import { classNames } from "../../utils/helpers";
 
 const cardStyles = {
   glass: "rounded-xl bg-white border border-[#E5E7EB] shadow-sm",
-  "glass-strong": "rounded-xl bg-white border border-[#E5E7EB] shadow-md",
-  elevated: "rounded-xl bg-white border border-[#E5E7EB] shadow-md",
+  "glass-strong": "rounded-xl bg-white border border-[#E5E7EB] shadow-sm",
+  elevated: "rounded-xl bg-white border border-[#E5E7EB] shadow-sm",
   flat: "rounded-xl bg-white border border-[#E5E7EB]",
-  premium: "rounded-xl bg-white border border-[#E5E7EB] shadow-md",
-  "premium-dark": "rounded-xl bg-white border border-[#E5E7EB] shadow-md",
+  premium: "rounded-xl bg-white border border-[#E5E7EB] shadow-sm",
+  "premium-dark": "rounded-xl bg-white border border-[#E5E7EB] shadow-sm",
 };
 
 export default function GlassCard({ children, className = "", hover = true, variant = "glass" }) {
@@ -19,7 +19,7 @@ export default function GlassCard({ children, className = "", hover = true, vari
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={classNames(
         cardStyles[variant] || cardStyles.glass,
-        hover && "transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/30 hover:-translate-y-0.5",
+        hover && "transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/30 hover:-translate-y-0.5",
         className
       )}
     >

@@ -252,9 +252,82 @@ const STUDENTS = {
   "25E2954": { name: "DEEPIKA S", rollNumber: "25E2954", dob: "16/07/2007", year: 2, semester: 3, section: "A", type: "student" },
   "25E2955": { name: "VARSHITH V", rollNumber: "25E2955", dob: "21/04/2008", year: 2, semester: 3, section: "A", type: "student" },
   "25E2956": { name: "GOKUL M", rollNumber: "25E2956", dob: "23/04/2007", year: 2, semester: 3, section: "A", type: "student" },
+
+  // ──── 1st Year B Section ────
+  "26E3101": { name: "THARUN A", rollNumber: "26E3101", dob: "15/09/2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3102": { name: "HARINI K", rollNumber: "26E3102", dob: "02/07/2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3103": { name: "MADHAVAN V", rollNumber: "26E3103", dob: "25/07/2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3104": { name: "GOWTHAM V", rollNumber: "26E3104", dob: "17-12-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3105": { name: "ABINAYA N", rollNumber: "26E3105", dob: "22-07-2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3106": { name: "SUNDARAM E", rollNumber: "26E3106", dob: "28-06-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3107": { name: "BHARANI SELVAN V", rollNumber: "26E3107", dob: "2009/3/2", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3108": { name: "SHARIKA D", rollNumber: "26E3108", dob: "10-04-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3109": { name: "HEMA VARSHINI K", rollNumber: "26E3109", dob: "16-12-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3110": { name: "SWETHA SRI S", rollNumber: "26E3110", dob: "02-02-2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3111": { name: "SRINETHI S", rollNumber: "26E3111", dob: "27-02-2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3112": { name: "SRINIVAS J", rollNumber: "26E3112", dob: "30-05-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3114": { name: "KEERTHIVASAN M", rollNumber: "26E3114", dob: "29-07-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3115": { name: "VENKATESHAN HARISH V", rollNumber: "26E3115", dob: "17-11-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3117": { name: "PRABHAKARAN R", rollNumber: "26E3117", dob: "26-10-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3118": { name: "S P ASHWANTH", rollNumber: "26E3118", dob: "21-04-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3119": { name: "HARI KRISHNAN S", rollNumber: "26E3119", dob: "10-10-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3120": { name: "KARTHIKEYAN V", rollNumber: "26E3120", dob: "31-12-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3121": { name: "GAGAN BHARDWAJ", rollNumber: "26E3121", dob: "31- 12- 2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3122": { name: "MANJULA V", rollNumber: "26E3122", dob: "25-07-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3123": { name: "THIRU PRASANNA BALAJI M", rollNumber: "26E3123", dob: "23-12-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3124": { name: "SAMYUTHRA S", rollNumber: "26E3124", dob: "28-02-2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3125": { name: "VARSHA C", rollNumber: "26E3125", dob: "18-10-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3126": { name: "KISHORE C", rollNumber: "26E3126", dob: "12-09-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3127": { name: "HARISH KUMAR K", rollNumber: "26E3127", dob: "04-04-2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3128": { name: "DHARSHINI J", rollNumber: "26E3128", dob: "24-05-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3129": { name: "MITHRA MARAN", rollNumber: "26E3129", dob: "10-01-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3130": { name: "ABILASH KUMAR K", rollNumber: "26E3130", dob: "11-10-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3131": { name: "DEEPAK V", rollNumber: "26E3131", dob: "29-01-2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3132": { name: "SURYA K", rollNumber: "26E3132", dob: "20-04-2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3133": { name: "SATHIYANATHAN I", rollNumber: "26E3133", dob: "27.09.2007", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3134": { name: "SANJU DHARSAN R", rollNumber: "26E3134", dob: "02/07/2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3136": { name: "NEELAVATHI N", rollNumber: "26E3136", dob: "31-10-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3137": { name: "OVIYA G", rollNumber: "26E3137", dob: "19-10-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3138": { name: "PRITHIVI RAJ P", rollNumber: "26E3138", dob: "2009/6/1", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3139": { name: "GOPINATH K", rollNumber: "26E3139", dob: "30-12-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3140": { name: "C SAAIKARAN", rollNumber: "26E3140", dob: "2008/7/21", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3141": { name: "DINESH B", rollNumber: "26E3141", dob: "26-02-2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3142": { name: "ATHITHI S", rollNumber: "26E3142", dob: "08-07-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3143": { name: "KEDAR R K", rollNumber: "26E3143", dob: "24-02-2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3144": { name: "VAISHNAVI S", rollNumber: "26E3144", dob: "06-11-2007", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3145": { name: "LATHISH G", rollNumber: "26E3145", dob: "22-05-2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3147": { name: "YOGI DASS H", rollNumber: "26E3147", dob: "05-07-2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3148": { name: "AKASH ALLEN M", rollNumber: "26E3148", dob: "11-08-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3149": { name: "ARUN TN", rollNumber: "26E3149", dob: "2007/12/20", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3150": { name: "JUDSON ABRAHAM Y", rollNumber: "26E3150", dob: "10-06-2009", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3151": { name: "G . BRINDHA", rollNumber: "26E3151", dob: "19-12-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3152": { name: "SHYAM PRAKASH R", rollNumber: "26E3152", dob: "06-08-2008", year: 1, semester: 1, section: "B", type: "student" },
+  "26E3153": { name: "KAMESWARAN P", rollNumber: "26E3153", dob: "13-09-2008", year: 1, semester: 1, section: "B", type: "student" },
 };
 
-
+// Helper to normalize varying Date of Birth separators and padding
+function normalizeDate(str) {
+  if (!str) return "";
+  let clean = str.replace(/\s+/g, "");
+  clean = clean.replace(/[-.]/g, "/");
+  let parts = clean.split("/");
+  if (parts.length === 3) {
+    let day, month, year;
+    if (parts[0].length === 4) {
+      year = parts[0];
+      month = parts[1];
+      day = parts[2];
+    } else {
+      day = parts[0];
+      month = parts[1];
+      year = parts[2];
+    }
+    const paddedDay = day.padStart(2, "0");
+    const paddedMonth = month.padStart(2, "0");
+    return `${paddedDay}/${paddedMonth}/${year}`;
+  }
+  return clean;
+}
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null); // { name, rollNumber, type, ... }
@@ -276,8 +349,8 @@ export function AuthProvider({ children }) {
       throw new Error("Invalid roll number. Please try again.");
     }
 
-    // Validate DOB
-    if (record.dob !== dob.trim()) {
+    // Validate DOB (standardized format match)
+    if (normalizeDate(record.dob) !== normalizeDate(dob)) {
       throw new Error("Date of birth does not match our records.");
     }
 

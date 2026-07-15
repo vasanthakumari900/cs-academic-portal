@@ -735,7 +735,7 @@ export default function Notes() {
           <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm">
             <FiBookOpen size={36} />
           </div>
-          <h1 className="font-sans text-4xl font-bold text-[#1F2937]">Lecture Notes</h1>
+          <h1 className="font-sans text-4xl font-bold text-[#0F4C81]">Lecture Notes</h1>
           <p className="mt-2 text-sm text-[#6B7280]">Select your year to browse faculty-curated PDF notes by subject</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
@@ -747,11 +747,11 @@ export default function Notes() {
                 transition={{ delay: 0.1 + i * 0.1, type: "spring", stiffness: 80 }}
                 whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedYear(year)}
-                className="glass-card-hover group bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
+                className="glass-card-hover group bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
               >
                 <div className="p-8 text-center">
                   <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-xl ${s.bg} text-3xl font-bold transition-all duration-300 group-hover:scale-105 shadow-sm`}>{CURRICULUM[year].icon}</div>
-                  <h2 className="text-xl font-bold text-[#1F2937]">{CURRICULUM[year].label}</h2>
+                  <h2 className="text-xl font-bold text-[#0F4C81]">{CURRICULUM[year].label}</h2>
                   <p className="mt-1.5 text-xs text-[#6B7280]">{Object.keys(CURRICULUM[year].semesters).length} Semesters</p>
                   <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#0F4C81] opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">Browse Notes <FiChevronRight size={12} /></div>
                 </div>
@@ -773,7 +773,7 @@ export default function Notes() {
         ><FiArrowLeft size={14} /> Back to Years</motion.button>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm"><FiLayers size={28} /></div>
-          <h1 className="font-sans text-2xl font-bold text-[#1F2937]">{yearData.label}</h1>
+          <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">{yearData.label}</h1>
           <p className="mt-1 text-sm text-[#6B7280]">Choose a semester</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -782,11 +782,11 @@ export default function Notes() {
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.08 }}
               whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
               onClick={() => setSelectedSemester(Number(semKey))}
-              className="glass-card-hover bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
+              className="glass-card-hover bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
             >
               <div className="p-8 text-center">
                 <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl ${ys.bg} text-xl font-bold text-white shadow-sm`}>{semKey === 1 ? "I" : "II"}</div>
-                <h2 className="text-lg font-bold text-[#1F2937]">{semData.label}</h2>
+                <h2 className="text-lg font-bold text-[#0F4C81]">{semData.label}</h2>
                 <p className="mt-1 text-xs text-[#6B7280]">{semData.subjects.length} subjects</p>
               </div>
             </motion.button>
@@ -807,7 +807,7 @@ export default function Notes() {
           <div className="flex items-center gap-2 text-sm text-[#6B7280] mb-3">
             <span className={ys.text}>{yearData.label}</span><FiChevronRight size={12} /><span className={ys.text}>{semesterData.label}</span>
           </div>
-          <h1 className="font-sans text-2xl font-bold text-[#1F2937]">Select Subject</h1>
+          <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">Select Subject</h1>
           <p className="mt-1 text-sm text-[#6B7280]">Choose a subject to browse its lecture notes</p>
         </motion.div>
         {semesterData.subjects.length === 0 ? (
@@ -839,12 +839,12 @@ export default function Notes() {
                   initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
                   whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                   onClick={() => setSelectedSubject(subject)}
-                  className="glass-card-hover group bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
+                  className="glass-card-hover group bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
                 >
                   <div className="relative flex items-start gap-4 p-5 text-left">
                     <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm transition-all duration-300 group-hover:scale-105"><FiFileText size={22} /></div>
                     <div className="min-w-0 flex-1 pt-1">
-                      <h3 className="font-sans font-bold text-sm text-[#1F2937] leading-snug">{subject}</h3>
+                      <h3 className="font-sans font-bold text-sm text-[#0F4C81] leading-snug">{subject}</h3>
                       {facultyName && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-[#6B7280]">{facultyName}</p>}
                       <div className="mt-3 flex items-center gap-2">
                         <span className="inline-flex items-center gap-1 rounded-full bg-[#0F4C81]/10 text-[#0F4C81] px-2.5 py-0.5 text-[10px] font-bold"><FiFileText size={10} /> VIEW NOTES</span>
@@ -890,7 +890,7 @@ export default function Notes() {
           ) : (
             <form onSubmit={handleUpload} className="space-y-4 rounded-xl border border-[#E5E7EB] bg-white p-6 shadow-sm">
               <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-3 mb-4">
-                <h3 className="font-sans text-base font-bold text-[#1F2937] flex items-center gap-2">
+                <h3 className="font-sans text-base font-bold text-[#0F4C81] flex items-center gap-2">
                   <FiUploadCloud size={18} className="text-[#0F4C81]" />
                   Upload Notes — {selectedSubject}
                 </h3>
@@ -911,7 +911,7 @@ export default function Notes() {
                     onChange={(e) => setUploadTitle(e.target.value)}
                     required
                     placeholder="e.g. Unit 1 Introduction"
-                    className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-4 py-2.5 text-sm text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
+                    className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-4 py-2.5 text-sm text-[#0F4C81] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
                   />
                 </div>
 
@@ -922,13 +922,13 @@ export default function Notes() {
                     onChange={(e) => setUploadDescription(e.target.value)}
                     placeholder="Brief description of the note"
                     rows={2}
-                    className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-4 py-2.5 text-sm text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
+                    className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-4 py-2.5 text-sm text-[#0F4C81] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
                   />
                 </div>
 
                 <div>
                   <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Select File</label>
-                  <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-slate-50 px-4 py-6 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
+                  <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-[#F8FAFC] px-4 py-6 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
                     <FiUploadCloud size={24} className="text-[#0F4C81]" />
                     <span className="text-xs text-[#6B7280]">
                       {uploadFileObj ? uploadFileObj.name : "Choose a PDF, DOC, PPTX file..."}
@@ -968,7 +968,7 @@ export default function Notes() {
           className="mb-4 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
         ><FiArrowLeft size={14} /> Back to Subjects</motion.button>
         <div className="flex items-center gap-2 text-xs text-[#6B7280]">
-          <span className={ys.text}>{yearData.label}</span><FiChevronRight size={10} /><span className={ys.text}>{semesterData.label}</span><FiChevronRight size={10} /><span className="text-[#1F2937] font-semibold">{selectedSubject}</span>
+          <span className={ys.text}>{yearData.label}</span><FiChevronRight size={10} /><span className={ys.text}>{semesterData.label}</span><FiChevronRight size={10} /><span className="text-[#0F4C81] font-semibold">{selectedSubject}</span>
         </div>
       </motion.div>
 
@@ -976,7 +976,7 @@ export default function Notes() {
         <div className="flex items-center gap-4">
           <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiBookOpen size={28} /></div>
           <div>
-            <h1 className="font-sans text-2xl font-bold text-[#1F2937]">{selectedSubject}</h1>
+            <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">{selectedSubject}</h1>
             <div className="flex items-center gap-3 mt-1">
               <span className="text-xs text-[#6B7280]">{yearData.label} · {semesterData.label}</span>
               {syllabusData && <span className="badge-primary">{syllabusData.length} modules</span>}
@@ -997,7 +997,7 @@ export default function Notes() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="bg-[#F8FAFC] text-[#1F2937]">
+                <tr className="bg-[#F8FAFC] text-[#0F4C81]">
                   <th className="px-5 py-3 font-bold uppercase tracking-wider w-14">Sl No</th>
                   <th className="px-5 py-3 font-bold uppercase tracking-wider">Contents of Module</th>
                   <th className="px-5 py-3 font-bold uppercase tracking-wider text-center w-20">Hrs</th>
@@ -1007,9 +1007,9 @@ export default function Notes() {
               <tbody className="divide-y divide-[#E5E7EB]">
                 {syllabusData.map((row) => (
                   <tr key={row.sl} className="hover:bg-[#F0F4F8] transition-colors">
-                    <td className="px-5 py-3.5 font-bold text-[#1F2937] align-top">{row.sl}</td>
+                    <td className="px-5 py-3.5 font-bold text-[#0F4C81] align-top">{row.sl}</td>
                     <td className="px-5 py-3.5 text-[#4B5563] leading-relaxed font-medium">{row.module}</td>
-                    <td className="px-5 py-3.5 text-center font-semibold text-[#1F2937] align-top">{row.hrs}</td>
+                    <td className="px-5 py-3.5 text-center font-semibold text-[#0F4C81] align-top">{row.hrs}</td>
                     <td className="px-5 py-3.5 text-center font-bold text-[#0F4C81] align-top">{row.co}</td>
                   </tr>
                 ))}
@@ -1029,7 +1029,7 @@ export default function Notes() {
           <div className="mb-5 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>
             <div>
-              <h2 className="font-sans text-lg font-bold text-[#1F2937]">English - Complete Notes</h2>
+              <h2 className="font-sans text-lg font-bold text-[#0F4C81]">English - Complete Notes</h2>
               <p className="text-[11px] text-[#6B7280]">Complete English notes PDF for download</p>
             </div>
           </div>
@@ -1044,7 +1044,7 @@ export default function Notes() {
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-base font-bold text-[#1F2937] group-hover:text-[#1E88E5] transition-colors">{englishPdf.title}</p>
+                  <p className="text-base font-bold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">{englishPdf.title}</p>
                   <p className="text-xs text-[#6B7280]">PDF · Complete Notes · 1st Year Semester 1</p>
                 </div>
                 <div className="shrink-0 rounded-full bg-white border border-[#E5E7EB] p-2 text-[#4B5563] hover:bg-slate-100 hover:text-slate-900 transition-all">
@@ -1064,7 +1064,7 @@ export default function Notes() {
           <div className="mb-5 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>
             <div>
-              <h2 className="font-sans text-lg font-bold text-[#1F2937]">Uploaded Notes</h2>
+              <h2 className="font-sans text-lg font-bold text-[#0F4C81]">Uploaded Notes</h2>
               <p className="text-[11px] text-[#6B7280]">{uploadedSubjectNotes.length} note{uploadedSubjectNotes.length > 1 ? "s" : ""} uploaded by faculty</p>
             </div>
           </div>
@@ -1080,7 +1080,7 @@ export default function Notes() {
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-semibold text-[#1F2937] truncate group-hover:text-[#1E88E5] transition-colors">{note.title}</p>
+                  <p className="text-sm font-semibold text-[#0F4C81] truncate group-hover:text-[#1E88E5] transition-colors">{note.title}</p>
                   <p className="text-[10px] text-[#6B7280]">PDF · {note.subject}</p>
                 </div>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-slate-400 group-hover:text-[#1E88E5] shrink-0"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -1095,7 +1095,7 @@ export default function Notes() {
           <div className="mb-5 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>
             <div>
-              <h2 className="font-sans text-lg font-bold text-[#1F2937]">Download Notes</h2>
+              <h2 className="font-sans text-lg font-bold text-[#0F4C81]">Download Notes</h2>
               <p className="text-[11px] text-[#6B7280]">{totalFiles} PDFs available across {units.length} units</p>
             </div>
           </div>
@@ -1114,7 +1114,7 @@ export default function Notes() {
                     <div className="flex items-center gap-3 min-w-0">
                       <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${uc.from} ${uc.to} text-xs font-bold shadow-sm transition-transform duration-300 ${isExpanded ? 'scale-105' : ''}`}>{idx + 1}</div>
                       <div className="min-w-0">
-                        <h3 className="text-sm font-bold text-[#1F2937]">{unit.title}</h3>
+                        <h3 className="text-sm font-bold text-[#0F4C81]">{unit.title}</h3>
                         <p className="text-[11px] text-[#6B7280]">{unit.subtitle}</p>
                       </div>
                     </div>
@@ -1148,7 +1148,7 @@ export default function Notes() {
                                     )}
                                   </div>
                                   <div className="min-w-0 flex-1">
-                                    <p className="text-sm font-semibold text-[#1F2937] truncate group-hover:text-[#1E88E5] transition-colors">{file.title}</p>
+                                    <p className="text-sm font-semibold text-[#0F4C81] truncate group-hover:text-[#1E88E5] transition-colors">{file.title}</p>
                                     <p className="text-[10px] text-[#6B7280]">{file.type === "doc" ? "Google Doc" : file.type === "docx" ? "Word" : file.type === "pptx" || file.type === "ppt" ? "PowerPoint" : "PDF"} · {unit.title}</p>
                                   </div>
                                   <div className="shrink-0 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] p-2 text-slate-400 group-hover:bg-[#0F4C81]/10 group-hover:text-[#0F4C81] transition-all"><FiExternalLink size={12} /></div>

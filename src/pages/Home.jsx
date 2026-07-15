@@ -111,12 +111,12 @@ export default function Home() {
                 transition={{ delay: i * 0.1, duration: 0.4 }}
                 whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                 onClick={() => navigate(card.to)}
-                className="group relative overflow-hidden rounded-lg bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md"
+                className="group relative overflow-hidden rounded-lg bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm"
               >
                 <div className="relative flex flex-col items-center gap-4 p-6 text-center">
                   <div className={`flex h-16 w-16 items-center justify-center rounded-lg ${card.bgIcon} text-white shadow-sm transition-all duration-300 group-hover:scale-105`}><card.icon size={26} /></div>
                   <div>
-                    <h3 className="font-sans text-base font-bold text-[#1F2937]">{card.label}</h3>
+                    <h3 className="font-sans text-base font-bold text-[#0F4C81]">{card.label}</h3>
                     <p className="mt-1 text-xs text-[#6B7280]">{card.desc}</p>
                   </div>
                   <div className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#1E88E5] opacity-0 group-hover:opacity-100 transition-all translate-y-1 group-hover:translate-y-0">Explore <FiChevronRight size={12} /></div>
@@ -132,17 +132,17 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 text-center">
             <span className="inline-flex items-center gap-2 rounded-full bg-[#0F4C81]/10 px-4 py-1.5 text-xs font-bold text-[#0F4C81] mb-4"><FiStar size={12} /> Features</span>
-            <h2 className="font-sans text-3xl font-bold text-[#1F2937]">Everything you need to succeed</h2>
+            <h2 className="font-sans text-3xl font-bold text-[#0F4C81]">Everything you need to succeed</h2>
             <p className="mt-3 text-sm text-[#6B7280] max-w-xl mx-auto">A comprehensive suite of academic resources designed to help you excel in your studies</p>
           </motion.div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((feature, i) => (
               <motion.div key={feature.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, duration: 0.4 }}
-                className="group rounded-lg bg-white border border-[#E5E7EB] shadow-sm p-6 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
+                className="group rounded-lg bg-white border border-[#E5E7EB] shadow-sm p-6 transition-all duration-300 hover:shadow-sm hover:-translate-y-0.5"
               >
                 <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-lg ${feature.bgIcon} text-white shadow-sm`}><feature.icon size={22} /></div>
-                <h3 className="font-sans text-base font-bold text-[#1F2937] mb-2">{feature.title}</h3>
+                <h3 className="font-sans text-base font-bold text-[#0F4C81] mb-2">{feature.title}</h3>
                 <p className="text-sm text-[#6B7280] leading-relaxed">{feature.desc}</p>
               </motion.div>
             ))}
@@ -156,7 +156,7 @@ export default function Home() {
       <section className="py-20 sm:py-24">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="relative overflow-hidden rounded-lg bg-[#0F4C81] p-10 sm:p-14 text-white text-center shadow-md border border-[#0A3356]"
+            className="relative overflow-hidden rounded-lg bg-[#0F4C81] p-10 sm:p-14 text-white text-center shadow-sm border border-[#0A3356]"
           >
             <div className="relative">
               <FiAward size={48} className="mx-auto mb-4 opacity-85" />
@@ -166,7 +166,7 @@ export default function Home() {
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <button onClick={() => navigate(getDashboardPath())}
-                  className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#0F4C81] shadow-md transition-all hover:bg-[#F0F4F8] active:scale-[0.97]"
+                  className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#0F4C81] shadow-sm transition-all hover:bg-[#F0F4F8] active:scale-[0.97]"
                 >{user ? "Go to Dashboard" : "Get Started"} <FiArrowRight size={16} /></button>
               </div>
             </div>

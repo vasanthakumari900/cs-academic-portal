@@ -16,7 +16,7 @@ export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, m
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35 }}
     >
-      <div className="group relative flex flex-col gap-3 overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md text-left">
+      <div className="group relative flex flex-col gap-3 overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm text-left">
         <div className="relative p-5 flex flex-col gap-3">
           <div className="flex items-start gap-3">
             {/* PDF icon */}
@@ -24,7 +24,7 @@ export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, m
               <FiFileText size={22} />
             </div>
             <div className="min-w-0 flex-1">
-              <h3 className="truncate font-sans text-sm font-semibold text-[#1F2937] group-hover:text-[#1E88E5] transition-colors">
+              <h3 className="truncate font-sans text-sm font-semibold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">
                 {doc.title}
               </h3>
               <p className="mt-0.5 text-xs text-[#6B7280]">

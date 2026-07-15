@@ -31,7 +31,7 @@ export default function Register() {
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="relative w-full max-w-md">
         <div className="relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass p-8">
           <div className="mb-6 text-center">
-            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow-md">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow-sm">
               <FiUser size={24} />
             </div>
             <h1 className="font-display text-2xl font-bold text-white">Create your account</h1>
@@ -80,7 +80,7 @@ export default function Register() {
             </div>
 
             <button type="submit" disabled={submitting}
-              className="group w-full rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:shadow-lg hover:from-indigo-500 hover:to-violet-600 active:scale-[0.97] disabled:opacity-60"
+              className="group w-full rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:shadow-sm hover:from-indigo-500 hover:to-violet-600 active:scale-[0.97] disabled:opacity-60"
             >
               {submitting ? "Creating account…" : "Create Account"} <FiArrowRight size={16} className="inline group-hover:translate-x-0.5 transition-transform" />
             </button>

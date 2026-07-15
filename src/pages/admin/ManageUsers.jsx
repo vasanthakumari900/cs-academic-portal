@@ -37,7 +37,7 @@ export default function ManageUsers() {
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 text-left bg-[#F8FAFC]">
-      <h2 className="mb-6 font-sans text-2xl font-bold text-[#1F2937]">Manage Users</h2>
+      <h2 className="mb-6 font-sans text-2xl font-bold text-[#0F4C81]">Manage Users</h2>
 
       {loading ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -58,8 +58,8 @@ export default function ManageUsers() {
             </thead>
             <tbody className="divide-y divide-[#E5E7EB]">
               {users.map((u) => (
-                <tr key={u.id} className="bg-white hover:bg-slate-50 transition-colors">
-                  <td className="flex items-center gap-2 px-4 py-3.5 font-medium text-[#1F2937]">
+                <tr key={u.id} className="bg-white hover:bg-[#F8FAFC] transition-colors">
+                  <td className="flex items-center gap-2 px-4 py-3.5 font-medium text-[#0F4C81]">
                     <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0F4C81] text-xs font-bold text-white shadow-sm">
                       {initials(u.name)}
                     </span>
@@ -70,7 +70,7 @@ export default function ManageUsers() {
                     <select
                       value={u.role}
                       onChange={(e) => changeRole(u.id, e.target.value)}
-                      className="rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-2 py-1.5 text-xs text-[#1F2937] outline-none focus:border-[#0F4C81] transition-all"
+                      className="rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-2 py-1.5 text-xs text-[#0F4C81] outline-none focus:border-[#0F4C81] transition-all"
                     >
                       {Object.values(ROLES).map((r) => (
                         <option key={r} value={r}>{r}</option>

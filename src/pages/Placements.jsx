@@ -67,7 +67,7 @@ function ApplyModal({ drive, onClose }) {
           {[1, 2, 3].map((s) => (
             <div key={s} className="flex items-center gap-2">
               <div className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold transition-all ${step >= s ? "bg-[#0F4C81] text-white shadow-sm" : "bg-slate-200 text-slate-500"}`}>{step > s ? <FiCheckCircle size={14} /> : s}</div>
-              <span className={`text-xs font-medium ${step >= s ? "text-[#1F2937] font-semibold" : "text-[#6B7280]"}`}>{s === 1 ? "Details" : s === 2 ? "MCQ Test" : "Submit"}</span>
+              <span className={`text-xs font-medium ${step >= s ? "text-[#0F4C81] font-semibold" : "text-[#6B7280]"}`}>{s === 1 ? "Details" : s === 2 ? "MCQ Test" : "Submit"}</span>
               {s < 3 && <span className="text-[#E5E7EB] mx-1">—</span>}
             </div>
           ))}
@@ -115,7 +115,7 @@ function ApplyModal({ drive, onClose }) {
                 </div>
                 {selectedQuestions.map((q, idx) => (
                   <div key={q.id} className="rounded-lg border border-[#E5E7EB] bg-white p-4 shadow-sm">
-                    <p className="mb-3 text-sm font-semibold text-[#1F2937]">{idx + 1}. {q.question}</p>
+                    <p className="mb-3 text-sm font-semibold text-[#0F4C81]">{idx + 1}. {q.question}</p>
                     <div className="space-y-2">
                       {q.options.map((opt, oi) => (
                         <button key={oi} onClick={() => handleAnswer(q.id, oi)}
@@ -137,7 +137,7 @@ function ApplyModal({ drive, onClose }) {
                 <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#2E7D32]/10">
                   <FiCheckCircle size={32} className="text-[#2E7D32]" />
                 </div>
-                <h3 className="text-lg font-bold text-[#1F2937]">Application Submitted!</h3>
+                <h3 className="text-lg font-bold text-[#0F4C81]">Application Submitted!</h3>
                 <p className="mt-2 text-sm text-[#6B7280]">Your application for {drive.companyName} — {drive.role} has been received.</p>
                 <div className="mt-6 grid grid-cols-2 gap-4 text-center w-full max-w-sm">
                   <div className="bg-white border border-[#E5E7EB] rounded-lg p-4 shadow-sm">
@@ -145,7 +145,7 @@ function ApplyModal({ drive, onClose }) {
                     <p className="text-[10px] text-[#6B7280] font-medium uppercase tracking-wider">MCQ Score</p>
                   </div>
                   <div className="bg-white border border-[#E5E7EB] rounded-lg p-4 shadow-sm">
-                    <p className="text-2xl font-bold text-[#1F2937]">{drive.package} LPA</p>
+                    <p className="text-2xl font-bold text-[#0F4C81]">{drive.package} LPA</p>
                     <p className="text-[10px] text-[#6B7280] font-medium uppercase tracking-wider">Package</p>
                   </div>
                 </div>
@@ -180,7 +180,7 @@ export default function Placements() {
         <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm">
           <FiBriefcase size={36} />
         </div>
-        <h1 className="font-sans text-4xl font-bold text-[#1F2937]">Placements</h1>
+        <h1 className="font-sans text-4xl font-bold text-[#0F4C81]">Placements</h1>
         <p className="mt-2 text-sm text-[#6B7280]">Live drives, eligibility criteria and application links from recruiting companies</p>
       </motion.div>
 
@@ -188,18 +188,18 @@ export default function Placements() {
         <div className="mb-6 flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiBriefcase size={18} /></div>
           <div className="text-left">
-            <h2 className="font-sans text-xl font-bold text-[#1F2937]">Active Drives</h2>
+            <h2 className="font-sans text-xl font-bold text-[#0F4C81]">Active Drives</h2>
             <p className="text-[11px] text-[#6B7280]">{displayItems.length} companies currently recruiting</p>
           </div>
         </div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {displayItems.map((p, i) => (
             <motion.div key={p.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} className="h-full">
-              <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300 flex h-full flex-col gap-4 text-left">
+              <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm hover:shadow-sm transition-all duration-300 flex h-full flex-col gap-4 text-left">
                 <div className="flex items-center gap-3">
                   <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-lg font-bold text-white shadow-sm">{p.companyName?.[0]}</div>
                   <div>
-                    <h3 className="font-sans font-semibold text-sm text-[#1F2937]">{p.companyName}</h3>
+                    <h3 className="font-sans font-semibold text-sm text-[#0F4C81]">{p.companyName}</h3>
                     <p className="flex items-center gap-1 text-xs text-[#6B7280]"><FiBriefcase size={11} /> {p.role}</p>
                   </div>
                 </div>

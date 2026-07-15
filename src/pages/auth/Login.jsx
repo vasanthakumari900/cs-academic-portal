@@ -33,7 +33,7 @@ function LiveClock() {
     <div className="inline-flex items-center gap-3 sm:gap-4 text-sm sm:text-base font-semibold text-[#4B5563]">
       <span className="flex items-center gap-2 text-[#0F4C81]"><FiCalendar size={16} /> {dayName}, {dateStr}</span>
       <span className="text-slate-300">|</span>
-      <span className="flex items-center gap-2 font-mono tracking-wider text-[#1F2937]"><FiClock size={16} /> {timeStr}</span>
+      <span className="flex items-center gap-2 font-mono tracking-wider text-[#0F4C81]"><FiClock size={16} /> {timeStr}</span>
     </div>
   );
 }
@@ -68,8 +68,8 @@ export default function Login() {
   async function handleStudentSubmit(e) {
     e.preventDefault();
 
-    if (!/^(24E(29|30)|25E(29|30))\d{2}$/i.test(rollNumber.trim())) {
-      toast.error("Enter a valid student roll number (e.g. 24E2901, 24E3001, 25E2901, or 25E3001)");
+    if (!/^(24E(29|30)|25E(29|30)|26E31)\d{2}$/i.test(rollNumber.trim())) {
+      toast.error("Enter a valid student roll number (e.g. 24E2901, 25E2901, or 26E3101)");
       return;
     }
 
@@ -148,7 +148,7 @@ export default function Login() {
             </motion.div>
 
             {/* Title */}
-            <h1 className="font-sans text-4xl xl:text-5xl font-bold leading-tight text-[#1F2937]">
+            <h1 className="font-sans text-4xl xl:text-5xl font-bold leading-tight text-[#0F4C81]">
               CS Academic Portal
             </h1>
 
@@ -190,7 +190,7 @@ export default function Login() {
                 alt="DGVC College Logo"
                 className="mx-auto mb-4 h-auto w-full max-w-[20rem] object-contain rounded-lg border border-[#E5E7EB] shadow-sm"
               />
-              <h2 className="font-sans text-2xl font-bold text-[#1F2937]">
+              <h2 className="font-sans text-2xl font-bold text-[#0F4C81]">
                 CS Academic Portal
               </h2>
               <p className="mt-1 text-xs text-[#0F4C81] font-semibold">
@@ -204,10 +204,10 @@ export default function Login() {
             </div>
 
             {/* Login Card */}
-            <div className="rounded-xl border border-[#E5E7EB] bg-white shadow-lg p-8 sm:p-10 text-left">
+            <div className="rounded-xl border border-[#E5E7EB] bg-white shadow-sm p-8 sm:p-10 text-left">
               <div className="relative">
                 {/* Tab Switcher */}
-                <div className="mb-6 flex rounded-lg bg-slate-100 p-1 border border-slate-200">
+                <div className="mb-6 flex rounded-lg bg-slate-100 p-1 border border-[#E5E7EB]">
                   <button
                     type="button"
                     onClick={() => { setActiveTab("student"); setCaptcha(""); refreshCaptcha(); }}
@@ -234,7 +234,7 @@ export default function Login() {
 
                 {/* Header */}
                 <div className="mb-6 text-center">
-                  <h2 className="font-sans text-xl font-bold text-[#1F2937]">
+                  <h2 className="font-sans text-xl font-bold text-[#0F4C81]">
                     {activeTab === "student" ? "Student Login" : "Faculty Login"}
                   </h2>
                   <p className="mt-1 text-xs text-[#6B7280]">
@@ -261,7 +261,7 @@ export default function Login() {
                             onChange={(e) => setRollNumber(formatRoll(e.target.value))}
                             placeholder="e.g. 24E2901"
                             maxLength={7}
-                            className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-11 py-3 font-mono text-sm tracking-wider text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
+                            className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 font-mono text-sm tracking-wider text-[#0F4C81] placeholder:text-[#6B7280]/60 outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
                             autoFocus={activeTab === "student"}
                           />
                         </div>
@@ -282,7 +282,7 @@ export default function Login() {
                             value={dob}
                             onChange={(e) => setDob(e.target.value)}
                             max={new Date().toISOString().split("T")[0]}
-                            className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-11 py-3 text-sm text-[#1F2937] outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
+                            className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 text-sm text-[#0F4C81] outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
                           />
                         </div>
                       </div>
@@ -303,7 +303,7 @@ export default function Login() {
                             value={facultyName}
                             onChange={(e) => setFacultyName(e.target.value.toUpperCase())}
                             placeholder="Enter name in CAPITAL letters"
-                            className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-11 py-3 text-sm text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
+                            className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 text-sm text-[#0F4C81] placeholder:text-[#6B7280]/60 outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
                             autoFocus={activeTab === "faculty"}
                           />
                         </div>
@@ -324,7 +324,7 @@ export default function Login() {
                             value={facultyPassword}
                             onChange={(e) => setFacultyPassword(e.target.value)}
                             placeholder="Enter your password"
-                            className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-11 py-3 text-sm text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
+                            className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 text-sm text-[#0F4C81] placeholder:text-[#6B7280]/60 outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
                           />
                         </div>
                         <p className="mt-1.5 text-[10px] text-[#6B7280]">
@@ -347,7 +347,7 @@ export default function Login() {
                         placeholder="Enter the 5-digit code"
                         maxLength={5}
                         inputMode="numeric"
-                        className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-11 py-3 font-mono text-sm tracking-[0.3em] text-[#1F2937] placeholder:text-[#6B7280]/60 placeholder:tracking-wider outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
+                        className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 font-mono text-sm tracking-[0.3em] text-[#0F4C81] placeholder:text-[#6B7280]/60 placeholder:tracking-wider outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
                       />
                     </div>
 

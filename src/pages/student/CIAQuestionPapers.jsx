@@ -46,7 +46,7 @@ function SelectionGrid({ items, onSelect }) {
           whileHover={{ y: -4 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => onSelect(item.key)}
-          className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40 text-left"
+          className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40 text-left"
         >
           <div className="relative flex items-center gap-4 p-5">
             <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm transition-all">
@@ -57,7 +57,7 @@ function SelectionGrid({ items, onSelect }) {
               )}
             </div>
             <div className="min-w-0 flex-1">
-              <h3 className="font-sans text-base font-bold text-[#1F2937] group-hover:text-[#1E88E5] transition-colors">
+              <h3 className="font-sans text-base font-bold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">
                 {item.label}
               </h3>
               {item.sub && (
@@ -83,14 +83,14 @@ function PaperCard({ paper, onPreview }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35 }}
     >
-      <div className="group relative flex flex-col gap-3 overflow-hidden rounded-lg bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 text-left">
+      <div className="group relative flex flex-col gap-3 overflow-hidden rounded-lg bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:-translate-y-0.5 text-left">
         <div className="relative p-5 flex flex-col gap-3">
           <div className="flex items-start gap-3">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81]/10 text-[#0F4C81] transition-transform">
               <FiFileText size={22} />
             </div>
             <div className="min-w-0 flex-1">
-              <h3 className="truncate font-sans text-sm font-semibold text-[#1F2937] group-hover:text-[#1E88E5] transition-colors">
+              <h3 className="truncate font-sans text-sm font-semibold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">
                 {paper.title}
               </h3>
               <p className="mt-0.5 text-xs text-[#6B7280] flex items-center gap-1.5">
@@ -313,7 +313,7 @@ export default function CIAQuestionPapers() {
               <FiAward size={26} />
             </div>
             <div className="text-left">
-              <h1 className="font-sans text-2xl font-bold text-[#1F2937]">
+              <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">
                 CIA Question Papers
               </h1>
               <p className="mt-1 text-sm text-[#6B7280]">
@@ -333,7 +333,7 @@ export default function CIAQuestionPapers() {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               onClick={goBack}
-              className="mb-4 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-3.5 py-2 text-xs font-semibold text-[#4B5563] transition-all hover:bg-slate-50 hover:text-slate-900"
+              className="mb-4 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-3.5 py-2 text-xs font-semibold text-[#4B5563] transition-all hover:bg-[#F8FAFC] hover:text-slate-900"
             >
               <FiChevronLeft size={14} /> Back
             </motion.button>
@@ -348,7 +348,7 @@ export default function CIAQuestionPapers() {
                 <FiFolder size={14} />
               </div>
               <div>
-                <h2 className="font-sans text-base font-bold text-[#1F2937]">
+                <h2 className="font-sans text-base font-bold text-[#0F4C81]">
                   Select Year
                 </h2>
                 <p className="text-[11px] text-[#6B7280]">Choose your academic year</p>
@@ -365,7 +365,7 @@ export default function CIAQuestionPapers() {
                 <FiFolder size={14} />
               </div>
               <div>
-                <h2 className="font-sans text-base font-bold text-[#1F2937]">
+                <h2 className="font-sans text-base font-bold text-[#0F4C81]">
                   {yearLabel} — Semesters
                 </h2>
                 <p className="text-[11px] text-[#6B7280]">Choose a semester</p>
@@ -382,7 +382,7 @@ export default function CIAQuestionPapers() {
                 <FiAward size={14} />
               </div>
               <div>
-                <h2 className="font-sans text-base font-bold text-[#1F2937]">
+                <h2 className="font-sans text-base font-bold text-[#0F4C81]">
                   {yearLabel} — {semLabel}
                 </h2>
                 <p className="text-[11px] text-[#6B7280]">Choose a CIA assessment</p>
@@ -399,7 +399,7 @@ export default function CIAQuestionPapers() {
                 <FiFileText size={14} />
               </div>
               <div>
-                <h2 className="font-sans text-base font-bold text-[#1F2937]">
+                <h2 className="font-sans text-base font-bold text-[#0F4C81]">
                   {yearLabel} — {semLabel} — {ciaLabel}
                 </h2>
                 <p className="text-[11px] text-[#6B7280]">

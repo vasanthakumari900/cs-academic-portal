@@ -39,7 +39,7 @@ export default function ManageFaculty() {
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 text-left bg-[#F8FAFC]">
-      <h2 className="mb-2 font-sans text-2xl font-bold text-[#1F2937]">Manage Faculty</h2>
+      <h2 className="mb-2 font-sans text-2xl font-bold text-[#0F4C81]">Manage Faculty</h2>
       <p className="mb-6 text-sm text-[#6B7280]">View and manage all faculty accounts.</p>
 
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -55,13 +55,13 @@ export default function ManageFaculty() {
       ) : (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {faculty.map((f) => (
-            <div key={f.id} className="rounded-xl border border-[#E5E7EB] bg-white p-5 shadow-sm hover:shadow-md transition-all text-left">
+            <div key={f.id} className="rounded-xl border border-[#E5E7EB] bg-white p-5 shadow-sm hover:shadow-sm transition-all text-left">
               <div className="flex items-center gap-3">
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0F4C81] text-sm font-bold text-white shadow-sm">
                   {initials(f.name)}
                 </span>
                 <div>
-                  <p className="font-semibold text-[#1F2937]">{f.name}</p>
+                  <p className="font-semibold text-[#0F4C81]">{f.name}</p>
                   <p className="text-sm text-[#6B7280]">{f.email}</p>
                 </div>
               </div>

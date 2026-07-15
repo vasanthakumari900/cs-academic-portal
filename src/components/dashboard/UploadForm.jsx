@@ -138,7 +138,7 @@ export default function UploadForm({
         {showThumbnail && (
           <div>
             <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Thumbnail (optional)</label>
-            <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-slate-50 px-4 py-6 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
+            <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-[#F8FAFC] px-4 py-6 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
               <FiUploadCloud size={22} className="text-[#0F4C81]" />
               <span className="text-sm text-[#6B7280]">
                 {thumbnail ? thumbnail.name : "Click to choose a thumbnail image"}
@@ -155,7 +155,7 @@ export default function UploadForm({
 
         <div>
           <label className="mb-1 block text-sm font-semibold text-[#4B5563]">{fileLabel}</label>
-          <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-slate-50 px-4 py-8 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
+          <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-[#F8FAFC] px-4 py-8 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
             <FiUploadCloud size={26} className="text-[#0F4C81]" />
             <span className="text-sm text-[#6B7280]">
               {file ? file.name : `Click to choose a ${fileLabel.toLowerCase()}`}

@@ -37,7 +37,7 @@ export default function Sidebar({ items, open, onClose }) {
         initial={false}
         animate={{ x: 0 }}
         className={classNames(
-          "fixed inset-y-0 left-0 z-40 w-64 shrink-0 border-r border-white/10 bg-[#0F4C81] shadow-md transition-transform duration-300 lg:static lg:translate-x-0",
+          "fixed inset-y-0 left-0 z-40 w-64 shrink-0 border-r border-white/10 bg-[#0F4C81] shadow-sm transition-transform duration-300 lg:static lg:translate-x-0",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >

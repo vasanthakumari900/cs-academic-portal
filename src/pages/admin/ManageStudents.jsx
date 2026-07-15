@@ -39,7 +39,7 @@ export default function ManageStudents() {
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 text-left bg-[#F8FAFC]">
-      <h2 className="mb-2 font-sans text-2xl font-bold text-[#1F2937]">Manage Students</h2>
+      <h2 className="mb-2 font-sans text-2xl font-bold text-[#0F4C81]">Manage Students</h2>
       <p className="mb-6 text-sm text-[#6B7280]">View and manage all student accounts.</p>
 
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -65,8 +65,8 @@ export default function ManageStudents() {
             </thead>
             <tbody className="divide-y divide-[#E5E7EB]">
               {students.map((s) => (
-                <tr key={s.id} className="bg-white hover:bg-slate-50 transition-colors">
-                  <td className="flex items-center gap-2 px-4 py-3.5 font-medium text-[#1F2937]">
+                <tr key={s.id} className="bg-white hover:bg-[#F8FAFC] transition-colors">
+                  <td className="flex items-center gap-2 px-4 py-3.5 font-medium text-[#0F4C81]">
                     <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0F4C81] text-xs font-bold text-white shadow-sm">
                       {initials(s.name)}
                     </span>

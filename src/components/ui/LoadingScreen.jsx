@@ -27,7 +27,7 @@ export default function LoadingScreen() {
         <motion.p
           animate={{ opacity: [0.4, 1, 0.4] }}
           transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-          className="font-sans text-sm font-semibold tracking-wide text-[#1F2937]"
+          className="font-sans text-sm font-semibold tracking-wide text-[#0F4C81]"
         >
           Loading CS Academic Portal…
         </motion.p>

@@ -287,7 +287,7 @@ const refetch = () => {};
           <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm">
             <FiAward size={36} />
           </div>
-          <h1 className="font-sans text-4xl font-bold text-[#1F2937]">Question Papers</h1>
+          <h1 className="font-sans text-4xl font-bold text-[#0F4C81]">Question Papers</h1>
           <p className="mt-2 text-sm text-[#6B7280]">Select your course to browse previous year exam papers</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -296,13 +296,13 @@ const refetch = () => {};
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.1 }}
               whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
               onClick={() => setCourseType(course.value)}
-              className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-350 hover:shadow-md hover:border-[#1E88E5]/45"
+              className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-350 hover:shadow-sm hover:border-[#1E88E5]/45"
             >
               <div className="relative p-8 text-center flex flex-col items-center">
                 <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-xl ${course.value === "ug" ? "bg-[#0F4C81]" : "bg-[#1E88E5]"} text-3xl font-bold text-white shadow-sm transition-all`}>
                   {course.value === "ug" ? "UG" : "PG"}
                 </div>
-                <h2 className="text-xl font-bold text-[#1F2937] group-hover:text-[#1E88E5] transition-colors">{course.label}</h2>
+                <h2 className="text-xl font-bold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">{course.label}</h2>
                 <p className="mt-1.5 text-xs text-[#6B7280]">{course.desc}</p>
                 <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#1E88E5]">
                   Browse Papers <FiChevronRight size={12} />
@@ -324,7 +324,7 @@ const refetch = () => {};
         ><FiArrowLeft size={14} /> Back to Course</motion.button>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm"><FiAward size={28} /></div>
-          <h1 className="font-sans text-2xl font-bold text-[#1F2937]">{courseType.toUpperCase()} — Select Year</h1>
+          <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">{courseType.toUpperCase()} — Select Year</h1>
           <p className="mt-1 text-sm text-[#6B7280]">Choose your academic year</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
@@ -335,11 +335,11 @@ const refetch = () => {};
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.08 }}
                 whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedYear(year)}
-                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
+                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
               >
                 <div className="relative p-8 text-center">
                   <div className={`mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-xl ${s.bg} text-2xl font-bold text-white shadow-sm transition-all`}>{CURRICULUM[year].icon}</div>
-                  <h2 className="text-lg font-bold text-[#1F2937]">{CURRICULUM[year].label}</h2>
+                  <h2 className="text-lg font-bold text-[#0F4C81]">{CURRICULUM[year].label}</h2>
                   {courseType !== "pg" && <p className="mt-1 text-xs text-[#6B7280]">{getSubjectsForYear(year).length} subjects</p>}
                 </div>
               </motion.button>
@@ -360,7 +360,7 @@ const refetch = () => {};
         ><FiArrowLeft size={14} /> Back to Years</motion.button>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm"><FiLayers size={28} /></div>
-          <h1 className="font-sans text-2xl font-bold text-[#1F2937]">{yearData.label}</h1>
+          <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">{yearData.label}</h1>
           <p className="mt-1 text-sm text-[#6B7280]">Choose a semester</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -369,11 +369,11 @@ const refetch = () => {};
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.08 }}
               whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
               onClick={() => setSelectedSemester(Number(semKey))}
-              className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
+              className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
             >
               <div className="relative p-8 text-center">
                 <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl ${ys.bg} text-xl font-bold text-white shadow-sm`}>{semKey === 1 ? "I" : "II"}</div>
-                <h2 className="text-lg font-bold text-[#1F2937]">{semData.label}</h2>
+                <h2 className="text-lg font-bold text-[#0F4C81]">{semData.label}</h2>
                 {courseType !== "pg" && <p className="mt-1 text-xs text-[#6B7280]">{semData.subjects.length} subjects</p>}
               </div>
             </motion.button>
@@ -395,7 +395,7 @@ const refetch = () => {};
             <span className="uppercase font-semibold text-[#6B7280]">{courseType.toUpperCase()}</span><FiChevronRight size={10} />
             <span className={ys.text}>{yearData.label}</span><FiChevronRight size={10} /><span className={ys.text}>{semesterData.label}</span>
           </div>
-          <h1 className="font-sans text-2xl font-bold text-[#1F2937]">Select Subject</h1>
+          <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">Select Subject</h1>
           <p className="mt-1 text-sm text-[#6B7280]">Choose a subject to view its previous year question papers</p>
         </motion.div>
         {yearSubjects.length === 0 ? (
@@ -412,12 +412,12 @@ const refetch = () => {};
                   initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
                   whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                   onClick={() => setSelectedSubject(subject)}
-                  className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40"
+                  className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
                 >
                   <div className="relative flex items-start gap-4 p-5 text-left">
                     <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm transition-all"><FiFileText size={22} /></div>
                     <div className="min-w-0 flex-1 pt-1">
-                      <h3 className="font-sans font-bold text-sm text-[#1F2937] leading-snug">{subject}</h3>
+                      <h3 className="font-sans font-bold text-sm text-[#0F4C81] leading-snug">{subject}</h3>
                       {FACULTY_MAP[subject] && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-[#6B7280]">{FACULTY_MAP[subject]}</p>}
                       <div className="mt-3 flex items-center gap-2">
                         <span className={`inline-flex items-center gap-1 rounded-full ${sc.badge} px-2.5 py-0.5 text-[10px] font-semibold`}><FiAward size={10} /> VIEW PAPERS</span>
@@ -445,7 +445,7 @@ const refetch = () => {};
         <div className="flex items-center gap-2 text-xs text-[#6B7280]">
           <span className="uppercase font-semibold text-[#6B7280]">{courseType.toUpperCase()}</span><FiChevronRight size={10} />
           <span className={ys.text}>{yearData.label}</span><FiChevronRight size={10} /><span className={ys.text}>{semesterData.label}</span><FiChevronRight size={10} />
-          <span className="text-[#1F2937] font-semibold">{selectedSubject}</span>
+          <span className="text-[#0F4C81] font-semibold">{selectedSubject}</span>
         </div>
       </motion.div>
 
@@ -463,7 +463,7 @@ const refetch = () => {};
           ) : (
             <form onSubmit={handleUpload} className="space-y-4 rounded-xl border border-[#E5E7EB] bg-white p-6 shadow-sm">
               <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-3 mb-4">
-                <h3 className="font-sans text-base font-bold text-[#1F2937] flex items-center gap-2">
+                <h3 className="font-sans text-base font-bold text-[#0F4C81] flex items-center gap-2">
                   <FiUploadCloud size={18} className="text-[#0F4C81]" />
                   Upload Question Paper — {selectedSubject}
                 </h3>
@@ -484,7 +484,7 @@ const refetch = () => {};
                     onChange={(e) => setUploadTitle(e.target.value)}
                     required
                     placeholder="e.g. November 2024 Exam Paper"
-                    className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-4 py-2.5 text-sm text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
+                    className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-4 py-2.5 text-sm text-[#0F4C81] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
                   />
                 </div>
 
@@ -495,7 +495,7 @@ const refetch = () => {};
                     onChange={(e) => setUploadDescription(e.target.value)}
                     placeholder="Brief description of the question paper"
                     rows={2}
-                    className="w-full rounded-lg border border-[#E5E7EB] bg-slate-50 px-4 py-2.5 text-sm text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
+                    className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-4 py-2.5 text-sm text-[#0F4C81] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white transition-all"
                   />
                 </div>
 
@@ -507,7 +507,7 @@ const refetch = () => {};
                       onChange={(e) => setUploadYearVal(e.target.value)}
                       required
                       placeholder="e.g. U1819"
-                      className="w-full rounded-lg border border-[#E5E7EB] bg-white px-4 py-2.5 text-sm text-[#1F2937] outline-none focus:border-[#0F4C81] transition-all"
+                      className="w-full rounded-lg border border-[#E5E7EB] bg-white px-4 py-2.5 text-sm text-[#0F4C81] outline-none focus:border-[#0F4C81] transition-all"
                     />
                   </div>
 
@@ -518,14 +518,14 @@ const refetch = () => {};
                       onChange={(e) => setUploadRegulation(e.target.value)}
                       required
                       placeholder="e.g. R2024"
-                      className="w-full rounded-lg border border-[#E5E7EB] bg-white px-4 py-2.5 text-sm text-[#1F2937] outline-none focus:border-[#0F4C81] transition-all"
+                      className="w-full rounded-lg border border-[#E5E7EB] bg-white px-4 py-2.5 text-sm text-[#0F4C81] outline-none focus:border-[#0F4C81] transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
                   <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Select PDF File</label>
-                  <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-slate-50 px-4 py-6 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
+                  <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-[#F8FAFC] px-4 py-6 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
                     <FiUploadCloud size={24} className="text-[#0F4C81]" />
                     <span className="text-xs text-[#6B7280]">
                       {uploadFileObj ? uploadFileObj.name : "Choose a PDF question paper..."}
@@ -563,7 +563,7 @@ const refetch = () => {};
         <div className="flex items-center gap-4">
           <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiAward size={28} /></div>
           <div>
-            <h1 className="font-sans text-2xl font-bold text-[#1F2937]">{selectedSubject}</h1>
+            <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">{selectedSubject}</h1>
             <div className="flex items-center gap-3 mt-1">
               <span className="text-xs text-[#6B7280]">{courseType.toUpperCase()} · {yearData.label} · {semesterData.label}</span>
               <span className="badge-primary">{filtered.length} paper{filtered.length !== 1 ? "s" : ""}</span>
@@ -586,7 +586,7 @@ const refetch = () => {};
               className="relative overflow-hidden rounded-lg bg-white border border-[#E5E7EB] shadow-sm p-4 text-center"
             >
               <div className={`absolute top-0 left-0 right-0 h-0.5 ${s.color}`} />
-              <p className="font-sans text-lg font-bold text-[#1F2937]">{s.value}</p>
+              <p className="font-sans text-lg font-bold text-[#0F4C81]">{s.value}</p>
               <p className="text-[11px] text-[#6B7280] mt-0.5">{s.label}</p>
             </motion.div>
           ))}
@@ -610,11 +610,11 @@ const refetch = () => {};
         >
           {filtered.map((paper, i) => (
             <motion.div key={paper.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}>
-              <div className="group relative flex flex-col gap-3 overflow-hidden rounded-lg bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 p-5">
+              <div className="group relative flex flex-col gap-3 overflow-hidden rounded-lg bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:-translate-y-0.5 p-5">
                 <div className="flex items-start gap-3">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiFileText size={20} /></div>
                   <div className="min-w-0 flex-1 text-left">
-                    <h3 className="truncate font-sans text-sm font-semibold text-[#1F2937] group-hover:text-[#1E88E5] transition-colors">{paper.title}</h3>
+                    <h3 className="truncate font-sans text-sm font-semibold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">{paper.title}</h3>
                     <p className="mt-0.5 flex items-center gap-2 text-[11px] text-[#6B7280]">
                       <span>{paper.subject}</span>
                       {paper.facultyName && (

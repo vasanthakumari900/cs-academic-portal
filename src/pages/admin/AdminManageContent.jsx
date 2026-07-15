@@ -74,14 +74,14 @@ export default function AdminManageContent({ title, service }) {
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 text-left bg-[#F8FAFC]">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <h2 className="font-sans text-2xl font-bold text-[#1F2937]">{title}</h2>
+        <h2 className="font-sans text-2xl font-bold text-[#0F4C81]">{title}</h2>
         <div className="relative">
           <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search title, subject, faculty…"
-            className="rounded-lg border border-[#E5E7EB] bg-white py-2 pl-9 pr-3 text-sm text-[#1F2937] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 transition-all"
+            className="rounded-lg border border-[#E5E7EB] bg-white py-2 pl-9 pr-3 text-sm text-[#0F4C81] placeholder:text-[#6B7280]/60 outline-none focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 transition-all"
           />
         </div>
       </div>
@@ -108,21 +108,21 @@ export default function AdminManageContent({ title, service }) {
             </thead>
             <tbody className="divide-y divide-[#E5E7EB]">
               {filtered.map((item) => (
-                <tr key={item.id} className="bg-white hover:bg-slate-50 transition-colors">
+                <tr key={item.id} className="bg-white hover:bg-[#F8FAFC] transition-colors">
                   {editingId === item.id ? (
                     <>
                       <td className="px-4 py-2">
                         <input
                           value={editForm.title}
                           onChange={(e) => setEditForm((f) => ({ ...f, title: e.target.value }))}
-                          className="w-full rounded-lg border border-[#E5E7EB] bg-white px-2 py-1 text-sm text-[#1F2937] outline-none focus:border-[#0F4C81]"
+                          className="w-full rounded-lg border border-[#E5E7EB] bg-white px-2 py-1 text-sm text-[#0F4C81] outline-none focus:border-[#0F4C81]"
                         />
                       </td>
                       <td className="px-4 py-2">
                         <select
                           value={editForm.subject}
                           onChange={(e) => setEditForm((f) => ({ ...f, subject: e.target.value }))}
-                          className="rounded-lg border border-[#E5E7EB] bg-white px-2 py-1 text-xs text-[#1F2937] outline-none focus:border-[#0F4C81]"
+                          className="rounded-lg border border-[#E5E7EB] bg-white px-2 py-1 text-xs text-[#0F4C81] outline-none focus:border-[#0F4C81]"
                         >
                           {ALL_SUBJECTS.map((s) => (
                             <option key={s} value={s}>{s}</option>
@@ -133,7 +133,7 @@ export default function AdminManageContent({ title, service }) {
                         <select
                           value={editForm.semester}
                           onChange={(e) => setEditForm((f) => ({ ...f, semester: e.target.value }))}
-                          className="rounded-lg border border-[#E5E7EB] bg-white px-2 py-1 text-xs text-[#1F2937] outline-none focus:border-[#0F4C81]"
+                          className="rounded-lg border border-[#E5E7EB] bg-white px-2 py-1 text-xs text-[#0F4C81] outline-none focus:border-[#0F4C81]"
                         >
                           {SEMESTERS.map((s) => (
                             <option key={s} value={s}>Sem {s}</option>
@@ -144,7 +144,7 @@ export default function AdminManageContent({ title, service }) {
                         <select
                           value={editForm.year}
                           onChange={(e) => setEditForm((f) => ({ ...f, year: e.target.value }))}
-                          className="rounded-lg border border-[#E5E7EB] bg-white px-2 py-1 text-xs text-[#1F2937] outline-none focus:border-[#0F4C81]"
+                          className="rounded-lg border border-[#E5E7EB] bg-white px-2 py-1 text-xs text-[#0F4C81] outline-none focus:border-[#0F4C81]"
                         >
                           <option value="">—</option>
                           {YEARS.map((y) => (
@@ -156,7 +156,7 @@ export default function AdminManageContent({ title, service }) {
                         <select
                           value={editForm.videoType}
                           onChange={(e) => setEditForm((f) => ({ ...f, videoType: e.target.value }))}
-                          className="rounded-lg border border-[#E5E7EB] bg-white px-2 py-1 text-xs text-[#1F2937] outline-none focus:border-[#0F4C81]"
+                          className="rounded-lg border border-[#E5E7EB] bg-white px-2 py-1 text-xs text-[#0F4C81] outline-none focus:border-[#0F4C81]"
                         >
                           <option value="">—</option>
                           {VIDEO_TYPES.map((t) => (
@@ -176,7 +176,7 @@ export default function AdminManageContent({ title, service }) {
                     </>
                   ) : (
                     <>
-                      <td className="max-w-xs truncate px-4 py-3.5 font-medium text-[#1F2937]">{item.title}</td>
+                      <td className="max-w-xs truncate px-4 py-3.5 font-medium text-[#0F4C81]">{item.title}</td>
                       <td className="px-4 py-3.5 text-[#6B7280]">{item.subject}</td>
                       <td className="px-4 py-3.5 text-[#6B7280]">{item.semester}</td>
                       <td className="px-4 py-3.5 text-[#6B7280]">{item.year ? `${item.year}${getYearSuffix(item.year)}` : "—"}</td>

@@ -40,7 +40,7 @@ export default function NotFound() {
       >
         <Link
           to="/"
-          className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-700 px-6 py-3 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-600 active:scale-[0.97]"
+          className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-700 px-6 py-3 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:shadow-indigo-500/30 hover:from-indigo-500 hover:to-violet-600 active:scale-[0.97]"
         >
           <FiHome size={16} />
           Back to Home

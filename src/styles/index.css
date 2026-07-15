@@ -95,7 +95,7 @@
   .badge {
     @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider border;
   }
-  .badge-primary { @apply badge bg-[#F0F4F8] text-[#0F4C81] border-[#D9E2EC]; }
+  .badge-primary { @apply badge bg-[#E8ECF2] text-[#1F2937] border-[#D5D8DC]; }
   .badge-success { @apply badge bg-[#E8F5E9] text-[#2E7D32] border-[#C8E6C9]; }
   .badge-warning { @apply badge bg-[#FFF3E0] text-[#E65100] border-[#FFE0B2]; }
   .badge-danger { @apply badge bg-[#FFEBEE] text-[#C62828] border-[#FFCDD2]; }
@@ -108,7 +108,7 @@
 @layer utilities {
   /* ─── Text Colors (Formerly Gradients) ─── */
   .text-gradient-primary {
-    @apply text-[#0F4C81];
+    @apply text-[#1F2937];
   }
   .text-gradient-cool {
     @apply text-[#1E88E5];
@@ -169,7 +169,7 @@
 
   /* ─── Number Counters ─── */
   .counter-premium {
-    @apply font-sans text-2xl font-bold text-[#0F4C81];
+    @apply font-sans text-2xl font-bold text-[#1F2937];
   }
 
   /* ─── Accent bar ─── */

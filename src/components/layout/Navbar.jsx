@@ -45,7 +45,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-40 bg-[#0F4C81] border-b border-[#0A3356] shadow-md"
+        className="fixed top-0 left-0 right-0 z-40 bg-[#0F4C81] border-b border-[#0A3356] shadow-sm"
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <Link to="/" className="group flex items-center gap-2.5">
