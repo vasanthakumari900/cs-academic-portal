@@ -56,6 +56,7 @@ export const COLLECTIONS = {
   VIDEOS: "videos",
   NOTES: "notes",
   QUESTION_PAPERS: "questionPapers",
+  CIA_QUESTION_PAPERS: "ciaQuestionPapers",
   PLACEMENTS: "placements",
   BOOKMARKS: "bookmarks",
   NOTIFICATIONS: "notifications",
@@ -200,6 +201,7 @@ export const STORAGE_PATHS = {
   VIDEOS: "videos/",
   NOTES: "notes/",
   QUESTION_PAPERS: "questionpapers/",
+  CIA_QUESTION_PAPERS: "ciaquestionpapers/",
   LOGOS: "logos/",
   PLACEMENT_FEEDBACK: "placementfeedback/",
 };

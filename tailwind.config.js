@@ -44,10 +44,10 @@ export default {
         error: "#D32F2F",
       },
       fontFamily: {
-        sans: ["Inter", "Plus Jakarta Sans", "system-ui", "-apple-system", "sans-serif"],
-        display: ["Space Grotesk", "Inter", "system-ui", "sans-serif"],
-        jakarta: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
-        grotesk: ["Space Grotesk", "system-ui", "sans-serif"],
+        sans: ["Poppins", "Inter", "system-ui", "-apple-system", "sans-serif"],
+        display: ["Poppins", "Inter", "system-ui", "sans-serif"],
+        jakarta: ["Poppins", "Inter", "sans-serif"],
+        grotesk: ["Poppins", "Inter", "sans-serif"],
       },
       borderRadius: {
         xl: "12px",

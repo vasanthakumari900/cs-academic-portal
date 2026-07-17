@@ -17,6 +17,7 @@ import {
   FiBarChart2,
   FiSettings,
   FiUserCheck,
+  FiAward,
 } from "react-icons/fi";
 
 import MainLayout from "./layouts/MainLayout";
@@ -109,9 +110,10 @@ const adminNav = [
 
 const facultyNav = [
   { to: "/faculty/dashboard", label: "Dashboard", icon: FiHome },
-  { to: "/faculty/notes", label: "Lecture Notes", icon: FiFileText },
+  { to: "/faculty/notes", label: "Upload Notes", icon: FiFileText },
   { to: "/faculty/videos", label: "Video Lectures", icon: FiPlayCircle },
-  { to: "/faculty/question-papers", label: "Question Papers", icon: FiFileText },
+  { to: "/faculty/question-papers", label: "Upload Semester Question Papers", icon: FiFileText },
+  { to: "/faculty/cia-papers", label: "Upload CIA Papers", icon: FiAward },
 ];
 
 export default function App() {
@@ -158,6 +160,7 @@ export default function App() {
               <Route path="/faculty/notes" element={<AnimatedPage><FacultyNotes /></AnimatedPage>} />
               <Route path="/faculty/videos" element={<AnimatedPage><FacultyVideos /></AnimatedPage>} />
               <Route path="/faculty/question-papers" element={<AnimatedPage><FacultyQuestionPapers /></AnimatedPage>} />
+              <Route path="/faculty/cia-papers" element={<AnimatedPage><CIAQuestionPapers /></AnimatedPage>} />
             </Route>
           </Route>
 

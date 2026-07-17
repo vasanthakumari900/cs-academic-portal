@@ -1,14 +1,21 @@
 // src/pages/student/CIAQuestionPapers.jsx
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FiChevronRight, FiChevronLeft, FiFileText, FiDownload,
   FiExternalLink, FiCalendar, FiBookOpen, FiFolder,
-  FiAward, FiX,
+  FiAward, FiX, FiUploadCloud,
 } from "react-icons/fi";
 import { CIA_DATA, getDriveDownloadUrl, getDriveEmbedUrl } from "../../utils/ciaData";
 import { formatDate } from "../../utils/helpers";
 import EmptyState from "../../components/ui/EmptyState";
+import { useAuth } from "../../context/AuthContext";
+import { useFirestoreList } from "../../hooks/useFirestoreList";
+import { ciaQuestionPaperService } from "../../services/ciaQuestionPaperService";
+import { uploadFile } from "../../services/storageService";
+import { STORAGE_PATHS } from "../../utils/constants";
+import { CURRICULUM } from "../../utils/curriculum";
+import toast from "react-hot-toast";
 
 // ─── Breadcrumb ───
 function Breadcrumb({ crumbs, onNavigate }) {
@@ -205,10 +212,25 @@ function PreviewModal({ paper, onClose }) {
 
 // ─── Main Component ───
 export default function CIAQuestionPapers() {
+  const { user } = useAuth();
+  const isFaculty = user?.type === "faculty";
+
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedSem, setSelectedSem] = useState(null);
   const [selectedCia, setSelectedCia] = useState(null);
   const [previewPaper, setPreviewPaper] = useState(null);
+
+  // Upload state
+  const [showUploadForm, setShowUploadForm] = useState(false);
+  const [uploadTitle, setUploadTitle] = useState("");
+  const [uploadDescription, setUploadDescription] = useState("");
+  const [uploadSubject, setUploadSubject] = useState("");
+  const [uploadFileObj, setUploadFileObj] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  // Firestore papers
+  const { items: uploadedCiaPapers, refetch } = useFirestoreList(ciaQuestionPaperService);
 
   const years = Object.entries(CIA_DATA).map(([key, val]) => ({
     key: Number(key),
@@ -239,10 +261,44 @@ export default function CIAQuestionPapers() {
         }))
       : [];
 
-  const currentPapers =
-    selectedYear != null && selectedSem != null && selectedCia != null
-      ? CIA_DATA[selectedYear]?.semesters[selectedSem]?.cia[selectedCia]?.papers || []
-      : [];
+  const subjectsList = useMemo(() => {
+    if (selectedYear == null || selectedSem == null) return [];
+    return CURRICULUM[selectedYear]?.semesters[selectedSem]?.subjects || [];
+  }, [selectedYear, selectedSem]);
+
+  // Set default subject when list changes or form opens
+  useEffect(() => {
+    if (subjectsList.length > 0 && !uploadSubject) {
+      setUploadSubject(subjectsList[0]);
+    }
+  }, [subjectsList, uploadSubject]);
+
+  const currentPapers = useMemo(() => {
+    if (selectedYear == null || selectedSem == null || selectedCia == null) return [];
+
+    // Filter uploaded papers matching current selection
+    const firestoreFiltered = uploadedCiaPapers
+      .filter((p) => {
+        const matchesYear = Number(p.year) === Number(selectedYear);
+        const matchesSem = Number(p.semester) === Number(selectedSem);
+        const matchesCia = Number(p.cia) === Number(selectedCia);
+        return matchesYear && matchesSem && matchesCia;
+      })
+      .map((p) => ({
+        id: p.id,
+        subject: p.subject,
+        title: p.title,
+        driveUrl: p.fileUrl,
+        uploadedDate: p.uploadedDate || p.createdAt,
+        description: p.description || "Uploaded CIA question paper",
+        fromFirestore: true,
+      }));
+
+    // Static papers
+    const staticPapers = CIA_DATA[selectedYear]?.semesters[selectedSem]?.cia[selectedCia]?.papers || [];
+
+    return [...staticPapers, ...firestoreFiltered];
+  }, [selectedYear, selectedSem, selectedCia, uploadedCiaPapers]);
 
   const yearLabel = selectedYear != null ? CIA_DATA[selectedYear]?.label : "";
   const semLabel =
@@ -272,21 +328,25 @@ export default function CIAQuestionPapers() {
     } else if (breadcrumbIndex === 2) {
       setSelectedCia(null);
     }
+    setShowUploadForm(false);
   }
 
   function handleSelectYear(key) {
     setSelectedYear(key);
     setSelectedSem(null);
     setSelectedCia(null);
+    setShowUploadForm(false);
   }
 
   function handleSelectSem(key) {
     setSelectedSem(key);
     setSelectedCia(null);
+    setShowUploadForm(false);
   }
 
   function handleSelectCia(key) {
     setSelectedCia(key);
+    setShowUploadForm(false);
   }
 
   function goBack() {
@@ -296,6 +356,52 @@ export default function CIAQuestionPapers() {
       setSelectedSem(null);
     } else if (selectedYear != null) {
       setSelectedYear(null);
+    }
+    setShowUploadForm(false);
+  }
+
+  async function handleUpload(e) {
+    e.preventDefault();
+    if (!uploadFileObj) {
+      toast.error("Please select a file to upload");
+      return;
+    }
+    if (!uploadTitle.trim()) {
+      toast.error("Please enter a title");
+      return;
+    }
+    if (!uploadSubject) {
+      toast.error("Please select a subject");
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const fileUrl = await uploadFile(STORAGE_PATHS.CIA_QUESTION_PAPERS, uploadFileObj, setProgress);
+      await ciaQuestionPaperService.create({
+        title: uploadTitle.trim(),
+        description: uploadDescription.trim(),
+        year: Number(selectedYear),
+        semester: Number(selectedSem),
+        cia: Number(selectedCia),
+        subject: uploadSubject,
+        fileUrl,
+        uploadedDate: new Date().toISOString().split("T")[0],
+        facultyName: user.name || "Faculty",
+        facultyId: user.uid || "faculty-id",
+      });
+
+      toast.success("CIA question paper uploaded successfully!");
+      setUploadTitle("");
+      setUploadDescription("");
+      setUploadFileObj(null);
+      setShowUploadForm(false);
+      refetch();
+    } catch (err) {
+      toast.error(err.message || "Failed to upload CIA paper");
+    } finally {
+      setUploading(false);
+      setProgress(0);
     }
   }
 
@@ -317,7 +423,7 @@ export default function CIAQuestionPapers() {
                 CIA Question Papers
               </h1>
               <p className="mt-1 text-sm text-[#6B7280]">
-                Practice with Continuous Internal Assessment question papers
+                Practice or manage Continuous Internal Assessment question papers
               </p>
             </div>
           </div>
@@ -394,20 +500,107 @@ export default function CIAQuestionPapers() {
 
         {selectedYear != null && selectedSem != null && selectedCia != null && (
           <div className="text-left">
-            <div className="mb-5 flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded bg-[#0F4C81]/10 text-[#0F4C81] text-xs font-bold border border-[#0F4C81]/25">
-                <FiFileText size={14} />
+            <div className="mb-5 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded bg-[#0F4C81]/10 text-[#0F4C81] text-xs font-bold border border-[#0F4C81]/25">
+                  <FiFileText size={14} />
+                </div>
+                <div>
+                  <h2 className="font-sans text-base font-bold text-[#0F4C81]">
+                    {yearLabel} — {semLabel} — {ciaLabel}
+                  </h2>
+                  <p className="text-[11px] text-[#6B7280]">
+                    {currentPapers.length} question paper
+                    {currentPapers.length !== 1 ? "s" : ""} available
+                  </p>
+                </div>
               </div>
-              <div>
-                <h2 className="font-sans text-base font-bold text-[#0F4C81]">
-                  {yearLabel} — {semLabel} — {ciaLabel}
-                </h2>
-                <p className="text-[11px] text-[#6B7280]">
-                  {currentPapers.length} question paper
-                  {currentPapers.length !== 1 ? "s" : ""} available
-                </p>
-              </div>
+
+              {isFaculty && !showUploadForm && (
+                <button
+                  onClick={() => setShowUploadForm(true)}
+                  className="rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] text-white px-4 py-2 text-xs font-bold shadow-sm transition-all flex items-center gap-1.5"
+                >
+                  <FiUploadCloud size={14} /> Upload CIA Paper
+                </button>
+              )}
             </div>
+
+            {/* Upload form for Faculty */}
+            {isFaculty && showUploadForm && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-8"
+              >
+                <form onSubmit={handleUpload} className="space-y-4 rounded-xl border border-[#E5E7EB] bg-white p-6 shadow-sm max-w-xl">
+                  <div className="flex items-center justify-between border-b border-[#E5E7EB] pb-3 mb-2">
+                    <h3 className="font-sans text-sm font-bold text-[#0F4C81]">Upload CIA Question Paper</h3>
+                    <button type="button" onClick={() => setShowUploadForm(false)} className="text-slate-400 hover:text-slate-650">
+                      <FiX size={16} />
+                    </button>
+                  </div>
+
+                  <div>
+                    <label className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">Subject</label>
+                    <select
+                      value={uploadSubject}
+                      onChange={(e) => setUploadSubject(e.target.value)}
+                      className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-3 py-2 text-xs text-[#0F4C81] outline-none focus:border-[#0F4C81] focus:bg-white"
+                    >
+                      {subjectsList.map((sub) => (
+                        <option key={sub} value={sub}>{sub}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">Paper Title</label>
+                    <input
+                      value={uploadTitle}
+                      onChange={(e) => setUploadTitle(e.target.value)}
+                      placeholder="e.g. CIA 1 - Fundamentals of Python Programming"
+                      className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-3 py-2 text-xs text-[#0F4C81] outline-none focus:border-[#0F4C81] focus:bg-white"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">Description</label>
+                    <textarea
+                      value={uploadDescription}
+                      onChange={(e) => setUploadDescription(e.target.value)}
+                      placeholder="Additional description (optional)"
+                      rows={2}
+                      className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-3 py-2 text-xs text-[#0F4C81] outline-none focus:border-[#0F4C81] focus:bg-white"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-[#6B7280]">Choose File (PDF)</label>
+                    <input
+                      type="file"
+                      accept=".pdf"
+                      onChange={(e) => setUploadFileObj(e.target.files[0])}
+                      className="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-[#0F4C81] hover:file:bg-blue-100"
+                    />
+                  </div>
+
+                  {uploading && (
+                    <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                      <div className="bg-[#0F4C81] h-1.5 transition-all duration-300" style={{ width: `${progress}%` }} />
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={uploading}
+                    className="w-full rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-2 text-xs font-bold text-white shadow-sm transition-all disabled:opacity-50"
+                  >
+                    {uploading ? `Uploading (${Math.round(progress)}%)` : "Upload Paper"}
+                  </button>
+                </form>
+              </motion.div>
+            )}
 
             {currentPapers.length === 0 ? (
               <EmptyState
@@ -448,3 +641,4 @@ export default function CIAQuestionPapers() {
     </div>
   );
 }
+

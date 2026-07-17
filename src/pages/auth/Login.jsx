@@ -68,8 +68,8 @@ export default function Login() {
   async function handleStudentSubmit(e) {
     e.preventDefault();
 
-    if (!/^(24E(29|30)|25E(29|30)|26E31)\d{2}$/i.test(rollNumber.trim())) {
-      toast.error("Enter a valid student roll number (e.g. 24E2901, 25E2901, or 26E3101)");
+    if (!/^(24E(29|30)|25E(29|30)|26E(30|31))\d{2}$/i.test(rollNumber.trim())) {
+      toast.error("Enter a valid student roll number (e.g. 24E2901, 25E2901, 26E3001, or 26E3101)");
       return;
     }
 
@@ -266,7 +266,7 @@ export default function Login() {
                           />
                         </div>
                         <p className="mt-1.5 text-[10px] text-[#6B7280]">
-                          24E29xx (3rd Yr A) · 24E30xx (3rd Yr B) · 25E29xx (2nd Yr A) · 25E30xx (2nd Yr B)
+                          24E29xx (3rd Yr A) · 24E30xx (3rd Yr B) · 25E29xx (2nd Yr A) · 25E30xx (2nd Yr B) · 26E30xx (1st Yr A) · 26E31xx (1st Yr B)
                         </p>
                       </div>
 

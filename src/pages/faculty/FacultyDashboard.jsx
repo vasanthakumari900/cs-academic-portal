@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import {
   FiHome, FiPlayCircle, FiGrid,
-  FiFileText, FiChevronRight, FiUser,
+  FiFileText, FiChevronRight, FiUser, FiAward,
 } from "react-icons/fi";
 
 const cards = [
   { label: "Upload Notes", icon: FiFileText, to: "/faculty/notes", bg: "bg-[#2E7D32]", desc: "Upload lecture notes by subject" },
-  { label: "Upload Videos", icon: FiPlayCircle, to: "/faculty/videos", bg: "bg-[#0F4C81]", desc: "Upload video lectures by subject" },
-  { label: "Upload Question Papers", icon: FiGrid, to: "/faculty/question-papers", bg: "bg-[#1E88E5]", desc: "Upload question papers by subject" },
+  { label: "Video Lectures", icon: FiPlayCircle, to: "/faculty/videos", bg: "bg-[#0F4C81]", desc: "Upload video lectures by subject" },
+  { label: "Upload Semester Question Papers", icon: FiGrid, to: "/faculty/question-papers", bg: "bg-[#1E88E5]", desc: "Upload semester question papers" },
+  { label: "Upload CIA Papers", icon: FiAward, to: "/faculty/cia-papers", bg: "bg-amber-600", desc: "Upload CIA question papers for all years" },
 ];
 
 export default function FacultyDashboard() {
@@ -42,25 +43,23 @@ export default function FacultyDashboard() {
             <p className="mt-1 text-sm text-[#6B7280]">Upload and manage academic content</p>
           </div>
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {cards.map((card, i) => (
               <motion.button key={card.label}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
                 whileHover={{ y: -3 }} whileTap={{ scale: 0.98 }}
                 onClick={() => navigate(card.to)}
-                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40 text-left h-full flex flex-col w-full"
+                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
               >
-                <div className="relative flex flex-col items-center p-6 text-center h-full justify-between w-full flex-1">
-                  <div className={`flex h-14 w-14 items-center justify-center rounded-lg ${card.bg} text-white shadow-sm transition-all`}>
+                <div className="relative flex items-center gap-4 p-5">
+                  <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-lg ${card.bg} text-white shadow-sm transition-all`}>
                     <card.icon size={24} />
                   </div>
-                  <div className="mt-4 flex-1">
-                    <h3 className="font-sans text-base font-bold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">{card.label}</h3>
-                    <p className="mt-1.5 text-xs text-[#6B7280] leading-relaxed">{card.desc}</p>
+                  <div className="min-w-0 flex-1 text-left">
+                    <h3 className="font-sans text-base font-bold text-[#0F4C81]">{card.label}</h3>
+                    <p className="mt-0.5 text-xs text-[#6B7280]">{card.desc}</p>
                   </div>
-                  <div className="mt-5 inline-flex items-center gap-1 text-[11px] font-semibold text-[#1E88E5] transition-all">
-                    Manage Section <FiChevronRight size={12} />
-                  </div>
+                  <FiChevronRight size={16} className="text-slate-400 group-hover:text-[#1E88E5] transition-all" />
                 </div>
               </motion.button>
             ))}
