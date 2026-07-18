@@ -7,10 +7,10 @@ import {
 } from "react-icons/fi";
 
 const cards = [
-  { label: "Upload Notes", icon: FiFileText, to: "/faculty/notes", bg: "bg-[#2E7D32]", desc: "Upload lecture notes by subject" },
+  { label: "Upload Notes", icon: FiFileText, to: "/faculty/notes", bg: "bg-[#0F4C81]", desc: "Upload lecture notes by subject" },
   { label: "Video Lectures", icon: FiPlayCircle, to: "/faculty/videos", bg: "bg-[#0F4C81]", desc: "Upload video lectures by subject" },
-  { label: "Upload Semester Question Papers", icon: FiGrid, to: "/faculty/question-papers", bg: "bg-[#1E88E5]", desc: "Upload semester question papers" },
-  { label: "Upload CIA Papers", icon: FiAward, to: "/faculty/cia-papers", bg: "bg-amber-600", desc: "Upload CIA question papers for all years" },
+  { label: "Upload Semester Question Papers", icon: FiGrid, to: "/faculty/question-papers", bg: "bg-[#0F4C81]", desc: "Upload semester question papers" },
+  { label: "Upload CIA Papers", icon: FiAward, to: "/faculty/cia-papers", bg: "bg-[#0F4C81]", desc: "Upload CIA question papers for all years" },
 ];
 
 export default function FacultyDashboard() {

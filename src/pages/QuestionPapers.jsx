@@ -14,8 +14,8 @@ import { uploadFile } from "../services/storageService";
 import toast from "react-hot-toast";
 
 const CURRICULUM = {
-  1: { label: "1st Year", icon: "Ⅰ", semesters: { 1: { label: "Semester 1", subjects: ["FUNDAMENTALS OF PYTHON PROGRAMMING","FUNDAMENTALS OF DIGITAL ELECTRONICS","MATHEMATICS PAPER - I","TAMIL","ENGLISH"] }, 2: { label: "Semester 2", subjects: ["OBJECT ORIENTED PROGRAMMING USING C++","DATA STRUCTURES","MATHEMATICS PAPER - II","TAMIL","ENGLISH"] } } },
-  2: { label: "2nd Year", icon: "Ⅱ", semesters: { 1: { label: "Semester 1", subjects: ["JAVA PROGRAMMING","WEB TECHNOLOGY","STATISTICAL METHODS FOR COMPUTER SCIENCE - I","TAMIL","ENGLISH"] }, 2: { label: "Semester 2", subjects: ["ANDROID APP DEVELOPMENT","SOFTWARE ENGINEERING","STATISTICAL METHODS FOR COMPUTER SCIENCE - II","ARTIFICIAL INTELLIGENCE AND EXPERT SYSTEMS","TAMIL","ENGLISH"] } } },
+  1: { label: "1st Year", icon: "Ⅰ", semesters: { 1: { label: "Semester 1", subjects: ["TAMIL", "Foundation English - I", "Mathematics Paper I", "Python Programming Essentials", "Data Structures"] }, 2: { label: "Semester 2", subjects: ["OBJECT ORIENTED PROGRAMMING USING C++","WEB TECHNOLOGY","MATHEMATICS PAPER - II","TAMIL","ENGLISH"] } } },
+  2: { label: "2nd Year", icon: "Ⅱ", semesters: { 1: { label: "Semester 1", subjects: ["Object Oriented Programming Concepts using JAVA", "Web Application Development using AngularJS and Node.js", "Statistical Methods for Computer Science – I", "TAMIL", "Foundation English - III", "Principles of operating Systems", "Web Application Development using ReactJS and Node.js"] }, 2: { label: "Semester 2", subjects: ["ANDROID APP DEVELOPMENT","SOFTWARE ENGINEERING","STATISTICAL METHODS FOR COMPUTER SCIENCE - II","ARTIFICIAL INTELLIGENCE AND EXPERT SYSTEMS","TAMIL","ENGLISH"] } } },
   3: { label: "3rd Year", icon: "Ⅲ", semesters: { 1: { label: "Semester 1", subjects: ["OPERATING SYSTEM","DATA MINING TECHNIQUES","ASP.NET","DATABASE MANAGEMENT SYSTEM"] }, 2: { label: "Semester 2", subjects: ["PROGRAMMING IN PHP","CLOUD COMPUTING","COMPUTER NETWORKS","INTRODUCTION TO DATA SCIENCE","UNIFIED MODELING LANGUAGE","DIGITAL IMAGE PROCESSING"] } } },
 };
 
@@ -23,8 +23,8 @@ function getSubjectsForYear(year) { const yr = CURRICULUM[year]; if (!yr) return
 
 const yearStyles = {
   1: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
-  2: { bg: "bg-[#1E88E5] text-white border-[#1565C0]", text: "text-[#1E88E5]" },
-  3: { bg: "bg-[#2E7D32] text-white border-[#1B5E20]", text: "text-[#2E7D32]" },
+  2: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
+  3: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
 };
 
 const subjectColors = [
@@ -158,8 +158,61 @@ const MATH2_PAPERS = [
 const AI_PAPERS = [
   { id: "ai-1", title: "AI and Expert Systems - Paper 1", subject: "ARTIFICIAL INTELLIGENCE AND EXPERT SYSTEMS", facultyName: "", description: "Previous year question paper", pages: 2, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1n4lo9IGkAXclSguIG78bIeExrTMvsl29" },
 ];
+const TAMIL_PAPERS = [
+  { id: "tamil-sem1-1", title: "Tamil Paper 1", subject: "TAMIL", facultyName: "", description: "Semester I question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1LpzT5dYU267D5XEEzIBTWzKvqf8NxYsy", academicYear: 1, semester: 1 },
+  { id: "tamil-sem2-1", title: "Tamil - Semester II", subject: "TAMIL", facultyName: "", description: "Semester II question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1mxoxQyHdbuqGOVeqIAS6ZZSHCY05EJVA", academicYear: 1, semester: 2 }
+];
+const CLOUD_PAPERS = [
+  { id: "cloud-1", title: "Cloud Computing - Paper 1", subject: "CLOUD COMPUTING", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "12oyzU49IEPdjy9M6XyoXgKSqkPBEE5L7", academicYear: 3, semester: 2 },
+  { id: "cloud-2", title: "Cloud Computing - Paper 2", subject: "CLOUD COMPUTING", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1psQp-f1SnS51UxMrq1y1ccR1ywSROsKp", academicYear: 3, semester: 2 },
+  { id: "cloud-3", title: "Cloud Computing - Paper 3", subject: "CLOUD COMPUTING", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1b_mAX0bq5vSZwJ-urXXDPnaZEGUX9o4x", academicYear: 3, semester: 2 }
+];
+const NETWORKS_PAPERS = [
+  { id: "net-1", title: "Computer Networks - Paper 1", subject: "COMPUTER NETWORKS", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1QRgdBK3pCjFSuqCk6QrGJbVuQxBUI6o0", academicYear: 3, semester: 2 },
+  { id: "net-2", title: "Computer Networks - Paper 2", subject: "COMPUTER NETWORKS", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1dL9LjKCFipMWv5JBoDAwXQfbuf3qTw2b", academicYear: 3, semester: 2 },
+  { id: "net-3", title: "Computer Networks - Paper 3", subject: "COMPUTER NETWORKS", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1bCNtBR3UHmavdOhFtKgl8pESodkOSq1h", academicYear: 3, semester: 2 },
+  { id: "net-4", title: "Computer Networks - Paper 4", subject: "COMPUTER NETWORKS", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1Bh_2kBij_UlMxqW77lbYUCrsYDPqvjF4", academicYear: 3, semester: 2 },
+  { id: "net-5", title: "Computer Networks - Paper 5", subject: "COMPUTER NETWORKS", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1JP_hDVk55J0icR7KQZbgqZ3vFoZbW3EF", academicYear: 3, semester: 2 }
+];
+const DATASCIENCE_PAPERS = [
+  { id: "ds-sci-1", title: "Introduction to Data Science - Paper 1", subject: "INTRODUCTION TO DATA SCIENCE", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1rBg0r-AjT27UzNwHGHKyEhvqjmoAVpIG", academicYear: 3, semester: 2 },
+  { id: "ds-sci-2", title: "Introduction to Data Science - Paper 2", subject: "INTRODUCTION TO DATA SCIENCE", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "10j2i-vW0U98sWUIAq9JXOJU5z9H-T8GX", academicYear: 3, semester: 2 },
+  { id: "ds-sci-3", title: "Introduction to Data Science - Paper 3", subject: "INTRODUCTION TO DATA SCIENCE", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1si5k_olvGdGCAxnjX1Cb-4Y1DSAcw_fJ", academicYear: 3, semester: 2 }
+];
+const PHP_PAPERS = [
+  { id: "php-1", title: "Programming in PHP - Paper 1", subject: "PROGRAMMING IN PHP", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1r6Rh29aZFXu8C5A7dvQBA82vDbdZlMfD", academicYear: 3, semester: 2 },
+  { id: "php-2", title: "Programming in PHP - Paper 2", subject: "PROGRAMMING IN PHP", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1n8Jz1eRNcEoTL6P0nyE8rI3apsvrhfsL", academicYear: 3, semester: 2 },
+  { id: "php-3", title: "Programming in PHP - Paper 3", subject: "PROGRAMMING IN PHP", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1lo6eLJr0HocInCWFPH8uzdA6PTeZpb8h", academicYear: 3, semester: 2 },
+  { id: "php-4", title: "Programming in PHP - Paper 4", subject: "PROGRAMMING IN PHP", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1KzWkN7TyT9U49cldL-8MsWh-SM0IMBBJ", academicYear: 3, semester: 2 },
+  { id: "php-5", title: "Programming in PHP - Paper 5", subject: "PROGRAMMING IN PHP", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1SQ5hlCDET19jkCoVNZdpc5m6xi75_gZH", academicYear: 3, semester: 2 },
+  { id: "php-6", title: "Programming in PHP - Paper 6", subject: "PROGRAMMING IN PHP", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1TQ4TqpqCWQ19qgoyaiGDeYyORiYixAvz", academicYear: 3, semester: 2 }
+];
 
-const allPapers = [...DBMS_PAPERS, ...OS_PAPERS, ...DMT_PAPERS, ...ASPNET_PAPERS, ...JAVA_PAPERS, ...WEBTECH_PAPERS, ...ANDROID_PAPERS, ...STATS1_PAPERS, ...SE_PAPERS, ...STATS2_PAPERS, ...PYTHON_PAPERS, ...DIGITAL_ELECTRONICS_PAPERS, ...MATH1_PAPERS, ...AI_PAPERS, ...DS_PAPERS, ...CPP_PAPERS, ...MATH2_PAPERS];
+const allPapers = [
+  ...DBMS_PAPERS,
+  ...OS_PAPERS,
+  ...TAMIL_PAPERS,
+  ...CLOUD_PAPERS,
+  ...NETWORKS_PAPERS,
+  ...DATASCIENCE_PAPERS,
+  ...PHP_PAPERS,
+  ...OS_PAPERS.map(p => ({ ...p, id: p.id + "-yr2", subject: "Principles of operating Systems" })),
+  ...DMT_PAPERS,
+  ...ASPNET_PAPERS,
+  ...JAVA_PAPERS.map(p => ({ ...p, subject: "Object Oriented Programming Concepts using JAVA" })),
+  ...WEBTECH_PAPERS,
+  ...ANDROID_PAPERS,
+  ...STATS1_PAPERS.map(p => ({ ...p, subject: "Statistical Methods for Computer Science – I" })),
+  ...SE_PAPERS,
+  ...STATS2_PAPERS,
+  ...PYTHON_PAPERS.map(p => ({ ...p, subject: "Python Programming Essentials" })),
+  ...DIGITAL_ELECTRONICS_PAPERS,
+  ...MATH1_PAPERS.map(p => ({ ...p, subject: "Mathematics Paper I" })),
+  ...AI_PAPERS,
+  ...DS_PAPERS.map(p => ({ ...p, subject: "Data Structures" })),
+  ...CPP_PAPERS,
+  ...MATH2_PAPERS
+];
 
 const COURSE_OPTIONS = [
   { value: "ug", label: "UG", desc: "Bachelor of Science in Computer Science (B.Sc.)" },
@@ -260,7 +313,9 @@ const refetch = () => {};
       .filter((p) => {
         const matchesSubject = !selectedSubject || p.subject?.toUpperCase() === selectedSubject.toUpperCase();
         const matchesCourse = !courseType || p.courseType === courseType;
-        return matchesSubject && matchesCourse;
+        const matchesSemester = !p.semester || !selectedSemester || p.semester === Number(selectedSemester);
+        const matchesYear = !p.academicYear || !selectedYear || p.academicYear === Number(selectedYear);
+        return matchesSubject && matchesCourse && matchesSemester && matchesYear;
       })
       .map((p) => ({
         ...p,
@@ -657,8 +712,14 @@ const refetch = () => {};
           {filtered.length === 0 && (
             <div className="col-span-full flex flex-col items-center py-16 text-[#6B7280]">
               <FiAward size={48} className="mb-3 opacity-30 text-slate-400" />
-              <p className="text-sm font-medium text-[#4B5563]">No question papers available yet</p>
-              <p className="mt-1 text-xs text-[#6B7280]">Papers will be uploaded soon</p>
+              <p className="text-sm font-medium text-[#4B5563]">
+                {selectedSubject === "Web Application Development using AngularJS and Node.js"
+                  ? "we will add later"
+                  : "No question papers available yet"}
+              </p>
+              {selectedSubject !== "Web Application Development using AngularJS and Node.js" && (
+                <p className="mt-1 text-xs text-[#6B7280]">Papers will be uploaded soon</p>
+              )}
             </div>
           )}
         </motion.div>

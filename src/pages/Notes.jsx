@@ -15,8 +15,8 @@ import { CURRICULUM } from "../utils/curriculum";
 
 const yearStyles = {
   1: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
-  2: { bg: "bg-[#1E88E5] text-white border-[#1565C0]", text: "text-[#1E88E5]" },
-  3: { bg: "bg-[#2E7D32] text-white border-[#1B5E20]", text: "text-[#2E7D32]" },
+  2: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
+  3: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
 };
 
 const subjectColors = [
@@ -38,32 +38,43 @@ const PLACEHOLDER_SUBJECTS = new Set(["OPERATING SYSTEM"]);
 
 // Subjects that appear name-only in specific year+semester combos (subject listed but no notes/syllabus)
 const NAME_ONLY_MAP = {
-  "1-1": new Set(["ENGLISH"]),          // 1st Year Sem 1 - ENGLISH name only (Tamil added)
+  "1-1": new Set(["FOUNDATION ENGLISH - I"]), // 1st Year Sem 1 - FOUNDATION ENGLISH - I name-only
   "1-2": new Set(["ENGLISH"]),          // 1st Year Sem 2 - ENGLISH name only (Tamil added)
-  "2-1": new Set(["ENGLISH"]),          // 2nd Year Sem 1 - ENGLISH name only
+  "2-1": new Set([]),                  // 2nd Year Sem 1 - None are name only
   "2-2": new Set(["ENGLISH"]),          // 2nd Year Sem 2 - ENGLISH name only
 };
 
 // Semester-specific unit keys for subjects shared across different semesters
 // Maps "year-semester" -> subject -> Set of allowed unit numbers
 const SEMESTER_UNITS = {
-  "1-1": { "ENGLISH": new Set([1]), "TAMIL": new Set([14, 15, 16, 17, 18]) },
+  "1-1": { "TAMIL": new Set([14, 15, 16, 17, 18]) },
   "1-2": { "ENGLISH": new Set([1]), "TAMIL": new Set([19, 20, 21, 22, 23]) },
-  "2-1": { "TAMIL": new Set([1,2,3,4,5,6,7,8]), "ENGLISH": new Set([2]) },
+  "2-1": { "TAMIL": new Set([1,2,3,4,5,6,7,8]), "Foundation English - III": new Set([1]) },
   "2-2": { "TAMIL": new Set([9,10,11,12,13]), "ENGLISH": new Set([2]) },
 };
 
 // Teachers exclusive to 1st Year Semester 1
 const FIRST_YEAR_SEM1_FACULTY = {
-  "TAMIL": "MR.VADIVELMURUGAN",
-  "ENGLISH": "MS. RITZY WONDERBELL",
-  "MATHEMATICS PAPER - I": "MR.KARNAN, MR.SATHISHKUMAR",
-  "FUNDAMENTALS OF PYTHON PROGRAMMING": "MS.V.PONNILA",
-  "DATA STRUCTURES": "DR.R.LALITHA",
+  "TAMIL": "DR.K.VADIVELMURUGAN / DR.C.Karthik, DR.J.SIVAKUMAR",
+  "FOUNDATION ENGLISH - I": "Ms.s.RITZY WONDERBELL / Ms.C.VIDHYA",
+  "MATHEMATICS PAPER I": "Mr.P.KARNAN, Mr.S.SATHISHKUMAR / Mr.R.SHANKAR",
+  "PYTHON PROGRAMMING ESSENTIALS": "Ms.V.PONNILA / Ms.R.POOJITHA SHREE",
+  "DATA STRUCTURES": "Mrs.R.Lalitha / Mrs.P J.RAJAM",
+};
+
+// Teachers exclusive to 2nd Year Semester 1
+const SECOND_YEAR_SEM1_FACULTY = {
+  "Foundation English - III": "Ms.C.MALINI / Ms.C.VIDHYA",
+  "TAMIL": "DR.J.SIVAKUMAR / DR.K.VADIVELMURUGAN",
+  "Statistical Methods for Computer Science – I": "DR.N S.INDHUMATHY",
+  "Web Application Development using ReactJS and Node.js": "DURGADEVI / Dr.N.M.Sangeetha",
+  "Principles of operating Systems": "DR.A.KAVITHA / DURGADEV",
+  "Object Oriented Programming Concepts using JAVA": "DR.A.KAVITHA, Mr.S.Tamilarasi / DR.G.SRILAKSHMI",
+  "Web Application Development using AngularJS and Node.js": "Dr.N.M.Sangeetha",
 };
 
 const NOTES_DATA = {
-  "FUNDAMENTALS OF PYTHON PROGRAMMING": {
+  "PYTHON PROGRAMMING ESSENTIALS": {
     units: {
       1: {
         title: "Unit I",
@@ -107,51 +118,95 @@ const NOTES_DATA = {
       }
     }
   },
-  "FUNDAMENTALS OF DIGITAL ELECTRONICS": {
+  "FOUNDATION ENGLISH - I": {
     units: {
       1: {
         title: "Unit I",
-        subtitle: "Number Systems & Codes",
-        syllabus: "Digital Computers and Digital Systems Number Systems & Codes: Number System - Base Conversion Binary Codes Code Conversion. Digital Logic: Logic Gates Truth Tables, Universal Gates,",
-        hrs: 10,
+        subtitle: "Environment and Sustainability",
+        syllabus: "Poem: A Bird, came down the Walk - Emily Dickinson | Speech: Nobel Acceptance Speech - Wangari Mathai | Film: Elephant Whisperers - Kartiki Gonsalves",
+        hrs: 12,
         co: "CO1",
-        files: []
+        files: [{ id: "eng1-u1-1", title: "English Course Book - Semester I", fileName: "English_1stYear.pdf", fileId: "1hz0m4SITKQiGVa8wax8mIRSOuKryOYQp", type: "pdf" }]
       },
       2: {
         title: "Unit II",
-        subtitle: "Boolean Algebra & Arithmetic",
-        syllabus: "Boolean Algebra: Laws & Theorems - SOP, POS Methods - Simplification Of Boolean Functions Using Theorems, K-Map, Implementation Using Universal Gates, Binary Arithmetic: Binary Addition - Subtraction - Arithmetic Building Blocks - Adders-",
-        hrs: 10,
+        subtitle: "Food and Well-being",
+        syllabus: "Feature: Phuphee and her healing Kyaele tchot - Sabah Mahjoor | Essay: Flavours that Attracted the Cream - Kamala Ramakrishnan | Book extract: The Bicycle and the Sweet Shop - Roald Dahl",
+        hrs: 12,
         co: "CO2",
         files: []
       },
       3: {
         title: "Unit III",
-        subtitle: "Combinational Logic",
-        syllabus: "Subtractors-Combinational Logic: Multiplexers - Demultiplexers - Decoders - Encoders",
-        hrs: 10,
+        subtitle: "Hope and Humanity",
+        syllabus: "Short Story: The Last Leaf - O’Henry | Biography: Vera Shaufeld - Holocaust Memorial Day Trust | Feature: A Real Good Samaritan - Bernard Hare | Speaking: Character sketches / Speaking activity based on the prescribed texts",
+        hrs: 12,
         co: "CO3",
         files: []
       },
       4: {
         title: "Unit IV",
-        subtitle: "Sequential Logic & Registers",
-        syllabus: "Sequential Logic: RS, JK, D, And T Flip-Flops - Edge-Triggered - Master-Slave Flip-Flops, Registers: Shift Registers - Types of Shift Register",
-        hrs: 15,
+        subtitle: "Writing, Reading and Listening",
+        syllabus: "Writing: Constructing sentences, Writing from pictures, Writing on food | Reading: Informative/factual passages, News reports | Listening: Announcements, Information",
+        hrs: 12,
         co: "CO4",
         files: []
       },
       5: {
         title: "Unit V",
-        subtitle: "Counters & Memory",
-        syllabus: "Counters: Asynchronous Counters Ripple, Mod, Up-Down Counters- Synchronous Counters - Types of ROM and RAM.",
-        hrs: 15,
+        subtitle: "Grammar and Vocabulary",
+        syllabus: "Grammar in use | Error correction | Vocabulary activities based on the texts | Sample question papers",
+        hrs: 12,
         co: "CO5",
         files: []
       }
     }
   },
-  "MATHEMATICS PAPER - I": {
+  "DATA STRUCTURES": {
+    units: {
+      1: {
+        title: "Unit I",
+        subtitle: "Introduction & Arrays",
+        syllabus: "Concept of Data Structures, Abstract Data Types (ADT). Linear vs Non-Linear. Arrays: Single and Multi-dimensional, address calculation, operations.",
+        hrs: 12,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "Unit II",
+        subtitle: "Stacks & Queues",
+        syllabus: "Stack ADT: Implementation using array, operations, applications (Infix to Postfix conversion, Evaluation of postfix). Queue ADT: Implementation using array, Circular Queue, Double Ended Queue (Deque), applications.",
+        hrs: 12,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "Unit III",
+        subtitle: "Linked Lists",
+        syllabus: "Singly Linked List: node creation, insertion, deletion, traversal. Doubly Linked List, Circular Linked List. Linked stacks and linked queues.",
+        hrs: 12,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "Unit IV",
+        subtitle: "Trees & Graphs",
+        syllabus: "Trees: Basic terminology, Binary Trees, Traversals (Preorder, Inorder, Postorder). Binary Search Trees (BST): Search, insert, delete. Graphs: Representation (Matrix, List), Traversals (BFS, DFS).",
+        hrs: 12,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "Unit V",
+        subtitle: "Sorting, Searching & Hashing",
+        syllabus: "Sorting: Bubble sort, Insertion sort, Merge sort, Quick sort. Searching: Linear and Binary Search. Hashing: Hash tables, Hash functions, Collision resolution techniques.",
+        hrs: 12,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "MATHEMATICS PAPER I": {
     units: {
       1: {
         title: "Unit I",
@@ -459,6 +514,87 @@ const NOTES_DATA = {
       }
     }
   },
+  "Principles of operating Systems": { units: { 1: { title: "Unit I", subtitle: "Introduction to OS", syllabus: "INTRODUCTION - VIEWS AND GOALS - OPERATING-SYSTEM SERVICES - USER AND OPERATING-SYSTEM INTERFACE - SYSTEM CALL - TYPES OF SYSTEM CALLS", files: [{ id: "os-u1-1", title: "OS Introduction", fileName: "OS-INTRO.pptx", fileId: "1GixI9_7uxRNzbf5qSe_wf4McmWaylQDS", type: "pptx" },{ id: "os-u1-2", title: "Session 2 - OS Basics", fileName: "ses-2.pptx", fileId: "1Zny7cAR4GR0YTRr3sIZT-u-FAOIQvQ-d", type: "pptx" },{ id: "os-u1-3", title: "OS Structures - Unit 1", fileName: "os structures-unit 1.pdf", fileId: "1O8-gnDMSgXurNN6O99N4S26z-UlONUbu", type: "pdf" },{ id: "os-u1-4", title: "OS Structures", fileName: "OSStructures.ppt", fileId: "1xqoPAFz_xavBAX8RR8nNErwANXnce-3B", type: "ppt" },{ id: "os-u1-5", title: "Processes", fileName: "os-processes.ppt", fileId: "1MoiwrzKonwOc4MH9wuO_sxKm92coXyYM", type: "ppt" },{ id: "os-u1-6", title: "Interprocess Communication", fileName: "interprocesscommunication-180721182943.pptx", fileId: "14mf_5YIS0TZB00phmq2kTSN8gT1gpfJY", type: "pptx" },{ id: "os-u1-7", title: "Threads - Unit 1", fileName: "threads-unit 1.pdf", fileId: "172mi8UGGUnGPAPF7zOeSKEBkqFucF5SM", type: "pdf" },{ id: "os-u1-8", title: "THREADS", fileName: "THREADS.pptx", fileId: "1uU4O05stk5cg2AVhfQBdC1VifAd_nrgJ", type: "pptx" }] }, 2: { title: "Unit II", subtitle: "Process Scheduling & Synchronization", syllabus: "PROCESS SCHEDULING: BASIC CONCEPTS - SCHEDULING CRITERIA - SCHEDULING ALGORITHON - MULTIPLE-PROCESSOR SCHEDULING - CPU SCHEDULING. SYNCHRONIZATION: THE CRITICAL-SECTION PROBLEM - SYNCHRONIZATION HARDWARE - SEMAPHORES",          files: [
+            { id: "os-u2-1", title: "OS Unit 2 - Process Scheduling & Synchronization", fileName: "OS_Unit2.pdf", fileId: "1J8M3d7mVSU4oxkyp6q_Dq-m4tuhdVmLV", type: "pdf" },
+            { id: "os-u2-2", title: "CPU Scheduling Algorithms", fileName: "CPU_Scheduling_Algorithms.pdf", fileId: "1_XELBrqMfKayUaj3iU_SqpwY_NQv55Kt", type: "pdf" },
+            { id: "os-u2-3", title: "Process Scheduling - Basic Concepts & Criteria", fileName: "Process_Scheduling_Concepts.pdf", fileId: "1G25fBzDLCLnCHNu_dby65kRLi5IUyJRW", type: "pdf" },
+            { id: "os-u2-4", title: "Multiple-Processor Scheduling", fileName: "Multiple_Processor_Scheduling.pdf", fileId: "18GbhNE-Or0GQCk-Y3-bYNzbV8JbEFX7J", type: "pdf" },
+            { id: "os-u2-5", title: "Process Synchronization & Semaphores", fileName: "Process_Synchronization.pdf", fileId: "1KzBX3DYJipevwk5eYTBU6uv52NZX7F8C", type: "pdf" }
+          ]
+        }, 3: { title: "Unit III", subtitle: "Deadlocks", syllabus: "DEADLOCKS: DEADLOCK CHARACTERIZATION - METHODS FOR HANDLING DEADLOCKS - DEADLOCK PREVENTION - DEADLOCK AVOIDANCE - DEADLOCK DETECTION - RECOVERY FROM DEADLOCK", files: [
+            { id: "os-u3-1", title: "Deadlocks - Characterization, Prevention & Avoidance", fileName: "Deadlocks_Unit3.pdf", fileId: "1KEvkmZURClibxejv1uiRlpAENXP9mlSE", type: "pdf" }
+          ]
+        }, 4: { title: "Unit IV", subtitle: "Memory Management", syllabus: "MEMORY-MANAGEMENT STRATEGIES: SWAPPING - CONTIGUOUS MEMORY ALLOCATION - SEGMENTATION - PAGING - STRUCTURE OF THE PAGE TABLE", files: [
+            { id: "os-u4-1", title: "Memory Management - Swapping & Contiguous Allocation", fileName: "Memory_Swapping_Allocation.pdf", fileId: "1w5o-MsZ6pgyB3DEbMuA7UHF2e38Dd3Jc", type: "pdf" },
+            { id: "os-u4-2", title: "Segmentation", fileName: "Segmentation.pdf", fileId: "1pzxj1nLB8W2cbjLyfRXTx1SSfLu4KixD", type: "pdf" },
+            { id: "os-u4-3", title: "Paging", fileName: "Paging.pdf", fileId: "1kIsJciTjPagETuo350PmDQUgOWLlbeAO", type: "pdf" },
+            { id: "os-u4-4", title: "Structure of the Page Table", fileName: "Page_Table_Structure.pdf", fileId: "1U_G19A8JVehszrXY2XFjxKx6SBfBbptL", type: "pdf" },
+            { id: "os-u4-5", title: "Memory Management Strategies Overview", fileName: "Memory_Management_Strategies.pdf", fileId: "1NkJUQVv7ufUccXPE1sI_zhfXFVRTql6L", type: "pdf" }
+          ]
+        }, 5: { title: "Unit V", subtitle: "Storage Management", syllabus: "STORAGE MANAGEMENT: FILE SYSTEM - FILE CONCEPT - ACCESS METHODS - DIRECTORY AND DISK STRUCTURE - FILE SHARING - PROTECTION", files: [
+            { id: "os-u5-1", title: "File System & File Concept", fileName: "File_System_Concept.pdf", fileId: "1HYnm9Ih13bwLt2Z6XtCZS_ORu1BU5XVW", type: "pdf" },
+            { id: "os-u5-2", title: "Access Methods & Directory Structure", fileName: "Access_Methods_Directory.pdf", fileId: "1Nu7e79tt6PV6la3cXv9ulvb_BCgMaEX1", type: "pdf" },
+            { id: "os-u5-3", title: "File Sharing & Protection", fileName: "File_Sharing_Protection.pdf", fileId: "1c_UXqc3WB3whDm9r3tDZtPH3asdONrzK", type: "pdf" }
+          ]
+        } } },
+  "Web Application Development using ReactJS and Node.js": {
+    units: {
+      1: {
+        title: "Unit I",
+        subtitle: "Introduction to React",
+        syllabus: "Introduction to ReactJS: Library vs Framework, Virtual DOM, create-react-app. React Elements, JSX, Components (Functional and Class), Props.",
+        hrs: 12,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "Unit II",
+        subtitle: "State & Hooks",
+        syllabus: "State Management: useState, useEffect. Handling Events, Conditional Rendering, Lists and Keys. Forms and Controlled Components.",
+        hrs: 12,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "Unit III",
+        subtitle: "Component Patterns & Routing",
+        syllabus: "Component Lifecycle, Composition vs Inheritance. React Router: Setup, Route, Link, useParams, useNavigate. Context API for global state.",
+        hrs: 12,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "Unit IV",
+        subtitle: "Node.js Basics & Express",
+        syllabus: "Introduction to Node.js: Event Loop, modules, npm. Express.js Framework: Router, Middlewares, handling HTTP requests and responses.",
+        hrs: 12,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "Unit V",
+        subtitle: "Full Stack Integration",
+        syllabus: "Connecting React frontend to Express/Node backend. REST API integration using fetch/axios. Database CRUD operations, deployment basics.",
+        hrs: 12,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Foundation English - III": {
+    units: {
+      1: {
+        title: "Unit I",
+        subtitle: "2nd Year - English Complete Notes",
+        syllabus: "Language skills, advanced prose, reading comprehension, writing skill refinement.",
+        files: [{ id: "eng-u2-1", title: "2nd Year English - Complete Notes", fileName: "English_2ndYear.pdf", fileId: "1Ji6UOgrPlrPk338Amz6s_9GnXuj7WosW", type: "pdf" }]
+      },
+      2: { title: "Unit II", subtitle: "Advanced Writing", syllabus: "Essay writing, report writing, summarizing and paraphrasing.", files: [] },
+      3: { title: "Unit III", subtitle: "Literature and Drama", syllabus: "Selected literary works and drama, analytical studies of text.", files: [] },
+      4: { title: "Unit IV", subtitle: "Communication Skills", syllabus: "Public speaking, presentation skills, group discussion preparation.", files: [] },
+      5: { title: "Unit V", subtitle: "Vocabulary and Grammar", syllabus: "Idioms and phrases, advanced syntax, vocabulary building.", files: [] }
+    }
+  },
   "OPERATING SYSTEM": { units: { 1: { title: "Unit I", subtitle: "Introduction to OS", syllabus: "INTRODUCTION - VIEWS AND GOALS - OPERATING-SYSTEM SERVICES - USER AND OPERATING-SYSTEM INTERFACE - SYSTEM CALL - TYPES OF SYSTEM CALLS", files: [{ id: "os-u1-1", title: "OS Introduction", fileName: "OS-INTRO.pptx", fileId: "1GixI9_7uxRNzbf5qSe_wf4McmWaylQDS", type: "pptx" },{ id: "os-u1-2", title: "Session 2 - OS Basics", fileName: "ses-2.pptx", fileId: "1Zny7cAR4GR0YTRr3sIZT-u-FAOIQvQ-d", type: "pptx" },{ id: "os-u1-3", title: "OS Structures - Unit 1", fileName: "os structures-unit 1.pdf", fileId: "1O8-gnDMSgXurNN6O99N4S26z-UlONUbu", type: "pdf" },{ id: "os-u1-4", title: "OS Structures", fileName: "OSStructures.ppt", fileId: "1xqoPAFz_xavBAX8RR8nNErwANXnce-3B", type: "ppt" },{ id: "os-u1-5", title: "Processes", fileName: "os-processes.ppt", fileId: "1MoiwrzKonwOc4MH9wuO_sxKm92coXyYM", type: "ppt" },{ id: "os-u1-6", title: "Interprocess Communication", fileName: "interprocesscommunication-180721182943.pptx", fileId: "14mf_5YIS0TZB00phmq2kTSN8gT1gpfJY", type: "pptx" },{ id: "os-u1-7", title: "Threads - Unit 1", fileName: "threads-unit 1.pdf", fileId: "172mi8UGGUnGPAPF7zOeSKEBkqFucF5SM", type: "pdf" },{ id: "os-u1-8", title: "THREADS", fileName: "THREADS.pptx", fileId: "1uU4O05stk5cg2AVhfQBdC1VifAd_nrgJ", type: "pptx" }] }, 2: { title: "Unit II", subtitle: "Process Scheduling & Synchronization", syllabus: "PROCESS SCHEDULING: BASIC CONCEPTS - SCHEDULING CRITERIA - SCHEDULING ALGORITHON - MULTIPLE-PROCESSOR SCHEDULING - CPU SCHEDULING. SYNCHRONIZATION: THE CRITICAL-SECTION PROBLEM - SYNCHRONIZATION HARDWARE - SEMAPHORES",          files: [
             { id: "os-u2-1", title: "OS Unit 2 - Process Scheduling & Synchronization", fileName: "OS_Unit2.pdf", fileId: "1J8M3d7mVSU4oxkyp6q_Dq-m4tuhdVmLV", type: "pdf" },
             { id: "os-u2-2", title: "CPU Scheduling Algorithms", fileName: "CPU_Scheduling_Algorithms.pdf", fileId: "1_XELBrqMfKayUaj3iU_SqpwY_NQv55Kt", type: "pdf" },
@@ -511,9 +647,9 @@ const NOTES_DATA = {
       { id: "dmt-u5-1", title: "DMT Unit 5 - Cluster Analysis & Outlier Detection", fileName: "DMT_Unit5.docx", fileId: "1MctHUSXAcVlRozM-aLbvm4qzQSDBOLFv", type: "doc" }
     ] }
   } },
-  "ENGLISH": { units: { 1: { title: "Unit I", subtitle: "1st Year - English Complete Notes", syllabus: "", files: [{ id: "eng-u1-1", title: "1st Year English - Complete Notes", fileName: "English_1stYear.pdf", fileId: "1hz0m4SITKQiGVa8wax8mIRSOuKryOYQp", type: "pdf" }] }, 2: { title: "Unit II", subtitle: "2nd Year - English Complete Notes", syllabus: "", files: [{ id: "eng-u2-1", title: "2nd Year English - Complete Notes", fileName: "English_2ndYear.pdf", fileId: "1Ji6UOgrPlrPk338Amz6s_9GnXuj7WosW", type: "pdf" }] }, 3: { title: "Unit III", subtitle: "", syllabus: "", files: [] }, 4: { title: "Unit IV", subtitle: "", syllabus: "", files: [] }, 5: { title: "Unit V", subtitle: "", syllabus: "", files: [] } } },
+  "ENGLISH": { units: { 1: { title: "Unit I", subtitle: "1st Year - English Complete Notes", syllabus: "", files: [] }, 2: { title: "Unit II", subtitle: "2nd Year - English Complete Notes", syllabus: "", files: [] }, 3: { title: "Unit III", subtitle: "", syllabus: "", files: [] }, 4: { title: "Unit IV", subtitle: "", syllabus: "", files: [] }, 5: { title: "Unit V", subtitle: "", syllabus: "", files: [] } } },
   "ASP.NET": { units: { 1: { title: "Unit I", subtitle: "Overview of ASP.NET Framework", syllabus: "OVERVIEW OF ASP.NET FRAMEWORK - PAGE STRUCTURE - COMPILER DIRECTIVES - NAMESPACE", files: [{ id: "u1-1", title: "Overview of ASP.Net Framework", fileName: "Overview of ASP.Net Framework.pdf", fileId: "173-KUv6pOGV8o8ihTckpLwvkvDyKv9nj", type: "pdf" },{ id: "u1-2", title: "ASP Page Structure", fileName: "ASP page structure.pdf", fileId: "1OcVM4CDJTvGvdT9WfqLHFd1Sz61kEO3a", type: "pdf" },{ id: "u1-3", title: "Compiler Directives", fileName: "Compiler Directives.pdf", fileId: "14CpNpp7OVns3R6Kj4dWy81Io4FiFVvYi", type: "pdf" },{ id: "u1-4", title: "NAMESPACE", fileName: "NAMESPACE.pdf", fileId: "1cbb7Mt3m7MKXJkW_Hu_YsR4tWKDJanP3", type: "pdf" },{ id: "u1-5", title: "Overview of ASP.Net Framework (Notes)", fileName: "Overview of ASP.Net Framework (Notes)", fileId: "1VjVHcuCldGrTi6trGyb5gf4Z81RwpzsmsEqKm4Tajfg", type: "doc" }] }, 2: { title: "Unit II", subtitle: "ASP.NET Controls", syllabus: "UNDERSTANDING ASP.NET CONTROLS - STANDARD CONTROLS - DISPLAYING INFORMATION - ACCEPTING USER INPUT", files: [{ id: "u2-1", title: "ASP.NET UNIT - 2", fileName: "ASP.NET UNIT -2.pptx", fileId: "1t4g4ab9d5HdKZGuGxmYpWcAwTkjmoqjm", type: "pptx" }] }, 3: { title: "Unit III", subtitle: "Validation & Rich Controls", syllabus: "VALIDATION CONTROLS - REQUIRED FIELD VALIDATOR - RANGE VALIDATOR - RICH CONTROLS - ADROTATOR, CALENDAR", files: [{ id: "u3-1", title: "Validation Controls", fileName: "Validation Controls.docx", fileId: "1z-1R0gaqaVaSIvgRybN5AiA8ExYGsJfY", type: "docx" },{ id: "u3-2", title: "Calendar Control in ASP.NET", fileName: "Calendar Control in ASP.pdf", fileId: "1DInHlyYjC7OpG7sY1i0l987_uZLjo5iY", type: "pdf" },{ id: "u3-3", title: "Rich Controls", fileName: "RICH CONTROLS.pdf", fileId: "1xE1sIoFOWnkI5D7GRbm0EtgyDHpxwYg0", type: "pdf" }] }, 4: { title: "Unit IV", subtitle: "Data Access in ASP.NET", syllabus: "DATA BOUND CONTROL - SQLDATASOURCE - OLEDB - DATASET", files: [{ id: "u4-1", title: "Data Bound Controls", fileName: "data bound controls.docx", fileId: "1IXY-buceR6cV10jEbMClDXUuveYjVWUo", type: "docx" },{ id: "u4-2", title: "Simple Data Bound Controls", fileName: "Simple Data Bound Controls.pdf", fileId: "1PCHmZ2U3uUV8Ah83Do1vZ2bTk4uBArx7", type: "pdf" }] }, 5: { title: "Unit V", subtitle: "List Controls & State Management", syllabus: "LIST CONTROLS - GRID VIEW - REPEATER - STATE MANAGEMENT - COOKIES - SESSION", files: [{ id: "u5-1", title: "List Controls", fileName: "Listbox RadiobuttionList CheckboxList BulletedList.pdf", fileId: "1hGMGwEMhCFf1J_RyY3pKNKNAEVXnkwH2", type: "pdf" },{ id: "u5-2", title: "ADO.NET Architecture", fileName: "ADO.NET ARCHITECTURE.pdf", fileId: "12EETP-MtzBDgmT_ybJ0xiTebiksP5In4", type: "pdf" },{ id: "u5-3", title: "Application and Session State", fileName: "Application and Session State.pdf", fileId: "1FnobkINTlyJp4Nbi31oTLAtN6_PtLrUX", type: "pdf" },{ id: "u5-4", title: "Cookies", fileName: "COOKIES.pdf", fileId: "1Lw-RzMw2vLCAbYNxR7HzcfYs_Wt102Ob", type: "pdf" },{ id: "u5-5", title: "Web Service", fileName: "WEB SERVICE.pdf", fileId: "1lbt5Eqo79yie2GsHA6O5sgvq0j2V3xnu", type: "pdf" }] } } },
- "JAVA PROGRAMMING": { units: {
+ "Object Oriented Programming Concepts using JAVA": { units: {
       1: { title: "Unit I", subtitle: "Introduction to Java", syllabus: "INTRODUCTION TO JAVA - OOP CONCEPTS - JAVA VIRTUAL MACHINE - DATA TYPES - VARIABLES - OPERATORS - CONTROL STATEMENTS - ARRAYS", files: [{ id: "java-u1-1", title: "Java Unit 1 - Introduction to Java", fileName: "Java_Unit1.pdf", fileId: "1Rc1MPevM5go_wHtt6vymVE0G6AKhEy2A", type: "pdf" }] },
       2: { title: "Unit II", subtitle: "Classes and Inheritance", syllabus: "CLASSES - OBJECTS - CONSTRUCTORS - INHERITANCE - PACKAGES - INTERFACES - METHOD OVERRIDING", files: [{ id: "java-u2-1", title: "Java Unit 2 - Classes and Inheritance", fileName: "Java_Unit2.pdf", fileId: "1PRi2MFawHIDfj3eDrJZ6nqRzwqhKn5rW", type: "pdf" }] },
       3: { title: "Unit III", subtitle: "Exception Handling & Multithreading", syllabus: "EXCEPTION HANDLING - TRY CATCH FINALLY - THROW - THROWS - MULTITHREADING - THREAD LIFE CYCLE - SYNCHRONIZATION", files: [{ id: "java-u3-1", title: "Java Unit 3 - Exception Handling & Multithreading", fileName: "Java_Unit3.pdf", fileId: "1b1ucYCpHPUvq614eY8dU6NsGe07tMcOK", type: "pdf" }] },
@@ -545,14 +681,8 @@ const NOTES_DATA = {
       22: { title: "அலகு IV", subtitle: "செய்யுள், கட்டுரை, மொழிப்பயிற்சி, இலக்கிய வரலாறு", syllabus: "செய்யுள்: 15. இரட்சணிய யாத்திரிகம் - எச். ஏ. கிருஷ்ணபிள்ளை (குமார பருவம் - இரட்சணிய சரிதப் படலம் - சிலுவைப்பாடு, பாடல் எண்கள்: 305, 308, 319, 326, 334, 338, 342); 16. குமரேச சதகம் - குருபாததாசர் (1. இறந்தும் வாழ்வோர் (பாடல் எண் 31), 2. இயல்பறிதல் (பாடல் எண் 54), 3. இறைவன் செயல் (பாடல் எண் 85)). கட்டுரை: 17. எண்ணங்கள் - லட்சியப்பாதை - எம். எஸ். உதயமூர்த்தி. மொழிப்பயிற்சி: 18. தொகாநிலைத் தொடர். பாடம் தழுவிய இலக்கிய வரலாறு: 19. கிறித்துவ இலக்கிய வரலாறு.", co: "CO4", files: [] },
       23: { title: "அலகு V", subtitle: "தமிழ்க்கணினிப் பயிற்சி, கட்டுரை, மொழிப்பயிற்சி", syllabus: "தமிழ்க்கணினிப் பயிற்சி: 20. தமிழ்க் கணினியும் தகவல் தொழில் நுட்பமும். கட்டுரை: 21. ஜெயித்துக்காட்டுவோம் - புதிய எண்ணங்களுடன் வெற்றி காண்க - அப்துல்கலாம். மொழிப்பயிற்சி: 22. (அ) ஒரு பொருள் குறித்த பல சொற்கள், (ஆ) பல பொருள் குறித்த ஒரு சொல்.", co: "CO5", files: [] }
     } },
- "WEB TECHNOLOGY": { units: {
-      1: { title: "Unit I", subtitle: "Introduction to Web Technologies", syllabus: "INTRODUCTION TO WEB TECHNOLOGIES - HTML BASICS - CSS FUNDAMENTALS - JAVASCRIPT OVERVIEW - WEB ARCHITECTURE", files: [{ id: "web-u1-1", title: "Web Tech Unit 1 - Introduction", fileName: "WebTech_Unit1.pptx", fileId: "12dv8jFAYcQwZbXUEfAuFUrKYYuw736OJ", type: "pptx" }] },
-      2: { title: "Unit II", subtitle: "Advanced HTML & CSS", syllabus: "HTML FORMS AND TABLES - CSS LAYOUTS - FLEXBOX - GRID - RESPONSIVE DESIGN - CSS FRAMEWORKS", files: [{ id: "web-u2-1", title: "Web Tech Unit 2 - Advanced HTML & CSS", fileName: "WebTech_Unit2.pptx", fileId: "1ZEHoSFvqerdMt4cMtLMHIlNwh-UXSsqC", type: "pptx" }] },
-      3: { title: "Unit III", subtitle: "JavaScript & DOM", syllabus: "JAVASCRIPT BASICS - DOM MANIPULATION - EVENTS - VALIDATION - ES6 FEATURES", files: [{ id: "web-u3-1", title: "Web Tech Unit 3 - JavaScript & DOM", fileName: "WebTech_Unit3.pptx", fileId: "1m-iUfVYv8GrE2TC4rLA3jiLLP7wxLuUC", type: "pptx" }] },
-      4: { title: "Unit IV", subtitle: "Server-Side Programming", syllabus: "SERVER-SIDE PROGRAMMING - PHP/SERVLETS - DATABASE CONNECTIVITY - SESSION MANAGEMENT - CRUD OPERATIONS", files: [{ id: "web-u4-1", title: "Web Tech Unit 4 - Server-Side Programming", fileName: "WebTech_Unit4.pdf", fileId: "1inVaANm-llf0-ixvVVwh2MpQhb-VqhAt", type: "pdf" }] },
-      5: { title: "Unit V", subtitle: "Web Services & XML", syllabus: "WEB SERVICES - XML - JSON - AJAX - REST API - INTRODUCTION TO FRAMEWORKS", files: [{ id: "web-u5-1", title: "Web Tech Unit 5 - Web Services", fileName: "WebTech_Unit5.docx", fileId: "1LUux3fYsHW-CCkuEV0nogtqrRHfgDOOR", type: "doc" }] }
-    } },
- "STATISTICAL METHODS FOR COMPUTER SCIENCE - I": { units: {
+
+ "Statistical Methods for Computer Science – I": { units: {
       1: { title: "Unit I", subtitle: "Introduction to Statistics", syllabus: "INTRODUCTION - STATISTICS - MEASURES OF CENTRAL TENDENCY - MEAN, MEDIAN, MODE - MEASURES OF DISPERSION - VARIANCE, STANDARD DEVIATION", files: [{ id: "stats-u1-1", title: "Statistics Unit 1 - Introduction to Statistics", fileName: "Stats_Unit1.pdf", fileId: "1CaoFLLcl1gi5CWvutD8m6BJnUswieCjA", type: "pdf" }] },
       2: { title: "Unit II", subtitle: "Probability Theory", syllabus: "PROBABILITY - BASIC CONCEPTS - AXIOMS OF PROBABILITY - CONDITIONAL PROBABILITY - BAYES THEOREM - RANDOM VARIABLES", files: [{ id: "stats-u2-1", title: "Statistics Unit 2 - Probability Theory", fileName: "Stats_Unit2.pdf", fileId: "1hMQguilzowigHuBpoGyilbGY0hGZRBUY", type: "pdf" }] },
       3: { title: "Unit III", subtitle: "Probability Distributions", syllabus: "PROBABILITY DISTRIBUTIONS - BINOMIAL DISTRIBUTION - POISSON DISTRIBUTION - NORMAL DISTRIBUTION - APPLICATIONS", files: [{ id: "stats-u3-1", title: "Statistics Unit 3 - Probability Distributions", fileName: "Stats_Unit3.pdf", fileId: "1Z7LLBa_EAQeG2Q_ILavs5zItgcbOTd26", type: "pdf" }] },
@@ -846,6 +976,8 @@ export default function Notes() {
                 : 0;
               const facultyName = selectedYear === 1 && selectedSemester === 1
                 ? FIRST_YEAR_SEM1_FACULTY[subject]
+                : selectedYear === 2 && selectedSemester === 1
+                ? SECOND_YEAR_SEM1_FACULTY[subject]
                 : isNameOnly ? null : FACULTY_MAP[subject];
               return (
                 <motion.button key={subject}
@@ -881,8 +1013,10 @@ export default function Notes() {
   const units = filteredUnits;
   const totalFiles = units.reduce((s, [, u]) => s + u.files.length, 0);
 
-  const isEnglish = selectedSubject === "ENGLISH";
-  const englishPdf = isEnglish && NOTES_DATA["ENGLISH"]?.units?.[selectedYear === 2 ? 2 : 1]?.files?.[0];
+  const isEnglish = selectedSubject === "ENGLISH" || selectedSubject === "FOUNDATION ENGLISH - I";
+  const englishPdf = selectedSubject === "FOUNDATION ENGLISH - I"
+    ? NOTES_DATA["FOUNDATION ENGLISH - I"]?.units?.[1]?.files?.[0]
+    : isEnglish && NOTES_DATA["ENGLISH"]?.units?.[selectedYear === 2 ? 2 : 1]?.files?.[0];
 
   // Determine the current subject's semester number for pre-filling upload form
   const currentSemesterNumber = selectedSemester;
@@ -1042,15 +1176,19 @@ export default function Notes() {
           <div className="mb-5 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>
             <div>
-              <h2 className="font-sans text-lg font-bold text-[#0F4C81]">English - Complete Notes</h2>
-              <p className="text-[11px] text-[#6B7280]">Complete English notes PDF for download</p>
+              <h2 className="font-sans text-lg font-bold text-[#0F4C81]">
+                {selectedSubject === "FOUNDATION ENGLISH - I" ? "English Course Book" : "English - Complete Notes"}
+              </h2>
+              <p className="text-[11px] text-[#6B7280]">
+                {selectedSubject === "FOUNDATION ENGLISH - I" ? "Course Book PDF for download & preview" : "Complete English notes PDF for download"}
+              </p>
             </div>
           </div>
           <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-sm">
             <div className="p-5">
               <motion.button
                 initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
-                onClick={() => setViewingPdf({ ...englishPdf, subject: "ENGLISH", unit: "Complete Notes" })}
+                onClick={() => setViewingPdf({ ...englishPdf, subject: selectedSubject, unit: selectedSubject === "FOUNDATION ENGLISH - I" ? "Course Book" : "Complete Notes" })}
                 className="group flex w-full items-center gap-3 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] p-4 text-left transition-all hover:bg-[#F0F4F8] hover:border-[#1E88E5]/30 hover:shadow-sm"
               >
                 <div className="flex h-14 w-12 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-650 shadow-sm">
@@ -1058,7 +1196,9 @@ export default function Notes() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-base font-bold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">{englishPdf.title}</p>
-                  <p className="text-xs text-[#6B7280]">PDF · Complete Notes · 1st Year Semester 1</p>
+                  <p className="text-xs text-[#6B7280]">
+                    {selectedSubject === "FOUNDATION ENGLISH - I" ? "PDF · Semester I Course Book" : "PDF · Complete Notes"}
+                  </p>
                 </div>
                 <div className="shrink-0 rounded-full bg-white border border-[#E5E7EB] p-2 text-[#4B5563] hover:bg-slate-100 hover:text-slate-900 transition-all">
                   <a href={getDriveDownloadUrl(englishPdf.fileId, englishPdf.type)} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>

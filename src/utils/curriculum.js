@@ -9,11 +9,10 @@ export const CURRICULUM = {
       1: {
         label: "Semester 1",
         subjects: [
-          "FUNDAMENTALS OF PYTHON PROGRAMMING",
-          "FUNDAMENTALS OF DIGITAL ELECTRONICS",
-          "MATHEMATICS PAPER - I",
+          "PYTHON PROGRAMMING ESSENTIALS",
+          "MATHEMATICS PAPER I",
           "TAMIL",
-          "ENGLISH",
+          "FOUNDATION ENGLISH - I",
           "DATA STRUCTURES"
         ]
       },
@@ -21,6 +20,7 @@ export const CURRICULUM = {
         label: "Semester 2",
         subjects: [
           "OBJECT ORIENTED PROGRAMMING USING C++",
+          "WEB TECHNOLOGY",
           "MATHEMATICS PAPER - II",
           "TAMIL",
           "ENGLISH"
@@ -35,13 +35,13 @@ export const CURRICULUM = {
       1: {
         label: "Semester 1",
         subjects: [
-          "JAVA PROGRAMMING",
-          "WEB TECHNOLOGY",
-          "STATISTICAL METHODS FOR COMPUTER SCIENCE - I",
+          "Object Oriented Programming Concepts using JAVA",
+          "Web Application Development using AngularJS and Node.js",
+          "Statistical Methods for Computer Science – I",
           "TAMIL",
-          "ENGLISH",
-          "OPERATING SYSTEM",
-          "REACT"
+          "Foundation English - III",
+          "Principles of operating Systems",
+          "Web Application Development using ReactJS and Node.js"
         ]
       },
       2: {

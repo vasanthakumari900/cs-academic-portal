@@ -6,3 +6,5 @@ dist
 vite-*.txt
 folder.html
 os_folder.html
+
+.vercel

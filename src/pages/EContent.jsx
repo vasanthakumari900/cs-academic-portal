@@ -21,12 +21,30 @@ const FACULTY_MAP = {
   "DATABASE MANAGEMENT SYSTEM": "M P SUDHA",
 };
 
+const FIRST_YEAR_SEM1_FACULTY = {
+  "TAMIL": "DR.K.VADIVELMURUGAN / DR.C.Karthik, DR.J.SIVAKUMAR",
+  "FOUNDATION ENGLISH - I": "Ms.s.RITZY WONDERBELL / Ms.C.VIDHYA",
+  "MATHEMATICS PAPER I": "Mr.P.KARNAN, Mr.S.SATHISHKUMAR / Mr.R.SHANKAR",
+  "PYTHON PROGRAMMING ESSENTIALS": "Ms.V.PONNILA / Ms.R.POOJITHA SHREE",
+  "DATA STRUCTURES": "Mrs.R.Lalitha / Mrs.P J.RAJAM",
+};
+
+const SECOND_YEAR_SEM1_FACULTY = {
+  "Foundation English - III": "Ms.C.MALINI / Ms.C.VIDHYA",
+  "TAMIL": "DR.J.SIVAKUMAR / DR.K.VADIVELMURUGAN",
+  "Statistical Methods for Computer Science – I": "DR.N S.INDHUMATHY",
+  "Web Application Development using ReactJS and Node.js": "DURGADEVI / Dr.N.M.Sangeetha",
+  "Principles of operating Systems": "DR.A.KAVITHA / DURGADEV",
+  "Object Oriented Programming Concepts using JAVA": "DR.A.KAVITHA, Mr.S.Tamilarasi / DR.G.SRILAKSHMI",
+  "Web Application Development using AngularJS and Node.js": "Dr.N.M.Sangeetha",
+};
+
 // CURRICULUM imported from Notes.jsx
 
 const yearStyles = {
   1: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
-  2: { bg: "bg-[#1E88E5] text-white border-[#1565C0]", text: "text-[#1E88E5]" },
-  3: { bg: "bg-[#2E7D32] text-white border-[#1B5E20]", text: "text-[#2E7D32]" },
+  2: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
+  3: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
 };
 
 const subjectColors = [
@@ -244,6 +262,11 @@ export default function EContent() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {semesterData.subjects.map((subject, i) => {
               const sc = subjectColors[i % subjectColors.length];
+              const facultyName = selectedYear === 1 && selectedSemester === 1
+                ? FIRST_YEAR_SEM1_FACULTY[subject]
+                : selectedYear === 2 && selectedSemester === 1
+                ? SECOND_YEAR_SEM1_FACULTY[subject]
+                : FACULTY_MAP[subject];
               return (
                 <motion.button key={subject}
                   initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
@@ -257,7 +280,7 @@ export default function EContent() {
                     </div>
                     <div className="min-w-0 flex-1 pt-1 text-left">
                       <h3 className="font-sans font-bold text-sm text-[#0F4C81] leading-snug">{subject}</h3>
-                      {FACULTY_MAP[subject] && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-[#6B7280]">{FACULTY_MAP[subject]}</p>}
+                      {facultyName && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-[#6B7280]">{facultyName}</p>}
                       <div className="mt-3 flex items-center gap-2">
                         <span className={`inline-flex items-center gap-1 rounded-full ${sc.badge} px-2.5 py-0.5 text-[10px] font-semibold`}><FiBookOpen size={10} /> VIEW SYLLABUS</span>
                         <FiChevronRight size={14} className="text-slate-400 group-hover:text-[#1E88E5] transition-colors ml-auto" />

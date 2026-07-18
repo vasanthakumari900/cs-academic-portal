@@ -8,11 +8,11 @@ import {
 
 const cards = [
   { label: "Home", icon: FiHome, to: "/", bg: "bg-[#0F4C81]", desc: "Inspirational quotes & info" },
-  { label: "Video Lectures", icon: FiPlayCircle, to: "/e-content", bg: "bg-[#2E7D32]", desc: "Year & subject-wise lectures" },
-  { label: "Lecture Notes", icon: FiFileText, to: "/notes", bg: "bg-[#1E88E5]", desc: "Unit-wise PDF notes by subject" },
+  { label: "Video Lectures", icon: FiPlayCircle, to: "/e-content", bg: "bg-[#0F4C81]", desc: "Year & subject-wise lectures" },
+  { label: "Lecture Notes", icon: FiFileText, to: "/notes", bg: "bg-[#0F4C81]", desc: "Unit-wise PDF notes by subject" },
   { label: "Semester Question Papers", icon: FiGrid, to: "/question-papers", bg: "bg-[#0F4C81]", desc: "Semester-wise past exam papers" },
-  { label: "Placement Details", icon: FiBriefcase, to: "/placements", bg: "bg-[#1E88E5]", desc: "Drives & opportunities" },
-  { label: "CIA Question Papers", icon: FiAward, to: "/student/cia-question-papers", bg: "bg-[#2E7D32]", desc: "CIA 1 & 2 question papers" },
+  { label: "Placement Details", icon: FiBriefcase, to: "/placements", bg: "bg-[#0F4C81]", desc: "Drives & opportunities" },
+  { label: "CIA Question Papers", icon: FiAward, to: "/student/cia-question-papers", bg: "bg-[#0F4C81]", desc: "CIA 1 & 2 question papers" },
 ];
 
 export default function StudentDashboard() {
