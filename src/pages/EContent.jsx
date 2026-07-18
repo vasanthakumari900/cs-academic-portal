@@ -148,6 +148,8 @@ export default function EContent() {
     : [];
   const syllabusData = useMemo(() => {
     if (!selectedSubject || isPlaceholder) return null;
+    if (selectedSubject === "ENGLISH" && selectedYear === 2 && selectedSemester === 2) return null;
+    if (selectedSubject === "Foundation English - III") return null;
     // Hide syllabus for Operating System in 2nd Year Sem 1 (E-Content only)
     if (selectedSubject === "OPERATING SYSTEM" && selectedYear === 2 && selectedSemester === 1) return null;
     const subjectData = NOTES_DATA[selectedSubject];
