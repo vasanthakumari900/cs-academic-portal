@@ -170,7 +170,9 @@ const NOTES_DATA = {
         syllabus: "Concept of Data Structures, Abstract Data Types (ADT). Linear vs Non-Linear. Arrays: Single and Multi-dimensional, address calculation, operations.",
         hrs: 12,
         co: "CO1",
-        files: []
+        files: [
+          { id: "ds-u1-1", title: "Data Structures - Unit I", fileName: "Data_Structures_Unit_1.pdf", fileId: "1-NsmikB2hUOR_Xs72yiFSTsnHW3g7Edp", type: "pdf" }
+        ]
       },
       2: {
         title: "Unit II",
@@ -178,7 +180,11 @@ const NOTES_DATA = {
         syllabus: "Stack ADT: Implementation using array, operations, applications (Infix to Postfix conversion, Evaluation of postfix). Queue ADT: Implementation using array, Circular Queue, Double Ended Queue (Deque), applications.",
         hrs: 12,
         co: "CO2",
-        files: []
+        files: [
+          { id: "ds-u2-1", title: "Data Structures - Unit II (Part 1)", fileName: "Data_Structures_Unit_2_Part1.pdf", fileId: "1wxSNRHHzGpxiiEQ1JTaDg9Fv2Shj1gaG", type: "pdf" },
+          { id: "ds-u2-2", title: "Data Structures - Unit II (Part 2)", fileName: "Data_Structures_Unit_2_Part2.pdf", fileId: "1t1HzQSM1WuXwobKbL5OrRlTCw6SJopN3", type: "pdf" },
+          { id: "ds-u2-3", title: "Data Structures - Unit II Notes", fileName: "Data_Structures_Unit_2_Notes.docx", fileId: "15_1A-AfD5Ols0ZgQaZ3AmM9JdESSbvNo", type: "doc" }
+        ]
       },
       3: {
         title: "Unit III",
@@ -186,7 +192,9 @@ const NOTES_DATA = {
         syllabus: "Singly Linked List: node creation, insertion, deletion, traversal. Doubly Linked List, Circular Linked List. Linked stacks and linked queues.",
         hrs: 12,
         co: "CO3",
-        files: []
+        files: [
+          { id: "ds-u3-1", title: "Data Structures - Unit III", fileName: "Data_Structures_Unit_3.pdf", fileId: "1TJezUtGE15YbkndWHBBuAENpWOtgWLl1", type: "pdf" }
+        ]
       },
       4: {
         title: "Unit IV",
@@ -194,7 +202,10 @@ const NOTES_DATA = {
         syllabus: "Trees: Basic terminology, Binary Trees, Traversals (Preorder, Inorder, Postorder). Binary Search Trees (BST): Search, insert, delete. Graphs: Representation (Matrix, List), Traversals (BFS, DFS).",
         hrs: 12,
         co: "CO4",
-        files: []
+        files: [
+          { id: "ds-u4-1", title: "Data Structures - Unit IV (Part 1)", fileName: "Data_Structures_Unit_4_Part1.docx", fileId: "1d6UqMCMnMn1GC5JDc5Qk7pgSIpBcF4ks", type: "doc" },
+          { id: "ds-u4-2", title: "Data Structures - Unit IV (Part 2)", fileName: "Data_Structures_Unit_4_Part2.docx", fileId: "1gPo6klP5Y6O8Z1nqvhx0VdUeSzpsz4PG", type: "doc" }
+        ]
       },
       5: {
         title: "Unit V",
@@ -514,11 +525,45 @@ const NOTES_DATA = {
       }
     }
   },
-  "Principles of operating Systems": { units: { 1: { title: "Unit I", subtitle: "Introduction to OS", syllabus: "INTRODUCTION - VIEWS AND GOALS - OPERATING-SYSTEM SERVICES - USER AND OPERATING-SYSTEM INTERFACE - SYSTEM CALL - TYPES OF SYSTEM CALLS", files: [] }, 2: { title: "Unit II", subtitle: "Process Scheduling & Synchronization", syllabus: "PROCESS SCHEDULING: BASIC CONCEPTS - SCHEDULING CRITERIA - SCHEDULING ALGORITHON - MULTIPLE-PROCESSOR SCHEDULING - CPU SCHEDULING. SYNCHRONIZATION: THE CRITICAL-SECTION PROBLEM - SYNCHRONIZATION HARDWARE - SEMAPHORES",          files: []
+  "Principles of operating Systems": { units: { 1: { title: "Unit I", subtitle: "Introduction to OS", syllabus: "INTRODUCTION - VIEWS AND GOALS - OPERATING-SYSTEM SERVICES - USER AND OPERATING-SYSTEM INTERFACE - SYSTEM CALL - TYPES OF SYSTEM CALLS", files: [{ id: "pos-u1-1", title: "Principles of Operating Systems - Unit I", fileName: "Principles_of_Operating_Systems_Unit1.pdf", fileId: "1g9NPHnEMAmQJoKvyB7qbpzpMxmUcB-99", type: "pdf" }] }, 2: { title: "Unit II", subtitle: "Process Scheduling & Synchronization", syllabus: "PROCESS SCHEDULING: BASIC CONCEPTS - SCHEDULING CRITERIA - SCHEDULING ALGORITHON - MULTIPLE-PROCESSOR SCHEDULING - CPU SCHEDULING. SYNCHRONIZATION: THE CRITICAL-SECTION PROBLEM - SYNCHRONIZATION HARDWARE - SEMAPHORES",          files: []
         }, 3: { title: "Unit III", subtitle: "Deadlocks", syllabus: "DEADLOCKS: DEADLOCK CHARACTERIZATION - METHODS FOR HANDLING DEADLOCKS - DEADLOCK PREVENTION - DEADLOCK AVOIDANCE - DEADLOCK DETECTION - RECOVERY FROM DEADLOCK", files: []
         }, 4: { title: "Unit IV", subtitle: "Memory Management", syllabus: "MEMORY-MANAGEMENT STRATEGIES: SWAPPING - CONTIGUOUS MEMORY ALLOCATION - SEGMENTATION - PAGING - STRUCTURE OF THE PAGE TABLE", files: []
         }, 5: { title: "Unit V", subtitle: "Storage Management", syllabus: "STORAGE MANAGEMENT: FILE SYSTEM - FILE CONCEPT - ACCESS METHODS - DIRECTORY AND DISK STRUCTURE - FILE SHARING - PROTECTION", files: []
         } } },
+  "WEB TECHNOLOGY": {
+    units: {
+      1: {
+        title: "Unit I",
+        subtitle: "Introduction to HTML",
+        syllabus: "Introduction to HTML -Anchor Tag - Hyperlink - Head and Body Section -Heading Horizontal - Ruler Paragraphs Tags -Images and Picture - Lists - Tables - Frames - Forms and forms elements.",
+        files: [{ id: "wt-u1-1", title: "Web Technology - Unit I", fileName: "Web_Technology_Unit_I.pptx", fileId: "12dv8jFAYcQwZbXUEfAuFUrKYYuw736OJ", type: "pptx" }]
+      },
+      2: {
+        title: "Unit II",
+        subtitle: "HTML Forms and CSS",
+        syllabus: "DHTML and Style sheets - Defining styles - Elements of style -Linking a style sheet to a html documents - Inline style - External style sheets - Multiple styles- Web page designing",
+        files: [{ id: "wt-u2-1", title: "Web Technology - Unit II", fileName: "Web_Technology_Unit_II.pptx", fileId: "1ZEHoSFvqerdMt4cMtLMHIlNwh-UXSsqC", type: "pptx" }]
+      },
+      3: {
+        title: "Unit III",
+        subtitle: "JavaScript Basics",
+        syllabus: "Introduction to Java script - Advantage of JavaScript - Data type -Variable Array - Operator and Expression - Control and looping Constructs - Functions - Dialog Boxes.",
+        files: [{ id: "wt-u3-1", title: "Web Technology - Unit III", fileName: "Web_Technology_Unit_III.pptx", fileId: "1m-iUfVYv8GrE2TC4rLA3jiLLP7wxLuUC", type: "pptx" }]
+      },
+      4: {
+        title: "Unit IV",
+        subtitle: "XML and DHTML",
+        syllabus: "JavaScript Document Object Model - Event Handling - Form Object Built in Object - User Defined Object-Cookies.",
+        files: [{ id: "wt-u4-1", title: "Web Technology - Unit IV", fileName: "Web_Technology_Unit_IV.pdf", fileId: "1inVaANm-llf0-ixvVVwh2MpQhb-VqhAt", type: "pdf" }]
+      },
+      5: {
+        title: "Unit V",
+        subtitle: "Server Side Scripting (PHP)",
+        syllabus: "Angular JS - Introduction - Data Binding and Directives - Services - Components and templates - Forms and validation",
+        files: [{ id: "wt-u5-1", title: "Web Technology - Unit V", fileName: "Web_Technology_Unit_V.docx", fileId: "1LUux3fYsHW-CCkuEV0nogtqrRHfgDOOR", type: "doc" }]
+      }
+    }
+  },
   "Web Application Development using ReactJS and Node.js": {
     units: {
       1: {
@@ -629,7 +674,7 @@ const NOTES_DATA = {
       { id: "dmt-u5-1", title: "DMT Unit 5 - Cluster Analysis & Outlier Detection", fileName: "DMT_Unit5.docx", fileId: "1MctHUSXAcVlRozM-aLbvm4qzQSDBOLFv", type: "doc" }
     ] }
   } },
-  "ENGLISH": { units: { 1: { title: "Unit I", subtitle: "1st Year - English Complete Notes", syllabus: "", files: [] }, 2: { title: "Unit II", subtitle: "2nd Year - English Complete Notes", syllabus: "", files: [] }, 3: { title: "Unit III", subtitle: "", syllabus: "", files: [] }, 4: { title: "Unit IV", subtitle: "", syllabus: "", files: [] }, 5: { title: "Unit V", subtitle: "", syllabus: "", files: [] } } },
+  "ENGLISH": { units: { 1: { title: "Unit I", subtitle: "1st Year - English Complete Notes", syllabus: "", files: [{ id: "eng-u1-1", title: "English Course Book - Semester II", fileName: "English_Sem2_Complete_Notes.pdf", fileId: "/English_Sem2_Complete_Notes.pdf", type: "pdf" }] }, 2: { title: "Unit II", subtitle: "2nd Year - English Complete Notes", syllabus: "", files: [{ id: "eng-u2-1", title: "2nd Year English - Complete Notes", fileName: "English_2ndYear.pdf", fileId: "1YzMj4-aF3A3g_J6mVV3VRwXzaWl9XKkk", type: "pdf" }] }, 3: { title: "Unit III", subtitle: "", syllabus: "", files: [] }, 4: { title: "Unit IV", subtitle: "", syllabus: "", files: [] }, 5: { title: "Unit V", subtitle: "", syllabus: "", files: [] } } },
   "ASP.NET": { units: { 1: { title: "Unit I", subtitle: "Overview of ASP.NET Framework", syllabus: "OVERVIEW OF ASP.NET FRAMEWORK - PAGE STRUCTURE - COMPILER DIRECTIVES - NAMESPACE", files: [{ id: "u1-1", title: "Overview of ASP.Net Framework", fileName: "Overview of ASP.Net Framework.pdf", fileId: "173-KUv6pOGV8o8ihTckpLwvkvDyKv9nj", type: "pdf" },{ id: "u1-2", title: "ASP Page Structure", fileName: "ASP page structure.pdf", fileId: "1OcVM4CDJTvGvdT9WfqLHFd1Sz61kEO3a", type: "pdf" },{ id: "u1-3", title: "Compiler Directives", fileName: "Compiler Directives.pdf", fileId: "14CpNpp7OVns3R6Kj4dWy81Io4FiFVvYi", type: "pdf" },{ id: "u1-4", title: "NAMESPACE", fileName: "NAMESPACE.pdf", fileId: "1cbb7Mt3m7MKXJkW_Hu_YsR4tWKDJanP3", type: "pdf" },{ id: "u1-5", title: "Overview of ASP.Net Framework (Notes)", fileName: "Overview of ASP.Net Framework (Notes)", fileId: "1VjVHcuCldGrTi6trGyb5gf4Z81RwpzsmsEqKm4Tajfg", type: "doc" }] }, 2: { title: "Unit II", subtitle: "ASP.NET Controls", syllabus: "UNDERSTANDING ASP.NET CONTROLS - STANDARD CONTROLS - DISPLAYING INFORMATION - ACCEPTING USER INPUT", files: [{ id: "u2-1", title: "ASP.NET UNIT - 2", fileName: "ASP.NET UNIT -2.pptx", fileId: "1t4g4ab9d5HdKZGuGxmYpWcAwTkjmoqjm", type: "pptx" }] }, 3: { title: "Unit III", subtitle: "Validation & Rich Controls", syllabus: "VALIDATION CONTROLS - REQUIRED FIELD VALIDATOR - RANGE VALIDATOR - RICH CONTROLS - ADROTATOR, CALENDAR", files: [{ id: "u3-1", title: "Validation Controls", fileName: "Validation Controls.docx", fileId: "1z-1R0gaqaVaSIvgRybN5AiA8ExYGsJfY", type: "docx" },{ id: "u3-2", title: "Calendar Control in ASP.NET", fileName: "Calendar Control in ASP.pdf", fileId: "1DInHlyYjC7OpG7sY1i0l987_uZLjo5iY", type: "pdf" },{ id: "u3-3", title: "Rich Controls", fileName: "RICH CONTROLS.pdf", fileId: "1xE1sIoFOWnkI5D7GRbm0EtgyDHpxwYg0", type: "pdf" }] }, 4: { title: "Unit IV", subtitle: "Data Access in ASP.NET", syllabus: "DATA BOUND CONTROL - SQLDATASOURCE - OLEDB - DATASET", files: [{ id: "u4-1", title: "Data Bound Controls", fileName: "data bound controls.docx", fileId: "1IXY-buceR6cV10jEbMClDXUuveYjVWUo", type: "docx" },{ id: "u4-2", title: "Simple Data Bound Controls", fileName: "Simple Data Bound Controls.pdf", fileId: "1PCHmZ2U3uUV8Ah83Do1vZ2bTk4uBArx7", type: "pdf" }] }, 5: { title: "Unit V", subtitle: "List Controls & State Management", syllabus: "LIST CONTROLS - GRID VIEW - REPEATER - STATE MANAGEMENT - COOKIES - SESSION", files: [{ id: "u5-1", title: "List Controls", fileName: "Listbox RadiobuttionList CheckboxList BulletedList.pdf", fileId: "1hGMGwEMhCFf1J_RyY3pKNKNAEVXnkwH2", type: "pdf" },{ id: "u5-2", title: "ADO.NET Architecture", fileName: "ADO.NET ARCHITECTURE.pdf", fileId: "12EETP-MtzBDgmT_ybJ0xiTebiksP5In4", type: "pdf" },{ id: "u5-3", title: "Application and Session State", fileName: "Application and Session State.pdf", fileId: "1FnobkINTlyJp4Nbi31oTLAtN6_PtLrUX", type: "pdf" },{ id: "u5-4", title: "Cookies", fileName: "COOKIES.pdf", fileId: "1Lw-RzMw2vLCAbYNxR7HzcfYs_Wt102Ob", type: "pdf" },{ id: "u5-5", title: "Web Service", fileName: "WEB SERVICE.pdf", fileId: "1lbt5Eqo79yie2GsHA6O5sgvq0j2V3xnu", type: "pdf" }] } } },
  "Object Oriented Programming Concepts using JAVA": { units: {
        1: { title: "Unit I", subtitle: "Introduction to Java", syllabus: "Introduction to Java - Features of Java - Java Environment - Tokens- Data Types - Variables - Arrays - Operators - Conditional Statements-Iterative Statements-General Structure of a Java Program - Fields and Methods Declaration-Command Line Arguments.", hrs: 12, co: "CO1", files: [{ id: "java-u1-1", title: "Java Unit 1 - Introduction to Java (Part 1)", fileName: "Java_Unit1_Part1.pdf", fileId: "1EAcmy8ppwjPZ25Ver8c6XhZuRxwh3e6l", type: "pdf" }, { id: "java-u1-2", title: "Java Unit 1 - Introduction to Java (Part 2)", fileName: "Java_Unit1_Part2.pdf", fileId: "11cymR4t4VldBQ5bRpXBmpMsqTRXncvgs", type: "pdf" }] },
@@ -743,11 +788,13 @@ const NOTES_DATA = {
 // SYLLABUS constant removed in favor of dynamic parsing from NOTES_DATA
 
 function getDrivePreviewUrl(fileId, type = "pdf") {
+  if (fileId && (fileId.startsWith("/") || fileId.startsWith("http"))) return fileId;
   if (type === "doc") return `https://docs.google.com/document/d/${fileId}/preview`;
   return `https://drive.google.com/file/d/${fileId}/preview`;
 }
 
 function getDriveDownloadUrl(fileId, type = "pdf") {
+  if (fileId && (fileId.startsWith("/") || fileId.startsWith("http"))) return fileId;
   if (type === "doc") return `https://docs.google.com/document/d/${fileId}/export?format=pdf`;
   return `https://drive.google.com/uc?export=download&confirm=t&id=${fileId}`;
 }
@@ -995,9 +1042,11 @@ export default function Notes() {
   const units = filteredUnits;
   const totalFiles = units.reduce((s, [, u]) => s + u.files.length, 0);
 
-  const isEnglish = selectedSubject === "ENGLISH" || selectedSubject === "FOUNDATION ENGLISH - I";
+  const isEnglish = selectedSubject === "ENGLISH" || selectedSubject === "FOUNDATION ENGLISH - I" || selectedSubject === "Foundation English - III";
   const englishPdf = selectedSubject === "FOUNDATION ENGLISH - I"
     ? NOTES_DATA["FOUNDATION ENGLISH - I"]?.units?.[1]?.files?.[0]
+    : selectedSubject === "Foundation English - III"
+    ? NOTES_DATA["Foundation English - III"]?.units?.[1]?.files?.[0]
     : isEnglish && NOTES_DATA["ENGLISH"]?.units?.[selectedYear === 2 ? 2 : 1]?.files?.[0];
 
   // Determine the current subject's semester number for pre-filling upload form
