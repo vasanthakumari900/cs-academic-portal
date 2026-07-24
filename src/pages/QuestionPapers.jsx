@@ -12,6 +12,7 @@ import { STORAGE_PATHS } from "../utils/constants";
 import { useFirestoreList } from "../hooks/useFirestoreList";
 import { uploadFile } from "../services/storageService";
 import toast from "react-hot-toast";
+import { downloadDriveFile } from "../utils/downloadUtils";
 
 const CURRICULUM = {
   1: { label: "1st Year", icon: "Ⅰ", semesters: { 1: { label: "Semester 1", subjects: ["TAMIL", "Foundation English - I", "Mathematics Paper I", "Python Programming Essentials", "Data Structures"] }, 2: { label: "Semester 2", subjects: ["OBJECT ORIENTED PROGRAMMING USING C++","WEB TECHNOLOGY","MATHEMATICS PAPER - II","TAMIL","ENGLISH"] } } },
@@ -721,20 +722,9 @@ const refetch = () => {};
                   <button onClick={() => setPreviewing(paper)}
                     className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] py-2 text-xs font-semibold text-[#4B5563] transition-all hover:bg-slate-100 hover:text-slate-900"
                   ><FiEye size={13} /> Preview</button>
-                  <button onClick={() => {
-                    if (paper.fileUrl) {
-                      window.open(paper.fileUrl, '_blank');
-                    } else {
-                      setDownloadingId(paper.id);
-                      setTimeout(() => {
-                        window.open(`https://drive.google.com/uc?export=download&id=${paper.driveFileId}`, '_blank');
-                        setDownloadingId(null);
-                      }, 400);
-                    }
-                  }}
-                    disabled={downloadingId === paper.id}
-                    className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-2 text-xs font-semibold text-white shadow-sm transition-all disabled:opacity-60"
-                  >{downloadingId === paper.id ? <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg> : <><FiDownload size={13} /> Download</>}</button>
+                  <button onClick={() => downloadDriveFile(paper.driveFileId || paper.fileUrl, paper.title)}
+                    className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-2 text-xs font-semibold text-white shadow-sm transition-all active:scale-95"
+                  ><FiDownload size={13} /> Download</button>
                 </div>
               </div>
             </motion.div>

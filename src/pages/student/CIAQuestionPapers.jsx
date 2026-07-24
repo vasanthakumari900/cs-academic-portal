@@ -16,6 +16,7 @@ import { uploadFile } from "../../services/storageService";
 import { STORAGE_PATHS } from "../../utils/constants";
 import { CURRICULUM } from "../../utils/curriculum";
 import toast from "react-hot-toast";
+import { downloadDriveFile } from "../../utils/downloadUtils";
 
 // ─── Breadcrumb ───
 function Breadcrumb({ crumbs, onNavigate }) {
@@ -133,15 +134,12 @@ function PaperCard({ paper, onPreview }) {
             >
               <FiExternalLink size={14} /> View
             </button>
-            <a
-              href={getDriveDownloadUrl(paper.driveUrl)}
-              download
-              target="_blank"
-              rel="noreferrer"
-              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-2.5 text-xs font-bold text-white shadow-sm transition-all"
+            <button
+              onClick={() => downloadDriveFile(paper.driveUrl, paper.title)}
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-2.5 text-xs font-bold text-white shadow-sm transition-all active:scale-95"
             >
               <FiDownload size={14} /> Download
-            </a>
+            </button>
           </div>
         </div>
       </div>

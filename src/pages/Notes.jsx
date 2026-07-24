@@ -12,6 +12,7 @@ import { STORAGE_PATHS } from "../utils/constants";
 import { uploadFile } from "../services/storageService";
 import toast from "react-hot-toast";
 import { CURRICULUM } from "../utils/curriculum";
+import { downloadDriveFile } from "../utils/downloadUtils";
 
 const yearStyles = {
   1: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
@@ -1348,7 +1349,20 @@ export default function Notes() {
                                     <p className="text-sm font-semibold text-[#0F4C81] truncate group-hover:text-[#1E88E5] transition-colors">{file.title}</p>
                                     <p className="text-[10px] text-[#6B7280]">{file.type === "doc" ? "Google Doc" : file.type === "docx" ? "Word" : file.type === "pptx" || file.type === "ppt" ? "PowerPoint" : "PDF"} · {unit.title}</p>
                                   </div>
-                                  <div className="shrink-0 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] p-2 text-slate-400 group-hover:bg-[#0F4C81]/10 group-hover:text-[#0F4C81] transition-all"><FiExternalLink size={12} /></div>
+                                  <div className="flex items-center gap-1.5 shrink-0">
+                                    <button
+                                      type="button"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        downloadDriveFile(file.fileId || file.url, file.title);
+                                      }}
+                                      className="rounded-full bg-[#0F4C81]/10 text-[#0F4C81] p-2 hover:bg-[#0F4C81] hover:text-white transition-all cursor-pointer"
+                                      title="Download file directly"
+                                    >
+                                      <FiDownload size={14} />
+                                    </button>
+                                    <div className="rounded-full bg-[#F8FAFC] border border-[#E5E7EB] p-2 text-slate-400 group-hover:bg-[#0F4C81]/10 group-hover:text-[#0F4C81] transition-all"><FiExternalLink size={12} /></div>
+                                  </div>
                                 </motion.button>
                               ))}
                             </div>
@@ -1385,9 +1399,9 @@ export default function Notes() {
                   <p className="text-[11px] text-white/80">{viewingPdf.subject} · {viewingPdf.unit}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <a href={getDriveDownloadUrl(viewingPdf.fileId, viewingPdf.type)} target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg bg-white px-4 py-2 text-xs font-bold text-[#0F4C81] border border-[#E5E7EB] hover:bg-[#F8FAFC] transition-all"
-                  ><FiDownload size={14} /> Download</a>
+                  <button onClick={() => downloadDriveFile(viewingPdf.fileId || viewingPdf.url, viewingPdf.title)}
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-white px-4 py-2 text-xs font-bold text-[#0F4C81] border border-[#E5E7EB] hover:bg-[#F8FAFC] transition-all active:scale-95 cursor-pointer"
+                  ><FiDownload size={14} /> Download</button>
                   <button onClick={() => setViewingPdf(null)}
                     className="rounded-full bg-white/10 p-1.5 text-white/70 hover:bg-white/20 hover:text-white transition-all">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>

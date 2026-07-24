@@ -2,6 +2,7 @@
 import { FiFileText, FiDownload, FiEye, FiBookmark, FiClock, FiHardDrive, FiChevronRight } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { truncate } from "../../utils/helpers";
+import { downloadDriveFile } from "../../utils/downloadUtils";
 
 function formatDownloads(n) {
   if (!n) return null;
@@ -80,15 +81,12 @@ export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, m
             >
               <FiEye size={14} /> Preview
             </button>
-            <a
-              href={doc.fileUrl}
-              download
-              target="_blank"
-              rel="noreferrer"
-              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-2.5 text-xs font-bold text-white shadow-sm transition-all"
+            <button
+              onClick={() => downloadDriveFile(doc.fileUrl || doc.driveUrl || doc.fileId || doc.id, doc.title)}
+              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-2.5 text-xs font-bold text-white shadow-sm transition-all active:scale-95"
             >
               <FiDownload size={14} /> Download
-            </a>
+            </button>
           </div>
         </div>
       </div>
