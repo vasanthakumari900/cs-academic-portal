@@ -15,7 +15,6 @@ export function extractDriveFileId(input) {
 
 /**
  * Converts any Google Drive URL or File ID into a direct download URL.
- * Uses drive.usercontent.google.com for direct Content-Disposition: attachment header.
  */
 export function getDirectDownloadUrl(input) {
   if (!input) return "";
@@ -42,29 +41,41 @@ export function getDriveEmbedUrl(input) {
 }
 
 /**
+ * Helper to check if current device is mobile (iOS / Android / Mobile Web)
+ */
+export function isMobileDevice() {
+  if (typeof window === "undefined" || !navigator) return false;
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+}
+
+/**
  * Triggers direct download for Google Drive files and direct URLs.
- * Shows top-right notification: "📥 Download started successfully"
+ * Shows top notification: "📥 Download started successfully" at top of screen.
  * Displays loading indicator ONLY if Google Drive takes longer than 1 second to respond.
  */
 export function downloadDriveFile(fileInput, customTitle = "") {
   if (!fileInput) {
-    toast.error("Download file link is missing", { position: "top-right" });
+    toast.error("Download file link is missing");
     return;
   }
 
   const directUrl = getDirectDownloadUrl(fileInput);
+  const isMobile = isMobileDevice();
+  const toastPosition = isMobile ? "top-center" : "top-right";
 
-  // 1. Immediately trigger top-right toast: "📥 Download started successfully"
+  // 1. Immediately trigger top notification
   toast.success("📥 Download started successfully", {
-    position: "top-right",
+    position: toastPosition,
     duration: 3500,
     style: {
-      borderRadius: "10px",
+      borderRadius: "12px",
       background: "#0F4C81",
       color: "#ffffff",
-      fontWeight: "600",
+      fontWeight: "700",
       fontSize: "13px",
-      boxShadow: "0 4px 12px rgba(15, 76, 129, 0.2)",
+      padding: "12px 18px",
+      boxShadow: "0 10px 25px -5px rgba(15, 76, 129, 0.4)",
+      border: "1px solid rgba(255, 255, 255, 0.2)",
     },
   });
 
@@ -72,32 +83,40 @@ export function downloadDriveFile(fileInput, customTitle = "") {
   let loadingToastId = null;
   const timerId = setTimeout(() => {
     loadingToastId = toast.loading("Preparing Google Drive download...", {
-      position: "top-right",
+      position: toastPosition,
       style: {
-        borderRadius: "10px",
+        borderRadius: "12px",
         fontSize: "13px",
       },
     });
   }, 1000);
 
-  // 3. Initiate native direct download
+  // 3. Initiate native download optimized for mobile (iOS / Android) and desktop
   try {
-    const link = document.createElement("a");
-    link.href = directUrl;
-    if (customTitle) link.setAttribute("download", customTitle);
-    link.target = "_self";
-    document.body.appendChild(link);
-    link.click();
+    if (isMobile) {
+      // On mobile phones, opening direct download URL triggers native mobile download popup at top of screen
+      const win = window.open(directUrl, "_blank");
+      if (!win) {
+        window.location.href = directUrl;
+      }
+    } else {
+      // On desktop, anchor click triggers direct download without leaving tab
+      const link = document.createElement("a");
+      link.href = directUrl;
+      if (customTitle) link.setAttribute("download", customTitle);
+      link.target = "_self";
+      document.body.appendChild(link);
+      link.click();
+      setTimeout(() => {
+        if (link.parentNode) document.body.removeChild(link);
+      }, 1000);
+    }
 
     setTimeout(() => {
       clearTimeout(timerId);
-      if (loadingToastId) {
-        toast.dismiss(loadingToastId);
-      }
-      if (link.parentNode) {
-        document.body.removeChild(link);
-      }
+      if (loadingToastId) toast.dismiss(loadingToastId);
     }, 1500);
+
   } catch (err) {
     clearTimeout(timerId);
     if (loadingToastId) toast.dismiss(loadingToastId);

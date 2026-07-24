@@ -17,7 +17,7 @@ createRoot(document.getElementById("root")).render(
           <Toaster
             position="top-right"
             gutter={10}
-            containerClassName="!mt-16"
+            containerClassName="!mt-3 sm:!mt-16"
             toastOptions={{
               duration: 3500,
               style: {
