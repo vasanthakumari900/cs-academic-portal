@@ -82,7 +82,9 @@ const NOTES_DATA = {
         syllabus: "Setting and Checking variables: Data types - Using Constants - Introduction to Python -Values and types - Variables - Variable names and keywords - Operators and Operands-Expressions and Statements-Order of Operations-Comments.",
         hrs: 10,
         co: "CO1",
-        files: []
+        files: [
+          { id: "py-u1-1", title: "Python Programming Essentials - Unit I", fileName: "Python_Programming_Unit_1.pdf", fileId: "1JJPedETy61bgpiHGvwZTwa8ZxBM9bwbU", type: "pdf" }
+        ]
       },
       2: {
         title: "Unit II",
@@ -98,7 +100,10 @@ const NOTES_DATA = {
         syllabus: "Iteration-Multiple assignment-Updating variables-While statement-break- String - Len-FString slices- Looping and counting-String methods-in operator-String comparison.",
         hrs: 10,
         co: "CO3",
-        files: []
+        files: [
+          { id: "py-u3-1", title: "Python Programming Essentials - Unit III (Part 1)", fileName: "Python_Programming_Unit_3_Part1.pdf", fileId: "1UjASUBSy3l3qKiDXQLXCJhQV1JsfUU4y", type: "pdf" },
+          { id: "py-u3-2", title: "Python Programming Essentials - Unit III Notes", fileName: "Python_Programming_Unit_3_Notes.docx", fileId: "1G0TZNpATWYTw6D0nLl8A1L8o2gu-ZqzQ", type: "doc" }
+        ]
       },
       4: {
         title: "Unit IV",
@@ -106,7 +111,13 @@ const NOTES_DATA = {
         syllabus: "Lists: List operations-list slices-list methods-Deleting elements-Lists and strings-Dictionaries: Dictionary as a set of counters-Looping and dictionaries-Reverse lookup-Global Variables, Tuples: Immutable-Tuple assignment-Tuples as return values Lists and tuples Dictionaries and tuples. Files: Reading and writing-Format operator- Filenames and Paths-Catching exceptions.",
         hrs: 15,
         co: "CO4",
-        files: []
+        files: [
+          { id: "py-u4-1", title: "Python Programming Essentials - Unit IV (Part 1)", fileName: "Python_Programming_Unit_4_Part1.pdf", fileId: "12KGfZJjbkQ7kJ16LpLG9xb7B1eUVblED", type: "pdf" },
+          { id: "py-u4-2", title: "Python Programming Essentials - Unit IV (Part 2)", fileName: "Python_Programming_Unit_4_Part2.pdf", fileId: "1W_CsJAb5kZ4cszRzAz8ndHVoyMuz27T9", type: "pdf" },
+          { id: "py-u4-3", title: "Python Programming Essentials - Unit IV (Part 3)", fileName: "Python_Programming_Unit_4_Part3.pdf", fileId: "1uQjkEwLU3bNy08kwzf4tnRR6ozHTyL0U", type: "pdf" },
+          { id: "py-u4-4", title: "Python Programming Essentials - Unit IV (Part 4)", fileName: "Python_Programming_Unit_4_Part4.pdf", fileId: "1hRUpuWk7F4zd9Nt36bNSO-CkPna4Y-Hx", type: "pdf" },
+          { id: "py-u4-5", title: "Python Programming Essentials - Unit IV (Part 5)", fileName: "Python_Programming_Unit_4_Part5.pdf", fileId: "1xNibq4k2CFPrDJBPwwte8sObe8AD92oh", type: "pdf" }
+        ]
       },
       5: {
         title: "Unit V",
@@ -114,7 +125,9 @@ const NOTES_DATA = {
         syllabus: "Classes and Objects: User-defined types-Attributes- Instances as return values. Classes and functions: Time-Pure functions-Modifiers. Classes and methods: Object oriented features init method-str method-Operator overloading- Polymorphism- Inheritance- Class diagrams- Data encapsulation.",
         hrs: 15,
         co: "CO5",
-        files: []
+        files: [
+          { id: "py-u5-1", title: "Python Programming Essentials - Unit V Notes", fileName: "Python_Programming_Unit_5_Notes.docx", fileId: "1WF-X-0DN1gKR_xew77tpCG66QwSeQF5U", type: "doc" }
+        ]
       }
     }
   },

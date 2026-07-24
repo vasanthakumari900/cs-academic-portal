@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   FiPlayCircle, FiBookOpen, FiArrowLeft, FiMonitor,
   FiYoutube, FiX, FiFilm, FiChevronRight, FiBook, FiLayers,
-  FiStar, FiAward, FiVideo, FiUploadCloud, FiFileText,
+  FiStar, FiAward, FiVideo, FiUploadCloud, FiFileText, FiExternalLink,
 } from "react-icons/fi";
 import { useFirestoreList } from "../hooks/useFirestoreList";
 import { videoService } from "../services/videoService";
@@ -13,6 +13,14 @@ import { uploadFile } from "../services/storageService";
 import toast from "react-hot-toast";
 import { NOTES_DATA, SEMESTER_UNITS, NAME_ONLY_MAP } from "./Notes";
 import { CURRICULUM } from "../utils/curriculum";
+
+const SUBJECT_PLAYLISTS = {
+  "OPERATING SYSTEM": "https://youtube.com/playlist?list=PLdo5W4Nhv31a5ucW_S1K3-x6ztBRD-PNa&si=sayP_LqlXGWAgRi5",
+  "DATABASE MANAGEMENT SYSTEM": "https://youtube.com/playlist?list=PLdo5W4Nhv31b33kF46f9aFjoJPOkdlsRc&si=B_RSaXrHa_xt0m1w",
+  "DATA MINING TECHNIQUES": "https://youtube.com/playlist?list=PLmAmHQ-_5ySxFoIGmY1MJao-XYvYGxxgj&si=XBCZHPLgI2dK39uO",
+  "DATA MINING": "https://youtube.com/playlist?list=PLmAmHQ-_5ySxFoIGmY1MJao-XYvYGxxgj&si=XBCZHPLgI2dK39uO",
+  "ASP.NET": "https://youtube.com/playlist?list=PLKPQ0KVcoIqw&si=aXUyKLvcrrd9tzp1",
+};
 
 const FACULTY_MAP = {
   "OPERATING SYSTEM": "DR DHARANI",
@@ -489,31 +497,50 @@ export default function EContent() {
           </motion.div>
         )}
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-center">
-          <button
-            onClick={() => {
-              if (subjectVideos.length === 0) {
-                toast.error("Videos are not yet available for this subject");
-                return;
-              }
-              setShowVideos(true);
-            }}
-            className={`group inline-flex items-center gap-2 rounded-lg px-8 py-3.5 text-sm font-bold text-white shadow-sm transition-all active:scale-[0.97] ${
-              subjectVideos.length === 0
-                ? "bg-slate-300 cursor-not-allowed text-slate-500"
-                : "bg-[#0F4C81] hover:bg-[#1E88E5]"
-            }`}
-          >
-            <FiPlayCircle size={20} />
-            Watch Videos
-            <FiChevronRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-          </button>
-        </motion.div>
+        {(() => {
+          const playlistUrl = selectedSubject ? SUBJECT_PLAYLISTS[selectedSubject] : null;
+          const isThirdYear = selectedYear === 3;
+          const isActive = isThirdYear || Boolean(playlistUrl) || subjectVideos.length > 0;
+
+          return (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-center">
+              <button
+                onClick={() => {
+                  if (playlistUrl) {
+                    window.open(playlistUrl, "_blank", "noopener,noreferrer");
+                    toast.success(`Redirecting to ${selectedSubject} YouTube Playlist...`);
+                  } else if (subjectVideos.length > 0) {
+                    setShowVideos(true);
+                  } else if (isThirdYear) {
+                    toast.error(`YouTube playlist link for ${selectedSubject} will be updated soon!`);
+                  } else {
+                    toast.error("Videos are not yet available for this subject");
+                  }
+                }}
+                className={`group inline-flex items-center gap-2.5 rounded-xl px-8 py-3.5 text-sm font-bold text-white shadow-sm transition-all active:scale-[0.97] ${
+                  isActive
+                    ? "bg-[#0F4C81] hover:bg-[#1E88E5] hover:shadow-md cursor-pointer"
+                    : "bg-slate-300 cursor-not-allowed text-slate-500 shadow-none"
+                }`}
+              >
+                <FiPlayCircle size={20} />
+                Watch Videos
+                {playlistUrl ? (
+                  <FiExternalLink size={15} className="transition-transform group-hover:translate-x-0.5" />
+                ) : (
+                  <FiChevronRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+                )}
+              </button>
+            </motion.div>
+          );
+        })()}
       </div>
     );
   }
 
   const sc = subjectColors[semesterData.subjects.indexOf(selectedSubject) % subjectColors.length];
+  const playlistUrl = selectedSubject ? SUBJECT_PLAYLISTS[selectedSubject] : null;
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
@@ -530,6 +557,29 @@ export default function EContent() {
           </div>
         </div>
       </motion.div>
+
+      {playlistUrl && (
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-6 flex flex-wrap items-center justify-between gap-4 rounded-xl bg-gradient-to-r from-red-600 to-red-700 p-5 text-white shadow-sm">
+          <div className="flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-white/20 backdrop-blur-sm">
+              <FiYoutube size={28} className="text-white" />
+            </div>
+            <div>
+              <h3 className="font-sans font-bold text-base">Official YouTube Playlist</h3>
+              <p className="text-xs text-red-100">Watch full lecture series for {selectedSubject} on YouTube</p>
+            </div>
+          </div>
+          <a
+            href={playlistUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-xs font-bold text-red-700 shadow hover:bg-red-50 transition-all active:scale-95"
+          >
+            <FiExternalLink size={15} />
+            Open Playlist on YouTube
+          </a>
+        </motion.div>
+      )}
 
       {subjectVideos.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E5E7EB] bg-white py-24 shadow-sm">
