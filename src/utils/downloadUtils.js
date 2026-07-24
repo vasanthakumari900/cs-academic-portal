@@ -15,6 +15,7 @@ export function extractDriveFileId(input) {
 
 /**
  * Converts any Google Drive URL or File ID into a direct download URL.
+ * Uses drive.usercontent.google.com for direct Content-Disposition: attachment header.
  */
 export function getDirectDownloadUrl(input) {
   if (!input) return "";
@@ -23,7 +24,7 @@ export function getDirectDownloadUrl(input) {
     if (String(input).includes("docs.google.com/document")) {
       return `https://docs.google.com/document/d/${fileId}/export?format=docx`;
     }
-    return `https://drive.google.com/uc?export=download&id=${fileId}`;
+    return `https://drive.usercontent.google.com/download?id=${fileId}&export=download`;
   }
   return String(input);
 }
@@ -53,17 +54,17 @@ export function downloadDriveFile(fileInput, customTitle = "") {
 
   const directUrl = getDirectDownloadUrl(fileInput);
 
-  // 1. Immediately trigger top-right toast
+  // 1. Immediately trigger top-right toast: "📥 Download started successfully"
   toast.success("📥 Download started successfully", {
     position: "top-right",
-    duration: 3000,
+    duration: 3500,
     style: {
       borderRadius: "10px",
       background: "#0F4C81",
       color: "#ffffff",
       fontWeight: "600",
       fontSize: "13px",
-      boxShadow: "0 4px 12px rgba(15, 76, 129, 0.15)",
+      boxShadow: "0 4px 12px rgba(15, 76, 129, 0.2)",
     },
   });
 
@@ -79,40 +80,27 @@ export function downloadDriveFile(fileInput, customTitle = "") {
     });
   }, 1000);
 
+  // 3. Initiate native direct download
   try {
-    // 3. Initiate background download via hidden iframe
-    const iframe = document.createElement("iframe");
-    iframe.style.display = "none";
-    iframe.src = directUrl;
-    document.body.appendChild(iframe);
+    const link = document.createElement("a");
+    link.href = directUrl;
+    if (customTitle) link.setAttribute("download", customTitle);
+    link.target = "_self";
+    document.body.appendChild(link);
+    link.click();
 
-    // Clean up iframe & dismiss loading indicator after download starts
     setTimeout(() => {
       clearTimeout(timerId);
       if (loadingToastId) {
         toast.dismiss(loadingToastId);
       }
-      try {
-        if (iframe && iframe.parentNode) {
-          document.body.removeChild(iframe);
-        }
-      } catch (e) {}
-    }, 2500);
-
+      if (link.parentNode) {
+        document.body.removeChild(link);
+      }
+    }, 1500);
   } catch (err) {
     clearTimeout(timerId);
     if (loadingToastId) toast.dismiss(loadingToastId);
-    
-    // Fallback: programmatically click download link
-    const link = document.createElement("a");
-    link.href = directUrl;
-    if (customTitle) link.download = customTitle;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    document.body.appendChild(link);
-    link.click();
-    setTimeout(() => {
-      if (link.parentNode) document.body.removeChild(link);
-    }, 1000);
+    window.location.href = directUrl;
   }
 }
