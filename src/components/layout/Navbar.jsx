@@ -45,11 +45,11 @@ export default function Navbar() {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-40 bg-[#0F4C81] border-b border-[#0A3356] shadow-sm"
+        className="fixed top-0 left-0 right-0 z-40 bg-[#021C4F] border-b border-[#011337] shadow-sm"
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
           <Link to="/" className="group flex items-center gap-2.5">
-            <span className="relative flex flex-col items-center justify-center rounded-lg bg-[#1E88E5] text-white shadow-sm px-3.5 py-1.5 transition-all">
+            <span className="relative flex flex-col items-center justify-center rounded-lg bg-[#C50337] text-white shadow-sm px-3.5 py-1.5 transition-all">
               <span className="text-[11px] font-extrabold leading-tight">DDGDVC</span>
               <span className="text-[8px] font-semibold leading-tight text-white/85">CS PORTAL</span>
             </span>
@@ -62,7 +62,7 @@ export default function Navbar() {
                 to={link.to}
                 className={`relative px-3.5 py-2 text-xs font-semibold rounded-lg transition-all duration-200 ${
                   isActive(link.to)
-                    ? "text-white bg-[#1E88E5]"
+                    ? "text-white bg-[#C50337]"
                     : "text-white/80 hover:text-white hover:bg-white/10"
                 }`}
               >
@@ -89,7 +89,7 @@ export default function Navbar() {
             {user ? (
               <div className="flex items-center gap-3">
                 <span className="hidden sm:flex items-center gap-1.5 text-[11px] font-medium text-white/85">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#1E88E5] text-[9px] font-bold text-white">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#C50337] text-[9px] font-bold text-white">
                     {user.name?.charAt(0)}
                   </span>
                   <span className="text-white/85">
@@ -99,7 +99,7 @@ export default function Navbar() {
                 </span>
                 <Link
                   to={getDashboardPath(user)}
-                  className="group inline-flex items-center gap-1.5 rounded-lg bg-[#1E88E5] px-4 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:bg-[#1565C0] active:scale-[0.97]"
+                  className="group inline-flex items-center gap-1.5 rounded-lg bg-[#C50337] px-4 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:bg-[#a0022b] active:scale-[0.97]"
                 >
                   <FiGrid size={14} />
                   Dashboard
@@ -109,7 +109,7 @@ export default function Navbar() {
             ) : (
               <Link
                 to="/login"
-                className="group inline-flex items-center gap-1.5 rounded-lg bg-[#1E88E5] px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-[#1565C0] active:scale-[0.97]"
+                className="group inline-flex items-center gap-1.5 rounded-lg bg-[#C50337] px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-[#a0022b] active:scale-[0.97]"
               >
                 Login
                 <FiChevronRight size={12} className="transition-transform group-hover:translate-x-0.5" />
@@ -136,7 +136,7 @@ export default function Navbar() {
             className="fixed inset-0 z-30 md:hidden"
           >
             <div className="absolute inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
-            <div className="absolute top-16 left-0 right-0 mx-4 rounded-xl bg-[#0F4C81] border border-[#0A3356] shadow-xl overflow-hidden">
+            <div className="absolute top-16 left-0 right-0 mx-4 rounded-xl bg-[#021C4F] border border-[#011337] shadow-xl overflow-hidden">
               <div className="p-3 space-y-1">
                 {navLinks.map((link) => (
                   <Link
@@ -144,7 +144,7 @@ export default function Navbar() {
                     to={link.to}
                     className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold transition-all ${
                       isActive(link.to)
-                        ? "bg-[#1E88E5] text-white"
+                        ? "bg-[#C50337] text-white"
                         : "text-white/80 hover:bg-white/10 hover:text-white"
                     }`}
                   >
@@ -163,7 +163,7 @@ export default function Navbar() {
                 {user && (
                   <Link
                     to={getDashboardPath(user)}
-                    className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-white bg-[#1E88E5]"
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold text-white bg-[#C50337]"
                   >
                     <FiGrid size={16} />
                     Dashboard

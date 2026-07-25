@@ -40,14 +40,14 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative overflow-hidden bg-[#0A3356] text-white">
+    <footer className="relative overflow-hidden bg-[#011337] text-white">
       <div className="absolute top-0 left-0 right-0 h-px bg-white/10" />
 
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <div className="mb-5 flex items-center gap-3">
-              <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#1E88E5] text-white text-base font-extrabold shadow-sm">
+              <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#C50337] text-white text-base font-extrabold shadow-sm">
                 DV
               </span>
               <div className="flex flex-col leading-tight">
@@ -81,7 +81,7 @@ export default function Footer() {
                 { icon: FiMail, href: "#", label: "Email" },
               ].map(({ icon: Icon, href, label }) => (
                 <a key={label} href={href} aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-white/60 transition-all duration-200 hover:bg-[#1E88E5] hover:text-white hover:border-[#1E88E5] hover:scale-105"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-white/60 transition-all duration-200 hover:bg-[#C50337] hover:text-white hover:border-[#C50337] hover:scale-105"
                 ><Icon size={16} /></a>
               ))}
             </div>

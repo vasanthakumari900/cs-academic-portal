@@ -46,7 +46,7 @@
     @apply rounded-xl bg-white border border-[#E5E7EB] shadow-sm;
   }
   .glass-card-hover {
-    @apply rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#1E88E5]/40 hover:-translate-y-0.5;
+    @apply rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#C50337]/40 hover:-translate-y-0.5;
   }
   .glass-card-strong {
     @apply rounded-xl bg-white border border-[#E5E7EB] shadow-md;
@@ -57,13 +57,13 @@
     @apply rounded-xl border border-[#E5E7EB] bg-white shadow-sm transition-all duration-300;
   }
   .premium-card-hover {
-    @apply rounded-xl border border-[#E5E7EB] bg-white shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 hover:border-[#1E88E5]/40;
+    @apply rounded-xl border border-[#E5E7EB] bg-white shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 hover:border-[#C50337]/40;
   }
   .surface-elevated {
     @apply rounded-xl bg-white shadow-md border border-[#E5E7EB];
   }
 
-  /* ─── Hero Grid (Removed bg lines, replaced with blank/subtle block) ─── */
+  /* ─── Hero Grid ─── */
   .hero-grid {
     background-color: transparent;
   }
@@ -73,7 +73,7 @@
     @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 disabled:opacity-50;
   }
   .btn-primary {
-    @apply btn-premium bg-[#0F4C81] text-white shadow-sm hover:bg-[#1E88E5] active:scale-[0.97];
+    @apply btn-premium bg-[#021C4F] text-white shadow-sm hover:bg-[#C50337] active:scale-[0.97];
   }
   .btn-ghost {
     @apply btn-premium bg-transparent text-[#4B5563] hover:bg-[#F1F5F9] hover:text-[#1F2937];
@@ -85,7 +85,7 @@
   /* ─── Premium Input ─── */
   .input-premium {
     @apply w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm outline-none transition-all duration-200 text-[#1F2937] placeholder-[#6B7280]/60;
-    @apply focus:border-[#0F4C81] focus:ring-2 focus:ring-[#0F4C81]/15 focus:shadow-sm;
+    @apply focus:border-[#021C4F] focus:ring-2 focus:ring-[#021C4F]/15 focus:shadow-sm;
   }
   .input-premium-error {
     @apply input-premium border-red-500/50 focus:border-red-500 focus:ring-red-500/10;
@@ -106,15 +106,15 @@
 }
 
 @layer utilities {
-  /* ─── Text Colors (Formerly Gradients) ─── */
+  /* ─── Text Colors ─── */
   .text-gradient-primary {
     @apply text-[#1F2937];
   }
   .text-gradient-cool {
-    @apply text-[#1E88E5];
+    @apply text-[#C50337];
   }
   .text-gradient-accent {
-    @apply text-[#1E88E5];
+    @apply text-[#C50337];
   }
   .text-gradient-amber {
     @apply text-amber-700;
@@ -123,10 +123,10 @@
     @apply text-[#2E7D32];
   }
   .text-gradient-violet {
-    @apply text-[#1E88E5];
+    @apply text-[#C50337];
   }
 
-  /* ─── Clean Backgrounds ─── */
+  /* ─── Backgrounds ─── */
   .bg-mesh, .bg-mesh-cool, .bg-mesh-deep {
     background: #F8FAFC;
   }
@@ -137,7 +137,7 @@
 
   /* ─── Solid Header/Card Backgrounds ─── */
   .bg-animated-gradient, .bg-animated-gradient-primary {
-    background: #0F4C81;
+    background: linear-gradient(135deg, #021C4F 0%, #C50337 100%);
   }
 
   /* ─── Removed Floating Particles & Orbs ─── */
@@ -147,7 +147,7 @@
 
   /* ─── Shimmer Loading ─── */
   .shimmer {
-    background: linear-gradient(90deg, transparent 0%, rgba(15, 76, 129, 0.08) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(2, 28, 79, 0.08) 50%, transparent 100%);
     background-size: 200% 100%;
     animation: shimmer 1.2s ease-in-out infinite;
   }
@@ -174,6 +174,6 @@
 
   /* ─── Accent bar ─── */
   .accent-bar {
-    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-[#1E88E5] scale-x-0 group-hover:scale-x-100 transition-transform origin-left;
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-[#C50337] scale-x-0 group-hover:scale-x-100 transition-transform origin-left;
   }
 }

@@ -218,6 +218,17 @@ const PHP_PAPERS = [
   { id: "php-5", title: "Programming in PHP - Paper 5", subject: "PROGRAMMING IN PHP", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1SQ5hlCDET19jkCoVNZdpc5m6xi75_gZH", academicYear: 3, semester: 2 },
   { id: "php-6", title: "Programming in PHP - Paper 6", subject: "PROGRAMMING IN PHP", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1TQ4TqpqCWQ19qgoyaiGDeYyORiYixAvz", academicYear: 3, semester: 2 }
 ];
+const DIP_PAPERS = [
+  { id: "dip-1", title: "Digital Image Processing - Paper 1", subject: "DIGITAL IMAGE PROCESSING", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1HdwywBsHdp_UWMuF0lcNVbgJn8_GjLxo", academicYear: 3, semester: 2 },
+  { id: "dip-2", title: "Digital Image Processing - Paper 2", subject: "DIGITAL IMAGE PROCESSING", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1uq6BZKJY9sl8TODFzNU0kOGZ16Mka2Db", academicYear: 3, semester: 2 },
+  { id: "dip-3", title: "Digital Image Processing - Paper 3", subject: "DIGITAL IMAGE PROCESSING", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1aDDWqBNexLoVPFiGDejbrt9GtuNWIHwS", academicYear: 3, semester: 2 },
+  { id: "dip-4", title: "Digital Image Processing - Paper 4", subject: "DIGITAL IMAGE PROCESSING", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1oymxVtefcOJNa-tDuSz1hnXSHK9swCA6", academicYear: 3, semester: 2 }
+];
+const UML_PAPERS = [
+  { id: "uml-1", title: "Unified Modeling Language - Paper 1", subject: "UNIFIED MODELING LANGUAGE", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1UjGLXsBXcgoBseFGrOeKdvNdftbL3kQ_", academicYear: 3, semester: 2 },
+  { id: "uml-2", title: "Unified Modeling Language - Paper 2", subject: "UNIFIED MODELING LANGUAGE", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "13nKZzkjfae3Hat_dkZQS0cjO_6Gx2_u3", academicYear: 3, semester: 2 },
+  { id: "uml-3", title: "Unified Modeling Language - Paper 3", subject: "UNIFIED MODELING LANGUAGE", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1NYliVjvrD3pzPCwGghpGLmAeJGzOOYoW", academicYear: 3, semester: 2 }
+];
 
 const allPapers = [
   ...DBMS_PAPERS,
@@ -227,6 +238,8 @@ const allPapers = [
   ...NETWORKS_PAPERS,
   ...DATASCIENCE_PAPERS,
   ...PHP_PAPERS,
+  ...DIP_PAPERS,
+  ...UML_PAPERS,
   ...OS_PAPERS.map(p => ({ ...p, id: p.id + "-yr2", subject: "Principles of operating Systems" })),
   ...DMT_PAPERS,
   ...ASPNET_PAPERS,
@@ -370,10 +383,10 @@ const refetch = () => {};
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center">
-          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm">
+          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#021C4F] text-white shadow-sm">
             <FiAward size={36} />
           </div>
-          <h1 className="font-sans text-4xl font-bold text-[#0F4C81]">Question Papers</h1>
+          <h1 className="font-sans text-4xl font-bold text-[#021C4F]">Question Papers</h1>
           <p className="mt-2 text-sm text-[#6B7280]">Select your course to browse previous year exam papers</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -382,15 +395,15 @@ const refetch = () => {};
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.1 }}
               whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
               onClick={() => setCourseType(course.value)}
-              className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-350 hover:shadow-sm hover:border-[#1E88E5]/45"
+              className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-350 hover:shadow-sm hover:border-[#C50337]/45"
             >
               <div className="relative p-8 text-center flex flex-col items-center">
-                <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-xl ${course.value === "ug" ? "bg-[#0F4C81]" : "bg-[#1E88E5]"} text-3xl font-bold text-white shadow-sm transition-all`}>
+                <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-xl ${course.value === "ug" ? "bg-[#021C4F]" : "bg-[#C50337]"} text-3xl font-bold text-white shadow-sm transition-all`}>
                   {course.value === "ug" ? "UG" : "PG"}
                 </div>
-                <h2 className="text-xl font-bold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">{course.label}</h2>
+                <h2 className="text-xl font-bold text-[#021C4F] group-hover:text-[#C50337] transition-colors">{course.label}</h2>
                 <p className="mt-1.5 text-xs text-[#6B7280]">{course.desc}</p>
-                <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#1E88E5]">
+                <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#C50337]">
                   Browse Papers <FiChevronRight size={12} />
                 </div>
               </div>
@@ -409,23 +422,23 @@ const refetch = () => {};
           className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
         ><FiArrowLeft size={14} /> Back to Course</motion.button>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm"><FiAward size={28} /></div>
-          <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">{courseType.toUpperCase()} — Select Year</h1>
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#021C4F] text-white shadow-sm"><FiAward size={28} /></div>
+          <h1 className="font-sans text-2xl font-bold text-[#021C4F]">{courseType.toUpperCase()} — Select Year</h1>
           <p className="mt-1 text-sm text-[#6B7280]">Choose your academic year</p>
         </motion.div>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-          {[1, 2, 3].map((year, i) => {
+        <div className={`grid grid-cols-1 gap-5 ${courseType === "pg" ? "sm:grid-cols-2 max-w-2xl mx-auto" : "sm:grid-cols-3"}`}>
+          {(courseType === "pg" ? [1, 2] : [1, 2, 3]).map((year, i) => {
             const s = yearStyles[year];
             return (
               <motion.button key={year}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.08 }}
                 whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedYear(year)}
-                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
+                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#C50337]/40"
               >
                 <div className="relative p-8 text-center">
                   <div className={`mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-xl ${s.bg} text-2xl font-bold text-white shadow-sm transition-all`}>{CURRICULUM[year].icon}</div>
-                  <h2 className="text-lg font-bold text-[#0F4C81]">{CURRICULUM[year].label}</h2>
+                  <h2 className="text-lg font-bold text-[#021C4F]">{CURRICULUM[year].label}</h2>
                   {courseType !== "pg" && <p className="mt-1 text-xs text-[#6B7280]">{getSubjectsForYear(year).length} subjects</p>}
                 </div>
               </motion.button>

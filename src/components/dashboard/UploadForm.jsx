@@ -138,8 +138,8 @@ export default function UploadForm({
         {showThumbnail && (
           <div>
             <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Thumbnail (optional)</label>
-            <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-[#F8FAFC] px-4 py-6 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
-              <FiUploadCloud size={22} className="text-[#0F4C81]" />
+            <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-[#F8FAFC] px-4 py-6 text-center transition-all hover:border-[#C50337]/50 hover:bg-slate-100">
+              <FiUploadCloud size={22} className="text-[#021C4F]" />
               <span className="text-sm text-[#6B7280]">
                 {thumbnail ? thumbnail.name : "Click to choose a thumbnail image"}
               </span>
@@ -155,8 +155,8 @@ export default function UploadForm({
 
         <div>
           <label className="mb-1 block text-sm font-semibold text-[#4B5563]">{fileLabel}</label>
-          <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-[#F8FAFC] px-4 py-8 text-center transition-all hover:border-[#1E88E5]/50 hover:bg-slate-100">
-            <FiUploadCloud size={26} className="text-[#0F4C81]" />
+          <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-[#F8FAFC] px-4 py-8 text-center transition-all hover:border-[#C50337]/50 hover:bg-slate-100">
+            <FiUploadCloud size={26} className="text-[#021C4F]" />
             <span className="text-sm text-[#6B7280]">
               {file ? file.name : `Click to choose a ${fileLabel.toLowerCase()}`}
             </span>
@@ -171,11 +171,11 @@ export default function UploadForm({
 
         {progress > 0 && progress < 100 && (
           <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
-            <div className="h-full bg-[#0F4C81] transition-all" style={{ width: `${progress}%` }} />
+            <div className="h-full bg-[#021C4F] transition-all" style={{ width: `${progress}%` }} />
           </div>
         )}
 
-        <button type="submit" disabled={isSubmitting} className="w-full rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-3 text-sm font-bold text-white shadow-sm transition-all disabled:opacity-50 mt-4">
+        <button type="submit" disabled={isSubmitting} className="w-full rounded-lg bg-[#021C4F] hover:bg-[#C50337] py-3 text-sm font-bold text-white shadow-sm transition-all disabled:opacity-50 mt-4">
           {isSubmitting ? "Uploading…" : "Upload Content"}
         </button>
       </form>

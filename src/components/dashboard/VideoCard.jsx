@@ -17,7 +17,7 @@ export default function VideoCard({ video, onPlay, onBookmark, bookmarked }) {
               <img src={video.thumbnailUrl} alt={video.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
             ) : (
               <div className="flex h-full items-center justify-center bg-[#F8FAFC]">
-                <FiPlay size={36} className="text-[#0F4C81]" />
+                <FiPlay size={36} className="text-[#021C4F]" />
               </div>
             )}
             {video.videoType === "class_recording" && (
@@ -28,7 +28,7 @@ export default function VideoCard({ video, onPlay, onBookmark, bookmarked }) {
             {/* Hover overlay */}
             <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-all duration-300 group-hover:opacity-100">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-sm transition-transform duration-300 group-hover:scale-105">
-                <FiPlay size={22} className="text-[#0F4C81] ml-0.5" />
+                <FiPlay size={22} className="text-[#021C4F] ml-0.5" />
               </div>
             </div>
           </button>
@@ -36,7 +36,7 @@ export default function VideoCard({ video, onPlay, onBookmark, bookmarked }) {
 
         {/* Info section */}
         <div className="flex flex-1 flex-col gap-2.5 p-4">
-          <h3 className="font-sans text-sm font-semibold text-[#0F4C81] leading-snug group-hover:text-[#1E88E5] transition-colors">{video.title}</h3>
+          <h3 className="font-sans text-sm font-semibold text-[#021C4F] leading-snug group-hover:text-[#C50337] transition-colors">{video.title}</h3>
           <p className="text-xs text-[#6B7280] leading-relaxed line-clamp-2">{truncate(video.description, 80)}</p>
           
           <div className="flex items-center justify-between text-xs mt-1">
@@ -47,7 +47,7 @@ export default function VideoCard({ video, onPlay, onBookmark, bookmarked }) {
             <button
               onClick={() => onBookmark(video.id)}
               className={`rounded-lg p-1.5 transition-all ${
-                bookmarked ? "text-[#0F4C81] bg-[#0F4C81]/10" : "text-[#6B7280] hover:text-[#0F4C81] hover:bg-[#0F4C81]/10"
+                bookmarked ? "text-[#021C4F] bg-[#021C4F]/10" : "text-[#6B7280] hover:text-[#021C4F] hover:bg-[#021C4F]/10"
               }`}
             >
               <FiBookmark size={15} fill={bookmarked ? "currentColor" : "none"} />

@@ -37,13 +37,13 @@ export default function Sidebar({ items, open, onClose }) {
         initial={false}
         animate={{ x: 0 }}
         className={classNames(
-          "fixed inset-y-0 left-0 z-40 w-64 shrink-0 border-r border-white/10 bg-[#0F4C81] shadow-sm transition-transform duration-300 lg:static lg:translate-x-0",
+          "fixed inset-y-0 left-0 z-40 w-64 shrink-0 border-r border-white/10 bg-[#021C4F] shadow-sm transition-transform duration-300 lg:static lg:translate-x-0",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <div className="flex h-20 items-center gap-3.5 border-b border-white/10 px-6">
           <Link to="/" className="flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#1E88E5] text-white text-base font-extrabold shadow-sm">DV</span>
+            <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#C50337] text-white text-base font-extrabold shadow-sm">DV</span>
             <div className="flex flex-col leading-tight">
               <span className="text-base font-bold text-white tracking-wide">DDGDVC</span>
               <span className="text-xs text-white/70 mt-0.5">Portal</span>
@@ -58,7 +58,7 @@ export default function Sidebar({ items, open, onClose }) {
                 classNames(
                   "group flex items-center gap-4.5 rounded-xl px-4 py-3.5 text-sm font-semibold transition-all duration-200",
                   isActive
-                    ? "bg-[#1E88E5] text-white shadow-sm"
+                    ? "bg-[#C50337] text-white shadow-sm"
                     : "text-white/80 hover:bg-white/10 hover:text-white"
                 )
               }
@@ -69,7 +69,7 @@ export default function Sidebar({ items, open, onClose }) {
           ))}
         </nav>
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10 bg-[#0F4C81]">
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10 bg-[#021C4F]">
           <Link to="/"
             className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-xs font-semibold text-white/80 hover:text-white hover:bg-white/10 transition-all"
           >

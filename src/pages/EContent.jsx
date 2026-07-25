@@ -15,11 +15,134 @@ import { NOTES_DATA, SEMESTER_UNITS, NAME_ONLY_MAP } from "./Notes";
 import { CURRICULUM } from "../utils/curriculum";
 
 const SUBJECT_PLAYLISTS = {
+  // 2nd Year Semester 1
+  "OBJECT ORIENTED PROGRAMMING CONCEPTS USING JAVA": "https://youtube.com/playlist?list=PLdo5W4Nhv31a7A5Az4Mxp_PcNPXItprPp&si=Jed8HASq8aGiLqfk",
+  "2-1-TAMIL": "https://youtube.com/playlist?list=PLK9f8qqkv3BY&si=LxxvKGKIrD9PEfhh",
+  "PRINCIPLES OF OPERATING SYSTEMS": "https://youtu.be/bZyszKmgz2c?si=CTVtcUAmeLId1WT",
+  "2-1-PRINCIPLES OF OPERATING SYSTEMS": "https://youtu.be/bZyszKmgz2c?si=CTVtcUAmeLId1WT",
+  "WEB APPLICATION DEVELOPMENT USING REACTJS AND NODE.JS": "https://youtu.be/QFaFIcGhPoM?si=2vb0SO2C1m20dx9z",
+  "2-1-WEB APPLICATION DEVELOPMENT USING REACTJS AND NODE.JS": "https://youtu.be/QFaFIcGhPoM?si=2vb0SO2C1m20dx9z",
+  "WEB APPLICATION DEVELOPMENT USING ANGULARJS AND NODE.JS": "https://youtu.be/LAUi8pPlcUM?si=m9qeCclDyW57aIKp",
+  "2-1-WEB APPLICATION DEVELOPMENT USING ANGULARJS AND NODE.JS": "https://youtu.be/LAUi8pPlcUM?si=m9qeCclDyW57aIKp",
+  "STATISTICAL METHODS FOR COMPUTER SCIENCE – I": "https://youtu.be/qNGDD_Rh8ps?si=x_gj4qcz9j_TpQIK",
+  "STATISTICAL METHODS FOR COMPUTER SCIENCE - I": "https://youtu.be/qNGDD_Rh8ps?si=x_gj4qcz9j_TpQIK",
+  "2-1-STATISTICAL METHODS FOR COMPUTER SCIENCE – I": "https://youtu.be/qNGDD_Rh8ps?si=x_gj4qcz9j_TpQIK",
+  "2-1-STATISTICAL METHODS FOR COMPUTER SCIENCE - I": "https://youtu.be/qNGDD_Rh8ps?si=x_gj4qcz9j_TpQIK",
+
+  // 2nd Year Semester 2
+  "ANDROID APP DEVELOPMENT": "https://youtube.com/playlist?list=PLUhfM8afLE_MOoV5jIAj4UTJ3o43LEmoc&si=obochsrhgBHkONiz",
+  "SOFTWARE ENGINEERING": "https://youtube.com/playlist?list=PLxCzCOWd7aiEed7SKZBnC6ypFDWYLRvB2&si=IE-4o7eX5Yq1rvpt",
+  "ARTIFICIAL INTELLIGENCE AND EXPERT SYSTEM": "https://youtube.com/playlist?list=PLzkMouYverAJ1hQLXScQB7FSM0XOwBHLg&si=lzGPIJn2VNBlcWXM",
+  "2-2-TAMIL": "https://youtube.com/playlist?list=PLDe0NG4ovv44&si=DInjH62wkyG3pczn",
+  "TAMIL": "https://youtube.com/playlist?list=PLDe0NG4ovv44&si=DInjH62wkyG3pczn",
+
+  // 3rd Year Semester 1
   "OPERATING SYSTEM": "https://youtube.com/playlist?list=PLdo5W4Nhv31a5ucW_S1K3-x6ztBRD-PNa&si=sayP_LqlXGWAgRi5",
   "DATABASE MANAGEMENT SYSTEM": "https://youtube.com/playlist?list=PLdo5W4Nhv31b33kF46f9aFjoJPOkdlsRc&si=B_RSaXrHa_xt0m1w",
   "DATA MINING TECHNIQUES": "https://youtube.com/playlist?list=PLmAmHQ-_5ySxFoIGmY1MJao-XYvYGxxgj&si=XBCZHPLgI2dK39uO",
   "DATA MINING": "https://youtube.com/playlist?list=PLmAmHQ-_5ySxFoIGmY1MJao-XYvYGxxgj&si=XBCZHPLgI2dK39uO",
   "ASP.NET": "https://youtube.com/playlist?list=PLKPQ0KVcoIqw&si=aXUyKLvcrrd9tzp1",
+
+  // 3rd Year Semester 2
+  "PROGRAMMING IN PHP": "https://youtube.com/playlist?list=PL0eyrZgxdwhwwQQZA79OzYwl5ewA7HQih&si=GZFGAYV8OJ9qXsqi",
+  "CLOUD COMPUTING": "https://youtube.com/playlist?list=PLxCzCOWd7aiHRHVUtR-O52MsrdUSrzuy4&si=0P8FXxrHHYRhhCi1",
+  "COMPUTER NETWORKS": "https://youtube.com/playlist?list=PLxCzCOWd7aiGFBD2-2joCpWOLUrDLvVV_&si=Ucz63yGPuz-b5896",
+  "INTRODUCTION TO DATA SCIENCE": "https://youtu.be/N6BghzuFLIg?si=L_TCwxN5H8IYhjgR",
+  "DIGITAL IMAGE PROCESSING": "https://youtube.com/playlist?list=PL3rE2jS8zxAykFjinlf6EsucLv5EA03_m&si=ta5Kk3KVB12u0mu3",
+  "UNIFIED MODELING LANGUAGE": "https://youtube.com/playlist?list=PLA_LG2oFbzOnY9M8mjCByYvnSjoleNTrJ&si=cJ3VG3_wFAEuWez0",
+};
+
+const SUBJECT_VIDEOS_MAP = {
+  "STATISTICAL METHODS FOR COMPUTER SCIENCE - II": [
+    {
+      id: "stats2-v1",
+      title: "Statistical Methods II - Part 1: Testing of Hypothesis",
+      youtubeId: "arHKUMbsh9k",
+      url: "https://youtu.be/arHKUMbsh9k?si=QEUMfTVAbcFYuKTf",
+      description: "Basic Concepts, Null and Alternative Hypothesis, Type I & Type II Errors",
+      facultyName: "DR.N S.INDHUMATHY"
+    },
+    {
+      id: "stats2-v2",
+      title: "Statistical Methods II - Part 2: Large & Small Sample Tests",
+      youtubeId: "xmzwdO259w0",
+      url: "https://youtu.be/xmzwdO259w0?si=9BCGMSVEtrnDxsfq",
+      description: "Student's t-test, F-test, Paired t-test, Single & Difference of Means",
+      facultyName: "DR.N S.INDHUMATHY"
+    },
+    {
+      id: "stats2-v3",
+      title: "Statistical Methods II - Part 3: Chi-Square Test & Goodness of Fit",
+      youtubeId: "Qyd5Wz_Zst4",
+      url: "https://youtu.be/Qyd5Wz_Zst4?si=e1F-hXTle8mnHEg0",
+      description: "Chi-square distribution, Test for Independence & Goodness of Fit",
+      facultyName: "DR.N S.INDHUMATHY"
+    },
+    {
+      id: "stats2-v4",
+      title: "Statistical Methods II - Part 4: Design of Experiments & ANOVA",
+      youtubeId: "wj3udcllWKI",
+      url: "https://youtu.be/wj3udcllWKI?si=-VSkaL9ELMBp2NX3",
+      description: "CRD, RBD, Latin Square Design (LSD) and ANOVA Table",
+      facultyName: "DR.N S.INDHUMATHY"
+    }
+  ],
+  "STATISTICAL METHODS FOR COMPUTER SCIENCE – II": [
+    {
+      id: "stats2-v1",
+      title: "Statistical Methods II - Part 1: Testing of Hypothesis",
+      youtubeId: "arHKUMbsh9k",
+      url: "https://youtu.be/arHKUMbsh9k?si=QEUMfTVAbcFYuKTf",
+      description: "Basic Concepts, Null and Alternative Hypothesis, Type I & Type II Errors",
+      facultyName: "DR.N S.INDHUMATHY"
+    },
+    {
+      id: "stats2-v2",
+      title: "Statistical Methods II - Part 2: Large & Small Sample Tests",
+      youtubeId: "xmzwdO259w0",
+      url: "https://youtu.be/xmzwdO259w0?si=9BCGMSVEtrnDxsfq",
+      description: "Student's t-test, F-test, Paired t-test, Single & Difference of Means",
+      facultyName: "DR.N S.INDHUMATHY"
+    },
+    {
+      id: "stats2-v3",
+      title: "Statistical Methods II - Part 3: Chi-Square Test & Goodness of Fit",
+      youtubeId: "Qyd5Wz_Zst4",
+      url: "https://youtu.be/Qyd5Wz_Zst4?si=e1F-hXTle8mnHEg0",
+      description: "Chi-square distribution, Test for Independence & Goodness of Fit",
+      facultyName: "DR.N S.INDHUMATHY"
+    },
+    {
+      id: "stats2-v4",
+      title: "Statistical Methods II - Part 4: Design of Experiments & ANOVA",
+      youtubeId: "wj3udcllWKI",
+      url: "https://youtu.be/wj3udcllWKI?si=-VSkaL9ELMBp2NX3",
+      description: "CRD, RBD, Latin Square Design (LSD) and ANOVA Table",
+      facultyName: "DR.N S.INDHUMATHY"
+    }
+  ]
+};
+
+const getSubjectVideos = (subject, year, sem) => {
+  if (!subject) return [];
+  const upper = subject.toUpperCase();
+  const key = `${year}-${sem}-${upper}`;
+  const normUpper = upper.replace(/–/g, "-");
+  const normKey = key.replace(/–/g, "-");
+
+  return SUBJECT_VIDEOS_MAP[key] ||
+         SUBJECT_VIDEOS_MAP[normKey] ||
+         SUBJECT_VIDEOS_MAP[upper] ||
+         SUBJECT_VIDEOS_MAP[normUpper] ||
+         SUBJECT_VIDEOS_MAP[subject] ||
+         [];
+};
+
+const getPlaylistUrl = (subject, year, sem) => {
+  if (!subject) return null;
+  const upper = subject.toUpperCase();
+  const key = `${year}-${sem}-${upper}`;
+  return SUBJECT_PLAYLISTS[key] || SUBJECT_PLAYLISTS[upper] || SUBJECT_PLAYLISTS[subject] || null;
 };
 
 const FACULTY_MAP = {
@@ -146,14 +269,22 @@ export default function EContent() {
     NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(selectedSubject)
   );
 
-  const subjectVideos = selectedSubject && selectedYear && !isPlaceholder
+  const firestoreSubjectVideos = selectedSubject && selectedYear && !isPlaceholder
     ? firestoreVideos.filter((v) => {
-        const matchesSubject = v.subject?.toUpperCase() === selectedSubject;
+        const matchesSubject = v.subject?.toUpperCase() === selectedSubject.toUpperCase();
         const matchesYear = v.year === selectedYear;
         const matchesSemester = !selectedSemester || v.semester === selectedSemester;
         return matchesSubject && matchesYear && matchesSemester;
       })
     : [];
+
+  const presetVideos = useMemo(() => {
+    return getSubjectVideos(selectedSubject, selectedYear, selectedSemester);
+  }, [selectedSubject, selectedYear, selectedSemester]);
+
+  const subjectVideos = useMemo(() => {
+    return [...presetVideos, ...firestoreSubjectVideos];
+  }, [presetVideos, firestoreSubjectVideos]);
   const syllabusData = useMemo(() => {
     if (!selectedSubject || isPlaceholder) return null;
     if (selectedSubject === "ENGLISH" && selectedYear === 2 && selectedSemester === 2) return null;
@@ -173,17 +304,18 @@ export default function EContent() {
       }));
   }, [selectedSubject, selectedYear, selectedSemester, isPlaceholder]);
 
-  const subjectNotesData = selectedSubject && !isPlaceholder ? NOTES_DATA[selectedSubject] : null;
+  const isStats2 = selectedSubject && selectedSubject.toUpperCase().includes("STATISTICAL METHODS FOR COMPUTER SCIENCE") && (selectedSubject.toUpperCase().includes("II") || selectedSubject.toUpperCase().includes("2"));
+  const subjectNotesData = selectedSubject && !isPlaceholder && !isStats2 ? NOTES_DATA[selectedSubject] : null;
   const semesterUnitFilter = selectedSubject && !isPlaceholder ? SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[selectedSubject] : null;
 
   if (!selectedYear) {
     return (
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center">
-          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm">
+          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#021C4F] text-white shadow-sm">
             <FiPlayCircle size={36} />
           </div>
-          <h1 className="font-sans text-4xl font-bold text-[#0F4C81]">Video Lectures</h1>
+          <h1 className="font-sans text-4xl font-bold text-[#021C4F]">Video Lectures</h1>
           <p className="mt-2 text-sm text-[#6B7280]">Select your year to browse subject-wise lectures &amp; syllabus</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
@@ -195,15 +327,15 @@ export default function EContent() {
                 transition={{ delay: 0.1 + i * 0.1, type: "spring", stiffness: 80 }}
                 whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedYear(year)}
-                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
+                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#C50337]/40"
               >
                 <div className="relative p-8 text-center">
                   <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-xl ${s.bg} text-3xl font-bold transition-all duration-300 group-hover:scale-105 shadow-sm`}>
                     {CURRICULUM[year].icon}
                   </div>
-                  <h2 className="text-xl font-bold text-[#0F4C81]">{CURRICULUM[year].label}</h2>
+                  <h2 className="text-xl font-bold text-[#021C4F]">{CURRICULUM[year].label}</h2>
                   <p className="mt-1.5 text-xs text-[#6B7280]">{Object.keys(CURRICULUM[year].semesters).length} Semesters</p>
-                  <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#0F4C81] opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
+                  <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#021C4F] opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
                     Browse Lectures <FiChevronRight size={12} />
                   </div>
                 </div>
@@ -498,19 +630,21 @@ export default function EContent() {
         )}
 
         {(() => {
-          const playlistUrl = selectedSubject ? SUBJECT_PLAYLISTS[selectedSubject] : null;
+          const playlistUrl = getPlaylistUrl(selectedSubject, selectedYear, selectedSemester);
           const isThirdYear = selectedYear === 3;
+          const hasPresetVideos = presetVideos.length > 0;
           const isActive = isThirdYear || Boolean(playlistUrl) || subjectVideos.length > 0;
 
           return (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-center">
               <button
                 onClick={() => {
-                  if (playlistUrl) {
-                    window.open(playlistUrl, "_blank", "noopener,noreferrer");
-                    toast.success(`Redirecting to ${selectedSubject} YouTube Playlist...`);
-                  } else if (subjectVideos.length > 0) {
+                  if (hasPresetVideos || subjectVideos.length > 0) {
                     setShowVideos(true);
+                  } else if (playlistUrl) {
+                    window.open(playlistUrl, "_blank", "noopener,noreferrer");
+                    const isPlaylist = playlistUrl.includes("playlist");
+                    toast.success(`Redirecting to ${selectedSubject} YouTube ${isPlaylist ? "Playlist" : "Video"}...`);
                   } else if (isThirdYear) {
                     toast.error(`YouTube playlist link for ${selectedSubject} will be updated soon!`);
                   } else {
@@ -525,7 +659,7 @@ export default function EContent() {
               >
                 <FiPlayCircle size={20} />
                 Watch Videos
-                {playlistUrl ? (
+                {playlistUrl && !hasPresetVideos ? (
                   <FiExternalLink size={15} className="transition-transform group-hover:translate-x-0.5" />
                 ) : (
                   <FiChevronRight size={14} className="transition-transform group-hover:translate-x-0.5" />
@@ -539,7 +673,7 @@ export default function EContent() {
   }
 
   const sc = subjectColors[semesterData.subjects.indexOf(selectedSubject) % subjectColors.length];
-  const playlistUrl = selectedSubject ? SUBJECT_PLAYLISTS[selectedSubject] : null;
+  const playlistUrl = getPlaylistUrl(selectedSubject, selectedYear, selectedSemester);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
@@ -565,8 +699,12 @@ export default function EContent() {
               <FiYoutube size={28} className="text-white" />
             </div>
             <div>
-              <h3 className="font-sans font-bold text-base">Official YouTube Playlist</h3>
-              <p className="text-xs text-red-100">Watch full lecture series for {selectedSubject} on YouTube</p>
+              <h3 className="font-sans font-bold text-base">
+                Official YouTube {playlistUrl.includes("playlist") ? "Playlist" : "Video"}
+              </h3>
+              <p className="text-xs text-red-100">
+                Watch {playlistUrl.includes("playlist") ? "full lecture series" : "lecture video"} for {selectedSubject} on YouTube
+              </p>
             </div>
           </div>
           <a
@@ -576,7 +714,7 @@ export default function EContent() {
             className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-xs font-bold text-red-700 shadow hover:bg-red-50 transition-all active:scale-95"
           >
             <FiExternalLink size={15} />
-            Open Playlist on YouTube
+            Open {playlistUrl.includes("playlist") ? "Playlist" : "Video"} on YouTube
           </a>
         </motion.div>
       )}

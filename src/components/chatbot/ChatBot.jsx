@@ -394,7 +394,7 @@ export default function ChatBot() {
               className={`${chatWidth} ${chatMaxWidth} ${chatHeight} relative flex flex-col overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-xl`}
             >
               {/* Header */}
-              <div className="flex shrink-0 items-center justify-between border-b border-[#0A3356] bg-[#0F4C81] px-4 py-3 text-white">
+              <div className="flex shrink-0 items-center justify-between border-b border-[#011337] bg-[#021C4F] px-4 py-3 text-white">
                 <div className="flex items-center gap-2.5">
                   <CSAIAgentLogo size={34} />
                   <div className="leading-tight">
@@ -446,7 +446,7 @@ export default function ChatBot() {
                     <div
                       className={`max-w-[85%] rounded-lg px-3.5 py-2.5 text-sm leading-relaxed ${
                         msg.role === "user"
-                          ? "bg-[#0F4C81] text-white shadow-sm"
+                          ? "bg-[#021C4F] text-white shadow-sm"
                           : "bg-white text-[#4B5563] border border-[#E5E7EB] shadow-sm"
                       }`}
                     >
@@ -462,9 +462,9 @@ export default function ChatBot() {
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
                     <div className="rounded-lg bg-white px-4 py-3 border border-[#E5E7EB] shadow-sm">
                       <div className="flex items-center gap-1.5">
-                        <span className="h-2 w-2 animate-bounce rounded-full bg-[#0F4C81]" style={{ animationDelay: "0ms" }} />
-                        <span className="h-2 w-2 animate-bounce rounded-full bg-[#0F4C81]" style={{ animationDelay: "150ms" }} />
-                        <span className="h-2 w-2 animate-bounce rounded-full bg-[#0F4C81]" style={{ animationDelay: "300ms" }} />
+                        <span className="h-2 w-2 animate-bounce rounded-full bg-[#021C4F]" style={{ animationDelay: "0ms" }} />
+                        <span className="h-2 w-2 animate-bounce rounded-full bg-[#021C4F]" style={{ animationDelay: "150ms" }} />
+                        <span className="h-2 w-2 animate-bounce rounded-full bg-[#021C4F]" style={{ animationDelay: "300ms" }} />
                       </div>
                     </div>
                   </motion.div>
@@ -481,7 +481,7 @@ export default function ChatBot() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     onClick={() => scrollToBottom(true)}
-                    className="absolute bottom-28 right-6 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-[#0F4C81] text-white shadow-sm transition-all hover:bg-[#1E88E5]"
+                    className="absolute bottom-28 right-6 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-[#021C4F] text-white shadow-sm transition-all hover:bg-[#C50337]"
                   >
                     <FiChevronDown size={14} />
                   </motion.button>
@@ -494,7 +494,7 @@ export default function ChatBot() {
                   <button
                     key={s.label}
                     onClick={() => handleSuggestion(s.query)}
-                    className="flex items-center gap-1.5 shrink-0 rounded-lg border border-[#E5E7EB] bg-white/90 px-2.5 py-1.5 text-[10px] font-bold text-[#0F4C81] hover:border-[#1E88E5]/30 hover:bg-slate-100 transition-all duration-200"
+                    className="flex items-center gap-1.5 shrink-0 rounded-lg border border-[#E5E7EB] bg-white/90 px-2.5 py-1.5 text-[10px] font-bold text-[#021C4F] hover:border-[#C50337]/30 hover:bg-slate-100 transition-all duration-200"
                   >
                     {s.label}
                   </button>
@@ -513,12 +513,12 @@ export default function ChatBot() {
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Ask me anything about the portal..."
                   disabled={isLoading}
-                  className="flex-1 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#0F4C81] placeholder-slate-450 outline-none transition-all focus:border-[#0F4C81] focus:bg-white/90 focus:ring-1 focus:ring-[#0F4C81]/15 disabled:opacity-50"
+                  className="flex-1 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#021C4F] placeholder-slate-450 outline-none transition-all focus:border-[#021C4F] focus:bg-white/90 focus:ring-1 focus:ring-[#021C4F]/15 disabled:opacity-50"
                 />
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm transition-all hover:bg-[#1E88E5] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#021C4F] text-white shadow-sm transition-all hover:bg-[#C50337] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <FiSend size={16} />
                 </button>
@@ -532,7 +532,7 @@ export default function ChatBot() {
           onClick={toggleOpen}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#1E88E5] text-white shadow-sm border-2 border-white transition-all hover:bg-[#2563EB]"
+          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#C50337] text-white shadow-sm border-2 border-white transition-all hover:bg-[#a0022b]"
         >
           {isOpen ? (
             <FiX size={22} />

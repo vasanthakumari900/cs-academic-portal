@@ -797,6 +797,48 @@ const NOTES_DATA = {
         { id: "se-u5-6", title: "Software Reverse Engineering - Part 4", fileName: "SE_Reverse_Eng_Part4.pptx", fileId: "1ko8Gx4aMDkdg1nOQqY3Lb--aPmMAhc9k", type: "pptx" }
       ] }
     } },
+  "Web Application Development using AngularJS and Node.js": { units: {
+      1: {
+        title: "Unit I",
+        subtitle: "Introduction to AngularJS",
+        syllabus: "Overview of AngularJS - Advantages and Features of AngularJS - MVC (Model-View-Controller) Architecture - Single Page Applications (SPA) - Installing and Setting up AngularJS - Creating the First AngularJS Application - AngularJS Directives (ng-app, ng-model, ng-bind, ng-repeat, etc.) - Expressions and Data Binding - Modules, Controllers, Scope, and View - Understanding $scope hierarchy",
+        hrs: 12,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "Unit II",
+        subtitle: "AngularJS Forms and AJAX",
+        syllabus: "AngularJS Filters: Uppercase, Lowercase, Date, Currency, Number, OrderBy, Filter - Creating Custom Filters - AngularJS Forms: Model Binding, Form Controller, Form Validation, CSS Classes and Form Events, Custom Model Update Triggers - AJAX using $http Service: HTTP Requests and Responses",
+        hrs: 12,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "Unit III",
+        subtitle: "Introduction to Node.js",
+        syllabus: "Overview of Node.js - Features of Node.js - Installing Node.js - Node.js Architecture - Traditional Web Server vs Node.js - Node.js Process Model - Node Package Manager (NPM) - Command Line Options - Core Modules, Local Modules, Third-party Modules - Creating a Simple Node.js Web Server",
+        hrs: 12,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "Unit IV",
+        subtitle: "Express.js and Database Connectivity",
+        syllabus: "Introduction to Express.js - Installing Express.js - Creating an Express Application - Routing in Express.js - HTTP Methods (GET, POST, PUT, DELETE) - Middleware - Serving Static Files - RESTful APIs - Database Connectivity (MongoDB/MySQL) - CRUD Operations",
+        hrs: 12,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "Unit V",
+        subtitle: "Building Web Applications",
+        syllabus: "Integrating AngularJS with Node.js - Client–Server Communication - Authentication and Session Management - File Upload and Download - Error Handling - Deploying Web Applications - Building a Complete CRUD Web Application - Mini Project using AngularJS and Node.js",
+        hrs: 12,
+        co: "CO5",
+        files: []
+      }
+    } }
 };
 
 // SYLLABUS constant removed in favor of dynamic parsing from NOTES_DATA
@@ -918,10 +960,10 @@ export default function Notes() {
     return (
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center">
-          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm">
+          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#021C4F] text-white shadow-sm">
             <FiBookOpen size={36} />
           </div>
-          <h1 className="font-sans text-4xl font-bold text-[#0F4C81]">Lecture Notes</h1>
+          <h1 className="font-sans text-4xl font-bold text-[#021C4F]">Lecture Notes</h1>
           <p className="mt-2 text-sm text-[#6B7280]">Select your year to browse faculty-curated PDF notes by subject</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
@@ -933,13 +975,13 @@ export default function Notes() {
                 transition={{ delay: 0.1 + i * 0.1, type: "spring", stiffness: 80 }}
                 whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedYear(year)}
-                className="glass-card-hover group bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
+                className="glass-card-hover group bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-sm hover:border-[#C50337]/40"
               >
                 <div className="p-8 text-center">
                   <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-xl ${s.bg} text-3xl font-bold transition-all duration-300 group-hover:scale-105 shadow-sm`}>{CURRICULUM[year].icon}</div>
-                  <h2 className="text-xl font-bold text-[#0F4C81]">{CURRICULUM[year].label}</h2>
+                  <h2 className="text-xl font-bold text-[#021C4F]">{CURRICULUM[year].label}</h2>
                   <p className="mt-1.5 text-xs text-[#6B7280]">{Object.keys(CURRICULUM[year].semesters).length} Semesters</p>
-                  <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#0F4C81] opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">Browse Notes <FiChevronRight size={12} /></div>
+                  <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#021C4F] opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">Browse Notes <FiChevronRight size={12} /></div>
                 </div>
               </motion.button>
             );

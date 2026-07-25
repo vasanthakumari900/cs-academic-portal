@@ -8,10 +8,10 @@ import {
 import AnimatedCounter from "../components/ui/AnimatedCounter";
 
 const quickCards = [
-  { label: "Video Lectures", icon: FiPlayCircle, to: "/e-content", bgIcon: "bg-[#0F4C81]", desc: "Watch subject-wise lectures" },
-  { label: "Question Papers", icon: FiGrid, to: "/question-papers", bgIcon: "bg-[#1E88E5]", desc: "Practice with past papers" },
+  { label: "Video Lectures", icon: FiPlayCircle, to: "/e-content", bgIcon: "bg-[#021C4F]", desc: "Watch subject-wise lectures" },
+  { label: "Question Papers", icon: FiGrid, to: "/question-papers", bgIcon: "bg-[#C50337]", desc: "Practice with past papers" },
   { label: "Placement Details", icon: FiBriefcase, to: "/placements", bgIcon: "bg-[#2E7D32]", desc: "Explore drives & opportunities" },
-  { label: "Lecture Notes", icon: FiFileText, to: "/notes", bgIcon: "bg-[#0F4C81]", desc: "Download study materials" },
+  { label: "Lecture Notes", icon: FiFileText, to: "/notes", bgIcon: "bg-[#021C4F]", desc: "Download study materials" },
 ];
 
 const stats = [
@@ -24,10 +24,10 @@ const stats = [
 ];
 
 const features = [
-  { icon: FiPlayCircle, title: "Video Lectures", desc: "Faculty-curated video lectures covering the entire syllabus with practical examples and in-depth explanations.", bgIcon: "bg-[#0F4C81]" },
-  { icon: FiFileText, title: "PDF Notes", desc: "Comprehensive unit-wise PDF notes for every subject, available for instant download and offline reading.", bgIcon: "bg-[#1E88E5]" },
+  { icon: FiPlayCircle, title: "Video Lectures", desc: "Faculty-curated video lectures covering the entire syllabus with practical examples and in-depth explanations.", bgIcon: "bg-[#021C4F]" },
+  { icon: FiFileText, title: "PDF Notes", desc: "Comprehensive unit-wise PDF notes for every subject, available for instant download and offline reading.", bgIcon: "bg-[#C50337]" },
   { icon: FiGrid, title: "Question Banks", desc: "Previous year question papers with multiple sets per subject to help you prepare thoroughly.", bgIcon: "bg-[#2E7D32]" },
-  { icon: FiBriefcase, title: "Placements", desc: "Stay updated with the latest placement drives, eligibility criteria, and application deadlines.", bgIcon: "bg-[#0F4C81]" },
+  { icon: FiBriefcase, title: "Placements", desc: "Stay updated with the latest placement drives, eligibility criteria, and application deadlines.", bgIcon: "bg-[#021C4F]" },
 ];
 
 const fadeInUp = { hidden: { opacity: 0, y: 20 }, visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.1, ease: "easeOut" } }) };
@@ -46,8 +46,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
       {/* HERO */}
-      <section className="relative min-h-[75vh] flex items-center overflow-hidden bg-[#0F4C81] text-white">
-        <div className="absolute inset-0 bg-[#0F4C81]" />
+      <section className="relative min-h-[75vh] flex items-center overflow-hidden bg-[#021C4F] text-white">
+        <div className="absolute inset-0 bg-[#021C4F]" />
         
         <div className="relative mx-auto max-w-7xl px-4 pt-20 pb-24 sm:px-6 lg:px-8 w-full z-10">
           <div className="flex flex-col items-center text-center">
@@ -62,8 +62,8 @@ export default function Home() {
             <motion.h1 custom={0} initial="hidden" animate="visible" variants={fadeInUp}
               className="font-sans text-3xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl text-white max-w-4xl"
             >
-              {user ? <>Welcome back, <span className="text-[#42A5F5]">{user.name}</span></>
-                : <>Your Gateway to <span className="text-[#42A5F5]">Academic Excellence</span></>}
+              {user ? <>Welcome back, <span className="text-[#C50337]">{user.name}</span></>
+                : <>Your Gateway to <span className="text-[#C50337]">Academic Excellence</span></>}
             </motion.h1>
 
             <motion.p custom={1} initial="hidden" animate="visible" variants={fadeInUp}
@@ -75,11 +75,11 @@ export default function Home() {
             <motion.div custom={2} initial="hidden" animate="visible" variants={fadeInUp} className="mt-10 flex flex-wrap items-center justify-center gap-4">
               {user ? (
                 <button onClick={() => navigate(getDashboardPath())}
-                  className="group inline-flex items-center gap-2 rounded-lg bg-white px-7 py-3 text-sm font-bold text-[#0F4C81] shadow-sm transition-all hover:bg-[#F0F4F8] active:scale-[0.97]"
+                  className="group inline-flex items-center gap-2 rounded-lg bg-[#C50337] px-7 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#a0022b] active:scale-[0.97]"
                 >Go to Dashboard <FiArrowRight size={16} className="transition-transform group-hover:translate-x-1" /></button>
               ) : (
                 <button onClick={() => navigate("/login")}
-                  className="group inline-flex items-center gap-2 rounded-lg bg-white px-7 py-3 text-sm font-bold text-[#0F4C81] shadow-sm transition-all hover:bg-[#F0F4F8] active:scale-[0.97]"
+                  className="group inline-flex items-center gap-2 rounded-lg bg-[#C50337] px-7 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#a0022b] active:scale-[0.97]"
                 >Access Student Portal <FiArrowRight size={16} className="transition-transform group-hover:translate-x-1" /></button>
               )}
               <button onClick={() => navigate("/about")}
@@ -116,10 +116,10 @@ export default function Home() {
                 <div className="relative flex flex-col items-center gap-4 p-6 text-center">
                   <div className={`flex h-16 w-16 items-center justify-center rounded-lg ${card.bgIcon} text-white shadow-sm transition-all duration-300 group-hover:scale-105`}><card.icon size={26} /></div>
                   <div>
-                    <h3 className="font-sans text-base font-bold text-[#0F4C81]">{card.label}</h3>
+                    <h3 className="font-sans text-base font-bold text-[#021C4F]">{card.label}</h3>
                     <p className="mt-1 text-xs text-[#6B7280]">{card.desc}</p>
                   </div>
-                  <div className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#1E88E5] opacity-0 group-hover:opacity-100 transition-all translate-y-1 group-hover:translate-y-0">Explore <FiChevronRight size={12} /></div>
+                  <div className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#C50337] opacity-0 group-hover:opacity-100 transition-all translate-y-1 group-hover:translate-y-0">Explore <FiChevronRight size={12} /></div>
                 </div>
               </motion.button>
             ))}
@@ -131,8 +131,8 @@ export default function Home() {
       <section className="py-20 sm:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12 text-center">
-            <span className="inline-flex items-center gap-2 rounded-full bg-[#0F4C81]/10 px-4 py-1.5 text-xs font-bold text-[#0F4C81] mb-4"><FiStar size={12} /> Features</span>
-            <h2 className="font-sans text-3xl font-bold text-[#0F4C81]">Everything you need to succeed</h2>
+            <span className="inline-flex items-center gap-2 rounded-full bg-[#021C4F]/10 px-4 py-1.5 text-xs font-bold text-[#021C4F] mb-4"><FiStar size={12} /> Features</span>
+            <h2 className="font-sans text-3xl font-bold text-[#021C4F]">Everything you need to succeed</h2>
             <p className="mt-3 text-sm text-[#6B7280] max-w-xl mx-auto">A comprehensive suite of academic resources designed to help you excel in your studies</p>
           </motion.div>
 
@@ -142,7 +142,7 @@ export default function Home() {
                 className="group rounded-lg bg-white border border-[#E5E7EB] shadow-sm p-6 transition-all duration-300 hover:shadow-sm hover:-translate-y-0.5"
               >
                 <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-lg ${feature.bgIcon} text-white shadow-sm`}><feature.icon size={22} /></div>
-                <h3 className="font-sans text-base font-bold text-[#0F4C81] mb-2">{feature.title}</h3>
+                <h3 className="font-sans text-base font-bold text-[#021C4F] mb-2">{feature.title}</h3>
                 <p className="text-sm text-[#6B7280] leading-relaxed">{feature.desc}</p>
               </motion.div>
             ))}
@@ -156,17 +156,17 @@ export default function Home() {
       <section className="py-20 sm:py-24">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-            className="relative overflow-hidden rounded-lg bg-[#0F4C81] p-10 sm:p-14 text-white text-center shadow-sm border border-[#0A3356]"
+            className="relative overflow-hidden rounded-lg bg-[#021C4F] p-10 sm:p-14 text-white text-center shadow-sm border border-[#011337]"
           >
             <div className="relative">
-              <FiAward size={48} className="mx-auto mb-4 opacity-85" />
+              <FiAward size={48} className="mx-auto mb-4 opacity-85 text-[#C50337]" />
               <h2 className="font-sans text-2xl sm:text-3xl font-bold">You've got this! 🚀</h2>
               <p className="mt-3 max-w-lg mx-auto text-sm text-white/80 leading-relaxed">
                 Every session you study, every paper you practice, every video you watch — brings you one step closer to your dreams. Keep going!
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <button onClick={() => navigate(getDashboardPath())}
-                  className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-[#0F4C81] shadow-sm transition-all hover:bg-[#F0F4F8] active:scale-[0.97]"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#C50337] px-6 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#a0022b] active:scale-[0.97]"
                 >{user ? "Go to Dashboard" : "Get Started"} <FiArrowRight size={16} /></button>
               </div>
             </div>

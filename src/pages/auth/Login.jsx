@@ -31,9 +31,9 @@ function LiveClock() {
   const timeStr = now.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
   return (
     <div className="inline-flex items-center gap-3 sm:gap-4 text-sm sm:text-base font-semibold text-[#4B5563]">
-      <span className="flex items-center gap-2 text-[#0F4C81]"><FiCalendar size={16} /> {dayName}, {dateStr}</span>
+      <span className="flex items-center gap-2 text-[#021C4F]"><FiCalendar size={16} /> {dayName}, {dateStr}</span>
       <span className="text-slate-300">|</span>
-      <span className="flex items-center gap-2 font-mono tracking-wider text-[#0F4C81]"><FiClock size={16} /> {timeStr}</span>
+      <span className="flex items-center gap-2 font-mono tracking-wider text-[#021C4F]"><FiClock size={16} /> {timeStr}</span>
     </div>
   );
 }
@@ -148,11 +148,11 @@ export default function Login() {
             </motion.div>
 
             {/* Title */}
-            <h1 className="font-sans text-4xl xl:text-5xl font-bold leading-tight text-[#0F4C81]">
+            <h1 className="font-sans text-4xl xl:text-5xl font-bold leading-tight text-[#021C4F]">
               CS Academic Portal
             </h1>
 
-            <p className="mt-3 text-base xl:text-lg text-[#0F4C81] font-semibold">
+            <p className="mt-3 text-base xl:text-lg text-[#021C4F] font-semibold">
               Department of Computer Science
             </p>
 
@@ -164,7 +164,7 @@ export default function Login() {
             <div className="mt-8 flex flex-wrap gap-2">
               {["Lecture Notes", "Video Lessons", "Question Papers", "Placement Drives"].map((item) => (
                 <span key={item} className="inline-flex items-center gap-1.5 rounded-full bg-white border border-[#E5E7EB] px-3.5 py-1.5 text-[11px] font-semibold text-[#4B5563] shadow-sm">
-                  <FiStar size={10} className="text-[#1E88E5]" />
+                  <FiStar size={10} className="text-[#C50337]" />
                   {item}
                 </span>
               ))}
@@ -190,10 +190,10 @@ export default function Login() {
                 alt="DGVC College Logo"
                 className="mx-auto mb-4 h-auto w-full max-w-[20rem] object-contain rounded-lg border border-[#E5E7EB] shadow-sm"
               />
-              <h2 className="font-sans text-2xl font-bold text-[#0F4C81]">
+              <h2 className="font-sans text-2xl font-bold text-[#021C4F]">
                 CS Academic Portal
               </h2>
-              <p className="mt-1 text-xs text-[#0F4C81] font-semibold">
+              <p className="mt-1 text-xs text-[#021C4F] font-semibold">
                 Department of Computer Science
               </p>
               <div className="mt-4 flex justify-center">
@@ -213,7 +213,7 @@ export default function Login() {
                     onClick={() => { setActiveTab("student"); setCaptcha(""); refreshCaptcha(); }}
                     className={`flex-1 rounded-md py-2 text-xs font-bold uppercase tracking-wider transition-all ${
                       activeTab === "student"
-                        ? "bg-[#0F4C81] text-white shadow-sm"
+                        ? "bg-[#021C4F] text-white shadow-sm"
                         : "text-[#6B7280] hover:text-[#4B5563]"
                     }`}
                   >
@@ -224,7 +224,7 @@ export default function Login() {
                     onClick={() => { setActiveTab("faculty"); setCaptcha(""); refreshCaptcha(); }}
                     className={`flex-1 rounded-md py-2 text-xs font-bold uppercase tracking-wider transition-all ${
                       activeTab === "faculty"
-                        ? "bg-[#0F4C81] text-white shadow-sm"
+                        ? "bg-[#021C4F] text-white shadow-sm"
                         : "text-[#6B7280] hover:text-[#4B5563]"
                     }`}
                   >
@@ -234,7 +234,7 @@ export default function Login() {
 
                 {/* Header */}
                 <div className="mb-6 text-center">
-                  <h2 className="font-sans text-xl font-bold text-[#0F4C81]">
+                  <h2 className="font-sans text-xl font-bold text-[#021C4F]">
                     {activeTab === "student" ? "Student Login" : "Faculty Login"}
                   </h2>
                   <p className="mt-1 text-xs text-[#6B7280]">
@@ -261,7 +261,7 @@ export default function Login() {
                             onChange={(e) => setRollNumber(formatRoll(e.target.value))}
                             placeholder="e.g. 24E2901"
                             maxLength={7}
-                            className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 font-mono text-sm tracking-wider text-[#0F4C81] placeholder:text-[#6B7280]/60 outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
+                            className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 font-mono text-sm tracking-wider text-[#021C4F] placeholder:text-[#6B7280]/60 outline-none transition-all focus:border-[#021C4F] focus:ring-1 focus:ring-[#021C4F]/15 focus:bg-white"
                             autoFocus={activeTab === "student"}
                           />
                         </div>
@@ -282,7 +282,7 @@ export default function Login() {
                             value={dob}
                             onChange={(e) => setDob(e.target.value)}
                             max={new Date().toISOString().split("T")[0]}
-                            className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 text-sm text-[#0F4C81] outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
+                            className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 text-sm text-[#021C4F] outline-none transition-all focus:border-[#021C4F] focus:ring-1 focus:ring-[#021C4F]/15 focus:bg-white"
                           />
                         </div>
                       </div>
@@ -303,7 +303,7 @@ export default function Login() {
                             value={facultyName}
                             onChange={(e) => setFacultyName(e.target.value.toUpperCase())}
                             placeholder="Enter name in CAPITAL letters"
-                            className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 text-sm text-[#0F4C81] placeholder:text-[#6B7280]/60 outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
+                            className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 text-sm text-[#021C4F] placeholder:text-[#6B7280]/60 outline-none transition-all focus:border-[#021C4F] focus:ring-1 focus:ring-[#021C4F]/15 focus:bg-white"
                             autoFocus={activeTab === "faculty"}
                           />
                         </div>
@@ -324,7 +324,7 @@ export default function Login() {
                             value={facultyPassword}
                             onChange={(e) => setFacultyPassword(e.target.value)}
                             placeholder="Enter your password"
-                            className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 text-sm text-[#0F4C81] placeholder:text-[#6B7280]/60 outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
+                            className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 text-sm text-[#021C4F] placeholder:text-[#6B7280]/60 outline-none transition-all focus:border-[#021C4F] focus:ring-1 focus:ring-[#021C4F]/15 focus:bg-white"
                           />
                         </div>
                         <p className="mt-1.5 text-[10px] text-[#6B7280]">
@@ -347,14 +347,14 @@ export default function Login() {
                         placeholder="Enter the 5-digit code"
                         maxLength={5}
                         inputMode="numeric"
-                        className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 font-mono text-sm tracking-[0.3em] text-[#0F4C81] placeholder:text-[#6B7280]/60 placeholder:tracking-wider outline-none transition-all focus:border-[#0F4C81] focus:ring-1 focus:ring-[#0F4C81]/15 focus:bg-white"
+                        className="w-full rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-11 py-3 font-mono text-sm tracking-[0.3em] text-[#021C4F] placeholder:text-[#6B7280]/60 placeholder:tracking-wider outline-none transition-all focus:border-[#021C4F] focus:ring-1 focus:ring-[#021C4F]/15 focus:bg-white"
                       />
                     </div>
 
                     {/* Captcha display */}
                     <div className="mt-2 flex items-center gap-3">
                       <div className="flex select-none items-center gap-2 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-5 py-3">
-                        <span className="text-xl font-bold tracking-[0.4em] text-[#0F4C81]">
+                        <span className="text-xl font-bold tracking-[0.4em] text-[#021C4F]">
                           {captchaCode.split("").map((d, i) => (
                             <span
                               key={i}
@@ -388,7 +388,7 @@ export default function Login() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+                    className="w-full rounded-lg bg-[#021C4F] hover:bg-[#C50337] px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2"
                   >
                     <span className="inline-flex items-center gap-2">
                       {loading ? (

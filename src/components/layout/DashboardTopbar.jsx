@@ -24,16 +24,16 @@ export default function DashboardTopbar({ onMenuToggle }) {
             <FiMenu size={20} />
           </button>
           <div className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0F4C81] text-white text-xs font-bold shadow-sm">DG</span>
+            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#021C4F] text-white text-xs font-bold shadow-sm">DG</span>
             <div className="hidden sm:block leading-tight">
-              <p className="text-sm font-bold text-[#0F4C81]">
+              <p className="text-sm font-bold text-[#021C4F]">
                 {user?.type === "faculty" ? "FACULTY PORTAL" : user?.type === "admin" ? "ADMIN PORTAL" : "STUDENT PORTAL"}
               </p>
             </div>
           </div>
           {user && (
             <div className="hidden md:block text-left border-l border-[#E5E7EB] pl-3">
-              <p className="text-xs font-semibold text-[#0F4C81] leading-tight">{user.name}</p>
+              <p className="text-xs font-semibold text-[#021C4F] leading-tight">{user.name}</p>
               <p className="text-[10px] text-[#6B7280]">
                 {user.type === "faculty"
                   ? "Faculty"
@@ -48,7 +48,7 @@ export default function DashboardTopbar({ onMenuToggle }) {
         <div className="flex items-center gap-2">
           {!isOnDashboard && (
             <button onClick={() => { const base = user?.type === "faculty" ? "faculty" : user?.type === "admin" ? "admin" : "student"; navigate(`/${base}/dashboard`); }}
-              className="group inline-flex items-center gap-1.5 rounded-lg bg-[#0F4C81] px-4 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:bg-[#1E88E5] active:scale-[0.97]"
+              className="group inline-flex items-center gap-1.5 rounded-lg bg-[#021C4F] px-4 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:bg-[#C50337] active:scale-[0.97]"
             ><FiHome size={14} /> Dashboard</button>
           )}
           <button onClick={handleLogout}
