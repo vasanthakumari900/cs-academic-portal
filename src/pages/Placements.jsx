@@ -1,127 +1,310 @@
+// src/pages/Placements.jsx
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  FiCode, FiBriefcase,
-  FiSend, FiCheckCircle,
-  FiX, FiAlertCircle, FiClock,
-} from "react-icons/fi";
+import { FiX, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 import toast from "react-hot-toast";
-import { SAMPLE_PLACEMENTS } from "../utils/constants";
-import { formatDate } from "../utils/helpers";
+
+import PlacementHeader from "../components/placements/PlacementHeader";
+import PlacementDashboardTab from "../components/placements/PlacementDashboardTab";
+import PlacementDrivesTab from "../components/placements/PlacementDrivesTab";
+import StudentPlacementTab from "../components/placements/StudentPlacementTab";
+import EligibilityCheckerTab from "../components/placements/EligibilityCheckerTab";
+import AptitudePrepTab from "../components/placements/AptitudePrepTab";
+import CodingPracticeTab from "../components/placements/CodingPracticeTab";
+import InterviewPrepTab from "../components/placements/InterviewPrepTab";
+import ResumeBuilderTab from "../components/placements/ResumeBuilderTab";
+import TrainingMaterialsTab from "../components/placements/TrainingMaterialsTab";
+import PlacementCalendarTab from "../components/placements/PlacementCalendarTab";
+import AlumniStoriesTab from "../components/placements/AlumniStoriesTab";
+import NotificationsTab from "../components/placements/NotificationsTab";
+import PlacementFAQTab from "../components/placements/PlacementFAQTab";
+import ContactOfficerTab from "../components/placements/ContactOfficerTab";
+import AdminPlacementPanel from "../components/placements/AdminPlacementPanel";
+
+import CompanyDetailsModal from "../components/placements/CompanyDetailsModal";
 import PlacementFeedback from "../components/placements/PlacementFeedback";
 
 const mcqQuestions = [
-  { id: 1, question: "If all cats are animals and some animals are pets, which of the following must be true?", options: ["All cats are pets", "Some cats are pets", "All pets are cats", "Some animals are cats"], correct: 3 },
-  { id: 2, question: "A train travels 360 km in 4 hours. What is its speed in m/s?", options: ["20 m/s", "25 m/s", "30 m/s", "15 m/s"], correct: 1 },
-  { id: 3, question: "If APARTMENT is coded as BQBUSFOU, how is BUILDING coded?", options: ["CVJMEJOH", "CVILEJOH", "CVJMEIOH", "BVILEJOH"], correct: 0 },
-  { id: 4, question: "In a class of 40 students, 25 like Maths, 20 like Physics, and 10 like both. How many like neither?", options: ["5", "10", "15", "20"], correct: 0 },
-  { id: 5, question: "A clock shows 3:15. What is the angle between the hour and minute hands?", options: ["0°", "7.5°", "15°", "30°"], correct: 1 },
+  {
+    id: 1,
+    question: "If all cats are animals and some animals are pets, which of the following must be true?",
+    options: ["All cats are pets", "Some cats are pets", "All pets are cats", "Some animals are cats"],
+    correct: 3,
+  },
+  {
+    id: 2,
+    question: "A train travels 360 km in 4 hours. What is its speed in m/s?",
+    options: ["20 m/s", "25 m/s", "30 m/s", "15 m/s"],
+    correct: 1,
+  },
+  {
+    id: 3,
+    question: "If APARTMENT is coded as BQBUSFOU, how is BUILDING coded?",
+    options: ["CVJMEJOH", "CVILEJOH", "CVJMEIOH", "BVILEJOH"],
+    correct: 0,
+  },
+  {
+    id: 4,
+    question: "In a class of 40 students, 25 like Maths, 20 like Physics, and 10 like both. How many like neither?",
+    options: ["5", "10", "15", "20"],
+    correct: 0,
+  },
+  {
+    id: 5,
+    question: "A clock shows 3:15. What is the angle between the hour and minute hands?",
+    options: ["0°", "7.5°", "15°", "30°"],
+    correct: 1,
+  },
 ];
 
 function ApplyModal({ drive, onClose }) {
   const [step, setStep] = useState(1);
   const [submitting, setSubmitting] = useState(false);
   const [answers, setAnswers] = useState({});
-  const [form, setForm] = useState({ fullName: "", email: "", phone: "", rollNumber: "", course: "", year: "", cgpa: "" });
+  const [form, setForm] = useState({
+    fullName: "Vasanth Kumar",
+    email: "vasanth.cs23@ddgdvc.edu.in",
+    phone: "9876543210",
+    rollNumber: "23CS104",
+    course: "B.Sc CS",
+    year: "3",
+    cgpa: "8.4",
+  });
 
   const selectedQuestions = mcqQuestions.slice(0, 5);
 
-  function handleFormChange(field, value) { setForm((prev) => ({ ...prev, [field]: value })); }
+  function handleFormChange(field, value) {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  }
 
   function handleNextStep() {
     if (step === 1) {
-      if (!form.fullName.trim() || !form.email.trim() || !form.phone.trim()) { toast.error("Please fill in all required fields"); return; }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) { toast.error("Enter a valid email address"); return; }
-      if (!/^\d{10}$/.test(form.phone)) { toast.error("Enter a valid 10-digit phone number"); return; }
+      if (!form.fullName.trim() || !form.email.trim() || !form.phone.trim()) {
+        toast.error("Please fill in all required fields");
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+        toast.error("Enter a valid email address");
+        return;
+      }
+      if (!/^\d{10}$/.test(form.phone)) {
+        toast.error("Enter a valid 10-digit phone number");
+        return;
+      }
       setStep(2);
     } else if (step === 2) {
       const unanswered = selectedQuestions.filter((q) => answers[q.id] === undefined);
-      if (unanswered.length > 0) { toast.error("Please answer all questions before submitting"); return; }
+      if (unanswered.length > 0) {
+        toast.error("Please answer all questions before submitting");
+        return;
+      }
       setSubmitting(true);
-      setTimeout(() => { setSubmitting(false); setStep(3); toast.success("Application submitted successfully!"); }, 1500);
+      setTimeout(() => {
+        setSubmitting(false);
+        setStep(3);
+        toast.success(`Application for ${drive.companyName} submitted!`);
+      }, 1200);
     }
   }
 
-  function handleAnswer(questionId, optionIndex) { setAnswers((prev) => ({ ...prev, [questionId]: optionIndex })); }
+  function handleAnswer(questionId, optionIndex) {
+    setAnswers((prev) => ({ ...prev, [questionId]: optionIndex }));
+  }
 
   const correctCount = selectedQuestions.filter((q) => answers[q.id] === q.correct).length;
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 text-left"
       onClick={onClose}
     >
-      <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.95, opacity: 0 }}
         onClick={(e) => e.stopPropagation()}
-        className="flex w-full max-w-2xl flex-col overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-2xl"
+        className="flex w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl"
       >
-        <div className="flex items-center justify-between border-b border-[#E5E7EB] bg-[#0F4C81] px-6 py-4 text-white">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-[#021C4F] px-6 py-4 text-white">
           <div>
-            <h3 className="text-base font-bold text-white">{step === 1 ? "Apply — Personal Details" : step === 2 ? "Logical Reasoning Assessment" : "Application Submitted"}</h3>
-            <p className="text-xs text-white/80">{drive.companyName} · {drive.role}</p>
+            <h3 className="text-base font-bold text-white">
+              {step === 1
+                ? "Campus Drive Application — Personal Details"
+                : step === 2
+                ? "Logical Reasoning Assessment"
+                : "Application Confirmation"}
+            </h3>
+            <p className="text-xs text-white/80">
+              {drive.companyName} · {drive.role}
+            </p>
           </div>
-          <button onClick={onClose} className="rounded-full bg-white/10 p-2 text-white/70 hover:bg-white/20 hover:text-white transition-all"><FiX size={16} /></button>
+          <button
+            onClick={onClose}
+            className="rounded-full bg-white/10 p-2 text-white/70 hover:bg-white/20 hover:text-white transition-all"
+          >
+            <FiX size={16} />
+          </button>
         </div>
 
-        <div className="flex items-center gap-2 border-b border-[#E5E7EB] bg-[#F8FAFC] px-6 py-3">
+        <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 px-6 py-3">
           {[1, 2, 3].map((s) => (
             <div key={s} className="flex items-center gap-2">
-              <div className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold transition-all ${step >= s ? "bg-[#0F4C81] text-white shadow-sm" : "bg-slate-200 text-slate-500"}`}>{step > s ? <FiCheckCircle size={14} /> : s}</div>
-              <span className={`text-xs font-medium ${step >= s ? "text-[#0F4C81] font-semibold" : "text-[#6B7280]"}`}>{s === 1 ? "Details" : s === 2 ? "MCQ Test" : "Submit"}</span>
-              {s < 3 && <span className="text-[#E5E7EB] mx-1">—</span>}
+              <div
+                className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold transition-all ${
+                  step >= s
+                    ? "bg-[#0F4C81] text-white shadow-sm"
+                    : "bg-slate-200 dark:bg-slate-700 text-slate-500"
+                }`}
+              >
+                {step > s ? <FiCheckCircle size={14} /> : s}
+              </div>
+              <span
+                className={`text-xs font-medium ${
+                  step >= s ? "text-[#0F4C81] dark:text-sky-400 font-semibold" : "text-slate-500"
+                }`}
+              >
+                {s === 1 ? "Student Details" : s === 2 ? "Aptitude Check" : "Submitted"}
+              </span>
+              {s < 3 && <span className="text-slate-300 dark:text-slate-700 mx-1">—</span>}
             </div>
           ))}
         </div>
 
-        <div className="flex-1 overflow-auto p-6 bg-white">
+        <div className="flex-1 overflow-auto p-6 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100">
           <AnimatePresence mode="wait">
             {step === 1 && (
-              <motion.div key="step1" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="space-y-4 text-left">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  {[{field:"fullName",label:"Full Name *",placeholder:"John Doe",type:"text"},{field:"email",label:"Email *",placeholder:"john@college.edu",type:"email"},{field:"phone",label:"Phone *",placeholder:"9876543210",type:"tel",maxLength:10},{field:"rollNumber",label:"Roll Number",placeholder:"24E3001",type:"text"}].map(({field,label,placeholder,type,maxLength}) => (
-                    <div key={field}>
-                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">{label}</label>
-                      <input value={form[field]} onChange={(e) => handleFormChange(field, e.target.value)} placeholder={placeholder} type={type} maxLength={maxLength}
-                        className="input-premium" />
-                    </div>
-                  ))}
+              <motion.div
+                key="step1"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                className="space-y-4"
+              >
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 text-xs">
                   <div>
-                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Course</label>
-                    <select value={form.course} onChange={(e) => handleFormChange("course", e.target.value)} className="input-premium bg-white">
-                      <option value="">Select Course</option>
+                    <label className="mb-1 block font-bold text-slate-700 dark:text-slate-300">
+                      Full Name *
+                    </label>
+                    <input
+                      value={form.fullName}
+                      onChange={(e) => handleFormChange("fullName", e.target.value)}
+                      placeholder="John Doe"
+                      className="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-2.5 text-slate-800 dark:text-slate-100"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-1 block font-bold text-slate-700 dark:text-slate-300">
+                      Official Email *
+                    </label>
+                    <input
+                      value={form.email}
+                      onChange={(e) => handleFormChange("email", e.target.value)}
+                      placeholder="john@ddgdvc.edu.in"
+                      type="email"
+                      className="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-2.5 text-slate-800 dark:text-slate-100"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-1 block font-bold text-slate-700 dark:text-slate-300">
+                      Phone Number *
+                    </label>
+                    <input
+                      value={form.phone}
+                      onChange={(e) => handleFormChange("phone", e.target.value)}
+                      placeholder="9876543210"
+                      maxLength={10}
+                      className="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-2.5 text-slate-800 dark:text-slate-100"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-1 block font-bold text-slate-700 dark:text-slate-300">
+                      Roll Number
+                    </label>
+                    <input
+                      value={form.rollNumber}
+                      onChange={(e) => handleFormChange("rollNumber", e.target.value)}
+                      placeholder="23CS104"
+                      className="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-2.5 text-slate-800 dark:text-slate-100"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-1 block font-bold text-slate-700 dark:text-slate-300">
+                      Department
+                    </label>
+                    <select
+                      value={form.course}
+                      onChange={(e) => handleFormChange("course", e.target.value)}
+                      className="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-2.5 text-slate-800 dark:text-slate-100"
+                    >
                       <option value="B.Sc CS">B.Sc Computer Science</option>
                       <option value="BCA">BCA</option>
                       <option value="M.Sc CS">M.Sc Computer Science</option>
                     </select>
                   </div>
-                  <div><label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">Year</label>
-                    <select value={form.year} onChange={(e) => handleFormChange("year", e.target.value)} className="input-premium bg-white">
-                      <option value="">Select Year</option>
-                      <option value="1">1st Year</option>
-                      <option value="2">2nd Year</option>
-                      <option value="3">3rd Year</option>
-                    </select></div>
-                  <div><label className="mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">CGPA</label>
-                    <input value={form.cgpa} onChange={(e) => handleFormChange("cgpa", e.target.value)} placeholder="8.5"
-                      className="input-premium" /></div>
+
+                  <div>
+                    <label className="mb-1 block font-bold text-slate-700 dark:text-slate-300">
+                      Current CGPA
+                    </label>
+                    <input
+                      value={form.cgpa}
+                      onChange={(e) => handleFormChange("cgpa", e.target.value)}
+                      placeholder="8.4"
+                      className="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-2.5 text-slate-800 dark:text-slate-100"
+                    />
+                  </div>
                 </div>
               </motion.div>
             )}
+
             {step === 2 && (
-              <motion.div key="step2" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="space-y-5 text-left">
-                <div className="rounded-lg border border-[#E5E7EB] bg-[#F0F4F8] p-3 text-xs text-[#0F4C81] flex items-center gap-2 font-medium">
-                  <FiAlertCircle size={14} className="text-[#0F4C81] shrink-0" />
-                  Answer all 5 logical reasoning questions.
+              <motion.div
+                key="step2"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                className="space-y-4"
+              >
+                <div className="rounded-xl border border-sky-500/30 bg-sky-500/10 p-3 text-xs text-sky-800 dark:text-sky-300 flex items-center gap-2 font-medium">
+                  <FiAlertCircle size={14} className="shrink-0 text-sky-600" />
+                  Answer all 5 questions to complete screening for {drive.companyName}.
                 </div>
+
                 {selectedQuestions.map((q, idx) => (
-                  <div key={q.id} className="rounded-lg border border-[#E5E7EB] bg-white p-4 shadow-sm">
-                    <p className="mb-3 text-sm font-semibold text-[#0F4C81]">{idx + 1}. {q.question}</p>
-                    <div className="space-y-2">
+                  <div
+                    key={q.id}
+                    className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 p-4 space-y-2 shadow-sm"
+                  >
+                    <p className="text-xs font-bold text-[#0F4C81] dark:text-sky-300">
+                      {idx + 1}. {q.question}
+                    </p>
+                    <div className="space-y-1.5">
                       {q.options.map((opt, oi) => (
-                        <button key={oi} onClick={() => handleAnswer(q.id, oi)}
-                          className={`flex w-full items-center gap-3 rounded-lg border px-3.5 py-2.5 text-xs text-left transition-all ${answers[q.id] === oi ? "border-[#0F4C81] bg-[#F0F4F8] text-[#0F4C81] shadow-sm font-semibold" : "border-[#E5E7EB] bg-white text-[#4B5563] hover:border-[#1E88E5]/30 hover:bg-[#F8FAFC]"}`}
+                        <button
+                          key={oi}
+                          onClick={() => handleAnswer(q.id, oi)}
+                          className={`flex w-full items-center gap-2.5 rounded-lg border px-3 py-2 text-xs text-left transition-all ${
+                            answers[q.id] === oi
+                              ? "border-[#0F4C81] bg-[#0F4C81]/10 font-bold text-[#0F4C81] dark:text-sky-300"
+                              : "border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300"
+                          }`}
                         >
-                          <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold transition-all ${answers[q.id] === oi ? "bg-[#0F4C81] text-white shadow-sm" : "bg-slate-200 text-slate-500"}`}>{String.fromCharCode(65 + oi)}</span>
+                          <span
+                            className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${
+                              answers[q.id] === oi
+                                ? "bg-[#0F4C81] text-white"
+                                : "bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-300"
+                            }`}
+                          >
+                            {String.fromCharCode(65 + oi)}
+                          </span>
                           {opt}
                         </button>
                       ))}
@@ -130,23 +313,35 @@ function ApplyModal({ drive, onClose }) {
                 ))}
               </motion.div>
             )}
+
             {step === 3 && (
-              <motion.div key="step3" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}
-                className="flex flex-col items-center py-8 text-center"
+              <motion.div
+                key="step3"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="flex flex-col items-center py-6 text-center space-y-3"
               >
-                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#2E7D32]/10">
-                  <FiCheckCircle size={32} className="text-[#2E7D32]" />
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600">
+                  <FiCheckCircle size={36} />
                 </div>
-                <h3 className="text-lg font-bold text-[#0F4C81]">Application Submitted!</h3>
-                <p className="mt-2 text-sm text-[#6B7280]">Your application for {drive.companyName} — {drive.role} has been received.</p>
-                <div className="mt-6 grid grid-cols-2 gap-4 text-center w-full max-w-sm">
-                  <div className="bg-white border border-[#E5E7EB] rounded-lg p-4 shadow-sm">
-                    <p className="text-2xl font-bold text-[#2E7D32]">{correctCount}/5</p>
-                    <p className="text-[10px] text-[#6B7280] font-medium uppercase tracking-wider">MCQ Score</p>
+                <h3 className="text-xl font-extrabold text-[#0F4C81] dark:text-sky-300">
+                  Application Successfully Registered!
+                </h3>
+                <p className="text-xs text-slate-500 max-w-md">
+                  Your application for <strong>{drive.companyName}</strong> ({drive.role}) has been submitted to the placement cell.
+                </p>
+
+                <div className="grid grid-cols-2 gap-4 w-full max-w-xs text-center pt-3">
+                  <div className="bg-slate-50 dark:bg-slate-800 border rounded-xl p-3">
+                    <p className="text-xl font-bold text-emerald-600">{correctCount}/5</p>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase">MCQ Score</p>
                   </div>
-                  <div className="bg-white border border-[#E5E7EB] rounded-lg p-4 shadow-sm">
-                    <p className="text-2xl font-bold text-[#0F4C81]">{drive.package} LPA</p>
-                    <p className="text-[10px] text-[#6B7280] font-medium uppercase tracking-wider">Package</p>
+                  <div className="bg-slate-50 dark:bg-slate-800 border rounded-xl p-3">
+                    <p className="text-xl font-bold text-[#0F4C81] dark:text-sky-400">
+                      ₹{drive.package} LPA
+                    </p>
+                    <p className="text-[10px] text-slate-400 font-bold uppercase">Package</p>
                   </div>
                 </div>
               </motion.div>
@@ -154,16 +349,31 @@ function ApplyModal({ drive, onClose }) {
           </AnimatePresence>
         </div>
 
-        <div className="flex items-center justify-end gap-3 border-t border-[#E5E7EB] bg-[#F8FAFC] px-6 py-4">
-          {step < 3 && (
+        <div className="flex items-center justify-end gap-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 px-6 py-4">
+          {step < 3 ? (
             <>
-              <button onClick={onClose} className="rounded-lg border border-[#E5E7EB] bg-white px-4 py-2.5 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all">Cancel</button>
-              <button onClick={handleNextStep} disabled={submitting}
-                className="rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] px-5 py-2.5 text-xs font-bold text-white shadow-sm transition-all disabled:opacity-60"
-              >{submitting ? "Submitting…" : step === 1 ? "Next: MCQ Test" : "Submit Application"}</button>
+              <button
+                onClick={onClose}
+                className="rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleNextStep}
+                disabled={submitting}
+                className="rounded-xl bg-[#0F4C81] hover:bg-[#1E88E5] px-5 py-2 text-xs font-bold text-white shadow-sm transition-all disabled:opacity-60"
+              >
+                {submitting ? "Submitting..." : step === 1 ? "Next: MCQ Screening" : "Submit Application"}
+              </button>
             </>
+          ) : (
+            <button
+              onClick={onClose}
+              className="rounded-xl bg-[#0F4C81] hover:bg-[#1E88E5] px-6 py-2 text-xs font-bold text-white shadow-sm"
+            >
+              Done
+            </button>
           )}
-          {step === 3 && <button onClick={onClose} className="rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] px-5 py-2.5 text-xs font-bold text-white shadow-sm transition-all">Done</button>}
         </div>
       </motion.div>
     </motion.div>
@@ -171,59 +381,127 @@ function ApplyModal({ drive, onClose }) {
 }
 
 export default function Placements() {
-  const [applyingTo, setApplyingTo] = useState(null);
-  const displayItems = SAMPLE_PLACEMENTS;
+  const [activeTab, setActiveTab] = useState("dashboard");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [selectedCompanyModal, setSelectedCompanyModal] = useState(null);
+  const [applyModalCompany, setApplyModalCompany] = useState(null);
+
+  function handleNavigateTab(tabId) {
+    setActiveTab(tabId);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function handleSelectCompany(company) {
+    setSelectedCompanyModal(company);
+  }
+
+  function handleApplyCompany(company) {
+    setApplyModalCompany(company);
+  }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
-      <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center">
-        <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm">
-          <FiBriefcase size={36} />
-        </div>
-        <h1 className="font-sans text-4xl font-bold text-[#0F4C81]">Placements</h1>
-        <p className="mt-2 text-sm text-[#6B7280]">Live drives, eligibility criteria and application links from recruiting companies</p>
-      </motion.div>
+    <div className={isDarkMode ? "dark" : ""}>
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
+          {/* Main Top Placement Header & Navigation */}
+          <PlacementHeader
+            activeTab={activeTab}
+            setActiveTab={handleNavigateTab}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            isDarkMode={isDarkMode}
+            setIsDarkMode={setIsDarkMode}
+          />
 
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiBriefcase size={18} /></div>
-          <div className="text-left">
-            <h2 className="font-sans text-xl font-bold text-[#0F4C81]">Active Drives</h2>
-            <p className="text-[11px] text-[#6B7280]">{displayItems.length} companies currently recruiting</p>
+          {/* Active Sub-Tab View */}
+          <main className="min-h-[60vh]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+              >
+                {activeTab === "dashboard" && (
+                  <PlacementDashboardTab
+                    onNavigateTab={handleNavigateTab}
+                    onSelectCompany={handleSelectCompany}
+                  />
+                )}
+
+                {activeTab === "drives" && (
+                  <PlacementDrivesTab
+                    searchQuery={searchQuery}
+                    onSelectCompany={handleSelectCompany}
+                    onApplyCompany={handleApplyCompany}
+                  />
+                )}
+
+                {activeTab === "student-dash" && (
+                  <StudentPlacementTab onApplyCompany={handleApplyCompany} />
+                )}
+
+                {activeTab === "eligibility" && (
+                  <EligibilityCheckerTab onApplyCompany={handleApplyCompany} />
+                )}
+
+                {activeTab === "aptitude" && <AptitudePrepTab />}
+
+                {activeTab === "coding" && <CodingPracticeTab />}
+
+                {activeTab === "interview" && <InterviewPrepTab />}
+
+                {activeTab === "resume" && <ResumeBuilderTab />}
+
+                {activeTab === "training" && <TrainingMaterialsTab />}
+
+                {activeTab === "calendar" && <PlacementCalendarTab />}
+
+                {activeTab === "alumni" && <AlumniStoriesTab />}
+
+                {activeTab === "notifications" && <NotificationsTab />}
+
+                {activeTab === "faq" && <PlacementFAQTab />}
+
+                {activeTab === "contact" && <ContactOfficerTab />}
+
+                {activeTab === "admin" && <AdminPlacementPanel />}
+              </motion.div>
+            </AnimatePresence>
+          </main>
+
+          {/* Placement Feedback Section */}
+          <div className="pt-8 border-t border-slate-200 dark:border-slate-800">
+            <PlacementFeedback />
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {displayItems.map((p, i) => (
-            <motion.div key={p.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} className="h-full">
-              <div className="bg-white border border-[#E5E7EB] rounded-xl p-5 shadow-sm hover:shadow-sm transition-all duration-300 flex h-full flex-col gap-4 text-left">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-lg font-bold text-white shadow-sm">{p.companyName?.[0]}</div>
-                  <div>
-                    <h3 className="font-sans font-semibold text-sm text-[#0F4C81]">{p.companyName}</h3>
-                    <p className="flex items-center gap-1 text-xs text-[#6B7280]"><FiBriefcase size={11} /> {p.role}</p>
-                  </div>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-[#0F4C81]/10 px-3 py-1 text-[11px] font-bold text-[#0F4C81]">₹{p.package} LPA</span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-700">{p.eligibility}</span>
-                  {p.skills && <span className="inline-flex items-center gap-1 rounded-full bg-[#1E88E5]/10 px-3 py-1 text-[11px] font-semibold text-[#0F4C81]"><FiCode size={10} /> {p.skills}</span>}
-                </div>
-                <p className="flex items-center gap-1.5 text-xs text-[#6B7280]"><FiClock size={11} /> Deadline: {formatDate(p.deadline)}</p>
-                <button onClick={() => setApplyingTo(p)}
-                  className="mt-auto flex items-center justify-center gap-1.5 rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-2.5 text-xs font-bold text-white shadow-sm transition-all"
-                >Apply Now <FiSend size={13} /></button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
 
-      {/* ── Placement Feedback Section ── */}
-      <PlacementFeedback />
+        {/* Company Detail Modal */}
+        <AnimatePresence>
+          {selectedCompanyModal && (
+            <CompanyDetailsModal
+              company={selectedCompanyModal}
+              onClose={() => setSelectedCompanyModal(null)}
+              onApply={(comp) => {
+                setSelectedCompanyModal(null);
+                setApplyModalCompany(comp);
+              }}
+            />
+          )}
+        </AnimatePresence>
 
-      <AnimatePresence>
-        {applyingTo && <ApplyModal drive={applyingTo} onClose={() => setApplyingTo(null)} />}
-      </AnimatePresence>
+        {/* Apply Application Modal */}
+        <AnimatePresence>
+          {applyModalCompany && (
+            <ApplyModal
+              drive={applyModalCompany}
+              onClose={() => setApplyModalCompany(null)}
+            />
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }

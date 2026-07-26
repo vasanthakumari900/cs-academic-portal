@@ -88,7 +88,7 @@ const studentNav = [
   { to: "/student/videos", label: "Videos", icon: FiPlayCircle },
   { to: "/student/notes", label: "Notes", icon: FiFileText },
   { to: "/student/question-papers", label: "Question Papers", icon: FiFileText },
-  { to: "/student/placements", label: "Placements", icon: FiBriefcase },
+  { to: "/student/placements", label: "Placement Details", icon: FiBriefcase },
   { to: "/student/bookmarks", label: "Bookmarks", icon: FiBookmark },
   { to: "/student/recently-viewed", label: "Recently Viewed", icon: FiClock },
   { to: "/student/profile", label: "Profile", icon: FiUser },

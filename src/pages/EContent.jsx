@@ -15,6 +15,10 @@ import { NOTES_DATA, SEMESTER_UNITS, NAME_ONLY_MAP } from "./Notes";
 import { CURRICULUM } from "../utils/curriculum";
 
 const SUBJECT_PLAYLISTS = {
+  // 1st Year Semester 1
+  "PYTHON PROGRAMMING ESSENTIALS": "https://youtube.com/playlist?list=PLsyeobzWxl7poL9JTVyndKe62ieoN-MZ3&si=8w8AUNLRxB8_KpjW",
+  "1-1-PYTHON PROGRAMMING ESSENTIALS": "https://youtube.com/playlist?list=PLsyeobzWxl7poL9JTVyndKe62ieoN-MZ3&si=8w8AUNLRxB8_KpjW",
+
   // 2nd Year Semester 1
   "OBJECT ORIENTED PROGRAMMING CONCEPTS USING JAVA": "https://youtube.com/playlist?list=PLdo5W4Nhv31a7A5Az4Mxp_PcNPXItprPp&si=Jed8HASq8aGiLqfk",
   "2-1-TAMIL": "https://youtube.com/playlist?list=PLK9f8qqkv3BY&si=LxxvKGKIrD9PEfhh",
@@ -34,7 +38,6 @@ const SUBJECT_PLAYLISTS = {
   "SOFTWARE ENGINEERING": "https://youtube.com/playlist?list=PLxCzCOWd7aiEed7SKZBnC6ypFDWYLRvB2&si=IE-4o7eX5Yq1rvpt",
   "ARTIFICIAL INTELLIGENCE AND EXPERT SYSTEM": "https://youtube.com/playlist?list=PLzkMouYverAJ1hQLXScQB7FSM0XOwBHLg&si=lzGPIJn2VNBlcWXM",
   "2-2-TAMIL": "https://youtube.com/playlist?list=PLDe0NG4ovv44&si=DInjH62wkyG3pczn",
-  "TAMIL": "https://youtube.com/playlist?list=PLDe0NG4ovv44&si=DInjH62wkyG3pczn",
 
   // 3rd Year Semester 1
   "OPERATING SYSTEM": "https://youtube.com/playlist?list=PLdo5W4Nhv31a5ucW_S1K3-x6ztBRD-PNa&si=sayP_LqlXGWAgRi5",
@@ -141,6 +144,7 @@ const getSubjectVideos = (subject, year, sem) => {
 const getPlaylistUrl = (subject, year, sem) => {
   if (!subject) return null;
   const upper = subject.toUpperCase();
+  if (Number(year) === 1 && Number(sem) === 1 && upper === "TAMIL") return null;
   const key = `${year}-${sem}-${upper}`;
   return SUBJECT_PLAYLISTS[key] || SUBJECT_PLAYLISTS[upper] || SUBJECT_PLAYLISTS[subject] || null;
 };

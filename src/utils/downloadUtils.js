@@ -59,14 +59,17 @@ export function downloadDriveFile(fileInput, customTitle = "") {
     return;
   }
 
-  const directUrl = getDirectDownloadUrl(fileInput);
+  const fileId = extractDriveFileId(fileInput);
+  const targetUrl = fileId
+    ? `https://drive.google.com/file/d/${fileId}/view?usp=sharing`
+    : String(fileInput);
+
   const isMobile = isMobileDevice();
   const toastPosition = isMobile ? "top-center" : "top-right";
 
-  // 1. Immediately trigger top notification
-  toast.success("📥 Download started successfully", {
+  toast.success("📥 Opening Google Drive document...", {
     position: toastPosition,
-    duration: 3500,
+    duration: 3000,
     style: {
       borderRadius: "12px",
       background: "#0F4C81",
@@ -79,47 +82,13 @@ export function downloadDriveFile(fileInput, customTitle = "") {
     },
   });
 
-  // 2. Set 1-second (1000ms) timer for slow response indicator
-  let loadingToastId = null;
-  const timerId = setTimeout(() => {
-    loadingToastId = toast.loading("Preparing Google Drive download...", {
-      position: toastPosition,
-      style: {
-        borderRadius: "12px",
-        fontSize: "13px",
-      },
-    });
-  }, 1000);
-
-  // 3. Initiate native download optimized for mobile (iOS / Android) and desktop
-  try {
-    if (isMobile) {
-      // On mobile phones, opening direct download URL triggers native mobile download popup at top of screen
-      const win = window.open(directUrl, "_blank");
-      if (!win) {
-        window.location.href = directUrl;
-      }
-    } else {
-      // On desktop, anchor click triggers direct download without leaving tab
-      const link = document.createElement("a");
-      link.href = directUrl;
-      if (customTitle) link.setAttribute("download", customTitle);
-      link.target = "_self";
-      document.body.appendChild(link);
-      link.click();
-      setTimeout(() => {
-        if (link.parentNode) document.body.removeChild(link);
-      }, 1000);
-    }
-
-    setTimeout(() => {
-      clearTimeout(timerId);
-      if (loadingToastId) toast.dismiss(loadingToastId);
-    }, 1500);
-
-  } catch (err) {
-    clearTimeout(timerId);
-    if (loadingToastId) toast.dismiss(loadingToastId);
-    window.location.href = directUrl;
-  }
+  const a = document.createElement("a");
+  a.href = targetUrl;
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => {
+    if (a.parentNode) document.body.removeChild(a);
+  }, 500);
 }

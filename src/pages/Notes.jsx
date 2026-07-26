@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   FiFileText, FiDownload, FiBookOpen,
   FiArrowLeft, FiChevronRight, FiLayers,
-  FiChevronDown, FiExternalLink, FiSearch, FiUploadCloud,
+  FiChevronDown, FiExternalLink, FiSearch, FiUploadCloud, FiCode, FiX,
 } from "react-icons/fi";
 import { useFirestoreList } from "../hooks/useFirestoreList";
 import { noteService } from "../services/noteService";
@@ -72,6 +72,29 @@ const SECOND_YEAR_SEM1_FACULTY = {
   "Principles of operating Systems": "DR.A.KAVITHA / DURGADEV",
   "Object Oriented Programming Concepts using JAVA": "DR.A.KAVITHA, Mr.S.Tamilarasi / DR.G.SRILAKSHMI",
   "Web Application Development using AngularJS and Node.js": "Dr.N.M.Sangeetha",
+};
+
+const LAB_RECORDS_DATA = {
+  "1-1": [
+    { id: "lab-1-1-1", title: "1st Year Semester 1 Practical Lab Manual & Record", subject: "1ST YEAR SEMESTER 1 LAB", fileName: "1st_Year_Sem1_Lab_Record.pdf", fileId: "1tCqpPAL_KYoQkEO1ksNbeLyxTbxBYV-N", type: "pdf" },
+  ],
+  "1-2": [
+    { id: "lab-1-2-1", title: "1st Year Semester 2 Practical Lab Manual & Record", subject: "1ST YEAR SEMESTER 2 LAB", fileName: "1st_Year_Sem2_Lab_Record.pdf", fileId: "1mwOgB_VcUtmgL4WOk3xRZHZbh5WrU-3d", type: "pdf" },
+  ],
+  "2-1": [
+    { id: "lab-2-1-1", title: "2nd Year Semester 1 Practical Lab Manual & Record", subject: "2ND YEAR SEMESTER 1 LAB", fileName: "2nd_Year_Sem1_Lab_Record.pdf", fileId: "1MODmT8KkDXWaFbpaDDXjGo63pLfLIAhH", type: "pdf" },
+  ],
+  "2-2": [
+    { id: "lab-2-2-1", title: "2nd Year Semester 2 Practical Lab Manual & Record", subject: "2ND YEAR SEMESTER 2 LAB", fileName: "2nd_Year_Sem2_Lab_Record.pdf", fileId: "1D9eAu2VLm4moN-_M0hWUzcRyZVLco2SD", type: "pdf" },
+  ],
+  "3-1": [
+    { id: "lab-3-1-1", title: "3rd Year Semester 1 Practical Lab Record (Part 1)", subject: "3RD YEAR SEMESTER 1 LAB", fileName: "3rd_Year_Sem1_Lab_Record_Part1.pdf", fileId: "1vywg9DWpIPa6uWj71G0Gjc9dqDtD_dYr", type: "pdf" },
+    { id: "lab-3-1-2", title: "3rd Year Semester 1 Practical Lab Record (Part 2)", subject: "3RD YEAR SEMESTER 1 LAB", fileName: "3rd_Year_Sem1_Lab_Record_Part2.pdf", fileId: "1BTi-DKIJcKa1zZg44pRV3j-BtXryIFle", type: "pdf" },
+  ],
+  "3-2": [
+    { id: "lab-3-2-1", title: "Programming in PHP & MySQL Web Development Lab Record", subject: "PROGRAMMING IN PHP", fileName: "PHP_MySQL_Lab_Record_Sem6.pdf", fileId: "1wfEGD7qYL7VgyGaXFct-ElXCgzH2L27x", type: "pdf" },
+    { id: "lab-3-2-2", title: "Computer Networks Socket Programming Lab Record", subject: "COMPUTER NETWORKS", fileName: "Computer_Networks_Lab_Record_Sem6.pdf", fileId: "1aZFnGvezjY2LptWKchO-uZvh7iFls_VQ", type: "pdf" },
+  ],
 };
 
 const NOTES_DATA = {
@@ -371,7 +394,10 @@ const NOTES_DATA = {
         syllabus: "Introduction Uses of Computer Networks Network Hardware- Network Software- OSI Reference Model TCP/IPReference Model.",
         hrs: 10,
         co: "CO1",
-        files: []
+        files: [
+          { id: "cn-u1-1", title: "Computer Networks - Unit I (Part 1)", fileName: "Computer_Networks_Unit_1_Part1.pdf", fileId: "1aZFnGvezjY2LptWKchO-uZvh7iFls_VQ", type: "pdf" },
+          { id: "cn-u1-2", title: "Computer Networks - Unit I (Part 2)", fileName: "Computer_Networks_Unit_1_Part2.pdf", fileId: "1-6FGW9OWqsNK7LVs9-iLrNBbVbg4hvB9", type: "pdf" }
+        ]
       },
       2: {
         title: "Unit II",
@@ -379,7 +405,13 @@ const NOTES_DATA = {
         syllabus: "Physical Layer Guided Transmission media Wireless Transmission Public switched Telephone Network LocalLoop Trunks Multiplexing- Switching.",
         hrs: 10,
         co: "CO2",
-        files: []
+        files: [
+          { id: "cn-u2-1", title: "Computer Networks - Unit II (Part 1)", fileName: "Computer_Networks_Unit_2_Part1.pdf", fileId: "14fTt0LfjL8uh_Q5JhJau5S6hqPi9k3jW", type: "pdf" },
+          { id: "cn-u2-2", title: "Computer Networks - Unit II (Part 2)", fileName: "Computer_Networks_Unit_2_Part2.pdf", fileId: "15qvKa7Hvh9MtaJEkeTxM_UjFMNJbZf__", type: "pdf" },
+          { id: "cn-u2-3", title: "Computer Networks - Unit II (Part 3)", fileName: "Computer_Networks_Unit_2_Part3.pdf", fileId: "1-1GOh8SnD_T3fDWBk6QkgvioMhGqBv4q", type: "pdf" },
+          { id: "cn-u2-4", title: "Computer Networks - Unit II (Part 4)", fileName: "Computer_Networks_Unit_2_Part4.pdf", fileId: "1eATbXK3Anq13NygYiksGLDkCd12Hnz8d", type: "pdf" },
+          { id: "cn-u2-5", title: "Computer Networks - Unit II (Part 5)", fileName: "Computer_Networks_Unit_2_Part5.pdf", fileId: "1ozK8A9tOHN-pttINfV8_XzKAWxE78hxz", type: "pdf" }
+        ]
       },
       3: {
         title: "Unit III",
@@ -855,6 +887,12 @@ function getDriveDownloadUrl(fileId, type = "pdf") {
   return `https://drive.google.com/uc?export=download&confirm=t&id=${fileId}`;
 }
 
+function getDriveViewUrl(fileId) {
+  if (!fileId) return "#";
+  if (fileId.startsWith("http")) return fileId;
+  return `https://drive.google.com/file/d/${fileId}/view?usp=sharing`;
+}
+
 const unitColors = [
   { from: "bg-[#0F4C81]", to: "text-white", light: "bg-[#F0F4F8]" },
   { from: "bg-[#2E7D32]", to: "text-white", light: "bg-[#E8F5E9]" },
@@ -871,6 +909,7 @@ export default function Notes() {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [expandedUnit, setExpandedUnit] = useState(null);
   const [viewingPdf, setViewingPdf] = useState(null);
+  const [showLabModal, setShowLabModal] = useState(false);
   const [showUploadForm, setShowUploadForm] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -923,8 +962,12 @@ export default function Notes() {
     (NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(selectedSubject));
   const subjectNotesData = !isPlaceholder && selectedSubject ? NOTES_DATA[selectedSubject] : null;
   // Semester-specific unit filter for subjects shared across semesters
-  const semesterUnitFilter = selectedSubject ? SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[selectedSubject] : null;
   const { items: uploadedNotes, refetch } = useFirestoreList(noteService);
+
+  const currentLabRecords = useMemo(() => {
+    if (!selectedYear || !selectedSemester) return [];
+    return LAB_RECORDS_DATA[`${selectedYear}-${selectedSemester}`] || [];
+  }, [selectedYear, selectedSemester]);
 
   // Uploaded notes from Firestore for this subject
   const uploadedSubjectNotes = useMemo(() => {
@@ -1031,12 +1074,22 @@ export default function Notes() {
           onClick={() => setSelectedSemester(null)}
           className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
         ><FiArrowLeft size={14} /> Back to Semesters</motion.button>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-          <div className="flex items-center gap-2 text-sm text-[#6B7280] mb-3">
-            <span className={ys.text}>{yearData.label}</span><FiChevronRight size={12} /><span className={ys.text}>{semesterData.label}</span>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 text-sm text-[#6B7280] mb-2">
+              <span className={ys.text}>{yearData.label}</span><FiChevronRight size={12} /><span className={ys.text}>{semesterData.label}</span>
+            </div>
+            <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">Select Subject</h1>
+            <p className="mt-1 text-xs text-[#6B7280]">Choose a subject to browse lecture notes or access practical lab records</p>
           </div>
-          <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">Select Subject</h1>
-          <p className="mt-1 text-sm text-[#6B7280]">Choose a subject to browse its lecture notes</p>
+
+          <button
+            onClick={() => setShowLabModal(true)}
+            className="group inline-flex items-center gap-2 rounded-xl bg-[#0F4C81] px-5 py-3 text-xs font-bold text-white shadow-md hover:bg-[#1E88E5] hover:shadow-lg transition-all active:scale-95 cursor-pointer shrink-0 border border-white/20"
+          >
+            <FiCode size={16} />
+            🧪 Lab Record ({yearData.label} - {semesterData.label})
+          </button>
         </motion.div>
         {semesterData.subjects.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E5E7EB] bg-white py-20 shadow-sm">
@@ -1088,6 +1141,138 @@ export default function Notes() {
             })}
           </div>
         )}
+
+        <AnimatePresence>
+          {showLabModal && (
+            <motion.div key="lab-modal-sub" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-3 sm:p-4 text-left"
+              onClick={() => setShowLabModal(false)}
+            >
+              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+                className="flex w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white border border-[#E5E7EB] shadow-2xl"
+              >
+                <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-[#021C4F] via-[#0F4C81] to-[#C50337] text-white">
+                  <div>
+                    <h3 className="text-base font-extrabold text-white flex items-center gap-2">
+                      <FiCode size={18} /> Laboratory Practical Records & Manuals
+                    </h3>
+                    <p className="text-xs text-white/80 mt-0.5">
+                      {yearData?.label || "UG Course"} · {semesterData?.label || "Semester View"}
+                    </p>
+                  </div>
+                  <button onClick={() => setShowLabModal(false)} className="rounded-full bg-white/10 p-2 text-white/80 hover:bg-white/20 hover:text-white transition-all">
+                    <FiX size={16} />
+                  </button>
+                </div>
+
+                <div className="p-6 max-h-[70vh] overflow-y-auto space-y-3 bg-[#F8FAFC]">
+                  {currentLabRecords.length > 0 ? (
+                    currentLabRecords.map((lab) => (
+                      <div key={lab.id} className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-xl border border-[#E5E7EB] bg-white p-4 shadow-sm hover:border-[#0F4C81]/40 transition-all">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="flex h-12 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 font-bold text-xs shadow-sm">
+                            LAB
+                          </div>
+                          <div className="min-w-0">
+                            <h4 className="text-sm font-bold text-[#0F4C81] truncate">{lab.title}</h4>
+                            <p className="text-[11px] text-[#6B7280]">{lab.subject} · {lab.fileName}</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
+                          <button
+                            onClick={() => setViewingPdf({ ...lab, unit: "Lab Record" })}
+                            className="inline-flex items-center gap-1 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-3 py-1.5 text-xs font-semibold text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white transition-all"
+                          >
+                            Preview
+                          </button>
+                          <a
+                            href={getDriveViewUrl(lab.fileId)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 rounded-lg border border-[#0F4C81]/30 bg-white px-3 py-1.5 text-xs font-bold text-[#0F4C81] hover:bg-slate-100 transition-all cursor-pointer"
+                          >
+                            <FiExternalLink size={12} /> Open Drive
+                          </a>
+                          <button
+                            onClick={() => downloadDriveFile(lab.fileId, lab.title)}
+                            className="inline-flex items-center gap-1 rounded-lg bg-[#0F4C81] px-3.5 py-1.5 text-xs font-bold text-white shadow-sm hover:bg-[#1E88E5] transition-all cursor-pointer"
+                          >
+                            <FiDownload size={14} /> Download
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="py-12 text-center text-slate-400">
+                      <FiFileText size={32} className="mx-auto mb-2 opacity-50" />
+                      <p className="text-xs font-medium">No lab records uploaded for this semester yet.</p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="border-t border-[#E5E7EB] bg-white px-6 py-3 text-right">
+                  <button onClick={() => setShowLabModal(false)} className="rounded-lg bg-slate-100 px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200">
+                    Close
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {viewingPdf && (
+            <motion.div key="pdf-modal-sub" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-2 sm:p-4 text-left"
+              onClick={() => setViewingPdf(null)}
+            >
+              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+                className="flex w-full max-w-5xl flex-col overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-2xl"
+              >
+                <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#E5E7EB] bg-[#0F4C81] text-white">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="truncate text-sm font-bold text-white">{viewingPdf.title}</h3>
+                    <p className="text-[11px] text-white/80">{viewingPdf.subject} · {viewingPdf.unit}</p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={getDriveViewUrl(viewingPdf.fileId || viewingPdf.url)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-white/15 px-3 py-1.5 text-xs font-bold text-white border border-white/20 hover:bg-white hover:text-[#0F4C81] transition-all cursor-pointer"
+                    >
+                      <FiExternalLink size={14} /> Open in Drive
+                    </a>
+                    <button onClick={() => downloadDriveFile(viewingPdf.fileId || viewingPdf.url, viewingPdf.title)}
+                      className="inline-flex items-center gap-1.5 rounded-lg bg-[#0F4C81] px-3.5 py-1.5 text-xs font-bold text-white shadow-sm hover:bg-[#1E88E5] transition-all active:scale-95 cursor-pointer"
+                    ><FiDownload size={14} /> Download</button>
+                    <button onClick={() => setViewingPdf(null)}
+                      className="rounded-full bg-white/10 p-1.5 text-white/70 hover:bg-white/20 hover:text-white transition-all">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    </button>
+                  </div>
+                </div>
+                <div className="aspect-[4/3] w-full bg-slate-900 sm:aspect-[16/10] lg:aspect-[16/9]">
+                  <iframe src={getDrivePreviewUrl(viewingPdf.fileId, viewingPdf.type)} title={viewingPdf.title} className="h-full w-full" allowFullScreen />
+                </div>
+                <div className="border-t border-[#E5E7EB] px-5 py-2.5 flex items-center justify-between text-[11px] text-[#6B7280] bg-[#F8FAFC]">
+                  <span className="truncate max-w-[60%]">{viewingPdf.fileName} · {viewingPdf.subject}</span>
+                  <a
+                    href={getDriveViewUrl(viewingPdf.fileId || viewingPdf.url)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold text-[#0F4C81] hover:underline inline-flex items-center gap-1 shrink-0"
+                  >
+                    <FiExternalLink size={12} /> View Full PDF in Google Drive ↗
+                  </a>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     );
   }
@@ -1104,6 +1289,15 @@ export default function Notes() {
     : selectedSubject === "Foundation English - III"
     ? NOTES_DATA["Foundation English - III"]?.units?.[1]?.files?.[0]
     : isEnglish && NOTES_DATA["ENGLISH"]?.units?.[selectedYear === 2 ? 2 : 1]?.files?.[0];
+
+  const isPhp = selectedSubject === "PROGRAMMING IN PHP";
+  const phpPdf = isPhp ? {
+    id: "php-complete-pdf",
+    title: "Programming in PHP — Unit 1 to Unit 5 Complete Notes",
+    fileName: "Programming_in_PHP_Complete_Notes_Unit1_to_5.pdf",
+    fileId: "1wfEGD7qYL7VgyGaXFct-ElXCgzH2L27x",
+    type: "pdf"
+  } : null;
 
   // Determine the current subject's semester number for pre-filling upload form
   const currentSemesterNumber = selectedSemester;
@@ -1206,7 +1400,7 @@ export default function Notes() {
         </div>
       </motion.div>
 
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiBookOpen size={28} /></div>
           <div>
@@ -1218,6 +1412,14 @@ export default function Notes() {
             </div>
           </div>
         </div>
+
+        <button
+          onClick={() => setShowLabModal(true)}
+          className="group inline-flex items-center gap-2 rounded-xl bg-[#0F4C81] px-4 py-2.5 text-xs font-bold text-white shadow-md hover:bg-[#1E88E5] hover:shadow-lg transition-all active:scale-95 cursor-pointer shrink-0 border border-white/20"
+        >
+          <FiCode size={15} />
+          🧪 Lab Record ({yearData.label} - {semesterData.label})
+        </button>
       </motion.div>
 
       {!isEnglish && syllabusData ? (
@@ -1298,6 +1500,53 @@ export default function Notes() {
         </motion.div>
       )}
 
+      {isPhp && phpPdf && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
+          <div className="mb-5 flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>
+            <div>
+              <h2 className="font-sans text-lg font-bold text-[#0F4C81]">
+                Programming in PHP — Complete Notes (Unit 1 to Unit 5)
+              </h2>
+              <p className="text-[11px] text-[#6B7280]">
+                Single complete notes PDF covering Unit 1, Unit 2, Unit 3, Unit 4 & Unit 5
+              </p>
+            </div>
+          </div>
+          <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-sm">
+            <div className="p-5">
+              <motion.button
+                initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
+                onClick={() => setViewingPdf({ ...phpPdf, subject: selectedSubject, unit: "Unit 1 to Unit 5 Complete Notes" })}
+                className="group flex w-full items-center gap-3 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] p-4 text-left transition-all hover:bg-[#F0F4F8] hover:border-[#1E88E5]/30 hover:shadow-sm"
+              >
+                <div className="flex h-14 w-12 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-650 shadow-sm">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-base font-bold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">{phpPdf.title}</p>
+                  <p className="text-xs text-[#6B7280]">PDF · Unit 1 to Unit 5 Complete Notes</p>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      downloadDriveFile(phpPdf.fileId, phpPdf.title);
+                    }}
+                    className="rounded-full bg-[#0F4C81]/10 text-[#0F4C81] p-2 hover:bg-[#0F4C81] hover:text-white transition-all cursor-pointer"
+                    title="Download file directly"
+                  >
+                    <FiDownload size={16} />
+                  </button>
+                  <div className="rounded-full bg-white border border-[#E5E7EB] p-2 text-[#4B5563] hover:bg-slate-100 hover:text-slate-900 transition-all"><FiExternalLink size={14} /></div>
+                </div>
+              </motion.button>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
       {/* Uploaded Notes from Firestore */}
       {uploadedSubjectNotes.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
@@ -1330,7 +1579,7 @@ export default function Notes() {
         </motion.div>
       )}
 
-      {!isEnglish && subjectNotesData && units.length > 0 && (
+      {!isEnglish && !isPhp && subjectNotesData && units.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>
@@ -1428,7 +1677,7 @@ export default function Notes() {
       <AnimatePresence>
         {viewingPdf && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-2 sm:p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-2 sm:p-4 text-left"
             onClick={() => setViewingPdf(null)}
           >
             <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
@@ -1441,8 +1690,16 @@ export default function Notes() {
                   <p className="text-[11px] text-white/80">{viewingPdf.subject} · {viewingPdf.unit}</p>
                 </div>
                 <div className="flex items-center gap-2">
+                  <a
+                    href={getDriveViewUrl(viewingPdf.fileId || viewingPdf.url)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-white/15 px-3 py-1.5 text-xs font-bold text-white border border-white/20 hover:bg-white hover:text-[#0F4C81] transition-all cursor-pointer"
+                  >
+                    <FiExternalLink size={14} /> Open in Drive
+                  </a>
                   <button onClick={() => downloadDriveFile(viewingPdf.fileId || viewingPdf.url, viewingPdf.title)}
-                    className="inline-flex items-center gap-1.5 rounded-lg bg-white px-4 py-2 text-xs font-bold text-[#0F4C81] border border-[#E5E7EB] hover:bg-[#F8FAFC] transition-all active:scale-95 cursor-pointer"
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3.5 py-1.5 text-xs font-bold text-[#0F4C81] border border-[#E5E7EB] hover:bg-[#F8FAFC] transition-all active:scale-95 cursor-pointer"
                   ><FiDownload size={14} /> Download</button>
                   <button onClick={() => setViewingPdf(null)}
                     className="rounded-full bg-white/10 p-1.5 text-white/70 hover:bg-white/20 hover:text-white transition-all">
@@ -1453,8 +1710,93 @@ export default function Notes() {
               <div className="aspect-[4/3] w-full bg-slate-900 sm:aspect-[16/10] lg:aspect-[16/9]">
                 <iframe src={getDrivePreviewUrl(viewingPdf.fileId, viewingPdf.type)} title={viewingPdf.title} className="h-full w-full" allowFullScreen />
               </div>
-              <div className="border-t border-[#E5E7EB] px-5 py-2.5 text-center text-[11px] text-[#6B7280] bg-[#F8FAFC]">
-                {viewingPdf.fileName} · {viewingPdf.subject} · {viewingPdf.unit}
+              <div className="border-t border-[#E5E7EB] px-5 py-2.5 flex items-center justify-between text-[11px] text-[#6B7280] bg-[#F8FAFC]">
+                <span className="truncate max-w-[60%]">{viewingPdf.fileName} · {viewingPdf.subject}</span>
+                <a
+                  href={getDriveViewUrl(viewingPdf.fileId || viewingPdf.url)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-[#0F4C81] hover:underline inline-flex items-center gap-1 shrink-0"
+                >
+                  <FiExternalLink size={12} /> View Full PDF in Google Drive ↗
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+        {showLabModal && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-3 sm:p-4 text-left"
+            onClick={() => setShowLabModal(false)}
+          >
+            <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="flex w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white border border-[#E5E7EB] shadow-2xl"
+            >
+              <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-[#021C4F] via-[#0F4C81] to-[#C50337] text-white">
+                <div>
+                  <h3 className="text-base font-extrabold text-white flex items-center gap-2">
+                    <FiCode size={18} /> Laboratory Practical Records & Manuals
+                  </h3>
+                  <p className="text-xs text-white/80 mt-0.5">
+                    {yearData?.label || "UG Course"} · {semesterData?.label || "Semester View"}
+                  </p>
+                </div>
+                <button onClick={() => setShowLabModal(false)} className="rounded-full bg-white/10 p-2 text-white/80 hover:bg-white/20 hover:text-white transition-all">
+                  <FiX size={16} />
+                </button>
+              </div>
+
+              <div className="p-6 max-h-[70vh] overflow-y-auto space-y-3 bg-[#F8FAFC]">
+                {currentLabRecords.length > 0 ? (
+                  currentLabRecords.map((lab) => (
+                    <div key={lab.id} className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-xl border border-[#E5E7EB] bg-white p-4 shadow-sm hover:border-[#0F4C81]/40 transition-all">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="flex h-12 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 font-bold text-xs shadow-sm">
+                          LAB
+                        </div>
+                        <div className="min-w-0">
+                          <h4 className="text-sm font-bold text-[#0F4C81] truncate">{lab.title}</h4>
+                          <p className="text-[11px] text-[#6B7280]">{lab.subject} · {lab.fileName}</p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
+                        <button
+                          onClick={() => setViewingPdf({ ...lab, unit: "Lab Record" })}
+                          className="inline-flex items-center gap-1 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-3 py-1.5 text-xs font-semibold text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white transition-all"
+                        >
+                          Preview
+                        </button>
+                        <a
+                          href={getDriveViewUrl(lab.fileId)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 rounded-lg border border-[#0F4C81]/30 bg-white px-3 py-1.5 text-xs font-bold text-[#0F4C81] hover:bg-slate-100 transition-all cursor-pointer"
+                        >
+                          <FiExternalLink size={12} /> Open Drive
+                        </a>
+                        <button
+                          onClick={() => downloadDriveFile(lab.fileId, lab.title)}
+                          className="inline-flex items-center gap-1 rounded-lg bg-[#0F4C81] px-3.5 py-1.5 text-xs font-bold text-white shadow-sm hover:bg-[#1E88E5] transition-all cursor-pointer"
+                        >
+                          <FiDownload size={14} /> Download
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="py-12 text-center text-slate-400">
+                    <FiFileText size={32} className="mx-auto mb-2 opacity-50" />
+                    <p className="text-xs font-medium">No lab records uploaded for this semester yet.</p>
+                  </div>
+                )}
+              </div>
+
+              <div className="border-t border-[#E5E7EB] bg-white px-6 py-3 text-right">
+                <button onClick={() => setShowLabModal(false)} className="rounded-lg bg-slate-100 px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200">
+                  Close
+                </button>
               </div>
             </motion.div>
           </motion.div>
