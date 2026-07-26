@@ -9,9 +9,6 @@ import {
   FiBookmark,
   FiUser,
   FiClock,
-  FiUpload,
-  FiUploadCloud,
-  FiList,
   FiUsers,
   FiVideo,
   FiBarChart2,
@@ -39,10 +36,15 @@ import NotFound from "./pages/NotFound";
 
 // Auth
 import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 
-// Student Dashboard — shows E-Content directly
+// Student Dashboard & pages
 import StudentDashboard from "./pages/student/StudentDashboard";
 import CIAQuestionPapers from "./pages/student/CIAQuestionPapers";
+import Bookmarks from "./pages/student/Bookmarks";
+import RecentlyViewed from "./pages/student/RecentlyViewed";
+import Profile from "./pages/student/Profile";
 
 // Public pages also accessible from student dashboard
 import StudentEContent from "./pages/EContent";
@@ -126,8 +128,8 @@ export default function App() {
       <Routes location={location} key={location.pathname}>
         {/* ─── Auth pages — always public ─── */}
         <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
-        <Route path="/register" element={<AnimatedPage><Login /></AnimatedPage>} />
-        <Route path="/forgot-password" element={<AnimatedPage><Login /></AnimatedPage>} />
+        <Route path="/register" element={<AnimatedPage><Register /></AnimatedPage>} />
+        <Route path="/forgot-password" element={<AnimatedPage><ForgotPassword /></AnimatedPage>} />
 
         {/* ─── Everything else requires authentication ─── */}
         <Route element={<ProtectedRoute />}>
@@ -144,13 +146,16 @@ export default function App() {
           </Route>
 
           {/* Student dashboard */}
-          <Route element={<DashboardLayout title="Student Dashboard" />}>
+          <Route element={<DashboardLayout title="Student Dashboard" items={studentNav} />}>
             <Route path="/student/dashboard" element={<AnimatedPage><StudentDashboard /></AnimatedPage>} />
             <Route path="/student/videos" element={<AnimatedPage><StudentEContent /></AnimatedPage>} />
             <Route path="/student/notes" element={<AnimatedPage><StudentNotes /></AnimatedPage>} />
             <Route path="/student/question-papers" element={<AnimatedPage><StudentQuestionPapers /></AnimatedPage>} />
             <Route path="/student/cia-question-papers" element={<AnimatedPage><CIAQuestionPapers /></AnimatedPage>} />
             <Route path="/student/placements" element={<AnimatedPage><StudentPlacements /></AnimatedPage>} />
+            <Route path="/student/bookmarks" element={<AnimatedPage><Bookmarks /></AnimatedPage>} />
+            <Route path="/student/recently-viewed" element={<AnimatedPage><RecentlyViewed /></AnimatedPage>} />
+            <Route path="/student/profile" element={<AnimatedPage><Profile /></AnimatedPage>} />
           </Route>
 
           {/* Faculty dashboard */}

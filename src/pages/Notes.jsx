@@ -76,20 +76,20 @@ const SECOND_YEAR_SEM1_FACULTY = {
 
 const LAB_RECORDS_DATA = {
   "1-1": [
-    { id: "lab-1-1-1", title: "1st Year Semester 1 Practical Lab Manual & Record", subject: "1ST YEAR SEMESTER 1 LAB", fileName: "1st_Year_Sem1_Lab_Record.pdf", fileId: "1tCqpPAL_KYoQkEO1ksNbeLyxTbxBYV-N", type: "pdf" },
+    { id: "lab-1-1-1", title: "Python Programming Essentials Practical Lab Manual & Record", subject: "PYTHON PROGRAMMING ESSENTIALS", fileName: "1st_Year_Sem1_Lab_Record.pdf", fileId: "1tCqpPAL_KYoQkEO1ksNbeLyxTbxBYV-N", type: "pdf" },
   ],
   "1-2": [
-    { id: "lab-1-2-1", title: "1st Year Semester 2 Practical Lab Manual & Record", subject: "1ST YEAR SEMESTER 2 LAB", fileName: "1st_Year_Sem2_Lab_Record.pdf", fileId: "1mwOgB_VcUtmgL4WOk3xRZHZbh5WrU-3d", type: "pdf" },
+    { id: "lab-1-2-1", title: "Object Oriented Programming using C++ Practical Lab Record", subject: "OBJECT ORIENTED PROGRAMMING USING C++", fileName: "1st_Year_Sem2_Lab_Record.pdf", fileId: "1mwOgB_VcUtmgL4WOk3xRZHZbh5WrU-3d", type: "pdf" },
   ],
   "2-1": [
-    { id: "lab-2-1-1", title: "2nd Year Semester 1 Practical Lab Manual & Record", subject: "2ND YEAR SEMESTER 1 LAB", fileName: "2nd_Year_Sem1_Lab_Record.pdf", fileId: "1MODmT8KkDXWaFbpaDDXjGo63pLfLIAhH", type: "pdf" },
+    { id: "lab-2-1-1", title: "Java Programming Concepts Practical Lab Record", subject: "Object Oriented Programming Concepts using JAVA", fileName: "2nd_Year_Sem1_Lab_Record.pdf", fileId: "1MODmT8KkDXWaFbpaDDXjGo63pLfLIAhH", type: "pdf" },
   ],
   "2-2": [
-    { id: "lab-2-2-1", title: "2nd Year Semester 2 Practical Lab Manual & Record", subject: "2ND YEAR SEMESTER 2 LAB", fileName: "2nd_Year_Sem2_Lab_Record.pdf", fileId: "1D9eAu2VLm4moN-_M0hWUzcRyZVLco2SD", type: "pdf" },
+    { id: "lab-2-2-1", title: "Android App Development Practical Lab Record", subject: "ANDROID APP DEVELOPMENT", fileName: "2nd_Year_Sem2_Lab_Record.pdf", fileId: "1D9eAu2VLm4moN-_M0hWUzcRyZVLco2SD", type: "pdf" },
   ],
   "3-1": [
-    { id: "lab-3-1-1", title: "3rd Year Semester 1 Practical Lab Record (Part 1)", subject: "3RD YEAR SEMESTER 1 LAB", fileName: "3rd_Year_Sem1_Lab_Record_Part1.pdf", fileId: "1vywg9DWpIPa6uWj71G0Gjc9dqDtD_dYr", type: "pdf" },
-    { id: "lab-3-1-2", title: "3rd Year Semester 1 Practical Lab Record (Part 2)", subject: "3RD YEAR SEMESTER 1 LAB", fileName: "3rd_Year_Sem1_Lab_Record_Part2.pdf", fileId: "1BTi-DKIJcKa1zZg44pRV3j-BtXryIFle", type: "pdf" },
+    { id: "lab-3-1-1", title: "Database Management System Practical Lab Record (Part 1)", subject: "DATABASE MANAGEMENT SYSTEM", fileName: "3rd_Year_Sem1_Lab_Record_Part1.pdf", fileId: "1vywg9DWpIPa6uWj71G0Gjc9dqDtD_dYr", type: "pdf" },
+    { id: "lab-3-1-2", title: "ASP.NET Practical Lab Record (Part 2)", subject: "ASP.NET", fileName: "3rd_Year_Sem1_Lab_Record_Part2.pdf", fileId: "1BTi-DKIJcKa1zZg44pRV3j-BtXryIFle", type: "pdf" },
   ],
   "3-2": [
     { id: "lab-3-2-1", title: "Programming in PHP & MySQL Web Development Lab Record", subject: "PROGRAMMING IN PHP", fileName: "PHP_MySQL_Lab_Record_Sem6.pdf", fileId: "1wfEGD7qYL7VgyGaXFct-ElXCgzH2L27x", type: "pdf" },
@@ -969,6 +969,18 @@ export default function Notes() {
     return LAB_RECORDS_DATA[`${selectedYear}-${selectedSemester}`] || [];
   }, [selectedYear, selectedSemester]);
 
+  const subjectLabRecords = useMemo(() => {
+    if (!selectedYear || !selectedSemester || !selectedSubject) return [];
+    const allSemesterLabs = LAB_RECORDS_DATA[`${selectedYear}-${selectedSemester}`] || [];
+    const upperSub = selectedSubject.toUpperCase();
+    return allSemesterLabs.filter((lab) => {
+      const labSub = lab.subject.toUpperCase();
+      return labSub === upperSub || labSub.includes(upperSub) || upperSub.includes(labSub);
+    });
+  }, [selectedYear, selectedSemester, selectedSubject]);
+
+  const activeLabRecords = selectedSubject ? subjectLabRecords : currentLabRecords;
+
   // Uploaded notes from Firestore for this subject
   const uploadedSubjectNotes = useMemo(() => {
     if (!selectedSubject || isPlaceholder) return [];
@@ -1167,8 +1179,8 @@ export default function Notes() {
                 </div>
 
                 <div className="p-6 max-h-[70vh] overflow-y-auto space-y-3 bg-[#F8FAFC]">
-                  {currentLabRecords.length > 0 ? (
-                    currentLabRecords.map((lab) => (
+                  {activeLabRecords.length > 0 ? (
+                    activeLabRecords.map((lab) => (
                       <div key={lab.id} className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-xl border border-[#E5E7EB] bg-white p-4 shadow-sm hover:border-[#0F4C81]/40 transition-all">
                         <div className="flex items-center gap-3 min-w-0">
                           <div className="flex h-12 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 font-bold text-xs shadow-sm">
@@ -1414,13 +1426,15 @@ export default function Notes() {
           </div>
         </div>
 
-        <button
-          onClick={() => setShowLabModal(true)}
-          className="group inline-flex items-center gap-2 rounded-xl bg-[#0F4C81] px-4 py-2.5 text-xs font-bold text-white shadow-md hover:bg-[#1E88E5] hover:shadow-lg transition-all active:scale-95 cursor-pointer shrink-0 border border-white/20"
-        >
-          <FiCode size={15} />
-          🧪 Lab Record ({yearData.label} - {semesterData.label})
-        </button>
+        {subjectLabRecords.length > 0 && (
+          <button
+            onClick={() => setShowLabModal(true)}
+            className="group inline-flex items-center gap-2 rounded-xl bg-[#0F4C81] px-4 py-2.5 text-xs font-bold text-white shadow-md hover:bg-[#1E88E5] hover:shadow-lg transition-all active:scale-95 cursor-pointer shrink-0 border border-white/20"
+          >
+            <FiCode size={15} />
+            🧪 Practical Lab Record
+          </button>
+        )}
       </motion.div>
 
       {!isEnglish && syllabusData ? (
@@ -1749,8 +1763,8 @@ export default function Notes() {
               </div>
 
               <div className="p-6 max-h-[70vh] overflow-y-auto space-y-3 bg-[#F8FAFC]">
-                {currentLabRecords.length > 0 ? (
-                  currentLabRecords.map((lab) => (
+                {activeLabRecords.length > 0 ? (
+                  activeLabRecords.map((lab) => (
                     <div key={lab.id} className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-xl border border-[#E5E7EB] bg-white p-4 shadow-sm hover:border-[#0F4C81]/40 transition-all">
                       <div className="flex items-center gap-3 min-w-0">
                         <div className="flex h-12 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 font-bold text-xs shadow-sm">

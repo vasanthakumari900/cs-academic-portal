@@ -16,8 +16,18 @@ import { CURRICULUM } from "../utils/curriculum";
 
 const SUBJECT_PLAYLISTS = {
   // 1st Year Semester 1
-  "PYTHON PROGRAMMING ESSENTIALS": "https://youtube.com/playlist?list=PLsyeobzWxl7poL9JTVyndKe62ieoN-MZ3&si=8w8AUNLRxB8_KpjW",
-  "1-1-PYTHON PROGRAMMING ESSENTIALS": "https://youtube.com/playlist?list=PLsyeobzWxl7poL9JTVyndKe62ieoN-MZ3&si=8w8AUNLRxB8_KpjW",
+  "PYTHON PROGRAMMING ESSENTIALS": "https://youtube.com/playlist?list=PLGjplNEQ1it8-0CmoljS5yeV-GlKSUEt0&si=pS1fVKWHLId-CxK1",
+  "1-1-PYTHON PROGRAMMING ESSENTIALS": "https://youtube.com/playlist?list=PLGjplNEQ1it8-0CmoljS5yeV-GlKSUEt0&si=pS1fVKWHLId-CxK1",
+  "DATA STRUCTURES": "https://youtube.com/playlist?list=PLGjplNEQ1it8-0CmoljS5yeV-GlKSUEt0&si=pS1fVKWHLId-CxK1",
+  "1-1-DATA STRUCTURES": "https://youtube.com/playlist?list=PLGjplNEQ1it8-0CmoljS5yeV-GlKSUEt0&si=pS1fVKWHLId-CxK1",
+  "1-1-TAMIL": "https://youtube.com/playlist?list=PLO9LKEvBiQTI&si=PSkqHz4hWIQpmDVE",
+
+  // 1st Year Semester 2
+  "OBJECT ORIENTED PROGRAMMING USING C++": "https://youtu.be/DwUuYC1tadI?si=o9ZMfZxzsxhVgfX5",
+  "1-2-OBJECT ORIENTED PROGRAMMING USING C++": "https://youtu.be/DwUuYC1tadI?si=o9ZMfZxzsxhVgfX5",
+  "WEB TECHNOLOGY": "https://youtube.com/playlist?list=PLJsQjWpPQDp2AZE8s9JJfdRo-F0WtLv9N&si=BBFQ_OhKe5NS-Jnk",
+  "1-2-WEB TECHNOLOGY": "https://youtube.com/playlist?list=PLJsQjWpPQDp2AZE8s9JJfdRo-F0WtLv9N&si=BBFQ_OhKe5NS-Jnk",
+  "1-2-TAMIL": "https://youtube.com/playlist?list=PLCOH2oZQZM4M&si=zWVF8Bo0BWaxNqwU",
 
   // 2nd Year Semester 1
   "OBJECT ORIENTED PROGRAMMING CONCEPTS USING JAVA": "https://youtube.com/playlist?list=PLdo5W4Nhv31a7A5Az4Mxp_PcNPXItprPp&si=Jed8HASq8aGiLqfk",
@@ -144,7 +154,6 @@ const getSubjectVideos = (subject, year, sem) => {
 const getPlaylistUrl = (subject, year, sem) => {
   if (!subject) return null;
   const upper = subject.toUpperCase();
-  if (Number(year) === 1 && Number(sem) === 1 && upper === "TAMIL") return null;
   const key = `${year}-${sem}-${upper}`;
   return SUBJECT_PLAYLISTS[key] || SUBJECT_PLAYLISTS[upper] || SUBJECT_PLAYLISTS[subject] || null;
 };

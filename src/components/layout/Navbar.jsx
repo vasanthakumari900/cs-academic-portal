@@ -17,7 +17,6 @@ const navLinks = [
 export default function Navbar() {
   const { user } = useAuth();
   const location = useLocation();
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const getDashboardPath = (user) => {
@@ -26,12 +25,6 @@ export default function Navbar() {
     if (user.type === "admin") return "/admin/dashboard";
     return "/student/dashboard";
   };
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     setMobileOpen(false);
