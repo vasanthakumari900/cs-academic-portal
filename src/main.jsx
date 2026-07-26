@@ -6,15 +6,17 @@ import { Toaster } from "react-hot-toast";
 import App from "./App.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
+import ErrorBoundary from "./components/common/ErrorBoundary.jsx";
 import "./styles/index.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <ThemeProvider>
-        <AuthProvider>
-          <App />
-          <Toaster
+    <ErrorBoundary>
+      <BrowserRouter>
+        <ThemeProvider>
+          <AuthProvider>
+            <App />
+            <Toaster
             position="top-right"
             gutter={10}
             containerClassName="!mt-3 sm:!mt-16"
@@ -41,5 +43,6 @@ createRoot(document.getElementById("root")).render(
         </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
+    </ErrorBoundary>
   </StrictMode>
 );

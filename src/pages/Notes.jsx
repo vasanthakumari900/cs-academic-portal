@@ -1279,6 +1279,7 @@ export default function Notes() {
 
   const sc = subjectColors[semesterData.subjects.indexOf(selectedSubject) % subjectColors.length];
   const allUnits = subjectNotesData ? Object.entries(subjectNotesData.units) : [];
+  const semesterUnitFilter = selectedSubject && !isPlaceholder ? SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[selectedSubject] : null;
   const filteredUnits = semesterUnitFilter ? allUnits.filter(([key]) => semesterUnitFilter.has(Number(key))) : allUnits;
   const units = filteredUnits;
   const totalFiles = units.reduce((s, [, u]) => s + u.files.length, 0);
