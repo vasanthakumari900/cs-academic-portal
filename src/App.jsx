@@ -91,8 +91,6 @@ const studentNav = [
   { to: "/student/notes", label: "Notes", icon: FiFileText },
   { to: "/student/question-papers", label: "Question Papers", icon: FiFileText },
   { to: "/student/placements", label: "Placement Details", icon: FiBriefcase },
-  { to: "/student/bookmarks", label: "Bookmarks", icon: FiBookmark },
-  { to: "/student/recently-viewed", label: "Recently Viewed", icon: FiClock },
   { to: "/student/profile", label: "Profile", icon: FiUser },
 ];
 
@@ -126,14 +124,13 @@ export default function App() {
       <>
       <ChatBot />
       <Routes location={location} key={location.pathname}>
-        {/* ─── Auth pages — always public ─── */}
+        {/* ─── Auth pages — public login ─── */}
         <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
         <Route path="/register" element={<AnimatedPage><Register /></AnimatedPage>} />
         <Route path="/forgot-password" element={<AnimatedPage><ForgotPassword /></AnimatedPage>} />
 
-        {/* ─── Everything else requires authentication ─── */}
+        {/* ─── Everything requires login ─── */}
         <Route element={<ProtectedRoute />}>
-          {/* Public-style pages with navbar & footer (accessible after login) */}
           <Route element={<MainLayout />}>
             <Route path="/" element={<AnimatedPage><Home /></AnimatedPage>} />
             <Route path="/e-content" element={<AnimatedPage><EContent /></AnimatedPage>} />

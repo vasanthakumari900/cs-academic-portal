@@ -13,6 +13,8 @@ import { uploadFile } from "../services/storageService";
 import toast from "react-hot-toast";
 import { NOTES_DATA, SEMESTER_UNITS, NAME_ONLY_MAP } from "./Notes";
 import { CURRICULUM } from "../utils/curriculum";
+import PdfFileCard from "../components/common/PdfFileCard";
+
 
 const SUBJECT_PLAYLISTS = {
   // 1st Year Semester 1
@@ -796,18 +798,19 @@ export default function EContent() {
                 return (
                   <div key={unitKey} className="rounded-lg border border-[#E5E7EB] bg-white p-5 shadow-sm">
                     <h3 className="font-sans text-sm font-bold text-[#0F4C81] mb-3">{unit.title} - {unit.subtitle}</h3>
-                    <div className="space-y-2">
+                    <div className="space-y-3">
                       {unit.files.map((file) => (
-                        <a
+                        <PdfFileCard
                           key={file.id}
-                          href={`https://drive.google.com/file/d/${file.fileId}/view`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2.5 rounded-lg bg-[#F8FAFC] px-4 py-2.5 text-xs font-semibold text-[#4B5563] hover:bg-[#F0F4F8] hover:text-[#0F4C81] transition-all border border-[#E5E7EB]"
-                        >
-                          <FiFileText className="text-[#2E7D32] shrink-0" />
-                          <span className="truncate flex-1">{file.title}</span>
-                        </a>
+                          file={{
+                            ...file,
+                            subject: selectedSubject,
+                            year: Number(selectedYear),
+                            semester: Number(selectedSemester),
+                            unit: unit.title,
+                            driveUrl: `https://drive.google.com/file/d/${file.fileId}/view`,
+                          }}
+                        />
                       ))}
                     </div>
                   </div>

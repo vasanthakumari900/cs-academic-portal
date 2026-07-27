@@ -1,5 +1,12 @@
 // src/utils/ciaData.js
+import {
+  getDirectDownloadUrl as getDirectUrl,
+  getDriveEmbedUrl as getEmbedUrl,
+  getDriveViewUrl as getViewUrl,
+} from "./downloadUtils";
+
 // CIA Question Papers data — managed via Google Drive links.
+
 // Edit the `driveUrl` values below to add or replace papers.
 // Google Drive share link format: https://drive.google.com/file/d/FILE_ID/view
 
@@ -303,21 +310,13 @@ export const CIA_DATA = {
 
 // Helper: convert Google Drive view URL to direct download/embed URLs
 export function getDriveViewUrl(driveUrl) {
-  return driveUrl; // Already a view URL
+  return getViewUrl(driveUrl);
 }
 
 export function getDriveDownloadUrl(driveUrl) {
-  const match = driveUrl?.match(/\/file\/d\/([^/]+)/);
-  if (match && match[1]) {
-    return `https://drive.google.com/uc?export=download&id=${match[1]}`;
-  }
-  return driveUrl;
+  return getDirectUrl(driveUrl);
 }
 
 export function getDriveEmbedUrl(driveUrl) {
-  const match = driveUrl?.match(/\/file\/d\/([^/]+)/);
-  if (match && match[1]) {
-    return `https://drive.google.com/file/d/${match[1]}/preview`;
-  }
-  return driveUrl;
+  return getEmbedUrl(driveUrl);
 }

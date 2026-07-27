@@ -17,6 +17,8 @@ import { STORAGE_PATHS } from "../../utils/constants";
 import { CURRICULUM } from "../../utils/curriculum";
 import toast from "react-hot-toast";
 import { downloadDriveFile } from "../../utils/downloadUtils";
+import PdfFileCard from "../../components/common/PdfFileCard";
+
 
 // ─── Breadcrumb ───
 function Breadcrumb({ crumbs, onNavigate }) {
@@ -86,64 +88,17 @@ function SelectionGrid({ items, onSelect }) {
 // ─── Paper Card ───
 function PaperCard({ paper, onPreview }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35 }}
-    >
-      <div className="group relative flex flex-col gap-3 overflow-hidden rounded-lg bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:-translate-y-0.5 text-left">
-        <div className="relative p-5 flex flex-col gap-3">
-          <div className="flex items-start gap-3">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81]/10 text-[#0F4C81] transition-transform">
-              <FiFileText size={22} />
-            </div>
-            <div className="min-w-0 flex-1">
-              <h3 className="truncate font-sans text-sm font-semibold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">
-                {paper.title}
-              </h3>
-              <p className="mt-0.5 text-xs text-[#6B7280] flex items-center gap-1.5">
-                <FiBookOpen size={11} />
-                {paper.subject}
-              </p>
-            </div>
-          </div>
-
-          {paper.description && (
-            <p className="text-xs leading-relaxed text-[#6B7280] line-clamp-2">
-              {paper.description}
-            </p>
-          )}
-
-          <div className="flex flex-wrap items-center gap-2">
-            {paper.uploadedDate && (
-              <span className="inline-flex items-center gap-1 rounded bg-[#1E88E5]/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#0F4C81]">
-                <FiCalendar size={10} />
-                {formatDate(paper.uploadedDate)}
-              </span>
-            )}
-            <span className="inline-flex items-center gap-1 rounded bg-slate-100 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-700">
-              <FiAward size={10} />
-              Question Paper
-            </span>
-          </div>
-
-          <div className="flex gap-2 pt-1">
-            <button
-              onClick={() => onPreview(paper)}
-              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] py-2.5 text-xs font-semibold text-[#4B5563] transition-all hover:bg-slate-100 hover:text-slate-900"
-            >
-              <FiExternalLink size={14} /> View
-            </button>
-            <button
-              onClick={() => downloadDriveFile(paper.driveUrl, paper.title)}
-              className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-2.5 text-xs font-bold text-white shadow-sm transition-all active:scale-95"
-            >
-              <FiDownload size={14} /> Download
-            </button>
-          </div>
-        </div>
-      </div>
-    </motion.div>
+    <PdfFileCard
+      file={{
+        ...paper,
+        fileName: `${paper.title.replace(/[^a-zA-Z0-9_-]/g, "_")}.pdf`,
+        subject: paper.subject || "CIA Question Paper",
+        year: paper.year ? (typeof paper.year === "number" ? `${paper.year}${paper.year === 1 ? "st" : paper.year === 2 ? "nd" : "rd"} Year` : paper.year) : null,
+        semester: paper.semester ? `Sem ${paper.semester}` : null,
+        driveUrl: paper.driveUrl || paper.fileUrl,
+      }}
+      onView={(p) => onPreview(p)}
+    />
   );
 }
 

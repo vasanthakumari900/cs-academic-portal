@@ -13,6 +13,8 @@ import { uploadFile } from "../services/storageService";
 import toast from "react-hot-toast";
 import { CURRICULUM } from "../utils/curriculum";
 import { downloadDriveFile } from "../utils/downloadUtils";
+import PdfFileCard from "../components/common/PdfFileCard";
+
 
 const yearStyles = {
   1: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
@@ -1638,38 +1640,19 @@ export default function Notes() {
                             </div>
                           )}
                           {fileCount > 0 ? (
-                            <div className="space-y-2">
-                              {unit.files.map((file, i) => (
-                                <motion.button key={file.id} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
-                                  onClick={() => setViewingPdf({ ...file, subject: selectedSubject, unit: unit.title })}
-                                  className="group flex w-full items-center gap-3 rounded-lg border border-[#E5E7EB] bg-white p-3.5 text-left transition-all hover:bg-[#F8FAFC] hover:border-[#1E88E5]/30 hover:shadow-sm"
-                                >
-                                  <div className="flex h-11 w-9 shrink-0 items-center justify-center rounded-lg bg-red-100 text-red-650 shadow-sm">
-                                    {file.type === "doc" ? (
-                                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                                    ) : (
-                                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                                    )}
-                                  </div>
-                                  <div className="min-w-0 flex-1">
-                                    <p className="text-sm font-semibold text-[#0F4C81] truncate group-hover:text-[#1E88E5] transition-colors">{file.title}</p>
-                                    <p className="text-[10px] text-[#6B7280]">{file.type === "doc" ? "Google Doc" : file.type === "docx" ? "Word" : file.type === "pptx" || file.type === "ppt" ? "PowerPoint" : "PDF"} · {unit.title}</p>
-                                  </div>
-                                  <div className="flex items-center gap-1.5 shrink-0">
-                                    <button
-                                      type="button"
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        downloadDriveFile(file.fileId || file.url, file.title);
-                                      }}
-                                      className="rounded-full bg-[#0F4C81]/10 text-[#0F4C81] p-2 hover:bg-[#0F4C81] hover:text-white transition-all cursor-pointer"
-                                      title="Download file directly"
-                                    >
-                                      <FiDownload size={14} />
-                                    </button>
-                                    <div className="rounded-full bg-[#F8FAFC] border border-[#E5E7EB] p-2 text-slate-400 group-hover:bg-[#0F4C81]/10 group-hover:text-[#0F4C81] transition-all"><FiExternalLink size={12} /></div>
-                                  </div>
-                                </motion.button>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              {unit.files.map((file) => (
+                                <PdfFileCard
+                                  key={file.id}
+                                  file={{
+                                    ...file,
+                                    subject: selectedSubject,
+                                    year: Number(selectedYear),
+                                    semester: Number(selectedSemester),
+                                    unit: unit.title,
+                                  }}
+                                  onView={(fileToView) => setViewingPdf(fileToView)}
+                                />
                               ))}
                             </div>
                           ) : (

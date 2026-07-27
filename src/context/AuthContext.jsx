@@ -76,7 +76,7 @@ const STUDENTS = {
   "24E3027": { name: "SRI SANJAY R M", rollNumber: "24E3027", dob: "29/05/2006", year: 3, semester: 5, section: "B", type: "student" },
   "24E3045": { name: "SUDHAN M", rollNumber: "24E3045", dob: "25/06/2006", year: 3, semester: 5, section: "B", type: "student" },
   "24E3053": { name: "TAMILARASAN R", rollNumber: "24E3053", dob: "12/01/2007", year: 3, semester: 5, section: "B", type: "student" },
-  "24E3006": { name: "THARUN B S", rollNumber: "24E3006", dob: "11/08/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3006": { name: "THARUN B S", rollNumber: "24E3006", dob: "11/08/2006", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/admin_photo.jpg", adminBadge: "ADMIN" },
   "24E3017": { name: "YUVANRAJKUMAR P", rollNumber: "24E3017", dob: "05/05/2007", year: 3, semester: 5, section: "B", type: "student" },
   "24E3032": { name: "V GANESH KUMAR", rollNumber: "24E3032", dob: "16/01/2007", year: 3, semester: 5, section: "B", type: "student" },
   "24E3038": { name: "ASJ POTHI VIGNESWAR", rollNumber: "24E3038", dob: "30/10/2006", year: 3, semester: 5, section: "B", type: "student" },

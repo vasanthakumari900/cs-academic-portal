@@ -1,4 +1,4 @@
-import { FiPlayCircle, FiFileText, FiBriefcase, FiUser, FiLayers, FiChevronRight } from "react-icons/fi";
+import { FiPlayCircle, FiFileText, FiBriefcase, FiUser, FiAward, FiShield } from "react-icons/fi";
 import { useFirestoreList } from "../../hooks/useFirestoreList";
 import { useAuth } from "../../context/AuthContext";
 import { videoService } from "../../services/videoService";
@@ -8,6 +8,7 @@ import { placementService } from "../../services/placementService";
 import StatCard from "../../components/ui/StatCard";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Cell } from "recharts";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function AdminDashboard() {
   const { user } = useAuth();
@@ -41,19 +42,55 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 bg-[#F8FAFC] text-left">
-      <div className="mb-8">
-        <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">Admin Overview</h1>
-        <p className="mt-1 text-sm text-[#6B7280]">A snapshot of everything on the portal.</p>
+    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 bg-[#F8FAFC] text-left space-y-8">
+      {/* Centered Admin Photo & Name Banner */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4 }}
+        className="rounded-2xl border border-[#E5E7EB] bg-white p-8 shadow-sm flex flex-col items-center justify-center text-center"
+      >
+        {/* Centered Photo */}
+        <div className="relative group">
+          <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#0F4C81] to-[#1E88E5] opacity-75 blur-md group-hover:opacity-100 transition-opacity" />
+          <img
+            src={user?.photoUrl || "/admin_photo.jpg"}
+            alt="ADMIN"
+            className="relative h-64 w-52 sm:h-72 sm:w-60 object-cover rounded-2xl border-4 border-white shadow-xl"
+          />
+        </div>
+
+        {/* Name ADMIN down to the photo */}
+        <h1 className="mt-5 font-sans text-3xl sm:text-4xl font-extrabold text-[#0F4C81] tracking-widest uppercase">
+          ADMIN
+        </h1>
+
+        <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+          <span className="inline-flex items-center gap-1 rounded-full bg-[#0F4C81]/10 px-3.5 py-1 text-xs font-bold text-[#0F4C81]">
+            <FiShield size={12} /> Roll No: {user?.rollNumber || "24E3006"}
+          </span>
+          <span className="inline-flex items-center gap-1 rounded-full bg-[#1E88E5]/10 px-3.5 py-1 text-xs font-bold text-[#1E88E5]">
+            <FiAward size={12} /> Department of Computer Science
+          </span>
+        </div>
+      </motion.div>
+
+      {/* Admin Overview Stats */}
+      <div>
+        <div className="mb-4">
+          <h2 className="font-sans text-xl font-bold text-[#0F4C81]">System Overview</h2>
+          <p className="mt-0.5 text-xs text-[#6B7280]">A snapshot of everything on the portal.</p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <StatCard icon={FiPlayCircle} label="Total Videos" value={videos.length} accent="primary" />
+          <StatCard icon={FiFileText} label="Total Notes" value={notes.length} accent="accent" />
+          <StatCard icon={FiFileText} label="Question Papers" value={papers.length} accent="success" />
+          <StatCard icon={FiBriefcase} label="Placement Drives" value={placements.length} accent="warning" />
+        </div>
       </div>
 
-      <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard icon={FiPlayCircle} label="Total Videos" value={videos.length} accent="primary" />
-        <StatCard icon={FiFileText} label="Total Notes" value={notes.length} accent="accent" />
-        <StatCard icon={FiFileText} label="Question Papers" value={papers.length} accent="success" />
-        <StatCard icon={FiBriefcase} label="Placement Drives" value={placements.length} accent="warning" />
-      </div>
-
+      {/* Chart overview */}
       <div className="rounded-xl border border-[#E5E7EB] bg-white shadow-sm overflow-hidden">
         <div className="border-b border-[#E5E7EB] px-5 py-4 bg-[#F8FAFC]">
           <h3 className="font-sans text-base font-bold text-[#0F4C81]">Content Overview</h3>

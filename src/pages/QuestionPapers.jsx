@@ -13,6 +13,8 @@ import { useFirestoreList } from "../hooks/useFirestoreList";
 import { uploadFile } from "../services/storageService";
 import toast from "react-hot-toast";
 import { downloadDriveFile } from "../utils/downloadUtils";
+import PdfFileCard from "../components/common/PdfFileCard";
+
 
 const CURRICULUM = {
   1: { label: "1st Year", icon: "Ⅰ", semesters: { 1: { label: "Semester 1", subjects: ["TAMIL", "Foundation English - I", "Mathematics Paper I", "Python Programming Essentials", "Data Structures"] }, 2: { label: "Semester 2", subjects: ["OBJECT ORIENTED PROGRAMMING USING C++","WEB TECHNOLOGY","MATHEMATICS PAPER - II","TAMIL","ENGLISH"] } } },
@@ -707,40 +709,19 @@ const refetch = () => {};
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
           className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {filtered.map((paper, i) => (
-            <motion.div key={paper.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }}>
-              <div className="group relative flex flex-col gap-3 overflow-hidden rounded-lg bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:-translate-y-0.5 p-5">
-                <div className="flex items-start gap-3">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiFileText size={20} /></div>
-                  <div className="min-w-0 flex-1 text-left">
-                    <h3 className="truncate font-sans text-sm font-semibold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">{paper.title}</h3>
-                    <p className="mt-0.5 flex items-center gap-2 text-[11px] text-[#6B7280]">
-                      <span>{paper.subject}</span>
-                      {paper.facultyName && (
-                        <>
-                          <span className="text-slate-300">·</span>
-                          <span className="flex items-center gap-1"><FiUser size={10} /> {paper.facultyName}</span>
-                        </>
-                      )}
-                    </p>
-                  </div>
-                </div>
-                <p className="line-clamp-1 text-xs text-[#6B7280] text-left">{paper.description}</p>
-                <div className="flex flex-wrap gap-1.5 text-[10px] justify-start">
-                  {paper.pages && <span className="rounded bg-[#F8FAFC] border border-[#E5E7EB] px-2 py-0.5 font-medium text-[#6B7280]">📄 {paper.pages}p</span>}
-                  <span className="rounded bg-[#0F4C81]/10 px-2 py-0.5 font-semibold text-[#0F4C81]">{paper.year}</span>
-                  <span className="rounded bg-[#F8FAFC] border border-[#E5E7EB] px-2 py-0.5 font-medium text-[#6B7280]">{paper.regulation}</span>
-                </div>
-                <div className="mt-auto flex gap-2 pt-1">
-                  <button onClick={() => setPreviewing(paper)}
-                    className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] py-2 text-xs font-semibold text-[#4B5563] transition-all hover:bg-slate-100 hover:text-slate-900"
-                  ><FiEye size={13} /> Preview</button>
-                  <button onClick={() => downloadDriveFile(paper.driveFileId || paper.fileUrl, paper.title)}
-                    className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-2 text-xs font-semibold text-white shadow-sm transition-all active:scale-95"
-                  ><FiDownload size={13} /> Download</button>
-                </div>
-              </div>
-            </motion.div>
+          {filtered.map((paper) => (
+            <PdfFileCard
+              key={paper.id}
+              file={{
+                ...paper,
+                fileName: `${paper.title.replace(/[^a-zA-Z0-9_-]/g, "_")}.pdf`,
+                subject: paper.subject || selectedSubject,
+                year: selectedYear ? `${selectedYear}${selectedYear === 1 ? "st" : selectedYear === 2 ? "nd" : "rd"} Year` : paper.year,
+                semester: selectedSemester ? `Sem ${selectedSemester}` : null,
+                driveUrl: paper.driveFileId || paper.fileUrl,
+              }}
+              onView={(p) => setPreviewing(p)}
+            />
           ))}
           {filtered.length === 0 && (
             <div className="col-span-full flex flex-col items-center py-16 text-[#6B7280]">

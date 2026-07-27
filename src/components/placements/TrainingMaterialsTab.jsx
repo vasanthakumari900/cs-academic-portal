@@ -13,6 +13,8 @@ import {
 } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { TRAINING_MATERIALS } from "../../utils/placementMockData";
+import PdfFileCard from "../common/PdfFileCard";
+
 
 export default function TrainingMaterialsTab() {
   const [materials, setMaterials] = useState(TRAINING_MATERIALS);
@@ -110,40 +112,18 @@ export default function TrainingMaterialsTab() {
       {/* Materials List Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {filteredMaterials.map((mat) => (
-          <div
+          <PdfFileCard
             key={mat.id}
-            className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm space-y-3 flex items-center justify-between hover:border-[#0F4C81]/40 transition-all"
-          >
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <span
-                  className={`rounded-md px-2 py-0.5 text-[10px] font-extrabold ${
-                    mat.type === "PDF"
-                      ? "bg-rose-500/10 text-rose-600"
-                      : mat.type === "Video"
-                      ? "bg-sky-500/10 text-sky-600"
-                      : "bg-emerald-500/10 text-emerald-600"
-                  }`}
-                >
-                  {mat.type}
-                </span>
-                <span className="text-[10px] text-slate-400">{mat.category}</span>
-              </div>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">{mat.title}</h4>
-              <p className="text-[11px] text-slate-500">
-                Uploaded by {mat.uploadedBy} · {mat.date} ({mat.size})
-              </p>
-            </div>
-
-            <a
-              href={mat.link}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-xl bg-[#0F4C81] hover:bg-[#1E88E5] p-3 text-white shadow-sm transition-all shrink-0"
-            >
-              <FiExternalLink size={18} />
-            </a>
-          </div>
+            file={{
+              ...mat,
+              title: mat.title,
+              fileName: `${mat.title.replace(/[^a-zA-Z0-9_-]/g, "_")}.pdf`,
+              subject: mat.category || "Placement Training",
+              uploadedDate: mat.date,
+              size: mat.size,
+              driveUrl: mat.link,
+            }}
+          />
         ))}
       </div>
 

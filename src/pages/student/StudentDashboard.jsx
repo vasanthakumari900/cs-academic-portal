@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import {
   FiHome, FiPlayCircle, FiBriefcase, FiGrid,
-  FiStar, FiFileText, FiChevronRight, FiBookOpen, FiAward,
+  FiFileText, FiChevronRight, FiAward, FiShield,
 } from "react-icons/fi";
 
 const cards = [
@@ -18,29 +18,69 @@ const cards = [
 export default function StudentDashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const is24E3006 = user?.rollNumber === "24E3006";
 
   return (
     <div className="mx-auto min-h-[70vh] max-w-4xl px-4 py-10 sm:px-6 bg-[#F8FAFC]">
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         {/* Welcome Banner */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          className="group relative mb-8 overflow-hidden rounded-xl bg-[#0F4C81] p-6 sm:p-8 shadow-sm border border-[#0F4C81]/10 text-left"
-        >
-          <div className="relative flex items-center justify-between">
-            <div>
-              <p className="text-xs font-semibold text-blue-200 uppercase tracking-[0.15em]">Welcome back</p>
-              <h1 className="mt-1 font-sans text-2xl font-bold text-white sm:text-3xl">{user?.name || "Student"}</h1>
-              <div className="mt-3 flex flex-wrap items-center gap-2">
-                <span className="rounded bg-white/10 px-3 py-0.5 text-[11px] font-semibold text-blue-100 border border-white/15">{user?.rollNumber}</span>
-                {user?.section && <span className="rounded bg-white/10 px-3 py-0.5 text-[11px] font-semibold text-blue-100 border border-white/15">Sec {user.section}</span>}
-                {user?.year && <span className="rounded bg-white/10 px-3 py-0.5 text-[11px] font-semibold text-blue-100 border border-white/15">{user.year === 1 ? "First Year" : user.year === 2 ? "Second Year" : "Third Year"}</span>}
+        {is24E3006 ? (
+          /* Custom Photo & ADMIN Banner for 24E3006 ONLY */
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8 rounded-2xl border border-[#E5E7EB] bg-white p-8 shadow-sm flex flex-col items-center justify-center text-center"
+          >
+            {/* Centered Photo */}
+            <div className="relative group">
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#0F4C81] to-[#1E88E5] opacity-75 blur-md group-hover:opacity-100 transition-opacity" />
+              <img
+                src={user?.photoUrl || "/admin_photo.jpg"}
+                alt="THARUN B S"
+                className="relative h-64 w-52 sm:h-72 sm:w-60 object-cover rounded-2xl border-4 border-white shadow-xl mx-auto"
+              />
+            </div>
+
+            {/* Name and ADMIN badge down to photo */}
+            <h1 className="mt-5 font-sans text-2xl sm:text-3xl font-extrabold text-[#0F4C81] tracking-wider uppercase">
+              {user?.name || "THARUN B S"}
+            </h1>
+
+            <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+              <span className="inline-flex items-center gap-1 rounded-full bg-[#C50337] px-4 py-1 text-xs font-extrabold text-white shadow-sm tracking-widest uppercase">
+                <FiShield size={13} /> {user?.adminBadge || "ADMIN"}
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-[#0F4C81]/10 px-3.5 py-1 text-xs font-bold text-[#0F4C81]">
+                Roll No: 24E3006
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold text-slate-700">
+                Sec B · 3rd Year
+              </span>
+            </div>
+          </motion.div>
+        ) : (
+          /* Original Standard Welcome Banner for all other students */
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="group relative mb-8 overflow-hidden rounded-xl bg-[#0F4C81] p-6 sm:p-8 shadow-sm border border-[#0F4C81]/10 text-left"
+          >
+            <div className="relative flex items-center justify-between">
+              <div>
+                <p className="text-xs font-semibold text-blue-200 uppercase tracking-[0.15em]">Welcome back</p>
+                <h1 className="mt-1 font-sans text-2xl font-bold text-white sm:text-3xl">{user?.name || "Student"}</h1>
+                <div className="mt-3 flex flex-wrap items-center gap-2">
+                  <span className="rounded bg-white/10 px-3 py-0.5 text-[11px] font-semibold text-blue-100 border border-white/15">{user?.rollNumber}</span>
+                  {user?.section && <span className="rounded bg-white/10 px-3 py-0.5 text-[11px] font-semibold text-blue-100 border border-white/15">Sec {user.section}</span>}
+                  {user?.year && <span className="rounded bg-white/10 px-3 py-0.5 text-[11px] font-semibold text-blue-100 border border-white/15">{user.year === 1 ? "First Year" : user.year === 2 ? "Second Year" : "Third Year"}</span>}
+                </div>
+              </div>
+              <div className="hidden sm:flex h-16 w-16 items-center justify-center rounded-lg bg-white/10 text-2xl font-bold text-white border border-white/15 shadow-sm">
+                {user?.name?.charAt(0) || "S"}
               </div>
             </div>
-            <div className="hidden sm:flex h-16 w-16 items-center justify-center rounded-lg bg-white/10 text-2xl font-bold text-white border border-white/15 shadow-sm">
-              {user?.name?.charAt(0) || "S"}
-            </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        )}
 
         {/* Navigation Cards */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
@@ -51,9 +91,13 @@ export default function StudentDashboard() {
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {cards.map((card, i) => (
-              <motion.button key={card.label}
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
-                whileHover={{ y: -3 }} whileTap={{ scale: 0.98 }}
+              <motion.button
+                key={card.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.06 }}
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => navigate(card.to)}
                 className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
               >
@@ -72,7 +116,10 @@ export default function StudentDashboard() {
           </div>
         </motion.div>
 
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
           className="mt-10 text-center text-[11px] text-[#6B7280]"
         >
           Dwaraka Doss Goverdhan Doss Vaishnav College · Department of Computer Science
