@@ -197,7 +197,7 @@ export default function CIAQuestionPapers() {
       ? Object.entries(CIA_DATA[selectedYear]?.semesters || {}).map(([key, val]) => ({
           key: Number(key),
           label: val.label,
-          icon: null,
+          icon: Number(key) === 1 ? "I" : "II",
           sub: `${Object.keys(val.cia).length} assessments`,
         }))
       : [];

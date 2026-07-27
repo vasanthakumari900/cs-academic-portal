@@ -19,6 +19,7 @@ import {
 
 import MainLayout from "./layouts/MainLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
+import StudentLayout from "./layouts/StudentLayout";
 // Auth removed — all logged-in students go to the dashboard directly.
 // Faculty/Admin routes are preserved for admin panel access.
 import ProtectedRoute from "./routes/ProtectedRoute";
@@ -142,8 +143,8 @@ export default function App() {
             <Route path="/search" element={<AnimatedPage><Search /></AnimatedPage>} />
           </Route>
 
-          {/* Student dashboard */}
-          <Route element={<DashboardLayout title="Student Dashboard" items={studentNav} />}>
+          {/* Student dashboard layout (No sidebar, top navigation with Dashboard button) */}
+          <Route element={<StudentLayout />}>
             <Route path="/student/dashboard" element={<AnimatedPage><StudentDashboard /></AnimatedPage>} />
             <Route path="/student/videos" element={<AnimatedPage><StudentEContent /></AnimatedPage>} />
             <Route path="/student/notes" element={<AnimatedPage><StudentNotes /></AnimatedPage>} />

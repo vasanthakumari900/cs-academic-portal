@@ -473,7 +473,7 @@ const refetch = () => {};
               className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
             >
               <div className="relative p-8 text-center">
-                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl ${ys.bg} text-xl font-bold text-white shadow-sm`}>{semKey === 1 ? "I" : "II"}</div>
+                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl ${ys.bg} text-xl font-bold text-white shadow-sm`}>{Number(semKey) === 1 ? "I" : "II"}</div>
                 <h2 className="text-lg font-bold text-[#0F4C81]">{semData.label}</h2>
                 {courseType !== "pg" && <p className="mt-1 text-xs text-[#6B7280]">{semData.subjects.length} subjects</p>}
               </div>

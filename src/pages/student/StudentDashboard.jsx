@@ -2,128 +2,305 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import {
-  FiHome, FiPlayCircle, FiBriefcase, FiGrid,
-  FiFileText, FiChevronRight, FiAward, FiShield,
+  FiPlayCircle,
+  FiFileText,
+  FiGrid,
+  FiBriefcase,
+  FiAward,
+  FiChevronRight,
+  FiShield,
+  FiCheckCircle,
+  FiMessageSquare,
 } from "react-icons/fi";
 
-const cards = [
-  { label: "Home", icon: FiHome, to: "/", bg: "bg-[#0F4C81]", desc: "Inspirational quotes & info" },
-  { label: "Video Lectures", icon: FiPlayCircle, to: "/e-content", bg: "bg-[#0F4C81]", desc: "Year & subject-wise lectures" },
-  { label: "Lecture Notes", icon: FiFileText, to: "/notes", bg: "bg-[#0F4C81]", desc: "Unit-wise PDF notes by subject" },
-  { label: "Semester Question Papers", icon: FiGrid, to: "/question-papers", bg: "bg-[#0F4C81]", desc: "Semester-wise past exam papers" },
-  { label: "Placement Details", icon: FiBriefcase, to: "/placements", bg: "bg-[#0F4C81]", desc: "Drives & opportunities" },
-  { label: "CIA Question Papers", icon: FiAward, to: "/student/cia-question-papers", bg: "bg-[#0F4C81]", desc: "CIA 1 & 2 question papers" },
+const CS_QUOTES = [
+  { text: "First, solve the problem. Then, write the code.", author: "John Johnson" },
+  { text: "Computers are good at following instructions, but not at reading your mind.", author: "Donald Knuth" },
+  { text: "The most dangerous phrase in the language is: 'We've always done it this way.'", author: "Grace Hopper" },
+  { text: "Talk is cheap. Show me the code.", author: "Linus Torvalds" },
+  { text: "Simplicity is prerequisite for reliability.", author: "Edsger W. Dijkstra" },
+  { text: "Software is a great combination between artistry and engineering.", author: "Bill Gates" },
+  { text: "Knowledge is power, especially in computer science.", author: "Alan Turing" },
+  { text: "Code is like humor. When you have to explain it, it's bad.", author: "Cory House" },
+  { text: "UNIX is simple. It just takes a genius to understand its simplicity.", author: "Dennis Ritchie" },
+  { text: "Make it work, make it right, make it fast.", author: "Kent Beck" },
+  { text: "Ideas are cheap. Execution is everything in software engineering.", author: "Linus Torvalds" },
+  { text: "Programs must be written for people to read, and only incidentally for machines to execute.", author: "Harold Abelson" },
+  { text: "Algorithms are the fundamental building blocks of computing.", author: "Donald Knuth" },
+  { text: "That's the thing about technology. It's only as good as the minds behind it.", author: "Margaret Hamilton" },
+  { text: "System architecture is the art of shaping digital possibilities.", author: "Alan Kay" },
+];
+
+function getStudentCsQuote(identifier = "") {
+  let hash = 0;
+  const str = String(identifier);
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const index = Math.abs(hash) % CS_QUOTES.length;
+  return CS_QUOTES[index];
+}
+
+const STUDENT_OPTIONS = [
+  {
+    label: "Video Lectures",
+    icon: FiPlayCircle,
+    to: "/student/videos",
+    badge: "E-Content",
+    desc: "Watch subject-wise video lectures, playlists & tutorials.",
+    color: "#021C4F",
+  },
+  {
+    label: "Notes",
+    icon: FiFileText,
+    to: "/student/notes",
+    badge: "PDF Notes",
+    desc: "Unit-wise lecture notes & downloadable study materials.",
+    color: "#C50337",
+  },
+  {
+    label: "Previous Year Question Papers",
+    icon: FiGrid,
+    to: "/student/question-papers",
+    badge: "Semester Exams",
+    desc: "Browse & download past university question papers.",
+    color: "#021C4F",
+  },
+  {
+    label: "CIA Question Papers",
+    icon: FiAward,
+    to: "/student/cia-question-papers",
+    badge: "Internal Assessment",
+    desc: "Continuous Internal Assessment (CIA 1 & CIA 2) papers.",
+    color: "#C50337",
+  },
+  {
+    label: "Placement Details",
+    icon: FiBriefcase,
+    to: "/student/placements",
+    badge: "Career Drives",
+    desc: "Placement updates, company eligibility & mock aptitude.",
+    color: "#021C4F",
+  },
 ];
 
 export default function StudentDashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const is24E3006 = user?.rollNumber === "24E3006";
+
+  const is24E3006 = user?.rollNumber === "24E3006" || Boolean(user?.photoUrl);
+  const photoPath = user?.photoUrl || "/admin_photo.jpg";
+
+  const yearLabel = user?.year
+    ? user.year === 1
+      ? "1st Year"
+      : user.year === 2
+      ? "2nd Year"
+      : "3rd Year"
+    : "3rd Year";
+
+  const semesterLabel = user?.semester
+    ? `Semester ${user.semester}`
+    : "Semester 5";
+
+  // Individual CS Quote deterministically assigned to each student
+  const studentQuote = getStudentCsQuote(user?.rollNumber || user?.name || "CS_STUDENT");
 
   return (
-    <div className="mx-auto min-h-[70vh] max-w-4xl px-4 py-10 sm:px-6 bg-[#F8FAFC]">
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        {/* Welcome Banner */}
+    <div className="mx-auto min-h-[80vh] max-w-6xl px-4 py-8 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        {/* Student Information Banner at the Top */}
         {is24E3006 ? (
-          /* Custom Photo & ADMIN Banner for 24E3006 ONLY */
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-8 rounded-2xl border border-[#E5E7EB] bg-white p-8 shadow-sm flex flex-col items-center justify-center text-center"
-          >
-            {/* Centered Photo */}
-            <div className="relative group">
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#0F4C81] to-[#1E88E5] opacity-75 blur-md group-hover:opacity-100 transition-opacity" />
+          /* Profile Photo Banner for Tharun B S (24E3006) */
+          <div className="mb-8 rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm flex flex-col items-center justify-center text-center">
+            <div className="relative mb-4">
+              <div className="absolute -inset-1.5 rounded-2xl bg-[#021C4F]/20 blur-sm" />
               <img
-                src={user?.photoUrl || "/admin_photo.jpg"}
-                alt="THARUN B S"
-                className="relative h-64 w-52 sm:h-72 sm:w-60 object-cover rounded-2xl border-4 border-white shadow-xl mx-auto"
+                src={photoPath}
+                alt={user?.name || "THARUN B S"}
+                className="relative h-60 w-48 sm:h-64 sm:w-52 object-cover rounded-2xl border-4 border-[#021C4F] shadow-md mx-auto"
+                onError={(e) => {
+                  e.target.src = "/admin_photo.jpg";
+                }}
               />
             </div>
 
-            {/* Name and ADMIN badge down to photo */}
-            <h1 className="mt-5 font-sans text-2xl sm:text-3xl font-extrabold text-[#0F4C81] tracking-wider uppercase">
+            <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#021C4F] tracking-wider uppercase">
               {user?.name || "THARUN B S"}
             </h1>
 
-            <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
-              <span className="inline-flex items-center gap-1 rounded-full bg-[#C50337] px-4 py-1 text-xs font-extrabold text-white shadow-sm tracking-widest uppercase">
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#C50337] px-4 py-1 text-xs font-bold text-white shadow-sm tracking-wider uppercase">
                 <FiShield size={13} /> {user?.adminBadge || "ADMIN"}
               </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-[#0F4C81]/10 px-3.5 py-1 text-xs font-bold text-[#0F4C81]">
-                Roll No: 24E3006
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#021C4F]/10 border border-[#021C4F]/20 px-3.5 py-1 text-xs font-bold text-[#021C4F]">
+                Roll No: {user?.rollNumber || "24E3006"}
               </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold text-slate-700">
-                Sec B · 3rd Year
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold text-[#021C4F] border border-slate-200">
+                Department of Computer Science · {user?.section ? `Sec ${user.section}` : "Sec B"} · {yearLabel} · {semesterLabel}
               </span>
             </div>
-          </motion.div>
+
+            {/* CS Quote for Tharun B S */}
+            <div className="mt-5 max-w-xl rounded-xl bg-[#F8FAFC] border border-slate-200 p-3.5 text-center">
+              <p className="text-xs font-medium text-slate-700 italic">
+                “{studentQuote.text}”
+              </p>
+              <p className="text-[11px] font-bold text-[#C50337] mt-1">
+                — {studentQuote.author}
+              </p>
+            </div>
+          </div>
         ) : (
-          /* Original Standard Welcome Banner for all other students */
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="group relative mb-8 overflow-hidden rounded-xl bg-[#0F4C81] p-6 sm:p-8 shadow-sm border border-[#0F4C81]/10 text-left"
-          >
-            <div className="relative flex items-center justify-between">
+          /* Student Information Banner for all Students */
+          <div className="relative overflow-hidden rounded-2xl bg-[#021C4F] p-6 sm:p-8 text-white shadow-md border border-[#021C4F] mb-8">
+            <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div>
-                <p className="text-xs font-semibold text-blue-200 uppercase tracking-[0.15em]">Welcome back</p>
-                <h1 className="mt-1 font-sans text-2xl font-bold text-white sm:text-3xl">{user?.name || "Student"}</h1>
-                <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <span className="rounded bg-white/10 px-3 py-0.5 text-[11px] font-semibold text-blue-100 border border-white/15">{user?.rollNumber}</span>
-                  {user?.section && <span className="rounded bg-white/10 px-3 py-0.5 text-[11px] font-semibold text-blue-100 border border-white/15">Sec {user.section}</span>}
-                  {user?.year && <span className="rounded bg-white/10 px-3 py-0.5 text-[11px] font-semibold text-blue-100 border border-white/15">{user.year === 1 ? "First Year" : user.year === 2 ? "Second Year" : "Third Year"}</span>}
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-bold text-white border border-white/20 mb-3">
+                  <FiCheckCircle size={13} className="text-[#C50337]" />
+                  DDGDVC Student Academic Portal
+                </div>
+                <h1 className="font-sans text-2xl sm:text-3xl font-black text-white tracking-tight">
+                  Welcome back, {user?.name || "Student"}!
+                </h1>
+
+                {/* Individual Computer Science Quote */}
+                <div className="mt-3 max-w-xl rounded-xl bg-white/10 backdrop-blur-md p-3.5 border border-white/20">
+                  <div className="flex items-start gap-2">
+                    <FiMessageSquare size={16} className="text-[#C50337] shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs sm:text-sm font-medium text-slate-100 italic leading-relaxed">
+                        “{studentQuote.text}”
+                      </p>
+                      <p className="text-[11px] font-bold text-[#C50337] mt-1">
+                        — {studentQuote.author}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="hidden sm:flex h-16 w-16 items-center justify-center rounded-lg bg-white/10 text-2xl font-bold text-white border border-white/15 shadow-sm">
-                {user?.name?.charAt(0) || "S"}
+
+              {/* Student Information Summary Card */}
+              <div className="rounded-xl bg-white/10 backdrop-blur-md p-4 border border-white/20 shrink-0 text-left min-w-[250px]">
+                <p className="text-[11px] uppercase font-extrabold tracking-wider text-white border-b border-white/20 pb-1 mb-2">
+                  Student Information
+                </p>
+                <div className="space-y-2 text-xs text-white">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-slate-200 font-semibold">Roll Number:</span>
+                    <span className="font-bold bg-white/20 px-2 py-0.5 rounded text-[11px] text-white">
+                      {user?.rollNumber || "24E2901"}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-slate-200 font-semibold">Department:</span>
+                    <span className="font-bold text-white">Computer Science</span>
+                  </div>
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-slate-200 font-semibold">Year &amp; Sem:</span>
+                    <span className="font-bold text-white">
+                      {yearLabel} · {semesterLabel}
+                    </span>
+                  </div>
+                  {user?.section && (
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-slate-200 font-semibold">Section:</span>
+                      <span className="font-bold text-white">Section {user.section}</span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
 
-        {/* Navigation Cards */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-          <div className="mb-5 text-center">
-            <h2 className="font-sans text-xl font-bold text-[#0F4C81]">Quick Access</h2>
-            <p className="mt-1 text-sm text-[#6B7280]">Navigate to any section of the academic portal</p>
+        {/* Options Section directly down to Student Information */}
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="font-sans text-xl font-bold text-[#021C4F]">Academic Options</h2>
+            <p className="mt-0.5 text-xs text-slate-500">
+              Select an option below to access course content
+            </p>
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {cards.map((card, i) => (
+        {/* Options Grid directly down to Student Information */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {STUDENT_OPTIONS.map((option, idx) => {
+            const IconComponent = option.icon;
+            const isRed = option.color === "#C50337";
+            return (
               <motion.button
-                key={card.label}
-                initial={{ opacity: 0, y: 20 }}
+                key={option.label}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.06 }}
+                transition={{ delay: idx * 0.05 }}
                 whileHover={{ y: -3 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => navigate(card.to)}
-                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
+                onClick={() => navigate(option.to)}
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white border border-slate-200 p-6 shadow-sm transition-all duration-200 hover:shadow-md hover:border-[#C50337] text-left"
               >
-                <div className="relative flex items-center gap-4 p-5">
-                  <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-lg ${card.bg} text-white shadow-sm transition-all`}>
-                    <card.icon size={24} />
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div
+                      className={`flex h-12 w-12 items-center justify-center rounded-xl text-white shadow-sm transition-transform duration-200 group-hover:scale-105 ${
+                        isRed ? "bg-[#C50337]" : "bg-[#021C4F]"
+                      }`}
+                    >
+                      <IconComponent size={22} />
+                    </div>
+                    <span
+                      className={`rounded-full px-2.5 py-1 text-[10px] font-bold border ${
+                        isRed
+                          ? "bg-[#C50337]/10 text-[#C50337] border-[#C50337]/20"
+                          : "bg-[#021C4F]/10 text-[#021C4F] border-[#021C4F]/20"
+                      }`}
+                    >
+                      {option.badge}
+                    </span>
                   </div>
-                  <div className="min-w-0 flex-1 text-left">
-                    <h3 className="font-sans text-base font-bold text-[#0F4C81]">{card.label}</h3>
-                    <p className="mt-0.5 text-xs text-[#6B7280]">{card.desc}</p>
-                  </div>
-                  <FiChevronRight size={16} className="text-slate-400 group-hover:text-[#1E88E5] transition-all" />
+
+                  <h3
+                    className={`font-sans text-base font-bold transition-colors leading-snug ${
+                      isRed ? "text-[#C50337]" : "text-[#021C4F]"
+                    }`}
+                  >
+                    {option.label}
+                  </h3>
+                  <p className="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                    {option.desc}
+                  </p>
+                </div>
+
+                <div
+                  className={`mt-5 flex items-center gap-1.5 text-xs font-bold transition-colors pt-3 border-t border-slate-100 ${
+                    isRed ? "text-[#C50337]" : "text-[#021C4F]"
+                  }`}
+                >
+                  <span>Open Section</span>
+                  <FiChevronRight
+                    size={14}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
                 </div>
               </motion.button>
-            ))}
-          </div>
-        </motion.div>
+            );
+          })}
+        </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="mt-10 text-center text-[11px] text-[#6B7280]"
-        >
-          Dwaraka Doss Goverdhan Doss Vaishnav College · Department of Computer Science
-        </motion.p>
+        {/* Department Footer Info */}
+        <div className="mt-12 rounded-xl bg-white p-4 text-center border border-slate-200 shadow-sm">
+          <p className="text-xs font-bold text-[#021C4F]">
+            Dwaraka Doss Goverdhan Doss Vaishnav College (Autonomous)
+          </p>
+          <p className="text-[11px] text-slate-500 mt-0.5">
+            Department of Computer Science · Affiliated to University of Madras · NAAC A++ Accredited
+          </p>
+        </div>
       </motion.div>
     </div>
   );

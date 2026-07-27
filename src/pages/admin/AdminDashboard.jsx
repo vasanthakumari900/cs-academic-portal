@@ -35,10 +35,10 @@ export default function AdminDashboard() {
   const { items: placements } = useFirestoreList(placementService);
 
   const chartData = [
-    { name: "Videos", count: videos.length, fill: "#0F4C81" },
-    { name: "Notes", count: notes.length, fill: "#1E88E5" },
-    { name: "Papers", count: papers.length, fill: "#2E7D32" },
-    { name: "Placements", count: placements.length, fill: "#4B5563" },
+    { name: "Videos", count: videos.length, fill: "#021C4F" },
+    { name: "Notes", count: notes.length, fill: "#C50337" },
+    { name: "Papers", count: papers.length, fill: "#021C4F" },
+    { name: "Placements", count: placements.length, fill: "#C50337" },
   ];
 
   return (
@@ -52,7 +52,7 @@ export default function AdminDashboard() {
       >
         {/* Centered Photo */}
         <div className="relative group">
-          <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#0F4C81] to-[#1E88E5] opacity-75 blur-md group-hover:opacity-100 transition-opacity" />
+          <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#021C4F] via-[#C50337] to-[#021C4F] opacity-75 blur-md group-hover:opacity-100 transition-opacity" />
           <img
             src={user?.photoUrl || "/admin_photo.jpg"}
             alt="ADMIN"
@@ -61,15 +61,18 @@ export default function AdminDashboard() {
         </div>
 
         {/* Name ADMIN down to the photo */}
-        <h1 className="mt-5 font-sans text-3xl sm:text-4xl font-extrabold text-[#0F4C81] tracking-widest uppercase">
+        <h1 className="mt-5 font-sans text-3xl sm:text-4xl font-extrabold text-[#021C4F] tracking-widest uppercase">
           ADMIN
         </h1>
 
         <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
-          <span className="inline-flex items-center gap-1 rounded-full bg-[#0F4C81]/10 px-3.5 py-1 text-xs font-bold text-[#0F4C81]">
+          <span className="inline-flex items-center gap-1 rounded-full bg-[#C50337] px-4 py-1 text-xs font-extrabold text-white shadow-sm tracking-widest uppercase">
+            <FiShield size={12} /> {user?.adminBadge || "ADMIN"}
+          </span>
+          <span className="inline-flex items-center gap-1 rounded-full bg-[#021C4F]/10 px-3.5 py-1 text-xs font-bold text-[#021C4F]">
             <FiShield size={12} /> Roll No: {user?.rollNumber || "24E3006"}
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-[#1E88E5]/10 px-3.5 py-1 text-xs font-bold text-[#1E88E5]">
+          <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold text-[#021C4F]">
             <FiAward size={12} /> Department of Computer Science
           </span>
         </div>

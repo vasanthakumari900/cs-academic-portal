@@ -18,6 +18,10 @@ import PdfFileCard from "../components/common/PdfFileCard";
 
 const SUBJECT_PLAYLISTS = {
   // 1st Year Semester 1
+  "MATHEMATICS PAPER I": "https://youtube.com/playlist?list=PLql0qQWQbo6nYjo2aqgiKh_kwm8YoyhEP&si=2rFWZ6ydB1onWVXD",
+  "1-1-MATHEMATICS PAPER I": "https://youtube.com/playlist?list=PLql0qQWQbo6nYjo2aqgiKh_kwm8YoyhEP&si=2rFWZ6ydB1onWVXD",
+  "MATHEMATICS PAPER - I": "https://youtube.com/playlist?list=PLql0qQWQbo6nYjo2aqgiKh_kwm8YoyhEP&si=2rFWZ6ydB1onWVXD",
+  "1-1-MATHEMATICS PAPER - I": "https://youtube.com/playlist?list=PLql0qQWQbo6nYjo2aqgiKh_kwm8YoyhEP&si=2rFWZ6ydB1onWVXD",
   "PYTHON PROGRAMMING ESSENTIALS": "https://youtube.com/playlist?list=PLGjplNEQ1it8-0CmoljS5yeV-GlKSUEt0&si=pS1fVKWHLId-CxK1",
   "1-1-PYTHON PROGRAMMING ESSENTIALS": "https://youtube.com/playlist?list=PLGjplNEQ1it8-0CmoljS5yeV-GlKSUEt0&si=pS1fVKWHLId-CxK1",
   "DATA STRUCTURES": "https://youtube.com/playlist?list=PLGjplNEQ1it8-0CmoljS5yeV-GlKSUEt0&si=pS1fVKWHLId-CxK1",
@@ -67,7 +71,38 @@ const SUBJECT_PLAYLISTS = {
   "UNIFIED MODELING LANGUAGE": "https://youtube.com/playlist?list=PLA_LG2oFbzOnY9M8mjCByYvnSjoleNTrJ&si=cJ3VG3_wFAEuWez0",
 };
 
+const MATH1_VIDEOS = [
+  {
+    id: "math1-v1",
+    title: "Mathematics Paper I - Lecture 1",
+    youtubeId: "WFH_7n7hpHo",
+    url: "https://youtu.be/WFH_7n7hpHo?si=PkhvvaIBSRSMwPeQ",
+    description: "Core Concepts & Problem Solving for Mathematics Paper I",
+    facultyName: "Mr.P.KARNAN, Mr.S.SATHISHKUMAR / Mr.R.SHANKAR"
+  },
+  {
+    id: "math1-v2",
+    title: "Mathematics Paper I - Lecture 2",
+    youtubeId: "DFRBL2FsTC4",
+    url: "https://youtu.be/DFRBL2FsTC4?si=lb1c5rZeCewX97Sc",
+    description: "Worked Examples & Solutions for Mathematics Paper I",
+    facultyName: "Mr.P.KARNAN, Mr.S.SATHISHKUMAR / Mr.R.SHANKAR"
+  },
+  {
+    id: "math1-v3",
+    title: "Mathematics Paper I - Lecture 3",
+    youtubeId: "iGnGYzatZdA",
+    url: "https://youtu.be/iGnGYzatZdA?si=JEG2xGhaeT-yQdNk",
+    description: "Advanced Topics & Important Practice Questions",
+    facultyName: "Mr.P.KARNAN, Mr.S.SATHISHKUMAR / Mr.R.SHANKAR"
+  }
+];
+
 const SUBJECT_VIDEOS_MAP = {
+  "MATHEMATICS PAPER I": MATH1_VIDEOS,
+  "1-1-MATHEMATICS PAPER I": MATH1_VIDEOS,
+  "MATHEMATICS PAPER - I": MATH1_VIDEOS,
+  "1-1-MATHEMATICS PAPER - I": MATH1_VIDEOS,
   "STATISTICAL METHODS FOR COMPUTER SCIENCE - II": [
     {
       id: "stats2-v1",
@@ -384,7 +419,7 @@ export default function EContent() {
               className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
             >
               <div className="relative p-8 text-center">
-                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl ${ys.bg} text-xl font-bold text-white shadow-sm`}>{semKey === 1 ? "I" : "II"}</div>
+                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl ${ys.bg} text-xl font-bold text-white shadow-sm`}>{Number(semKey) === 1 ? "I" : "II"}</div>
                 <h2 className="text-lg font-bold text-[#0F4C81]">{semData.label}</h2>
                 <p className="mt-1 text-xs text-[#6B7280]">{semData.subjects.length} subjects</p>
               </div>

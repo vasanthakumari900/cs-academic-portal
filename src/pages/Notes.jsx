@@ -93,10 +93,7 @@ const LAB_RECORDS_DATA = {
     { id: "lab-3-1-1", title: "Database Management System Practical Lab Record (Part 1)", subject: "DATABASE MANAGEMENT SYSTEM", fileName: "3rd_Year_Sem1_Lab_Record_Part1.pdf", fileId: "1vywg9DWpIPa6uWj71G0Gjc9dqDtD_dYr", type: "pdf" },
     { id: "lab-3-1-2", title: "ASP.NET Practical Lab Record (Part 2)", subject: "ASP.NET", fileName: "3rd_Year_Sem1_Lab_Record_Part2.pdf", fileId: "1BTi-DKIJcKa1zZg44pRV3j-BtXryIFle", type: "pdf" },
   ],
-  "3-2": [
-    { id: "lab-3-2-1", title: "Programming in PHP & MySQL Web Development Lab Record", subject: "PROGRAMMING IN PHP", fileName: "PHP_MySQL_Lab_Record_Sem6.pdf", fileId: "1wfEGD7qYL7VgyGaXFct-ElXCgzH2L27x", type: "pdf" },
-    { id: "lab-3-2-2", title: "Computer Networks Socket Programming Lab Record", subject: "COMPUTER NETWORKS", fileName: "Computer_Networks_Lab_Record_Sem6.pdf", fileId: "1aZFnGvezjY2LptWKchO-uZvh7iFls_VQ", type: "pdf" },
-  ],
+  "3-2": [],
 };
 
 const NOTES_DATA = {
@@ -1070,7 +1067,7 @@ export default function Notes() {
               className="glass-card-hover bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
             >
               <div className="p-8 text-center">
-                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl ${ys.bg} text-xl font-bold text-white shadow-sm`}>{semKey === 1 ? "I" : "II"}</div>
+                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl ${ys.bg} text-xl font-bold text-white shadow-sm`}>{Number(semKey) === 1 ? "I" : "II"}</div>
                 <h2 className="text-lg font-bold text-[#0F4C81]">{semData.label}</h2>
                 <p className="mt-1 text-xs text-[#6B7280]">{semData.subjects.length} subjects</p>
               </div>
