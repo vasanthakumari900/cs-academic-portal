@@ -10,7 +10,7 @@ const navLinks = [
   { to: "/notes", label: "Notes", icon: FiFileText },
   { to: "/question-papers", label: "Q Papers", icon: FiFileText },
   { to: "/cia-question-papers", label: "CIA Papers", icon: FiAward },
-  { to: "/placements", label: "Placement Details", icon: FiBriefcase },
+  { to: "/placements", label: "Placements", icon: FiBriefcase },
   { to: "/about", label: "About", icon: FiGrid },
 ];
 

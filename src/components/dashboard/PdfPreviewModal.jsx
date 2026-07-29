@@ -43,7 +43,7 @@ export default function PdfPreviewModal({ file, onClose }) {
               loading={<p className="text-center text-sm text-white/40">Loading PDF…</p>}
               error={<p className="text-center text-sm text-red-400">Could not load this PDF.</p>}
             >
-              <Page pageNumber={page} width={520} />
+              <Page pageNumber={page} width={Math.min(typeof window !== "undefined" ? window.innerWidth - 48 : 500, 560)} />
             </Document>
           </div>
 

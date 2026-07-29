@@ -44,10 +44,13 @@ export default {
         error: "#D32F2F",
       },
       fontFamily: {
-        sans: ["Poppins", "Inter", "system-ui", "-apple-system", "sans-serif"],
-        display: ["Poppins", "Inter", "system-ui", "sans-serif"],
-        jakarta: ["Poppins", "Inter", "sans-serif"],
-        grotesk: ["Poppins", "Inter", "sans-serif"],
+        sans: ["Arimo", "sans-serif"],
+        heading: ["Arimo", "sans-serif"],
+        serif: ["Arimo", "serif"],
+        mono: ["'JetBrains Mono'", "monospace"],
+        display: ["Arimo", "sans-serif"],
+        jakarta: ["Arimo", "sans-serif"],
+        grotesk: ["Arimo", "sans-serif"],
       },
       borderRadius: {
         xl: "12px",

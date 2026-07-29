@@ -54,7 +54,11 @@ export default function DashboardTopbar({ onMenuToggle }) {
           <button onClick={handleLogout}
             className="group flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 transition-all duration-200 hover:bg-red-50 hover:text-red-650 active:scale-95"
             aria-label="Log out" title="Sign out"
-          ><FiLogOut size={16} className="transition-transform group-hover:-translate-x-0.5" /></button>
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor" className="transition-transform group-hover:-translate-x-0.5">
+              <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/>
+            </svg>
+          </button>
         </div>
       </div>
     </header>

@@ -18,6 +18,7 @@ import {
   FiSearch,
   FiSun,
   FiMoon,
+  FiMessageSquare,
 } from "react-icons/fi";
 
 export const PLACEMENT_TABS = [
@@ -27,6 +28,7 @@ export const PLACEMENT_TABS = [
   { id: "eligibility", label: "Eligibility Checker", icon: FiCheckCircle },
   { id: "aptitude", label: "Aptitude Prep", icon: FiBookOpen },
   { id: "coding", label: "Coding Practice", icon: FiCode },
+  { id: "interview-exp", label: "Interview Experiences", icon: FiMessageSquare },
   { id: "interview", label: "Interview Prep", icon: FiFileText },
   { id: "resume", label: "Resume Builder", icon: FiFileText },
   { id: "training", label: "Training Materials", icon: FiFolder },

@@ -1,6 +1,7 @@
 // src/context/AuthContext.jsx
 // Student & Faculty login
 import { createContext, useContext, useEffect, useState } from "react";
+import { logStudentLogout } from "../services/activityLoggerService";
 
 const AuthContext = createContext(null);
 
@@ -442,6 +443,7 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
+    logStudentLogout();
     setUser(null);
     localStorage.removeItem("ddgdvc_user");
   }

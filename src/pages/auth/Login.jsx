@@ -8,6 +8,7 @@ import {
   FiShield, FiUser, FiLock,
 } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
+import { logStudentLogin } from "../../services/activityLoggerService";
 import collegeLogo from "../../assets/college-logo.jpg";
 
 function generateCaptcha() {
@@ -87,9 +88,14 @@ export default function Login() {
     try {
       const loginResult = await login(rollNumber, displayDob);
       const userName = loginResult?.name || rollNumber;
+      
+      // Automatically log student login event in Firestore
+      logStudentLogin(loginResult || { rollNumber, dob: displayDob }, "Success");
+
       toast.success(`Welcome, ${userName}!`);
       navigate(location.state?.from?.pathname || "/student/dashboard", { replace: true });
     } catch (err) {
+      logStudentLogin({ rollNumber, dob: displayDob }, "Failed");
       toast.error(err.message);
     } finally { setLoading(false); }
   }

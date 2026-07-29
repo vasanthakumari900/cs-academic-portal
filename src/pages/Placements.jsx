@@ -23,6 +23,7 @@ import AdminPlacementPanel from "../components/placements/AdminPlacementPanel";
 
 import CompanyDetailsModal from "../components/placements/CompanyDetailsModal";
 import PlacementFeedback from "../components/placements/PlacementFeedback";
+import InterviewExperiences from "./InterviewExperiences";
 
 const mcqQuestions = [
   {
@@ -450,6 +451,8 @@ export default function Placements() {
                 {activeTab === "aptitude" && <AptitudePrepTab />}
 
                 {activeTab === "coding" && <CodingPracticeTab />}
+
+                {activeTab === "interview-exp" && <InterviewExperiences />}
 
                 {activeTab === "interview" && <InterviewPrepTab />}
 

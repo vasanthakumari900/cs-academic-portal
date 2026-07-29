@@ -16,6 +16,7 @@ import {
   limit as fsLimit,
   serverTimestamp,
   increment,
+  onSnapshot,
 } from "firebase/firestore";
 import { db } from "../firebase/config";
 
@@ -48,13 +49,36 @@ export function createCollectionService(collectionName) {
 
     async list({ semester, subject, year, videoType, sortBy = "createdAt", max = 50 } = {}) {
       const clauses = [];
-      if (semester) clauses.push(where("semester", "==", semester));
+      if (semester) clauses.push(where("semester", "==", Number(semester)));
       if (subject) clauses.push(where("subject", "==", subject));
       if (year) clauses.push(where("year", "==", Number(year)));
       if (videoType) clauses.push(where("videoType", "==", videoType));
       const q = query(colRef, ...clauses, orderBy(sortBy, "desc"), fsLimit(max));
       const snap = await getDocs(q);
       return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    },
+
+    /**
+     * Real-time subscription listener for student content mapping
+     */
+    subscribe({ semester, subject, year, videoType, callback }) {
+      const clauses = [];
+      if (semester) clauses.push(where("semester", "==", Number(semester)));
+      if (subject) clauses.push(where("subject", "==", subject));
+      if (year) clauses.push(where("year", "==", Number(year)));
+      if (videoType) clauses.push(where("videoType", "==", videoType));
+      
+      const q = query(colRef, ...clauses, orderBy("createdAt", "desc"));
+      return onSnapshot(
+        q,
+        (snapshot) => {
+          const items = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+          callback(items);
+        },
+        (err) => {
+          console.warn(`Real-time subscription warning for ${collectionName}:`, err);
+        }
+      );
     },
 
     async incrementField(id, field, by = 1) {

@@ -14,15 +14,24 @@ export default function ProtectedRoute({ allowedRoles }) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
-  // Role-based access control — redirect to student dashboard if the user
-  // doesn't have the required role for this route tree.
-  // Faculty members are also allowed on admin routes.
-  const effectiveRoles = allowedRoles?.includes("admin")
-    ? [...allowedRoles, "faculty"]
-    : allowedRoles;
-  if (effectiveRoles && !effectiveRoles.includes(user.type)) {
-    const dest = user.type === "faculty" ? "/faculty/dashboard" : user.type === "admin" ? "/admin/dashboard" : "/student/dashboard";
-    return <Navigate to={dest} replace />;
+  // Role-based access control — redirect if the user doesn't have the required role.
+  // 24E3006 and admin roles have full access to admin routes.
+  const userRole = user.role || user.type;
+  const isAdminUser = userRole === "admin" || user.rollNumber === "24E3006" || user.type === "admin";
+
+  if (allowedRoles) {
+    if (allowedRoles.includes("admin") && isAdminUser) {
+      return <Outlet />;
+    }
+
+    const effectiveRoles = allowedRoles.includes("admin")
+      ? [...allowedRoles, "faculty"]
+      : allowedRoles;
+
+    if (!effectiveRoles.includes(user.type) && !effectiveRoles.includes(userRole) && !isAdminUser) {
+      const dest = isAdminUser ? "/admin/dashboard" : user.type === "faculty" ? "/faculty/dashboard" : "/student/dashboard";
+      return <Navigate to={dest} replace />;
+    }
   }
 
   return <Outlet />;
