@@ -446,6 +446,9 @@ export function AuthProvider({ children }) {
     logStudentLogout();
     setUser(null);
     localStorage.removeItem("ddgdvc_user");
+    try {
+      sessionStorage.clear();
+    } catch { /* ignore */ }
   }
 
   const value = { user, loading, login, facultyLogin, logout, FACULTY_LIST, FACULTY_CREDENTIALS };

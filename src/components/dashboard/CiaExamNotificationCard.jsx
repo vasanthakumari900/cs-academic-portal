@@ -43,6 +43,14 @@ export default function CiaExamNotificationCard({ studentYear = 3 }) {
   function triggerImmediateNotification(exam) {
     if (exam && !exam.completed && !notifiedRef.current) {
       notifiedRef.current = true;
+
+      // Only trigger notification toast once per login session
+      const sessionKey = `cia_notified_session_${yearNum}`;
+      if (sessionStorage.getItem(sessionKey)) {
+        return;
+      }
+      sessionStorage.setItem(sessionKey, "true");
+
       playNotificationSound();
 
       const daysText = exam.isToday ? "Today!" : `${exam.daysRemaining} days remaining`;

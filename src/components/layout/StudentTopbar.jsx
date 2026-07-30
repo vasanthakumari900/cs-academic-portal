@@ -1,14 +1,13 @@
+// src/components/layout/StudentTopbar.jsx
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FiHome, FiActivity, FiLogOut } from "react-icons/fi";
+import { FiHome, FiAward } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
 
 export default function StudentTopbar() {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
-  const isAdmin = user?.rollNumber === "24E3006" || user?.role === "admin" || user?.type === "admin";
 
   async function handleLogout() {
     await logout();
@@ -17,59 +16,46 @@ export default function StudentTopbar() {
   }
 
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-200 bg-white shadow-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-30 border-b-4 border-[#F5EBD0] bg-[#7F011F] text-white shadow-md">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-3 py-2.5 sm:px-6 lg:px-8">
         {/* Top Left Corner: DDGDVC STUDENT PORTAL */}
-        <Link to="/student/dashboard" className="flex items-center gap-3 group shrink-0">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#021C4F] text-white text-xs font-black shadow-sm group-hover:bg-[#C50337] transition-all">
+        <Link to="/student/dashboard" className="flex items-center gap-2 group shrink min-w-0">
+          <span className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-[#F5EBD0] text-[#7F011F] text-xs font-black shadow-md group-hover:scale-105 transition-all border border-[#E6DAB8] shrink-0">
             DG
           </span>
-          <div className="leading-tight">
-            <p className="text-sm sm:text-base font-extrabold text-[#021C4F] tracking-wide group-hover:text-[#C50337] transition-colors">
-              DDGDVC STUDENT PORTAL
-            </p>
-            <p className="text-[10px] font-semibold text-slate-500">
+          <div className="leading-tight text-left min-w-0">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <p className="text-xs sm:text-base font-extrabold text-white tracking-wide group-hover:text-[#F5EBD0] transition-colors truncate">
+                DDGDVC STUDENT PORTAL
+              </p>
+              <span className="hidden md:inline-flex items-center gap-1 bg-[#F5EBD0] text-[#7F011F] text-[9px] font-black px-1.5 py-0.5 rounded uppercase shrink-0">
+                <FiAward size={10} /> CS DEPT
+              </span>
+            </div>
+            <p className="text-[9px] sm:text-[10px] font-semibold text-[#F5EBD0]/90 truncate hidden xs:block">
               Department of Computer Science
             </p>
           </div>
         </Link>
 
         {/* Top Right Corner: Dashboard Button & Sign Out */}
-        <div className="flex items-center gap-2.5">
-          {/* Admin Exclusive: Student Activity Button */}
-          {isAdmin && (
-            <button
-              onClick={() => navigate("/admin/student-activity")}
-              className={`inline-flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs sm:text-sm font-bold shadow-sm transition-all active:scale-95 ${
-                location.pathname === "/admin/student-activity"
-                  ? "bg-[#C50337] text-white ring-2 ring-[#C50337]/40"
-                  : "bg-rose-50 text-[#C50337] hover:bg-[#C50337] hover:text-white border border-rose-200"
-              }`}
-              title="Student Activity Monitoring"
-            >
-              <FiActivity size={15} />
-              <span>Student Activity</span>
-            </button>
-          )}
-
-          {/* Dashboard Option Button on Top Right Corner */}
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 ml-2">
           <button
             onClick={() => navigate("/student/dashboard")}
-            className={`inline-flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs sm:text-sm font-bold shadow-sm transition-all active:scale-95 ${
+            className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-2 sm:px-4 min-h-[40px] sm:min-h-[44px] text-xs font-extrabold shadow-md transition-all active:scale-95 ${
               location.pathname === "/student/dashboard"
-                ? "bg-[#021C4F] text-white ring-2 ring-[#C50337]/40"
-                : "bg-[#021C4F] text-white hover:bg-[#C50337]"
+                ? "bg-[#F5EBD0] text-[#7F011F] ring-2 ring-white"
+                : "bg-white/10 text-white hover:bg-[#F5EBD0] hover:text-[#7F011F] border border-white/20"
             }`}
             title="Dashboard"
           >
             <FiHome size={15} />
-            <span>Dashboard</span>
+            <span className="hidden sm:inline">Dashboard</span>
           </button>
 
-          {/* Sign Out Button */}
           <button
             onClick={handleLogout}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 hover:bg-red-50 hover:text-[#C50337] transition-all border border-slate-200"
+            className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl text-white/90 bg-white/10 hover:bg-rose-700 hover:text-white transition-all border border-white/20 min-h-[40px] sm:min-h-[44px] shrink-0"
             title="Sign out"
           >
             <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">

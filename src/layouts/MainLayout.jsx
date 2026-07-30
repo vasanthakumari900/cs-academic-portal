@@ -15,7 +15,7 @@ export default function MainLayout() {
   if (booting) return <LoadingScreen />;
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8FAFC]">
+    <div className="flex min-h-screen flex-col bg-[#F5EBD0] text-[#7F011F]">
       <Navbar />
       <main className="relative flex-1 pt-16">
         <Outlet />

@@ -477,8 +477,8 @@ export default function ChatBot() {
     }
   }, [messages, isOpen]);
 
-  const chatWidth = isFullscreen ? "w-[95vw] sm:w-[90vw] md:w-[80vw] lg:w-[70vw]" : "w-[calc(100vw-2rem)] sm:w-[420px]";
-  const chatHeight = isFullscreen ? "h-[90vh] sm:h-[85vh]" : "h-[560px] sm:h-[600px]";
+  const chatWidth = isFullscreen ? "w-[95vw] sm:w-[90vw] md:w-[80vw] lg:w-[70vw]" : "w-[clamp(280px,94vw,440px)]";
+  const chatHeight = isFullscreen ? "h-[90vh] sm:h-[85vh]" : "h-[clamp(460px,82vh,600px)]";
   const chatMaxWidth = isFullscreen ? "max-w-5xl" : "max-w-[460px]";
 
   const isAuthPage = location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forgot-password";
@@ -494,7 +494,7 @@ export default function ChatBot() {
         className="hidden"
       />
 
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      <div className="fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3 max-w-[calc(100vw-1.5rem)]">
         <AnimatePresence>
           {isOpen && (
             <motion.div

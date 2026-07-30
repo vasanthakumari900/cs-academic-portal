@@ -5,25 +5,14 @@ import { FiX, FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 import toast from "react-hot-toast";
 
 import PlacementHeader from "../components/placements/PlacementHeader";
-import PlacementDashboardTab from "../components/placements/PlacementDashboardTab";
 import PlacementDrivesTab from "../components/placements/PlacementDrivesTab";
-import StudentPlacementTab from "../components/placements/StudentPlacementTab";
-import EligibilityCheckerTab from "../components/placements/EligibilityCheckerTab";
-import AptitudePrepTab from "../components/placements/AptitudePrepTab";
-import CodingPracticeTab from "../components/placements/CodingPracticeTab";
-import InterviewPrepTab from "../components/placements/InterviewPrepTab";
-import ResumeBuilderTab from "../components/placements/ResumeBuilderTab";
-import TrainingMaterialsTab from "../components/placements/TrainingMaterialsTab";
-import PlacementCalendarTab from "../components/placements/PlacementCalendarTab";
-import AlumniStoriesTab from "../components/placements/AlumniStoriesTab";
-import NotificationsTab from "../components/placements/NotificationsTab";
-import PlacementFAQTab from "../components/placements/PlacementFAQTab";
-import ContactOfficerTab from "../components/placements/ContactOfficerTab";
-import AdminPlacementPanel from "../components/placements/AdminPlacementPanel";
+import PlacementDashboardTab from "../components/placements/PlacementDashboardTab";
+import PlacementPrepHubTab from "../components/placements/PlacementPrepHubTab";
+import PlacementCareerToolkitTab from "../components/placements/PlacementCareerToolkitTab";
+import PlacementExperiencesTab from "../components/placements/PlacementExperiencesTab";
 
 import CompanyDetailsModal from "../components/placements/CompanyDetailsModal";
 import PlacementFeedback from "../components/placements/PlacementFeedback";
-import InterviewExperiences from "./InterviewExperiences";
 
 const mcqQuestions = [
   {
@@ -66,7 +55,7 @@ function ApplyModal({ drive, onClose }) {
     fullName: "Vasanth Kumar",
     email: "vasanth.cs23@ddgdvc.edu.in",
     phone: "9876543210",
-    rollNumber: "23CS104",
+    rollNumber: "24E3006",
     course: "B.Sc CS",
     year: "3",
     cgpa: "8.4",
@@ -103,7 +92,7 @@ function ApplyModal({ drive, onClose }) {
       setTimeout(() => {
         setSubmitting(false);
         setStep(3);
-        toast.success(`Application for ${drive.companyName} submitted!`);
+        toast.success(`Application for ${drive.companyName} submitted successfully!`);
       }, 1200);
     }
   }
@@ -230,7 +219,7 @@ function ApplyModal({ drive, onClose }) {
                     <input
                       value={form.rollNumber}
                       onChange={(e) => handleFormChange("rollNumber", e.target.value)}
-                      placeholder="23CS104"
+                      placeholder="24E3006"
                       className="w-full rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-2.5 text-slate-800 dark:text-slate-100"
                     />
                   </div>
@@ -382,7 +371,7 @@ function ApplyModal({ drive, onClose }) {
 }
 
 export default function Placements() {
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const [activeTab, setActiveTab] = useState("drives");
   const [searchQuery, setSearchQuery] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [selectedCompanyModal, setSelectedCompanyModal] = useState(null);
@@ -425,13 +414,6 @@ export default function Placements() {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.25 }}
               >
-                {activeTab === "dashboard" && (
-                  <PlacementDashboardTab
-                    onNavigateTab={handleNavigateTab}
-                    onSelectCompany={handleSelectCompany}
-                  />
-                )}
-
                 {activeTab === "drives" && (
                   <PlacementDrivesTab
                     searchQuery={searchQuery}
@@ -440,37 +422,20 @@ export default function Placements() {
                   />
                 )}
 
-                {activeTab === "student-dash" && (
-                  <StudentPlacementTab onApplyCompany={handleApplyCompany} />
+                {activeTab === "analytics" && (
+                  <PlacementDashboardTab
+                    onNavigateTab={handleNavigateTab}
+                    onSelectCompany={handleSelectCompany}
+                  />
                 )}
 
-                {activeTab === "eligibility" && (
-                  <EligibilityCheckerTab onApplyCompany={handleApplyCompany} />
+                {activeTab === "prephub" && <PlacementPrepHubTab />}
+
+                {activeTab === "toolkit" && (
+                  <PlacementCareerToolkitTab onApplyCompany={handleApplyCompany} />
                 )}
 
-                {activeTab === "aptitude" && <AptitudePrepTab />}
-
-                {activeTab === "coding" && <CodingPracticeTab />}
-
-                {activeTab === "interview-exp" && <InterviewExperiences />}
-
-                {activeTab === "interview" && <InterviewPrepTab />}
-
-                {activeTab === "resume" && <ResumeBuilderTab />}
-
-                {activeTab === "training" && <TrainingMaterialsTab />}
-
-                {activeTab === "calendar" && <PlacementCalendarTab />}
-
-                {activeTab === "alumni" && <AlumniStoriesTab />}
-
-                {activeTab === "notifications" && <NotificationsTab />}
-
-                {activeTab === "faq" && <PlacementFAQTab />}
-
-                {activeTab === "contact" && <ContactOfficerTab />}
-
-                {activeTab === "admin" && <AdminPlacementPanel />}
+                {activeTab === "experiences" && <PlacementExperiencesTab />}
               </motion.div>
             </AnimatePresence>
           </main>

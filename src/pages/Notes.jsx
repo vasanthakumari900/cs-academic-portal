@@ -1094,13 +1094,15 @@ export default function Notes() {
             <p className="mt-1 text-xs text-[#6B7280]">Choose a subject to browse lecture notes or access practical lab records</p>
           </div>
 
-          <button
-            onClick={() => setShowLabModal(true)}
-            className="group inline-flex items-center gap-2 rounded-xl bg-[#0F4C81] px-5 py-3 text-xs font-bold text-white shadow-md hover:bg-[#1E88E5] hover:shadow-lg transition-all active:scale-95 cursor-pointer shrink-0 border border-white/20"
-          >
-            <FiCode size={16} />
-            🧪 Lab Record ({yearData.label} - {semesterData.label})
-          </button>
+          {selectedYear === 1 && selectedSemester === 1 && (
+            <button
+              onClick={() => setShowLabModal(true)}
+              className="group inline-flex items-center gap-2 rounded-xl bg-[#0F4C81] px-5 py-3 text-xs font-bold text-white shadow-md hover:bg-[#1E88E5] hover:shadow-lg transition-all active:scale-95 cursor-pointer shrink-0 border border-white/20"
+            >
+              <FiCode size={16} />
+              🧪 Lab Record ({yearData.label} - {semesterData.label})
+            </button>
+          )}
         </motion.div>
         {semesterData.subjects.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E5E7EB] bg-white py-20 shadow-sm">
@@ -1425,15 +1427,6 @@ export default function Notes() {
           </div>
         </div>
 
-        {subjectLabRecords.length > 0 && (
-          <button
-            onClick={() => setShowLabModal(true)}
-            className="group inline-flex items-center gap-2 rounded-xl bg-[#0F4C81] px-4 py-2.5 text-xs font-bold text-white shadow-md hover:bg-[#1E88E5] hover:shadow-lg transition-all active:scale-95 cursor-pointer shrink-0 border border-white/20"
-          >
-            <FiCode size={15} />
-            🧪 Practical Lab Record
-          </button>
-        )}
       </motion.div>
 
       {!isEnglish && syllabusData ? (

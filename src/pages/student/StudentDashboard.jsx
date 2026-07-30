@@ -96,22 +96,7 @@ export default function StudentDashboard() {
   const is24E3006 = user?.rollNumber === "24E3006" || Boolean(user?.photoUrl);
   const photoPath = user?.photoUrl || "/admin_photo.jpg";
 
-  // Build options array (append Student Activity next to Placement Details ONLY for Admin / 24E3006)
-  const optionsToRender = [
-    ...STUDENT_OPTIONS,
-    ...(isAdmin
-      ? [
-          {
-            label: "Student Activity",
-            icon: FiActivity,
-            to: "/admin/student-activity",
-            badge: "Admin Exclusive",
-            desc: "View student login history, live sessions, device details & download audit logs.",
-            color: "#C50337",
-          },
-        ]
-      : []),
-  ];
+  const optionsToRender = STUDENT_OPTIONS;
 
   const yearLabel = user?.year
     ? user.year === 1
@@ -209,7 +194,7 @@ export default function StudentDashboard() {
                   </div>
 
                   {/* Student Information Summary Card */}
-                  <div className="rounded-xl bg-white/10 backdrop-blur-md p-4 border border-white/20 shrink-0 text-left min-w-[240px]">
+                  <div className="rounded-xl bg-white/10 backdrop-blur-md p-4 border border-white/20 shrink-0 text-left w-full md:w-auto md:min-w-[240px]">
                     <p className="text-[11px] uppercase font-extrabold tracking-wider text-white border-b border-white/20 pb-1 mb-2">
                       Student Information
                     </p>

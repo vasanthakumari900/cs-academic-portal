@@ -75,7 +75,6 @@ import ManagePlacements from "./pages/admin/ManagePlacements";
 import Analytics from "./pages/admin/Analytics";
 import Settings from "./pages/admin/Settings";
 import ManageCiaTimetable from "./pages/admin/ManageCiaTimetable";
-import StudentActivityDashboard from "./pages/admin/StudentActivityDashboard";
 import ChatBot from "./components/chatbot/ChatBot";
 
 const pageVariants = {
@@ -104,7 +103,6 @@ const studentNav = [
 
 const adminNav = [
   { to: "/admin/dashboard", label: "Dashboard", icon: FiHome },
-  { to: "/admin/student-activity", label: "Student Activity Log", icon: FiActivity },
   { to: "/admin/users", label: "Manage Users", icon: FiUsers },
   { to: "/admin/faculty", label: "Manage Faculty", icon: FiUserCheck },
   { to: "/admin/students", label: "Manage Students", icon: FiUsers },
@@ -185,7 +183,6 @@ export default function App() {
             <Route element={<ProtectedRoute allowedRoles={[ROLES.ADMIN]} />}>
               <Route element={<DashboardLayout title="Admin Dashboard" items={adminNav} />}>
                 <Route path="/admin/dashboard" element={<AnimatedPage><AdminDashboard /></AnimatedPage>} />
-                <Route path="/admin/student-activity" element={<AnimatedPage><StudentActivityDashboard /></AnimatedPage>} />
                 <Route path="/admin/users" element={<AnimatedPage><ManageUsers /></AnimatedPage>} />
                 <Route path="/admin/faculty" element={<AnimatedPage><ManageFaculty /></AnimatedPage>} />
                 <Route path="/admin/students" element={<AnimatedPage><ManageStudents /></AnimatedPage>} />
