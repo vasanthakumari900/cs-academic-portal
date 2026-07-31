@@ -34,7 +34,7 @@ export function getDirectDownloadUrl(input) {
     if (str.includes("docs.google.com/spreadsheets")) {
       return `https://docs.google.com/spreadsheets/d/${fileId}/export?format=pdf`;
     }
-    return `https://drive.usercontent.google.com/download?id=${fileId}&export=download&confirm=t`;
+    return `https://drive.google.com/uc?export=download&id=${fileId}`;
   }
   return str;
 }
@@ -44,6 +44,7 @@ export function getDirectDownloadUrl(input) {
  */
 export function getDriveEmbedUrl(input) {
   if (!input) return "";
+  if (typeof input === "string" && input.startsWith("/")) return input;
   const fileId = extractDriveFileId(input);
   if (fileId) {
     return `https://drive.google.com/file/d/${fileId}/preview`;
@@ -56,6 +57,7 @@ export function getDriveEmbedUrl(input) {
  */
 export function getDriveViewUrl(input) {
   if (!input) return "#";
+  if (typeof input === "string" && input.startsWith("/")) return input;
   const fileId = extractDriveFileId(input);
   if (fileId) {
     return `https://drive.google.com/file/d/${fileId}/view?usp=sharing`;
@@ -139,28 +141,56 @@ export async function downloadDriveFile(fileInput, customTitle = "", metadata = 
 
   const isMobile = isMobileDevice();
   const toastPosition = isMobile ? "top-center" : "top-right";
+  const isLocalFile = typeof fileInput === "string" && fileInput.startsWith("/");
 
+  if (isMobile) {
+    const toastId = toast.loading(`📥 Downloading ${pdfFileName}...`, {
+      position: toastPosition,
+      duration: 2500,
+    });
+
+    if (isLocalFile) {
+      const a = document.createElement("a");
+      a.href = fileInput;
+      a.download = pdfFileName;
+      a.target = "_blank";
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        if (a.parentNode) document.body.removeChild(a);
+      }, 500);
+    } else {
+      const targetUrl = directDownloadUrl || (fileId ? `https://drive.google.com/uc?export=download&id=${fileId}` : String(fileInput));
+      window.open(targetUrl, "_blank");
+    }
+
+    toast.success(`📥 PDF download initiated for ${pdfFileName}`, {
+      id: toastId,
+      position: toastPosition,
+      duration: 3500,
+    });
+    return;
+  }
+
+  // Desktop Flow
   const toastId = toast.loading(`📥 Preparing PDF download (${pdfFileName})...`, {
     position: toastPosition,
   });
 
   try {
-    // Attempt fetch blob for clean filename preservation where possible
-    const fetchUrl = fileId
-      ? `https://drive.usercontent.google.com/download?id=${fileId}&export=download&confirm=t`
-      : String(fileInput);
-
     let fetchedBlob = null;
-    try {
-      const response = await fetch(fetchUrl, { method: "GET" });
-      if (response.ok) {
-        const contentType = response.headers.get("content-type") || "";
-        if (!contentType.includes("text/html")) {
-          fetchedBlob = await response.blob();
+    if (isLocalFile) {
+      try {
+        const response = await fetch(fileInput, { method: "GET" });
+        if (response.ok) {
+          const contentType = response.headers.get("content-type") || "";
+          if (!contentType.includes("text/html")) {
+            fetchedBlob = await response.blob();
+          }
         }
+      } catch {
+        // Fallback below
       }
-    } catch {
-      // Network restriction may prevent direct fetch; fallback to anchor click below
     }
 
     if (fetchedBlob && fetchedBlob.size > 500) {
@@ -179,7 +209,7 @@ export async function downloadDriveFile(fileInput, customTitle = "", metadata = 
       return;
     }
 
-    // Direct Anchor / Window location fallback for mobile and CORS restricted URLs
+    // Direct Anchor / Window location fallback for desktop
     const downloadAnchor = document.createElement("a");
     downloadAnchor.href = directDownloadUrl;
     downloadAnchor.download = pdfFileName;
@@ -200,6 +230,7 @@ export async function downloadDriveFile(fileInput, customTitle = "", metadata = 
   } catch (err) {
     console.error("PDF Download error:", err);
     toast.error("Opening PDF in browser window...", { id: toastId });
-    window.open(getDriveViewUrl(fileInput), "_blank");
+    const fallbackUrl = fileId ? `https://drive.google.com/file/d/${fileId}/view?usp=sharing` : String(fileInput);
+    window.open(fallbackUrl, "_blank");
   }
 }

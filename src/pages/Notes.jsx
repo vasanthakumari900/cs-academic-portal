@@ -883,12 +883,12 @@ function getDrivePreviewUrl(fileId, type = "pdf") {
 function getDriveDownloadUrl(fileId, type = "pdf") {
   if (fileId && (fileId.startsWith("/") || fileId.startsWith("http"))) return fileId;
   if (type === "doc") return `https://docs.google.com/document/d/${fileId}/export?format=pdf`;
-  return `https://drive.google.com/uc?export=download&confirm=t&id=${fileId}`;
+  return `https://drive.google.com/uc?export=download&id=${fileId}`;
 }
 
 function getDriveViewUrl(fileId) {
   if (!fileId) return "#";
-  if (fileId.startsWith("http")) return fileId;
+  if (fileId.startsWith("/") || fileId.startsWith("http")) return fileId;
   return `https://drive.google.com/file/d/${fileId}/view?usp=sharing`;
 }
 
