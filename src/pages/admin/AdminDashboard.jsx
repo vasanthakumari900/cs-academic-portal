@@ -6,6 +6,7 @@ import { noteService } from "../../services/noteService";
 import { questionPaperService } from "../../services/questionPaperService";
 import { placementService } from "../../services/placementService";
 import StatCard from "../../components/ui/StatCard";
+import AdminFeedbackViewer from "../../components/admin/AdminFeedbackViewer";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Cell } from "recharts";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -114,6 +115,9 @@ export default function AdminDashboard() {
           </div>
         </div>
       </div>
+
+      {/* Admin-Only Confidential Submitted Feedback Section */}
+      <AdminFeedbackViewer />
     </div>
   );
 }

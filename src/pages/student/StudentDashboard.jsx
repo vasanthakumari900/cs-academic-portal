@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
@@ -12,8 +13,15 @@ import {
   FiCheckCircle,
   FiMessageSquare,
   FiActivity,
+  FiEdit3,
+  FiUserCheck,
+  FiBookOpen,
+  FiEye,
+  FiExternalLink,
 } from "react-icons/fi";
 import CiaExamNotificationCard from "../../components/dashboard/CiaExamNotificationCard";
+import ProjectFeedbackModal from "../../components/feedback/ProjectFeedbackModal";
+import AdminFeedbackModal from "../../components/admin/AdminFeedbackModal";
 import useActivityTracker from "../../hooks/useActivityTracker";
 
 const CS_QUOTES = [
@@ -85,12 +93,24 @@ const STUDENT_OPTIONS = [
     desc: "Placement updates, company eligibility & mock aptitude.",
     color: "#021C4F",
   },
+  {
+    label: "Vaishnav LMS Portal",
+    icon: FiExternalLink,
+    href: "https://dgvc.in/lms/login.php",
+    isExternal: true,
+    badge: "Official LMS",
+    desc: "Access the official Vaishnav Learning Management System portal.",
+    color: "#C50337",
+  },
 ];
 
 export default function StudentDashboard() {
   const { user } = useAuth();
   useActivityTracker("Student Dashboard");
   const navigate = useNavigate();
+
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+  const [isAdminFeedbackOpen, setIsAdminFeedbackOpen] = useState(false);
 
   const isAdmin = user?.rollNumber === "24E3006" || user?.role === "admin" || user?.type === "admin";
   const is24E3006 = user?.rollNumber === "24E3006" || Boolean(user?.photoUrl);
@@ -257,7 +277,7 @@ export default function StudentDashboard() {
                 transition={{ delay: idx * 0.05 }}
                 whileHover={{ y: -3 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={() => navigate(option.to)}
+                onClick={() => (option.isExternal ? window.open(option.href, "_blank") : navigate(option.to))}
                 className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white border border-slate-200 p-6 shadow-sm transition-all duration-200 hover:shadow-md hover:border-[#C50337] text-left"
               >
                 <div>
@@ -307,6 +327,92 @@ export default function StudentDashboard() {
             );
           })}
         </div>
+
+        {/* CS Academic Portal Project Feedback Options (Down on Student Dashboard) */}
+        {isAdmin ? (
+          /* ADMIN VIEW (24E3006): View Feedback Responses */
+          <div className="mt-12 rounded-3xl bg-gradient-to-r from-[#021C4F] via-[#0A369D] to-[#C50337] p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
+            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-amber-300">
+                  <FiShield size={13} /> Admin Exclusive Access (24E3006)
+                </span>
+                <h2 className="text-xl sm:text-2xl font-extrabold text-white mt-2">
+                  View Student Feedback Responses
+                </h2>
+                <p className="text-xs text-white/80 mt-1 max-w-xl leading-relaxed">
+                  As the portal Administrator, inspect all submitted student feedback responses, ratings, choices, and recommendations.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsAdminFeedbackOpen(true)}
+                className="shrink-0 flex items-center gap-2 rounded-2xl bg-white text-[#021C4F] hover:bg-amber-300 hover:text-slate-900 px-6 py-3.5 text-xs font-black shadow-lg transition-all transform hover:scale-105"
+              >
+                <FiEye size={18} />
+                <span>View Feedback Responses</span>
+              </button>
+            </div>
+          </div>
+        ) : (
+          /* STUDENT VIEW: Submit Student Feedback to Admin */
+          <div className="mt-12 rounded-3xl bg-gradient-to-r from-[#021C4F] via-[#0A369D] to-[#C50337] p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
+            <div className="relative z-10 space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/20 pb-4">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-amber-300">
+                    <FiEdit3 size={13} /> Student Feedback Portal
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-white mt-1">
+                    Student Feedback Form
+                  </h2>
+                  <p className="text-xs text-white/80 mt-0.5">
+                    Submit your feedback directly to the Admin (24E3006) to help improve the CS Academic Portal.
+                  </p>
+                </div>
+              </div>
+
+              {/* Student Feedback Button Card */}
+              <div className="bg-white/10 p-6 rounded-2xl border border-white/20 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-[#021C4F] shadow-md shrink-0 font-bold">
+                    <FiUserCheck size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-extrabold text-base text-white">Student Feedback Form</h3>
+                    <p className="text-xs text-white/80 mt-0.5">
+                      Rate lecture notes, question papers, E-content &amp; AI assistant. Responses go straight to Admin.
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setIsFeedbackOpen(true)}
+                  className="shrink-0 flex items-center gap-2 rounded-2xl bg-white text-[#021C4F] hover:bg-amber-300 hover:text-slate-900 px-6 py-3 text-xs font-black shadow-md transition-all transform hover:scale-105"
+                >
+                  <FiEdit3 size={16} />
+                  <span>Open Student Feedback Form</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Student Feedback Modal */}
+        <ProjectFeedbackModal
+          isOpen={isFeedbackOpen}
+          onClose={() => setIsFeedbackOpen(false)}
+          defaultType="student"
+          user={user}
+        />
+
+        {/* Admin Feedback Modal for 24E3006 */}
+        <AdminFeedbackModal
+          isOpen={isAdminFeedbackOpen}
+          onClose={() => setIsAdminFeedbackOpen(false)}
+        />
 
         {/* Department Footer Info */}
         <div className="mt-12 rounded-xl bg-white p-4 text-center border border-slate-200 shadow-sm">

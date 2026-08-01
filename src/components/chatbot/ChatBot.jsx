@@ -21,6 +21,7 @@ import {
 import { useAuth } from "../../context/AuthContext";
 import { CURRICULUM } from "../../utils/curriculum";
 import CSAIAgentLogo from "./CSAIAgentLogo";
+import FormattedMessage from "./FormattedMessage";
 import toast from "react-hot-toast";
 
 const STORAGE_KEY = "cs_portal_chat_history";
@@ -575,7 +576,11 @@ export default function ChatBot() {
                           : "bg-white text-slate-800 border border-slate-200/80 border-l-4 border-l-[#C50337] rounded-bl-xs"
                       }`}
                     >
-                      <p className="whitespace-pre-wrap font-sans">{msg.content}</p>
+                      {msg.role === "user" ? (
+                        <p className="whitespace-pre-wrap font-sans">{msg.content}</p>
+                      ) : (
+                        <FormattedMessage content={msg.content} />
+                      )}
 
                       {/* Render generated image if present */}
                       {msg.imageUrl && (

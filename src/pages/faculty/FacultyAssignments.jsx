@@ -17,6 +17,36 @@ import GlassCard from "../../components/ui/GlassCard";
 import Button from "../../components/ui/Button";
 import toast from "react-hot-toast";
 
+const CS_SUBJECTS_BY_YEAR = {
+  "1": [
+    "Programming in C & Data Structures",
+    "Problem Solving Techniques & C Lab",
+    "Digital Logic & Computer Fundamentals",
+    "Programming in C++",
+    "Object Oriented Programming (OOP)",
+    "Discrete Mathematics"
+  ],
+  "2": [
+    "Java Programming",
+    "Database Management Systems (DBMS)",
+    "Data Structures & Algorithms",
+    "Python Programming",
+    "Computer Networks & Security",
+    "Operating Systems (OS)",
+    "Microprocessors & Assembly Language"
+  ],
+  "3": [
+    "Web Technology & UI Development",
+    "Software Engineering & Testing",
+    "Machine Learning & AI",
+    "Cloud Computing & Distributed Systems",
+    "Compiler Design",
+    "Information & Cyber Security",
+    "Mobile Application Development",
+    "Main Project Work & Viva-Voce"
+  ]
+};
+
 export default function FacultyAssignments() {
   const { user } = useAuth();
   const [assignments, setAssignments] = useState([]);
@@ -26,7 +56,7 @@ export default function FacultyAssignments() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
-    subject: "DATA STRUCTURES",
+    subject: "Programming in C & Data Structures",
     year: "1",
     semester: "2",
     description: "",
@@ -257,14 +287,29 @@ export default function FacultyAssignments() {
                     </select>
                   </div>
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1">Subject</label>
-                    <input
-                      type="text"
+                    <label className="block font-semibold text-slate-700 mb-1">Respected CS Subject</label>
+                    <select
                       required
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full p-2.5 border border-slate-200 rounded-xl focus:outline-none"
-                    />
+                      className="w-full p-2.5 border border-slate-200 rounded-xl bg-white focus:outline-none font-medium text-xs text-[#021C4F]"
+                    >
+                      <optgroup label="🎓 1st Year CS Subjects">
+                        {CS_SUBJECTS_BY_YEAR["1"].map((s) => (
+                          <option key={s} value={s}>{s}</option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="🎓 2nd Year CS Subjects">
+                        {CS_SUBJECTS_BY_YEAR["2"].map((s) => (
+                          <option key={s} value={s}>{s}</option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="🎓 3rd Year CS Subjects">
+                        {CS_SUBJECTS_BY_YEAR["3"].map((s) => (
+                          <option key={s} value={s}>{s}</option>
+                        ))}
+                      </optgroup>
+                    </select>
                   </div>
                 </div>
 

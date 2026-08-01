@@ -188,6 +188,135 @@ const getSubjectVideos = (subject, year, sem) => {
          [];
 };
 
+export const DGVC_OFFICIAL_VIDEOS = [
+  {
+    id: "dgvc-v1",
+    title: "DGVC Computer Science Video Lecture 1",
+    youtubeId: "JgvQmR6HKlY",
+    url: "https://youtu.be/JgvQmR6HKlY?si=rKDQECUVYdvWAswD",
+    description: "Official DGVC Computer Science Department Lecture & E-Content Series",
+    facultyName: "DGVC Computer Science Faculty",
+    badge: "DGVC Official"
+  },
+  {
+    id: "dgvc-v2",
+    title: "DGVC Computer Science Video Lecture 2",
+    youtubeId: "_ryqzpu1HX8",
+    url: "https://youtu.be/_ryqzpu1HX8",
+    description: "Official DGVC Computer Science Department Lecture & E-Content Series",
+    facultyName: "DGVC Computer Science Faculty",
+    badge: "DGVC Official"
+  },
+  {
+    id: "dgvc-v3",
+    title: "DGVC Computer Science Video Lecture 3",
+    youtubeId: "DjFVF86o49M",
+    url: "https://youtu.be/DjFVF86o49M",
+    description: "Official DGVC Computer Science Department Lecture & E-Content Series",
+    facultyName: "DGVC Computer Science Faculty",
+    badge: "DGVC Official"
+  },
+  {
+    id: "dgvc-v4",
+    title: "DGVC Computer Science Video Lecture 4",
+    youtubeId: "cWxmS-nPww0",
+    url: "https://youtu.be/cWxmS-nPww0",
+    description: "Official DGVC Computer Science Department Lecture & E-Content Series",
+    facultyName: "DGVC Computer Science Faculty",
+    badge: "DGVC Official"
+  },
+  {
+    id: "dgvc-v5",
+    title: "DGVC Computer Science Video Lecture 5",
+    youtubeId: "P7NfEobYxng",
+    url: "https://youtu.be/P7NfEobYxng",
+    description: "Official DGVC Computer Science Department Lecture & E-Content Series",
+    facultyName: "DGVC Computer Science Faculty",
+    badge: "DGVC Official"
+  },
+  {
+    id: "dgvc-v6",
+    title: "DGVC Computer Science Video Lecture 6",
+    youtubeId: "26DWC_QhY4w",
+    url: "https://youtu.be/26DWC_QhY4w",
+    description: "Official DGVC Computer Science Department Lecture & E-Content Series",
+    facultyName: "DGVC Computer Science Faculty",
+    badge: "DGVC Official"
+  },
+  {
+    id: "dgvc-v7",
+    title: "DGVC Computer Science Video Lecture 7",
+    youtubeId: "O84M0xilgkE",
+    url: "https://youtu.be/O84M0xilgkE",
+    description: "Official DGVC Computer Science Department Lecture & E-Content Series",
+    facultyName: "DGVC Computer Science Faculty",
+    badge: "DGVC Official"
+  },
+  {
+    id: "dgvc-v8",
+    title: "DGVC Computer Science Video Lecture 8",
+    youtubeId: "Pcdu--f2MTg",
+    url: "https://youtu.be/Pcdu--f2MTg",
+    description: "Official DGVC Computer Science Department Lecture & E-Content Series",
+    facultyName: "DGVC Computer Science Faculty",
+    badge: "DGVC Official"
+  },
+  {
+    id: "dgvc-v9",
+    title: "DGVC Computer Science Video Lecture 9",
+    youtubeId: "i1d9Wpjed-M",
+    url: "https://youtu.be/i1d9Wpjed-M",
+    description: "Official DGVC Computer Science Department Lecture & E-Content Series",
+    facultyName: "DGVC Computer Science Faculty",
+    badge: "DGVC Official"
+  },
+  {
+    id: "dgvc-v10",
+    title: "DGVC Computer Science Video Lecture 10",
+    youtubeId: "wSnW1WeXQT0",
+    url: "https://youtu.be/wSnW1WeXQT0",
+    description: "Official DGVC Computer Science Department Lecture & E-Content Series",
+    facultyName: "DGVC Computer Science Faculty",
+    badge: "DGVC Official"
+  },
+  {
+    id: "dgvc-v11",
+    title: "DGVC Computer Science Video Lecture 11",
+    youtubeId: "gpNN79H0pRE",
+    url: "https://youtu.be/gpNN79H0pRE",
+    description: "Official DGVC Computer Science Department Lecture & E-Content Series",
+    facultyName: "DGVC Computer Science Faculty",
+    badge: "DGVC Official"
+  },
+  {
+    id: "dgvc-v12",
+    title: "DGVC Computer Science Video Lecture 12",
+    youtubeId: "duT750w95rE",
+    url: "https://youtu.be/duT750w95rE",
+    description: "Official DGVC Computer Science Department Lecture & E-Content Series",
+    facultyName: "DGVC Computer Science Faculty",
+    badge: "DGVC Official"
+  },
+  {
+    id: "dgvc-v13",
+    title: "DGVC Computer Science Video Lecture 13",
+    youtubeId: "bZR98Z0Rk_0",
+    url: "https://youtu.be/bZR98Z0Rk_0",
+    description: "Official DGVC Computer Science Department Lecture & E-Content Series",
+    facultyName: "DGVC Computer Science Faculty",
+    badge: "DGVC Official"
+  },
+  {
+    id: "dgvc-v14",
+    title: "DGVC Computer Science Video Lecture 14",
+    youtubeId: "jOaRcKs8upA",
+    url: "https://youtu.be/jOaRcKs8upA",
+    description: "Official DGVC Computer Science Department Lecture & E-Content Series",
+    facultyName: "DGVC Computer Science Faculty",
+    badge: "DGVC Official"
+  }
+];
+
 const getPlaylistUrl = (subject, year, sem) => {
   if (!subject) return null;
   const upper = subject.toUpperCase();
@@ -360,39 +489,208 @@ export default function EContent() {
 
   if (!selectedYear) {
     return (
-      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center">
           <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#021C4F] text-white shadow-sm">
             <FiPlayCircle size={36} />
           </div>
-          <h1 className="font-sans text-4xl font-bold text-[#021C4F]">Video Lectures</h1>
-          <p className="mt-2 text-sm text-[#6B7280]">Select your year to browse subject-wise lectures &amp; syllabus</p>
+          <h1 className="font-sans text-4xl font-bold text-[#021C4F]">Video Lectures &amp; E-Content</h1>
+          <p className="mt-2 text-sm text-[#6B7280]">Select your academic year or browse official DGVC Computer Science video lectures</p>
         </motion.div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+
+        {/* 4 Cards Grid: 1st Year, 2nd Year, 3rd Year, & DGVC VIDEOS (Next to 3rd Year) */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[1, 2, 3].map((year, i) => {
-            const s = yearStyles[year];
             return (
               <motion.button key={year}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + i * 0.1, type: "spring", stiffness: 80 }}
                 whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedYear(year)}
-                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#C50337]/40"
+                className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white shadow-xl transition-all duration-300 hover:shadow-2xl text-center flex flex-col justify-between"
               >
                 <div className="relative p-8 text-center">
-                  <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-xl ${s.bg} text-3xl font-bold transition-all duration-300 group-hover:scale-105 shadow-sm`}>
+                  <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md text-3xl font-bold transition-all duration-300 group-hover:scale-110 shadow-md">
                     {CURRICULUM[year].icon}
                   </div>
-                  <h2 className="text-xl font-bold text-[#021C4F]">{CURRICULUM[year].label}</h2>
-                  <p className="mt-1.5 text-xs text-[#6B7280]">{Object.keys(CURRICULUM[year].semesters).length} Semesters</p>
-                  <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#021C4F] opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
+                  <span className="inline-block bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-2 shadow-sm">
+                    {Object.keys(CURRICULUM[year].semesters).length} Semesters
+                  </span>
+                  <h2 className="text-xl font-black text-white">{CURRICULUM[year].label}</h2>
+                  <p className="mt-1.5 text-xs text-rose-100 font-medium">Subject-wise Video Lectures</p>
+                  <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
                     Browse Lectures <FiChevronRight size={12} />
                   </div>
                 </div>
               </motion.button>
             );
           })}
+
+          {/* Button Next to Third Year: DGVC VIDEOS */}
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, type: "spring", stiffness: 80 }}
+            whileHover={{ y: -4 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => setSelectedYear("dgvc")}
+            className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white shadow-xl transition-all duration-300 hover:shadow-2xl text-center flex flex-col justify-between"
+          >
+            <div className="relative p-8 text-center">
+              <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md text-3xl font-bold transition-all duration-300 group-hover:scale-110 shadow-md">
+                <FiYoutube size={44} className="text-amber-300" />
+              </div>
+              <span className="inline-block bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-2 shadow-sm">
+                Official YouTube Series
+              </span>
+              <h2 className="text-xl font-black text-white">DGVC VIDEOS</h2>
+              <p className="mt-1.5 text-xs text-rose-100 font-medium">14 Official CS Lecture Videos</p>
+              <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                Watch DGVC Videos <FiChevronRight size={12} />
+              </div>
+            </div>
+          </motion.button>
         </div>
+      </div>
+    );
+  }
+
+  {/* 🎬 DGVC VIDEOS GALLERY VIEW */}
+  if (selectedYear === "dgvc") {
+    return (
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          onClick={() => { setSelectedYear(null); setSelectedSemester(null); setSelectedSubject(null); }}
+          className="mb-8 inline-flex items-center gap-1.5 rounded-xl border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-extrabold text-[#021C4F] hover:bg-[#F8FAFC] transition-all shadow-sm"
+        >
+          <FiArrowLeft size={14} /> Back to Years
+        </motion.button>
+
+        {/* Header Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-8 rounded-3xl bg-gradient-to-r from-[#011337] via-[#021C4F] to-[#7F011F] p-6 sm:p-8 text-white shadow-xl border border-amber-400/30 text-left"
+        >
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-400 text-slate-900 px-3.5 py-1 text-[10px] font-black uppercase tracking-widest mb-2 shadow-sm">
+                <FiYoutube size={14} /> Official DGVC Channel Content
+              </span>
+              <h1 className="text-2xl sm:text-4xl font-extrabold text-white font-serif">
+                DGVC Computer Science Video Lectures
+              </h1>
+              <p className="text-xs sm:text-sm text-slate-200 mt-2 max-w-2xl leading-relaxed">
+                Collection of 14 official YouTube video lectures curated by the Department of Computer Science, Dwaraka Doss Goverdhan Doss Vaishnav College.
+              </p>
+            </div>
+            <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-md text-amber-300 border border-white/20 shadow-md">
+              <FiYoutube size={42} />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* 14 Videos Responsive Grid */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {DGVC_OFFICIAL_VIDEOS.map((video, i) => (
+            <motion.div
+              key={video.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.04 }}
+              className="group overflow-hidden rounded-2xl bg-white border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300 text-left flex flex-col justify-between"
+            >
+              <div>
+                <div
+                  onClick={() => setPlaying(video)}
+                  className="relative aspect-video w-full bg-slate-900 cursor-pointer overflow-hidden group-hover:opacity-95"
+                >
+                  <img
+                    src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
+                    alt={video.title}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/10 transition-colors">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#C50337] text-white shadow-xl group-hover:scale-110 transition-transform">
+                      <FiPlayCircle size={28} className="ml-0.5" />
+                    </div>
+                  </div>
+                  <span className="absolute top-3 left-3 bg-[#021C4F] text-amber-300 text-[10px] font-extrabold uppercase px-2.5 py-0.5 rounded-md shadow-md border border-white/20">
+                    Lecture #{i + 1}
+                  </span>
+                </div>
+
+                <div className="p-5 space-y-2">
+                  <h3 className="font-extrabold text-sm text-[#021C4F] group-hover:text-[#C50337] transition-colors leading-snug">
+                    {video.title}
+                  </h3>
+                  <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
+                    {video.description}
+                  </p>
+                  <div className="flex items-center gap-2 pt-1">
+                    <span className="inline-block bg-rose-50 text-[#C50337] text-[10px] font-extrabold px-2 py-0.5 rounded border border-rose-200">
+                      {video.badge}
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-semibold">{video.facultyName}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 pt-0 flex items-center gap-2">
+                <button
+                  onClick={() => setPlaying(video)}
+                  className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-[#021C4F] hover:bg-[#C50337] px-4 py-2.5 text-xs font-bold text-white shadow-sm transition-all"
+                >
+                  <FiPlayCircle size={14} />
+                  <span>Watch Video</span>
+                </button>
+                <a
+                  href={video.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 text-slate-600 transition-all"
+                  title="Open on YouTube"
+                >
+                  <FiExternalLink size={14} />
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Video Player Modal */}
+        <AnimatePresence>
+          {playing && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4"
+              onClick={() => setPlaying(null)}
+            >
+              <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-4xl overflow-hidden rounded-2xl bg-white border border-[#E5E7EB] shadow-2xl"
+              >
+                <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#E5E7EB] bg-[#0F4C81] text-white">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="truncate text-sm font-bold text-white">{playing.title || "Lecture"}</h3>
+                    <p className="text-[11px] text-amber-300">DGVC Computer Science Video Lecture</p>
+                  </div>
+                  <button onClick={() => setPlaying(null)} className="rounded-full bg-white/10 p-2 text-white/70 hover:bg-white/20 hover:text-white transition-all"><FiX size={16} /></button>
+                </div>
+                <div className="aspect-video w-full bg-black">
+                  {playing.youtubeId ? (
+                    <iframe src={`https://www.youtube.com/embed/${playing.youtubeId}?autoplay=1&rel=0`}
+                      title={playing.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen className="h-full w-full" />
+                  ) : (
+                    <div className="flex h-full items-center justify-center text-white/50 text-sm">Video URL not available</div>
+                  )}
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     );
   }
@@ -410,18 +708,23 @@ export default function EContent() {
           <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">{yearData.label}</h1>
           <p className="mt-1 text-sm text-[#6B7280]">Choose a semester</p>
         </motion.div>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {sems.map(([semKey, semData], i) => (
             <motion.button key={semKey}
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.08 }}
               whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
               onClick={() => setSelectedSemester(Number(semKey))}
-              className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white shadow-xl transition-all duration-300 hover:shadow-2xl text-center flex flex-col justify-between"
             >
               <div className="relative p-8 text-center">
-                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl ${ys.bg} text-xl font-bold text-white shadow-sm`}>{Number(semKey) === 1 ? "I" : "II"}</div>
-                <h2 className="text-lg font-bold text-[#0F4C81]">{semData.label}</h2>
-                <p className="mt-1 text-xs text-[#6B7280]">{semData.subjects.length} subjects</p>
+                <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md text-2xl font-black text-amber-300 shadow-md">
+                  {Number(semKey) === 1 ? "SEM I" : "SEM II"}
+                </div>
+                <h2 className="text-xl font-black text-white">{semData.label}</h2>
+                <p className="mt-1.5 text-xs text-rose-100 font-medium">{semData.subjects.length} Subjects</p>
+                <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                  Explore Subjects <FiChevronRight size={12} />
+                </div>
               </div>
             </motion.button>
           ))}

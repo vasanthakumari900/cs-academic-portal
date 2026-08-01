@@ -428,20 +428,27 @@ const refetch = () => {};
           <h1 className="font-sans text-2xl font-bold text-[#021C4F]">{courseType.toUpperCase()} — Select Year</h1>
           <p className="mt-1 text-sm text-[#6B7280]">Choose your academic year</p>
         </motion.div>
-        <div className={`grid grid-cols-1 gap-5 ${courseType === "pg" ? "sm:grid-cols-2 max-w-2xl mx-auto" : "sm:grid-cols-3"}`}>
+        <div className={`grid grid-cols-1 gap-6 ${courseType === "pg" ? "sm:grid-cols-2 max-w-2xl mx-auto" : "sm:grid-cols-3"}`}>
           {(courseType === "pg" ? [1, 2] : [1, 2, 3]).map((year, i) => {
-            const s = yearStyles[year];
             return (
               <motion.button key={year}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.08 }}
                 whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                 onClick={() => setSelectedYear(year)}
-                className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#C50337]/40"
+                className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white shadow-xl transition-all duration-300 hover:shadow-2xl text-center flex flex-col justify-between"
               >
                 <div className="relative p-8 text-center">
-                  <div className={`mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-xl ${s.bg} text-2xl font-bold text-white shadow-sm transition-all`}>{CURRICULUM[year].icon}</div>
-                  <h2 className="text-lg font-bold text-[#021C4F]">{CURRICULUM[year].label}</h2>
-                  {courseType !== "pg" && <p className="mt-1 text-xs text-[#6B7280]">{getSubjectsForYear(year).length} subjects</p>}
+                  <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md text-3xl font-bold transition-all duration-300 group-hover:scale-110 shadow-md">
+                    {CURRICULUM[year].icon}
+                  </div>
+                  <span className="inline-block bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-2 shadow-sm">
+                    {getSubjectsForYear(year).length} Subjects
+                  </span>
+                  <h2 className="text-xl font-black text-white">{CURRICULUM[year].label}</h2>
+                  <p className="mt-1.5 text-xs text-rose-100 font-medium">Semester Question Papers</p>
+                  <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                    Browse Papers <FiChevronRight size={12} />
+                  </div>
                 </div>
               </motion.button>
             );
@@ -464,18 +471,23 @@ const refetch = () => {};
           <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">{yearData.label}</h1>
           <p className="mt-1 text-sm text-[#6B7280]">Choose a semester</p>
         </motion.div>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {sems.map(([semKey, semData], i) => (
             <motion.button key={semKey}
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.08 }}
               whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
               onClick={() => setSelectedSemester(Number(semKey))}
-              className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white shadow-xl transition-all duration-300 hover:shadow-2xl text-center flex flex-col justify-between"
             >
               <div className="relative p-8 text-center">
-                <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl ${ys.bg} text-xl font-bold text-white shadow-sm`}>{Number(semKey) === 1 ? "I" : "II"}</div>
-                <h2 className="text-lg font-bold text-[#0F4C81]">{semData.label}</h2>
-                {courseType !== "pg" && <p className="mt-1 text-xs text-[#6B7280]">{semData.subjects.length} subjects</p>}
+                <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md text-2xl font-black text-amber-300 shadow-md">
+                  {Number(semKey) === 1 ? "SEM I" : "SEM II"}
+                </div>
+                <h2 className="text-xl font-black text-white">{semData.label}</h2>
+                {courseType !== "pg" && <p className="mt-1.5 text-xs text-rose-100 font-medium">{semData.subjects.length} Subjects</p>}
+                <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                  Explore Subjects <FiChevronRight size={12} />
+                </div>
               </div>
             </motion.button>
           ))}

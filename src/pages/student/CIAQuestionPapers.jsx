@@ -44,9 +44,9 @@ function Breadcrumb({ crumbs, onNavigate }) {
 }
 
 // ─── Selection Grid (Years or Semesters or CIAs) ───
-function SelectionGrid({ items, onSelect }) {
+function SelectionGrid({ items, onSelect, isCrimson }) {
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {items.map((item, i) => (
         <motion.button
           key={item.key}
@@ -56,27 +56,35 @@ function SelectionGrid({ items, onSelect }) {
           whileHover={{ y: -4 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => onSelect(item.key)}
-          className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40 text-left"
+          className={`group relative overflow-hidden rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl text-left ${
+            isCrimson
+              ? "bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white"
+              : "bg-white border border-[#E5E7EB] hover:border-[#1E88E5]/40"
+          }`}
         >
           <div className="relative flex items-center gap-4 p-5">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm transition-all">
+            <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl font-bold text-lg shadow-sm transition-transform group-hover:scale-105 ${
+              isCrimson ? "bg-white/20 backdrop-blur-md text-amber-300 border border-white/20" : "bg-[#0F4C81] text-white"
+            }`}>
               {item.icon ? (
-                <span className="text-lg font-bold">{item.icon}</span>
+                <span>{item.icon}</span>
               ) : (
                 <FiFolder size={22} />
               )}
             </div>
             <div className="min-w-0 flex-1">
-              <h3 className="font-sans text-base font-bold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">
+              <h3 className={`font-sans text-base font-extrabold transition-colors ${
+                isCrimson ? "text-white group-hover:text-amber-300" : "text-[#0F4C81] group-hover:text-[#1E88E5]"
+              }`}>
                 {item.label}
               </h3>
               {item.sub && (
-                <p className="mt-0.5 text-xs text-[#6B7280]">{item.sub}</p>
+                <p className={`mt-0.5 text-xs ${isCrimson ? "text-rose-100" : "text-[#6B7280]"}`}>{item.sub}</p>
               )}
             </div>
             <FiChevronRight
-              size={16}
-              className="text-slate-400 group-hover:text-[#1E88E5] transition-all shrink-0"
+              size={18}
+              className={`transition-all shrink-0 ${isCrimson ? "text-amber-300 group-hover:translate-x-1" : "text-slate-400 group-hover:text-[#1E88E5]"}`}
             />
           </div>
         </motion.button>
@@ -413,7 +421,7 @@ export default function CIAQuestionPapers() {
                 <p className="text-[11px] text-[#6B7280]">Choose your academic year</p>
               </div>
             </div>
-            <SelectionGrid items={years} onSelect={handleSelectYear} prefix="year" />
+            <SelectionGrid items={years} onSelect={handleSelectYear} prefix="year" isCrimson={true} />
           </div>
         )}
 
@@ -430,7 +438,7 @@ export default function CIAQuestionPapers() {
                 <p className="text-[11px] text-[#6B7280]">Choose a semester</p>
               </div>
             </div>
-            <SelectionGrid items={sems} onSelect={handleSelectSem} prefix="sem" />
+            <SelectionGrid items={sems} onSelect={handleSelectSem} prefix="sem" isCrimson={true} />
           </div>
         )}
 
