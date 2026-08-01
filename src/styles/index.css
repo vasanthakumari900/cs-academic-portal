@@ -31,23 +31,23 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    font-family: 'Arimo', sans-serif !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
     overflow-x: hidden !important;
     width: 100%;
     max-width: 100vw;
-    background-color: #F5EBD0 !important;
+    background-color: #EAE0CB !important;
     color: #7F011F !important;
   }
 
   * {
-    font-family: 'Arimo', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     box-sizing: border-box;
     max-width: 100%;
   }
 
   body {
-    font-family: 'Arimo', sans-serif !important;
-    @apply text-base leading-relaxed antialiased bg-[#F5EBD0] text-[#7F011F];
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    @apply text-base leading-relaxed antialiased bg-[#EAE0CB] text-[#7F011F];
     overflow-x: hidden !important;
     width: 100%;
     max-width: 100vw;
@@ -57,7 +57,7 @@
     overflow-x: hidden !important;
     max-width: 100vw;
     width: 100%;
-    background-color: #F5EBD0;
+    background-color: #EAE0CB;
   }
 
   /* ─── Mobile Media & Touch Optimizations ─── */
@@ -71,17 +71,17 @@
     min-height: 44px;
   }
 
-  /* ─── Global University Typography Hierarchy (Wine Red & Light Sand Theme) ─── */
+  /* ─── Global University Typography Hierarchy (Wine Red & Royal Warm Ivory Theme) ─── */
   h1, .h1 {
-    font-family: 'Arimo', sans-serif !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
     font-size: var(--fluid-text-4xl);
-    @apply font-bold text-[#7F011F] tracking-tight leading-tight;
+    @apply font-extrabold text-[#7F011F] tracking-tight leading-tight;
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
   h2, .h2 {
-    font-family: 'Arimo', sans-serif !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
     font-size: var(--fluid-text-3xl);
     @apply font-bold text-[#7F011F] tracking-tight leading-snug;
     word-break: break-word;
@@ -89,25 +89,25 @@
   }
 
   h3, .h3 {
-    font-family: 'Arimo', sans-serif !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
     font-size: var(--fluid-text-2xl);
-    @apply font-semibold text-[#7F011F] tracking-tight leading-snug;
+    @apply font-bold text-[#7F011F] tracking-tight leading-snug;
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
   h4, .h4 {
-    font-family: 'Arimo', sans-serif !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
     font-size: var(--fluid-text-xl);
-    @apply font-semibold text-[#7F011F] tracking-tight;
+    @apply font-bold text-[#7F011F] tracking-tight;
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
   h5, h6 {
-    font-family: 'Arimo', sans-serif !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
     font-size: var(--fluid-text-sm);
-    @apply font-medium text-[#7F011F] tracking-normal;
+    @apply font-semibold text-[#7F011F] tracking-normal;
     word-break: break-word;
     overflow-wrap: break-word;
   }
@@ -124,15 +124,15 @@
   }
 
   button, input, select, textarea {
-    font-family: 'Arimo', sans-serif !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
   }
 
   :focus-visible {
-    @apply outline-none ring-2 ring-[#7F011F]/40 ring-offset-2 ring-offset-[#F5EBD0] transition-all duration-150;
+    @apply outline-none ring-2 ring-[#7F011F]/40 ring-offset-2 ring-offset-[#FAF7F2] transition-all duration-150;
   }
 
   ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: #F5EBD0; }
+  ::-webkit-scrollbar-track { background: #FAF7F2; }
   ::-webkit-scrollbar-thumb { background: #E6DAB8; border-radius: 8px; }
   ::-webkit-scrollbar-thumb:hover { background: #D5C79E; }
 
@@ -149,32 +149,32 @@
 }
 
 @layer components {
-  /* ─── Wine Red & Light Sand Cards ─── */
+  /* ─── Wine Red & Royal Warm Ivory Cards ─── */
   .glass {
-    @apply bg-white border border-[#E6DAB8] shadow-sm text-[#7F011F];
+    @apply bg-[#FAF7F2] border border-[#E6DAB8] shadow-sm text-[#7F011F];
   }
   .glass-strong {
-    @apply bg-white border border-[#E6DAB8] shadow-md text-[#7F011F];
+    @apply bg-[#FAF7F2] border border-[#E6DAB8] shadow-md text-[#7F011F];
   }
   .glass-card {
-    @apply rounded-xl bg-white border border-[#E6DAB8] shadow-sm text-[#7F011F];
+    @apply rounded-xl bg-[#FAF7F2] border border-[#E6DAB8] shadow-sm text-[#7F011F];
   }
   .glass-card-hover {
-    @apply rounded-xl bg-white border border-[#E6DAB8] shadow-sm text-[#7F011F] transition-all duration-300 hover:shadow-md hover:border-[#7F011F]/40 hover:-translate-y-0.5;
+    @apply rounded-xl bg-[#FAF7F2] border border-[#E6DAB8] shadow-sm text-[#7F011F] transition-all duration-300 hover:shadow-md hover:border-[#7F011F]/40 hover:-translate-y-0.5;
   }
   .glass-card-strong {
-    @apply rounded-xl bg-white border border-[#E6DAB8] shadow-md text-[#7F011F];
+    @apply rounded-xl bg-[#FAF7F2] border border-[#E6DAB8] shadow-md text-[#7F011F];
   }
 
   /* ─── Surface Cards ─── */
   .premium-card {
-    @apply rounded-xl border border-[#E6DAB8] bg-white text-[#7F011F] shadow-sm transition-all duration-300;
+    @apply rounded-xl border border-[#E6DAB8] bg-[#FAF7F2] text-[#7F011F] shadow-sm transition-all duration-300;
   }
   .premium-card-hover {
-    @apply rounded-xl border border-[#E6DAB8] bg-white text-[#7F011F] shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 hover:border-[#7F011F]/50;
+    @apply rounded-xl border border-[#E6DAB8] bg-[#FAF7F2] text-[#7F011F] shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 hover:border-[#7F011F]/50;
   }
   .surface-elevated {
-    @apply rounded-xl bg-white text-[#7F011F] shadow-md border border-[#E6DAB8];
+    @apply rounded-xl bg-[#FAF7F2] text-[#7F011F] shadow-md border border-[#E6DAB8];
   }
 
   /* ─── Hero Grid ─── */
@@ -182,7 +182,7 @@
     background-color: transparent;
   }
 
-  /* ─── Wine Red & Light Sand Buttons ─── */
+  /* ─── Wine Red & Royal Warm Ivory Buttons ─── */
   .btn-premium {
     @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 disabled:opacity-50;
     min-height: 44px;
@@ -191,15 +191,15 @@
     @apply btn-premium bg-gradient-to-r from-[#7F011F] to-[#990227] text-white shadow-md hover:from-[#660119] hover:to-[#7F011F] active:scale-[0.97];
   }
   .btn-ghost {
-    @apply btn-premium bg-transparent text-[#6B4F45] hover:bg-[#EBDCAE] hover:text-[#7F011F];
+    @apply btn-premium bg-transparent text-[#6B4F45] hover:bg-[#FAF7F2] hover:text-[#7F011F];
   }
   .btn-outline {
-    @apply btn-premium border border-[#E6DAB8] text-[#7F011F] bg-white hover:bg-[#F5EBD0] hover:border-[#7F011F] hover:text-[#7F011F];
+    @apply btn-premium border border-[#E6DAB8] text-[#7F011F] bg-[#FAF7F2] hover:bg-[#F5EBD0] hover:border-[#7F011F] hover:text-[#7F011F];
   }
 
   /* ─── Premium Input ─── */
   .input-premium {
-    @apply w-full rounded-xl border border-[#E6DAB8] bg-white px-4 py-3 text-sm outline-none transition-all duration-200 text-[#7F011F] placeholder-[#9E8B76];
+    @apply w-full rounded-xl border border-[#E6DAB8] bg-[#FAF7F2] px-4 py-3 text-sm outline-none transition-all duration-200 text-[#7F011F] placeholder-[#9E8B76];
     @apply focus:border-[#7F011F] focus:ring-2 focus:ring-[#7F011F]/15 focus:shadow-sm;
     min-height: 44px;
   }
@@ -207,7 +207,7 @@
     @apply input-premium border-red-500/50 focus:border-red-500 focus:ring-red-500/10;
   }
 
-  /* ─── Premium Badges with Light Sand Accents ─── */
+  /* ─── Premium Badges with Royal Warm Ivory Accents ─── */
   .badge {
     @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider border;
   }
@@ -215,7 +215,7 @@
   .badge-success { @apply badge bg-emerald-50 text-emerald-800 border-emerald-200; }
   .badge-warning { @apply badge bg-amber-50 text-amber-900 border-amber-300; }
   .badge-danger { @apply badge bg-rose-50 text-rose-800 border-rose-200; }
-  .badge-sand { @apply badge bg-[#F5EBD0] text-[#7F011F] border-[#E6DAB8] font-extrabold; }
+  .badge-sand { @apply badge bg-[#FAF7F2] text-[#7F011F] border-[#E6DAB8] font-extrabold; }
 }
 
 @layer utilities {
@@ -238,7 +238,7 @@
 
   /* ─── Backgrounds ─── */
   .bg-mesh, .bg-mesh-cool, .bg-mesh-deep {
-    background: #F5EBD0;
+    background: #FAF7F2;
   }
 
   .bg-grid-subtle {
@@ -280,5 +280,31 @@
   /* ─── Accent bar ─── */
   .accent-bar {
     @apply absolute bottom-0 left-0 right-0 h-0.5 bg-[#7F011F] scale-x-0 group-hover:scale-x-100 transition-transform origin-left;
+  }
+
+  /* ─── Strict Warm Sand Non-White Background Enforcement ─── */
+  .bg-white,
+  .bg-slate-50,
+  .bg-slate-100,
+  .bg-slate-200,
+  .bg-gray-50,
+  .bg-gray-100,
+  .bg-zinc-50,
+  .bg-stone-50,
+  .bg-neutral-50,
+  [class*="bg-[#F8FAFC]"],
+  [class*="bg-[#f8fafc]"],
+  [class*="bg-[#F1F5F9]"],
+  [class*="bg-[#f1f5f9]"],
+  [class*="bg-[#FFFFFF]"],
+  [class*="bg-[#ffffff]"],
+  [class*="bg-[#FAF7F2]"],
+  [class*="bg-[#faf7f2]"] {
+    background-color: #EAE0CB !important;
+  }
+
+  [class*="bg-white/9"],
+  [class*="bg-white/8"] {
+    background-color: rgba(234, 224, 203, 0.95) !important;
   }
 }

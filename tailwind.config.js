@@ -5,6 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        white: "#EAE0CB",
         dark: {
           DEFAULT: "#021C4F",
           50: "#F8FAFC",
@@ -31,9 +32,9 @@ export default {
           dark: "#8F0226",
         },
         surface: {
-          DEFAULT: "#FFFFFF",
-          light: "#F8FAFC",
-          medium: "#E2E8F0",
+          DEFAULT: "#EAE0CB",
+          light: "#EAE0CB",
+          medium: "#DCD0B7",
         },
         heading: "#021C4F",
         body: "#334155",
@@ -44,13 +45,13 @@ export default {
         error: "#D32F2F",
       },
       fontFamily: {
-        sans: ["Arimo", "sans-serif"],
-        heading: ["Arimo", "sans-serif"],
-        serif: ["Arimo", "serif"],
+        sans: ["'Plus Jakarta Sans'", "sans-serif"],
+        heading: ["'Plus Jakarta Sans'", "sans-serif"],
+        serif: ["'Plus Jakarta Sans'", "serif"],
         mono: ["'JetBrains Mono'", "monospace"],
-        display: ["Arimo", "sans-serif"],
-        jakarta: ["Arimo", "sans-serif"],
-        grotesk: ["Arimo", "sans-serif"],
+        display: ["'Plus Jakarta Sans'", "sans-serif"],
+        jakarta: ["'Plus Jakarta Sans'", "sans-serif"],
+        grotesk: ["'Plus Jakarta Sans'", "sans-serif"],
       },
       borderRadius: {
         xl: "12px",

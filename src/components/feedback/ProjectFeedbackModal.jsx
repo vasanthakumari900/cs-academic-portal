@@ -249,8 +249,8 @@ export default function ProjectFeedbackModal({ isOpen, onClose, defaultType = "s
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
               {currentFeedback.questions.map((q) => (
-                <div key={q.id} className="bg-slate-50 rounded-2xl p-4 border border-slate-200/80 space-y-3">
-                  <label className="block text-xs sm:text-sm font-bold text-[#021C4F]">
+                <div key={q.id} className="bg-[#DFD3BB] rounded-2xl p-4 sm:p-5 border border-[#C5B79C] space-y-3 shadow-xs">
+                  <label className="block text-sm sm:text-base font-extrabold text-[#021C4F] leading-snug">
                     {q.question}
                   </label>
 
@@ -262,20 +262,20 @@ export default function ProjectFeedbackModal({ isOpen, onClose, defaultType = "s
                           key={star}
                           type="button"
                           onClick={() => handleRatingChange(q.id, star)}
-                          className="p-1 text-slate-300 hover:text-amber-400 transition-colors focus:outline-none"
+                          className="p-1 text-[#A08F74] hover:text-amber-500 transition-colors focus:outline-none"
                         >
                           <FiStar
-                            size={26}
+                            size={28}
                             className={
                               (answers[q.id] || 0) >= star
-                                ? "fill-amber-400 text-amber-400"
-                                : "text-slate-300"
+                                ? "fill-amber-500 text-amber-500 drop-shadow-xs"
+                                : "text-[#A08F74]"
                             }
                           />
                         </button>
                       ))}
                       {answers[q.id] && (
-                        <span className="ml-2 text-xs font-extrabold text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
+                        <span className="ml-2 text-xs font-black text-amber-900 bg-amber-200/90 px-3 py-1 rounded-full border border-amber-400 shadow-xs">
                           {answers[q.id]} / 5 Stars
                         </span>
                       )}
@@ -284,20 +284,20 @@ export default function ProjectFeedbackModal({ isOpen, onClose, defaultType = "s
 
                   {/* Choice Question */}
                   {q.type === "choice" && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
                       {q.options.map((opt) => (
                         <button
                           key={opt}
                           type="button"
                           onClick={() => handleChoiceChange(q.id, opt)}
-                          className={`flex items-center justify-between p-3 rounded-xl border text-xs font-bold transition-all text-left ${
+                          className={`flex items-center justify-between p-3.5 rounded-xl border text-xs font-black transition-all text-left ${
                             answers[q.id] === opt
-                              ? "bg-[#021C4F] text-white border-[#021C4F] shadow-sm"
-                              : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
+                              ? "bg-[#021C4F] text-white border-[#021C4F] shadow-md scale-[1.01]"
+                              : "bg-[#EAE0CB] text-[#021C4F] border-[#C5B79C] hover:bg-[#FAF7F2]"
                           }`}
                         >
                           <span>{opt}</span>
-                          {answers[q.id] === opt && <FiCheck size={14} className="text-amber-300" />}
+                          {answers[q.id] === opt && <FiCheck size={16} className="text-amber-300" />}
                         </button>
                       ))}
                     </div>
@@ -310,7 +310,7 @@ export default function ProjectFeedbackModal({ isOpen, onClose, defaultType = "s
                       value={answers[q.id] || ""}
                       onChange={(e) => handleTextChange(q.id, e.target.value)}
                       placeholder={q.placeholder}
-                      className="w-full rounded-xl border border-slate-200 bg-white p-3 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none focus:border-[#021C4F] focus:ring-2 focus:ring-[#021C4F]/10 font-medium"
+                      className="w-full rounded-xl border border-[#C5B79C] bg-[#EAE0CB] p-3.5 text-xs sm:text-sm text-[#021C4F] placeholder-[#7A6A54] outline-none focus:border-[#021C4F] focus:ring-2 focus:ring-[#021C4F]/20 font-bold"
                     />
                   )}
                 </div>

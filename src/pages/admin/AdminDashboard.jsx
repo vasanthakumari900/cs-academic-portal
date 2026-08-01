@@ -106,7 +106,7 @@ export default function AdminDashboard() {
                 <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" opacity={0.5} />
                 <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#64748B' }} />
                 <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: '#64748B' }} />
-                <Tooltip contentStyle={{ borderRadius: '8px', border: '1px solid #E5E7EB', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', fontSize: '13px', backgroundColor: '#FFFFFF' }} />
+                <Tooltip contentStyle={{ borderRadius: '8px', border: '1px solid #E5E7EB', boxShadow: '0 4px 12px rgba(0,0,0,0.05)', fontSize: '13px', backgroundColor: '#FAF7F2' }} />
                 <Bar dataKey="count" radius={[4, 4, 0, 0]} barSize={48}>
                   {chartData.map((entry, index) => (<Cell key={index} fill={entry.fill} />))}
                 </Bar>

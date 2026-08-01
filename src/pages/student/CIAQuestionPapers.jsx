@@ -52,11 +52,11 @@ function SelectionGrid({ items, onSelect, isCrimson }) {
           key={item.key}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: i * 0.06 }}
-          whileHover={{ y: -4 }}
-          whileTap={{ scale: 0.98 }}
+          transition={{ delay: i * 0.06, type: "spring", stiffness: 280, damping: 20 }}
+          whileHover={{ y: -6, scale: 1.02, boxShadow: "0 18px 36px -8px rgba(197, 3, 55, 0.25)" }}
+          whileTap={{ scale: 0.97 }}
           onClick={() => onSelect(item.key)}
-          className={`group relative overflow-hidden rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl text-left ${
+          className={`group relative overflow-hidden rounded-2xl transition-all duration-300 shadow-md text-left ${
             isCrimson
               ? "bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white"
               : "bg-white border border-[#E5E7EB] hover:border-[#1E88E5]/40"
@@ -455,7 +455,7 @@ export default function CIAQuestionPapers() {
                 <p className="text-[11px] text-[#6B7280]">Choose a CIA assessment</p>
               </div>
             </div>
-            <SelectionGrid items={cias} onSelect={handleSelectCia} prefix="cia" />
+            <SelectionGrid items={cias} onSelect={handleSelectCia} prefix="cia" isCrimson={true} />
           </div>
         )}
 

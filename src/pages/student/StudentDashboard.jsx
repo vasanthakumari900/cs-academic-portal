@@ -272,13 +272,13 @@ export default function StudentDashboard() {
             return (
               <motion.button
                 key={option.label}
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.05 }}
-                whileHover={{ y: -3 }}
-                whileTap={{ scale: 0.98 }}
+                transition={{ delay: idx * 0.06, type: "spring", stiffness: 260, damping: 20 }}
+                whileHover={{ y: -6, scale: 1.02, boxShadow: "0 16px 32px -8px rgba(2, 28, 79, 0.12)" }}
+                whileTap={{ scale: 0.96 }}
                 onClick={() => (option.isExternal ? window.open(option.href, "_blank") : navigate(option.to))}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white border border-slate-200 p-6 shadow-sm transition-all duration-200 hover:shadow-md hover:border-[#C50337] text-left"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white border border-slate-200 p-6 shadow-sm transition-all duration-300 hover:border-[#C50337] text-left"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">

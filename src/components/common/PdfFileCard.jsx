@@ -52,10 +52,12 @@ export default function PdfFileCard({ file, onView }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.25 }}
-      className="group relative flex flex-col justify-between overflow-hidden rounded-xl bg-white dark:bg-slate-900 border border-[#E5E7EB] dark:border-slate-800 shadow-sm transition-all duration-300 hover:shadow-md hover:border-[#0F4C81]/40 text-left p-5 gap-4"
+      whileHover={{ y: -5, scale: 1.015, boxShadow: "0 14px 28px -6px rgba(2, 28, 79, 0.1)" }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+      className="group relative flex flex-col justify-between overflow-hidden rounded-xl bg-white dark:bg-slate-900 border border-[#E5E7EB] dark:border-slate-800 shadow-sm transition-all duration-300 hover:border-[#0F4C81]/40 text-left p-5 gap-4"
     >
       <div className="space-y-3">
         {/* Header Icon + Title */}

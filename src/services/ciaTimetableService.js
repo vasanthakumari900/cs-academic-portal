@@ -18,11 +18,11 @@ import { CURRICULUM } from "../utils/curriculum";
 
 const COLLECTION_NAME = "ciaTimetables";
 
-// Year-wise exam timings specification
+// Year-wise exam timings specification (Shift II - Evening Shift)
 export const YEAR_EXAM_TIMINGS = {
-  1: "10:00 AM – 11:30 AM",
-  2: "12:00 PM – 1:30 PM",
-  3: "2:00 PM – 3:30 PM",
+  1: "02.00 p.m – 04.00 p.m",
+  2: "02.00 p.m – 04.00 p.m",
+  3: "04.30 p.m – 06.30 p.m",
 };
 
 /**
@@ -44,61 +44,162 @@ export function calculateDaysRemaining(examDateStr) {
 }
 
 /**
- * Generate sequential dates starting from 13 August 2026, skipping weekends (Saturday & Sunday).
+ * Official CIA - I August 2026 Timetable for UG (Shift II - Evening Shift)
  */
-export function generateExamDates(startDateStr, count) {
-  const dates = [];
-  const parts = startDateStr.split("-").map(Number);
-  let current = new Date(parts[0], parts[1] - 1, parts[2]);
-
-  while (dates.length < count) {
-    const dayOfWeek = current.getDay();
-    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
-      dates.push(new Date(current));
-    }
-    current.setDate(current.getDate() + 1);
-  }
-  return dates;
-}
+export const OFFICIAL_CIA_UG_TIMETABLES = {
+  1: [
+    {
+      id: "ug1_1",
+      year: 1,
+      semester: 1,
+      subject: "Language",
+      examDate: "2026-08-13",
+      dateDisplay: "13 August 2026 (Thursday)",
+      timing: "02.00 p.m – 04.00 p.m",
+      college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
+    },
+    {
+      id: "ug1_2",
+      year: 1,
+      semester: 1,
+      subject: "English",
+      examDate: "2026-08-14",
+      dateDisplay: "14 August 2026 (Friday)",
+      timing: "02.00 p.m – 04.00 p.m",
+      college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
+    },
+    {
+      id: "ug1_3",
+      year: 1,
+      semester: 1,
+      subject: "Python Programming Essentials",
+      examDate: "2026-08-17",
+      dateDisplay: "17 August 2026 (Monday)",
+      timing: "02.00 p.m – 04.00 p.m",
+      college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
+    },
+    {
+      id: "ug1_4",
+      year: 1,
+      semester: 1,
+      subject: "Mathematics I",
+      examDate: "2026-08-18",
+      dateDisplay: "18 August 2026 (Tuesday)",
+      timing: "02.00 p.m – 04.00 p.m",
+      college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
+    },
+  ],
+  2: [
+    {
+      id: "ug2_1",
+      year: 2,
+      semester: 1,
+      subject: "Language",
+      examDate: "2026-08-13",
+      dateDisplay: "13 August 2026 (Thursday)",
+      timing: "02.00 p.m – 04.00 p.m",
+      college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
+    },
+    {
+      id: "ug2_2",
+      year: 2,
+      semester: 1,
+      subject: "English",
+      examDate: "2026-08-14",
+      dateDisplay: "14 August 2026 (Friday)",
+      timing: "02.00 p.m – 04.00 p.m",
+      college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
+    },
+    {
+      id: "ug2_3",
+      year: 2,
+      semester: 1,
+      subject: "Object Oriented Programming Concepts using Java",
+      examDate: "2026-08-17",
+      dateDisplay: "17 August 2026 (Monday)",
+      timing: "02.00 p.m – 04.00 p.m",
+      college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
+    },
+    {
+      id: "ug2_4",
+      year: 2,
+      semester: 1,
+      subject: "Principles of Operating Systems",
+      examDate: "2026-08-18",
+      dateDisplay: "18 August 2026 (Tuesday)",
+      timing: "02.00 p.m – 04.00 p.m",
+      college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
+    },
+    {
+      id: "ug2_5",
+      year: 2,
+      semester: 1,
+      subject: "DSE I(A) - Web Application Development Using REACTJS and NODE.JS / DSE I(B) - Web Application Development Using AngularJS and NodeJS",
+      examDate: "2026-08-19",
+      dateDisplay: "19 August 2026 (Wednesday)",
+      timing: "02.00 p.m – 04.00 p.m",
+      college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
+    },
+    {
+      id: "ug2_6",
+      year: 2,
+      semester: 1,
+      subject: "Statistics I",
+      examDate: "2026-08-20",
+      dateDisplay: "20 August 2026 (Thursday)",
+      timing: "02.00 p.m – 04.00 p.m",
+      college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
+    },
+  ],
+  3: [
+    {
+      id: "ug3_1",
+      year: 3,
+      semester: 1,
+      subject: "Operating Systems",
+      examDate: "2026-08-13",
+      dateDisplay: "13 August 2026 (Thursday)",
+      timing: "04.30 p.m – 06.30 p.m",
+      college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
+    },
+    {
+      id: "ug3_2",
+      year: 3,
+      semester: 1,
+      subject: "Database Management Systems",
+      examDate: "2026-08-14",
+      dateDisplay: "14 August 2026 (Friday)",
+      timing: "04.30 p.m – 06.30 p.m",
+      college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
+    },
+    {
+      id: "ug3_3",
+      year: 3,
+      semester: 1,
+      subject: "Data Mining Techniques",
+      examDate: "2026-08-17",
+      dateDisplay: "17 August 2026 (Monday)",
+      timing: "04.30 p.m – 06.30 p.m",
+      college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
+    },
+    {
+      id: "ug3_4",
+      year: 3,
+      semester: 1,
+      subject: "ASP DOT NET Programming",
+      examDate: "2026-08-18",
+      dateDisplay: "18 August 2026 (Tuesday)",
+      timing: "04.30 p.m – 06.30 p.m",
+      college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
+    },
+  ],
+};
 
 /**
- * Generate default CIA Semester 1 Timetable for all 3 years starting 13 August 2026.
+ * Return official CIA UG Timetables
  */
 export function getDefaultCiaTimetables() {
-  const timetables = { 1: [], 2: [], 3: [] };
-  const startDateStr = "2026-08-13"; // Thursday, 13 August 2026
-
-  [1, 2, 3].forEach((year) => {
-    const subjects = CURRICULUM[year]?.semesters?.[1]?.subjects || [];
-    const examDates = generateExamDates(startDateStr, subjects.length);
-
-    timetables[year] = subjects.map((subject, index) => {
-      const dateObj = examDates[index];
-      const y = dateObj.getFullYear();
-      const m = String(dateObj.getMonth() + 1).padStart(2, "0");
-      const d = String(dateObj.getDate()).padStart(2, "0");
-      const isoDate = `${y}-${m}-${d}`;
-
-      const dateDisplay = dateObj.toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
-
-      return {
-        id: `default_${year}_${index}`,
-        year: parseInt(year),
-        semester: 1,
-        subject,
-        examDate: isoDate,
-        dateDisplay,
-        timing: YEAR_EXAM_TIMINGS[year],
-        college: "Dwaraka Doss Goverdhan Doss Vaishnav College (DDGDVC)",
-      };
-    });
-  });
-
-  return timetables;
+  return OFFICIAL_CIA_UG_TIMETABLES;
 }
 
 /**
