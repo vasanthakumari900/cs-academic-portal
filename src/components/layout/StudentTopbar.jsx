@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
-import csDragonLogo from "../../assets/cs-dragon-logo.jpg";
+import csPortalLogo from "../../assets/cs-portal-logo-transparent.png";
 
 export default function StudentTopbar() {
   const { logout } = useAuth();
@@ -26,13 +26,13 @@ export default function StudentTopbar() {
           <div className="flex items-center gap-2.5 shrink min-w-0">
             <button
               onClick={() => setLogoModalOpen(true)}
-              className="relative flex h-11 w-11 sm:h-13 sm:w-13 items-center justify-center rounded-xl bg-slate-900 border border-white/20 shadow-md hover:scale-105 transition-all shrink-0 overflow-hidden cursor-pointer"
+              className="relative flex h-13 w-13 sm:h-16 sm:w-16 items-center justify-center rounded-xl bg-[#FAF7F2] border border-white/20 shadow-md hover:scale-105 transition-all shrink-0 overflow-hidden cursor-pointer p-1"
               title="Click to view logo in full screen"
             >
               <img
-                src={csDragonLogo}
-                alt="CS Dragon Logo"
-                className="h-full w-full object-contain p-0.5"
+                src={csPortalLogo}
+                alt="CS Academic Portal Logo"
+                className="h-full w-full object-contain"
               />
             </button>
 
@@ -108,18 +108,10 @@ export default function StudentTopbar() {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={csDragonLogo}
-              alt="Computer Science Cyber Dragon Logo Full View"
-              className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border-2 border-cyan-500/40 bg-slate-900"
+              src={csPortalLogo}
+              alt="CS Academic Portal Logo Full View"
+              className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border-2 border-[#7F011F]/30 bg-[#FAF7F2] p-4"
             />
-            <div className="mt-5 text-center">
-              <h3 className="text-xl sm:text-3xl font-black text-amber-400 tracking-wider uppercase">
-                Computer Science Department
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-300 font-semibold mt-1">
-                DDGDVC CS Academic Portal Emblem
-              </p>
-            </div>
           </motion.div>
         </motion.div>
       )}

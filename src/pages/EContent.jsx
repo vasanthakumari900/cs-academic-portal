@@ -14,6 +14,8 @@ import toast from "react-hot-toast";
 import { NOTES_DATA, SEMESTER_UNITS, NAME_ONLY_MAP } from "./Notes";
 import { CURRICULUM } from "../utils/curriculum";
 import PdfFileCard from "../components/common/PdfFileCard";
+import { getSubjectIcon } from "../utils/subjectIcons";
+import watchVideoBtnImg from "../assets/watch-video-btn.png";
 
 
 const SUBJECT_PLAYLISTS = {
@@ -638,13 +640,13 @@ export default function EContent() {
                 </div>
               </div>
 
-              <div className="p-4 pt-0 flex items-center gap-2">
+              <div className="p-4 pt-0 flex items-center justify-between gap-2">
                 <button
                   onClick={() => setPlaying(video)}
-                  className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-[#021C4F] hover:bg-[#C50337] px-4 py-2.5 text-xs font-bold text-white shadow-sm transition-all"
+                  className="cursor-pointer focus:outline-none hover:scale-105 active:scale-95 transition-transform"
+                  title="Watch Video"
                 >
-                  <FiPlayCircle size={14} />
-                  <span>Watch Video</span>
+                  <img src={watchVideoBtnImg} alt="Watch Video" className="h-10 sm:h-11 w-auto object-contain drop-shadow-sm" />
                 </button>
                 <a
                   href={video.url}
@@ -770,8 +772,8 @@ export default function EContent() {
                   className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
                 >
                   <div className="relative flex items-start gap-4 p-5">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm transition-all duration-300 group-hover:scale-105">
-                      <FiBook size={22} />
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#FAF7F2] border border-[#E6DAB8] shadow-sm transition-all duration-300 group-hover:scale-105">
+                      {getSubjectIcon(subject, 26)}
                     </div>
                     <div className="min-w-0 flex-1 pt-1 text-left">
                       <h3 className="font-sans font-bold text-sm text-[#0F4C81] leading-snug">{subject}</h3>
@@ -808,7 +810,9 @@ export default function EContent() {
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiBookOpen size={28} /></div>
+            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-[#FAF7F2] border border-[#E6DAB8] shadow-sm p-1">
+              {getSubjectIcon(selectedSubject, 32)}
+            </div>
             <div>
               <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">{selectedSubject}</h1>
               <div className="flex items-center gap-3 mt-1">
@@ -989,7 +993,7 @@ export default function EContent() {
           const isActive = isThirdYear || Boolean(playlistUrl) || subjectVideos.length > 0;
 
           return (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-center">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-center mt-6">
               <button
                 onClick={() => {
                   if (hasPresetVideos || subjectVideos.length > 0) {
@@ -1004,19 +1008,16 @@ export default function EContent() {
                     toast.error("Videos are not yet available for this subject");
                   }
                 }}
-                className={`group inline-flex items-center gap-2.5 rounded-xl px-8 py-3.5 text-sm font-bold text-white shadow-sm transition-all active:scale-[0.97] ${
-                  isActive
-                    ? "bg-[#0F4C81] hover:bg-[#1E88E5] hover:shadow-md cursor-pointer"
-                    : "bg-slate-300 cursor-not-allowed text-slate-500 shadow-none"
+                className={`group cursor-pointer focus:outline-none transition-transform hover:scale-105 active:scale-95 ${
+                  isActive ? "opacity-100" : "opacity-60"
                 }`}
+                title={`Watch Videos for ${selectedSubject}`}
               >
-                <FiPlayCircle size={20} />
-                Watch Videos
-                {playlistUrl && !hasPresetVideos ? (
-                  <FiExternalLink size={15} className="transition-transform group-hover:translate-x-0.5" />
-                ) : (
-                  <FiChevronRight size={14} className="transition-transform group-hover:translate-x-0.5" />
-                )}
+                <img
+                  src={watchVideoBtnImg}
+                  alt="Watch Video"
+                  className="h-14 sm:h-16 w-auto object-contain drop-shadow-md"
+                />
               </button>
             </motion.div>
           );

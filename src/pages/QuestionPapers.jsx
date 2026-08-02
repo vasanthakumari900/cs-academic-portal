@@ -14,6 +14,7 @@ import { uploadFile } from "../services/storageService";
 import toast from "react-hot-toast";
 import { downloadDriveFile } from "../utils/downloadUtils";
 import PdfFileCard from "../components/common/PdfFileCard";
+import { getSubjectIcon } from "../utils/subjectIcons";
 
 
 const CURRICULUM = {
@@ -528,7 +529,9 @@ const refetch = () => {};
                   className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
                 >
                   <div className="relative flex items-start gap-4 p-5 text-left">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm transition-all"><FiFileText size={22} /></div>
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#FAF7F2] border border-[#E6DAB8] shadow-sm transition-all">
+                      {getSubjectIcon(subject, 26)}
+                    </div>
                     <div className="min-w-0 flex-1 pt-1">
                       <h3 className="font-sans font-bold text-sm text-[#0F4C81] leading-snug">{subject}</h3>
                       {FACULTY_MAP[subject] && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-[#6B7280]">{FACULTY_MAP[subject]}</p>}

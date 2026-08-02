@@ -1,6 +1,5 @@
-// src/utils/pdfGenerator.js
-// Generates real educational PDF content on-the-fly using jsPDF.
 import { jsPDF } from "jspdf";
+import { LOGO_TRANS_BASE64 } from "../assets/logoBase64";
 
 /**
  * Generate a real PDF for a lecture note with actual subject content.
@@ -32,27 +31,34 @@ export function generateNotePdf(note) {
   doc.setFillColor(30, 64, 175);
   doc.rect(0, 6, pageW, 2, "F");
 
-  // College name — centered
+  // Official CS Academic Portal Department Seal Logo
+  try {
+    doc.addImage(LOGO_TRANS_BASE64, "PNG", (pageW - 28) / 2, 14, 28, 28);
+  } catch (err) {
+    console.error("PDF logo render error:", err);
+  }
+
+  // College name — centered below logo
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(16);
+  doc.setFontSize(15);
   doc.setTextColor(37, 99, 235);
-  doc.text("DWARAKA DOSS GOVERDHAN DOSS VAISHNAV COLLEGE", pageW / 2, 25, { align: "center" });
+  doc.text("DWARAKA DOSS GOVERDHAN DOSS VAISHNAV COLLEGE", pageW / 2, 48, { align: "center" });
 
   doc.setFontSize(10);
   doc.setTextColor(100, 100, 140);
-  doc.text("Department of Computer Science", pageW / 2, 33, { align: "center" });
+  doc.text("Department of Computer Science — Academic Portal", pageW / 2, 55, { align: "center" });
 
   // Decorative line
   doc.setDrawColor(37, 99, 235);
   doc.setLineWidth(0.8);
-  doc.line(margin, 40, pageW - margin, 40);
+  doc.line(margin, 60, pageW - margin, 60);
 
   // Title
   doc.setFont("helvetica", "bold");
   doc.setFontSize(20);
   doc.setTextColor(30, 30, 50);
   const lines = doc.splitTextToSize(note.title, pageW - 2 * margin - 10);
-  y = 55;
+  y = 75;
   doc.text(lines, pageW / 2, y, { align: "center" });
 
   // Subject & Faculty
@@ -142,17 +148,23 @@ export function generateQuestionPaperPdf(paper) {
   doc.setFillColor(30, 64, 175);
   doc.rect(0, 6, pageW, 2, "F");
 
+  try {
+    doc.addImage(LOGO_TRANS_BASE64, "PNG", 16, 12, 22, 22);
+  } catch (err) {
+    console.error("PDF question paper logo error:", err);
+  }
+
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(16);
+  doc.setFontSize(14);
   doc.setTextColor(37, 99, 235);
-  doc.text("DWARAKA DOSS GOVERDHAN DOSS VAISHNAV COLLEGE", pageW / 2, 25, { align: "center" });
+  doc.text("DWARAKA DOSS GOVERDHAN DOSS VAISHNAV COLLEGE", 115, 22, { align: "center" });
   doc.setFontSize(10);
   doc.setTextColor(100, 100, 140);
-  doc.text("Department of Computer Science", pageW / 2, 33, { align: "center" });
+  doc.text("Department of Computer Science — Autonomous", 115, 29, { align: "center" });
 
   doc.setDrawColor(37, 99, 235);
   doc.setLineWidth(0.8);
-  doc.line(margin, 40, pageW - margin, 40);
+  doc.line(margin, 38, pageW - margin, 38);
 
   // Exam title
   y = 55;

@@ -16,6 +16,7 @@ import {
 } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { jsPDF } from "jspdf";
+import { LOGO_TRANS_BASE64 } from "../../assets/logoBase64";
 import {
   DEMO_STUDENT_PROFILE,
   DEMO_STUDENT_APPLICATIONS,
@@ -33,16 +34,22 @@ export default function StudentPlacementTab({ onApplyCompany }) {
 
       // Header
       doc.setFillColor(2, 28, 79); // #021C4F
-      doc.rect(0, 0, 210, 40, "F");
+      doc.rect(0, 0, 210, 42, "F");
+
+      try {
+        doc.addImage(LOGO_TRANS_BASE64, "PNG", 12, 6, 30, 30);
+      } catch (e) {
+        console.error("Offer PDF logo error:", e);
+      }
 
       doc.setTextColor(255, 255, 255);
       doc.setFont("helvetica", "bold");
-      doc.setFontSize(20);
-      doc.text("DWARAKA DOSS GOVERDHAN DOSS VAISHNAV COLLEGE", 105, 18, { align: "center" });
+      doc.setFontSize(16);
+      doc.text("DWARAKA DOSS GOVERDHAN DOSS VAISHNAV COLLEGE", 118, 18, { align: "center" });
 
-      doc.setFontSize(12);
+      doc.setFontSize(11);
       doc.setFont("helvetica", "normal");
-      doc.text("DEPARTMENT OF COMPUTER SCIENCE — PLACEMENT CELL", 105, 28, { align: "center" });
+      doc.text("DEPARTMENT OF COMPUTER SCIENCE — PLACEMENT CELL", 118, 28, { align: "center" });
 
       // Title
       doc.setTextColor(15, 76, 129);

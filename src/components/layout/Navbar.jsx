@@ -15,7 +15,7 @@ import { FaGraduationCap } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import csDragonLogo from "../../assets/cs-dragon-logo.jpg";
+import csPortalLogo from "../../assets/cs-portal-logo-transparent.png";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -84,17 +84,17 @@ export default function Navbar() {
       <header className="fixed top-0 left-0 right-0 z-50 px-2 sm:px-4 py-2 transition-all">
         <div className="mx-auto max-w-[1440px] bg-white/95 backdrop-blur-md rounded-2xl shadow-md border-t-4 border-[#7F011F] border-x border-b border-gray-100 px-3 sm:px-6 py-2 flex items-center justify-between gap-3 sm:gap-4">
           
-          {/* Left Brand CS Dragon Logo */}
+          {/* Left Brand CS Academic Portal Logo */}
           <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
             <button
               onClick={() => setLogoModalOpen(true)}
-              className="cursor-pointer focus:outline-none group"
+              className="cursor-pointer focus:outline-none group p-1 rounded-xl hover:bg-[#F5EBD0]/50 transition-colors"
               title="Click to view logo in full screen"
             >
               <img
-                src={csDragonLogo}
-                alt="Computer Science Dragon Logo"
-                className="h-12 sm:h-14 md:h-16 w-auto object-contain rounded-xl shadow-md border border-slate-700/20 bg-slate-900 transition-transform group-hover:scale-105 shrink-0"
+                src={csPortalLogo}
+                alt="CS Academic Portal Logo"
+                className="h-14 sm:h-16 md:h-20 w-auto object-contain transition-transform group-hover:scale-105 shrink-0 drop-shadow-sm"
               />
             </button>
             
@@ -333,18 +333,10 @@ export default function Navbar() {
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src={csDragonLogo}
-                alt="Computer Science Cyber Dragon Logo Full View"
-                className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border-2 border-cyan-500/40 bg-slate-900"
+                src={csPortalLogo}
+                alt="CS Academic Portal Logo Full View"
+                className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border-2 border-[#7F011F]/30 bg-[#FAF7F2] p-4"
               />
-              <div className="mt-5 text-center">
-                <h3 className="text-xl sm:text-3xl font-black text-amber-400 tracking-wider uppercase">
-                  Computer Science Department
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-300 font-semibold mt-1">
-                  DDGDVC CS Academic Portal Emblem
-                </p>
-              </div>
             </motion.div>
           </motion.div>
         )}

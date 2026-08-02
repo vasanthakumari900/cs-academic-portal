@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import { CURRICULUM } from "../utils/curriculum";
 import { downloadDriveFile } from "../utils/downloadUtils";
 import PdfFileCard from "../components/common/PdfFileCard";
+import { getSubjectIcon } from "../utils/subjectIcons";
 
 
 const yearStyles = {
@@ -1149,7 +1150,9 @@ export default function Notes() {
                   className="glass-card-hover group bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
                 >
                   <div className="relative flex items-start gap-4 p-5 text-left">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm transition-all duration-300 group-hover:scale-105"><FiFileText size={22} /></div>
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#FAF7F2] border border-[#E6DAB8] shadow-sm transition-all duration-300 group-hover:scale-105">
+                      {getSubjectIcon(subject, 26)}
+                    </div>
                     <div className="min-w-0 flex-1 pt-1">
                       <h3 className="font-sans font-bold text-sm text-[#0F4C81] leading-snug">{subject}</h3>
                       {facultyName && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-[#6B7280]">{facultyName}</p>}
@@ -1427,7 +1430,9 @@ export default function Notes() {
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiBookOpen size={28} /></div>
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-[#FAF7F2] border border-[#E6DAB8] shadow-sm p-1">
+            {getSubjectIcon(selectedSubject, 32)}
+          </div>
           <div>
             <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">{selectedSubject}</h1>
             <div className="flex items-center gap-3 mt-1">

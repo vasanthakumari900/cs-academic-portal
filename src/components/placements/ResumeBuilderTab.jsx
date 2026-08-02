@@ -16,6 +16,7 @@ import {
 } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { jsPDF } from "jspdf";
+import { LOGO_TRANS_BASE64 } from "../../assets/logoBase64";
 import { RESUME_TEMPLATES, DEMO_STUDENT_PROFILE } from "../../utils/placementMockData";
 
 export default function ResumeBuilderTab() {
@@ -45,6 +46,13 @@ export default function ResumeBuilderTab() {
       // Top Accent Line
       doc.setFillColor(2, 28, 79); // #021C4F
       doc.rect(0, 0, 210, 15, "F");
+
+      // Department Seal Logo on Top Right
+      try {
+        doc.addImage(LOGO_TRANS_BASE64, "PNG", 168, 18, 22, 22);
+      } catch (err) {
+        console.error("Resume PDF logo error:", err);
+      }
 
       // Name & Contact Header
       doc.setTextColor(2, 28, 79);

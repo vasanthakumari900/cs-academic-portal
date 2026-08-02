@@ -16,6 +16,7 @@ import {
   ensurePdfExtension,
 } from "../../utils/downloadUtils";
 import { formatDate } from "../../utils/helpers";
+import { getSubjectIcon } from "../../utils/subjectIcons";
 
 export default function PdfFileCard({ file, onView }) {
   if (!file) return null;
@@ -62,8 +63,8 @@ export default function PdfFileCard({ file, onView }) {
       <div className="space-y-3">
         {/* Header Icon + Title */}
         <div className="flex items-start gap-3">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81]/10 text-[#0F4C81] dark:bg-sky-950 dark:text-sky-400">
-            <FiFileText size={22} />
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#FAF7F2] border border-[#E6DAB8] shadow-sm">
+            {getSubjectIcon(subject, 22)}
           </div>
 
           <div className="min-w-0 flex-1">

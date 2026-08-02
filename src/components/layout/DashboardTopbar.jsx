@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
-import csDragonLogo from "../../assets/cs-dragon-logo.jpg";
+import csPortalLogo from "../../assets/cs-portal-logo-transparent.png";
 
 export default function DashboardTopbar({ onMenuToggle }) {
   const { user, logout } = useAuth();
@@ -32,10 +32,10 @@ export default function DashboardTopbar({ onMenuToggle }) {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setLogoModalOpen(true)}
-                className="flex h-11 w-11 sm:h-13 sm:w-13 items-center justify-center rounded-xl bg-slate-900 shadow-md shrink-0 border border-white/20 overflow-hidden cursor-pointer hover:scale-105 transition-transform"
+                className="flex h-13 w-13 sm:h-16 sm:w-16 items-center justify-center rounded-xl bg-[#FAF7F2] shadow-md shrink-0 border border-white/20 overflow-hidden cursor-pointer hover:scale-105 transition-transform p-1"
                 title="Click to view logo in full screen"
               >
-                <img src={csDragonLogo} alt="CS Dragon Logo" className="h-full w-full object-contain p-0.5" />
+                <img src={csPortalLogo} alt="CS Academic Portal Logo" className="h-full w-full object-contain" />
               </button>
               <div className="hidden xs:block leading-tight text-left">
                 <p className="text-xs sm:text-sm font-black text-white tracking-wide">
@@ -107,18 +107,10 @@ export default function DashboardTopbar({ onMenuToggle }) {
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src={csDragonLogo}
-                alt="Computer Science Cyber Dragon Logo Full View"
-                className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border-2 border-cyan-500/40 bg-slate-900"
+                src={csPortalLogo}
+                alt="CS Academic Portal Logo Full View"
+                className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border-2 border-[#7F011F]/30 bg-[#FAF7F2] p-4"
               />
-              <div className="mt-5 text-center">
-                <h3 className="text-xl sm:text-3xl font-black text-amber-400 tracking-wider uppercase">
-                  Computer Science Department
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-300 font-semibold mt-1">
-                  DDGDVC CS Academic Portal Emblem
-                </p>
-              </div>
             </motion.div>
           </motion.div>
         )}
