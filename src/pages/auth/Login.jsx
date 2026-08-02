@@ -11,6 +11,7 @@ import {
 import { useAuth } from "../../context/AuthContext";
 import { logStudentLogin } from "../../services/activityLoggerService";
 import collegeLogo from "../../assets/college-logo.jpg";
+import LiveDateTime from "../../components/common/LiveDateTime";
 
 function generateCaptcha() {
   let code = "";
@@ -18,26 +19,6 @@ function generateCaptcha() {
     code += Math.floor(Math.random() * 10);
   }
   return code;
-}
-
-function LiveClock() {
-  const [now, setNow] = useState(new Date());
-  useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(t);
-  }, []);
-  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-  const dayName = days[now.getDay()];
-  const dateStr = `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
-  const timeStr = now.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-  return (
-    <div className="inline-flex items-center gap-3 sm:gap-4 text-sm sm:text-base font-semibold text-[#6B4F45]">
-      <span className="flex items-center gap-2 text-[#7F011F]"><FiCalendar size={16} /> {dayName}, {dateStr}</span>
-      <span className="text-[#E6DAB8]">|</span>
-      <span className="flex items-center gap-2 font-mono tracking-wider text-[#7F011F]"><FiClock size={16} /> {timeStr}</span>
-    </div>
-  );
 }
 
 export default function Login() {
@@ -130,8 +111,8 @@ export default function Login() {
   return (
     <div className="relative flex min-h-screen overflow-hidden bg-[#F5EBD0]">
       {/* Main Content */}
-      <div className="relative z-10 flex w-full min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-        <div className="flex w-full max-w-6xl flex-col lg:flex-row items-center gap-8 lg:gap-12 text-left">
+      <div className="relative z-10 flex w-full min-h-screen items-center justify-center px-3 py-4 sm:px-6 lg:px-8">
+        <div className="flex w-full max-w-6xl flex-col lg:flex-row items-center justify-center gap-6 lg:gap-10 text-left">
           
           {/* Left: Welcome Section (Desktop) */}
           <motion.div
@@ -145,41 +126,41 @@ export default function Login() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="mb-6"
+              className="mb-3"
             >
               <img
                 src={collegeLogo}
                 alt="DGVC College Logo"
-                className="h-auto w-[32rem] object-contain rounded-lg border border-[#E6DAB8] shadow-sm bg-white p-2"
+                className="h-auto w-full max-w-[28rem] xl:max-w-[32rem] object-contain rounded-lg border border-[#E6DAB8] shadow-sm bg-white p-2"
               />
             </motion.div>
 
             {/* Title */}
-            <h1 className="font-sans text-4xl xl:text-5xl font-bold leading-tight text-[#7F011F]">
+            <h1 className="font-sans text-3xl xl:text-4xl font-bold leading-tight text-[#7F011F]">
               CS Academic Portal
             </h1>
 
-            <p className="mt-3 text-base xl:text-lg text-[#7F011F] font-semibold">
+            <p className="mt-0.5 text-sm xl:text-base text-[#7F011F] font-semibold">
               Department of Computer Science
             </p>
 
-            <p className="mt-2 text-sm text-[#6B4F45] max-w-md leading-relaxed">
+            <p className="mt-1 text-xs xl:text-sm text-[#6B4F45] max-w-md leading-relaxed">
               Your single home for lecture notes, video lessons, question papers, and placement resources — all in one organized, searchable system.
             </p>
 
             {/* Feature chips */}
-            <div className="mt-8 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap gap-1.5 sm:gap-2">
               {["Lecture Notes", "Video Lessons", "Question Papers", "Placement Drives"].map((item) => (
-                <span key={item} className="inline-flex items-center gap-1.5 rounded-full bg-white border border-[#E6DAB8] px-3.5 py-1.5 text-[11px] font-semibold text-[#7F011F] shadow-sm">
+                <span key={item} className="inline-flex items-center gap-1.5 rounded-full bg-white border border-[#E6DAB8] px-3 py-1 text-[11px] font-semibold text-[#7F011F] shadow-xs">
                   <FiStar size={10} className="text-[#7F011F]" />
                   {item}
                 </span>
               ))}
             </div>
 
-            {/* Clock */}
-            <div className="mt-10 rounded-xl bg-white border border-[#E6DAB8] px-6 py-4 shadow-sm">
-              <LiveClock />
+            {/* Live Calendar & Digital Clock */}
+            <div className="mt-4 w-full max-w-md">
+              <LiveDateTime />
             </div>
           </motion.div>
 
@@ -191,30 +172,28 @@ export default function Login() {
             className="w-full max-w-md lg:w-1/2"
           >
             {/* Mobile branding */}
-            <div className="lg:hidden mb-6 text-center">
+            <div className="lg:hidden mb-4 text-center">
               <img
                 src={collegeLogo}
                 alt="DGVC College Logo"
-                className="mx-auto mb-4 h-auto w-full max-w-[20rem] object-contain rounded-lg border border-[#E6DAB8] shadow-sm bg-white p-2"
+                className="mx-auto mb-3 h-auto w-full max-w-[22rem] sm:max-w-[24rem] object-contain rounded-lg border border-[#E6DAB8] shadow-sm bg-white p-2"
               />
               <h2 className="font-sans text-2xl font-bold text-[#7F011F]">
                 CS Academic Portal
               </h2>
-              <p className="mt-1 text-xs text-[#7F011F] font-semibold">
+              <p className="mt-0.5 text-xs text-[#7F011F] font-semibold">
                 Department of Computer Science
               </p>
-              <div className="mt-4 flex justify-center">
-                <div className="rounded-xl bg-white border border-[#E6DAB8] px-4 py-2 shadow-sm">
-                  <LiveClock />
-                </div>
+              <div className="mt-3 flex justify-center w-full">
+                <LiveDateTime />
               </div>
             </div>
 
             {/* Login Card */}
-            <div className="rounded-xl border border-[#E6DAB8] bg-white shadow-sm p-6 sm:p-10 text-left">
+            <div className="rounded-xl border border-[#E6DAB8] bg-white shadow-md p-5 sm:p-7 text-left">
               <div className="relative">
                 {/* Tab Switcher */}
-                <div className="mb-6 flex rounded-lg bg-[#F5EBD0] p-1 border border-[#E6DAB8]">
+                <div className="mb-4 flex rounded-lg bg-[#F5EBD0] p-1 border border-[#E6DAB8]">
                   <button
                     type="button"
                     onClick={() => { setActiveTab("student"); setCaptcha(""); refreshCaptcha(); }}

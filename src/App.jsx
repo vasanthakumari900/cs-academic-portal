@@ -78,14 +78,49 @@ import ManageCiaTimetable from "./pages/admin/ManageCiaTimetable";
 import ChatBot from "./components/chatbot/ChatBot";
 
 const pageVariants = {
-  initial: { opacity: 0, y: 12 },
-  enter: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
-  exit: { opacity: 0, y: -8, transition: { duration: 0.2, ease: "easeIn" } },
+  initial: { 
+    opacity: 0, 
+    rotateY: 65, 
+    x: "40%",
+    scale: 0.85,
+    transformPerspective: 1200,
+    transformOrigin: "right center"
+  },
+  enter: { 
+    opacity: 1, 
+    rotateY: 0, 
+    x: 0,
+    scale: 1,
+    transformPerspective: 1200,
+    transformOrigin: "center center",
+    transition: { 
+      duration: 0.5, 
+      ease: [0.25, 1, 0.5, 1] 
+    } 
+  },
+  exit: { 
+    opacity: 0, 
+    rotateY: -65, 
+    x: "-40%",
+    scale: 0.85,
+    transformPerspective: 1200,
+    transformOrigin: "left center",
+    transition: { 
+      duration: 0.4, 
+      ease: [0.5, 0, 0.75, 0] 
+    } 
+  },
 };
 
 function AnimatedPage({ children }) {
   return (
-    <motion.div variants={pageVariants} initial="initial" animate="enter" exit="exit">
+    <motion.div 
+      variants={pageVariants} 
+      initial="initial" 
+      animate="enter" 
+      exit="exit"
+      className="w-full h-full [perspective:1200px]"
+    >
       {children}
     </motion.div>
   );

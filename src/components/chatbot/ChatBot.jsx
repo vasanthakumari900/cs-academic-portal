@@ -478,9 +478,9 @@ export default function ChatBot() {
     }
   }, [messages, isOpen]);
 
-  const chatWidth = isFullscreen ? "w-[95vw] sm:w-[90vw] md:w-[80vw] lg:w-[70vw]" : "w-[clamp(280px,94vw,440px)]";
-  const chatHeight = isFullscreen ? "h-[90vh] sm:h-[85vh]" : "h-[clamp(460px,82vh,600px)]";
-  const chatMaxWidth = isFullscreen ? "max-w-5xl" : "max-w-[460px]";
+  const chatWidth = isFullscreen ? "w-[95vw] sm:w-[92vw] md:w-[85vw] lg:w-[75vw]" : "w-[clamp(320px,96vw,540px)]";
+  const chatHeight = isFullscreen ? "h-[92vh]" : "h-[clamp(520px,85vh,720px)]";
+  const chatMaxWidth = isFullscreen ? "max-w-6xl" : "max-w-[560px]";
 
   const isAuthPage = location.pathname === "/login" || location.pathname === "/register" || location.pathname === "/forgot-password";
   if (isAuthPage) return null;
@@ -509,9 +509,9 @@ export default function ChatBot() {
               <div className="relative flex shrink-0 items-center justify-between border-b border-white/20 bg-gradient-to-r from-[#021C4F] via-[#0B3C91] to-[#C50337] px-4 py-3.5 text-white shadow-md">
                 <div className="flex items-center gap-3">
                   <div className="relative">
-                    <CSAIAgentLogo size={36} />
-                    <span className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3 items-center justify-center rounded-full bg-emerald-400 ring-2 ring-white">
-                      <span className="h-1.5 w-1.5 animate-ping rounded-full bg-white opacity-75" />
+                    <CSAIAgentLogo size={52} />
+                    <span className="absolute -bottom-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-400 ring-2 ring-white">
+                      <span className="h-2 w-2 animate-ping rounded-full bg-white opacity-75" />
                     </span>
                   </div>
                   <div className="leading-tight text-left">
@@ -837,22 +837,22 @@ export default function ChatBot() {
           onClick={toggleOpen}
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.92 }}
-          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-[#021C4F] via-[#0B3C91] to-[#C50337] text-white shadow-2xl border-2 border-white transition-all duration-300 hover:shadow-rose-900/30"
+          className="relative flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full bg-slate-900 text-white shadow-2xl border-3 border-amber-400 transition-all duration-300 hover:shadow-amber-500/60 p-0.5 cursor-pointer"
         >
           {isOpen ? (
-            <FiX size={22} />
+            <FiX size={30} />
           ) : (
-            <>
-              <FiMessageCircle size={24} />
-              <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-rose-500 border border-white text-[8px] font-bold text-white shadow-xs">
-                <FiZap size={9} />
+            <div className="relative flex items-center justify-center w-full h-full">
+              <CSAIAgentLogo size={82} />
+              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-amber-400 border-2 border-white text-[10px] font-bold text-slate-900 shadow-sm">
+                <FiZap size={11} />
               </span>
               {hasNewMessage && (
-                <span className="absolute -left-1 -bottom-1 flex h-4 w-4 items-center justify-center rounded-full bg-cyan-400 text-[8px] font-bold text-slate-900 shadow-sm animate-pulse">
+                <span className="absolute -left-1 -bottom-1 flex h-5 w-5 items-center justify-center rounded-full bg-cyan-400 text-[10px] font-bold text-slate-900 shadow-sm animate-pulse">
                   ●
                 </span>
               )}
-            </>
+            </div>
           )}
         </motion.button>
       </div>

@@ -1,13 +1,16 @@
-// src/components/layout/StudentTopbar.jsx
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FiHome, FiAward } from "react-icons/fi";
+import { FiHome, FiAward, FiX } from "react-icons/fi";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
+import csDragonLogo from "../../assets/cs-dragon-logo.jpg";
 
 export default function StudentTopbar() {
   const { logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [logoModalOpen, setLogoModalOpen] = useState(false);
 
   async function handleLogout() {
     await logout();
@@ -16,27 +19,37 @@ export default function StudentTopbar() {
   }
 
   return (
-    <header className="sticky top-0 z-30 border-b-4 border-[#F5EBD0] bg-[#7F011F] text-white shadow-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-3 py-2.5 sm:px-6 lg:px-8">
-        {/* Top Left Corner: DDGDVC STUDENT PORTAL */}
-        <Link to="/student/dashboard" className="flex items-center gap-2 group shrink min-w-0">
-          <span className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-[#F5EBD0] text-[#7F011F] text-xs font-black shadow-md group-hover:scale-105 transition-all border border-[#E6DAB8] shrink-0">
-            DG
-          </span>
-          <div className="leading-tight text-left min-w-0">
-            <div className="flex items-center gap-1.5 min-w-0">
-              <p className="text-xs sm:text-base font-extrabold text-white tracking-wide group-hover:text-[#F5EBD0] transition-colors truncate">
-                DDGDVC STUDENT PORTAL
+    <>
+      <header className="sticky top-0 z-30 border-b-4 border-[#F5EBD0] bg-[#7F011F] text-white shadow-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-3 py-2.5 sm:px-6 lg:px-8">
+          {/* Top Left Corner: DDGDVC STUDENT PORTAL */}
+          <div className="flex items-center gap-2.5 shrink min-w-0">
+            <button
+              onClick={() => setLogoModalOpen(true)}
+              className="relative flex h-11 w-11 sm:h-13 sm:w-13 items-center justify-center rounded-xl bg-slate-900 border border-white/20 shadow-md hover:scale-105 transition-all shrink-0 overflow-hidden cursor-pointer"
+              title="Click to view logo in full screen"
+            >
+              <img
+                src={csDragonLogo}
+                alt="CS Dragon Logo"
+                className="h-full w-full object-contain p-0.5"
+              />
+            </button>
+
+            <Link to="/student/dashboard" className="leading-tight text-left min-w-0 group">
+              <div className="flex items-center gap-1.5 min-w-0">
+                <p className="text-xs sm:text-base font-extrabold text-white tracking-wide group-hover:text-[#F5EBD0] transition-colors truncate">
+                  DDGDVC STUDENT PORTAL
+                </p>
+                <span className="hidden md:inline-flex items-center gap-1 bg-[#F5EBD0] text-[#7F011F] text-[9px] font-black px-1.5 py-0.5 rounded uppercase shrink-0">
+                  <FiAward size={10} /> CS DEPT
+                </span>
+              </div>
+              <p className="text-[9px] sm:text-[10px] font-semibold text-[#F5EBD0]/90 truncate hidden xs:block">
+                Department of Computer Science
               </p>
-              <span className="hidden md:inline-flex items-center gap-1 bg-[#F5EBD0] text-[#7F011F] text-[9px] font-black px-1.5 py-0.5 rounded uppercase shrink-0">
-                <FiAward size={10} /> CS DEPT
-              </span>
-            </div>
-            <p className="text-[9px] sm:text-[10px] font-semibold text-[#F5EBD0]/90 truncate hidden xs:block">
-              Department of Computer Science
-            </p>
+            </Link>
           </div>
-        </Link>
 
         {/* Top Right Corner: Dashboard Button & Sign Out */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 ml-2">
@@ -65,5 +78,52 @@ export default function StudentTopbar() {
         </div>
       </div>
     </header>
+
+    {/* Full Screen Logo Viewer Modal */}
+    <AnimatePresence>
+      {logoModalOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-4 sm:p-8"
+          onClick={() => setLogoModalOpen(false)}
+        >
+          {/* Close Button */}
+          <button
+            onClick={() => setLogoModalOpen(false)}
+            className="absolute top-5 right-5 p-3 rounded-full bg-white/10 text-white hover:bg-rose-600 hover:scale-110 transition-all cursor-pointer z-10"
+            title="Close Full Screen"
+          >
+            <FiX size={26} />
+          </button>
+
+          {/* Modal Image */}
+          <motion.div
+            initial={{ scale: 0.85, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.85, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className="relative flex flex-col items-center justify-center max-w-4xl max-h-[90vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={csDragonLogo}
+              alt="Computer Science Cyber Dragon Logo Full View"
+              className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border-2 border-cyan-500/40 bg-slate-900"
+            />
+            <div className="mt-5 text-center">
+              <h3 className="text-xl sm:text-3xl font-black text-amber-400 tracking-wider uppercase">
+                Computer Science Department
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 font-semibold mt-1">
+                DDGDVC CS Academic Portal Emblem
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 }

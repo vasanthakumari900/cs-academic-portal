@@ -1,210 +1,356 @@
 // src/components/layout/Navbar.jsx
 import { Link, useLocation } from "react-router-dom";
-import { FiGrid, FiChevronRight, FiMenu, FiX, FiBookOpen, FiFileText, FiBriefcase, FiHome, FiSearch, FiAward, FiInfo, FiExternalLink } from "react-icons/fi";
+import { 
+  FiGrid, 
+  FiMenu, 
+  FiX, 
+  FiSearch, 
+  FiUser, 
+  FiChevronDown, 
+  FiLogOut, 
+  FiBookmark,
+  FiExternalLink
+} from "react-icons/fi";
+import { FaGraduationCap } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import csDragonLogo from "../../assets/cs-dragon-logo.jpg";
 
 const navLinks = [
-  { to: "/", label: "HOME", icon: FiHome },
-  { to: "/e-content", label: "E-CONTENT", icon: FiBookOpen },
-  { to: "/notes", label: "NOTES", icon: FiFileText },
-  { to: "/question-papers", label: "Q PAPERS", icon: FiFileText },
-  { to: "/cia-question-papers", label: "CIA PAPERS", icon: FiAward },
-  { to: "/placements", label: "PLACEMENTS", icon: FiBriefcase },
-  { to: "/about", label: "ABOUT US", icon: FiInfo },
+  { to: "/", label: "Home" },
+  { to: "/notes", label: "Notes" },
+  { to: "/e-content", label: "E-Content" },
+  { to: "/question-papers", label: "Q Papers" },
+  { to: "/cia-question-papers", label: "CIA Papers" },
+  { to: "/placements", label: "Placements" },
+  { to: "/about", label: "About Us" },
 ];
 
 export default function Navbar() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [logoModalOpen, setLogoModalOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-  const getDashboardPath = (user) => {
-    if (!user) return "/login";
-    if (user.type === "faculty" || user.role === "faculty") return "/faculty/dashboard";
-    if (user.type === "admin" || user.role === "admin") return "/admin/dashboard";
+  const getDashboardPath = (u) => {
+    if (!u) return "/login";
+    if (u.type === "faculty" || u.role === "faculty") return "/faculty/dashboard";
+    if (u.type === "admin" || u.role === "admin") return "/admin/dashboard";
     return "/student/dashboard";
   };
 
-  const getHomePath = (user) => {
-    if (user?.type === "faculty" || user?.role === "faculty") return "/faculty/dashboard";
+  const getHomePath = (u) => {
+    if (u?.type === "faculty" || u?.role === "faculty") return "/faculty/dashboard";
     return "/";
   };
 
   useEffect(() => {
     setMobileOpen(false);
+    setProfileOpen(false);
   }, [location.pathname]);
+
+  // Click outside listener for profile dropdown
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setProfileOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const isActive = (path) => {
     if (path === "/") return location.pathname === "/";
     return location.pathname.startsWith(path);
   };
 
+  const formatName = (nameStr) => {
+    if (!nameStr) return "Mega Nathan";
+    return nameStr
+      .toLowerCase()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
+  const displayName = user ? formatName(user.name) : "Mega Nathan";
+
   return (
     <>
-      <header
-        className="fixed top-0 left-0 right-0 z-50 bg-[#7F011F]/95 backdrop-blur-md border-b-4 border-[#F5EBD0] shadow-2xl transition-all"
-      >
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2.5 sm:px-6 lg:px-8">
+      <header className="fixed top-0 left-0 right-0 z-50 px-2 sm:px-4 py-2 transition-all">
+        <div className="mx-auto max-w-[1440px] bg-white/95 backdrop-blur-md rounded-2xl shadow-md border-t-4 border-[#7F011F] border-x border-b border-gray-100 px-3 sm:px-6 py-2 flex items-center justify-between gap-3 sm:gap-4">
           
-          {/* Creative Logo Emblem */}
-          <Link to={getHomePath(user)} className="group flex items-center gap-3">
-            <span className="relative flex flex-col items-center justify-center rounded-xl bg-[#F5EBD0] text-[#7F011F] shadow-lg px-3.5 py-1.5 transition-transform group-hover:scale-105 border-2 border-[#E6DAB8]">
-              <span className="text-[11px] font-black leading-tight tracking-widest uppercase">DDGDVC</span>
-              <span className="text-[8px] font-extrabold leading-tight text-[#C50337] uppercase tracking-wider">CS PORTAL</span>
-            </span>
-          </Link>
+          {/* Left Brand CS Dragon Logo */}
+          <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+            <button
+              onClick={() => setLogoModalOpen(true)}
+              className="cursor-pointer focus:outline-none group"
+              title="Click to view logo in full screen"
+            >
+              <img
+                src={csDragonLogo}
+                alt="Computer Science Dragon Logo"
+                className="h-12 sm:h-14 md:h-16 w-auto object-contain rounded-xl shadow-md border border-slate-700/20 bg-slate-900 transition-transform group-hover:scale-105 shrink-0"
+              />
+            </button>
+            
+            <Link to={getHomePath(user)} className="flex flex-col leading-none shrink-0 group">
+              <span className="text-lg sm:text-xl font-black text-[#7F011F] tracking-tight group-hover:text-[#680119] transition-colors">DDGDVC</span>
+              <span className="text-[10px] sm:text-[11px] font-bold text-slate-500 mt-0.5 tracking-wide">CS Portal</span>
+            </Link>
+          </div>
 
-          {/* Desktop Creative Nav Links (All Uppercase) */}
-          <div className="hidden md:flex items-center gap-1.5 bg-black/20 p-1.5 rounded-2xl border border-white/10 shadow-inner">
+          {/* Center Nav Links (Horizontal single line, no wrapping) */}
+          <nav className="hidden xl:flex items-center gap-6 xl:gap-8 shrink-0">
             {navLinks.map((link) => {
               const active = isActive(link.to);
               return (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`relative px-3.5 py-2 text-xs font-black tracking-wider rounded-xl transition-all duration-200 uppercase flex items-center gap-1.5 ${
+                  className={`relative py-1 text-sm font-semibold whitespace-nowrap transition-colors duration-150 ${
                     active
-                      ? "text-[#7F011F] bg-[#F5EBD0] shadow-md scale-105 font-black"
-                      : "text-white/90 hover:text-white hover:bg-white/15"
+                      ? "text-[#7F011F] font-bold"
+                      : "text-slate-700 hover:text-[#7F011F]"
                   }`}
                 >
-                  <link.icon size={13} className={active ? "text-[#7F011F]" : "text-amber-300"} />
-                  <span>{link.label}</span>
+                  {link.label}
                   {active && (
                     <motion.span
-                      layoutId="nav-pill"
-                      className="absolute -bottom-1 left-2 right-2 h-1 rounded-full bg-[#C50337]"
+                      layoutId="active-nav-underline"
+                      className="absolute -bottom-3 left-0 right-0 h-[2.5px] bg-[#7F011F] rounded-full"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
                 </Link>
               );
             })}
-          </div>
+          </nav>
 
-          {/* Right User / Login Section */}
-          <div className="flex items-center gap-2.5">
+          {/* Right Control Section */}
+          <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+            
+            {/* Search Button */}
+            <Link
+              to="/search"
+              className="flex items-center justify-center w-9 h-9 rounded-xl border border-gray-200 text-slate-600 hover:text-[#7F011F] hover:bg-gray-50 transition-colors shadow-2xs shrink-0"
+              title="Search"
+              aria-label="Search"
+            >
+              <FiSearch className="w-4 h-4" />
+            </Link>
+
             {/* Vaishnav LMS Button */}
             <a
               href="https://dgvc.in/lms/login.php"
               target="_blank"
               rel="noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 px-3.5 py-2 text-xs font-black text-slate-900 shadow-md transition-all border border-amber-300 uppercase tracking-wider active:scale-95 hover:scale-105"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl bg-[#EBB328] hover:bg-[#d9a11f] active:scale-97 px-3.5 py-2 text-xs font-bold text-slate-900 uppercase tracking-wider shadow-2xs transition-all border border-amber-300/40 shrink-0 whitespace-nowrap"
             >
-              <FiExternalLink size={14} className="text-[#021C4F]" />
+              <FaGraduationCap className="w-4 h-4 text-slate-900" />
               <span>VAISHNAV LMS</span>
             </a>
 
+            {/* Dashboard Button */}
             <Link
-              to="/search"
-              className="p-2 rounded-xl text-white/90 hover:text-white hover:bg-white/15 transition-all shadow-sm"
-              aria-label="Search"
+              to={getDashboardPath(user)}
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl bg-[#7F011F] hover:bg-[#680119] active:scale-97 px-3.5 py-2 text-xs font-bold text-white uppercase tracking-wider shadow-2xs transition-all border border-[#7F011F] shrink-0 whitespace-nowrap"
             >
-              <FiSearch size={17} />
+              <FiGrid className="w-3.5 h-3.5 text-white" />
+              <span>DASHBOARD</span>
             </Link>
 
-            {user ? (
-              <div className="flex items-center gap-3">
-                <span className="hidden sm:flex items-center gap-1.5 text-[11px] font-bold text-white/95 bg-white/10 px-3 py-1.5 rounded-xl border border-white/15">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#F5EBD0] text-[10px] font-black text-[#7F011F]">
-                    {user.name?.charAt(0)}
-                  </span>
-                  <span className="text-white font-black tracking-wide uppercase">
-                    {user.name?.split(" ")[0]}
-                    {user.section && <span className="text-amber-300 ml-1">· Sec {user.section}</span>}
-                  </span>
-                </span>
-                <Link
-                  to={getDashboardPath(user)}
-                  className="group inline-flex items-center gap-1.5 rounded-xl bg-[#F5EBD0] hover:bg-amber-300 px-4 py-2 text-xs font-black text-[#7F011F] shadow-lg transition-all active:scale-95 border border-[#E6DAB8] uppercase tracking-wider"
-                >
-                  <FiGrid size={14} />
-                  <span>DASHBOARD</span>
-                  <FiChevronRight size={12} className="transition-transform group-hover:translate-x-0.5" />
-                </Link>
-              </div>
-            ) : (
-              <Link
-                to="/login"
-                className="group inline-flex items-center gap-1.5 rounded-xl bg-[#F5EBD0] hover:bg-amber-300 px-5 py-2 text-xs font-black text-[#7F011F] shadow-lg transition-all active:scale-95 border border-[#E6DAB8] uppercase tracking-wider"
+            {/* Profile Dropdown */}
+            <div className="relative shrink-0" ref={dropdownRef}>
+              <button
+                onClick={() => setProfileOpen(!profileOpen)}
+                className="flex items-center gap-2 p-1 pl-1.5 pr-2 rounded-full hover:bg-gray-100/80 transition-colors cursor-pointer shrink-0"
+                aria-label="User menu"
               >
-                <span>LOGIN</span>
-                <FiChevronRight size={12} className="transition-transform group-hover:translate-x-0.5" />
-              </Link>
-            )}
+                <div className="flex items-center justify-center w-8 h-8 rounded-full border-2 border-[#7F011F] text-[#7F011F] bg-rose-50/50 overflow-hidden shrink-0">
+                  {user?.photoUrl ? (
+                    <img src={user.photoUrl} alt="Avatar" className="w-full h-full object-cover" />
+                  ) : (
+                    <FiUser className="w-4 h-4 stroke-[2.5]" />
+                  )}
+                </div>
+                <span className="hidden md:inline-block text-xs font-bold text-slate-800 tracking-tight whitespace-nowrap">
+                  {displayName}
+                </span>
+                <FiChevronDown className={`w-3.5 h-3.5 text-slate-500 transition-transform ${profileOpen ? "rotate-180" : ""}`} />
+              </button>
 
+              {/* Profile Dropdown Panel */}
+              <AnimatePresence>
+                {profileOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 mt-2 w-56 rounded-2xl bg-white p-2 shadow-xl border border-gray-100 text-slate-800 z-50"
+                  >
+                    {user ? (
+                      <>
+                        <div className="px-3 py-2 border-b border-gray-100 mb-1">
+                          <p className="text-xs font-bold text-[#7F011F] truncate">{user.name}</p>
+                          <p className="text-[11px] text-slate-500 truncate mt-0.5">
+                            {user.rollNumber ? `Roll: ${user.rollNumber}` : user.type?.toUpperCase() || "USER"}
+                          </p>
+                        </div>
+                        <Link
+                          to="/student/profile"
+                          className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-rose-50 hover:text-[#7F011F] rounded-xl transition-colors"
+                        >
+                          <FiUser size={14} /> Profile Details
+                        </Link>
+                        <div className="h-px bg-gray-100 my-1" />
+                        <button
+                          onClick={logout}
+                          className="w-full flex items-center gap-2 px-3 py-2 text-xs font-bold text-rose-600 hover:bg-rose-50 rounded-xl transition-colors cursor-pointer"
+                        >
+                          <FiLogOut size={14} /> Logout
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <div className="px-3 py-2 border-b border-gray-100 mb-1">
+                          <p className="text-xs font-bold text-slate-800">Welcome Guest</p>
+                          <p className="text-[11px] text-slate-500 mt-0.5">Access your CS Academic Portal</p>
+                        </div>
+                        <Link
+                          to="/login"
+                          className="flex items-center justify-center gap-2 px-3 py-2 text-xs font-bold text-white bg-[#7F011F] hover:bg-[#680119] rounded-xl transition-colors"
+                        >
+                          Login to Portal
+                        </Link>
+                      </>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Mobile Hamburger Button */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-xl text-white/90 hover:bg-white/15 transition-all"
-              aria-label="Toggle menu"
+              className="xl:hidden p-2 rounded-xl border border-gray-200 text-slate-700 hover:bg-gray-50 transition-colors shrink-0"
+              aria-label="Toggle navigation"
             >
-              {mobileOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+              {mobileOpen ? <FiX size={20} /> : <FiMenu size={20} />}
             </button>
+
           </div>
-        </nav>
+        </div>
       </header>
 
-      {/* Mobile Drawer Navigation */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="fixed inset-0 z-40 md:hidden"
+            className="fixed inset-0 z-40 xl:hidden"
           >
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-xs" onClick={() => setMobileOpen(false)} />
-            <div className="absolute top-16 left-0 right-0 mx-4 rounded-2xl bg-[#7F011F] border-2 border-[#F5EBD0] shadow-2xl overflow-hidden">
-              <div className="p-3 space-y-1.5 text-left">
+            <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-xs" onClick={() => setMobileOpen(false)} />
+            <div className="absolute top-20 left-3 right-3 rounded-2xl bg-white border border-gray-100 shadow-2xl overflow-hidden p-3 text-slate-800">
+              <div className="space-y-1">
                 {navLinks.map((link) => {
                   const active = isActive(link.to);
                   return (
                     <Link
                       key={link.to}
                       to={link.to}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black tracking-wider transition-all uppercase ${
+                      className={`flex items-center px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
                         active
-                          ? "bg-[#F5EBD0] text-[#7F011F] font-black shadow-md"
-                          : "text-white/90 hover:bg-white/10 hover:text-white"
+                          ? "bg-rose-50 text-[#7F011F] font-bold"
+                          : "text-slate-700 hover:bg-gray-50"
                       }`}
                     >
-                      <link.icon size={16} className={active ? "text-[#7F011F]" : "text-amber-300"} />
                       {link.label}
                     </Link>
                   );
                 })}
-                <div className="h-px bg-white/15 my-2" />
+              </div>
+
+              <div className="h-px bg-gray-100 my-3" />
+
+              <div className="space-y-2">
                 <a
                   href="https://dgvc.in/lms/login.php"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black tracking-wider text-slate-900 bg-amber-400 hover:bg-amber-300 uppercase shadow-md"
+                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#EBB328] text-xs font-bold text-slate-900 uppercase tracking-wider shadow-2xs"
                 >
-                  <FiExternalLink size={16} />
-                  VAISHNAV LMS PORTAL
+                  <FaGraduationCap className="w-4 h-4" />
+                  VAISHNAV LMS
                 </a>
+
                 <Link
-                  to="/search"
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black tracking-wider text-white/90 hover:bg-white/10 uppercase"
+                  to={getDashboardPath(user)}
+                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#7F011F] text-xs font-bold text-white uppercase tracking-wider shadow-2xs"
                 >
-                  <FiSearch size={16} className="text-amber-300" />
-                  SEARCH
+                  <FiGrid className="w-4 h-4" />
+                  DASHBOARD
                 </Link>
-                {user && (
-                  <Link
-                    to={getDashboardPath(user)}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-black tracking-wider text-[#7F011F] bg-[#F5EBD0] uppercase shadow-md"
-                  >
-                    <FiGrid size={16} />
-                    DASHBOARD
-                  </Link>
-                )}
               </div>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Full Screen Logo Viewer Modal */}
+      <AnimatePresence>
+        {logoModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-4 sm:p-8"
+            onClick={() => setLogoModalOpen(false)}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setLogoModalOpen(false)}
+              className="absolute top-5 right-5 p-3 rounded-full bg-white/10 text-white hover:bg-rose-600 hover:scale-110 transition-all cursor-pointer z-10"
+              title="Close Full Screen"
+            >
+              <FiX size={26} />
+            </button>
+
+            {/* Modal Image */}
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              className="relative flex flex-col items-center justify-center max-w-4xl max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={csDragonLogo}
+                alt="Computer Science Cyber Dragon Logo Full View"
+                className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border-2 border-cyan-500/40 bg-slate-900"
+              />
+              <div className="mt-5 text-center">
+                <h3 className="text-xl sm:text-3xl font-black text-amber-400 tracking-wider uppercase">
+                  Computer Science Department
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 font-semibold mt-1">
+                  DDGDVC CS Academic Portal Emblem
+                </p>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
     </>
   );
 }
+
+
