@@ -1013,13 +1013,28 @@ export default function Notes() {
 
   if (!selectedYear) {
     return (
-      <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
-        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center">
-          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#021C4F] text-white shadow-sm">
-            <FiBookOpen size={36} />
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-10 text-center flex flex-col items-center justify-center">
+          {/* Custom Notes Logo Symbol */}
+          <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-[#021C4F] via-[#0B3C91] to-[#C50337] p-1 shadow-xl shadow-rose-950/20 ring-4 ring-amber-400/30 transition-transform hover:scale-105 duration-300">
+            <div className="flex h-full w-full items-center justify-center rounded-[20px] bg-[#021C4F] text-amber-300">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-10 w-10 text-amber-400"
+              >
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                <path d="M12 7v14" />
+              </svg>
+            </div>
           </div>
-          <h1 className="font-sans text-4xl font-bold text-[#021C4F]">Lecture Notes</h1>
-          <p className="mt-2 text-sm text-[#6B7280]">Select your year to browse faculty-curated PDF notes by subject</p>
+          <h1 className="font-sans text-3xl sm:text-4xl font-extrabold text-[#021C4F] tracking-tight">Lecture Notes</h1>
+          <p className="mt-2 text-xs sm:text-sm font-medium text-[#6B7280]">Select your year to browse faculty-curated PDF notes by subject</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {[1, 2, 3].map((year, i) => {

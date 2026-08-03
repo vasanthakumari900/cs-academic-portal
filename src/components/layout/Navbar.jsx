@@ -122,7 +122,7 @@ export default function Navbar() {
                   {active && (
                     <motion.span
                       layoutId="active-nav-underline"
-                      className="absolute -bottom-3 left-0 right-0 h-[2.5px] bg-[#7F011F] rounded-full"
+                      className="absolute -bottom-1 left-0 right-0 h-[2.5px] bg-[#7F011F] rounded-full"
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}

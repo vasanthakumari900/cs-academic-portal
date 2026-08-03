@@ -113,7 +113,7 @@ export default function StudentDashboard() {
   const [isAdminFeedbackOpen, setIsAdminFeedbackOpen] = useState(false);
 
   const isAdmin = user?.rollNumber === "24E3006" || user?.role === "admin" || user?.type === "admin";
-  const is24E3006 = user?.rollNumber === "24E3006" || Boolean(user?.photoUrl);
+  const hasPhoto = Boolean(user?.photoUrl);
   const photoPath = user?.photoUrl || "/admin_photo.jpg";
 
   const optionsToRender = STUDENT_OPTIONS;
@@ -143,38 +143,37 @@ export default function StudentDashboard() {
         {/* Top Header Grid: Banner on Left + CIA Notification Card on Top-Right */}
         <div className="mb-8 flex flex-col lg:flex-row items-start justify-between gap-6">
           <div className="flex-1 w-full">
-            {is24E3006 ? (
-              /* Profile Photo Banner for Tharun B S (24E3006) */
+            {hasPhoto ? (
+              /* Profile Photo Banner for Students with Photos (e.g. 24E3006, 24E3007) */
               <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm flex flex-col items-center justify-center text-center">
                 <div className="relative mb-4">
                   <div className="absolute -inset-1.5 rounded-2xl bg-[#021C4F]/20 blur-sm" />
                   <img
                     src={photoPath}
-                    alt={user?.name || "THARUN B S"}
+                    alt={user?.name || "Student"}
                     className="relative h-60 w-48 sm:h-64 sm:w-52 object-cover rounded-2xl border-4 border-[#021C4F] shadow-md mx-auto"
-                    onError={(e) => {
-                      e.target.src = "/admin_photo.jpg";
-                    }}
                   />
                 </div>
 
                 <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#021C4F] tracking-wider uppercase">
-                  {user?.name || "THARUN B S"}
+                  {user?.name || "STUDENT"}
                 </h1>
 
                 <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#C50337] px-4 py-1 text-xs font-bold text-white shadow-sm tracking-wider uppercase">
-                    <FiShield size={13} /> {user?.adminBadge || "ADMIN"}
-                  </span>
+                  {user?.adminBadge && (
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#C50337] px-4 py-1 text-xs font-bold text-white shadow-sm tracking-wider uppercase">
+                      <FiShield size={13} /> {user.adminBadge}
+                    </span>
+                  )}
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-[#021C4F]/10 border border-[#021C4F]/20 px-3.5 py-1 text-xs font-bold text-[#021C4F]">
-                    Roll No: {user?.rollNumber || "24E3006"}
+                    Roll No: {user?.rollNumber}
                   </span>
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold text-[#021C4F] border border-slate-200">
                     Department of Computer Science · {user?.section ? `Sec ${user.section}` : "Sec B"} · {yearLabel} · {semesterLabel}
                   </span>
                 </div>
 
-                {/* CS Quote for Tharun B S */}
+                {/* CS Quote for Student */}
                 <div className="mt-5 max-w-xl rounded-xl bg-[#F8FAFC] border border-slate-200 p-3.5 text-center">
                   <p className="text-xs font-medium text-slate-700 italic">
                     “{studentQuote.text}”
