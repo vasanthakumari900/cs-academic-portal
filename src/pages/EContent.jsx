@@ -606,7 +606,12 @@ export default function EContent() {
             >
               <div>
                 <div
-                  onClick={() => setPlaying(video)}
+                  onClick={() => {
+                    setPlaying(video);
+                    setTimeout(() => {
+                      document.getElementById("dgvc-video-player-bottom")?.scrollIntoView({ behavior: "smooth" });
+                    }, 100);
+                  }}
                   className="relative aspect-video w-full bg-slate-900 cursor-pointer overflow-hidden group-hover:opacity-95"
                 >
                   <img
@@ -642,7 +647,12 @@ export default function EContent() {
 
               <div className="p-4 pt-0 flex items-center justify-between gap-2">
                 <button
-                  onClick={() => setPlaying(video)}
+                  onClick={() => {
+                    setPlaying(video);
+                    setTimeout(() => {
+                      document.getElementById("dgvc-video-player-bottom")?.scrollIntoView({ behavior: "smooth" });
+                    }, 100);
+                  }}
                   className="cursor-pointer focus:outline-none hover:scale-105 active:scale-95 transition-transform"
                   title="Watch Video"
                 >
@@ -661,6 +671,53 @@ export default function EContent() {
             </motion.div>
           ))}
         </div>
+
+        {/* Dedicated Bottom Video Player Display for DGVC Videos */}
+        {playing && (
+          <motion.div
+            id="dgvc-video-player-bottom"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-12 rounded-3xl bg-[#011337] border-2 border-amber-400 p-6 sm:p-8 text-white shadow-2xl text-left"
+          >
+            <div className="flex items-center justify-between border-b border-white/15 pb-4 mb-4 gap-4">
+              <div>
+                <span className="inline-block bg-[#C50337] text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-1 shadow-sm">
+                  🎬 Active Video Lecture
+                </span>
+                <h2 className="text-xl sm:text-2xl font-black text-white font-serif">
+                  {playing.title}
+                </h2>
+                <p className="text-xs text-amber-300 font-semibold mt-1">
+                  {playing.facultyName} · {playing.description}
+                </p>
+              </div>
+              <button
+                onClick={() => setPlaying(null)}
+                className="p-2.5 rounded-xl bg-white/10 hover:bg-rose-600 text-white transition-all shrink-0 cursor-pointer"
+                title="Close Video Player"
+              >
+                <FiX size={20} />
+              </button>
+            </div>
+
+            <div className="relative aspect-video w-full rounded-2xl overflow-hidden bg-black shadow-2xl border border-white/20">
+              {playing.youtubeId ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${playing.youtubeId}?autoplay=1&rel=0`}
+                  title={playing.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="h-full w-full border-0"
+                />
+              ) : (
+                <div className="flex h-full items-center justify-center text-slate-400 text-xs">
+                  Video stream not available
+                </div>
+              )}
+            </div>
+          </motion.div>
+        )}
 
         {/* Video Player Modal */}
         <AnimatePresence>

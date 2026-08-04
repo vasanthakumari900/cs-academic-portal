@@ -1,5 +1,5 @@
 // src/components/notes/NotesTopAiHeader.jsx
-// Compact Top-Right Notes AI Analyzer & Document QA Drawer with Voice Input & Clean Formatting.
+// Dedicated Notes AI Assistant with Large 3D Notebook Logo, Ultra High Contrast Chat Text, & Zero Window Scroll.
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -15,87 +15,83 @@ import {
   FiBookOpen,
   FiCpu,
   FiX,
-  FiAward,
-  FiLayers,
-  FiPaperclip,
+  FiCopy,
+  FiRefreshCw,
   FiTrash2,
+  FiPaperclip,
+  FiCheck,
   FiMaximize2,
   FiMinimize2,
-  FiCheckCircle,
-  FiHelpCircle
+  FiPlus,
+  FiInfo
 } from "react-icons/fi";
 import { sendMessage } from "../../services/groqService";
 import { parseUploadedDocument } from "../../utils/documentParser";
 import FormattedMessage from "../chatbot/FormattedMessage";
 import toast from "react-hot-toast";
 
-// Custom Dedicated Logo for Notes AI Assistant
-function NotesAIBrainLogo({ size = 36 }) {
+// Official 3D Notebook & Pencil Logo for Notes AI Assistant (Prominent & High-Res)
+function NotesAIBrainLogo({ size = 44 }) {
   return (
-    <div
+    <img
+      src="/notes-ai-logo.jpg"
+      alt="Notes AI Assistant Logo"
       style={{ width: size, height: size }}
-      className="relative flex items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 via-rose-500 to-[#C50337] p-0.5 shadow-md shadow-rose-900/20 shrink-0"
-    >
-      <div className="flex h-full w-full items-center justify-center rounded-[10px] bg-[#021C4F] text-amber-300">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="h-3/5 w-3/5 text-amber-400 animate-pulse"
-        >
-          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-          <path d="M12 7v14" />
-          <circle cx="12" cy="5" r="1.5" fill="currentColor" />
-        </svg>
-      </div>
-    </div>
+      className="rounded-2xl object-cover drop-shadow-md shrink-0 bg-white p-1 border-2 border-amber-400 shadow-sm"
+    />
   );
 }
 
-// Clean helper to remove any lingering raw markdown asterisks (**) from text
-function sanitizeText(str) {
-  if (!str) return "";
-  return str.replace(/\*\*(.*?)\*\*/g, "$1").replace(/\*/g, "");
-}
+// Academic Subject & Non-Academic Query Checker
+const CS_ACADEMIC_KEYWORDS = [
+  "programming", "python", "java", "c++", "c", "dbms", "database", "sql", "operating system", "os",
+  "data mining", "artificial intelligence", "ai", "asp.net", ".net", "web technology", "react", "node", "angular",
+  "android", "mobile app", "software engineering", "computer networks", "networks", "data structures", "algorithms",
+  "mathematics", "matrices", "calculus", "statistics", "uml", "cloud computing", "digital image processing",
+  "data science", "syllabus", "unit", "lecture", "notes", "exam", "question", "definition", "code", "function",
+  "array", "class", "object", "inheritance", "polymorphism", "recursion", "deadlock", "normalization", "sdlc",
+  "agile", "query", "table", "pdf", "file", "explain", "summary", "formula", "derivative", "complexity", "time complexity",
+  "space complexity", "dgvc", "sem", "semester", "cia", "test", "mark", "answer", "lab", "record", "hi", "hello", "hey"
+];
 
-// Sample Year-based curated notes for quick selection
-const CURATED_SAMPLE_NOTES = {
-  1: [
-    { title: "Python Fundamentals & Data Types", year: 1, subject: "Python Programming", text: "Python supports dynamic typing, numeric types, strings, lists, tuples, and dictionaries. Key concepts include loops (for/while), functions with def, list comprehensions, and error handling using try-except blocks." },
-    { title: "Data Structures - Stacks & Queues", year: 1, subject: "Data Structures", text: "A Stack operates on LIFO (Last In First Out) principle using push and pop. A Queue operates on FIFO (First In First Out) using enqueue and dequeue. Applications include call stack management and BFS traversal." },
-    { title: "Mathematics - Matrix Eigenvalues", year: 1, subject: "Mathematics Paper I", text: "Eigenvalues λ and eigenvectors v satisfy Av = λv. The Cayley-Hamilton theorem states that every square matrix satisfies its own characteristic equation |A - λI| = 0. Used in solving linear systems." }
-  ],
-  2: [
-    { title: "Operating Systems - Deadlocks & CPU Scheduling", year: 2, subject: "Principles of Operating Systems", text: "Deadlock conditions: Mutual Exclusion, Hold and Wait, No Preemption, Circular Wait. Banker's Algorithm ensures safe state avoidance. CPU scheduling algorithms include FCFS, SJF, Round Robin, and Priority Scheduling." },
-    { title: "Java OOP - Inheritance & Polymorphism", year: 2, subject: "Java Programming", text: "Object-oriented programming in Java features Encapsulation, Abstraction, Inheritance (extends), and Polymorphism (Method Overriding vs Overloading). Interfaces define pure abstract contracts." },
-    { title: "DBMS - Normalization & SQL JOINs", year: 2, subject: "DBMS", text: "Normalization eliminates data redundancy: 1NF (atomic values), 2NF (remove partial dependencies), 3NF (remove transitive dependencies). SQL JOIN types: INNER, LEFT, RIGHT, and FULL OUTER JOINs." }
-  ],
-  3: [
-    { title: "Artificial Intelligence - Search & Neural Networks", year: 3, subject: "Artificial Intelligence", text: "Uninformed search includes BFS and DFS. Informed search uses heuristics (A* Search: f(n) = g(n) + h(n)). Artificial Neural Networks use Backpropagation to update weights using gradient descent." },
-    { title: "Software Engineering - Agile & SDLC", year: 3, subject: "Software Engineering", text: "SDLC phases: Requirements, Design, Implementation, Testing, Maintenance. Agile Methodology focuses on iterative sprints, continuous feedback, unit testing, and continuous integration (CI/CD)." },
-    { title: "Cloud Computing - Virtualization & IaaS/PaaS/SaaS", year: 3, subject: "Cloud Computing", text: "Cloud service models: IaaS (VMs, AWS EC2), PaaS (Heroku, Firebase), SaaS (Google Workspace, Office 365). Virtualization hypervisors (Type 1 bare-metal vs Type 2 hosted) enable hardware abstraction." }
-  ]
-};
+const UNRELATED_TOPICS = [
+  "movie", "cinema", "actor", "actress", "politics", "election", "politician", "party",
+  "entertainment", "song", "music", "celebrity", "gossip", "joke", "dating", "relationship",
+  "gaming", "game cheat", "sports match", "ipl", "cricket score", "football", "weather", "recipe"
+];
+
+function isAcademicQuery(query, hasUploadedPdf) {
+  if (hasUploadedPdf) return true;
+  const q = query.toLowerCase().trim();
+
+  for (const topic of UNRELATED_TOPICS) {
+    if (q.includes(topic)) return false;
+  }
+
+  const words = q.split(/\s+/);
+  if (words.length <= 3) return true;
+
+  for (const keyword of CS_ACADEMIC_KEYWORDS) {
+    if (q.includes(keyword)) return true;
+  }
+
+  return true;
+}
 
 export default function NotesTopAiHeader() {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("chat"); // 'chat' | 'summarizer'
 
-  // --- Document & PDF State ---
-  const [customFile, setCustomFile] = useState(null);
-  const [parsedDoc, setParsedDoc] = useState(null);
-  const [isParsingDoc, setIsParsingDoc] = useState(false);
+  // Multiple PDF Upload Knowledge Base State
+  const [uploadedPdfs, setUploadedPdfs] = useState([]);
+  const [isParsingPdf, setIsParsingPdf] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
-  // --- Chatbot State ---
+  // Chat State
   const [chatMessages, setChatMessages] = useState([
     {
       role: "assistant",
       content:
-        "👋 Welcome to **Notes AI Analyzer**! Upload any PDF or ask me any subject question (Python, Java, DBMS, OS, Math). Click 📄 **Upload PDF** to analyze your notes and get accurate answers!",
+        "👋 Welcome! I am your dedicated **Notes AI Assistant**.\n\nI can help you understand Computer Science subjects, explain complex syllabus concepts, and answer questions from your uploaded PDF notes.\n\nClick **+ Upload** to index your notes or ask any subject question below!",
       timestamp: Date.now(),
     },
   ]);
@@ -103,19 +99,18 @@ export default function NotesTopAiHeader() {
   const [isChatLoading, setIsChatLoading] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [copiedMsgIndex, setCopiedMsgIndex] = useState(null);
+
   const recognitionRef = useRef(null);
-  const chatEndRef = useRef(null);
-
-  // --- Summarizer & Quiz State ---
-  const [selectedYear, setSelectedYear] = useState(1);
-  const [docSummary, setDocSummary] = useState(null);
-  const [docQuiz, setDocQuiz] = useState(null);
-  const [quizAnswers, setQuizAnswers] = useState({});
-  const [quizSubmitted, setQuizSubmitted] = useState(false);
-  const [isGeneratingAi, setIsGeneratingAi] = useState(false);
-  const [summarizerMode, setSummarizerMode] = useState("summary"); // 'summary' | 'quiz'
-
+  const chatContainerRef = useRef(null);
   const fileInputRef = useRef(null);
+
+  // Scroll inner chat container to bottom ONLY (without scrolling window/page down)
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [chatMessages, isChatLoading, isOpen]);
 
   // Setup Voice Speech Recognition
   useEffect(() => {
@@ -133,15 +128,8 @@ export default function NotesTopAiHeader() {
         setChatInput(transcript);
       };
 
-      rec.onerror = (event) => {
-        console.warn("Speech recognition error:", event.error);
-        setIsRecording(false);
-      };
-
-      rec.onend = () => {
-        setIsRecording(false);
-      };
-
+      rec.onerror = () => setIsRecording(false);
+      rec.onend = () => setIsRecording(false);
       recognitionRef.current = rec;
     }
   }, []);
@@ -159,7 +147,7 @@ export default function NotesTopAiHeader() {
       try {
         recognitionRef.current.start();
         setIsRecording(true);
-        toast.success("Listening to your voice...");
+        toast.success("Listening... Speak your academic question.");
       } catch (err) {
         console.error("Mic error:", err);
       }
@@ -186,70 +174,75 @@ export default function NotesTopAiHeader() {
     setIsSpeaking(true);
   };
 
-  // Upload & Parse PDF
+  // Upload & Index PDF
   const handleFileUpload = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
 
-    setCustomFile(file);
-    setIsParsingDoc(true);
-    setDocSummary(null);
-    setDocQuiz(null);
-    setQuizSubmitted(false);
+    setIsParsingPdf(true);
+    setUploadProgress(20);
 
-    try {
-      const parsed = await parseUploadedDocument(file);
-      setParsedDoc(parsed);
-      toast.success(`PDF "${file.name}" loaded (${parsed.totalPages} Pages)! 📄`);
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      try {
+        setUploadProgress(40 + Math.floor((i / files.length) * 50));
+        const parsed = await parseUploadedDocument(file);
+        
+        const pdfEntry = {
+          id: `pdf_${Date.now()}_${i}`,
+          fileName: file.name,
+          fileSize: `${(file.size / 1024).toFixed(1)} KB`,
+          totalPages: parsed.totalPages || 1,
+          wordCount: parsed.wordCount || 0,
+          fullText: parsed.fullText || parsed.summary?.excerpt || "",
+        };
 
-      // Add notification message in chat
-      const sysMsg = {
+        setUploadedPdfs((prev) => [...prev.filter((p) => p.fileName !== file.name), pdfEntry]);
+        toast.success(`PDF "${file.name}" indexed successfully! 📄`);
+
+        const sysMsg = {
+          role: "assistant",
+          content: `📄 **Indexed PDF Knowledge**: "${file.name}" (${pdfEntry.totalPages} Pages, ${pdfEntry.wordCount} Words).\n\nI can now answer questions directly using this uploaded PDF as the primary source!`,
+          timestamp: Date.now(),
+        };
+        setChatMessages((prev) => [...prev, sysMsg]);
+      } catch (err) {
+        console.error("PDF Parse Error:", err);
+        toast.error(`Failed to parse "${file.name}". Make sure it is a valid document.`);
+      }
+    }
+
+    setUploadProgress(100);
+    setTimeout(() => {
+      setIsParsingPdf(false);
+      setUploadProgress(0);
+    }, 500);
+
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const handleRemovePdf = (id) => {
+    setUploadedPdfs((prev) => prev.filter((p) => p.id !== id));
+    toast.success("Removed PDF from knowledge base.");
+  };
+
+  // Send Chat Message
+  const handleChatSend = async (e, queryOverride = "") => {
+    e?.preventDefault();
+    const query = (queryOverride || chatInput).trim();
+    if (!query || isChatLoading) return;
+
+    // Academic Restriction Check
+    if (!isAcademicQuery(query, uploadedPdfs.length > 0)) {
+      setChatInput("");
+      const restrictedMsg = {
         role: "assistant",
-        content: `📄 **Uploaded PDF**: "${file.name}" (${parsed.totalPages} Pages, ${parsed.wordCount} Words).\n\nI have indexed the full PDF content! Ask me any question from this document and I will answer accurately.`,
+        content: "I am the Notes AI Assistant. I can answer only subject-related questions and uploaded PDF content.",
         timestamp: Date.now(),
       };
-      setChatMessages((prev) => [...prev, sysMsg]);
-
-      // Auto generate key summary
-      generateKeyTakeaways(parsed.fullText || parsed.summary.excerpt, file.name);
-    } catch (err) {
-      console.error("PDF Parse Error:", err);
-      toast.error("Failed to parse PDF. Ensure it is a valid document.");
-    } finally {
-      setIsParsingDoc(false);
+      setChatMessages((prev) => [...prev, { role: "user", content: query, timestamp: Date.now() }, restrictedMsg]);
+      return;
     }
-  };
-
-  // Select Sample Note
-  const handleSelectSampleNote = (sample) => {
-    setCustomFile(null);
-    const parsed = {
-      fileName: sample.title,
-      fileType: "PDF",
-      totalPages: 3,
-      wordCount: sample.text.split(" ").length * 5,
-      fullText: `${sample.title} - ${sample.subject}\n\n${sample.text}\n\nCore Concepts & Rules:\n1. Master key definitions and formulas.\n2. Practice writing code snippets.\n3. Solve previous year semester questions.`,
-    };
-    setParsedDoc(parsed);
-    setDocSummary(null);
-    setDocQuiz(null);
-    setQuizSubmitted(false);
-
-    const sysMsg = {
-      role: "assistant",
-      content: `📄 **Selected Note**: "${sample.title}" (${sample.subject}).\n\nI have loaded the note context. Ask me any question about this subject!`,
-      timestamp: Date.now(),
-    };
-    setChatMessages((prev) => [...prev, sysMsg]);
-
-    generateKeyTakeaways(parsed.fullText, sample.title);
-  };
-
-  // Send Chat Message with PDF Grounded QA
-  const handleChatSend = async (e, textOverride = "") => {
-    e?.preventDefault();
-    const query = (textOverride || chatInput).trim();
-    if (!query || isChatLoading) return;
 
     setChatInput("");
     setIsChatLoading(true);
@@ -258,489 +251,304 @@ export default function NotesTopAiHeader() {
     setChatMessages((prev) => [...prev, userMsg]);
 
     try {
-      const history = chatMessages.map((m) => ({ role: m.role, content: m.content }));
-      let context = "You are a CS Subject AI Tutor. Provide accurate, clean, structured answers without raw asterisks format.";
+      const history = chatMessages.slice(-6).map((m) => ({ role: m.role, content: m.content }));
+      
+      let systemContext = `You are the Notes AI Assistant, an expert Computer Science academic tutor for university students.
+Your job is to explain syllabus concepts in simple, clear, student-friendly language.
+Provide short summaries first, then detailed explanations with examples where helpful.
+Highlight key exam points and revision takeaways.
+If asked non-academic questions, reply ONLY: "I am the Notes AI Assistant. I can answer only subject-related questions and uploaded PDF content."`;
 
-      if (parsedDoc) {
-        context += `\n\n[UPLOADED PDF ATTACHED - "${parsedDoc.fileName}"]:\n${parsedDoc.fullText.slice(0, 4000)}\n\nAnswer the user's question accurately based strictly on this PDF content.`;
+      if (uploadedPdfs.length > 0) {
+        systemContext += `\n\n[PRIMARY SOURCE - UPLOADED KNOWLEDGE BASE (${uploadedPdfs.length} PDFs)]:\n`;
+        uploadedPdfs.forEach((pdf, idx) => {
+          systemContext += `\n--- PDF #${idx + 1}: ${pdf.fileName} ---\n${pdf.fullText.slice(0, 3000)}\n`;
+        });
+        systemContext += `\nInstructions:
+1. First search and answer using the uploaded PDF content above. Mention which PDF the answer came from (e.g., "[Source PDF: ${uploadedPdfs[0].fileName}]").
+2. Quote relevant sections.
+3. If the answer is not in the uploaded PDF, use general CS syllabus knowledge while remaining clear and helpful.`;
       }
 
-      const rawReply = await sendMessage(history, query, context);
-      // Ensure clean formatting without raw ** asterisks
-      const reply = rawReply.replace(/\*\*(.*?)\*\*/g, "**$1**");
-
-      const botMsg = { role: "assistant", content: reply, timestamp: Date.now() };
+      const rawReply = await sendMessage(history, query, systemContext);
+      const botMsg = { role: "assistant", content: rawReply, timestamp: Date.now() };
       setChatMessages((prev) => [...prev, botMsg]);
     } catch (err) {
       console.error(err);
-      toast.error("Error generating answer. Using smart fallback.");
+      toast.error("Error generating response. Please try again.");
     } finally {
       setIsChatLoading(false);
-      setTimeout(() => chatEndRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
     }
   };
 
-  // Generate Bullet Key Takeaways
-  const generateKeyTakeaways = async (text, title) => {
-    setIsGeneratingAi(true);
-
-    try {
-      const prompt = `Analyze these lecture notes for "${title}" and generate 5 clear bulleted Key Takeaways for exam revision:\n\n${text.slice(0, 3000)}`;
-      const result = await sendMessage([], prompt, "");
-
-      setDocSummary({
-        title,
-        keypoints: result,
-      });
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsGeneratingAi(false);
-    }
+  const handleCopyMessage = (content, index) => {
+    navigator.clipboard.writeText(content);
+    setCopiedMsgIndex(index);
+    toast.success("Answer copied to clipboard!");
+    setTimeout(() => setCopiedMsgIndex(null), 2000);
   };
 
-  // Generate Revision Quiz
-  const generateQuiz = async () => {
-    if (!parsedDoc) {
-      toast.error("Please upload a PDF or select a note first!");
-      return;
-    }
-
-    setIsGeneratingAi(true);
-    setSummarizerMode("quiz");
-    setQuizAnswers({});
-    setQuizSubmitted(false);
-
-    try {
-      const textToUse = parsedDoc.fullText || parsedDoc.summary.excerpt;
-      const prompt = `Generate a 3-question MCQ quiz for revision from these notes.
-Return ONLY valid JSON format strictly matching this structure:
-[
-  {
-    "id": 1,
-    "question": "Question text?",
-    "options": ["Option A", "Option B", "Option C", "Option D"],
-    "correctIndex": 0,
-    "explanation": "Brief explanation."
-  }
-]
-Notes content:
-${textToUse.slice(0, 2500)}`;
-
-      const response = await sendMessage([], prompt, "");
-
-      let quizData = null;
-      try {
-        const jsonMatch = response.match(/\[[\s\S]*\]/);
-        if (jsonMatch) {
-          quizData = JSON.parse(jsonMatch[0]);
-        }
-      } catch (e) {
-        console.warn("JSON parse error fallback", e);
-      }
-
-      if (!quizData || !Array.isArray(quizData)) {
-        quizData = [
-          {
-            id: 1,
-            question: `What is the primary topic covered in ${parsedDoc.fileName.replace(/\.[^/.]+$/, "")}?`,
-            options: [
-              "Core Principles & Optimization",
-              "Unconditional Loops",
-              "Static Fixed Memory",
-              "Ignoring Logic Rules",
-            ],
-            correctIndex: 0,
-            explanation: "Academic notes prioritize foundational logic and optimal execution performance.",
-          },
-          {
-            id: 2,
-            question: "Which approach is recommended when preparing for semester exams?",
-            options: [
-              "Synthesizing key formulas & active recall",
-              "Rote memorization without understanding",
-              "Skipping lab exercises",
-              "Ignoring syllabus units",
-            ],
-            correctIndex: 0,
-            explanation: "Active recall and solving unit problems yields high exam retention.",
-          },
-        ];
-      }
-
-      setDocQuiz(quizData);
-    } catch (err) {
-      console.error(err);
-      toast.error("Quiz generation failed.");
-    } finally {
-      setIsGeneratingAi(false);
-    }
-  };
-
-  const calculateQuizScore = () => {
-    if (!docQuiz) return 0;
-    let score = 0;
-    docQuiz.forEach((q) => {
-      if (quizAnswers[q.id] === q.correctIndex) {
-        score += 1;
-      }
-    });
-    return score;
+  const handleClearChat = () => {
+    setChatMessages([
+      {
+        role: "assistant",
+        content: "Chat cleared. Ask me any subject question or upload PDF notes!",
+        timestamp: Date.now(),
+      },
+    ]);
+    toast.success("Chat cleared.");
   };
 
   return (
-    <div className="mb-6 w-full flex items-center justify-between bg-gradient-to-r from-[#021C4F] via-[#0B3C91] to-[#C50337] p-3.5 sm:p-4 rounded-2xl text-white shadow-lg relative z-20">
+    <>
       {/* Hidden File Input */}
       <input
         type="file"
         ref={fileInputRef}
         onChange={handleFileUpload}
         accept=".pdf,.txt,.doc,.docx"
+        multiple
         className="hidden"
       />
 
-      {/* Left Title & Status */}
-      <div className="flex items-center gap-3">
-        <NotesAIBrainLogo size={40} />
-        <div>
-          <div className="flex items-center gap-2">
-            <h2 className="text-sm sm:text-base font-black text-white tracking-wide">
-              Notes AI Analyzer &amp; PDF QA
-            </h2>
-            {parsedDoc && (
-              <span className="flex items-center gap-1 rounded-full bg-emerald-400/20 px-2 py-0.5 text-[9px] font-bold text-emerald-300 border border-emerald-300/30">
-                📄 PDF Active ({parsedDoc.totalPages} Pgs)
-              </span>
-            )}
-          </div>
-          <p className="text-[11px] text-rose-100/90 font-medium hidden sm:block">
-            Upload PDF notes, ask questions accurately, or generate 5-Min Revision Quizzes
-          </p>
-        </div>
-      </div>
-
-      {/* Right Action Trigger Buttons */}
-      <div className="flex items-center gap-2">
-        <button
-          onClick={() => fileInputRef.current?.click()}
-          className="flex items-center gap-1.5 rounded-xl bg-amber-400 px-3 py-1.5 text-xs font-black text-slate-950 hover:bg-amber-300 transition-all shadow-md active:scale-95"
-        >
-          <FiUploadCloud size={14} />
-          <span className="hidden sm:inline">Upload PDF</span>
-        </button>
-
+      {/* Floating Top-Right AI Trigger Button */}
+      <div className="w-full lg:w-auto flex justify-end mb-4 lg:mb-0">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`flex items-center gap-1.5 rounded-xl px-3.5 py-1.5 text-xs font-black transition-all shadow-md active:scale-95 border border-white/20 ${
-            isOpen
-              ? "bg-white text-[#021C4F]"
-              : "bg-white/15 text-white hover:bg-white/25"
-          }`}
+          className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#011337] via-[#021C4F] to-[#0F4C81] px-4 py-3 text-xs font-black text-white shadow-xl border-2 border-amber-400 hover:scale-105 transition-all cursor-pointer active:scale-95 z-30"
+          title="Open Notes AI Assistant"
         >
-          <FiCpu size={14} />
-          {isOpen ? "Close Analyzer" : "Open AI Analyzer"}
+          <NotesAIBrainLogo size={42} />
+          <div className="text-left leading-tight">
+            <p className="text-sm font-black text-white flex items-center gap-1.5">
+              Notes AI Assistant
+              {uploadedPdfs.length > 0 && (
+                <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping" />
+              )}
+            </p>
+            <p className="text-xs text-amber-300 font-bold">
+              {uploadedPdfs.length > 0 ? `${uploadedPdfs.length} PDF(s) Indexed` : "Ask Subject Doubts & Upload PDFs"}
+            </p>
+          </div>
+          {isOpen ? <FiMinimize2 size={18} className="ml-1 text-white/80" /> : <FiMaximize2 size={18} className="ml-1 text-white/80" />}
         </button>
       </div>
 
-      {/* FLOATING TOP-RIGHT DRAWER / MODAL DIALOG (Non-intrusive) */}
+      {/* FLOATING TOP-RIGHT PANEL (Ultra Clear Contrast & High Visibility) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 10 }}
-            className="absolute top-16 right-0 z-50 w-full sm:w-[480px] h-[580px] rounded-3xl border border-white/30 bg-white/95 text-slate-900 shadow-2xl backdrop-blur-2xl flex flex-col overflow-hidden"
+            exit={{ opacity: 0, scale: 0.95, y: 15 }}
+            transition={{ type: "spring", damping: 25, stiffness: 320 }}
+            className="w-full sm:w-[420px] lg:w-[440px] lg:fixed lg:top-20 lg:right-6 z-50 h-[480px] sm:h-[510px] max-h-[calc(100vh-130px)] rounded-3xl border-2 border-[#021C4F]/20 bg-white text-slate-900 shadow-2xl flex flex-col overflow-hidden text-left mb-6 lg:mb-0"
           >
-            {/* Drawer Header */}
-            <div className="flex items-center justify-between bg-gradient-to-r from-[#021C4F] to-[#0B3C91] px-4 py-3 text-white">
-              <div className="flex items-center gap-2">
-                <NotesAIBrainLogo size={32} />
+            {/* Academic Navy & Amber Header Bar */}
+            <div className="flex items-center justify-between bg-gradient-to-r from-[#011337] via-[#021C4F] to-[#0F4C81] px-4 py-3.5 text-white border-b-2 border-amber-400 shrink-0">
+              <div className="flex items-center gap-3">
+                <NotesAIBrainLogo size={42} />
                 <div>
-                  <h3 className="text-xs font-extrabold text-white">Notes AI Assistant &amp; PDF QA</h3>
-                  <p className="text-[9px] text-amber-300 font-medium">
-                    {parsedDoc ? `Loaded: ${parsedDoc.fileName}` : "No PDF uploaded - General QA active"}
+                  <h3 className="text-sm font-black text-white flex items-center gap-1.5">
+                    Notes AI Assistant
+                    <span className="bg-amber-400 text-slate-950 text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider shadow-xs">
+                      Academic
+                    </span>
+                  </h3>
+                  <p className="text-[11px] text-amber-200 font-semibold mt-0.5">
+                    {uploadedPdfs.length > 0 ? `${uploadedPdfs.length} PDF Knowledge Base Active` : "CS Subjects & Syllabus Tutor"}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
-                <div className="flex bg-black/30 p-0.5 rounded-xl border border-white/10">
-                  <button
-                    onClick={() => setActiveTab("chat")}
-                    className={`rounded-lg px-2.5 py-1 text-[10px] font-black transition-all ${
-                      activeTab === "chat" ? "bg-amber-400 text-slate-950" : "text-white/80"
-                    }`}
-                  >
-                    💬 Q&amp;A
-                  </button>
-                  <button
-                    onClick={() => setActiveTab("summarizer")}
-                    className={`rounded-lg px-2.5 py-1 text-[10px] font-black transition-all ${
-                      activeTab === "summarizer" ? "bg-amber-400 text-slate-950" : "text-white/80"
-                    }`}
-                  >
-                    ⚡ Quiz &amp; Summary
-                  </button>
-                </div>
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="flex items-center gap-1 rounded-xl bg-amber-400 text-slate-950 px-2.5 py-1 text-xs font-black hover:bg-amber-300 transition-all shadow-xs cursor-pointer"
+                  title="Upload PDF Notes"
+                >
+                  <FiPlus size={14} />
+                  <span>Upload</span>
+                </button>
+                <button
+                  onClick={handleClearChat}
+                  className="p-1.5 rounded-lg text-white/80 hover:bg-white/20 hover:text-white transition-all cursor-pointer"
+                  title="Clear Chat"
+                >
+                  <FiTrash2 size={16} />
+                </button>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="rounded-lg p-1 text-white/80 hover:bg-white/20 hover:text-white"
+                  className="p-1.5 rounded-lg text-white/80 hover:bg-white/20 hover:text-white transition-all cursor-pointer"
+                  title="Close Assistant"
                 >
-                  <FiX size={16} />
+                  <FiX size={18} />
                 </button>
               </div>
             </div>
 
-            {/* TAB 1: PDF QUESTION ANSWERING CHATBOT */}
-            {activeTab === "chat" && (
-              <div className="flex-1 flex flex-col overflow-hidden bg-slate-50">
-                {/* PDF Status Chip */}
-                {parsedDoc && (
-                  <div className="flex items-center justify-between bg-emerald-50 px-3 py-1.5 text-[11px] text-emerald-900 border-b border-emerald-100">
-                    <span className="truncate font-bold flex items-center gap-1">
-                      <FiPaperclip size={12} className="text-emerald-600" />
-                      Active PDF: {parsedDoc.fileName} ({parsedDoc.totalPages} Pgs)
-                    </span>
-                    <button
-                      onClick={() => {
-                        setParsedDoc(null);
-                        setCustomFile(null);
-                        toast.success("Cleared PDF context");
-                      }}
-                      className="text-rose-600 hover:underline font-bold text-[10px]"
-                    >
-                      Clear PDF
-                    </button>
-                  </div>
-                )}
-
-                {/* Messages Container */}
-                <div className="flex-1 overflow-y-auto p-3.5 space-y-3">
-                  {chatMessages.map((msg, i) => (
-                    <div
-                      key={i}
-                      className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-                    >
-                      <div
-                        className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed shadow-xs ${
-                          msg.role === "user"
-                            ? "bg-gradient-to-r from-[#021C4F] to-[#0A369D] text-white rounded-br-xs font-sans"
-                            : "bg-white text-slate-800 border border-slate-200 border-l-4 border-l-[#C50337] rounded-bl-xs"
-                        }`}
-                      >
-                        {msg.role === "user" ? (
-                          <p className="whitespace-pre-wrap">{msg.content}</p>
-                        ) : (
-                          <FormattedMessage content={msg.content} />
-                        )}
-
-                        {msg.role === "assistant" && (
-                          <div className="mt-1.5 flex items-center justify-end">
-                            <button
-                              onClick={() => speakText(msg.content)}
-                              className="inline-flex items-center gap-1 text-[9px] font-bold text-amber-700 hover:text-amber-900 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200"
-                            >
-                              {isSpeaking ? <FiVolumeX size={10} /> : <FiVolume2 size={10} />}
-                              {isSpeaking ? "Stop" : "Audio"}
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-
-                  {isChatLoading && (
-                    <div className="flex justify-start">
-                      <div className="rounded-2xl bg-white px-3.5 py-2 border border-slate-200 text-xs font-bold text-[#021C4F] flex items-center gap-2">
-                        <FiCpu className="animate-spin text-rose-600" size={14} />
-                        {parsedDoc ? "Searching PDF pages & analyzing accurately..." : "Synthesizing answer..."}
-                      </div>
-                    </div>
-                  )}
-                  <div ref={chatEndRef} />
-                </div>
-
-                {/* Input & Voice Controls */}
-                <form
-                  onSubmit={handleChatSend}
-                  className="flex items-center gap-1.5 border-t border-slate-200 bg-white p-2"
-                >
+            {/* Uploaded PDFs Manager Banner */}
+            {uploadedPdfs.length > 0 && (
+              <div className="bg-blue-50 border-b border-blue-200 px-3.5 py-2 text-xs text-blue-950 flex flex-col gap-1 shrink-0">
+                <div className="flex items-center justify-between font-extrabold">
+                  <span className="flex items-center gap-1 text-[#021C4F]">
+                    <FiPaperclip size={13} className="text-[#021C4F]" />
+                    Indexed PDFs ({uploadedPdfs.length})
+                  </span>
                   <button
-                    type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200"
-                    title="Upload PDF"
+                    className="text-[11px] text-[#0F4C81] hover:underline font-black cursor-pointer"
                   >
-                    <FiUploadCloud size={16} />
+                    + Add More
                   </button>
-
-                  <button
-                    type="button"
-                    onClick={toggleMic}
-                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-all ${
-                      isRecording
-                        ? "bg-rose-600 text-white animate-pulse"
-                        : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                    }`}
-                    title={isRecording ? "Stop Listening" : "Voice Input"}
-                  >
-                    {isRecording ? <FiMicOff size={16} /> : <FiMic size={16} />}
-                  </button>
-
-                  <input
-                    type="text"
-                    value={chatInput}
-                    onChange={(e) => setChatInput(e.target.value)}
-                    placeholder={
-                      parsedDoc
-                        ? `Ask any question about "${parsedDoc.fileName.slice(0, 15)}..."`
-                        : "Ask any CS question or upload PDF..."
-                    }
-                    className="flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#021C4F]"
-                  />
-
-                  <button
-                    type="submit"
-                    disabled={!chatInput.trim() || isChatLoading}
-                    className="flex h-9 px-3 items-center justify-center gap-1 rounded-xl bg-[#021C4F] text-xs font-bold text-white shadow-xs hover:bg-[#0A369D] disabled:opacity-50"
-                  >
-                    <FiSend size={14} />
-                  </button>
-                </form>
-              </div>
-            )}
-
-            {/* TAB 2: AI SUMMARIZER & 5-MIN REVISION QUIZ */}
-            {activeTab === "summarizer" && (
-              <div className="flex-1 flex flex-col overflow-y-auto p-3.5 space-y-3 bg-slate-50">
-                {/* Year Selector */}
-                <div className="flex items-center justify-between rounded-xl bg-white p-2.5 border border-slate-200">
-                  <span className="text-xs font-bold text-slate-800">Curated Notes:</span>
-                  <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg">
-                    {[1, 2, 3].map((yr) => (
-                      <button
-                        key={yr}
-                        onClick={() => setSelectedYear(yr)}
-                        className={`rounded px-2 py-0.5 text-[10px] font-black transition-all ${
-                          selectedYear === yr
-                            ? "bg-[#021C4F] text-white"
-                            : "text-slate-600 hover:text-slate-900"
-                        }`}
-                      >
-                        Yr {yr}
-                      </button>
-                    ))}
-                  </div>
                 </div>
-
-                {/* Sample Note Chips */}
-                <div className="flex flex-col gap-1.5">
-                  {CURATED_SAMPLE_NOTES[selectedYear]?.map((note, i) => (
-                    <button
-                      key={i}
-                      onClick={() => handleSelectSampleNote(note)}
-                      className="text-left rounded-xl bg-white border border-slate-200 px-2.5 py-1.5 text-xs hover:border-amber-500 transition-all flex items-center justify-between"
+                <div className="flex flex-wrap gap-1.5 max-h-16 overflow-y-auto pt-0.5">
+                  {uploadedPdfs.map((pdf) => (
+                    <div
+                      key={pdf.id}
+                      className="flex items-center gap-1.5 bg-white border border-blue-200 px-2.5 py-1 rounded-lg text-[11px] shadow-2xs"
                     >
-                      <span className="truncate font-semibold text-slate-800">📄 {note.title}</span>
-                      <span className="text-[9px] font-bold bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded shrink-0">
-                        {note.subject}
+                      <span className="truncate max-w-[140px] font-bold text-[#021C4F]" title={pdf.fileName}>
+                        {pdf.fileName}
                       </span>
-                    </button>
+                      <span className="text-slate-500 font-medium">({pdf.totalPages}p)</span>
+                      <button
+                        onClick={() => handleRemovePdf(pdf.id)}
+                        className="text-rose-600 hover:text-rose-800 ml-0.5 cursor-pointer"
+                        title="Remove PDF"
+                      >
+                        <FiX size={13} />
+                      </button>
+                    </div>
                   ))}
                 </div>
-
-                {/* Mode Selector Header */}
-                <div className="flex items-center justify-between pt-2 border-t border-slate-200">
-                  <button
-                    onClick={() => setSummarizerMode("summary")}
-                    className={`rounded-xl px-3 py-1 text-xs font-bold ${
-                      summarizerMode === "summary" ? "bg-[#021C4F] text-white" : "bg-white text-slate-700 border"
-                    }`}
-                  >
-                    📝 Bullet Takeaways
-                  </button>
-                  <button
-                    onClick={generateQuiz}
-                    className={`rounded-xl px-3 py-1 text-xs font-bold ${
-                      summarizerMode === "quiz" ? "bg-[#C50337] text-white" : "bg-white text-slate-700 border"
-                    }`}
-                  >
-                    🎯 5-Min Quiz
-                  </button>
-                </div>
-
-                {/* Summary or Quiz Content Output */}
-                {isGeneratingAi ? (
-                  <div className="py-8 text-center text-xs font-bold text-slate-600">
-                    <FiCpu className="animate-spin text-[#021C4F] mx-auto mb-2" size={24} />
-                    Generating insights with AI...
-                  </div>
-                ) : summarizerMode === "summary" ? (
-                  <div className="rounded-xl bg-white p-3 border border-slate-200 shadow-xs space-y-2">
-                    <h4 className="text-xs font-black text-[#021C4F]">
-                      Key Takeaways ({docSummary?.title || parsedDoc?.fileName || "Note"})
-                    </h4>
-                    <div className="text-xs text-slate-700 whitespace-pre-wrap leading-relaxed">
-                      {docSummary?.keypoints ? (
-                        <FormattedMessage content={docSummary.keypoints} />
-                      ) : (
-                        "Select a note or upload a PDF to see key takeaway bullet points."
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    {docQuiz ? (
-                      docQuiz.map((q, qIdx) => (
-                        <div key={q.id} className="rounded-xl bg-white p-3 border border-slate-200 space-y-2">
-                          <p className="text-xs font-bold text-slate-800">
-                            Q{qIdx + 1}. {q.question}
-                          </p>
-                          <div className="grid grid-cols-1 gap-1.5">
-                            {q.options.map((opt, oIdx) => (
-                              <button
-                                key={oIdx}
-                                disabled={quizSubmitted}
-                                onClick={() => setQuizAnswers({ ...quizAnswers, [q.id]: oIdx })}
-                                className={`text-left text-xs p-2 rounded-lg border transition-all ${
-                                  quizSubmitted
-                                    ? q.correctIndex === oIdx
-                                      ? "bg-emerald-50 border-emerald-500 font-bold text-emerald-900"
-                                      : quizAnswers[q.id] === oIdx
-                                      ? "bg-rose-50 border-rose-500 text-rose-900"
-                                      : "border-slate-200"
-                                    : quizAnswers[q.id] === oIdx
-                                    ? "bg-blue-50 border-blue-500 font-bold"
-                                    : "border-slate-200 hover:bg-slate-50"
-                                }`}
-                              >
-                                {String.fromCharCode(65 + oIdx)}. {opt}
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="text-xs text-slate-500 text-center py-4">
-                        Click 🎯 5-Min Quiz to generate interactive revision questions.
-                      </p>
-                    )}
-
-                    {docQuiz && !quizSubmitted && (
-                      <button
-                        onClick={() => setQuizSubmitted(true)}
-                        className="w-full rounded-xl bg-[#C50337] py-2 text-xs font-bold text-white shadow-xs"
-                      >
-                        Submit Answers &amp; Grade Score ({calculateQuizScore()}/{docQuiz.length})
-                      </button>
-                    )}
-                  </div>
-                )}
               </div>
             )}
+
+            {/* Upload Progress Bar */}
+            {isParsingPdf && (
+              <div className="bg-amber-50 px-3.5 py-2 border-b border-amber-200 text-xs text-amber-950 flex items-center justify-between shrink-0 font-bold">
+                <span className="flex items-center gap-2 text-[11px]">
+                  <FiCpu className="animate-spin text-amber-700" size={15} /> Extracting PDF Knowledge Base...
+                </span>
+                <span className="font-mono text-xs">{uploadProgress}%</span>
+              </div>
+            )}
+
+            {/* Chat Messages Container (Ultra High Contrast Dark Text) */}
+            <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 space-y-3.5 bg-[#F1F5F9]">
+              {chatMessages.map((msg, idx) => (
+                <div
+                  key={idx}
+                  className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}
+                >
+                  <div
+                    className={`max-w-[92%] rounded-2xl px-4 py-3 text-xs sm:text-sm leading-relaxed shadow-md ${
+                      msg.role === "user"
+                        ? "bg-[#011337] text-white font-black border-2 border-amber-400 rounded-br-xs"
+                        : "bg-white text-[#011337] border-2 border-blue-200 border-l-4 border-l-[#C50337] rounded-bl-xs font-semibold"
+                    }`}
+                  >
+                    {msg.role === "user" ? (
+                      <p className="whitespace-pre-wrap font-black text-white">{msg.content}</p>
+                    ) : (
+                      <div className="text-[#011337] font-semibold">
+                        <FormattedMessage content={msg.content} />
+                      </div>
+                    )}
+
+                    {/* Bot Action Buttons (High Contrast Badges) */}
+                    {msg.role === "assistant" && (
+                      <div className="mt-3 pt-2 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-600 font-medium">
+                        <span className="font-mono font-bold text-slate-500">
+                          {new Date(msg.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                        </span>
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => handleCopyMessage(msg.content, idx)}
+                            className="inline-flex items-center gap-1 font-bold text-[#021C4F] bg-blue-100 hover:bg-[#021C4F] hover:text-white px-2.5 py-1 rounded-lg border border-blue-200 cursor-pointer transition-all shadow-2xs"
+                            title="Copy Answer"
+                          >
+                            {copiedMsgIndex === idx ? <FiCheck size={12} className="text-emerald-600" /> : <FiCopy size={12} />}
+                            {copiedMsgIndex === idx ? "Copied" : "Copy"}
+                          </button>
+                          <button
+                            onClick={() => speakText(msg.content)}
+                            className="inline-flex items-center gap-1 font-bold text-amber-900 bg-amber-100 hover:bg-amber-500 hover:text-slate-950 px-2.5 py-1 rounded-lg border border-amber-300 cursor-pointer transition-all shadow-2xs"
+                            title="Read Aloud"
+                          >
+                            {isSpeaking ? <FiVolumeX size={12} /> : <FiVolume2 size={12} />}
+                            {isSpeaking ? "Stop" : "Audio"}
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+
+              {isChatLoading && (
+                <div className="flex justify-start">
+                  <div className="rounded-2xl bg-white px-4 py-3 border-2 border-blue-200 text-xs font-black text-[#021C4F] flex items-center gap-2.5 shadow-md">
+                    <FiCpu className="animate-spin text-[#021C4F]" size={16} />
+                    {uploadedPdfs.length > 0
+                      ? "Searching PDF knowledge base & synthesizing answer..."
+                      : "Thinking & synthesizing academic answer..."}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Chat Input Bar (High Contrast Input) */}
+            <form
+              onSubmit={handleChatSend}
+              className="flex items-center gap-2 border-t-2 border-slate-200 bg-white p-3 shrink-0"
+            >
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-400 text-slate-950 hover:bg-amber-300 border border-amber-500 cursor-pointer shadow-xs font-bold"
+                title="Upload PDF Notes (+)"
+              >
+                <FiPlus size={18} />
+              </button>
+
+              <button
+                type="button"
+                onClick={toggleMic}
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all cursor-pointer border ${
+                  isRecording
+                    ? "bg-rose-600 text-white animate-pulse border-rose-700"
+                    : "bg-slate-100 text-slate-800 hover:bg-slate-200 border-slate-300"
+                }`}
+                title={isRecording ? "Stop Listening" : "Voice Input"}
+              >
+                {isRecording ? <FiMicOff size={18} /> : <FiMic size={18} />}
+              </button>
+
+              <input
+                type="text"
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                placeholder={
+                  uploadedPdfs.length > 0
+                    ? `Ask about ${uploadedPdfs[0].fileName.slice(0, 14)}...`
+                    : "Ask CS subject question or upload PDF..."
+                }
+                className="flex-1 rounded-xl border-2 border-slate-300 bg-white px-3.5 py-2 text-xs sm:text-sm text-slate-900 font-semibold placeholder:text-slate-400 focus:border-[#021C4F] focus:outline-none focus:ring-2 focus:ring-[#021C4F]/20"
+              />
+
+              <button
+                type="submit"
+                disabled={!chatInput.trim() || isChatLoading}
+                className="flex h-10 px-4 items-center justify-center gap-1 rounded-xl bg-[#021C4F] hover:bg-[#0F4C81] text-xs sm:text-sm font-black text-white shadow-md disabled:opacity-50 cursor-pointer transition-all"
+              >
+                <FiSend size={15} />
+              </button>
+            </form>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </>
   );
 }

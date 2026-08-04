@@ -112,7 +112,7 @@ export default function StudentDashboard() {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isAdminFeedbackOpen, setIsAdminFeedbackOpen] = useState(false);
 
-  const isAdmin = user?.rollNumber === "24E3006" || user?.role === "admin" || user?.type === "admin";
+  const isAdmin = user?.rollNumber === "24E3006" || user?.rollNumber === "24E3013" || user?.role === "admin" || user?.type === "admin" || Boolean(user?.adminBadge);
   const hasPhoto = Boolean(user?.photoUrl);
   const photoPath = user?.photoUrl || "/admin_photo.jpg";
 

@@ -90,7 +90,7 @@ export default function FormattedMessage({ content }) {
   }
 
   return (
-    <div className="space-y-2 text-slate-800 leading-relaxed font-sans text-xs sm:text-sm">
+    <div className="space-y-2 text-[#011337] leading-relaxed font-sans text-xs sm:text-sm font-semibold">
       {blocks.map((block, bIdx) => {
         if (block.type === "code") {
           return (
@@ -128,7 +128,7 @@ export default function FormattedMessage({ content }) {
                 return (
                   <div
                     key={lIdx}
-                    className={`font-bold text-slate-900 ${
+                    className={`font-black text-[#021C4F] ${
                       level === 1
                         ? "text-base mt-2 mb-1 border-b border-slate-200 pb-1"
                         : level === 2
@@ -151,20 +151,20 @@ export default function FormattedMessage({ content }) {
                 return (
                   <div key={lIdx} className="flex items-start gap-2 pl-1 py-0.5">
                     <span
-                      className={`shrink-0 select-none font-semibold ${
+                      className={`shrink-0 select-none font-bold ${
                         isNumeric ? "text-[#021C4F] text-xs min-w-[1.2rem]" : "text-[#C50337] text-sm"
                       }`}
                     >
                       {bullet}
                     </span>
-                    <span className="flex-1 text-slate-800">{parseInline(text)}</span>
+                    <span className="flex-1 text-[#011337] font-semibold">{parseInline(text)}</span>
                   </div>
                 );
               }
 
               // Regular paragraph line
               return (
-                <p key={lIdx} className="leading-relaxed text-slate-800">
+                <p key={lIdx} className="leading-relaxed text-[#011337] font-semibold">
                   {parseInline(line)}
                 </p>
               );

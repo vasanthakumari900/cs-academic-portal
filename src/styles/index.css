@@ -66,9 +66,13 @@
     height: auto;
   }
 
-  button, input, select, textarea, a {
+  button, input, select, textarea, .touch-target {
     touch-action: manipulation;
     min-height: 44px;
+  }
+
+  a {
+    touch-action: manipulation;
   }
 
   /* ─── Global University Typography Hierarchy (Wine Red & Royal Warm Ivory Theme) ─── */

@@ -189,12 +189,12 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-wrap items-center justify-center gap-4 pt-2"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 pt-2 w-full sm:w-auto px-2 sm:px-0"
           >
             {user ? (
               <button
                 onClick={() => navigate(getDashboardPath())}
-                className="group relative inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#C50337] to-rose-700 px-8 py-4 text-sm font-black text-white shadow-xl shadow-rose-950/40 transition-all hover:scale-105 hover:shadow-2xl active:scale-95"
+                className="group relative inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#C50337] to-rose-700 px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-black text-white shadow-xl shadow-rose-950/40 transition-all hover:scale-105 hover:shadow-2xl active:scale-95 w-full sm:w-auto"
               >
                 <span>Go to Student Dashboard</span>
                 <FiArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
@@ -202,7 +202,7 @@ export default function Home() {
             ) : (
               <button
                 onClick={() => navigate("/login")}
-                className="group relative inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#C50337] to-rose-700 px-8 py-4 text-sm font-black text-white shadow-xl shadow-rose-950/40 transition-all hover:scale-105 hover:shadow-2xl active:scale-95"
+                className="group relative inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#C50337] to-rose-700 px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-black text-white shadow-xl shadow-rose-950/40 transition-all hover:scale-105 hover:shadow-2xl active:scale-95 w-full sm:w-auto"
               >
                 <span>Access Student Portal</span>
                 <FiArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
@@ -211,7 +211,7 @@ export default function Home() {
 
             <button
               onClick={() => navigate("/about")}
-              className="group inline-flex items-center gap-2 rounded-2xl bg-white/10 backdrop-blur-md px-7 py-4 text-sm font-bold text-white border border-white/20 hover:bg-white/20 transition-all hover:scale-105 active:scale-95 shadow-md"
+              className="group inline-flex items-center justify-center gap-2 rounded-2xl bg-white/10 backdrop-blur-md px-6 sm:px-7 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white border border-white/20 hover:bg-white/20 transition-all hover:scale-105 active:scale-95 shadow-md w-full sm:w-auto"
             >
               <FiCompass size={16} className="text-amber-300" />
               <span>Explore About DGVC</span>

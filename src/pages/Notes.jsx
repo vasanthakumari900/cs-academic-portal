@@ -15,6 +15,7 @@ import { CURRICULUM } from "../utils/curriculum";
 import { downloadDriveFile } from "../utils/downloadUtils";
 import PdfFileCard from "../components/common/PdfFileCard";
 import { getSubjectIcon } from "../utils/subjectIcons";
+import NotesTopAiHeader from "../components/notes/NotesTopAiHeader";
 
 
 const yearStyles = {
@@ -1014,6 +1015,7 @@ export default function Notes() {
   if (!selectedYear) {
     return (
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+        <NotesTopAiHeader />
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-10 text-center flex flex-col items-center justify-center">
           {/* Custom Notes Logo Symbol */}
           <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-[#021C4F] via-[#0B3C91] to-[#C50337] p-1 shadow-xl shadow-rose-950/20 ring-4 ring-amber-400/30 transition-transform hover:scale-105 duration-300">
@@ -1071,6 +1073,7 @@ export default function Notes() {
     const sems = Object.entries(yearData.semesters);
     return (
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+        <NotesTopAiHeader />
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setSelectedYear(null); setSelectedSemester(null); setSelectedSubject(null); }}
           className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
@@ -1347,6 +1350,7 @@ export default function Notes() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+      <NotesTopAiHeader />
       {/* ─── Faculty Upload Section ─── */}
       {isFaculty && selectedSubject && (
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
