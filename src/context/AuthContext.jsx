@@ -35,11 +35,11 @@ const STUDENTS = {
   "24E3013": { name: "MYTHILI B", rollNumber: "24E3013", dob: "10/12/2006", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3013.jpg", adminBadge: "ADMIN" },
   "24E3055": { name: "PRADHIKSHA B", rollNumber: "24E3055", dob: "27/10/2006", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3055.jpg" },
   "24E3034": { name: "RAMYA S", rollNumber: "24E3034", dob: "12/01/2007", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3034.jpg" },
-  "24E3010": { name: "ROSHITHA N", rollNumber: "24E3010", dob: "26/06/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3010": { name: "ROSHITHA N", rollNumber: "24E3010", dob: "26/06/2007", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3010.jpg" },
   "24E3002": { name: "SANTHOSHINI R", rollNumber: "24E3002", dob: "13/05/2007", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3002.jpg" },
   "24E3029": { name: "SHARMELA", rollNumber: "24E3029", dob: "10/08/2007", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3029.jpg" },
   "24E3046": { name: "SREE PRIYA", rollNumber: "24E3046", dob: "19/03/2007", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3046.jpg" },
-  "24E3004": { name: "SRISAKTHI S", rollNumber: "24E3004", dob: "19/06/2006", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3004": { name: "SRISAKTHI S", rollNumber: "24E3004", dob: "19/06/2006", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3004.jpg" },
   "24E3047": { name: "V SUREKHA", rollNumber: "24E3047", dob: "11/09/2006", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3047.jpg" },
   "24E3031": { name: "A S VARSHINEE", rollNumber: "24E3031", dob: "02/02/2007", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3031.jpg" },
   "24E3039": { name: "AHMED AADHIL", rollNumber: "24E3039", dob: "26/03/2007", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3039.jpg" },
@@ -82,7 +82,7 @@ const STUDENTS = {
   "24E3017": { name: "YUVANRAJKUMAR P", rollNumber: "24E3017", dob: "05/05/2007", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3017.jpg" },
   "24E3032": { name: "V GANESH KUMAR", rollNumber: "24E3032", dob: "16/01/2007", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3032.jpg" },
   "24E3038": { name: "ASJ POTHI VIGNESWAR", rollNumber: "24E3038", dob: "30/10/2006", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3038.jpg" },
-  "24E3049": { name: "YASHIKA V", rollNumber: "24E3049", dob: "13/02/2007", year: 3, semester: 5, section: "B", type: "student" },
+  "24E3049": { name: "YASHIKA V", rollNumber: "24E3049", dob: "13/02/2007", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3049.jpg" },
 
   // ──── 3rd Year A Section ────
   "24E2901": { name: "SANTHOSH KUMAR S", rollNumber: "24E2901", dob: "04/05/2006", year: 3, semester: 5, section: "A", type: "student" },

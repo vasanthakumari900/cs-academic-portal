@@ -9,10 +9,12 @@ import {
   FiSun,
   FiMoon,
   FiMessageSquare,
+  FiPercent,
 } from "react-icons/fi";
 
 export const PLACEMENT_TABS = [
   { id: "drives", label: "Live Placement Drives", icon: FiBriefcase },
+  { id: "cgpa", label: "CGPA & Percentage Calculator", icon: FiPercent },
   { id: "analytics", label: "Placement Analytics", icon: FiPieChart },
   { id: "prephub", label: "Prep & Practice Hub", icon: FiBookOpen },
   { id: "toolkit", label: "Career Tools & Eligibility", icon: FiCheckCircle },

@@ -152,8 +152,6 @@ const adminNav = [
 
 const facultyNav = [
   { to: "/faculty/dashboard", label: "Dashboard", icon: FiHome },
-  { to: "/faculty/assignments", label: "Manage Assignments", icon: FiCheckSquare },
-  { to: "/faculty/cia-timetable", label: "CIA Timetable Manager", icon: FiAward },
   { to: "/faculty/notes", label: "Upload Notes", icon: FiFileText },
   { to: "/faculty/videos", label: "Video Lectures", icon: FiPlayCircle },
   { to: "/faculty/question-papers", label: "Upload Semester Question Papers", icon: FiFileText },
@@ -205,8 +203,6 @@ export default function App() {
             <Route element={<ProtectedRoute allowedRoles={[ROLES.FACULTY]} />}>
               <Route element={<DashboardLayout title="Faculty Dashboard" items={facultyNav} />}>
                 <Route path="/faculty/dashboard" element={<AnimatedPage><FacultyDashboard /></AnimatedPage>} />
-                <Route path="/faculty/assignments" element={<AnimatedPage><FacultyAssignments /></AnimatedPage>} />
-                <Route path="/faculty/cia-timetable" element={<AnimatedPage><ManageCiaTimetable /></AnimatedPage>} />
                 <Route path="/faculty/notes" element={<AnimatedPage><FacultyNotes /></AnimatedPage>} />
                 <Route path="/faculty/videos" element={<AnimatedPage><FacultyVideos /></AnimatedPage>} />
                 <Route path="/faculty/question-papers" element={<AnimatedPage><FacultyQuestionPapers /></AnimatedPage>} />

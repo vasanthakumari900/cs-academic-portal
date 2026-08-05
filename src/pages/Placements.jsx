@@ -10,6 +10,7 @@ import PlacementDashboardTab from "../components/placements/PlacementDashboardTa
 import PlacementPrepHubTab from "../components/placements/PlacementPrepHubTab";
 import PlacementCareerToolkitTab from "../components/placements/PlacementCareerToolkitTab";
 import PlacementExperiencesTab from "../components/placements/PlacementExperiencesTab";
+import CgpaCalculatorTab from "../components/placements/CgpaCalculatorTab";
 
 import CompanyDetailsModal from "../components/placements/CompanyDetailsModal";
 import PlacementFeedback from "../components/placements/PlacementFeedback";
@@ -421,6 +422,8 @@ export default function Placements() {
                     onApplyCompany={handleApplyCompany}
                   />
                 )}
+
+                {activeTab === "cgpa" && <CgpaCalculatorTab />}
 
                 {activeTab === "analytics" && (
                   <PlacementDashboardTab

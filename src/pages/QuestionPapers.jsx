@@ -12,7 +12,7 @@ import { STORAGE_PATHS } from "../utils/constants";
 import { useFirestoreList } from "../hooks/useFirestoreList";
 import { uploadFile } from "../services/storageService";
 import toast from "react-hot-toast";
-import { downloadDriveFile } from "../utils/downloadUtils";
+import { downloadDriveFile, getDriveEmbedUrl } from "../utils/downloadUtils";
 import PdfFileCard from "../components/common/PdfFileCard";
 import { getSubjectIcon } from "../utils/subjectIcons";
 
@@ -774,11 +774,12 @@ const refetch = () => {};
                 </button>
               </div>
               <div className="aspect-[4/3] w-full bg-slate-900 sm:aspect-[16/10] lg:aspect-[16/9]">
-                {previewing.driveFileId ? (
-                  <iframe src={`https://drive.google.com/file/d/${previewing.driveFileId}/preview`} title={previewing.title} className="h-full w-full" allowFullScreen />
-                ) : (
-                  <iframe src={previewing.fileUrl} title={previewing.title} className="h-full w-full" allowFullScreen />
-                )}
+                <iframe
+                  src={getDriveEmbedUrl(previewing.fileUrl || previewing.driveUrl || (previewing.driveFileId ? `https://drive.google.com/file/d/${previewing.driveFileId}/view` : ""))}
+                  title={previewing.title}
+                  className="h-full w-full border-0"
+                  allowFullScreen
+                />
               </div>
               <div className="border-t border-[#E5E7EB] px-5 py-2.5 text-center text-[11px] text-[#6B7280] bg-[#F8FAFC]">
                 {previewing.pages && <span>{previewing.pages} pages</span>} · {previewing.subject} · {previewing.year}

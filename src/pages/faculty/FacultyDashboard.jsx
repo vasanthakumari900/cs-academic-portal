@@ -43,14 +43,6 @@ const cards = [
     desc: "Upload CIA 1 & CIA 2 assessment papers for 1st, 2nd & 3rd Year."
   },
   {
-    label: "Manage Assignments",
-    icon: FiBookOpen,
-    to: "/faculty/assignments",
-    bg: "bg-[#021C4F]",
-    badge: "Coursework & Grading",
-    desc: "Post assignments with 3-year CS subject names, review & grade student submissions."
-  },
-  {
     label: "Vaishnav LMS Portal",
     icon: FiExternalLink,
     href: "https://dgvc.in/lms/login.php",
@@ -87,7 +79,7 @@ export default function FacultyDashboard() {
                 Welcome back, {user?.name || "Faculty Member"}!
               </h1>
               <p className="mt-2 text-xs sm:text-sm text-slate-100 max-w-xl leading-relaxed font-medium">
-                Upload &amp; manage academic notes, video lectures, CIA papers, semester question papers, and assignments for Computer Science students.
+                Upload &amp; manage academic notes, video lectures, CIA papers, and semester question papers for Computer Science students.
               </p>
             </div>
 

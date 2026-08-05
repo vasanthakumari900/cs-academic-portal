@@ -2,11 +2,25 @@ import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 /**
+ * Extract Google Drive Folder ID from folder link.
+ */
+export function extractDriveFolderId(input) {
+  if (!input) return null;
+  const str = String(input).trim();
+  if (str.includes("/folders/")) {
+    const match = str.match(/\/folders\/([a-zA-Z0-9_-]{25,})/);
+    return match ? match[1] : null;
+  }
+  return null;
+}
+
+/**
  * Extract Google Drive File ID from various link formats or raw ID string.
  */
 export function extractDriveFileId(input) {
   if (!input) return null;
   const str = String(input).trim();
+  if (str.includes("/folders/")) return null;
   if (/^[a-zA-Z0-9_-]{25,}$/.test(str)) {
     return str;
   }
@@ -22,6 +36,10 @@ export function extractDriveFileId(input) {
 export function getDirectDownloadUrl(input) {
   if (!input) return "";
   const str = String(input).trim();
+  const folderId = extractDriveFolderId(str);
+  if (folderId) {
+    return `https://drive.google.com/drive/folders/${folderId}`;
+  }
   const fileId = extractDriveFileId(str);
 
   if (fileId) {
@@ -45,6 +63,10 @@ export function getDirectDownloadUrl(input) {
 export function getDriveEmbedUrl(input) {
   if (!input) return "";
   if (typeof input === "string" && input.startsWith("/")) return input;
+  const folderId = extractDriveFolderId(input);
+  if (folderId) {
+    return `https://drive.google.com/embeddedfolderview?id=${folderId}#grid`;
+  }
   const fileId = extractDriveFileId(input);
   if (fileId) {
     return `https://drive.google.com/file/d/${fileId}/preview`;
@@ -58,6 +80,10 @@ export function getDriveEmbedUrl(input) {
 export function getDriveViewUrl(input) {
   if (!input) return "#";
   if (typeof input === "string" && input.startsWith("/")) return input;
+  const folderId = extractDriveFolderId(input);
+  if (folderId) {
+    return `https://drive.google.com/drive/folders/${folderId}`;
+  }
   const fileId = extractDriveFileId(input);
   if (fileId) {
     return `https://drive.google.com/file/d/${fileId}/view?usp=sharing`;
@@ -130,6 +156,14 @@ export function formatFileSize(size) {
 export async function downloadDriveFile(fileInput, customTitle = "", metadata = {}) {
   if (!fileInput) {
     toast.error("Download file link is missing or empty");
+    return;
+  }
+
+  const folderId = extractDriveFolderId(fileInput);
+  if (folderId || (typeof fileInput === "string" && fileInput.includes("/folders/"))) {
+    const folderUrl = folderId ? `https://drive.google.com/drive/folders/${folderId}` : String(fileInput);
+    toast.success("📂 Opening Google Drive Folder with Question Papers...", { position: isMobileDevice() ? "top-center" : "top-right" });
+    window.open(folderUrl, "_blank");
     return;
   }
 
