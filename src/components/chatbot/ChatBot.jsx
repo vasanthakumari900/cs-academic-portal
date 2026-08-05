@@ -503,7 +503,7 @@ export default function ChatBot() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.85, y: 20 }}
               transition={{ type: "spring", damping: 22, stiffness: 280 }}
-              className={`${chatWidth} ${chatMaxWidth} ${chatHeight} relative flex flex-col overflow-hidden rounded-3xl border border-white/40 bg-white/95 shadow-2xl backdrop-blur-xl`}
+              className={`${chatWidth} ${chatMaxWidth} ${chatHeight} relative flex flex-col overflow-hidden rounded-3xl border border-white/40 bg-white shadow-2xl chatbot-window`}
             >
               {/* Creative Glassmorphic Gradient Header */}
               <div className="relative flex shrink-0 items-center justify-between border-b border-white/20 bg-gradient-to-r from-[#021C4F] via-[#0B3C91] to-[#C50337] px-4 py-3.5 text-white shadow-md">
@@ -559,7 +559,7 @@ export default function ChatBot() {
               <div
                 ref={chatContainerRef}
                 onScroll={handleScroll}
-                className="flex-1 overflow-y-auto space-y-3.5 px-4 py-4 bg-gradient-to-b from-slate-50 to-slate-100/70"
+                className="flex-1 overflow-y-auto space-y-3.5 px-4 py-4 bg-slate-50 chat-feed"
               >
                 {messages.map((msg, i) => (
                   <motion.div
@@ -572,12 +572,12 @@ export default function ChatBot() {
                     <div
                       className={`max-w-[88%] rounded-2xl px-4 py-3 text-xs sm:text-sm leading-relaxed shadow-sm transition-all ${
                         msg.role === "user"
-                          ? "bg-gradient-to-br from-[#021C4F] to-[#0A369D] text-white shadow-blue-900/10 rounded-br-xs"
-                          : "bg-white text-slate-800 border border-slate-200/80 border-l-4 border-l-[#C50337] rounded-bl-xs"
+                          ? "bg-gradient-to-br from-[#021C4F] to-[#0A369D] text-white shadow-blue-900/10 rounded-br-xs chat-user-bubble"
+                          : "bg-white text-slate-900 border border-slate-200/80 border-l-4 border-l-[#C50337] rounded-bl-xs chat-ai-bubble"
                       }`}
                     >
                       {msg.role === "user" ? (
-                        <p className="whitespace-pre-wrap font-sans">{msg.content}</p>
+                        <p className="whitespace-pre-wrap font-sans text-white font-bold !text-white">{msg.content}</p>
                       ) : (
                         <FormattedMessage content={msg.content} />
                       )}
@@ -602,7 +602,7 @@ export default function ChatBot() {
                         </div>
                       )}
 
-                      <p className={`mt-1 text-[9px] text-right font-medium ${msg.role === "user" ? "text-white/60" : "text-slate-400"}`}>
+                      <p className={`mt-1 text-[9px] text-right font-medium ${msg.role === "user" ? "text-white/80 !text-white/80" : "text-slate-500 !text-slate-500"}`}>
                         {formatTime(msg.timestamp)}
                       </p>
                     </div>
@@ -817,7 +817,7 @@ export default function ChatBot() {
                       : "Talk to AI or ask anything..."
                   }
                   disabled={isLoading}
-                  className="flex-1 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-xs sm:text-sm text-[#021C4F] placeholder-slate-400 outline-none transition-all focus:border-[#021C4F] focus:bg-white focus:ring-2 focus:ring-[#021C4F]/10 disabled:opacity-50 font-medium"
+                  className="flex-1 rounded-2xl border border-slate-300 bg-white px-4 py-2.5 text-xs sm:text-sm text-[#021C4F] !text-[#021C4F] placeholder-slate-500 outline-none transition-all focus:border-[#021C4F] focus:bg-white focus:ring-2 focus:ring-[#021C4F]/10 disabled:opacity-50 font-bold chat-input-field"
                 />
 
                 <button

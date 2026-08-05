@@ -285,23 +285,32 @@ export default function PlacementDrivesTab({ searchQuery, onSelectCompany, onApp
                   </div>
 
                   {/* Location & Drive Date */}
-                  <div className="text-xs space-y-1 text-slate-500 dark:text-slate-400 pt-1">
-                    <p className="flex items-center gap-1.5">
-                      <FiMapPin size={13} className="text-slate-400" /> Location:{" "}
-                      <span className="font-semibold text-slate-700 dark:text-slate-300">
-                        {company.location || "Pan India"}
+                  <div className="space-y-1.5 pt-1 text-left">
+                    <p className="flex items-start sm:items-center gap-1.5 leading-tight">
+                      <FiMapPin size={13} className="text-slate-500 dark:text-slate-400 shrink-0 mt-0.5 sm:mt-0" />
+                      <span>
+                        <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide">Location:</span>{" "}
+                        <span className="text-[11px] font-semibold text-slate-700 dark:text-slate-200">
+                          {company.location || "Pan India"}
+                        </span>
                       </span>
                     </p>
-                    <p className="flex items-center gap-1.5">
-                      <FiCalendar size={13} className="text-slate-400" /> Drive Date:{" "}
-                      <span className="font-semibold text-slate-700 dark:text-slate-300">
-                        {formatDate(company.driveDate || company.deadline)}
+                    <p className="flex items-center gap-1.5 leading-tight">
+                      <FiCalendar size={13} className="text-slate-500 dark:text-slate-400 shrink-0" />
+                      <span>
+                        <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide">Drive Date:</span>{" "}
+                        <span className="text-[11px] font-semibold text-slate-700 dark:text-slate-200">
+                          {formatDate(company.driveDate || company.deadline)}
+                        </span>
                       </span>
                     </p>
-                    <p className="flex items-center gap-1.5">
-                      <FiClock size={13} className="text-amber-500" /> Apply Before:{" "}
-                      <span className="font-semibold text-slate-700 dark:text-slate-300">
-                        {formatDate(company.deadline)}
+                    <p className="flex items-center gap-1.5 leading-tight">
+                      <FiClock size={13} className="text-amber-500 shrink-0" />
+                      <span>
+                        <span className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wide">Apply Before:</span>{" "}
+                        <span className="text-[11px] font-semibold text-slate-700 dark:text-slate-200">
+                          {formatDate(company.deadline)}
+                        </span>
                       </span>
                     </p>
                   </div>

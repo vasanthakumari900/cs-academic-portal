@@ -346,120 +346,102 @@ function extractGpaFromPdfText(rawText) {
 }
 
 // Extract the CGPA/GPA value printed inside the PART III section (user requirement: always use
-// PART III — every semester marksheet prints its CGPA there). Locates "PART III" with OCR-tolerant
-// roman numerals and separators, then scans only until the next PART marker (IV/V/4/5) so the
-// overall CGPA printed elsewhere never overrides the PART III value.
+// PART III — every semester marksheet prints its CGPA there). Locates "PART III" in the summary table,
+// matches the label "Part III" first, reads the GPA beside it (e.g. Part III 30 7.60 -> 7.60), and
+// ignores Part I, Part II, Part IV, and first decimal occurrences.
 function extractPart3Cgpa(clean) {
-  const cgpaLabelRx = /(?:c\s*\.?\s*g\s*\.?\s*p\s*\.?\s*a\s*\.?|cumulative\s+grade\s+point\s+average)/i;
-  const gpaLabelRx = /(?:s\s*\.?\s*g\s*\.?\s*p\s*\.?\s*a\s*\.?|g\s*\.?\s*p\s*\.?\s*a\s*\.?|semester\s+grade\s+point\s+average|grade\s+point\s+average)/i;
+  if (!clean || typeof clean !== "string") return null;
 
-  // Separator between "PART" and the numeral — OCR freely swaps space/hyphen/en-dash/em-dash/
-  // colon/period/slash, so accept ANY of them, in any amount.
-  const partSep = "[\\s\\-–—_:/.(]*";
-
-  // The word PART itself may suffer a single OCR error ("PABT", "PAKT", "PADT") or be spaced
-  // letter-by-letter ("P A R T"). `t?` tolerates a dropped final T.
-  const partWord = "p\\s*a\\s*[rktbd]\\s*t?\\s*";
-
-  // PART III numeral: the three I's are often read as digits or lowercase-L ("PART 111",
-  // "PART IIl", "PART I II", "PART 11 1") or as the Arabic "PART 3". `\b` after the numeral
-  // keeps "PART 11" (PART II) and "PART 1" (PART I) from matching.
-  const roman3 = "[Il1](?:\\s*[Il1]){2}";
-  const part3Index = clean.search(
-    new RegExp(`${partWord}${partSep}(?:${roman3}|3)\\b`, "i")
-  );
-  if (part3Index === -1) return null;
-
-  // Region: from PART III up to the next PART marker (IV/4/V/5) or an OVERALL/CONSOLIDATED/
-  // SUMMARY / "TOTAL CGPA" block when present — the overall CGPA always lives in those, and
-  // cutting the region there guarantees the PART III value wins. If neither is found, use a
-  // GENEROUS window so long subject tables (10+ subjects ≈ 700 chars) are fully covered.
-  const after = clean.substring(part3Index);
-  let regionEnd = after.search(new RegExp(`\\bpart${partSep}(?:[Il1]?v\\b|4\\b|5\\b)`, "i"));
-  if (regionEnd === -1) regionEnd = after.search(/\b(?:overall|consolidated|total\s+(?:cgpa|gpa|sgpa))\b/i);
-  const region = regionEnd !== -1 ? after.substring(0, regionEnd) : after.substring(0, 1400);
-
-  const readAfter = (idx) => findValidValueIn(region, idx);
-  const readBefore = (idx) => findLastValidValueIn(region, Math.max(0, idx - 60), idx);
-
-  // A CGPA/GPA label that belongs to the OVERALL block ("TOTAL CGPA: 8.26", "OVERALL CGPA")
-  // must never be mistaken for the PART III value — skip any label immediately preceded by an
-  // overall-style word.
-  const isOverallLabel = (idx) => {
-    const win = region.slice(Math.max(0, idx - 24), idx);
-    // The overall word must be followed by only separators and optionally a CGPA-shaped decimal
-    // ("TOTAL CGPA", "TOTAL: 8.26") — an integer marks total ("GRAND TOTAL: 500") must NOT flag,
-    // or a legitimate PART III CGPA right after it would be wrongly skipped.
-    return /(?:total|overall|consolidated|grand)\s*[:=.()\-]*(?:[0-9OIlZSBgqA]{1,2}\.[0-9OIlZSBgqA]{1,2})?\s*$/i.test(win);
-  };
-
-  // 1. USER RULE — the CGPA printed under PART III wins. ALL CGPA labels in the region are
-  //    scanned first ("PART III ... RESULT: PASS CGPA: 7.60"), so a GPA/SGPA value that happens
-  //    to appear earlier ("PART III ... GPA: 8.50 ... CGPA: 7.60") can never override the CGPA.
-  //    Only when no CGPA label exists do GPA/SGPA labels count. Overall-block labels
-  //    ("TOTAL CGPA: 8.26") are skipped in both passes.
-  for (const rx of [cgpaLabelRx, gpaLabelRx]) {
-    const rxGlobal = new RegExp(rx.source, "gi");
-    let lm;
-    while ((lm = rxGlobal.exec(region)) !== null) {
-      if (isOverallLabel(lm.index)) continue;
-      const afterVal = readAfter(lm.index + lm[0].length);
-      if (afterVal) return afterVal;
-      // Some sheets print "7.60 CGPA" (value BEFORE the label)
-      const beforeVal = readBefore(lm.index);
-      if (beforeVal) return beforeVal;
+  // 1. Label-based summary table parser (Pattern: Part III [credits] [GPA], e.g., Part III 30 7.60)
+  // Matches "Part III 30 7.60", "PART III 30 7.60", "PART-III 30 7.60"
+  const summaryTableRx = /\bpart[\s\-:_.]*(?:iii|3|111|i\s*i\s*i)\s+(\d+)\s+(\d+\.\d+)\b/i;
+  const matchTable = clean.match(summaryTableRx);
+  if (matchTable && matchTable[2]) {
+    const val = parseFloat(matchTable[2]);
+    if (!isNaN(val) && val >= 0 && val <= 10.00) {
+      return val.toFixed(2);
     }
   }
 
-  // 2. The FIRST "RESULT"/"GRAND TOTAL" row in the region (the PART III table's own bottom row)
-  //    with a DIRECTLY attached value like "RESULT: 7.60". Anchored to the FIRST occurrence so a
-  //    later overall summary can never win; a bare "RESULT: PASS" (no number) is skipped.
-  const firstResult = region.search(/(?:result|grand\s+total)/i);
-  if (firstResult !== -1) {
-    const attachedVal = findValidValueIn(region, firstResult, 40);
-    if (attachedVal && attachedVal !== "10.00") return attachedVal;
+  // 2. Direct Part III label match with colon/dash or direct decimal (e.g. "Part III : 7.60", "PART III 7.60")
+  const directLabelRxes = [
+    /\bpart[\s\-:_.]*(?:iii|3|111|i\s*i\s*i)\b[^\n\r\d]*?(\d{1,3})\s+([0-9]\.\d{1,2}|10\.00)\b/i,
+    /\bpart[\s\-:_.]*(?:iii|3|111|i\s*i\s*i)\b[^\n\r\d]*?[:=\-]?\s*([0-9]\.\d{1,2}|10\.00)\b/i,
+    /\b(?:core|major)\s*(?:subjects?|courses?|part)?\b[^\n\r\d]*?[:=\-]?\s*([0-9]\.\d{1,2}|10\.00)\b/i
+  ];
+
+  for (const rx of directLabelRxes) {
+    const match = clean.match(rx);
+    if (match) {
+      const gpaStr = match[2] || match[1];
+      const val = parseFloat(gpaStr);
+      if (!isNaN(val) && val >= 0 && val <= 10.00) {
+        return val.toFixed(2);
+      }
+    }
   }
 
-  // 3. Fallback: LAST plausible decimal — totals sit at the bottom of the PART III table.
-  return findLastValidValueIn(region);
-}
-// Single-pass extraction against one normalized text string.
-function extractGpaFromCleanText(clean) {
-  const valid = (v) => {
-    const val = parseFloat(v);
-    return !Number.isNaN(val) && val >= 4.0 && val <= 10.0;
-  };
-  const cgpaLabelRx = /(?:c\s*\.?\s*g\s*\.?\s*p\s*\.?\s*a\s*\.?|cumulative\s+grade\s+point\s+average)/i;
-  const gpaLabelRx = /(?:s\s*\.?\s*g\s*\.?\s*p\s*\.?\s*a\s*\.?|g\s*\.?\s*p\s*\.?\s*a\s*\.?|semester\s+grade\s+point\s+average|grade\s+point\s+average)/i;
+  // 3. Locate PART III section heading position in full text
+  const part3Patterns = [
+    /\bpart[\s\-:_.]*(?:iii|3|111|i\s*i\s*i|l\s*l\s*l|1\s*1\s*1)\b/i,
+    /\bp\s*a\s*r\s*t\s*[-:_.]*\s*(?:iii|3|i\s*i\s*i)\b/i,
+    /\b(?:core|major)\s*(?:subjects?|courses?|part)?\b/i,
+  ];
 
-  // PRIORITY 1: PART III section CGPA (user requirement — always take the PART III value).
-  const part3Value = extractPart3Cgpa(clean);
-  if (part3Value) return part3Value;
+  let part3Index = -1;
 
-  // PRIORITY 2: Explicit CGPA label anywhere — "CGPA: 7.60", "C.G.P.A - 7.60", "7.60 CGPA"
-  let m = cgpaLabelRx.exec(clean);
-  if (m) {
-    const v = findValidValueIn(clean, m.index + m[0].length);
-    if (v) return v;
-  }
-  m = /\b(?:cgpa|c\.g\.p\.a)\b/i.exec(clean);
-  if (m) {
-    const v = findLastValidValueIn(clean, Math.max(0, m.index - 80), m.index);
-    if (v) return v;
+  // Search for PART III after PART I / PART II if present
+  const part1Or2Idx = clean.search(/\bpart[\s\-:_.]*(?:i|1|ii|2)\b(?![\s\-]*[iv3])/i);
+  if (part1Or2Idx !== -1) {
+    const afterPart12 = clean.substring(part1Or2Idx + 6);
+    for (const rx of part3Patterns) {
+      const idx = afterPart12.search(rx);
+      if (idx !== -1) {
+        part3Index = part1Or2Idx + 6 + idx;
+        break;
+      }
+    }
   }
 
-  // PRIORITY 3: Explicit GPA / SGPA / Grade Point Average label
-  m = gpaLabelRx.exec(clean);
-  if (m) {
-    const v = findValidValueIn(clean, m.index + m[0].length);
-    if (v) return v;
+  if (part3Index === -1) {
+    for (const rx of part3Patterns) {
+      const idx = clean.search(rx);
+      if (idx !== -1) {
+        part3Index = idx;
+        break;
+      }
+    }
   }
 
-  // PRIORITY 4: Score out of 10 e.g. "7.60/10"
-  const score10Match = clean.match(/\b([4-9]\.[0-9]{1,2}|10\.00?)\s*\/\s*10\b/i);
-  if (score10Match && valid(score10Match[1])) return parseFloat(score10Match[1]).toFixed(2);
+  // Strictly return null if Part III section heading cannot be identified
+  if (part3Index === -1) return null;
+
+  // Extract region starting strictly from PART III up to PART IV, PART V, or OVERALL
+  const afterPart3 = clean.substring(part3Index);
+  let regionEnd = afterPart3.search(/\bpart[\s\-:_.]*(?:iv|4|v|5)\b/i);
+  if (regionEnd === -1) regionEnd = afterPart3.search(/\b(?:overall|consolidated|grand\s+total)\b/i);
+  const region = regionEnd !== -1 ? afterPart3.substring(0, regionEnd) : afterPart3.substring(0, 400);
+
+  // Extract all valid decimal numbers inside the PART III region only
+  const decimals = region.match(/\b([0-9]\.\d{1,2}|10\.00)\b/g);
+  if (decimals && decimals.length > 0) {
+    // Return the decimal associated with Part III (typically the last valid GPA decimal <= 10.00)
+    for (let i = decimals.length - 1; i >= 0; i--) {
+      const val = parseFloat(decimals[i]);
+      if (!isNaN(val) && val >= 0 && val <= 10.00) {
+        return val.toFixed(2);
+      }
+    }
+  }
 
   return null;
+}
+
+// Single-pass extraction against one normalized text string.
+function extractGpaFromCleanText(clean) {
+  // Label-based strict extraction: Must identify PART III section heading first.
+  // Never extract the first CGPA found on the page if it belongs to Part I or another section.
+  return extractPart3Cgpa(clean);
 }
 
 // Function to verify if file is an official academic semester marksheet and extract detailed fields.
@@ -575,26 +557,8 @@ async function verifyAndExtractMarksheetDetails(file, semNumber, onProgressLog, 
   }
 
   // ── 3. CGPA fallbacks & rejection policy ──
-  if (!extractedGpa && isMarksheet) {
-    // Filename CGPA fallback — allowed for any recognized marksheet (identity is optional).
-    const filenameMatch = file.name.match(/(?:^|[^0-9])([5-9]\.[0-9]{1,2})(?![0-9])/);
-    if (filenameMatch && parseFloat(filenameMatch[1]) >= 5.0 && parseFloat(filenameMatch[1]) <= 10.0) {
-      log(`📛 CGPA read from filename: ${filenameMatch[1]}`);
-      extractedGpa = parseFloat(filenameMatch[1]).toFixed(2);
-    }
-  }
-
-  // Only reject when the document is NOT a recognizable marksheet with academic data.
-  if (!extractedGpa && !isMarksheet) {
-    log(`❌ Rejected: the document does not appear to be an official semester marksheet.`);
-    return {
-      isValid: false,
-      extractedGpa: null,
-      errorMsg:
-        "This document does not appear to be an official semester marksheet, so no CGPA could be extracted. Please upload a clear, full-page photo of an official semester marksheet (PDF, JPG, or PNG) showing the subject marks and the SGPA/CGPA.",
-      logs,
-    };
-  }
+  // Only accept CGPA extracted directly from the PART III section of the document text.
+  // Never read values from the filename, Part I, Part II, or position-based guesses.
 
   if (extractedGpa) {
     log(`📊 PART III CGPA Extracted (${usedOcr ? "via OCR" : "text layer"}): ${extractedGpa}`);
@@ -608,12 +572,11 @@ async function verifyAndExtractMarksheetDetails(file, semNumber, onProgressLog, 
     };
   }
 
-  log(`❌ Recognized as an official marksheet, but no CGPA/SGPA value could be read.`);
+  log(`❌ Part III GPA not detected.`);
   return {
     isValid: false,
     extractedGpa: null,
-    errorMsg:
-      "We recognized this as an official semester marksheet, but could not read the CGPA value from it. Use a clearer, straight-on scan of the FULL page (including the CGPA at the bottom), or rename the file to include your CGPA (e.g. Sem1_8.42.pdf).",
+    errorMsg: "Part III GPA not detected.",
     logs,
   };
 }

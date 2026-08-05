@@ -168,20 +168,20 @@ export default function Navbar() {
             <div className="relative shrink-0" ref={dropdownRef}>
               <button
                 onClick={() => setProfileOpen(!profileOpen)}
-                className="flex items-center gap-2 p-1 pl-1.5 pr-2 rounded-full hover:bg-gray-100/80 transition-colors cursor-pointer shrink-0"
+                className="flex items-center gap-1.5 p-1 pl-1.5 pr-2 rounded-full hover:bg-gray-100/80 transition-colors cursor-pointer shrink-0 max-w-[120px] xs:max-w-[150px] sm:max-w-[180px]"
                 aria-label="User menu"
               >
-                <div className="flex items-center justify-center w-8 h-8 rounded-full border-2 border-[#7F011F] text-[#7F011F] bg-rose-50/50 overflow-hidden shrink-0">
+                <div className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#7F011F] text-[#7F011F] bg-rose-50/50 overflow-hidden shrink-0">
                   {user?.photoUrl ? (
                     <img src={user.photoUrl} alt="Avatar" className="w-full h-full object-cover" />
                   ) : (
-                    <FiUser className="w-4 h-4 stroke-[2.5]" />
+                    <FiUser className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
                   )}
                 </div>
-                <span className="hidden md:inline-block text-xs font-bold text-slate-800 tracking-tight whitespace-nowrap">
+                <span className="hidden md:inline-block text-xs font-bold text-slate-800 tracking-tight truncate max-w-[70px] lg:max-w-[100px]">
                   {displayName}
                 </span>
-                <FiChevronDown className={`w-3.5 h-3.5 text-slate-500 transition-transform ${profileOpen ? "rotate-180" : ""}`} />
+                <FiChevronDown className={`w-3.5 h-3.5 text-slate-500 shrink-0 transition-transform ${profileOpen ? "rotate-180" : ""}`} />
               </button>
 
               {/* Profile Dropdown Panel */}

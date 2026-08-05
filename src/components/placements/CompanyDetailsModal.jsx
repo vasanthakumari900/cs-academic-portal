@@ -56,26 +56,34 @@ export default function CompanyDetailsModal({ company, onClose, onApply }) {
 
               <div className="flex-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-2xl font-bold text-white">{company.companyName}</h2>
-                  <span className="rounded-full bg-white/20 px-3 py-0.5 text-xs font-semibold text-white backdrop-blur-md">
+                  <h2 className="text-xl font-extrabold text-white">{company.companyName}</h2>
+                  <span className="rounded-full bg-white/20 px-2.5 py-0.5 text-[11px] font-semibold text-white backdrop-blur-md">
                     {company.status || "Upcoming"}
                   </span>
                 </div>
-                <p className="mt-1 text-sm text-white/90 font-medium flex items-center gap-1.5">
-                  <FiBriefcase size={14} /> {company.role}
+                <p className="mt-1 text-xs text-white/90 font-medium flex items-center gap-1.5">
+                  <FiBriefcase size={13} /> {company.role}
                 </p>
-                <div className="mt-3 flex flex-wrap gap-4 text-xs text-white/80">
+                <div className="mt-2.5 flex flex-wrap gap-3 text-white/90">
                   <span className="flex items-center gap-1">
-                    <FiDollarSign size={14} className="text-emerald-300" /> Package:{" "}
-                    <strong className="text-white">₹{company.package} LPA</strong>
+                    <FiDollarSign size={13} className="text-emerald-300" />
+                    <span className="text-xs font-bold uppercase tracking-wide text-white">Package:</span>{" "}
+                    <strong className="text-[11px] font-semibold text-white">₹{company.package} LPA</strong>
                   </span>
                   <span className="flex items-center gap-1">
-                    <FiMapPin size={14} className="text-sky-300" /> Location:{" "}
-                    <strong className="text-white">{company.location || "Pan India"}</strong>
+                    <FiMapPin size={13} className="text-sky-300" />
+                    <span className="text-xs font-bold uppercase tracking-wide text-white">Location:</span>{" "}
+                    <strong className="text-[11px] font-semibold text-white">{company.location || "Pan India"}</strong>
                   </span>
                   <span className="flex items-center gap-1">
-                    <FiCalendar size={14} className="text-amber-300" /> Last Date:{" "}
-                    <strong className="text-white">{formatDate(company.deadline)}</strong>
+                    <FiCalendar size={13} className="text-amber-300" />
+                    <span className="text-xs font-bold uppercase tracking-wide text-white">Drive Date:</span>{" "}
+                    <strong className="text-[11px] font-semibold text-white">{formatDate(company.driveDate || company.deadline)}</strong>
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <FiClock size={13} className="text-rose-300" />
+                    <span className="text-xs font-bold uppercase tracking-wide text-white">Apply Before:</span>{" "}
+                    <strong className="text-[11px] font-semibold text-white">{formatDate(company.deadline)}</strong>
                   </span>
                 </div>
               </div>
@@ -85,34 +93,34 @@ export default function CompanyDetailsModal({ company, onClose, onApply }) {
                   href={company.website}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-lg bg-white/10 hover:bg-white/20 px-3.5 py-2 text-xs font-semibold text-white border border-white/20 transition-all shrink-0"
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-white/10 hover:bg-white/20 px-3 py-1.5 text-[11px] font-semibold text-white border border-white/20 transition-all shrink-0"
                 >
-                  Official Site <FiExternalLink size={12} />
+                  Official Site <FiExternalLink size={11} />
                 </a>
               )}
             </div>
           </div>
 
           {/* Modal Body */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-6 text-left">
+          <div className="flex-1 overflow-y-auto p-5 space-y-5 text-left">
             {/* About & Role Description */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="md:col-span-2 space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div className="md:col-span-2 space-y-3.5">
                 <section>
-                  <h3 className="text-sm font-bold uppercase tracking-wider text-[#0F4C81] dark:text-sky-400 mb-2 flex items-center gap-2">
-                    <FiTarget size={16} /> About {company.companyName}
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#0F4C81] dark:text-sky-400 mb-1.5 flex items-center gap-1.5">
+                    <FiTarget size={14} /> About {company.companyName}
                   </h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
                     {company.about ||
                       `${company.companyName} is a global tech enterprise recruiting talented software engineers for core R&D and digital innovation projects.`}
                   </p>
                 </section>
 
                 <section>
-                  <h3 className="text-sm font-bold uppercase tracking-wider text-[#0F4C81] dark:text-sky-400 mb-2 flex items-center gap-2">
-                    <FiBookOpen size={16} /> Job Description
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#0F4C81] dark:text-sky-400 mb-1.5 flex items-center gap-1.5">
+                    <FiBookOpen size={14} /> Job Description
                   </h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
                     {company.description ||
                       "Build production-grade applications, optimize algorithms, write clean testable code, and collaborate in agile engineering sprints."}
                   </p>
@@ -120,41 +128,41 @@ export default function CompanyDetailsModal({ company, onClose, onApply }) {
               </div>
 
               {/* Eligibility Box */}
-              <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 p-4 space-y-3">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b pb-2 flex items-center gap-1.5">
-                  <FiAward size={14} className="text-[#C50337]" /> Eligibility Criteria
+              <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 p-3.5 space-y-2.5">
+                <h4 className="text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b pb-1.5 flex items-center gap-1.5">
+                  <FiAward size={13} className="text-[#C50337]" /> Eligibility Criteria
                 </h4>
-                <div className="text-xs space-y-2 text-slate-600 dark:text-slate-300">
+                <div className="text-[11px] space-y-1.5 text-slate-600 dark:text-slate-300 font-medium">
                   <p>
-                    <strong className="text-slate-800 dark:text-slate-100">Cutoff CGPA:</strong>{" "}
+                    <strong className="text-slate-800 dark:text-slate-100 font-bold">Cutoff CGPA:</strong>{" "}
                     {company.eligibility || "CGPA 6.0+"}
                   </p>
                   <p>
-                    <strong className="text-slate-800 dark:text-slate-100">Departments:</strong>{" "}
+                    <strong className="text-slate-800 dark:text-slate-100 font-bold">Departments:</strong>{" "}
                     {company.allowedDepts?.join(", ") || "B.Sc CS, BCA, M.Sc CS"}
                   </p>
                   <p>
-                    <strong className="text-slate-800 dark:text-slate-100">Standing Arrears:</strong>{" "}
+                    <strong className="text-slate-800 dark:text-slate-100 font-bold">Standing Arrears:</strong>{" "}
                     {company.allowedArrears !== undefined
                       ? `${company.allowedArrears} Max Allowed`
                       : "0 Active Arrears"}
                   </p>
                   <p>
-                    <strong className="text-slate-800 dark:text-slate-100">Drive Date:</strong>{" "}
+                    <strong className="text-slate-800 dark:text-slate-100 font-bold">Drive Date:</strong>{" "}
                     {formatDate(company.driveDate || company.deadline)}
                   </p>
                 </div>
 
-                <div className="pt-2">
-                  <h5 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                <div className="pt-1.5">
+                  <h5 className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">
                     Required Skills
                   </h5>
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-1">
                     {Array.isArray(company.skills)
                       ? company.skills.map((s, idx) => (
                           <span
                             key={idx}
-                            className="rounded-md bg-[#0F4C81]/10 text-[#0F4C81] dark:bg-sky-950 dark:text-sky-300 px-2 py-0.5 text-[11px] font-semibold"
+                            className="rounded-md bg-[#0F4C81]/10 text-[#0F4C81] dark:bg-sky-950 dark:text-sky-300 px-1.5 py-0.5 text-[10px] font-semibold"
                           >
                             {s}
                           </span>
@@ -164,7 +172,7 @@ export default function CompanyDetailsModal({ company, onClose, onApply }) {
                           .map((s, idx) => (
                             <span
                               key={idx}
-                              className="rounded-md bg-[#0F4C81]/10 text-[#0F4C81] dark:bg-sky-950 dark:text-sky-300 px-2 py-0.5 text-[11px] font-semibold"
+                              className="rounded-md bg-[#0F4C81]/10 text-[#0F4C81] dark:bg-sky-950 dark:text-sky-300 px-1.5 py-0.5 text-[10px] font-semibold"
                             >
                               {s.trim()}
                             </span>
@@ -177,24 +185,24 @@ export default function CompanyDetailsModal({ company, onClose, onApply }) {
             {/* Selection Process Rounds */}
             {company.rounds && company.rounds.length > 0 && (
               <section className="pt-2 border-t border-slate-200 dark:border-slate-800">
-                <h3 className="text-sm font-bold uppercase tracking-wider text-[#0F4C81] dark:text-sky-400 mb-3 flex items-center gap-2">
-                  <FiUsers size={16} /> Selection Rounds & Hiring Process
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#0F4C81] dark:text-sky-400 mb-2.5 flex items-center gap-1.5">
+                  <FiUsers size={14} /> Selection Rounds &amp; Hiring Process
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {company.rounds.map((round, rIdx) => (
                     <div
                       key={rIdx}
-                      className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 p-3.5 shadow-sm space-y-1"
+                      className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 p-3 shadow-sm space-y-1"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-[#0F4C81] dark:text-sky-400">
+                        <span className="text-[11px] font-bold text-[#0F4C81] dark:text-sky-400">
                           {round.name}
                         </span>
-                        <span className="text-[10px] font-semibold text-slate-500 bg-slate-100 dark:bg-slate-700 px-2 py-0.5 rounded">
+                        <span className="text-[9px] font-semibold text-slate-500 bg-slate-100 dark:bg-slate-700 px-1.5 py-0.5 rounded">
                           {round.duration}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-600 dark:text-slate-300">{round.details}</p>
+                      <p className="text-[11px] text-slate-600 dark:text-slate-300 font-medium">{round.details}</p>
                     </div>
                   ))}
                 </div>
@@ -203,21 +211,21 @@ export default function CompanyDetailsModal({ company, onClose, onApply }) {
 
             {/* Past Experiences & Tips */}
             {(company.experience || company.tips) && (
-              <section className="pt-2 border-t border-slate-200 dark:border-slate-800 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <section className="pt-2 border-t border-slate-200 dark:border-slate-800 grid grid-cols-1 md:grid-cols-2 gap-3.5">
                 {company.experience && (
-                  <div className="rounded-xl bg-amber-500/10 border border-amber-500/20 p-4 text-xs text-amber-900 dark:text-amber-200 space-y-1">
-                    <strong className="font-bold block text-sm text-amber-700 dark:text-amber-400">
+                  <div className="rounded-xl bg-amber-500/10 border border-amber-500/20 p-3 text-[11px] text-amber-900 dark:text-amber-200 space-y-1">
+                    <strong className="font-bold block text-xs text-amber-700 dark:text-amber-400">
                       💡 Past Student Interview Experience
                     </strong>
-                    <p className="leading-relaxed">{company.experience}</p>
+                    <p className="leading-relaxed font-medium">{company.experience}</p>
                   </div>
                 )}
                 {company.tips && (
-                  <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-4 text-xs text-emerald-900 dark:text-emerald-200 space-y-1.5">
-                    <strong className="font-bold block text-sm text-emerald-700 dark:text-emerald-400">
+                  <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-3 text-[11px] text-emerald-900 dark:text-emerald-200 space-y-1">
+                    <strong className="font-bold block text-xs text-emerald-700 dark:text-emerald-400">
                       🎯 Preparation Tips
                     </strong>
-                    <ul className="list-disc list-inside space-y-1">
+                    <ul className="list-disc list-inside space-y-0.5 font-medium">
                       {Array.isArray(company.tips) ? (
                         company.tips.map((t, i) => <li key={i}>{t}</li>)
                       ) : (

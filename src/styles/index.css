@@ -4,21 +4,21 @@
 
 @layer base {
   :root {
-    --fluid-text-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.8rem);
-    --fluid-text-sm: clamp(0.8rem, 0.75rem + 0.35vw, 0.925rem);
-    --fluid-text-base: clamp(0.9rem, 0.825rem + 0.4vw, 1.05rem);
-    --fluid-text-lg: clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
-    --fluid-text-xl: clamp(1.15rem, 1.05rem + 0.75vw, 1.45rem);
-    --fluid-text-2xl: clamp(1.35rem, 1.2rem + 1vw, 1.85rem);
-    --fluid-text-3xl: clamp(1.6rem, 1.35rem + 1.5vw, 2.35rem);
-    --fluid-text-4xl: clamp(1.9rem, 1.55rem + 2vw, 3rem);
-    --fluid-text-5xl: clamp(2.3rem, 1.75rem + 2.8vw, 3.75rem);
+    --fluid-text-xs: clamp(0.8rem, 0.75rem + 0.3vw, 0.925rem);
+    --fluid-text-sm: clamp(0.925rem, 0.85rem + 0.4vw, 1.075rem);
+    --fluid-text-base: clamp(1.075rem, 0.975rem + 0.5vw, 1.225rem);
+    --fluid-text-lg: clamp(1.225rem, 1.1rem + 0.6vw, 1.425rem);
+    --fluid-text-xl: clamp(1.375rem, 1.225rem + 0.8vw, 1.675rem);
+    --fluid-text-2xl: clamp(1.625rem, 1.425rem + 1.2vw, 2.125rem);
+    --fluid-text-3xl: clamp(1.95rem, 1.65rem + 1.8vw, 2.8rem);
+    --fluid-text-4xl: clamp(2.3rem, 1.9rem + 2.5vw, 3.6rem);
+    --fluid-text-5xl: clamp(2.8rem, 2.25rem + 3.3vw, 4.35rem);
     
-    --fluid-space-xs: clamp(0.35rem, 0.3rem + 0.25vw, 0.6rem);
-    --fluid-space-sm: clamp(0.6rem, 0.5rem + 0.5vw, 1rem);
-    --fluid-space-md: clamp(1rem, 0.8rem + 0.8vw, 1.6rem);
-    --fluid-space-lg: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
-    --fluid-space-xl: clamp(2rem, 1.5rem + 2.5vw, 4rem);
+    --fluid-space-xs: clamp(0.4rem, 0.35rem + 0.3vw, 0.7rem);
+    --fluid-space-sm: clamp(0.7rem, 0.6rem + 0.6vw, 1.15rem);
+    --fluid-space-md: clamp(1.15rem, 0.95rem + 0.9vw, 1.8rem);
+    --fluid-space-lg: clamp(1.65rem, 1.35rem + 1.7vw, 2.8rem);
+    --fluid-space-xl: clamp(2.25rem, 1.75rem + 2.8vw, 4.5rem);
 
     --fluid-radius-sm: clamp(0.375rem, 0.3rem + 0.2vw, 0.5rem);
     --fluid-radius-md: clamp(0.5rem, 0.4rem + 0.3vw, 0.75rem);
@@ -31,7 +31,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 17px !important;
     overflow-x: hidden !important;
     width: 100%;
     max-width: 100vw;
@@ -40,13 +41,14 @@
   }
 
   * {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     box-sizing: border-box;
     max-width: 100%;
   }
 
   body {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 1.075rem !important;
     @apply text-base leading-relaxed antialiased bg-[#EAE0CB] text-[#7F011F];
     overflow-x: hidden !important;
     width: 100%;
@@ -75,9 +77,9 @@
     touch-action: manipulation;
   }
 
-  /* ─── Global University Typography Hierarchy (Wine Red & Royal Warm Ivory Theme) ─── */
+  /* ─── Global University Typography Hierarchy (Outfit & Inter) ─── */
   h1, .h1 {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-family: 'Outfit', 'Inter', sans-serif !important;
     font-size: var(--fluid-text-4xl);
     @apply font-extrabold text-[#7F011F] tracking-tight leading-tight;
     word-break: break-word;
@@ -85,7 +87,7 @@
   }
 
   h2, .h2 {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-family: 'Outfit', 'Inter', sans-serif !important;
     font-size: var(--fluid-text-3xl);
     @apply font-bold text-[#7F011F] tracking-tight leading-snug;
     word-break: break-word;
@@ -93,7 +95,7 @@
   }
 
   h3, .h3 {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-family: 'Outfit', 'Inter', sans-serif !important;
     font-size: var(--fluid-text-2xl);
     @apply font-bold text-[#7F011F] tracking-tight leading-snug;
     word-break: break-word;
@@ -101,7 +103,7 @@
   }
 
   h4, .h4 {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-family: 'Outfit', 'Inter', sans-serif !important;
     font-size: var(--fluid-text-xl);
     @apply font-bold text-[#7F011F] tracking-tight;
     word-break: break-word;
@@ -109,7 +111,7 @@
   }
 
   h5, h6 {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-family: 'Outfit', 'Inter', sans-serif !important;
     font-size: var(--fluid-text-sm);
     @apply font-semibold text-[#7F011F] tracking-normal;
     word-break: break-word;
@@ -117,6 +119,7 @@
   }
 
   p {
+    font-size: var(--fluid-text-base);
     @apply text-[#6B4F45];
     word-break: break-word;
     overflow-wrap: break-word;
@@ -128,7 +131,7 @@
   }
 
   button, input, select, textarea {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-family: 'Inter', sans-serif !important;
   }
 
   :focus-visible {
@@ -286,29 +289,59 @@
     @apply absolute bottom-0 left-0 right-0 h-0.5 bg-[#7F011F] scale-x-0 group-hover:scale-x-100 transition-transform origin-left;
   }
 
-  /* ─── Strict Warm Sand Non-White Background Enforcement ─── */
-  .bg-white,
-  .bg-slate-50,
-  .bg-slate-100,
-  .bg-slate-200,
-  .bg-gray-50,
-  .bg-gray-100,
-  .bg-zinc-50,
-  .bg-stone-50,
-  .bg-neutral-50,
-  [class*="bg-[#F8FAFC]"],
-  [class*="bg-[#f8fafc]"],
-  [class*="bg-[#F1F5F9]"],
-  [class*="bg-[#f1f5f9]"],
-  [class*="bg-[#FFFFFF]"],
-  [class*="bg-[#ffffff]"],
-  [class*="bg-[#FAF7F2]"],
-  [class*="bg-[#faf7f2]"] {
-    background-color: #EAE0CB !important;
+  /* ─── AI Chatbot High-Contrast Specific Styling Overrides ─── */
+  .chatbot-window {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+  }
+  .chat-feed {
+    background-color: #F8FAFC !important;
+  }
+  .chat-user-bubble {
+    background: linear-gradient(135deg, #021C4F 0%, #0A369D 100%) !important;
+    color: #FFFFFF !important;
+  }
+  .chat-user-bubble *,
+  .chat-user-bubble p,
+  .chat-user-bubble span {
+    color: #FFFFFF !important;
+  }
+  .chat-ai-bubble {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+  }
+  .chat-ai-bubble p,
+  .chat-ai-bubble li,
+  .chat-ai-bubble span,
+  .chat-ai-bubble div {
+    color: #0F172A !important;
+  }
+  .chat-ai-bubble strong {
+    color: #021C4F !important;
+  }
+  .chat-input-field {
+    background-color: #FFFFFF !important;
+    color: #021C4F !important;
+  }
+  .chat-input-field::placeholder {
+    color: #64748B !important;
   }
 
-  [class*="bg-white/9"],
-  [class*="bg-white/8"] {
-    background-color: rgba(234, 224, 203, 0.95) !important;
+  /* ─── Strict Warm Sand Non-White Background Enforcement (Excludes Chatbot) ─── */
+  :not(.chatbot-window):not(.chatbot-window *):not(.chat-user-bubble):not(.chat-ai-bubble).bg-white,
+  :not(.chatbot-window):not(.chatbot-window *).bg-slate-50,
+  :not(.chatbot-window):not(.chatbot-window *).bg-slate-100,
+  :not(.chatbot-window):not(.chatbot-window *).bg-slate-200,
+  :not(.chatbot-window):not(.chatbot-window *).bg-gray-50,
+  :not(.chatbot-window):not(.chatbot-window *).bg-gray-100,
+  :not(.chatbot-window):not(.chatbot-window *).bg-zinc-50,
+  :not(.chatbot-window):not(.chatbot-window *).bg-stone-50,
+  :not(.chatbot-window):not(.chatbot-window *).bg-neutral-50,
+  :not(.chatbot-window):not(.chatbot-window *)[class*="bg-[#F8FAFC]"],
+  :not(.chatbot-window):not(.chatbot-window *)[class*="bg-[#f8fafc]"],
+  :not(.chatbot-window):not(.chatbot-window *)[class*="bg-[#F1F5F9]"],
+  :not(.chatbot-window):not(.chatbot-window *)[class*="bg-[#f1f5f9]"],
+  :not(.chatbot-window):not(.chatbot-window *)[class*="bg-[#FAF7F2]"],
+  :not(.chatbot-window):not(.chatbot-window *)[class*="bg-[#faf7f2]"] {
+    background-color: #EAE0CB !important;
   }
 }
