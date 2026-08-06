@@ -5,5 +5,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
+    watch: {
+      ignored: ["**/*.pdf", "**/sem 1 english/**"],
+    },
   },
 });

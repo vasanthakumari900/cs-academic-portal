@@ -233,10 +233,39 @@ const UML_PAPERS = [
   { id: "uml-3", title: "Unified Modeling Language - Paper 3", subject: "UNIFIED MODELING LANGUAGE", facultyName: "", description: "Previous year question paper", pages: 3, downloads: 0, year: "U1819", courseType: "ug", regulation: "R2024", driveFileId: "1NYliVjvrD3pzPCwGghpGLmAeJGzOOYoW", academicYear: 3, semester: 2 }
 ];
 
+const ENGLISH_SEM1_PAPERS = [
+  { id: "english-sem1-u103", title: "1st Year Sem 1 English - Paper U103", subject: "FOUNDATION ENGLISH - I", facultyName: "Dept of English", description: "Foundation English Paper I (U103)", pages: 12, downloads: 0, year: "U103", courseType: "ug", regulation: "U103", fileUrl: "/question_papers/english_sem1/U103.pdf", academicYear: 1, semester: 1 },
+  { id: "english-sem1-u103-1", title: "1st Year Sem 1 English - Paper U103 (Set 1)", subject: "FOUNDATION ENGLISH - I", facultyName: "Dept of English", description: "Foundation English Paper I (U103 Set 1)", pages: 14, downloads: 0, year: "U103", courseType: "ug", regulation: "U103", fileUrl: "/question_papers/english_sem1/U103_1.pdf", academicYear: 1, semester: 1 },
+  { id: "english-sem1-u103-2", title: "1st Year Sem 1 English - Paper U103 (Set 2)", subject: "FOUNDATION ENGLISH - I", facultyName: "Dept of English", description: "Foundation English Paper I (U103 Set 2)", pages: 10, downloads: 0, year: "U103", courseType: "ug", regulation: "U103", fileUrl: "/question_papers/english_sem1/U103_1_1.pdf", academicYear: 1, semester: 1 },
+  { id: "english-sem1-u103-3", title: "1st Year Sem 1 English - Paper U103 (Set 3)", subject: "FOUNDATION ENGLISH - I", facultyName: "Dept of English", description: "Foundation English Paper I (U103 Set 3)", pages: 12, downloads: 0, year: "U103", courseType: "ug", regulation: "U103", fileUrl: "/question_papers/english_sem1/U103_2.pdf", academicYear: 1, semester: 1 },
+];
+
+const ENGLISH_SEM2_PAPERS = [
+  { id: "english-sem2-1", title: "1st Year Sem 2 English - Paper 1", subject: "ENGLISH", facultyName: "Dept of English", description: "Foundation English Paper II (Set 1)", pages: 14, downloads: 0, year: "Sem 2", courseType: "ug", regulation: "R2024", fileUrl: "/question_papers/english_sem2/sem2_1.pdf", academicYear: 1, semester: 2 },
+  { id: "english-sem2-2", title: "1st Year Sem 2 English - Paper 2", subject: "ENGLISH", facultyName: "Dept of English", description: "Foundation English Paper II (Set 2)", pages: 14, downloads: 0, year: "Sem 2", courseType: "ug", regulation: "R2024", fileUrl: "/question_papers/english_sem2/sem2_2.pdf", academicYear: 1, semester: 2 },
+  { id: "english-sem2-3", title: "1st Year Sem 2 English - Paper 3", subject: "ENGLISH", facultyName: "Dept of English", description: "Foundation English Paper II (Set 3)", pages: 14, downloads: 0, year: "Sem 2", courseType: "ug", regulation: "R2024", fileUrl: "/question_papers/english_sem2/sem2_3.pdf", academicYear: 1, semester: 2 },
+];
+
+const ENGLISH_YR2_SEM1_PAPERS = [
+  { id: "english-yr2-sem1-eng", title: "2nd Year Sem 1 English - Paper 1 (Eng)", subject: "Foundation English - III", facultyName: "Dept of English", description: "Foundation English Paper III (Paper 1)", pages: 12, downloads: 0, year: "Sem 3", courseType: "ug", regulation: "R2024", fileUrl: "/question_papers/english_yr2_sem1/eng.pdf", academicYear: 2, semester: 1 },
+  { id: "english-yr2-sem1-eng1", title: "2nd Year Sem 1 English - Paper 2 (Eng 1)", subject: "Foundation English - III", facultyName: "Dept of English", description: "Foundation English Paper III (Paper 2)", pages: 12, downloads: 0, year: "Sem 3", courseType: "ug", regulation: "R2024", fileUrl: "/question_papers/english_yr2_sem1/eng1.pdf", academicYear: 2, semester: 1 },
+];
+
+const ENGLISH_YR2_SEM2_PAPERS = [
+  { id: "english-yr2-sem2-u112", title: "2nd Year Sem 2 English - Paper U112", subject: "ENGLISH", facultyName: "Dept of English", description: "Foundation English Paper IV (U112)", pages: 8, downloads: 0, year: "Sem 4", courseType: "ug", regulation: "U112", fileUrl: "/question_papers/english_yr2_sem2/U112.pdf", academicYear: 2, semester: 2 },
+];
+
 const allPapers = [
   ...DBMS_PAPERS,
   ...OS_PAPERS,
   ...TAMIL_PAPERS,
+  ...ENGLISH_SEM1_PAPERS,
+  ...ENGLISH_SEM2_PAPERS,
+  ...ENGLISH_SEM2_PAPERS.map(p => ({ ...p, id: p.id + "-alias", subject: "Foundation English - II" })),
+  ...ENGLISH_YR2_SEM1_PAPERS,
+  ...ENGLISH_YR2_SEM1_PAPERS.map(p => ({ ...p, id: p.id + "-alias", subject: "ENGLISH" })),
+  ...ENGLISH_YR2_SEM2_PAPERS,
+  ...ENGLISH_YR2_SEM2_PAPERS.map(p => ({ ...p, id: p.id + "-alias", subject: "Foundation English - IV" })),
   ...CLOUD_PAPERS,
   ...NETWORKS_PAPERS,
   ...DATASCIENCE_PAPERS,
@@ -729,10 +758,10 @@ const refetch = () => {};
               key={paper.id}
               file={{
                 ...paper,
-                fileName: `${paper.title.replace(/[^a-zA-Z0-9_-]/g, "_")}.pdf`,
+                displayFileName: (paper.subject || selectedSubject || "document").toLowerCase(),
                 subject: paper.subject || selectedSubject,
-                year: selectedYear ? `${selectedYear}${selectedYear === 1 ? "st" : selectedYear === 2 ? "nd" : "rd"} Year` : paper.year,
-                semester: selectedSemester ? `Sem ${selectedSemester}` : null,
+                academicYear: paper.academicYear || Number(selectedYear) || 1,
+                semester: paper.semester || Number(selectedSemester) || 1,
                 driveUrl: paper.driveFileId || paper.fileUrl,
               }}
               onView={(p) => setPreviewing(p)}
@@ -769,20 +798,65 @@ const refetch = () => {};
                   <h3 className="truncate text-sm font-bold text-white">{previewing.title}</h3>
                   <p className="text-[11px] text-white/80">{previewing.subject} · {previewing.regulation}</p>
                 </div>
-                <button onClick={() => setPreviewing(null)} className="rounded-full bg-white/10 p-1.5 text-white/70 hover:bg-white/20 hover:text-white transition-all">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
-                </button>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={previewing.fileUrl || previewing.driveUrl || (previewing.driveFileId ? `https://drive.google.com/file/d/${previewing.driveFileId}/view` : "#")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-lg bg-white/15 px-3 py-1 text-xs font-semibold text-white hover:bg-white/25 transition-all flex items-center gap-1"
+                  >
+                    Open PDF ↗
+                  </a>
+                  <button onClick={() => setPreviewing(null)} className="rounded-full bg-white/10 p-1.5 text-white/70 hover:bg-white/20 hover:text-white transition-all">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                  </button>
+                </div>
               </div>
               <div className="aspect-[4/3] w-full bg-slate-900 sm:aspect-[16/10] lg:aspect-[16/9]">
-                <iframe
-                  src={getDriveEmbedUrl(previewing.fileUrl || previewing.driveUrl || (previewing.driveFileId ? `https://drive.google.com/file/d/${previewing.driveFileId}/view` : ""))}
-                  title={previewing.title}
-                  className="h-full w-full border-0"
-                  allowFullScreen
-                />
+                {(() => {
+                  const targetUrl = previewing.fileUrl || previewing.driveUrl || (previewing.driveFileId ? `https://drive.google.com/file/d/${previewing.driveFileId}/view` : "");
+                  const isLocal = typeof targetUrl === "string" && targetUrl.startsWith("/");
+                  if (isLocal) {
+                    return (
+                      <object
+                        data={targetUrl}
+                        type="application/pdf"
+                        className="h-full w-full"
+                      >
+                        <div className="flex flex-col items-center justify-center h-full text-white p-6 text-center">
+                          <p className="mb-3 text-sm">PDF Preview</p>
+                          <a
+                            href={targetUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 py-2 bg-[#1E88E5] text-white rounded-lg text-xs font-bold shadow-md hover:bg-blue-600 transition-all"
+                          >
+                            Open PDF in New Tab ↗
+                          </a>
+                        </div>
+                      </object>
+                    );
+                  }
+                  return (
+                    <iframe
+                      src={getDriveEmbedUrl(targetUrl)}
+                      title={previewing.title}
+                      className="h-full w-full border-0"
+                      allowFullScreen
+                    />
+                  );
+                })()}
               </div>
-              <div className="border-t border-[#E5E7EB] px-5 py-2.5 text-center text-[11px] text-[#6B7280] bg-[#F8FAFC]">
-                {previewing.pages && <span>{previewing.pages} pages</span>} · {previewing.subject} · {previewing.year}
+              <div className="border-t border-[#E5E7EB] px-5 py-2.5 flex items-center justify-between text-[11px] text-[#6B7280] bg-[#F8FAFC]">
+                <span>{previewing.subject} · {previewing.year}</span>
+                <a
+                  href={previewing.fileUrl || previewing.driveUrl || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#0F4C81] font-bold hover:underline"
+                >
+                  Direct PDF Link ↗
+                </a>
               </div>
             </motion.div>
           </motion.div>

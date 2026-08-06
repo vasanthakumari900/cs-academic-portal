@@ -147,12 +147,18 @@ function PreviewModal({ paper, onClose }) {
             </button>
           </div>
           <div className="flex-1 bg-slate-900">
-            <iframe
-              src={embedUrl}
-              className="h-[70vh] w-full"
-              title={paper.title}
-              allow="autoplay"
-            />
+            {typeof paper.driveUrl === "string" && paper.driveUrl.startsWith("/") ? (
+              <object data={paper.driveUrl} type="application/pdf" className="h-[70vh] w-full">
+                <iframe src={paper.driveUrl} className="h-[70vh] w-full border-0" title={paper.title} />
+              </object>
+            ) : (
+              <iframe
+                src={embedUrl}
+                className="h-[70vh] w-full"
+                title={paper.title}
+                allow="autoplay"
+              />
+            )}
           </div>
           <div className="flex items-center justify-between border-t border-[#E5E7EB] px-5 py-3 bg-[#F8FAFC]">
             <span className="text-xs text-[#6B7280]">Google Drive preview</span>
