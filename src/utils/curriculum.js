@@ -84,3 +84,36 @@ export const CURRICULUM = {
     }
   }
 };
+
+export const CURRICULUM_PG = {
+  1: {
+    label: "1st Year",
+    icon: "Ⅰ",
+    semesters: {
+      1: {
+        label: "Semester 1",
+        subjects: [
+          "Advanced Design and Analysis of Algorithms",
+          "Advanced Software Engineering",
+          "Contemporary Web Technologies",
+          "Data Communication and Networking",
+          "Python for Data Science",
+          "Mobile Network System",
+          "Artificial Neural Network"
+        ]
+      },
+      2: {
+        label: "Semester 2",
+        subjects: []
+      }
+    }
+  },
+  2: {
+    label: "2nd Year",
+    icon: "Ⅱ",
+    semesters: {
+      1: { label: "Semester 1", subjects: [] },
+      2: { label: "Semester 2", subjects: [] }
+    }
+  }
+};

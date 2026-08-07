@@ -65,10 +65,10 @@ export const COLLECTIONS = {
 
 // Faculty names per subject (as specified)
 export const FACULTY_NAMES = {
-  DBMS: "M P Sudha",
-  ASPNET: "R Saranya",
-  OS: "Dr Dharani",
-  DMT: "V Ponnila",
+  DBMS: "Ms. M P Sudha",
+  ASPNET: "Ms. R Saranya",
+  OS: "Ms. Dr Dharani",
+  DMT: "Ms. V Ponnila",
 };
 
 // Sample placement drives shown as fallback when Firestore has no data.

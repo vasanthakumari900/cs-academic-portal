@@ -421,9 +421,10 @@ export function AuthProvider({ children }) {
   }
 
   function facultyLogin(name, password) {
-    const trimmedName = name.trim().toUpperCase();
+    const raw = name.trim().toUpperCase();
+    const cleanName = raw.replace(/^(MS\.|MS|MRS\.|MRS|DR\.|DR)\s+/, "").trim();
 
-    const expectedPassword = FACULTY_CREDENTIALS[trimmedName];
+    const expectedPassword = FACULTY_CREDENTIALS[raw] || FACULTY_CREDENTIALS[cleanName];
 
     if (!expectedPassword) {
       throw new Error("Faculty name not found. Please check the spelling and try again.");

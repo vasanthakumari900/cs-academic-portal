@@ -8,6 +8,15 @@ export function getSubjectAbbreviation(subjectName) {
   if (!subjectName) return "CS";
   const sub = String(subjectName).toUpperCase().trim();
 
+  if (sub.includes("ADVANCED DESIGN") || sub.includes("DESIGN AND ANALYSIS")) return "ADAA";
+  if (sub.includes("ADVANCED SOFTWARE")) return "ASE";
+  if (sub.includes("MOBILE NETWORK")) return "MNS";
+  if (sub.includes("NEURAL NETWORK") || sub.includes("NEURAL")) return "ANN";
+  if (sub.includes("CONTEMPORARY WEB") && sub.includes("LAB")) return "CWT LAB";
+  if (sub.includes("CONTEMPORARY WEB")) return "CWT";
+  if (sub.includes("DATA COMMUNICATION")) return "DCN";
+  if (sub.includes("PYTHON FOR DATA SCIENCE") && sub.includes("LAB")) return "PY LAB";
+  if (sub.includes("PYTHON FOR DATA SCIENCE")) return "PY DATA";
   if (sub.includes("PYTHON")) return "PYTHON";
   if (sub.includes("JAVA") && !sub.includes("SCRIPT")) return "JAVA";
   if (sub.includes("C++") || sub.includes("CPP")) return "C++";

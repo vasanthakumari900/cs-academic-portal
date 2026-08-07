@@ -240,21 +240,21 @@ const committees = [
 ];
 
 const facultyList = [
-  { name: "Mrs. P. Suganya", designation: "Assistant Professor & Head", specialization: "Compiler Design & Computing" },
-  { name: "Mrs. R. Lalitha", designation: "Associate Professor", specialization: "Data Mining & Data Warehousing" },
-  { name: "Mrs. P. J. Rajam", designation: "Assistant Professor", specialization: "Digital Logic & Microprocessors" },
-  { name: "Dr. K. Durgadevi", designation: "Assistant Professor", specialization: "Machine Learning & Neural Networks" },
-  { name: "Mrs. Dharani", designation: "Assistant Professor", specialization: "Database Management Systems" },
-  { name: "Mrs. P. Revathi", designation: "Assistant Professor", specialization: "Web Technology & UI Development" },
-  { name: "Mrs. S. Karthika", designation: "Assistant Professor", specialization: "Data Structures & Algorithms" },
-  { name: "Mrs. R. Saranya", designation: "Assistant Professor", specialization: "Cloud Computing & Networks" },
-  { name: "Dr. M. P. Sudha", designation: "Assistant Professor", specialization: "Software Engineering & Testing" },
-  { name: "Mrs. V. Ponnila", designation: "Assistant Professor", specialization: "Operating Systems & Shell Scripting" },
-  { name: "Mrs. R. Poojitha Shree", designation: "Assistant Professor", specialization: "Python Programming & AI" },
-  { name: "Mrs. S. Tamilarasi", designation: "Assistant Professor", specialization: "Object Oriented Programming" },
-  { name: "Mrs. G. Srilakshmi", designation: "Assistant Professor", specialization: "Computer Networks & Security" },
-  { name: "Mrs. M. Sangeetha", designation: "Assistant Professor", specialization: "Information Security" },
-  { name: "Mrs. S. Gita", designation: "Assistant Professor", specialization: "C++ & Problem Solving" }
+  { name: "Ms. P. Suganya", designation: "Assistant Professor & Head", specialization: "Compiler Design & Computing" },
+  { name: "Ms. R. Lalitha", designation: "Associate Professor", specialization: "Data Mining & Data Warehousing" },
+  { name: "Ms. P. J. Rajam", designation: "Assistant Professor", specialization: "Digital Logic & Microprocessors" },
+  { name: "Ms. Dr. K. Durgadevi", designation: "Assistant Professor", specialization: "Machine Learning & Neural Networks" },
+  { name: "Ms. Dr. Dharani", designation: "Assistant Professor", specialization: "Database Management Systems" },
+  { name: "Ms. P. Revathi", designation: "Assistant Professor", specialization: "Web Technology & UI Development" },
+  { name: "Ms. S. Karthika", designation: "Assistant Professor", specialization: "Data Structures & Algorithms" },
+  { name: "Ms. R. Saranya", designation: "Assistant Professor", specialization: "Cloud Computing & Networks" },
+  { name: "Ms. Dr. M. P. Sudha", designation: "Assistant Professor", specialization: "Software Engineering & Testing" },
+  { name: "Ms. V. Ponnila", designation: "Assistant Professor", specialization: "Operating Systems & Shell Scripting" },
+  { name: "Ms. R. Poojitha Shree", designation: "Assistant Professor", specialization: "Python Programming & AI" },
+  { name: "Ms. S. Tamilarasi", designation: "Assistant Professor", specialization: "Object Oriented Programming" },
+  { name: "Ms. Dr. G. Srilakshmi", designation: "Assistant Professor", specialization: "Computer Networks & Security" },
+  { name: "Ms. Dr. M. Sangeetha", designation: "Assistant Professor", specialization: "Information Security" },
+  { name: "Ms. S. Gita", designation: "Assistant Professor", specialization: "C++ & Problem Solving" }
 ];
 
 export default function About() {

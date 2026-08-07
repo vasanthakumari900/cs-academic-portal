@@ -327,28 +327,28 @@ const getPlaylistUrl = (subject, year, sem) => {
 };
 
 const FACULTY_MAP = {
-  "OPERATING SYSTEM": "DR DHARANI",
-  "DATA MINING TECHNIQUES": "V PONNILA",
-  "ASP.NET": "R SARANYA",
-  "DATABASE MANAGEMENT SYSTEM": "M P SUDHA",
+  "OPERATING SYSTEM": "Ms. Dr. DHARANI",
+  "DATA MINING TECHNIQUES": "Ms. V. PONNILA",
+  "ASP.NET": "Ms. R. SARANYA",
+  "DATABASE MANAGEMENT SYSTEM": "Ms. M.P. SUDHA",
 };
 
 const FIRST_YEAR_SEM1_FACULTY = {
-  "TAMIL": "DR.K.VADIVELMURUGAN / DR.C.Karthik, DR.J.SIVAKUMAR",
-  "FOUNDATION ENGLISH - I": "Ms.s.RITZY WONDERBELL / Ms.C.VIDHYA",
-  "MATHEMATICS PAPER I": "Mr.P.KARNAN, Mr.S.SATHISHKUMAR / Mr.R.SHANKAR",
-  "PYTHON PROGRAMMING ESSENTIALS": "Ms.V.PONNILA / Ms.R.POOJITHA SHREE",
-  "DATA STRUCTURES": "Mrs.R.Lalitha / Mrs.P J.RAJAM",
+  "TAMIL": "Dr. K. VADIVELMURUGAN / Dr. C. Karthik, Dr. J. SIVAKUMAR",
+  "FOUNDATION ENGLISH - I": "Ms. S. RITZY WONDERBELL / Ms. C. VIDHYA",
+  "MATHEMATICS PAPER I": "Mr. P. KARNAN, Mr. S. SATHISHKUMAR / Mr. R. SHANKAR",
+  "PYTHON PROGRAMMING ESSENTIALS": "Ms. V. PONNILA / Ms. R. POOJITHA SHREE",
+  "DATA STRUCTURES": "Ms. R. Lalitha / Ms. P.J. RAJAM",
 };
 
 const SECOND_YEAR_SEM1_FACULTY = {
-  "Foundation English - III": "Ms.C.MALINI / Ms.C.VIDHYA",
-  "TAMIL": "DR.J.SIVAKUMAR / DR.K.VADIVELMURUGAN",
-  "Statistical Methods for Computer Science – I": "DR.N S.INDHUMATHY",
-  "Web Application Development using ReactJS and Node.js": "DURGADEVI / Dr.N.M.Sangeetha",
-  "Principles of operating Systems": "DR.A.KAVITHA / DURGADEV",
-  "Object Oriented Programming Concepts using JAVA": "DR.A.KAVITHA, Mr.S.Tamilarasi / DR.G.SRILAKSHMI",
-  "Web Application Development using AngularJS and Node.js": "Dr.N.M.Sangeetha",
+  "Foundation English - III": "Ms. C. MALINI / Ms. C. VIDHYA",
+  "TAMIL": "Dr. J. SIVAKUMAR / Dr. K. VADIVELMURUGAN",
+  "Statistical Methods for Computer Science – I": "Ms. Dr. N.S. INDHUMATHY",
+  "Web Application Development using ReactJS and Node.js": "Ms. K. DURGADEVI / Ms. Dr. N.M. Sangeetha",
+  "Principles of operating Systems": "Ms. Dr. A. KAVITHA / Ms. K. DURGADEVI",
+  "Object Oriented Programming Concepts using JAVA": "Ms. Dr. A. KAVITHA, Ms. S. Tamilarasi / Ms. Dr. G. SRILAKSHMI",
+  "Web Application Development using AngularJS and Node.js": "Ms. Dr. N.M. Sangeetha",
 };
 
 // CURRICULUM imported from Notes.jsx

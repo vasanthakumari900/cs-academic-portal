@@ -23,7 +23,37 @@ const CURRICULUM = {
   3: { label: "3rd Year", icon: "Ⅲ", semesters: { 1: { label: "Semester 1", subjects: ["OPERATING SYSTEM","DATA MINING TECHNIQUES","ASP.NET","DATABASE MANAGEMENT SYSTEM"] }, 2: { label: "Semester 2", subjects: ["PROGRAMMING IN PHP","CLOUD COMPUTING","COMPUTER NETWORKS","INTRODUCTION TO DATA SCIENCE","UNIFIED MODELING LANGUAGE","DIGITAL IMAGE PROCESSING"] } } },
 };
 
-function getSubjectsForYear(year) { const yr = CURRICULUM[year]; if (!yr) return []; const all = []; Object.values(yr.semesters).forEach((sem) => { sem.subjects.forEach((s) => { if (!all.includes(s)) all.push(s); }); }); return all; }
+const CURRICULUM_PG = {
+  1: {
+    label: "1st Year",
+    icon: "Ⅰ",
+    semesters: {
+      1: {
+        label: "Semester 1",
+        subjects: [
+          "Advanced Design and Analysis of Algorithms",
+          "Advanced Software Engineering",
+          "Contemporary Web Technologies",
+          "Data Communication and Networking",
+          "Python for Data Science",
+          "Mobile Network System",
+          "Artificial Neural Network",
+        ],
+      },
+      2: { label: "Semester 2", subjects: [] },
+    },
+  },
+  2: {
+    label: "2nd Year",
+    icon: "Ⅱ",
+    semesters: {
+      1: { label: "Semester 1", subjects: [] },
+      2: { label: "Semester 2", subjects: [] },
+    },
+  },
+};
+
+function getSubjectsForYear(year, curr = CURRICULUM) { const yr = curr[year]; if (!yr) return []; const all = []; Object.values(yr.semesters).forEach((sem) => { sem.subjects.forEach((s) => { if (!all.includes(s)) all.push(s); }); }); return all; }
 
 const yearStyles = {
   1: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
@@ -40,17 +70,49 @@ const subjectColors = [
 ];
 
 const FACULTY_MAP = {
-  "OPERATING SYSTEM": "DR DHARANI", "DATA MINING TECHNIQUES": "V PONNILA",
-  "ASP.NET": "R SARANYA", "DATABASE MANAGEMENT SYSTEM": "M P SUDHA",
+  "OPERATING SYSTEM": "Ms. Dr. DHARANI", "DATA MINING TECHNIQUES": "Ms. V. PONNILA",
+  "ASP.NET": "Ms. R. SARANYA", "DATABASE MANAGEMENT SYSTEM": "Ms. M.P. SUDHA",
+  "ADVANCED DESIGN AND ANALYSIS OF ALGORITHMS": "Ms. P. REVATHI",
+  "ADVANCED SOFTWARE ENGINEERING": "Ms. Dr. N.M. Sangeetha",
+  "CONTEMPORARY WEB TECHNOLOGIES": "Ms. P. SUGANYA",
+  "CONTEMPORARY WEB TECHNOLOGIES LAB": "Ms. P. SUGANYA",
+  "DATA COMMUNICATION AND NETWORKING": "Ms. M.P. SUDHA",
+  "PYTHON FOR DATA SCIENCE": "Ms. S. Karthika",
+  "PYTHON FOR DATA SCIENCE LAB": "Ms. S. Karthika",
+  "Advanced Design and Analysis of Algorithms": "Ms. P. REVATHI",
+  "Advanced Software Engineering": "Ms. Dr. N.M. Sangeetha",
+  "Contemporary Web Technologies": "Ms. P. SUGANYA",
+  "Contemporary Web Technologies lab": "Ms. P. SUGANYA",
+  "Data Communication and Networking": "Ms. M.P. SUDHA",
+  "Python for Data Science": "Ms. S. Karthika",
+  "Python for Data Science lab": "Ms. S. Karthika",
+};
+
+const SUBJECT_CODES = {
+  "ADVANCED DESIGN AND ANALYSIS OF ALGORITHMS": "2627101",
+  "ADVANCED SOFTWARE ENGINEERING": "2627105(A)",
+  "CONTEMPORARY WEB TECHNOLOGIES": "2627103",
+  "CONTEMPORARY WEB TECHNOLOGIES LAB": "2627107",
+  "DATA COMMUNICATION AND NETWORKING": "2627104(A)",
+  "PYTHON FOR DATA SCIENCE": "2627102",
+  "PYTHON FOR DATA SCIENCE LAB": "2627106",
+  "Advanced Design and Analysis of Algorithms": "2627101",
+  "Advanced Software Engineering": "2627105(A)",
+  "Contemporary Web Technologies": "2627103",
+  "Contemporary Web Technologies lab": "2627107",
+  "Data Communication and Networking": "2627104(A)",
+  "Python for Data Science": "2627102",
+  "Python for Data Science lab": "2627106",
 };
 
 function getFacultyName(subject) {
+  if (!subject) return null;
   const upper = subject.toUpperCase();
   if (upper.includes("DBMS") || upper.includes("DATABASE")) return FACULTY_NAMES.DBMS;
   if (upper.includes("ASP") || upper.includes(".NET")) return FACULTY_NAMES.ASPNET;
   if (upper.includes("OPERATING") || upper.includes("OS")) return FACULTY_NAMES.OS;
   if (upper.includes("DMT") || upper.includes("DATA MINING")) return FACULTY_NAMES.DMT;
-  return null;
+  return FACULTY_MAP[subject] || FACULTY_MAP[upper] || null;
 }
 
 const DBMS_PAPERS = [
@@ -255,7 +317,34 @@ const ENGLISH_YR2_SEM2_PAPERS = [
   { id: "english-yr2-sem2-u112", title: "2nd Year Sem 2 English - Paper U112", subject: "ENGLISH", facultyName: "Dept of English", description: "Foundation English Paper IV (U112)", pages: 8, downloads: 0, year: "Sem 4", courseType: "ug", regulation: "U112", fileUrl: "/question_papers/english_yr2_sem2/U112.pdf", academicYear: 2, semester: 2 },
 ];
 
+const PG_CWT_PAPERS = [
+  { id: "pg-cwt-1", title: "Contemporary Web Technologies - Paper 1", subject: "Contemporary Web Technologies", description: "Previous year question paper for Contemporary Web Technologies", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627103", driveFileId: "1JZi8yoVLAwJm5lqPtMtEfGcIC51JVepT", academicYear: 1, semester: 1 },
+];
+const PG_ASE_PAPERS = [
+  { id: "pg-ase-1", title: "Advanced Software Engineering - Paper 1", subject: "Advanced Software Engineering", description: "Previous year question paper for Advanced Software Engineering", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627105(A)", driveFileId: "1kaS8vlnBc1r-CzMTQlPg6S00Qo7UNLml", academicYear: 1, semester: 1 },
+];
+const PG_ADAA_PAPERS = [
+  { id: "pg-adaa-1", title: "Advanced Design and Analysis of Algorithms - Paper 1", subject: "Advanced Design and Analysis of Algorithms", description: "Previous year question paper (Set 1)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627101", driveFileId: "1WH6_Eplje_2Rc6XEwvwuVf0VMok0Ghiq", academicYear: 1, semester: 1 },
+  { id: "pg-adaa-2", title: "Advanced Design and Analysis of Algorithms - Paper 2", subject: "Advanced Design and Analysis of Algorithms", description: "Previous year question paper (Set 2)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627101", driveFileId: "1eNRqMWa68VrhT3gaAXI1B-7liK3OyHz0", academicYear: 1, semester: 1 },
+  { id: "pg-adaa-3", title: "Advanced Design and Analysis of Algorithms - Paper 3", subject: "Advanced Design and Analysis of Algorithms", description: "Previous year question paper (Set 3)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627101", driveFileId: "128czfz0ahngxlAxtHarTohMnSfE6RIyM", academicYear: 1, semester: 1 },
+  { id: "pg-adaa-4", title: "Advanced Design and Analysis of Algorithms - Paper 4", subject: "Advanced Design and Analysis of Algorithms", description: "Previous year question paper (Set 4)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627101", driveFileId: "1D0v1eGC0PntefaHskvDenhGMpzn5OEve", academicYear: 1, semester: 1 },
+];
+const PG_DCN_PAPERS = [
+  { id: "pg-dcn-1", title: "Data Communication and Networking - Paper 1", subject: "Data Communication and Networking", description: "Previous year question paper for Data Communication and Networking", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627104(A)", driveFileId: "1D0v1eGC0PntefaHskvDenhGMpzn5OEve", academicYear: 1, semester: 1 },
+];
+const PG_PYTHON_PAPERS = [
+  { id: "pg-py-1", title: "Python for Data Science - Paper 1", subject: "Python for Data Science", description: "Previous year question paper (Set 1)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627102", driveFileId: "1In45ROQ75_Aptzkv7YeMURnJ-HJTozrx", academicYear: 1, semester: 1 },
+  { id: "pg-py-2", title: "Python for Data Science - Paper 2", subject: "Python for Data Science", description: "Previous year question paper (Set 2)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627102", driveFileId: "1XAH0o0izYqqzdlFTKWwqEeNaocuMtlYL", academicYear: 1, semester: 1 },
+  { id: "pg-py-3", title: "Python for Data Science - Paper 3", subject: "Python for Data Science", description: "Previous year question paper (Set 3)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627102", driveFileId: "1TwSRki6nKrNYgUjOPMUUUUP3bpnY1Rql", academicYear: 1, semester: 1 },
+  { id: "pg-py-4", title: "Python for Data Science - Paper 4", subject: "Python for Data Science", description: "Previous year question paper (Set 4)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627102", driveFileId: "1rKrNPPNBxOUIOgj6fbesICpedgdqj3Ut", academicYear: 1, semester: 1 },
+];
+
 const allPapers = [
+  ...PG_CWT_PAPERS,
+  ...PG_ASE_PAPERS,
+  ...PG_ADAA_PAPERS,
+  ...PG_DCN_PAPERS,
+  ...PG_PYTHON_PAPERS,
   ...DBMS_PAPERS,
   ...OS_PAPERS,
   ...TAMIL_PAPERS,
@@ -359,9 +448,10 @@ const refetch = () => {};
     }
   }
 
-  const yearData = selectedYear ? CURRICULUM[selectedYear] : null;
+  const activeCurriculum = courseType === "pg" ? CURRICULUM_PG : CURRICULUM;
+  const yearData = selectedYear ? activeCurriculum[selectedYear] : null;
   const semesterData = selectedSemester && yearData ? yearData.semesters[selectedSemester] : null;
-  const yearSubjects = courseType === "pg" ? [] : (semesterData ? semesterData.subjects : (selectedYear ? getSubjectsForYear(selectedYear) : []));
+  const yearSubjects = semesterData ? semesterData.subjects : (selectedYear ? getSubjectsForYear(selectedYear, activeCurriculum) : []);
   const ys = selectedYear ? yearStyles[selectedYear] : yearStyles[1];
 
   const combinedPapers = useMemo(() => {
@@ -469,12 +559,12 @@ const refetch = () => {};
               >
                 <div className="relative p-8 text-center">
                   <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md text-3xl font-bold transition-all duration-300 group-hover:scale-110 shadow-md">
-                    {CURRICULUM[year].icon}
+                    {activeCurriculum[year].icon}
                   </div>
                   <span className="inline-block bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-2 shadow-sm">
-                    {getSubjectsForYear(year).length} Subjects
+                    {getSubjectsForYear(year, activeCurriculum).length} Subjects
                   </span>
-                  <h2 className="text-xl font-black text-white">{CURRICULUM[year].label}</h2>
+                  <h2 className="text-xl font-black text-white">{activeCurriculum[year].label}</h2>
                   <p className="mt-1.5 text-xs text-rose-100 font-medium">Semester Question Papers</p>
                   <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
                     Browse Papers <FiChevronRight size={12} />
@@ -514,7 +604,7 @@ const refetch = () => {};
                   {Number(semKey) === 1 ? "SEM I" : "SEM II"}
                 </div>
                 <h2 className="text-xl font-black text-white">{semData.label}</h2>
-                {courseType !== "pg" && <p className="mt-1.5 text-xs text-rose-100 font-medium">{semData.subjects.length} Subjects</p>}
+                <p className="mt-1.5 text-xs text-rose-100 font-medium">{semData.subjects.length} Subjects</p>
                 <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
                   Explore Subjects <FiChevronRight size={12} />
                 </div>
@@ -550,6 +640,8 @@ const refetch = () => {};
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {yearSubjects.map((subject, i) => {
               const sc = subjectColors[i % subjectColors.length];
+              const faculty = getFacultyName(subject);
+              const code = SUBJECT_CODES[subject];
               return (
                 <motion.button key={subject}
                   initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
@@ -563,7 +655,11 @@ const refetch = () => {};
                     </div>
                     <div className="min-w-0 flex-1 pt-1">
                       <h3 className="font-sans font-bold text-sm text-[#0F4C81] leading-snug">{subject}</h3>
-                      {FACULTY_MAP[subject] && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-[#6B7280]">{FACULTY_MAP[subject]}</p>}
+                      {code && (
+                        <span className="inline-block mt-1 rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-600">
+                          Code: {code}
+                        </span>
+                      )}
                       <div className="mt-3 flex items-center gap-2">
                         <span className={`inline-flex items-center gap-1 rounded-full ${sc.badge} px-2.5 py-0.5 text-[10px] font-semibold`}><FiAward size={10} /> VIEW PAPERS</span>
                         <FiChevronRight size={14} className="text-slate-400 group-hover:text-[#1E88E5] transition-colors ml-auto" />

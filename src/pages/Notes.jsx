@@ -11,12 +11,24 @@ import { useAuth } from "../context/AuthContext";
 import { STORAGE_PATHS } from "../utils/constants";
 import { uploadFile } from "../services/storageService";
 import toast from "react-hot-toast";
-import { CURRICULUM } from "../utils/curriculum";
+import { CURRICULUM, CURRICULUM_PG } from "../utils/curriculum";
 import { downloadDriveFile } from "../utils/downloadUtils";
 import PdfFileCard from "../components/common/PdfFileCard";
 import { getSubjectIcon } from "../utils/subjectIcons";
 import NotesTopAiHeader from "../components/notes/NotesTopAiHeader";
 
+const COURSE_OPTIONS = [
+  { value: "ug", label: "UG", desc: "Bachelor of Science in Computer Science (B.Sc.)" },
+  { value: "pg", label: "PG", desc: "Master of Science in Computer Science (M.Sc.)" },
+];
+
+const PG_FIRST_YEAR_SEM1_FACULTY = {
+  "Advanced Design and Analysis of Algorithms": "Ms. P. REVATHI",
+  "Advanced Software Engineering": "Ms. Dr. N.M. Sangeetha",
+  "Contemporary Web Technologies": "Ms. P. SUGANYA",
+  "Data Communication and Networking": "Ms. M.P. SUDHA",
+  "Python for Data Science": "Ms. S. Karthika",
+};
 
 const yearStyles = {
   1: { bg: "bg-[#0F4C81] text-white border-[#0A3356]", text: "text-[#0F4C81]" },
@@ -33,9 +45,9 @@ const subjectColors = [
 ];
 
 const FACULTY_MAP = {
-  "OPERATING SYSTEM": "DR DHARANI", "DATA MINING TECHNIQUES": "V PONNILA",
-  "ASP.NET": "R SARANYA", "DATABASE MANAGEMENT SYSTEM": "M P SUDHA",
-  "SOFTWARE ENGINEERING": "V PONNILA",
+  "OPERATING SYSTEM": "Ms. Dr. DHARANI", "DATA MINING TECHNIQUES": "Ms. V. PONNILA",
+  "ASP.NET": "Ms. R. SARANYA", "DATABASE MANAGEMENT SYSTEM": "Ms. M.P. SUDHA",
+  "SOFTWARE ENGINEERING": "Ms. V. PONNILA",
 };
 
 // Placeholder subjects in 2nd Year that share names with higher years — show name only, no content
@@ -60,22 +72,22 @@ const SEMESTER_UNITS = {
 
 // Teachers exclusive to 1st Year Semester 1
 const FIRST_YEAR_SEM1_FACULTY = {
-  "TAMIL": "DR.K.VADIVELMURUGAN / DR.C.Karthik, DR.J.SIVAKUMAR",
-  "FOUNDATION ENGLISH - I": "Ms.s.RITZY WONDERBELL / Ms.C.VIDHYA",
-  "MATHEMATICS PAPER I": "Mr.P.KARNAN, Mr.S.SATHISHKUMAR / Mr.R.SHANKAR",
-  "PYTHON PROGRAMMING ESSENTIALS": "Ms.V.PONNILA / Ms.R.POOJITHA SHREE",
-  "DATA STRUCTURES": "Mrs.R.Lalitha / Mrs.P J.RAJAM",
+  "TAMIL": "Dr. K. VADIVELMURUGAN / Dr. C. Karthik, Dr. J. SIVAKUMAR",
+  "FOUNDATION ENGLISH - I": "Ms. S. RITZY WONDERBELL / Ms. C. VIDHYA",
+  "MATHEMATICS PAPER I": "Mr. P. KARNAN, Mr. S. SATHISHKUMAR / Mr. R. SHANKAR",
+  "PYTHON PROGRAMMING ESSENTIALS": "Ms. V. PONNILA / Ms. R. POOJITHA SHREE",
+  "DATA STRUCTURES": "Ms. R. Lalitha / Ms. P.J. RAJAM",
 };
 
 // Teachers exclusive to 2nd Year Semester 1
 const SECOND_YEAR_SEM1_FACULTY = {
-  "Foundation English - III": "Ms.C.MALINI / Ms.C.VIDHYA",
-  "TAMIL": "DR.J.SIVAKUMAR / DR.K.VADIVELMURUGAN",
-  "Statistical Methods for Computer Science – I": "DR.N S.INDHUMATHY",
-  "Web Application Development using ReactJS and Node.js": "DURGADEVI / Dr.N.M.Sangeetha",
-  "Principles of operating Systems": "DR.A.KAVITHA / DURGADEV",
-  "Object Oriented Programming Concepts using JAVA": "DR.A.KAVITHA, Mr.S.Tamilarasi / DR.G.SRILAKSHMI",
-  "Web Application Development using AngularJS and Node.js": "Dr.N.M.Sangeetha",
+  "Foundation English - III": "Ms. C. MALINI / Ms. C. VIDHYA",
+  "TAMIL": "Dr. J. SIVAKUMAR / Dr. K. VADIVELMURUGAN",
+  "Statistical Methods for Computer Science – I": "Ms. Dr. N.S. INDHUMATHY",
+  "Web Application Development using ReactJS and Node.js": "Ms. K. DURGADEVI / Ms. Dr. N.M. Sangeetha",
+  "Principles of operating Systems": "Ms. Dr. A. KAVITHA / Ms. K. DURGADEVI",
+  "Object Oriented Programming Concepts using JAVA": "Ms. Dr. A. KAVITHA, Ms. S. Tamilarasi / Ms. Dr. G. SRILAKSHMI",
+  "Web Application Development using AngularJS and Node.js": "Ms. Dr. N.M. Sangeetha",
 };
 
 const LAB_RECORDS_DATA = {
@@ -873,7 +885,624 @@ const NOTES_DATA = {
         co: "CO5",
         files: []
       }
-    } }
+    }
+  },
+  "Advanced Design and Analysis of Algorithms": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction",
+        syllabus: "Introduction: Notion of Algorithm – Fundamentals of the Analysis of Algorithmic Efficiency – Space complexity, Time complexity – Recursive Algorithms -Asymptotic Notations and their properties (O, Ω, Θ). Elementary Data Structures: Stacks and Queues – Trees – Graphs.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Divide and conquer & Greedy Method",
+        syllabus: "Divide and conquer: Quick sort- Selection sort – Merge sort-Strassen's matrix multiplication. Greedy Method: Knapsack problem- Prim‘s algorithm and Kruskal’s Algorithm – Tree Vertex Splitting – Job sequencing with deadline .",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Dynamic Programming & Search techniques",
+        syllabus: "Dynamic Programming: Multistage graphs -Optimal Binary Search trees– All pairs shortest paths – Single source shortest paths – Search techniques for Graphs – DFS-BFS-Connected components – Biconnected components.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Back Tracking & Branch and Bound",
+        syllabus: "Back Tracking: 8-Queens Problems – Sum of Subsets – Graph Coloring – Hamiltonian Cycles. Branch and Bound: 0/1 knapsack problem– Traveling Salesperson problem.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Lower Bound Theory & NP Completeness",
+        syllabus: "Lower Bound Theory: Comparison trees – NP-Hard and NP Complete Problems: Non-deterministic Algorithms- NP Hard Problem: Clique Decision Problem (CDP)-Chromatic number decision problem",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "ADVANCED DESIGN AND ANALYSIS OF ALGORITHMS": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction",
+        syllabus: "Introduction: Notion of Algorithm – Fundamentals of the Analysis of Algorithmic Efficiency – Space complexity, Time complexity – Recursive Algorithms -Asymptotic Notations and their properties (O, Ω, Θ). Elementary Data Structures: Stacks and Queues – Trees – Graphs.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Divide and conquer & Greedy Method",
+        syllabus: "Divide and conquer: Quick sort- Selection sort – Merge sort-Strassen's matrix multiplication. Greedy Method: Knapsack problem- Prim‘s algorithm and Kruskal’s Algorithm – Tree Vertex Splitting – Job sequencing with deadline .",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Dynamic Programming & Search techniques",
+        syllabus: "Dynamic Programming: Multistage graphs -Optimal Binary Search trees– All pairs shortest paths – Single source shortest paths – Search techniques for Graphs – DFS-BFS-Connected components – Biconnected components.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Back Tracking & Branch and Bound",
+        syllabus: "Back Tracking: 8-Queens Problems – Sum of Subsets – Graph Coloring – Hamiltonian Cycles. Branch and Bound: 0/1 knapsack problem– Traveling Salesperson problem.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Lower Bound Theory & NP Completeness",
+        syllabus: "Lower Bound Theory: Comparison trees – NP-Hard and NP Complete Problems: Non-deterministic Algorithms- NP Hard Problem: Clique Decision Problem (CDP)-Chromatic number decision problem",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Python for Data Science": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction to Python",
+        syllabus: "Introduction to Python – Python Interpreter - Interactive mode- - Basic Programming concepts - Variables, Expressions and statements - Input/Output –Operators. – Conditional statements –loops",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Functions & Data Structures",
+        syllabus: "Functions - Arguments - Return values – Keyword Argument function – Function with default values - Lambda function - Data Structures –Strings - Lists - Dictionaries - Tuples - Sets Sequences - Modules and Packages",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Introduction to NumPy",
+        syllabus: "Introduction to NumPy-Standard Data Types-Basic Array Types - Indexing, Slicing, Reshaping, Concatenation. Ufuncs and its features. Aggregations",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Visualization with Matplotlib",
+        syllabus: "Visualization with MatplotLib- Line Plots, Scatter Plots. Visualizing Error, Density & Contour plots, customizing color bar, visualization with seaborn.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Introduction to Pandas",
+        syllabus: "Introduction to Pandas-Creation of Series- Operations-Creation of Data Frames--Simple plot using pandasOperations-Import/Export of different types of Files-Slicing - Filtering- groupby-Aggregation- to check for missing values, outliers and imbalance in dataset – case study :real time dataset analysis",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "PYTHON FOR DATA SCIENCE": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction to Python",
+        syllabus: "Introduction to Python – Python Interpreter - Interactive mode- - Basic Programming concepts - Variables, Expressions and statements - Input/Output –Operators. – Conditional statements –loops",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Functions & Data Structures",
+        syllabus: "Functions - Arguments - Return values – Keyword Argument function – Function with default values - Lambda function - Data Structures –Strings - Lists - Dictionaries - Tuples - Sets Sequences - Modules and Packages",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Introduction to NumPy",
+        syllabus: "Introduction to NumPy-Standard Data Types-Basic Array Types - Indexing, Slicing, Reshaping, Concatenation. Ufuncs and its features. Aggregations",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Visualization with Matplotlib",
+        syllabus: "Visualization with MatplotLib- Line Plots, Scatter Plots. Visualizing Error, Density & Contour plots, customizing color bar, visualization with seaborn.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Introduction to Pandas",
+        syllabus: "Introduction to Pandas-Creation of Series- Operations-Creation of Data Frames--Simple plot using pandasOperations-Import/Export of different types of Files-Slicing - Filtering- groupby-Aggregation- to check for missing values, outliers and imbalance in dataset – case study :real time dataset analysis",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Contemporary Web Technologies": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction to HTML & HTML5",
+        syllabus: "Introduction to HTML -Anchor Tag – Hyperlink - Head and Body Section– Heading - Horizontal Ruler – Paragraphs – Tags - Images and Picture – Lists – Tables – Frames. HTML5: What is HTML5 - Features of HTML5 – Difference Between HTML and HTML5, Semantic Tags – New Input Elements and tags-Media tags (audio and video tags) – Designing Graphics using Canvas API - Drag and Drop features",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "DHTML and Style Sheets (CSS3)",
+        syllabus: "DHTML and Style sheets (CSS3) - What is CSS3 –Features of CSS3 Defining styles - Elements of style - Linking a style sheet to a html documents - Inline style - External style sheets - Multiple styles- Implementation of border radius, box shadow, image border, custom web font, backgrounds - Advanced text effects(shadow) - 2D and 3D Transformations - Transitions to elements - Animations to text and elements",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Introduction to JavaScript",
+        syllabus: "INTRODUCTION TO JAVASCRIPT : Introduction –Advantages of JavaScript - Variables – Data types -Operators – Control Statements – Looping statements - Functions –Dialog boxes-Array, Date and number related methods - Document Object Model - Event Handling –Browser Object Model - Windows and Documents - Form handling and validations. - Built in Object - User Defined Object.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Introduction to Node.js",
+        syllabus: "INTRODUCTION TO NODE.js: Node.js runtime environment-Node.js architecture and event-driven programming-Core Modules and NPM-Using built-in modules like fs, http, and path-Managing packages with Node Package Manager (NPM)-Asynchronous ProgrammingCallbacks, Promises, and async/await-Handling asynchronous operations-Creating a Basic Web Server-Using the http module to create servers-Handling requests and responses",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Introduction to NoSQL Database – MongoDB",
+        syllabus: "INTRODUCTION TO NOSQL DATABASE – MONGODB: What is NoSQL Database - Why to Use MongoDB - Difference between MongoDB & RDBMS - Download & Installation - Common Terms in MongoDB – Implementation of Basic CRUD Operations using MongoDB.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "CONTEMPORARY WEB TECHNOLOGIES": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction to HTML & HTML5",
+        syllabus: "Introduction to HTML -Anchor Tag – Hyperlink - Head and Body Section– Heading - Horizontal Ruler – Paragraphs – Tags - Images and Picture – Lists – Tables – Frames. HTML5: What is HTML5 - Features of HTML5 – Difference Between HTML and HTML5, Semantic Tags – New Input Elements and tags-Media tags (audio and video tags) – Designing Graphics using Canvas API - Drag and Drop features",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "DHTML and Style Sheets (CSS3)",
+        syllabus: "DHTML and Style sheets (CSS3) - What is CSS3 –Features of CSS3 Defining styles - Elements of style - Linking a style sheet to a html documents - Inline style - External style sheets - Multiple styles- Implementation of border radius, box shadow, image border, custom web font, backgrounds - Advanced text effects(shadow) - 2D and 3D Transformations - Transitions to elements - Animations to text and elements",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Introduction to JavaScript",
+        syllabus: "INTRODUCTION TO JAVASCRIPT : Introduction –Advantages of JavaScript - Variables – Data types -Operators – Control Statements – Looping statements - Functions –Dialog boxes-Array, Date and number related methods - Document Object Model - Event Handling –Browser Object Model - Windows and Documents - Form handling and validations. - Built in Object - User Defined Object.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Introduction to Node.js",
+        syllabus: "INTRODUCTION TO NODE.js: Node.js runtime environment-Node.js architecture and event-driven programming-Core Modules and NPM-Using built-in modules like fs, http, and path-Managing packages with Node Package Manager (NPM)-Asynchronous ProgrammingCallbacks, Promises, and async/await-Handling asynchronous operations-Creating a Basic Web Server-Using the http module to create servers-Handling requests and responses",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Introduction to NoSQL Database – MongoDB",
+        syllabus: "INTRODUCTION TO NOSQL DATABASE – MONGODB: What is NoSQL Database - Why to Use MongoDB - Difference between MongoDB & RDBMS - Download & Installation - Common Terms in MongoDB – Implementation of Basic CRUD Operations using MongoDB.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Data Communication and Networking": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction & Physical Layer",
+        syllabus: "Introduction : Network Hardware – Software – Reference Models – OSI and TCP/IP models – Physical layer: Transmission media–Wireless Transmission–Narrowband ISDN.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Telephones & Data Link Layer",
+        syllabus: "Telephones structure –local loop– trunks and multiplexing, switching. Data link layer: Design issues – error detection and correction, Elementary data link protocols – Sliding window protocols.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Medium Access Sub Layer",
+        syllabus: "Medium Access Sub Layer: Channel Allocation Problem – Multiple Access Protocols: ALOHA– Carrier Sense MultipleAccess Protocols – Collision Free Protocols – Limited Contention Protocols Bridges – Transparent Bridges – Spanning Tree Bridges – Source Routing Bridges.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Network Layer & Routing Algorithms",
+        syllabus: "Network layer – design issues – Routing Algorithms: Shortest Path Routing – Flooding – Distance Vector Routing – Link State Routing – Hierarchical Routing Congestion control algorithms: General Principles – Congestion Control in Virtual Circuit Subnets – Choke Packets – Load Shedding – Jitter Control– IP protocol – IP Address –Subnets – Internet Control Protocol.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Transport & Application Layer",
+        syllabus: "Transport layer –Elements– Connection management – Addressing, Establishing & Releasing a connection – Transport Control Protocol: TCP Protocol – TCP segment Header– Connection Management –Application Layer – Network Security-Traditional Cryptography - DNS-DNS Name Space -Electronic Mail - Message Formats.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "DATA COMMUNICATION AND NETWORKING": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction & Physical Layer",
+        syllabus: "Introduction : Network Hardware – Software – Reference Models – OSI and TCP/IP models – Physical layer: Transmission media–Wireless Transmission–Narrowband ISDN.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Telephones & Data Link Layer",
+        syllabus: "Telephones structure –local loop– trunks and multiplexing, switching. Data link layer: Design issues – error detection and correction, Elementary data link protocols – Sliding window protocols.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Medium Access Sub Layer",
+        syllabus: "Medium Access Sub Layer: Channel Allocation Problem – Multiple Access Protocols: ALOHA– Carrier Sense MultipleAccess Protocols – Collision Free Protocols – Limited Contention Protocols Bridges – Transparent Bridges – Spanning Tree Bridges – Source Routing Bridges.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Network Layer & Routing Algorithms",
+        syllabus: "Network layer – design issues – Routing Algorithms: Shortest Path Routing – Flooding – Distance Vector Routing – Link State Routing – Hierarchical Routing Congestion control algorithms: General Principles – Congestion Control in Virtual Circuit Subnets – Choke Packets – Load Shedding – Jitter Control– IP protocol – IP Address –Subnets – Internet Control Protocol.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Transport & Application Layer",
+        syllabus: "Transport layer –Elements– Connection management – Addressing, Establishing & Releasing a connection – Transport Control Protocol: TCP Protocol – TCP segment Header– Connection Management –Application Layer – Network Security-Traditional Cryptography - DNS-DNS Name Space -Electronic Mail - Message Formats.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Advanced Software Engineering": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Software Life Cycle Models & Metrics",
+        syllabus: "Software life cycle models: Waterfall, RAD,AGILE and Spiral model Process metric – Product metrics – Estimation – LOC, FP, COCOMO models – Project Management – Planning, Scheduling and Tracking Software Quality – Quality Standards, Quality Metrics.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "System Concepts for Object Modeling",
+        syllabus: "System Concepts for Object Modeling – Abstraction, Inheritance, Polymorphism, Encapsulation, Message Sending, Association, Aggregation – Requirement Workflow Functional, Non-functional – Characteristics of Requirements – Requirement Elicitation Techniques – Requirement Documentation – Use case specification, Activity Diagram.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Use-Case Modeling & Diagrams",
+        syllabus: "Use-Case Modeling – Actors, Use Cases, Use Case Relationships. The Process of Requirements Use-Case – Identify Business Actors, Identify Business Requirements, Use Cases, Construct, Use Case Model Diagram – Class Diagrams and Object Diagrams – Package Diagrams – Sequence and Collaboration diagrams, State chart diagram.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Design Workflow & Testing",
+        syllabus: "Design Workflow: System Design Concept – Coupling and Cohesion – Architectural Styles – Identifying Subsystems and Interfaces – Design Patterns Implementation Workflow – Mapping models to Code – Mapping Object Model to Database Schema Testing – Formal Technical Reviews – Walkthrough and Inspection.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Software Configuration Management & Maintenance",
+        syllabus: "Software Configuration Management - Managing and controlling Changes – Managing and controlling versions Maintenance –Types of maintenance – Maintenance Log and defect reports – Reverse and re-engineering.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "ADVANCED SOFTWARE ENGINEERING": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Software Life Cycle Models & Metrics",
+        syllabus: "Software life cycle models: Waterfall, RAD,AGILE and Spiral model Process metric – Product metrics – Estimation – LOC, FP, COCOMO models – Project Management – Planning, Scheduling and Tracking Software Quality – Quality Standards, Quality Metrics.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "System Concepts for Object Modeling",
+        syllabus: "System Concepts for Object Modeling – Abstraction, Inheritance, Polymorphism, Encapsulation, Message Sending, Association, Aggregation – Requirement Workflow Functional, Non-functional – Characteristics of Requirements – Requirement Elicitation Techniques – Requirement Documentation – Use case specification, Activity Diagram.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Use-Case Modeling & Diagrams",
+        syllabus: "Use-Case Modeling – Actors, Use Cases, Use Case Relationships. The Process of Requirements Use-Case – Identify Business Actors, Identify Business Requirements, Use Cases, Construct, Use Case Model Diagram – Class Diagrams and Object Diagrams – Package Diagrams – Sequence and Collaboration diagrams, State chart diagram.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Design Workflow & Testing",
+        syllabus: "Design Workflow: System Design Concept – Coupling and Cohesion – Architectural Styles – Identifying Subsystems and Interfaces – Design Patterns Implementation Workflow – Mapping models to Code – Mapping Object Model to Database Schema Testing – Formal Technical Reviews – Walkthrough and Inspection.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Software Configuration Management & Maintenance",
+        syllabus: "Software Configuration Management - Managing and controlling Changes – Managing and controlling versions Maintenance –Types of maintenance – Maintenance Log and defect reports – Reverse and re-engineering.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Mobile Network System": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "INTRODUCTION",
+        syllabus: "Introduction to wireless, mobile and cellular mobile systems- cellular mobile telephone systems, analog and digital cellular systems- frequency reuse, co-channel interference.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "MAC",
+        syllabus: "Medium access control - MAC, SDMA, FDMA, TDMA, CDMA, Hand offs and dropped calls-initiation of handoff, power difference, mobile assisted cell-site and Intersystem handoff.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "COMMUNICATION SYSTEMS",
+        syllabus: "Mobile Telecommunication standards, GSM, DECT, TETRA, IMT-2000, CTEO, satellite systems – GEO, LEO and MEO, and broadcast systems –Digital audio and video broadcasting, IEEE 802.11, HIPERLAN, Bluetooth, Wireless ATM, WATM services.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "MOBILE NETWORK LAYER",
+        syllabus: "Network support for mobile systems – Mobile IP- IP packet delivery- Agent discovery- tunneling and encapsulation, reverse tunneling, IPV6, DHCP.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "MOBILE TRANSPORT LAYER",
+        syllabus: "Mobile transport and application layer protocol - Review of traditional TCP, fast retransmit/fast recovery, transmission/timeout freezing, file systems, WWW, WAP.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "MOBILE NETWORK SYSTEM": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "INTRODUCTION",
+        syllabus: "Introduction to wireless, mobile and cellular mobile systems- cellular mobile telephone systems, analog and digital cellular systems- frequency reuse, co-channel interference.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "MAC",
+        syllabus: "Medium access control - MAC, SDMA, FDMA, TDMA, CDMA, Hand offs and dropped calls-initiation of handoff, power difference, mobile assisted cell-site and Intersystem handoff.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "COMMUNICATION SYSTEMS",
+        syllabus: "Mobile Telecommunication standards, GSM, DECT, TETRA, IMT-2000, CTEO, satellite systems – GEO, LEO and MEO, and broadcast systems –Digital audio and video broadcasting, IEEE 802.11, HIPERLAN, Bluetooth, Wireless ATM, WATM services.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "MOBILE NETWORK LAYER",
+        syllabus: "Network support for mobile systems – Mobile IP- IP packet delivery- Agent discovery- tunneling and encapsulation, reverse tunneling, IPV6, DHCP.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "MOBILE TRANSPORT LAYER",
+        syllabus: "Mobile transport and application layer protocol - Review of traditional TCP, fast retransmit/fast recovery, transmission/timeout freezing, file systems, WWW, WAP.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Artificial Neural Network": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Review of Basic Neural Networks",
+        syllabus: "Review of Basic Neural Networks-Introduction to Neural Networks-Perceptron, Activation Functions, Loss Functions-Backpropagation and Gradient Descent-Overfitting and Regularization Techniques",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Convolutional Neural Networks (CNNs)",
+        syllabus: "Convolutional Neural Networks (CNNs)-CNN Architecture and Components-Convolution, Pooling, Flattening, Fully Connected Layers-Stride, Padding, Filter Sizes-Advanced CNN Techniques-Transfer Learning (Fine-Tuning Pretrained Networks)",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Generative Models",
+        syllabus: "Generative Models-Generative Adversarial Networks (GANs)-GAN Architecture and Training Dynamics-Conditional GANs, CycleGANs, StyleGAN-Applications in Image Generation, Art, and Data Augmentation",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Advanced Topics in Neural Networks",
+        syllabus: "Advanced Topics in Neural Networks-Meta-Learning and Few-Shot Learning-Model-Agnostic Meta-Learning (MAML)-Few-shot Learning Architectures-Self-Supervised Learning-Contrastive Learning, Pretext Tasks",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Real-World Applications",
+        syllabus: "Real-World Applications-Computer Vision-Object Detection, Image Classification, Image Segmentation-Natural Language Processing (NLP)-Language Modeling, Text Generation, Question Answering",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "ARTIFICIAL NEURAL NETWORK": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Review of Basic Neural Networks",
+        syllabus: "Review of Basic Neural Networks-Introduction to Neural Networks-Perceptron, Activation Functions, Loss Functions-Backpropagation and Gradient Descent-Overfitting and Regularization Techniques",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Convolutional Neural Networks (CNNs)",
+        syllabus: "Convolutional Neural Networks (CNNs)-CNN Architecture and Components-Convolution, Pooling, Flattening, Fully Connected Layers-Stride, Padding, Filter Sizes-Advanced CNN Techniques-Transfer Learning (Fine-Tuning Pretrained Networks)",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Generative Models",
+        syllabus: "Generative Models-Generative Adversarial Networks (GANs)-GAN Architecture and Training Dynamics-Conditional GANs, CycleGANs, StyleGAN-Applications in Image Generation, Art, and Data Augmentation",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Advanced Topics in Neural Networks",
+        syllabus: "Advanced Topics in Neural Networks-Meta-Learning and Few-Shot Learning-Model-Agnostic Meta-Learning (MAML)-Few-shot Learning Architectures-Self-Supervised Learning-Contrastive Learning, Pretext Tasks",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Real-World Applications",
+        syllabus: "Real-World Applications-Computer Vision-Object Detection, Image Classification, Image Segmentation-Natural Language Processing (NLP)-Language Modeling, Text Generation, Question Answering",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  }
 };
 
 // SYLLABUS constant removed in favor of dynamic parsing from NOTES_DATA
@@ -907,6 +1536,7 @@ const unitColors = [
 export default function Notes() {
   const { user } = useAuth();
   const isFaculty = user?.type === "faculty";
+  const [courseType, setCourseType] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedSemester, setSelectedSemester] = useState(null);
   const [selectedSubject, setSelectedSubject] = useState(null);
@@ -957,7 +1587,8 @@ export default function Notes() {
     }
   }
 
-  const yearData = selectedYear ? CURRICULUM[selectedYear] : null;
+  const activeCurriculum = courseType === "pg" ? CURRICULUM_PG : CURRICULUM;
+  const yearData = selectedYear ? activeCurriculum[selectedYear] : null;
   const semesterData = selectedSemester && yearData ? yearData.semesters[selectedSemester] : null;
   const ys = selectedYear ? yearStyles[selectedYear] : yearStyles[1];
   // Placeholder subjects — name only, no syllabus/faculty/PDF content
@@ -1014,12 +1645,11 @@ export default function Notes() {
       }));
   }, [selectedSubject, selectedYear, selectedSemester, isPlaceholder]);
 
-  if (!selectedYear) {
+  if (!courseType) {
     return (
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
         <NotesTopAiHeader />
-        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-10 text-center flex flex-col items-center justify-center">
-          {/* Custom Notes Logo Symbol */}
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center flex flex-col items-center justify-center">
           <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-[#021C4F] via-[#0B3C91] to-[#C50337] p-1 shadow-xl shadow-rose-950/20 ring-4 ring-amber-400/30 transition-transform hover:scale-105 duration-300">
             <div className="flex h-full w-full items-center justify-center rounded-[20px] bg-[#021C4F] text-amber-300">
               <svg
@@ -1037,11 +1667,52 @@ export default function Notes() {
               </svg>
             </div>
           </div>
-          <h1 className="font-sans text-3xl sm:text-4xl font-extrabold text-[#021C4F] tracking-tight">Lecture Notes</h1>
-          <p className="mt-2 text-xs sm:text-sm font-medium text-[#6B7280]">Select your year to browse faculty-curated PDF notes by subject</p>
+          <h1 className="font-sans text-4xl font-extrabold text-[#021C4F]">Lecture Notes</h1>
+          <p className="mt-2 text-sm text-[#6B7280]">Select your course to browse faculty-curated PDF notes</p>
         </motion.div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-          {[1, 2, 3].map((year, i) => {
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          {COURSE_OPTIONS.map((course, i) => (
+            <motion.button key={course.value}
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.1 }}
+              whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
+              onClick={() => setCourseType(course.value)}
+              className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-355 hover:shadow-sm hover:border-[#C50337]/45"
+            >
+              <div className="relative p-8 text-center flex flex-col items-center">
+                <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-xl ${course.value === "ug" ? "bg-[#021C4F]" : "bg-[#C50337]"} text-3xl font-bold text-white shadow-sm transition-all`}>
+                  {course.value === "ug" ? "UG" : "PG"}
+                </div>
+                <h2 className="text-xl font-bold text-[#021C4F] group-hover:text-[#C50337] transition-colors">{course.label}</h2>
+                <p className="mt-1.5 text-xs text-[#6B7280]">{course.desc}</p>
+                <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#C50337]">
+                  Browse Notes <FiChevronRight size={12} />
+                </div>
+              </div>
+            </motion.button>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (!selectedYear) {
+    const yearsList = courseType === "pg" ? [1, 2] : [1, 2, 3];
+    return (
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+        <NotesTopAiHeader />
+        <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          onClick={() => { setCourseType(null); setSelectedYear(null); setSelectedSubject(null); }}
+          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
+        ><FiArrowLeft size={14} /> Back to Course</motion.button>
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-10 text-center flex flex-col items-center justify-center">
+          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#021C4F] text-amber-300 shadow-md">
+            <FiBookOpen size={28} />
+          </div>
+          <h1 className="font-sans text-3xl sm:text-4xl font-extrabold text-[#021C4F] tracking-tight">{courseType.toUpperCase()} — Select Year</h1>
+          <p className="mt-2 text-xs sm:text-sm font-medium text-[#6B7280]">Choose your academic year</p>
+        </motion.div>
+        <div className={`grid grid-cols-1 gap-6 ${courseType === "pg" ? "sm:grid-cols-2 max-w-2xl mx-auto" : "sm:grid-cols-3"}`}>
+          {yearsList.map((year, i) => {
             return (
               <motion.button key={year}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -1052,12 +1723,12 @@ export default function Notes() {
               >
                 <div className="relative p-8 text-center">
                   <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md text-3xl font-bold transition-all duration-300 group-hover:scale-110 shadow-md">
-                    {CURRICULUM[year].icon}
+                    {activeCurriculum[year].icon}
                   </div>
                   <span className="inline-block bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-2 shadow-sm">
-                    {Object.keys(CURRICULUM[year].semesters).length} Semesters
+                    {Object.keys(activeCurriculum[year].semesters).length} Semesters
                   </span>
-                  <h2 className="text-xl font-black text-white">{CURRICULUM[year].label}</h2>
+                  <h2 className="text-xl font-black text-white">{activeCurriculum[year].label}</h2>
                   <p className="mt-1.5 text-xs text-rose-100 font-medium">Faculty-curated PDF Notes</p>
                   <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
                     Browse Notes <FiChevronRight size={12} />
@@ -1120,13 +1791,14 @@ export default function Notes() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 text-sm text-[#6B7280] mb-2">
+              <span className="uppercase font-semibold text-[#6B7280]">{courseType.toUpperCase()}</span><FiChevronRight size={10} />
               <span className={ys.text}>{yearData.label}</span><FiChevronRight size={12} /><span className={ys.text}>{semesterData.label}</span>
             </div>
             <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">Select Subject</h1>
             <p className="mt-1 text-xs text-[#6B7280]">Choose a subject to browse lecture notes or access practical lab records</p>
           </div>
 
-          {selectedYear === 1 && selectedSemester === 1 && (
+          {courseType !== "pg" && selectedYear === 1 && selectedSemester === 1 && (
             <button
               onClick={() => setShowLabModal(true)}
               className="group inline-flex items-center gap-2 rounded-xl bg-[#0F4C81] px-5 py-3 text-xs font-bold text-white shadow-md hover:bg-[#1E88E5] hover:shadow-lg transition-all active:scale-95 cursor-pointer shrink-0 border border-white/20"
@@ -1157,7 +1829,9 @@ export default function Notes() {
               const totalFiles = filteredSubjectUnits.length > 0
                 ? filteredSubjectUnits.reduce((s, [, u]) => s + u.files.length, 0)
                 : 0;
-              const facultyName = selectedYear === 1 && selectedSemester === 1
+              const facultyName = courseType === "pg" && selectedYear === 1 && selectedSemester === 1
+                ? PG_FIRST_YEAR_SEM1_FACULTY[subject]
+                : selectedYear === 1 && selectedSemester === 1
                 ? FIRST_YEAR_SEM1_FACULTY[subject]
                 : selectedYear === 2 && selectedSemester === 1
                 ? SECOND_YEAR_SEM1_FACULTY[subject]
@@ -1167,7 +1841,7 @@ export default function Notes() {
                   initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
                   whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
                   onClick={() => setSelectedSubject(subject)}
-                  className="glass-card-hover group bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
+                  className="glass-card-hover group bg-white border border-[#E5E7EB] shadow-sm rounded-xl transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40 text-left"
                 >
                   <div className="relative flex items-start gap-4 p-5 text-left">
                     <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#FAF7F2] border border-[#E6DAB8] shadow-sm transition-all duration-300 group-hover:scale-105">
