@@ -29,7 +29,7 @@ const FACULTY_CREDENTIALS = {
 const FACULTY_LIST = Object.keys(FACULTY_CREDENTIALS);
 
 // 3rd Year A & B Section student records
-const STUDENTS = {
+export const STUDENTS = {
   "24E3036": { name: "G BHUVANESHWARI", rollNumber: "24E3036", dob: "23/09/2006", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3036.jpg" },
   "24E3014": { name: "DEEPIKA T", rollNumber: "24E3014", dob: "30/05/2007", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3014.jpg" },
   "24E3013": { name: "MYTHILI B", rollNumber: "24E3013", dob: "10/12/2006", year: 3, semester: 5, section: "B", type: "student", photoUrl: "/student_24E3013.jpg", adminBadge: "ADMIN" },
@@ -396,7 +396,13 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     try {
       const saved = localStorage.getItem("ddgdvc_user");
-      if (saved) setUser(JSON.parse(saved));
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed?.rollNumber && STUDENTS[parsed.rollNumber] && !parsed.dob) {
+          parsed.dob = STUDENTS[parsed.rollNumber].dob;
+        }
+        setUser(parsed);
+      }
     } catch { /* ignore */ }
     setLoading(false);
   }, []);
@@ -414,7 +420,7 @@ export function AuthProvider({ children }) {
       throw new Error("Date of birth does not match our records.");
     }
 
-    const { dob: _, ...userData } = record;
+    const userData = { ...record };
     setUser(userData);
     localStorage.setItem("ddgdvc_user", JSON.stringify(userData));
     return userData;

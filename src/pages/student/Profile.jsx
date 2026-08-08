@@ -1,7 +1,7 @@
-// src/pages/student/Profile.jsx
 import { useAuth } from "../../context/AuthContext";
 import { initials } from "../../utils/helpers";
 import { FiShield } from "react-icons/fi";
+import BirthdayWishCard from "../../components/dashboard/BirthdayWishCard";
 
 export default function Profile() {
   const { profile, user } = useAuth();
@@ -10,6 +10,9 @@ export default function Profile() {
 
   return (
     <div className="max-w-xl mx-auto py-10 px-4 text-center bg-[#F8FAFC]">
+      {/* Advance Birthday Wish Celebration Banner */}
+      <BirthdayWishCard user={user} />
+
       <h2 className="mb-6 font-sans text-2xl font-bold text-[#1E3A8A]">Student Profile</h2>
       <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm flex flex-col items-center justify-center">
         {hasPhoto ? (
@@ -58,6 +61,14 @@ export default function Profile() {
             <dt className="text-slate-500 font-medium">Roll Number</dt>
             <dd className="text-[#1E3A8A] font-bold">{user?.rollNumber || "24E3006"}</dd>
           </div>
+          {user?.dob && (
+            <div className="flex justify-between border-b border-slate-100 pb-2.5">
+              <dt className="text-slate-500 font-medium">Date of Birth</dt>
+              <dd className="text-[#C50337] font-extrabold flex items-center gap-1">
+                🎂 {user.dob}
+              </dd>
+            </div>
+          )}
           <div className="flex justify-between border-b border-slate-100 pb-2.5">
             <dt className="text-slate-500 font-medium">Department</dt>
             <dd className="text-[#1E3A8A] font-semibold">Computer Science</dd>

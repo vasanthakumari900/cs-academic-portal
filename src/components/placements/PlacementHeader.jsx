@@ -37,17 +37,22 @@ export default function PlacementHeader({
         <div className="absolute left-1/2 bottom-0 -ml-16 -mb-16 h-48 w-48 rounded-full bg-amber-500/10 blur-2xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-left">
-          <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#F5EBD0] text-[#7F011F] px-3 py-1 text-xs font-black shadow-sm">
-              <span className="flex h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
-              DDGDVC CS Academic Portal · Official Placement Details
+          <div className="flex items-start gap-4">
+            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 text-amber-300 shadow-md mt-1">
+              <FiBriefcase size={34} className="text-amber-300 drop-shadow-md" />
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
-              Placement Details Portal
-            </h1>
-            <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-medium">
-              Complete career ecosystem with live drive applications, student eligibility calculator, aptitude &amp; coding practice, ATS resume builder, and placement analytics.
-            </p>
+            <div className="space-y-1.5 max-w-2xl">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#F5EBD0] text-[#7F011F] px-3 py-1 text-xs font-black shadow-sm">
+                <span className="flex h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
+                DDGDVC CS Academic Portal · Official Placement Details
+              </div>
+              <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
+                Placement Details Portal
+              </h1>
+              <p className="text-xs sm:text-sm text-white/90 leading-relaxed font-medium">
+                Complete career ecosystem with live drive applications, student eligibility calculator, aptitude &amp; coding practice, ATS resume builder, and placement analytics.
+              </p>
+            </div>
           </div>
 
           {/* Quick Actions & Controls */}

@@ -19,7 +19,7 @@ import {
   clearActiveDocuments 
 } from "../../services/ragService";
 import { useAuth } from "../../context/AuthContext";
-import { CURRICULUM } from "../../utils/curriculum";
+import { CURRICULUM, CURRICULUM_PG } from "../../utils/curriculum";
 import CSAIAgentLogo from "./CSAIAgentLogo";
 import FormattedMessage from "./FormattedMessage";
 import toast from "react-hot-toast";
@@ -237,15 +237,19 @@ export default function ChatBot() {
     }
     
     if (detectedSubject) {
-      for (const yKey of Object.keys(CURRICULUM)) {
-        const yr = CURRICULUM[yKey];
-        for (const sKey of Object.keys(yr.semesters)) {
-          const sem = yr.semesters[sKey];
-          if (sem.subjects.includes(detectedSubject)) {
-            detectedYear = parseInt(yKey);
-            detectedSem = parseInt(sKey);
-            break;
+      const curriculums = [CURRICULUM, CURRICULUM_PG];
+      for (const curr of curriculums) {
+        for (const yKey of Object.keys(curr)) {
+          const yr = curr[yKey];
+          for (const sKey of Object.keys(yr.semesters)) {
+            const sem = yr.semesters[sKey];
+            if (sem.subjects.includes(detectedSubject)) {
+              detectedYear = parseInt(yKey);
+              detectedSem = parseInt(sKey);
+              break;
+            }
           }
+          if (detectedYear) break;
         }
         if (detectedYear) break;
       }

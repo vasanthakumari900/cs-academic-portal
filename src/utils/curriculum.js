@@ -104,7 +104,17 @@ export const CURRICULUM_PG = {
       },
       2: {
         label: "Semester 2",
-        subjects: []
+        subjects: [
+          "Digital Image Processing",
+          "Java Enterprise Edition",
+          "Data Mining Techniques",
+          "Advanced Database Management System",
+          "Distributed Databases",
+          "Cloud Web Services",
+          "IoT and its Applications",
+          "High Speed Networks",
+          "Social Network Analysis"
+        ]
       }
     }
   },
@@ -112,7 +122,17 @@ export const CURRICULUM_PG = {
     label: "2nd Year",
     icon: "Ⅱ",
     semesters: {
-      1: { label: "Semester 1", subjects: [] },
+      1: {
+        label: "Semester 1",
+        subjects: [
+          "Artificial Intelligence and Machine Learning Techniques",
+          "DOT NET Technology",
+          "Big Data Analytics",
+          "Cyber Forensics",
+          "Ethical Hacking",
+          "Information Security"
+        ]
+      },
       2: { label: "Semester 2", subjects: [] }
     }
   }

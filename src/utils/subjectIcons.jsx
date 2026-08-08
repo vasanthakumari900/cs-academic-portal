@@ -18,6 +18,18 @@ export function getSubjectAbbreviation(subjectName) {
   if (sub.includes("PYTHON FOR DATA SCIENCE") && sub.includes("LAB")) return "PY LAB";
   if (sub.includes("PYTHON FOR DATA SCIENCE")) return "PY DATA";
   if (sub.includes("PYTHON")) return "PYTHON";
+  if (sub.includes("ENTERPRISE") || sub.includes("JEE")) return "JEE";
+  if (sub.includes("INTERNET OF THINGS") || sub.includes("IOT")) return "IOT";
+  if (sub.includes("ADVANCED DATABASE")) return "ADBMS";
+  if (sub.includes("DISTRIBUTED DATABASE")) return "DDB";
+  if (sub.includes("MACHINE LEARNING") || (sub.includes("ARTIFICIAL") && sub.includes("MACHINE"))) return "AIML";
+  if (sub.includes("DOT NET")) return "DOTNET";
+  if (sub.includes("BIG DATA")) return "BDA";
+  if (sub.includes("CYBER FORENSICS")) return "CF";
+  if (sub.includes("ETHICAL HACKING")) return "EH";
+  if (sub.includes("INFORMATION SECURITY")) return "IS";
+  if (sub.includes("HIGH SPEED")) return "HSN";
+  if (sub.includes("SOCIAL NETWORK")) return "SNA";
   if (sub.includes("JAVA") && !sub.includes("SCRIPT")) return "JAVA";
   if (sub.includes("C++") || sub.includes("CPP")) return "C++";
   if (sub.includes("DBMS") || sub.includes("DATABASE")) return "DBMS";

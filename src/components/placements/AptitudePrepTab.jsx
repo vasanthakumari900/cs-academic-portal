@@ -14,6 +14,7 @@ import {
   FiExternalLink,
   FiRotateCcw,
   FiAward,
+  FiArrowLeft,
 } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { APTITUDE_CATEGORIES, MOCK_QUIZ_QUESTIONS } from "../../utils/placementMockData";
@@ -258,9 +259,9 @@ export default function AptitudePrepTab() {
 
                 <button
                   onClick={() => setQuizActive(false)}
-                  className="rounded-xl bg-[#0F4C81] px-6 py-2.5 text-xs font-bold text-white shadow-sm"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#0F4C81] px-6 py-3 text-sm font-extrabold text-white shadow-md transition-all hover:bg-[#1E88E5] hover:scale-105"
                 >
-                  Back to Practice Materials
+                  <FiArrowLeft size={18} /> Back to Practice Materials
                 </button>
               </div>
             )}

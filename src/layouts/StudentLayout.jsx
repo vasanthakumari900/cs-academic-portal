@@ -17,10 +17,10 @@ export default function StudentLayout() {
           <div className="mx-auto max-w-6xl px-4 pt-6 pb-2 sm:px-6 lg:px-8 text-left">
             <button
               onClick={() => navigate("/student/dashboard")}
-              className="group inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-xs sm:text-sm font-bold text-[#7F011F] shadow-sm transition-all hover:bg-[#7F011F] hover:text-white active:scale-95 border border-[#E6DAB8]"
+              className="group inline-flex items-center gap-2.5 rounded-xl bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#7F011F] shadow-md transition-all hover:bg-[#7F011F] hover:text-white hover:shadow-lg hover:scale-105 active:scale-95 border-2 border-[#E6DAB8]"
               title="Back to Dashboard"
             >
-              <FiArrowLeft size={18} className="transition-transform group-hover:-translate-x-1 text-[#7F011F] group-hover:text-white" />
+              <FiArrowLeft size={22} className="transition-transform group-hover:-translate-x-1 text-[#7F011F] group-hover:text-white" />
               <span>Back</span>
             </button>
           </div>

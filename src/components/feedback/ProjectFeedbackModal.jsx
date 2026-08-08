@@ -151,40 +151,48 @@ export default function ProjectFeedbackModal({ isOpen, onClose, defaultType = "s
     setAnswers((prev) => ({ ...prev, [qId]: val }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const payload = {
+    const localPayload = {
       feedbackType: defaultType,
       feedbackTitle: currentFeedback.title,
       answers,
-      submittedBy: user?.name || "Student User",
-      userRollNumber: user?.rollNumber || "24E2901",
-      userRole: user?.role || user?.type || "student",
+      submittedBy: user?.name || (user?.type === "faculty" ? "Faculty User" : "Student User"),
+      userRollNumber: user?.rollNumber || (user?.type === "faculty" ? "Faculty Staff" : "24E3006"),
+      userRole: user?.role || user?.type || defaultType,
       submittedAt: new Date().toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" }),
       rawTimestamp: Date.now(),
-      timestamp: serverTimestamp()
     };
 
+    // 1. Save to LocalStorage immediately so it never hangs
     try {
-      // 1. Store in Firestore for Admin View
-      await addDoc(collection(db, "cs_portal_project_feedback"), payload).catch(() => {});
-
-      // 2. Store in LocalStorage fallback
       const existing = JSON.parse(localStorage.getItem("cs_portal_admin_feedback_submissions") || "[]");
-      existing.unshift(payload);
+      existing.unshift(localPayload);
       localStorage.setItem("cs_portal_admin_feedback_submissions", JSON.stringify(existing));
-
-      setSubmittedSuccess(true);
-      toast.success(`Thank you! Your ${currentFeedback.title} has been submitted directly to Admin. 🎉`);
     } catch (err) {
-      console.error("Feedback submit error:", err);
-      toast.error("Feedback submitted to Admin!");
-      setSubmittedSuccess(true);
-    } finally {
-      setIsSubmitting(false);
+      console.warn("LocalStorage save error:", err);
     }
+
+    // 2. Save to Firestore asynchronously in background without blocking UI
+    try {
+      addDoc(collection(db, "cs_portal_project_feedback"), {
+        ...localPayload,
+        timestamp: serverTimestamp()
+      }).catch((err) => {
+        console.warn("Firestore feedback write notice:", err);
+      });
+    } catch (err) {
+      console.warn("Firestore init notice:", err);
+    }
+
+    // 3. Immediately show success modal & toast
+    setTimeout(() => {
+      setSubmittedSuccess(true);
+      setIsSubmitting(false);
+      toast.success(`Thank you! Your ${currentFeedback.title} has been submitted directly to Admin (24E3006). 🎉`);
+    }, 200);
   };
 
   const handleReset = () => {

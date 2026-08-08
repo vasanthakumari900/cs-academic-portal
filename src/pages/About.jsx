@@ -560,11 +560,16 @@ export default function About() {
 
         {/* ── Department of Computer Science & Faculty ── */}
         <section id="faculty" className="space-y-6 scroll-mt-24">
-          <div className="text-center space-y-1">
+          <div className="text-center space-y-2 flex flex-col items-center justify-center">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F] p-1 shadow-lg ring-2 ring-amber-400/40">
+              <div className="flex h-full w-full items-center justify-center rounded-xl bg-[#021C4F] text-amber-300">
+                <FiUsers size={30} className="text-amber-400" />
+              </div>
+            </div>
             <span className="bg-[#C50337]/20 text-rose-300 text-[10px] font-extrabold uppercase tracking-widest px-3.5 py-1 rounded-full border border-[#C50337]/40">
-              Department Profile
+              Department Profile &amp; Faculty Directory
             </span>
-            <h2 className="text-xl sm:text-3xl font-extrabold text-white mt-2">Department of Computer Science</h2>
+            <h2 className="text-xl sm:text-3xl font-extrabold text-white">Department of Computer Science</h2>
             <p className="text-xs text-slate-400 font-medium">Meet our dedicated faculty &amp; department leadership</p>
           </div>
 

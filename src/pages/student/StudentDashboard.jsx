@@ -20,6 +20,7 @@ import {
   FiExternalLink,
 } from "react-icons/fi";
 import CiaExamNotificationCard from "../../components/dashboard/CiaExamNotificationCard";
+import BirthdayWishCard from "../../components/dashboard/BirthdayWishCard";
 import ProjectFeedbackModal from "../../components/feedback/ProjectFeedbackModal";
 import AdminFeedbackModal from "../../components/admin/AdminFeedbackModal";
 import useActivityTracker from "../../hooks/useActivityTracker";
@@ -60,30 +61,38 @@ const STUDENT_OPTIONS = [
     badge: "E-Content",
     desc: "Watch subject-wise video lectures, playlists & tutorials.",
     color: "#021C4F",
+    emblemGradient: "bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F]",
+    iconColor: "text-amber-400 drop-shadow-xs",
   },
   {
     label: "Notes",
-    icon: FiFileText,
+    icon: FiBookOpen,
     to: "/student/notes",
     badge: "PDF Notes",
     desc: "Unit-wise lecture notes & downloadable study materials.",
     color: "#C50337",
+    emblemGradient: "bg-gradient-to-tr from-[#7F011F] via-[#C50337] to-[#A0022B]",
+    iconColor: "text-amber-300 drop-shadow-xs",
   },
   {
     label: "Previous Year Question Papers",
-    icon: FiGrid,
+    icon: FiAward,
     to: "/student/question-papers",
     badge: "Semester Exams",
     desc: "Browse & download past university question papers.",
     color: "#021C4F",
+    emblemGradient: "bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#0A369D]",
+    iconColor: "text-amber-400 drop-shadow-xs",
   },
   {
     label: "CIA Question Papers",
-    icon: FiAward,
+    icon: FiCheckCircle,
     to: "/student/cia-question-papers",
     badge: "Internal Assessment",
     desc: "Continuous Internal Assessment (CIA 1 & CIA 2) papers.",
     color: "#C50337",
+    emblemGradient: "bg-gradient-to-tr from-[#C50337] via-[#A0022B] to-[#7F011F]",
+    iconColor: "text-amber-300 drop-shadow-xs",
   },
   {
     label: "Placement Details",
@@ -92,6 +101,8 @@ const STUDENT_OPTIONS = [
     badge: "Career Drives",
     desc: "Placement updates, company eligibility & mock aptitude.",
     color: "#021C4F",
+    emblemGradient: "bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#1E3A8A]",
+    iconColor: "text-amber-400 drop-shadow-xs",
   },
   {
     label: "Vaishnav LMS Portal",
@@ -101,6 +112,8 @@ const STUDENT_OPTIONS = [
     badge: "Official LMS",
     desc: "Access the official Vaishnav Learning Management System portal.",
     color: "#C50337",
+    emblemGradient: "bg-gradient-to-tr from-[#7F011F] via-[#C50337] to-[#990000]",
+    iconColor: "text-amber-300 drop-shadow-xs",
   },
 ];
 
@@ -140,7 +153,7 @@ export default function StudentDashboard() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        {/* Top Header Grid: Banner on Left + CIA Notification Card on Top-Right */}
+        {/* Top Header Grid: Banner on Left + Notification Cards on Top-Right */}
         <div className="mb-8 flex flex-col lg:flex-row items-start justify-between gap-6">
           <div className="flex-1 w-full">
             {hasPhoto ? (
@@ -245,9 +258,12 @@ export default function StudentDashboard() {
                 </div>
               </div>
             )}
+
+            {/* Left-Side Birthday Notification Card */}
+            <BirthdayWishCard user={user} />
           </div>
 
-          {/* Top-Right CIA Notification Card */}
+          {/* Top-Right CIA Examination Notification Card */}
           <div className="shrink-0 w-full lg:w-auto self-stretch lg:self-start">
             <CiaExamNotificationCard studentYear={user?.year || 1} />
           </div>
@@ -282,17 +298,20 @@ export default function StudentDashboard() {
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div
-                      className={`flex h-12 w-12 items-center justify-center rounded-xl text-white shadow-sm transition-transform duration-200 group-hover:scale-105 ${
-                        isRed ? "bg-[#C50337]" : "bg-[#021C4F]"
-                      }`}
+                      className={`flex h-14 w-14 items-center justify-center rounded-2xl ${
+                        option.emblemGradient || "bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F]"
+                      } p-1 shadow-md ring-2 ring-amber-400/40 transition-transform duration-300 group-hover:scale-110`}
                     >
-                      <IconComponent size={22} />
+                      <div className="flex h-full w-full items-center justify-center rounded-xl bg-black/25 backdrop-blur-xs">
+                        <IconComponent size={24} className={option.iconColor || "text-amber-300"} />
+                      </div>
                     </div>
+
                     <span
-                      className={`rounded-full px-2.5 py-1 text-[10px] font-bold border ${
+                      className={`rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider border shadow-2xs ${
                         isRed
-                          ? "bg-[#C50337]/10 text-[#C50337] border-[#C50337]/20"
-                          : "bg-[#021C4F]/10 text-[#021C4F] border-[#021C4F]/20"
+                          ? "bg-[#C50337]/10 text-[#C50337] border-[#C50337]/30"
+                          : "bg-[#021C4F]/10 text-[#021C4F] border-[#021C4F]/30"
                       }`}
                     >
                       {option.badge}
@@ -327,27 +346,27 @@ export default function StudentDashboard() {
           })}
         </div>
 
-        {/* CS Academic Portal Project Feedback Options (Down on Student Dashboard) */}
+        {/* CS Academic Portal Project Feedback Options */}
         {isAdmin ? (
-          /* ADMIN VIEW (24E3006): View Feedback Responses */
+          /* ADMIN VIEW (24E3006): View Feedback Responses ONLY */
           <div className="mt-12 rounded-3xl bg-gradient-to-r from-[#021C4F] via-[#0A369D] to-[#C50337] p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
             <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
               <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-amber-300">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-400 text-slate-950 px-3 py-1 text-[10px] font-black uppercase tracking-widest shadow-md">
                   <FiShield size={13} /> Admin Exclusive Access (24E3006)
                 </span>
                 <h2 className="text-xl sm:text-2xl font-extrabold text-white mt-2">
                   View Student Feedback Responses
                 </h2>
-                <p className="text-xs text-white/80 mt-1 max-w-xl leading-relaxed">
-                  As the portal Administrator, inspect all submitted student feedback responses, ratings, choices, and recommendations.
+                <p className="text-xs text-amber-100 mt-1 max-w-xl font-medium leading-relaxed">
+                  As the portal Administrator, inspect all submitted student &amp; faculty feedback responses, ratings, choices, and recommendations.
                 </p>
               </div>
 
               <button
                 type="button"
                 onClick={() => setIsAdminFeedbackOpen(true)}
-                className="shrink-0 flex items-center gap-2 rounded-2xl bg-white text-[#021C4F] hover:bg-amber-300 hover:text-slate-900 px-6 py-3.5 text-xs font-black shadow-lg transition-all transform hover:scale-105"
+                className="shrink-0 flex items-center gap-2 rounded-2xl bg-amber-400 text-slate-950 hover:bg-amber-300 px-6 py-3.5 text-xs font-black shadow-lg transition-all transform hover:scale-105 cursor-pointer border border-amber-300"
               >
                 <FiEye size={18} />
                 <span>View Feedback Responses</span>
@@ -381,7 +400,7 @@ export default function StudentDashboard() {
                   <div>
                     <h3 className="font-extrabold text-base text-white">Student Feedback Form</h3>
                     <p className="text-xs text-white/80 mt-0.5">
-                      Rate lecture notes, question papers, E-content &amp; AI assistant. Responses go straight to Admin.
+                      Rate lecture notes, question papers, E-content &amp; AI assistant. Responses go straight to Admin (24E3006).
                     </p>
                   </div>
                 </div>
@@ -389,7 +408,7 @@ export default function StudentDashboard() {
                 <button
                   type="button"
                   onClick={() => setIsFeedbackOpen(true)}
-                  className="shrink-0 flex items-center gap-2 rounded-2xl bg-white text-[#021C4F] hover:bg-amber-300 hover:text-slate-900 px-6 py-3 text-xs font-black shadow-md transition-all transform hover:scale-105"
+                  className="shrink-0 flex items-center gap-2 rounded-2xl bg-white text-[#021C4F] hover:bg-amber-300 hover:text-slate-900 px-6 py-3 text-xs font-black shadow-md transition-all transform hover:scale-105 cursor-pointer"
                 >
                   <FiEdit3 size={16} />
                   <span>Open Student Feedback Form</span>

@@ -8,6 +8,25 @@ import {
 } from "react-icons/fi";
 import toast from "react-hot-toast";
 
+const QUESTION_MAP = {
+  // Student Form
+  q1_rating: "1. E-Content & Lecture Notes Quality",
+  q2_exam_prep: "2. Exam Preparation Helpfulness (CIA & Sem Papers)",
+  q3_ai_rating: "3. CS AI Study Assistant (Q&A & Voice Search)",
+  q4_top_feature: "4. Most Used Portal Feature",
+  q5_comments: "5. Student Recommendations & Feature Requests",
+  // Faculty Form
+  q1_ease_of_use: "1. Ease of Content Upload & Management",
+  q2_efficiency: "2. Academic Content Distribution Efficiency",
+  q3_analytics: "3. Student Activity Tracking & Dashboard Rating",
+  q4_tools_needed: "4. Teaching Tools Requested",
+  // Alumni Form
+  q1_industry_prep: "1. IT Corporate Career Curriculum Preparedness",
+  q2_placement_rating: "2. Placement Drives & Interview Section Rating",
+  q3_mentorship: "3. Alumni Mentorship Interest",
+  q4_tech_trends: "4. Tech Domain Focus Recommendation",
+};
+
 export default function AdminFeedbackViewer() {
   const [feedbackList, setFeedbackList] = useState([]);
   const [filterType, setFilterType] = useState("all");
@@ -15,29 +34,47 @@ export default function AdminFeedbackViewer() {
 
   const fetchFeedback = async () => {
     setLoading(true);
-    let items = [];
 
+    // 1. Load LocalStorage submissions immediately (0ms delay)
+    let items = [];
     try {
-      // 1. Fetch from Firestore
-      const q = query(collection(db, "cs_portal_project_feedback"), orderBy("timestamp", "desc"));
-      const snapshot = await getDocs(q);
-      snapshot.forEach((d) => {
-        items.push({ id: d.id, ...d.data() });
+      const local = JSON.parse(localStorage.getItem("cs_portal_admin_feedback_submissions") || "[]");
+      local.forEach((loc, idx) => {
+        items.push({ id: `local_${idx}_${loc.rawTimestamp || Date.now()}`, ...loc });
       });
-    } catch (err) {
-      console.warn("Firestore fetch error, falling back to local:", err);
+    } catch (e) {
+      console.warn("Local storage parse notice:", e);
     }
 
-    // 2. Combine with LocalStorage fallback
-    const local = JSON.parse(localStorage.getItem("cs_portal_admin_feedback_submissions") || "[]");
-    local.forEach((loc, idx) => {
-      if (!items.some((it) => it.submittedAt === loc.submittedAt && it.submittedBy === loc.submittedBy)) {
-        items.push({ id: `local_${idx}`, ...loc });
-      }
-    });
-
+    items.sort((a, b) => (b.rawTimestamp || 0) - (a.rawTimestamp || 0));
     setFeedbackList(items);
-    setLoading(false);
+
+    // 2. Fetch Firestore entries with 1s timeout limit so UI never hangs
+    try {
+      const firestorePromise = getDocs(collection(db, "cs_portal_project_feedback"));
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Firestore fetch timeout")), 1000)
+      );
+
+      const snapshot = await Promise.race([firestorePromise, timeoutPromise]);
+      const firestoreItems = [];
+      snapshot.forEach((d) => {
+        firestoreItems.push({ id: d.id, ...d.data() });
+      });
+
+      firestoreItems.forEach((fItem) => {
+        if (!items.some((it) => (it.submittedAt === fItem.submittedAt && it.submittedBy === fItem.submittedBy) || (it.rawTimestamp && it.rawTimestamp === fItem.rawTimestamp))) {
+          items.push(fItem);
+        }
+      });
+
+      items.sort((a, b) => (b.rawTimestamp || 0) - (a.rawTimestamp || 0));
+      setFeedbackList([...items]);
+    } catch (err) {
+      console.warn("Firestore fetch timeout or offline notice:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -181,22 +218,26 @@ export default function AdminFeedbackViewer() {
               </div>
 
               {/* Answers Grid */}
-              <div className="space-y-2 text-xs text-slate-700">
+              <div className="space-y-3 text-xs">
                 {item.answers && Object.keys(item.answers).length > 0 ? (
                   Object.entries(item.answers).map(([qKey, val]) => (
-                    <div key={qKey} className="bg-slate-50 rounded-xl p-3 border border-slate-100">
-                      <span className="font-bold text-[#021C4F] block mb-1 uppercase text-[10px] tracking-wider">
-                        {qKey.replace(/_/g, " ")}:
+                    <div key={qKey} className="rounded-2xl bg-[#FAF7F2] p-4 border-2 border-[#E6DAB8] shadow-2xs space-y-1.5">
+                      <span className="font-extrabold text-[#021C4F] block text-xs tracking-tight">
+                        {QUESTION_MAP[qKey] || qKey.replace(/_/g, " ").toUpperCase()}:
                       </span>
                       {typeof val === "number" ? (
-                        <div className="flex items-center gap-1 text-amber-500 font-bold">
+                        <div className="flex items-center gap-1.5 text-amber-600 font-extrabold pt-0.5">
                           {[1, 2, 3, 4, 5].map((s) => (
-                            <FiStar key={s} size={14} className={val >= s ? "fill-amber-400 text-amber-400" : "text-slate-300"} />
+                            <FiStar key={s} size={16} className={val >= s ? "fill-amber-400 text-amber-500 drop-shadow-xs" : "text-slate-300"} />
                           ))}
-                          <span className="ml-1 text-[11px] text-slate-600">({val} / 5 Stars)</span>
+                          <span className="ml-1.5 text-xs text-slate-900 bg-amber-200/90 px-3 py-0.5 rounded-full font-black border border-amber-400 shadow-2xs">
+                            {val} / 5 Stars
+                          </span>
                         </div>
                       ) : (
-                        <p className="text-xs text-slate-800 font-medium leading-relaxed">{val}</p>
+                        <p className="text-xs text-slate-950 font-extrabold bg-white p-3 rounded-xl border border-[#E6DAB8] leading-relaxed break-words shadow-2xs">
+                          {val || "No written comment provided"}
+                        </p>
                       )}
                     </div>
                   ))

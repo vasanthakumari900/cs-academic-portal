@@ -12,7 +12,7 @@ import { STORAGE_PATHS } from "../utils/constants";
 import { uploadFile } from "../services/storageService";
 import toast from "react-hot-toast";
 import { NOTES_DATA, SEMESTER_UNITS, NAME_ONLY_MAP } from "./Notes";
-import { CURRICULUM } from "../utils/curriculum";
+import { CURRICULUM, CURRICULUM_PG } from "../utils/curriculum";
 import PdfFileCard from "../components/common/PdfFileCard";
 import { getSubjectIcon } from "../utils/subjectIcons";
 import watchVideoBtnImg from "../assets/watch-video-btn.png";
@@ -372,6 +372,7 @@ const subjectColors = [
 export default function EContent() {
   const { user } = useAuth();
   const isFaculty = user?.type === "faculty";
+  const [courseType, setCourseType] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedSemester, setSelectedSemester] = useState(null);
   const [selectedSubject, setSelectedSubject] = useState(null);
@@ -442,7 +443,8 @@ export default function EContent() {
     }
   }
 
-  const yearData = selectedYear ? CURRICULUM[selectedYear] : null;
+  const activeCurriculum = courseType === "pg" ? CURRICULUM_PG : CURRICULUM;
+  const yearData = selectedYear && activeCurriculum[selectedYear] ? activeCurriculum[selectedYear] : null;
   const semesterData = selectedSemester && yearData ? yearData.semesters[selectedSemester] : null;
   const ys = selectedYear ? yearStyles[selectedYear] : yearStyles[1];
   const { items: firestoreVideos, refetch } = useFirestoreList(videoService);
@@ -489,20 +491,118 @@ export default function EContent() {
   const subjectNotesData = selectedSubject && !isPlaceholder && !isStats2 ? NOTES_DATA[selectedSubject] : null;
   const semesterUnitFilter = selectedSubject && !isPlaceholder ? SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[selectedSubject] : null;
 
-  if (!selectedYear) {
+  if (!courseType && selectedYear !== "dgvc") {
     return (
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
-        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center">
-          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#021C4F] text-white shadow-sm">
-            <FiPlayCircle size={36} />
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center flex flex-col items-center justify-center">
+          <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F] p-1.5 shadow-xl shadow-rose-950/20 ring-4 ring-amber-400/40 transition-transform hover:scale-105 duration-300">
+            <div className="flex h-full w-full items-center justify-center rounded-[20px] bg-[#021C4F] text-amber-300">
+              <FiPlayCircle size={48} className="text-amber-400 drop-shadow-md" />
+            </div>
           </div>
-          <h1 className="font-sans text-4xl font-bold text-[#021C4F]">Video Lectures &amp; E-Content</h1>
-          <p className="mt-2 text-sm text-[#6B7280]">Select your academic year or browse official DGVC Computer Science video lectures</p>
+          <span className="inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 shadow-md">
+            <FiVideo size={14} /> Video Lectures &amp; E-Content
+          </span>
+          <h1 className="font-sans text-4xl font-extrabold text-[#021C4F]">Video Lectures &amp; E-Content</h1>
+          <p className="mt-2 text-sm text-[#6B7280]">Select your degree program or browse official DGVC Computer Science video lectures</p>
         </motion.div>
 
-        {/* 4 Cards Grid: 1st Year, 2nd Year, 3rd Year, & DGVC VIDEOS (Next to 3rd Year) */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {[1, 2, 3].map((year, i) => {
+        {/* 3 Main Course Cards: B.Sc. CS (UG), M.Sc. CS (PG), & DGVC VIDEOS */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 max-w-4xl mx-auto">
+          {/* B.Sc. CS (UG) Card */}
+          <motion.button
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, type: "spring", stiffness: 90 }}
+            whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
+            onClick={() => { setCourseType("ug"); setSelectedYear(null); }}
+            className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white shadow-lg transition-all duration-300 hover:shadow-xl text-center flex flex-col justify-between"
+          >
+            <div className="relative p-6 text-center">
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-white/20 backdrop-blur-md text-2xl font-black text-amber-300 transition-all duration-300 group-hover:scale-110 shadow-md">
+                UG
+              </div>
+              <span className="inline-block bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-2 shadow-xs">
+                3 Years · 6 Semesters
+              </span>
+              <h2 className="text-lg font-black text-white leading-snug">B.Sc. Computer Science</h2>
+              <p className="mt-1 text-[11px] text-rose-100 font-medium">Undergraduate E-Content</p>
+              <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                Explore UG <FiChevronRight size={12} />
+              </div>
+            </div>
+          </motion.button>
+
+          {/* M.Sc. CS (PG) Card */}
+          <motion.button
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 90 }}
+            whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
+            onClick={() => { setCourseType("pg"); setSelectedYear(null); }}
+            className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white shadow-lg transition-all duration-300 hover:shadow-xl text-center flex flex-col justify-between"
+          >
+            <div className="relative p-6 text-center">
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-white/20 backdrop-blur-md text-2xl font-black text-amber-300 transition-all duration-300 group-hover:scale-110 shadow-md">
+                PG
+              </div>
+              <span className="inline-block bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-2 shadow-xs">
+                2 Years · 4 Semesters
+              </span>
+              <h2 className="text-lg font-black text-white leading-snug">M.Sc. Computer Science</h2>
+              <p className="mt-1 text-[11px] text-rose-100 font-medium">Postgraduate E-Content</p>
+              <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                Explore PG <FiChevronRight size={12} />
+              </div>
+            </div>
+          </motion.button>
+
+          {/* DGVC VIDEOS Card */}
+          <motion.button
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, type: "spring", stiffness: 90 }}
+            whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
+            onClick={() => setSelectedYear("dgvc")}
+            className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white shadow-lg transition-all duration-300 hover:shadow-xl text-center flex flex-col justify-between"
+          >
+            <div className="relative p-6 text-center">
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-white/20 backdrop-blur-md transition-all duration-300 group-hover:scale-110 shadow-md">
+                <FiYoutube size={32} className="text-amber-300" />
+              </div>
+              <span className="inline-block bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-2 shadow-xs">
+                Official YouTube Series
+              </span>
+              <h2 className="text-lg font-black text-white leading-snug">DGVC VIDEOS</h2>
+              <p className="mt-1 text-[11px] text-rose-100 font-medium">14 Official CS Videos</p>
+              <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                Watch Videos <FiChevronRight size={12} />
+              </div>
+            </div>
+          </motion.button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!selectedYear) {
+    const yearsList = courseType === "pg" ? [1, 2] : [1, 2, 3];
+    return (
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+        <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          onClick={() => { setCourseType(null); setSelectedYear(null); setSelectedSubject(null); }}
+          className="mb-8 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
+        ><FiArrowLeft size={20} /> Back to Course</motion.button>
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center flex flex-col items-center justify-center">
+          <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F] p-1 shadow-xl ring-4 ring-amber-400/30 transition-transform hover:scale-105 duration-300">
+            <div className="flex h-full w-full items-center justify-center rounded-[20px] bg-[#021C4F] text-amber-300">
+              <FiPlayCircle size={38} className="text-amber-400" />
+            </div>
+          </div>
+          <h1 className="font-sans text-3xl sm:text-4xl font-extrabold text-[#021C4F]">{courseType.toUpperCase()} — Select Academic Year</h1>
+          <p className="mt-2 text-sm text-[#6B7280]">Select your year to browse subject-wise E-Content &amp; video lectures</p>
+        </motion.div>
+
+        {/* Year Cards Grid */}
+        <div className={`grid grid-cols-1 gap-6 ${courseType === "pg" ? "sm:grid-cols-2 max-w-2xl mx-auto" : "sm:grid-cols-3"}`}>
+          {yearsList.map((year, i) => {
             return (
               <motion.button key={year}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
@@ -513,13 +613,13 @@ export default function EContent() {
               >
                 <div className="relative p-8 text-center">
                   <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md text-3xl font-bold transition-all duration-300 group-hover:scale-110 shadow-md">
-                    {CURRICULUM[year].icon}
+                    {activeCurriculum[year].icon}
                   </div>
                   <span className="inline-block bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-2 shadow-sm">
-                    {Object.keys(CURRICULUM[year].semesters).length} Semesters
+                    {Object.keys(activeCurriculum[year].semesters).length} Semesters
                   </span>
-                  <h2 className="text-xl font-black text-white">{CURRICULUM[year].label}</h2>
-                  <p className="mt-1.5 text-xs text-rose-100 font-medium">Subject-wise Video Lectures</p>
+                  <h2 className="text-xl font-black text-white">{activeCurriculum[year].label}</h2>
+                  <p className="mt-1.5 text-xs text-rose-100 font-medium">Subject-wise Video Lectures &amp; Syllabus</p>
                   <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
                     Browse Lectures <FiChevronRight size={12} />
                   </div>
@@ -527,31 +627,6 @@ export default function EContent() {
               </motion.button>
             );
           })}
-
-          {/* Button Next to Third Year: DGVC VIDEOS */}
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, type: "spring", stiffness: 80 }}
-            whileHover={{ y: -4 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => setSelectedYear("dgvc")}
-            className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white shadow-xl transition-all duration-300 hover:shadow-2xl text-center flex flex-col justify-between"
-          >
-            <div className="relative p-8 text-center">
-              <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md text-3xl font-bold transition-all duration-300 group-hover:scale-110 shadow-md">
-                <FiYoutube size={44} className="text-amber-300" />
-              </div>
-              <span className="inline-block bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-2 shadow-sm">
-                Official YouTube Series
-              </span>
-              <h2 className="text-xl font-black text-white">DGVC VIDEOS</h2>
-              <p className="mt-1.5 text-xs text-rose-100 font-medium">14 Official CS Lecture Videos</p>
-              <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
-                Watch DGVC Videos <FiChevronRight size={12} />
-              </div>
-            </div>
-          </motion.button>
         </div>
       </div>
     );
@@ -565,9 +640,9 @@ export default function EContent() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           onClick={() => { setSelectedYear(null); setSelectedSemester(null); setSelectedSubject(null); }}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-xl border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-extrabold text-[#021C4F] hover:bg-[#F8FAFC] transition-all shadow-sm"
+          className="mb-8 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
         >
-          <FiArrowLeft size={14} /> Back to Years
+          <FiArrowLeft size={20} /> Back to Course
         </motion.button>
 
         {/* Header Banner */}
@@ -606,12 +681,7 @@ export default function EContent() {
             >
               <div>
                 <div
-                  onClick={() => {
-                    setPlaying(video);
-                    setTimeout(() => {
-                      document.getElementById("dgvc-video-player-bottom")?.scrollIntoView({ behavior: "smooth" });
-                    }, 100);
-                  }}
+                  onClick={() => setPlaying(video)}
                   className="relative aspect-video w-full bg-slate-900 cursor-pointer overflow-hidden group-hover:opacity-95"
                 >
                   <img
@@ -647,12 +717,7 @@ export default function EContent() {
 
               <div className="p-4 pt-0 flex items-center justify-between gap-2">
                 <button
-                  onClick={() => {
-                    setPlaying(video);
-                    setTimeout(() => {
-                      document.getElementById("dgvc-video-player-bottom")?.scrollIntoView({ behavior: "smooth" });
-                    }, 100);
-                  }}
+                  onClick={() => setPlaying(video)}
                   className="cursor-pointer focus:outline-none hover:scale-105 active:scale-95 transition-transform"
                   title="Watch Video"
                 >
@@ -672,78 +737,34 @@ export default function EContent() {
           ))}
         </div>
 
-        {/* Dedicated Bottom Video Player Display for DGVC Videos */}
-        {playing && (
-          <motion.div
-            id="dgvc-video-player-bottom"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-12 rounded-3xl bg-[#011337] border-2 border-amber-400 p-6 sm:p-8 text-white shadow-2xl text-left"
-          >
-            <div className="flex items-center justify-between border-b border-white/15 pb-4 mb-4 gap-4">
-              <div>
-                <span className="inline-block bg-[#C50337] text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-1 shadow-sm">
-                  🎬 Active Video Lecture
-                </span>
-                <h2 className="text-xl sm:text-2xl font-black text-white font-serif">
-                  {playing.title}
-                </h2>
-                <p className="text-xs text-amber-300 font-semibold mt-1">
-                  {playing.facultyName} · {playing.description}
-                </p>
-              </div>
-              <button
-                onClick={() => setPlaying(null)}
-                className="p-2.5 rounded-xl bg-white/10 hover:bg-rose-600 text-white transition-all shrink-0 cursor-pointer"
-                title="Close Video Player"
-              >
-                <FiX size={20} />
-              </button>
-            </div>
-
-            <div className="relative aspect-video w-full rounded-2xl overflow-hidden bg-black shadow-2xl border border-white/20">
-              {playing.youtubeId ? (
-                <iframe
-                  src={`https://www.youtube.com/embed/${playing.youtubeId}?autoplay=1&rel=0`}
-                  title={playing.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="h-full w-full border-0"
-                />
-              ) : (
-                <div className="flex h-full items-center justify-center text-slate-400 text-xs">
-                  Video stream not available
-                </div>
-              )}
-            </div>
-          </motion.div>
-        )}
-
         {/* Video Player Modal */}
         <AnimatePresence>
           {playing && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4"
+              className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center bg-slate-950/80 backdrop-blur-md p-4"
               onClick={() => setPlaying(null)}
             >
               <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
                 onClick={(e) => e.stopPropagation()}
-                className="w-full max-w-4xl overflow-hidden rounded-2xl bg-white border border-[#E5E7EB] shadow-2xl"
+                className="w-full max-w-4xl my-auto overflow-hidden rounded-3xl bg-white border-2 border-amber-400 shadow-2xl"
               >
-                <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#E5E7EB] bg-[#0F4C81] text-white">
+                <div className="flex items-center justify-between px-6 py-4 border-b border-[#E5E7EB] bg-gradient-to-r from-[#011337] via-[#021C4F] to-[#7F011F] text-white">
                   <div className="min-w-0 flex-1">
-                    <h3 className="truncate text-sm font-bold text-white">{playing.title || "Lecture"}</h3>
-                    <p className="text-[11px] text-amber-300">DGVC Computer Science Video Lecture</p>
+                    <span className="inline-block bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-1">
+                      🎬 DGVC Video Lecture
+                    </span>
+                    <h3 className="truncate text-base font-extrabold text-white">{playing.title || "Lecture"}</h3>
+                    <p className="text-xs text-amber-200/90 font-medium">{playing.facultyName} · {playing.badge}</p>
                   </div>
-                  <button onClick={() => setPlaying(null)} className="rounded-full bg-white/10 p-2 text-white/70 hover:bg-white/20 hover:text-white transition-all"><FiX size={16} /></button>
+                  <button onClick={() => setPlaying(null)} className="rounded-full bg-white/10 p-2.5 text-white/80 hover:bg-white/20 hover:text-white transition-all cursor-pointer"><FiX size={20} /></button>
                 </div>
                 <div className="aspect-video w-full bg-black">
                   {playing.youtubeId ? (
                     <iframe src={`https://www.youtube.com/embed/${playing.youtubeId}?autoplay=1&rel=0`}
                       title={playing.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen className="h-full w-full" />
+                      allowFullScreen className="h-full w-full border-0" />
                   ) : (
-                    <div className="flex h-full items-center justify-center text-white/50 text-sm">Video URL not available</div>
+                    <div className="flex h-full items-center justify-center text-white/50 text-xs">Video URL not available</div>
                   )}
                 </div>
               </motion.div>
@@ -760,12 +781,19 @@ export default function EContent() {
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setSelectedYear(null); setSelectedSemester(null); setSelectedSubject(null); }}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
-        ><FiArrowLeft size={14} /> Back to Years</motion.button>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm"><FiLayers size={28} /></div>
-          <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">{yearData.label}</h1>
-          <p className="mt-1 text-sm text-[#6B7280]">Choose a semester</p>
+          className="mb-8 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
+        ><FiArrowLeft size={20} /> Back to Years</motion.button>
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-10 text-center flex flex-col items-center justify-center">
+          <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F] p-1.5 shadow-xl shadow-rose-950/20 ring-4 ring-amber-400/40 transition-transform hover:scale-105 duration-300">
+            <div className="flex h-full w-full items-center justify-center rounded-[20px] bg-[#021C4F] text-amber-300">
+              <FiPlayCircle size={48} className="text-amber-400 drop-shadow-md" />
+            </div>
+          </div>
+          <span className="inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 shadow-md">
+            <FiVideo size={14} /> E-CONTENT SEMESTER SELECTION
+          </span>
+          <h1 className="font-sans text-3xl sm:text-4xl font-extrabold text-[#021C4F] tracking-tight">{yearData.label}</h1>
+          <p className="mt-2 text-sm text-[#6B7280] font-medium">Choose a semester to explore video lectures &amp; syllabus</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {sems.map(([semKey, semData], i) => (
@@ -797,8 +825,8 @@ export default function EContent() {
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => setSelectedSemester(null)}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
-        ><FiArrowLeft size={14} /> Back to Semesters</motion.button>
+          className="mb-8 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
+        ><FiArrowLeft size={20} /> Back to Semesters</motion.button>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="flex items-center gap-2 text-sm text-[#6B7280] mb-3">
             <span className={ys.text}>{yearData.label}</span><FiChevronRight size={12} /><span className={ys.text}>{semesterData.label}</span>
@@ -816,11 +844,6 @@ export default function EContent() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {semesterData.subjects.map((subject, i) => {
               const sc = subjectColors[i % subjectColors.length];
-              const facultyName = selectedYear === 1 && selectedSemester === 1
-                ? FIRST_YEAR_SEM1_FACULTY[subject]
-                : selectedYear === 2 && selectedSemester === 1
-                ? SECOND_YEAR_SEM1_FACULTY[subject]
-                : FACULTY_MAP[subject];
               return (
                 <motion.button key={subject}
                   initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
@@ -834,7 +857,6 @@ export default function EContent() {
                     </div>
                     <div className="min-w-0 flex-1 pt-1 text-left">
                       <h3 className="font-sans font-bold text-sm text-[#0F4C81] leading-snug">{subject}</h3>
-                      {facultyName && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-[#6B7280]">{facultyName}</p>}
                       <div className="mt-3 flex items-center gap-2">
                         <span className={`inline-flex items-center gap-1 rounded-full ${sc.badge} px-2.5 py-0.5 text-[10px] font-semibold`}><FiBookOpen size={10} /> VIEW SYLLABUS</span>
                         <FiChevronRight size={14} className="text-slate-400 group-hover:text-[#1E88E5] transition-colors ml-auto" />
@@ -856,8 +878,8 @@ export default function EContent() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setSelectedSubject(null); }}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
-        ><FiArrowLeft size={14} /> Back to Subjects</motion.button>
+          className="mb-8 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
+        ><FiArrowLeft size={20} /> Back to Subjects</motion.button>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-4 flex items-center gap-2 text-xs text-[#6B7280]">
           <span className={ys.text}>{yearData.label}</span><FiChevronRight size={10} />
@@ -1090,8 +1112,8 @@ export default function EContent() {
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
         onClick={() => setShowVideos(false)}
-        className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
-      ><FiArrowLeft size={14} /> Back to Syllabus</motion.button>
+        className="mb-8 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
+      ><FiArrowLeft size={20} /> Back to Syllabus</motion.button>
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
         <div className="flex items-center gap-4">

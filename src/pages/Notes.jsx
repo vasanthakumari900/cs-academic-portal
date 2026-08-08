@@ -4,6 +4,7 @@ import {
   FiFileText, FiDownload, FiBookOpen,
   FiArrowLeft, FiChevronRight, FiLayers,
   FiChevronDown, FiExternalLink, FiSearch, FiUploadCloud, FiCode, FiX,
+  FiSliders, FiUserCheck, FiHeadphones,
 } from "react-icons/fi";
 import { useFirestoreList } from "../hooks/useFirestoreList";
 import { noteService } from "../services/noteService";
@@ -1502,10 +1503,1136 @@ const NOTES_DATA = {
         files: []
       }
     }
+  },
+  "Digital Image Processing": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction & Digital Image Fundamentals",
+        syllabus: "Introduction: Fundamental steps in digital image processing, components of an image processing system. Image acquisition, sampling and quantization, spatial and intensity resolution, basic relationships between pixels. Color Image Fundamentals: Color models – RGB, CMY, HSV, HIS, basics of color image processing.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Image Enhancement in Spatial Domain",
+        syllabus: "Spatial domain enhancement: Basic gray level intensity transformations (log, power law, contrast stretching). Histogram processing: Histogram equalization, histogram matching. Arithmetic and logic operations. Basics of spatial filtering: Smoothing spatial filters (mean, median), Sharpening spatial filters (Laplacian, Unsharp masking).",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Image Enhancement in Frequency Domain",
+        syllabus: "Frequency domain enhancement: 2D Discrete Fourier Transform (DFT) and its properties, Fast Fourier Transform (FFT). Filtering in frequency domain: Correspondence between spatial and frequency filtering. Smoothing frequency domain filters: Ideal, Butterworth, Gaussian lowpass. Sharpening filters: Highpass Butterworth and Gaussian.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Image Restoration & Segmentation",
+        syllabus: "Image Restoration: Model of image degradation/restoration process, Noise models (Gaussian, Rayleigh, Impulse). Restoration in presence of noise: Mean filters, Order-statistic filters, Inverse filtering, Wiener filtering. Image Segmentation: Point, line, and edge detection, Thresholding (Otsu's method), Region-based segmentation (Region growing, splitting and merging).",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Image Compression & Wavelet Analysis",
+        syllabus: "Image Compression: Fundamentals, Redundancy (Coding, Interpixel, Psychovisual). Fidelity criteria, Image compression models. Lossless Compression: Huffman coding, Run-length coding, Arithmetic coding. Lossy Compression: Predictive coding, Transform coding, JPEG compression standard. Wavelet Transform: Continuous and Discrete Wavelet Transform.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Java Enterprise Edition": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Need for Enterprise Programming & Architecture",
+        syllabus: "Need for Enterprise Programming – J2EE Advantage – Enterprise Architecture types– Architecture of J2EE – J2EE Components – J2EE Containers – Introducing RMI – RMI Architecture – Application Development with RMI – RMI over IIOP.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Introduction to Servlets & JDBC",
+        syllabus: "Introduction to Servlets – Servlet Life Cycle – Servlet API Basics – HTTP Redirects –Cookies –State and Session Management –Hidden Fields – URL rewriting –Session Management with the Servlet API –Inter Servlet Communication – Server Side Includes and Request Forwarding –Data Base Access with JDBC.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Javamail, JMS & EJB Fundamentals",
+        syllabus: "Javamail: Working with Java Mail –Understanding Protocols for Javamail –Components –Javamail API –Understanding Java Messaging Services: JMS Components EJB Fundamentals – EJB Architecture – EJB Roles –Introduction to Session Beans, Entity Beans & Message Driven Beans.",
+        hrs: 6,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Client / Server Concepts & Middleware",
+        syllabus: "Client / Server Concepts: Client-Server - File server - Database server - Group server - Object server – Web server- Middleware - General middleware - Service specific middleware - Client / server building blocks - RPC - Messaging - Peer-to-Peer",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Spring Framework and Spring Boot",
+        syllabus: "Introduction to Spring Framework and Spring Boot-Spring Initializer-Dependency Injection (Constructor/Setter-based) Inversion of Control -Building RESTful API with spring Boot-Data Access with Spring data JPA- Security-Testing and Deploying Spring Boot Applications.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "JAVA ENTERPRISE EDITION": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Need for Enterprise Programming & Architecture",
+        syllabus: "Need for Enterprise Programming – J2EE Advantage – Enterprise Architecture types– Architecture of J2EE – J2EE Components – J2EE Containers – Introducing RMI – RMI Architecture – Application Development with RMI – RMI over IIOP.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Introduction to Servlets & JDBC",
+        syllabus: "Introduction to Servlets – Servlet Life Cycle – Servlet API Basics – HTTP Redirects –Cookies –State and Session Management –Hidden Fields – URL rewriting –Session Management with the Servlet API –Inter Servlet Communication – Server Side Includes and Request Forwarding –Data Base Access with JDBC.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Javamail, JMS & EJB Fundamentals",
+        syllabus: "Javamail: Working with Java Mail –Understanding Protocols for Javamail –Components –Javamail API –Understanding Java Messaging Services: JMS Components EJB Fundamentals – EJB Architecture – EJB Roles –Introduction to Session Beans, Entity Beans & Message Driven Beans.",
+        hrs: 6,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Client / Server Concepts & Middleware",
+        syllabus: "Client / Server Concepts: Client-Server - File server - Database server - Group server - Object server – Web server- Middleware - General middleware - Service specific middleware - Client / server building blocks - RPC - Messaging - Peer-to-Peer",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Spring Framework and Spring Boot",
+        syllabus: "Introduction to Spring Framework and Spring Boot-Spring Initializer-Dependency Injection (Constructor/Setter-based) Inversion of Control -Building RESTful API with spring Boot-Data Access with Spring data JPA- Security-Testing and Deploying Spring Boot Applications.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Data Mining Techniques": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction to Data Mining",
+        syllabus: "What is Data Mining – What Kinds of Data can be mined- Kinds of Patterns that can be mined - Technologies used - Issues in Data Mining – Data Objects and Attribute Types- Basic Statistical Description of Data- Data Visualization.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Data Preprocessing & Data Warehouse",
+        syllabus: "Data Preprocessing: Why preprocess the data – Data cleaning – Data Integration – Data Transformation – Data Reduction – Data Discretization. Data Warehouse: Basic concepts-Data Warehouse Modelling:Data Cube and OLAP",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Data Mining Techniques & Association Rules",
+        syllabus: "Data Mining Techniques: Association Rule Mining – The Apriori Algorithm – Multilevel Association Rules – Multidimensional Association Rules – Constraint Based Association Mining.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Classification and Prediction",
+        syllabus: "Classification and Prediction: Issues regarding Classification and Prediction – Decision Tree induction – Bayesian Classification – Back Propagation – Classification Methods – Prediction – Classifiers accuracy.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Clustering Techniques & Outlier Analysis",
+        syllabus: "Clustering Techniques: cluster Analysis – Clustering Methods – Similarity and Distance Measures – Hierarchical Methods – Partitional Methods – Outlier Analysis",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Advanced Database Management Systems / Distributed Databases / Cloud Web Services": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Database System Concepts And Architectures & ER Model",
+        syllabus: "Database System Concepts And Architectures: Data Models – Schemas – Instances – Three Schema Architecture – Data Independence – Database Languages. E-R Model and EER Model: Entity Types – Entity Sets – Attributes – Key – Relationship Types – Relationship Sets – Weak Entity Types – ER Diagram – Naming Conventions – Subclasses – Super classes – Inheritance – Specialization And Generalization – Constraints and Characteristics Of Specialization and Generalization Hierarchies.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Normalization & Functional Dependencies",
+        syllabus: "Normalization: Basic Definitions – Functional Dependencies – Types of FD – Introduction to Normalization – Decomposition – Dependency Preservation – First, Second, Third Normal Forms – BCNF – Multivalued Dependencies and Fourth Normal Form – Join Dependency and Fifth Normal Form.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Object And Object Relational Databases",
+        syllabus: "Object And Object Relational Databases – Concepts for Object Databases: Object Identity – Object structure – Type Constructors – Encapsulation of Operations – Methods – Persistence – Type and Class Hierarchies – Inheritance – Complex Objects Object Database Standards and Languages: Overview of ODMG Model – ODL – OQL.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Data Warehousing And Distributed DBMS",
+        syllabus: "Data Warehousing And Distributed DBMS – Data Warehousing – Characteristics Of Data Warehouses – Data Modeling For Data Warehouses – Typical Functionality Of A Data Warehouse – Distributed DBMS – Features – Factors Encouraging DDBMS – Advantages Of Distributed Data Bases – Distributed DBMS Architecture – Types Of Distributed Data Bases.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Emerging Technologies",
+        syllabus: "Emerging Technologies – Mobile Databases – Architecture and Data Management Issues – Multimedia Databases – Nature of Data, Data Management Issues and Applications.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Advanced Database Management Systems/Distributed Databases/Cloud Web Services": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Database System Concepts And Architectures & ER Model",
+        syllabus: "Database System Concepts And Architectures: Data Models – Schemas – Instances – Three Schema Architecture – Data Independence – Database Languages. E-R Model and EER Model: Entity Types – Entity Sets – Attributes – Key – Relationship Types – Relationship Sets – Weak Entity Types – ER Diagram – Naming Conventions – Subclasses – Super classes – Inheritance – Specialization And Generalization – Constraints and Characteristics Of Specialization and Generalization Hierarchies.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Normalization & Functional Dependencies",
+        syllabus: "Normalization: Basic Definitions – Functional Dependencies – Types of FD – Introduction to Normalization – Decomposition – Dependency Preservation – First, Second, Third Normal Forms – BCNF – Multivalued Dependencies and Fourth Normal Form – Join Dependency and Fifth Normal Form.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Object And Object Relational Databases",
+        syllabus: "Object And Object Relational Databases – Concepts for Object Databases: Object Identity – Object structure – Type Constructors – Encapsulation of Operations – Methods – Persistence – Type and Class Hierarchies – Inheritance – Complex Objects Object Database Standards and Languages: Overview of ODMG Model – ODL – OQL.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Data Warehousing And Distributed DBMS",
+        syllabus: "Data Warehousing And Distributed DBMS – Data Warehousing – Characteristics Of Data Warehouses – Data Modeling For Data Warehouses – Typical Functionality Of A Data Warehouse – Distributed DBMS – Features – Factors Encouraging DDBMS – Advantages Of Distributed Data Bases – Distributed DBMS Architecture – Types Of Distributed Data Bases.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Emerging Technologies",
+        syllabus: "Emerging Technologies – Mobile Databases – Architecture and Data Management Issues – Multimedia Databases – Nature of Data, Data Management Issues and Applications.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "ADVANCED DATABASE MANAGEMENT SYSTEMS / DISTRIBUTED DATABASES / CLOUD WEB SERVICES": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Database System Concepts And Architectures & ER Model",
+        syllabus: "Database System Concepts And Architectures: Data Models – Schemas – Instances – Three Schema Architecture – Data Independence – Database Languages. E-R Model and EER Model: Entity Types – Entity Sets – Attributes – Key – Relationship Types – Relationship Sets – Weak Entity Types – ER Diagram – Naming Conventions – Subclasses – Super classes – Inheritance – Specialization And Generalization – Constraints and Characteristics Of Specialization and Generalization Hierarchies.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Normalization & Functional Dependencies",
+        syllabus: "Normalization: Basic Definitions – Functional Dependencies – Types of FD – Introduction to Normalization – Decomposition – Dependency Preservation – First, Second, Third Normal Forms – BCNF – Multivalued Dependencies and Fourth Normal Form – Join Dependency and Fifth Normal Form.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Object And Object Relational Databases",
+        syllabus: "Object And Object Relational Databases – Concepts for Object Databases: Object Identity – Object structure – Type Constructors – Encapsulation of Operations – Methods – Persistence – Type and Class Hierarchies – Inheritance – Complex Objects Object Database Standards and Languages: Overview of ODMG Model – ODL – OQL.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Data Warehousing And Distributed DBMS",
+        syllabus: "Data Warehousing And Distributed DBMS – Data Warehousing – Characteristics Of Data Warehouses – Data Modeling For Data Warehouses – Typical Functionality Of A Data Warehouse – Distributed DBMS – Features – Factors Encouraging DDBMS – Advantages Of Distributed Data Bases – Distributed DBMS Architecture – Types Of Distributed Data Bases.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Emerging Technologies",
+        syllabus: "Emerging Technologies – Mobile Databases – Architecture and Data Management Issues – Multimedia Databases – Nature of Data, Data Management Issues and Applications.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Advanced Database Management System": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Database System Concepts And Architectures & ER Model",
+        syllabus: "Database System Concepts And Architectures: Data Models – Schemas – Instances – Three Schema Architecture – Data Independence – Database Languages. E-R Model and EER Model: Entity Types – Entity Sets – Attributes – Key – Relationship Types – Relationship Sets – Weak Entity Types – ER Diagram – Naming Conventions – Subclasses – Super classes – Inheritance – Specialization And Generalization – Constraints and Characteristics Of Specialization and Generalization Hierarchies.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Normalization & Functional Dependencies",
+        syllabus: "Normalization: Basic Definitions – Functional Dependencies – Types of FD – Introduction to Normalization – Decomposition – Dependency Preservation – First, Second, Third Normal Forms – BCNF – Multivalued Dependencies and Fourth Normal Form – Join Dependency and Fifth Normal Form.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Object And Object Relational Databases",
+        syllabus: "Object And Object Relational Databases – Concepts for Object Databases: Object Identity – Object structure – Type Constructors – Encapsulation of Operations – Methods – Persistence – Type and Class Hierarchies – Inheritance – Complex Objects Object Database Standards and Languages: Overview of ODMG Model – ODL – OQL.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Data Warehousing And Distributed DBMS",
+        syllabus: "Data Warehousing And Distributed DBMS – Data Warehousing – Characteristics Of Data Warehouses – Data Modeling For Data Warehouses – Typical Functionality Of A Data Warehouse – Distributed DBMS – Features – Factors Encouraging DDBMS – Advantages Of Distributed Data Bases – Distributed DBMS Architecture – Types Of Distributed Data Bases.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Emerging Technologies",
+        syllabus: "Emerging Technologies – Mobile Databases – Architecture and Data Management Issues – Multimedia Databases – Nature of Data, Data Management Issues and Applications.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "ADVANCED DATABASE MANAGEMENT SYSTEM": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Database System Concepts And Architectures & ER Model",
+        syllabus: "Database System Concepts And Architectures: Data Models – Schemas – Instances – Three Schema Architecture – Data Independence – Database Languages. E-R Model and EER Model: Entity Types – Entity Sets – Attributes – Key – Relationship Types – Relationship Sets – Weak Entity Types – ER Diagram – Naming Conventions – Subclasses – Super classes – Inheritance – Specialization And Generalization – Constraints and Characteristics Of Specialization and Generalization Hierarchies.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Normalization & Functional Dependencies",
+        syllabus: "Normalization: Basic Definitions – Functional Dependencies – Types of FD – Introduction to Normalization – Decomposition – Dependency Preservation – First, Second, Third Normal Forms – BCNF – Multivalued Dependencies and Fourth Normal Form – Join Dependency and Fifth Normal Form.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Object And Object Relational Databases",
+        syllabus: "Object And Object Relational Databases – Concepts for Object Databases: Object Identity – Object structure – Type Constructors – Encapsulation of Operations – Methods – Persistence – Type and Class Hierarchies – Inheritance – Complex Objects Object Database Standards and Languages: Overview of ODMG Model – ODL – OQL.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Data Warehousing And Distributed DBMS",
+        syllabus: "Data Warehousing And Distributed DBMS – Data Warehousing – Characteristics Of Data Warehouses – Data Modeling For Data Warehouses – Typical Functionality Of A Data Warehouse – Distributed DBMS – Features – Factors Encouraging DDBMS – Advantages Of Distributed Data Bases – Distributed DBMS Architecture – Types Of Distributed Data Bases.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Emerging Technologies",
+        syllabus: "Emerging Technologies – Mobile Databases – Architecture and Data Management Issues – Multimedia Databases – Nature of Data, Data Management Issues and Applications.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Distributed Databases": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction & Architecture of Distributed Systems",
+        syllabus: "Introduction: Distributed Data Processing - Promises of DDBs - Complicating Factors and Problem Areas. Architecture of distributed systems: Homogeneous – Heterogeneous - Client/server - Distributed Databases versus Replicated Databases.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Distributed Database Design & Access Control",
+        syllabus: "Distributed Database Design: Alternative Design strategies - Distribution Design Issues – Fragmentation - Allocation. Data and Access Control: View management – Data security – Semantic Integrity Control",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Query Processing & Distributed Query Optimization",
+        syllabus: "Query processing: Query processing objectives, characterization of query processors, layers of query processing, query decomposition, localization of distributed data. Distributed query Optimization: Query optimization, centralized query optimization, distributed query optimization algorithms.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Transaction Management & Concurrency Control",
+        syllabus: "Transaction Management: Definition - Properties of transaction - Types of transactions - Distributed Concurrency Control: Serializability, Concurrency Control Mechanisms & Algorithms, Time - Stamped & Optimistic Concurrency Control Algorithms, Deadlock Management.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Distributed DBMS Reliability & Parallel Databases",
+        syllabus: "Distributed DBMS Reliability: Reliability Concepts and Measures - Fault-Tolerance in Distributed Systems - Failures in Distributed DBMS - Local & Distributed Reliability Protocols - Site Failures and Network Partitioning. Parallel Database Systems: Parallel Database System Architectures - Parallel Data Placement - Parallel Query Processing - Load Balancing - Database Clusters.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "DISTRIBUTED DATABASES": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction & Architecture of Distributed Systems",
+        syllabus: "Introduction: Distributed Data Processing - Promises of DDBs - Complicating Factors and Problem Areas. Architecture of distributed systems: Homogeneous – Heterogeneous - Client/server - Distributed Databases versus Replicated Databases.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Distributed Database Design & Access Control",
+        syllabus: "Distributed Database Design: Alternative Design strategies - Distribution Design Issues – Fragmentation - Allocation. Data and Access Control: View management – Data security – Semantic Integrity Control",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Query Processing & Distributed Query Optimization",
+        syllabus: "Query processing: Query processing objectives, characterization of query processors, layers of query processing, query decomposition, localization of distributed data. Distributed query Optimization: Query optimization, centralized query optimization, distributed query optimization algorithms.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Transaction Management & Concurrency Control",
+        syllabus: "Transaction Management: Definition - Properties of transaction - Types of transactions - Distributed Concurrency Control: Serializability, Concurrency Control Mechanisms & Algorithms, Time - Stamped & Optimistic Concurrency Control Algorithms, Deadlock Management.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Distributed DBMS Reliability & Parallel Databases",
+        syllabus: "Distributed DBMS Reliability: Reliability Concepts and Measures - Fault-Tolerance in Distributed Systems - Failures in Distributed DBMS - Local & Distributed Reliability Protocols - Site Failures and Network Partitioning. Parallel Database Systems: Parallel Database System Architectures - Parallel Data Placement - Parallel Query Processing - Load Balancing - Database Clusters.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Cloud Web Services": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction to Cloud Computing and Amazon Web Services",
+        syllabus: "Introduction to Cloud Computing, Cloud Service Delivery Models (IAAS, PAAS, SAAS), Cloud Deployment Models (Private, Public, Hybrid and Community), Cloud Computing Security, Case Study-Introduction to Amazon Web Services, Why Amazon? Use Cases, AWS Storage Options, AWS Compute Options, AWS Database Options, AWS Workflow Automation and Orchestration Options, AWS Systems Management and Monitoring Options, AWS Virtual Private Cloud Introduction, Pricing Concepts",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Introduction to EC2",
+        syllabus: "Introduction to EC2, Instance Types and Uses, Auto scaling Instances, Amazon Machine Images (AMIS), Modifying Existing Images, Creating New Images of Running Instances, converting an Instance Store AMI to an EBS AMI, Instances Backed by Storage Types, Elastic IPS, Elastic Load Balancing",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Web Applications and Security",
+        syllabus: "Introduction to Elastic Beanstalk, Deploying Scalable Application On AWS, Selecting and Launching an Application Environment, Provisioning Application Resources with Cloud formation, Introduction to Cloud Lookout, Describe Amazon Cloud Watch metrics and alarms, AWS Messaging Services (SNS, SQS, SES). Introduction to AWS Security, Describe Amazon Identity and Access Management (IAM), AWS Directory Service, AWS Key Management Service, Securing Data at Rest and in Motion.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "AWS Storage",
+        syllabus: "Amazon Storage, S3 Storage Basics, Buckets and Objects, Creating A Web Server Using S3 Endpoints, Managing Voluminous Information with EBS, Glacier Storage Service, Describe Amazon Dynamo, understand key aspects of Amazon RDS, Launch an Amazon RDS instance.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "AWS Networking",
+        syllabus: "Introduction to AWS Networking, Access Control Lists (ACLs), Setting Up a Security Group, Setting Up VPC and Internet Gateway, Setting Up A VPN, Setting Up a Customer Gateway for VPN, Setting Up Dedicated Hardware for VPC, Route53 for DNS System, Cloud front, Case Study.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "CLOUD WEB SERVICES": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction to Cloud Computing and Amazon Web Services",
+        syllabus: "Introduction to Cloud Computing, Cloud Service Delivery Models (IAAS, PAAS, SAAS), Cloud Deployment Models (Private, Public, Hybrid and Community), Cloud Computing Security, Case Study-Introduction to Amazon Web Services, Why Amazon? Use Cases, AWS Storage Options, AWS Compute Options, AWS Database Options, AWS Workflow Automation and Orchestration Options, AWS Systems Management and Monitoring Options, AWS Virtual Private Cloud Introduction, Pricing Concepts",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Introduction to EC2",
+        syllabus: "Introduction to EC2, Instance Types and Uses, Auto scaling Instances, Amazon Machine Images (AMIS), Modifying Existing Images, Creating New Images of Running Instances, converting an Instance Store AMI to an EBS AMI, Instances Backed by Storage Types, Elastic IPS, Elastic Load Balancing",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Web Applications and Security",
+        syllabus: "Introduction to Elastic Beanstalk, Deploying Scalable Application On AWS, Selecting and Launching an Application Environment, Provisioning Application Resources with Cloud formation, Introduction to Cloud Lookout, Describe Amazon Cloud Watch metrics and alarms, AWS Messaging Services (SNS, SQS, SES). Introduction to AWS Security, Describe Amazon Identity and Access Management (IAM), AWS Directory Service, AWS Key Management Service, Securing Data at Rest and in Motion.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "AWS Storage",
+        syllabus: "Amazon Storage, S3 Storage Basics, Buckets and Objects, Creating A Web Server Using S3 Endpoints, Managing Voluminous Information with EBS, Glacier Storage Service, Describe Amazon Dynamo, understand key aspects of Amazon RDS, Launch an Amazon RDS instance.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "AWS Networking",
+        syllabus: "Introduction to AWS Networking, Access Control Lists (ACLs), Setting Up a Security Group, Setting Up VPC and Internet Gateway, Setting Up A VPN, Setting Up a Customer Gateway for VPN, Setting Up Dedicated Hardware for VPC, Route53 for DNS System, Cloud front, Case Study.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "IoT and its Applications": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction to Internet of Things",
+        syllabus: "Definition and characteristics of IoT- Physical design of IoT - Things in IoT - IoT Protocols - Logical Design of IoT - IoT functional blocks - IoT communication Models - IoT communication API’s - IoT enabling Technologies Wireless sensor networks - Cloud Computing - Big Data Analytics - Communication protocols - embedded systems. IoT Levels and Deployment templates",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Domain Specific IoT",
+        syllabus: "Home Automation – IoT in Cities, Environment – IoT in smart grids, retails, logistics – IoT in agriculture, Industry, health & lifestyle",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "IoT and M2M",
+        syllabus: "M2M - Difference between IoT and M2M - SDN and NFV for IoT- Software defined networking - network function virtualization .",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "IoT Platforms Design Methodology",
+        syllabus: "IoT Design and Methodology- Purpose and requirements specification - Process specification - Domain model specification - Information model specification - service specification - IoT level specification - functional view specification - Operational view specification - Device and component integration - application development",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "IoT Physical Devices and Endpoints",
+        syllabus: "IoT device - Basic Building blocks of an IoT Device. Exemplary Device: Raspberry Pi - About the Board - Linux on Raspberry Pi - Raspberry Pi Interfaces - Other IoT devices.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "High Speed Networks": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "High Speed Networks & ATM",
+        syllabus: "High Speed Networks Frame Relay Networks – Asynchronous transfer mode – ATM Protocol Architecture, ATM logical Connection, ATM Cell – ATM Service Categories – AAL High Speed LAN’s: Fast Ethernet, Gigabit Ethernet, Fibre Channel – Wireless LAN’s: applications, requirements – Architecture of 802.11",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Congestion And Traffic Management",
+        syllabus: "Queuing Analysis – Queuing Models – Single Server Queues – Effects of Congestion – Congestion Control – Traffic Management – Congestion Control in Packet Switching Networks – Frame Relay Congestion Control.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "TCP And ATM Congestion Control",
+        syllabus: "TCP Flow control – TCP Congestion Control – Retransmission – Timer Management – Exponential RTO backoff – KARN’s Algorithm – Window management – Performance of TCP over ATM Traffic and Congestion control in ATM – Requirements – Attributes – Traffic Management Frame work, Traffic Control – ABR traffic Management – ABR rate control, RM cell formats, ABR Capacity allocations – GFR traffic management.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Integrated And Differentiated Services",
+        syllabus: "Integrated Services Architecture – Approach, Components, Services- Queuing Discipline, FQ, PS, BRFQ, GPS, WFQ – Random Early Detection, Differentiated Services.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Protocols For QoS Support",
+        syllabus: "RSVP – Goals & Characteristics, Data Flow, RSVP operations, Protocol Mechanisms – Multiprotocol Label Switching – Operations, Label Stacking, Protocol details – RTP – Protocol Architecture, Data Transfer Protocol, RTCP.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Social Network Analysis": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction to Semantic Web & SNA",
+        syllabus: "Introduction to Semantic Web: Limitations of current Web - Development of Semantic Web - Emergence of the Social Web - Social Network analysis: Development of Social Network Analysis - Key concepts and measures in network analysis - Electronic sources for network analysis: Electronic discussion networks, Blogs and online communities - Web-based networks - Applications of Social Network Analysis",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Modelling, Aggregating and Knowledge Representation",
+        syllabus: "Ontology and their role in the Semantic Web: Ontology-based knowledge Representation - Ontology languages for the Semantic Web: Resource Description Framework - Web Ontology Language - Modelling and aggregating social network data: State-of-the-art in network data representation - Ontological representation of social individuals - Ontological representation of social relationships - Aggregating and reasoning with social network data",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Extraction and Mining Communities in Web Social Networks",
+        syllabus: "Extracting evolution of Web Community from a Series of Web Archive - Detecting communities in social networks - Definition of community - Evaluating communities - Methods for community detection and mining - Applications of community mining algorithms - Tools for detecting communities social network infrastructures and communities - Decentralized online social networks",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Predicting Human Behaviour and Privacy Issues",
+        syllabus: "Understanding and predicting human behaviour for social communities - User data management - Inference and Distribution - Enabling new human experiences - Reality mining - Context - Awareness - Privacy in online social networks - Trust in online environment - Trust models based on subjective logic - Trust network analysis - Trust transitivity analysis - Combining trust and reputation - Trust derivation based on trust comparisons.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Visualization and Applications of Social Networks",
+        syllabus: "Graph theory - Centrality - Clustering - Node-Edge Diagrams - Matrix representation - Visualizing online social networks, Visualizing social networks with matrix-based representations - Matrix and Node-Link Diagrams - Hybrid representations - Applications - Cover networks - Community welfare - Collaboration networks - Co-Citation networks.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Artificial Intelligence and Machine Learning Techniques": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction of Artificial Intelligence",
+        syllabus: "Overview of Artificial Intelligence  Knowledge: General Concepts  Lisp and other AI Programming Languages. Knowledge Representation  Formalized Symbolic logics  Dealing with Inconsistencies and Uncertainties  Probabilistic Reasoning. Structured Knowledge : Graphs, Frames and Related Structures  Object  Oriented Representations",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Knowledge Organization and Manipulation",
+        syllabus: "Search and control Strategies - Matching Techniques - Knowledge Organization and Management. Perception and Communication: - Natural Language Processing - Pattern Recognition - visual Image Processing. Expert System Architecture: Rule-Based System Architecture - Non Production System Architecture.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "The Machine Learning Landscape",
+        syllabus: "Introduction - Types of Machine Learning Systems - Supervised/Unsupervised Learning, Batch and Online Learning, InstanceBased Versus Model-BasedLearning - Main Challenges of Machine Learning - Nonrepresentative Training Data, Poor-Quality Data - Underfitting the Training Data - Testing and Validating - Frame the Problem - Select a Performance Measure - Check the Assumptions - Create a Test Set - Visualizing Geographical Data- correlation - Prepare the Data for Machine Learning Algorithms.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Data Cleaning & Classification",
+        syllabus: "Data Cleaning - Handling Text and Categorical Attributes- Feature ScalingTransformation Pipelines- Select and Train a Model- Training and Evaluating on the Training Set- Fine-Tune Your Model- Grid Search- Randomized Search. Classification: MNIST- Training a Binary Classifier- Performance MeasuresMeasuring Accuracy Using Cross-Validation- Confusion Matrix- Precision and Recall Multiclass, multi-label and multi-output classification",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      }
+    }
+  },
+  "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction of Artificial Intelligence",
+        syllabus: "Overview of Artificial Intelligence  Knowledge: General Concepts  Lisp and other AI Programming Languages. Knowledge Representation  Formalized Symbolic logics  Dealing with Inconsistencies and Uncertainties  Probabilistic Reasoning. Structured Knowledge : Graphs, Frames and Related Structures  Object  Oriented Representations",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Knowledge Organization and Manipulation",
+        syllabus: "Search and control Strategies - Matching Techniques - Knowledge Organization and Management. Perception and Communication: - Natural Language Processing - Pattern Recognition - visual Image Processing. Expert System Architecture: Rule-Based System Architecture - Non Production System Architecture.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "The Machine Learning Landscape",
+        syllabus: "Introduction - Types of Machine Learning Systems - Supervised/Unsupervised Learning, Batch and Online Learning, InstanceBased Versus Model-BasedLearning - Main Challenges of Machine Learning - Nonrepresentative Training Data, Poor-Quality Data - Underfitting the Training Data - Testing and Validating - Frame the Problem - Select a Performance Measure - Check the Assumptions - Create a Test Set - Visualizing Geographical Data- correlation - Prepare the Data for Machine Learning Algorithms.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Data Cleaning & Classification",
+        syllabus: "Data Cleaning - Handling Text and Categorical Attributes- Feature ScalingTransformation Pipelines- Select and Train a Model- Training and Evaluating on the Training Set- Fine-Tune Your Model- Grid Search- Randomized Search. Classification: MNIST- Training a Binary Classifier- Performance MeasuresMeasuring Accuracy Using Cross-Validation- Confusion Matrix- Precision and Recall Multiclass, multi-label and multi-output classification",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      }
+    }
+  },
+  "DOT NET Technology": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction to .NET",
+        syllabus: "Overview of C#, Literals, Variables, Data Types, Operators and Expressions, Branching, Looping, Methods, Arrays and Structures, Enumerations.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Classes, Objects & Exceptions",
+        syllabus: "Classes, Objects, Inheritance, Interfaces, Delegates, Events, Errors and Exceptions.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Programming Web Applications with Web Forms",
+        syllabus: "Standard Web server Controls Label, Textbox, Button, Link Button, Image, Image map, Links, Check & Radio button. Rich controls Calendar, Ad Rotator List Controls Check box list, Radio button list, Drop down list, List box, Data controls Data grid, Repeater Validation Controls.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Working with Data",
+        syllabus: "OLEDB connection class, command class, data adaptor class, data reader data set class Web services.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Session & Application Object",
+        syllabus: "Application Object global.asa file, Webconfig files creating & reading application variables, Session object introduction, storing session-information, contents & identifying session, controlling when session ends, creating & reading cookies.",
+        hrs: 9,
+        co: "CO5, CO6",
+        files: []
+      }
+    }
+  },
+  "DOT NET TECHNOLOGY": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction to .NET",
+        syllabus: "Overview of C#, Literals, Variables, Data Types, Operators and Expressions, Branching, Looping, Methods, Arrays and Structures, Enumerations.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Classes, Objects & Exceptions",
+        syllabus: "Classes, Objects, Inheritance, Interfaces, Delegates, Events, Errors and Exceptions.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Programming Web Applications with Web Forms",
+        syllabus: "Standard Web server Controls Label, Textbox, Button, Link Button, Image, Image map, Links, Check & Radio button. Rich controls Calendar, Ad Rotator List Controls Check box list, Radio button list, Drop down list, List box, Data controls Data grid, Repeater Validation Controls.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Working with Data",
+        syllabus: "OLEDB connection class, command class, data adaptor class, data reader data set class Web services.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Session & Application Object",
+        syllabus: "Application Object global.asa file, Webconfig files creating & reading application variables, Session object introduction, storing session-information, contents & identifying session, controlling when session ends, creating & reading cookies.",
+        hrs: 9,
+        co: "CO5, CO6",
+        files: []
+      }
+    }
+  },
+  "Big Data Analytics": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Understanding Big Data",
+        syllabus: "What is big data why big data convergence of key trends unstructured data industry examples of big data web analytics big data and marketing fraud and big data risk and big data credit risk management big data and algorithmic trading big data and healthcare big data in medicine.",
+        hrs: 10,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "NoSQL Data Management",
+        syllabus: "Introduction to NoSQL aggregate data models aggregates key-value and document data models relationships graph databases schemaless databases materialized views distribution models sharding master-slave replication peer-peer replication sharding and replication consistency relaxing consistency version stamps map-reduce partitioning and combining composing map-reduce calculations.",
+        hrs: 10,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Basics of Hadoop",
+        syllabus: "Data format analyzing data with Hadoop scaling out Hadoop streaming Hadoop pipes design of Hadoop distributed file system (HDFS) HDFS concepts Java interface data flow Hadoop I/O data integrity compression serialization Avro file-based data structures.",
+        hrs: 10,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "MapReduce Applications",
+        syllabus: "Mapreduce workflows unit tests with MRUnit test data and local tests anatomy of MapReduce job run classic Map-reduce YARN failures in classic Map-reduce and YARN job scheduling shuffle and sort task execution MapReduce types input formats output formats.",
+        hrs: 10,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Hadoop Related Tools",
+        syllabus: "hbase data model and implementations Hbase clients Hbase examples praxis.Cassandra cassandra data model cassandra examples cassandra clients. Hadoop integration. Pig Grunt pig data model Pig Latin developing and testing Pig Latin scripts. Hive data types and file formats HiveQL data definition HiveQL data manipulation HiveQL queries.",
+        hrs: 5,
+        co: "CO5, CO6",
+        files: []
+      }
+    }
+  },
+  "BIG DATA ANALYTICS": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Understanding Big Data",
+        syllabus: "What is big data why big data convergence of key trends unstructured data industry examples of big data web analytics big data and marketing fraud and big data risk and big data credit risk management big data and algorithmic trading big data and healthcare big data in medicine.",
+        hrs: 10,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "NoSQL Data Management",
+        syllabus: "Introduction to NoSQL aggregate data models aggregates key-value and document data models relationships graph databases schemaless databases materialized views distribution models sharding master-slave replication peer-peer replication sharding and replication consistency relaxing consistency version stamps map-reduce partitioning and combining composing map-reduce calculations.",
+        hrs: 10,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Basics of Hadoop",
+        syllabus: "Data format analyzing data with Hadoop scaling out Hadoop streaming Hadoop pipes design of Hadoop distributed file system (HDFS) HDFS concepts Java interface data flow Hadoop I/O data integrity compression serialization Avro file-based data structures.",
+        hrs: 10,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "MapReduce Applications",
+        syllabus: "Mapreduce workflows unit tests with MRUnit test data and local tests anatomy of MapReduce job run classic Map-reduce YARN failures in classic Map-reduce and YARN job scheduling shuffle and sort task execution MapReduce types input formats output formats.",
+        hrs: 10,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Hadoop Related Tools",
+        syllabus: "hbase data model and implementations Hbase clients Hbase examples praxis.Cassandra cassandra data model cassandra examples cassandra clients. Hadoop integration. Pig Grunt pig data model Pig Latin developing and testing Pig Latin scripts. Hive data types and file formats HiveQL data definition HiveQL data manipulation HiveQL queries.",
+        hrs: 5,
+        co: "CO5, CO6",
+        files: []
+      }
+    }
+  },
+  "Information Security": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Security Attacks, Services & Mechanisms",
+        syllabus: "Security Attacks (Interruption, Interception, Modification and Fabrication), Security Services (Confidentiality, Authentication, Integrity, Non-repudiation, access Control and Availability) and Mechanisms.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Public Key Cryptography & Key Management",
+        syllabus: "Public key cryptography principles, public key cryptography algorithms, digital signatures, digital Certificates, Certificate Authority and key management Kerberos,X.509 Directory Authentication Service",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Email Privacy & IP Security",
+        syllabus: "Email privacy: Pretty Good Privacy (PGP) and S/MIME.P Security Overview, IP Security Architecture, Authentication Header, Encapsulating Security Payload, Combining Security Associations and Key Management",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Web Security Requirements & Protocols",
+        syllabus: "Web Security Requirements, Secure Socket Layer (SSL) and Transport Layer Security (TLS), Secure Electronic Transaction (SET",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "SNMP, Threats, Firewalls & IDS",
+        syllabus: "Basic concepts of SNMP, SNMPv1 Community facility and SNMPv3, Intruders, Viruses and related threats Firewall Design principles, Trusted Systems, Intrusion Detection Systems",
+        hrs: 9,
+        co: "CO5, CO6",
+        files: []
+      }
+    }
+  },
+  "INFORMATION SECURITY": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Security Attacks, Services & Mechanisms",
+        syllabus: "Security Attacks (Interruption, Interception, Modification and Fabrication), Security Services (Confidentiality, Authentication, Integrity, Non-repudiation, access Control and Availability) and Mechanisms.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Public Key Cryptography & Key Management",
+        syllabus: "Public key cryptography principles, public key cryptography algorithms, digital signatures, digital Certificates, Certificate Authority and key management Kerberos,X.509 Directory Authentication Service",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Email Privacy & IP Security",
+        syllabus: "Email privacy: Pretty Good Privacy (PGP) and S/MIME.P Security Overview, IP Security Architecture, Authentication Header, Encapsulating Security Payload, Combining Security Associations and Key Management",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Web Security Requirements & Protocols",
+        syllabus: "Web Security Requirements, Secure Socket Layer (SSL) and Transport Layer Security (TLS), Secure Electronic Transaction (SET",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "SNMP, Threats, Firewalls & IDS",
+        syllabus: "Basic concepts of SNMP, SNMPv1 Community facility and SNMPv3, Intruders, Viruses and related threats Firewall Design principles, Trusted Systems, Intrusion Detection Systems",
+        hrs: 9,
+        co: "CO5, CO6",
+        files: []
+      }
+    }
+  },
+  "Cyber Forensics": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Digital Investigation & Computer Crime",
+        syllabus: "Digital Evidence and Computer Crime - History and Terminology of Computer Crime Investigation - Technology and Law - The Investigative Process - Investigative Reconstruction - Modus Operandi, Motive and Technology - Digital Evidence in the Courtroom.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Understanding Information & Data Storage",
+        syllabus: "Methods of storing data: number systems, character codes, record structures, file formats and file signatures - Word processing and graphic file formats - Structure and Analysis of Optical Media Disk Formats - Recognition of file formats and internal buffers used by the most common CD and DVD writing applications - Extraction of forensic artifacts with a view to establishing possible provenance of a CD or DVD",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Computer Basics for Digital Investigators",
+        syllabus: "Computer Forensic Fundamentals - Applying Forensic Science to computers - Computer Forensic Services - Benefits of Professional Forensic Methodology - Steps taken by computer forensic specialists.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Types of Computer Forensics & Tools",
+        syllabus: "Tools and Types of Military Computer Forensics Technology - Tools and Types of Law Enforcement Computer Forensic Technology - Tools and Types of Business Computer Forensic Technology",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Standards, Guidelines and Best Practices",
+        syllabus: "Handling the Digital Crime Scene - Digital Evidence Examination Guidelines – ACPO – IOCE – SWGDE – DFRWS – IACIS – HTCIA - ISO 27037",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "CYBER FORENSICS": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Digital Investigation & Computer Crime",
+        syllabus: "Digital Evidence and Computer Crime - History and Terminology of Computer Crime Investigation - Technology and Law - The Investigative Process - Investigative Reconstruction - Modus Operandi, Motive and Technology - Digital Evidence in the Courtroom.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Understanding Information & Data Storage",
+        syllabus: "Methods of storing data: number systems, character codes, record structures, file formats and file signatures - Word processing and graphic file formats - Structure and Analysis of Optical Media Disk Formats - Recognition of file formats and internal buffers used by the most common CD and DVD writing applications - Extraction of forensic artifacts with a view to establishing possible provenance of a CD or DVD",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Computer Basics for Digital Investigators",
+        syllabus: "Computer Forensic Fundamentals - Applying Forensic Science to computers - Computer Forensic Services - Benefits of Professional Forensic Methodology - Steps taken by computer forensic specialists.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "Types of Computer Forensics & Tools",
+        syllabus: "Tools and Types of Military Computer Forensics Technology - Tools and Types of Law Enforcement Computer Forensic Technology - Tools and Types of Business Computer Forensic Technology",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Standards, Guidelines and Best Practices",
+        syllabus: "Handling the Digital Crime Scene - Digital Evidence Examination Guidelines – ACPO – IOCE – SWGDE – DFRWS – IACIS – HTCIA - ISO 27037",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
   }
 };
-
-// SYLLABUS constant removed in favor of dynamic parsing from NOTES_DATA
 
 function getDrivePreviewUrl(fileId, type = "pdf") {
   if (fileId && (fileId.startsWith("/") || fileId.startsWith("http"))) return fileId;
@@ -1591,11 +2718,10 @@ export default function Notes() {
   const yearData = selectedYear ? activeCurriculum[selectedYear] : null;
   const semesterData = selectedSemester && yearData ? yearData.semesters[selectedSemester] : null;
   const ys = selectedYear ? yearStyles[selectedYear] : yearStyles[1];
-  // Placeholder subjects — name only, no syllabus/faculty/PDF content
   const isPlaceholder = (selectedYear === 2 && selectedSubject && PLACEHOLDER_SUBJECTS.has(selectedSubject)) ||
     (NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(selectedSubject));
   const subjectNotesData = !isPlaceholder && selectedSubject ? NOTES_DATA[selectedSubject] : null;
-  // Semester-specific unit filter for subjects shared across semesters
+
   const { items: uploadedNotes, refetch } = useFirestoreList(noteService);
 
   const currentLabRecords = useMemo(() => {
@@ -1615,7 +2741,6 @@ export default function Notes() {
 
   const activeLabRecords = selectedSubject ? subjectLabRecords : currentLabRecords;
 
-  // Uploaded notes from Firestore for this subject
   const uploadedSubjectNotes = useMemo(() => {
     if (!selectedSubject || isPlaceholder) return [];
     return uploadedNotes
@@ -1647,49 +2772,68 @@ export default function Notes() {
 
   if (!courseType) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
         <NotesTopAiHeader />
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center flex flex-col items-center justify-center">
-          <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-[#021C4F] via-[#0B3C91] to-[#C50337] p-1 shadow-xl shadow-rose-950/20 ring-4 ring-amber-400/30 transition-transform hover:scale-105 duration-300">
+          <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F] p-1.5 shadow-xl shadow-rose-950/20 ring-4 ring-amber-400/40 transition-transform hover:scale-105 duration-300">
             <div className="flex h-full w-full items-center justify-center rounded-[20px] bg-[#021C4F] text-amber-300">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-10 w-10 text-amber-400"
-              >
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-                <path d="M12 7v14" />
-              </svg>
+              <FiBookOpen size={48} className="text-amber-400 drop-shadow-md" />
             </div>
           </div>
-          <h1 className="font-sans text-4xl font-extrabold text-[#021C4F]">Lecture Notes</h1>
-          <p className="mt-2 text-sm text-[#6B7280]">Select your course to browse faculty-curated PDF notes</p>
+          <span className="inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 shadow-md">
+            <FiBookOpen size={14} /> LECTURE NOTES &amp; SYLLABUS
+          </span>
+          <h1 className="font-sans text-4xl font-extrabold text-[#021C4F]">Lecture Notes &amp; Syllabus</h1>
+          <p className="mt-2 text-sm text-[#6B7280]">Select your degree program to browse faculty-curated PDF notes &amp; syllabus</p>
         </motion.div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {COURSE_OPTIONS.map((course, i) => (
-            <motion.button key={course.value}
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.1 }}
-              whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
-              onClick={() => setCourseType(course.value)}
-              className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-355 hover:shadow-sm hover:border-[#C50337]/45"
-            >
-              <div className="relative p-8 text-center flex flex-col items-center">
-                <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-xl ${course.value === "ug" ? "bg-[#021C4F]" : "bg-[#C50337]"} text-3xl font-bold text-white shadow-sm transition-all`}>
-                  {course.value === "ug" ? "UG" : "PG"}
-                </div>
-                <h2 className="text-xl font-bold text-[#021C4F] group-hover:text-[#C50337] transition-colors">{course.label}</h2>
-                <p className="mt-1.5 text-xs text-[#6B7280]">{course.desc}</p>
-                <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#C50337]">
-                  Browse Notes <FiChevronRight size={12} />
-                </div>
+
+        {/* 2 Main Course Cards: B.Sc. CS (UG) & M.Sc. CS (PG) */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 max-w-2xl mx-auto">
+          {/* B.Sc. CS (UG) Card */}
+          <motion.button
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, type: "spring", stiffness: 90 }}
+            whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
+            onClick={() => setCourseType("ug")}
+            className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white shadow-lg transition-all duration-300 hover:shadow-xl text-center flex flex-col justify-between"
+          >
+            <div className="relative p-6 text-center">
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-white/20 backdrop-blur-md text-2xl font-black text-amber-300 transition-all duration-300 group-hover:scale-110 shadow-md">
+                UG
               </div>
-            </motion.button>
-          ))}
+              <span className="inline-block bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-2 shadow-xs">
+                3 Years · 6 Semesters
+              </span>
+              <h2 className="text-lg font-black text-white leading-snug">B.Sc. Computer Science</h2>
+              <p className="mt-1 text-[11px] text-rose-100 font-medium">Undergraduate Notes &amp; Syllabus</p>
+              <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                Browse UG <FiChevronRight size={12} />
+              </div>
+            </div>
+          </motion.button>
+
+          {/* M.Sc. CS (PG) Card */}
+          <motion.button
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 90 }}
+            whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
+            onClick={() => setCourseType("pg")}
+            className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white shadow-lg transition-all duration-300 hover:shadow-xl text-center flex flex-col justify-between"
+          >
+            <div className="relative p-6 text-center">
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-white/20 backdrop-blur-md text-2xl font-black text-amber-300 transition-all duration-300 group-hover:scale-110 shadow-md">
+                PG
+              </div>
+              <span className="inline-block bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-2 shadow-xs">
+                2 Years · 4 Semesters
+              </span>
+              <h2 className="text-lg font-black text-white leading-snug">M.Sc. Computer Science</h2>
+              <p className="mt-1 text-[11px] text-rose-100 font-medium">Postgraduate Notes &amp; Syllabus</p>
+              <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                Browse PG <FiChevronRight size={12} />
+              </div>
+            </div>
+          </motion.button>
         </div>
       </div>
     );
@@ -1702,8 +2846,8 @@ export default function Notes() {
         <NotesTopAiHeader />
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setCourseType(null); setSelectedYear(null); setSelectedSubject(null); }}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
-        ><FiArrowLeft size={14} /> Back to Course</motion.button>
+          className="mb-8 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
+        ><FiArrowLeft size={20} /> Back to Course</motion.button>
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-10 text-center flex flex-col items-center justify-center">
           <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#021C4F] text-amber-300 shadow-md">
             <FiBookOpen size={28} />
@@ -1749,12 +2893,19 @@ export default function Notes() {
         <NotesTopAiHeader />
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setSelectedYear(null); setSelectedSemester(null); setSelectedSubject(null); }}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
-        ><FiArrowLeft size={14} /> Back to Years</motion.button>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm"><FiLayers size={28} /></div>
-          <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">{yearData.label}</h1>
-          <p className="mt-1 text-sm text-[#6B7280]">Choose a semester</p>
+          className="mb-8 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
+        ><FiArrowLeft size={20} /> Back to Years</motion.button>
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-10 text-center flex flex-col items-center justify-center">
+          <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F] p-1.5 shadow-xl shadow-rose-950/20 ring-4 ring-amber-400/40 transition-transform hover:scale-105 duration-300">
+            <div className="flex h-full w-full items-center justify-center rounded-[20px] bg-[#021C4F] text-amber-300">
+              <FiBookOpen size={48} className="text-amber-400 drop-shadow-md" />
+            </div>
+          </div>
+          <span className="inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 shadow-md">
+            <FiBookOpen size={14} /> LECTURE NOTES SEMESTER SELECTION
+          </span>
+          <h1 className="font-sans text-3xl sm:text-4xl font-extrabold text-[#021C4F] tracking-tight">{yearData.label}</h1>
+          <p className="mt-2 text-sm text-[#6B7280] font-medium">Choose a semester to view faculty-curated PDF notes &amp; syllabus</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {sems.map(([semKey, semData], i) => (
@@ -1786,8 +2937,8 @@ export default function Notes() {
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => setSelectedSemester(null)}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
-        ><FiArrowLeft size={14} /> Back to Semesters</motion.button>
+          className="mb-8 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
+        ><FiArrowLeft size={20} /> Back to Semesters</motion.button>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 text-sm text-[#6B7280] mb-2">
@@ -2116,8 +3267,8 @@ export default function Notes() {
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-6">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setSelectedSubject(null); setExpandedUnit(null); setViewingPdf(null); }}
-          className="mb-4 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
-        ><FiArrowLeft size={14} /> Back to Subjects</motion.button>
+          className="mb-4 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
+        ><FiArrowLeft size={20} /> Back to Subjects</motion.button>
         <div className="flex items-center gap-2 text-xs text-[#6B7280]">
           <span className={ys.text}>{yearData.label}</span><FiChevronRight size={10} /><span className={ys.text}>{semesterData.label}</span><FiChevronRight size={10} /><span className="text-[#0F4C81] font-semibold">{selectedSubject}</span>
         </div>

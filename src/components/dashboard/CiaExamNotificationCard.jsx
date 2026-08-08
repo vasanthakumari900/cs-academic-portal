@@ -243,13 +243,13 @@ export default function CiaExamNotificationCard({ studentYear = 3 }) {
       {/* Full Timetable Modal */}
       <AnimatePresence>
         {showModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs">
+          <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.92, y: 15 }}
               transition={{ type: "spring", damping: 25, stiffness: 340 }}
-              className="w-full max-w-xl rounded-2xl bg-white p-6 shadow-2xl space-y-4 max-h-[90vh] flex flex-col text-left"
+              className="w-full max-w-xl my-auto rounded-3xl bg-white p-6 shadow-2xl border-2 border-amber-400 space-y-4 max-h-[85vh] flex flex-col text-left"
             >
               {/* Modal Header */}
               <div className="flex items-center justify-between border-b pb-3 border-slate-100 shrink-0">

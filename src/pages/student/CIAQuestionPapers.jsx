@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   FiChevronRight, FiChevronLeft, FiFileText, FiDownload,
   FiExternalLink, FiCalendar, FiBookOpen, FiFolder,
-  FiAward, FiX, FiUploadCloud,
+  FiAward, FiX, FiUploadCloud, FiCheckSquare,
 } from "react-icons/fi";
 import { CIA_DATA, getDriveDownloadUrl, getDriveEmbedUrl } from "../../utils/ciaData";
 import { formatDate } from "../../utils/helpers";
@@ -382,14 +382,19 @@ export default function CIAQuestionPapers() {
           className="mb-6"
         >
           <div className="flex items-center gap-4 mb-4">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm">
-              <FiAward size={26} />
+            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F] p-1 shadow-lg ring-2 ring-amber-400/40">
+              <div className="flex h-full w-full items-center justify-center rounded-xl bg-[#021C4F] text-amber-300">
+                <FiCheckSquare size={32} className="text-amber-400" />
+              </div>
             </div>
             <div className="text-left">
-              <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">
+              <span className="inline-flex items-center gap-1 bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded mb-1 shadow-xs">
+                INTERNAL ASSESSMENT PAPERS
+              </span>
+              <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#0F4C81]">
                 CIA Question Papers
               </h1>
-              <p className="mt-1 text-sm text-[#6B7280]">
+              <p className="mt-0.5 text-xs sm:text-sm text-[#6B7280]">
                 Practice or manage Continuous Internal Assessment question papers
               </p>
             </div>
@@ -406,9 +411,9 @@ export default function CIAQuestionPapers() {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               onClick={goBack}
-              className="mb-4 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-3.5 py-2 text-xs font-semibold text-[#4B5563] transition-all hover:bg-[#F8FAFC] hover:text-slate-900"
+              className="mb-4 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md transition-all hover:bg-[#F3F4F6] hover:scale-105"
             >
-              <FiChevronLeft size={14} /> Back
+              <FiChevronLeft size={20} /> Back
             </motion.button>
           </div>
         )}

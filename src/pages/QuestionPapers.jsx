@@ -40,14 +40,37 @@ const CURRICULUM_PG = {
           "Artificial Neural Network",
         ],
       },
-      2: { label: "Semester 2", subjects: [] },
+      2: {
+        label: "Semester 2",
+        subjects: [
+          "Digital Image Processing",
+          "Java Enterprise Edition",
+          "Data Mining Techniques",
+          "Advanced Database Management System",
+          "Distributed Databases",
+          "Cloud Web Services",
+          "IoT and its Applications",
+          "High Speed Networks",
+          "Social Network Analysis",
+        ],
+      },
     },
   },
   2: {
     label: "2nd Year",
     icon: "Ⅱ",
     semesters: {
-      1: { label: "Semester 1", subjects: [] },
+      1: {
+        label: "Semester 1",
+        subjects: [
+          "Artificial Intelligence and Machine Learning Techniques",
+          "DOT NET Technology",
+          "Big Data Analytics",
+          "Cyber Forensics",
+          "Ethical Hacking",
+          "Information Security",
+        ],
+      },
       2: { label: "Semester 2", subjects: [] },
     },
   },
@@ -79,6 +102,22 @@ const FACULTY_MAP = {
   "DATA COMMUNICATION AND NETWORKING": "Ms. M.P. SUDHA",
   "PYTHON FOR DATA SCIENCE": "Ms. S. Karthika",
   "PYTHON FOR DATA SCIENCE LAB": "Ms. S. Karthika",
+  "DIGITAL IMAGE PROCESSING": "Ms. Dr. DHARANI",
+  "JAVA ENTERPRISE EDITION": "Ms. K. DURGADEVI",
+  "ADVANCED DATABASE MANAGEMENT SYSTEM": "Ms. M.P. SUDHA",
+  "DISTRIBUTED DATABASES": "Ms. M.P. SUDHA",
+  "CLOUD WEB SERVICES": "Ms. R. SARANYA",
+  "IOT AND ITS APPLICATIONS": "Ms. P. REVATHI",
+  "INTERNET OF THINGS AND ITS APPLICATIONS": "Ms. P. REVATHI",
+  "HIGH SPEED NETWORKS": "Ms. V. PONNILA",
+  "SOCIAL NETWORK ANALYSIS": "Ms. Dr. N.M. Sangeetha",
+  "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES": "Mrs. R. Karthika",
+  "DOT NET TECHNOLOGY": "Mrs. P. Revathi",
+  "DOT NET  TECHNOLOGY": "Mrs. P. Revathi",
+  "BIG DATA ANALYTICS": "Mrs. R. Lalitha",
+  "CYBER FORENSICS": "Department of CS",
+  "ETHICAL HACKING": "Mrs. R. Poojitha Shree",
+  "INFORMATION SECURITY": "Department of CS",
   "Advanced Design and Analysis of Algorithms": "Ms. P. REVATHI",
   "Advanced Software Engineering": "Ms. Dr. N.M. Sangeetha",
   "Contemporary Web Technologies": "Ms. P. SUGANYA",
@@ -86,6 +125,21 @@ const FACULTY_MAP = {
   "Data Communication and Networking": "Ms. M.P. SUDHA",
   "Python for Data Science": "Ms. S. Karthika",
   "Python for Data Science lab": "Ms. S. Karthika",
+  "Digital Image Processing": "Ms. Dr. DHARANI",
+  "Java Enterprise Edition": "Ms. K. DURGADEVI",
+  "Data Mining Techniques": "Ms. V. PONNILA",
+  "Advanced Database Management System": "Ms. M.P. SUDHA",
+  "Distributed Databases": "Ms. M.P. SUDHA",
+  "Cloud Web Services": "Ms. R. SARANYA",
+  "IoT and its Applications": "Ms. P. REVATHI",
+  "High Speed Networks": "Ms. V. PONNILA",
+  "Social Network Analysis": "Ms. Dr. N.M. Sangeetha",
+  "Artificial Intelligence and Machine Learning Techniques": "Mrs. R. Karthika",
+  "DOT NET Technology": "Mrs. P. Revathi",
+  "Big Data Analytics": "Mrs. R. Lalitha",
+  "Cyber Forensics": "Department of CS",
+  "Ethical Hacking": "Mrs. R. Poojitha Shree",
+  "Information Security": "Department of CS",
 };
 
 const SUBJECT_CODES = {
@@ -96,6 +150,23 @@ const SUBJECT_CODES = {
   "DATA COMMUNICATION AND NETWORKING": "2627104(A)",
   "PYTHON FOR DATA SCIENCE": "2627102",
   "PYTHON FOR DATA SCIENCE LAB": "2627106",
+  "DIGITAL IMAGE PROCESSING": "2627201",
+  "JAVA ENTERPRISE EDITION": "2627202",
+  "DATA MINING TECHNIQUES": "2627203",
+  "ADVANCED DATABASE MANAGEMENT SYSTEM": "2627204(A)",
+  "DISTRIBUTED DATABASES": "2627204(B)",
+  "CLOUD WEB SERVICES": "2627204(C)",
+  "IOT AND ITS APPLICATIONS": "2627205(A)",
+  "INTERNET OF THINGS AND ITS APPLICATIONS": "2627205(A)",
+  "HIGH SPEED NETWORKS": "2627205(B)",
+  "SOCIAL NETWORK ANALYSIS": "2627205(C)",
+  "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES": "2627301",
+  "DOT NET TECHNOLOGY": "2627302",
+  "DOT NET  TECHNOLOGY": "2627302",
+  "BIG DATA ANALYTICS": "2627303",
+  "CYBER FORENSICS": "2627304(A)",
+  "ETHICAL HACKING": "2627304(B)",
+  "INFORMATION SECURITY": "2627304(C)",
   "Advanced Design and Analysis of Algorithms": "2627101",
   "Advanced Software Engineering": "2627105(A)",
   "Contemporary Web Technologies": "2627103",
@@ -103,6 +174,21 @@ const SUBJECT_CODES = {
   "Data Communication and Networking": "2627104(A)",
   "Python for Data Science": "2627102",
   "Python for Data Science lab": "2627106",
+  "Digital Image Processing": "2627201",
+  "Java Enterprise Edition": "2627202",
+  "Data Mining Techniques": "2627203",
+  "Advanced Database Management System": "2627204(A)",
+  "Distributed Databases": "2627204(B)",
+  "Cloud Web Services": "2627204(C)",
+  "IoT and its Applications": "2627205(A)",
+  "High Speed Networks": "2627205(B)",
+  "Social Network Analysis": "2627205(C)",
+  "Artificial Intelligence and Machine Learning Techniques": "2627301",
+  "DOT NET Technology": "2627302",
+  "Big Data Analytics": "2627303",
+  "Cyber Forensics": "2627304(A)",
+  "Ethical Hacking": "2627304(B)",
+  "Information Security": "2627304(C)",
 };
 
 function getFacultyName(subject) {
@@ -503,34 +589,67 @@ const refetch = () => {};
 
   if (!courseType) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
-        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center">
-          <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-xl bg-[#021C4F] text-white shadow-sm">
-            <FiAward size={36} />
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center flex flex-col items-center justify-center">
+          <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F] p-1.5 shadow-xl shadow-rose-950/20 ring-4 ring-amber-400/40 transition-transform hover:scale-105 duration-300">
+            <div className="flex h-full w-full items-center justify-center rounded-[20px] bg-[#021C4F] text-amber-300">
+              <FiAward size={48} className="text-amber-400 drop-shadow-md" />
+            </div>
           </div>
-          <h1 className="font-sans text-4xl font-bold text-[#021C4F]">Question Papers</h1>
-          <p className="mt-2 text-sm text-[#6B7280]">Select your course to browse previous year exam papers</p>
+          <span className="inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 shadow-md">
+            <FiAward size={14} /> EXAM QUESTION PAPERS
+          </span>
+          <h1 className="font-sans text-4xl font-extrabold text-[#021C4F]">Question Papers</h1>
+          <p className="mt-2 text-sm text-[#6B7280]">Select your degree program to browse previous year semester exam papers</p>
         </motion.div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {COURSE_OPTIONS.map((course, i) => (
-            <motion.button key={course.value}
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.1 }}
-              whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
-              onClick={() => setCourseType(course.value)}
-              className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-350 hover:shadow-sm hover:border-[#C50337]/45"
-            >
-              <div className="relative p-8 text-center flex flex-col items-center">
-                <div className={`mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-xl ${course.value === "ug" ? "bg-[#021C4F]" : "bg-[#C50337]"} text-3xl font-bold text-white shadow-sm transition-all`}>
-                  {course.value === "ug" ? "UG" : "PG"}
-                </div>
-                <h2 className="text-xl font-bold text-[#021C4F] group-hover:text-[#C50337] transition-colors">{course.label}</h2>
-                <p className="mt-1.5 text-xs text-[#6B7280]">{course.desc}</p>
-                <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-[#C50337]">
-                  Browse Papers <FiChevronRight size={12} />
-                </div>
+
+        {/* 2 Main Course Cards: B.Sc. CS (UG) & M.Sc. CS (PG) */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 max-w-2xl mx-auto">
+          {/* B.Sc. CS (UG) Card */}
+          <motion.button
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, type: "spring", stiffness: 90 }}
+            whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
+            onClick={() => setCourseType("ug")}
+            className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white shadow-lg transition-all duration-300 hover:shadow-xl text-center flex flex-col justify-between"
+          >
+            <div className="relative p-6 text-center">
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-white/20 backdrop-blur-md text-2xl font-black text-amber-300 transition-all duration-300 group-hover:scale-110 shadow-md">
+                UG
               </div>
-            </motion.button>
-          ))}
+              <span className="inline-block bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-2 shadow-xs">
+                3 Years · 6 Semesters
+              </span>
+              <h2 className="text-lg font-black text-white leading-snug">B.Sc. Computer Science</h2>
+              <p className="mt-1 text-[11px] text-rose-100 font-medium">Undergraduate Question Papers</p>
+              <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                Browse UG <FiChevronRight size={12} />
+              </div>
+            </div>
+          </motion.button>
+
+          {/* M.Sc. CS (PG) Card */}
+          <motion.button
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, type: "spring", stiffness: 90 }}
+            whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
+            onClick={() => setCourseType("pg")}
+            className="group relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#C50337] via-[#A0022B] to-[#7F011F] border-2 border-amber-400 text-white shadow-lg transition-all duration-300 hover:shadow-xl text-center flex flex-col justify-between"
+          >
+            <div className="relative p-6 text-center">
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-xl bg-white/20 backdrop-blur-md text-2xl font-black text-amber-300 transition-all duration-300 group-hover:scale-110 shadow-md">
+                PG
+              </div>
+              <span className="inline-block bg-amber-400 text-slate-900 text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-2 shadow-xs">
+                2 Years · 4 Semesters
+              </span>
+              <h2 className="text-lg font-black text-white leading-snug">M.Sc. Computer Science</h2>
+              <p className="mt-1 text-[11px] text-rose-100 font-medium">Postgraduate Question Papers</p>
+              <div className="mt-4 inline-flex items-center gap-1 text-[11px] font-black text-amber-300 uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                Browse PG <FiChevronRight size={12} />
+              </div>
+            </div>
+          </motion.button>
         </div>
       </div>
     );
@@ -541,11 +660,15 @@ const refetch = () => {};
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setCourseType(null); setSelectedYear(null); setSelectedSubject(null); }}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
-        ><FiArrowLeft size={14} /> Back to Course</motion.button>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#021C4F] text-white shadow-sm"><FiAward size={28} /></div>
-          <h1 className="font-sans text-2xl font-bold text-[#021C4F]">{courseType.toUpperCase()} — Select Year</h1>
+          className="mb-8 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
+        ><FiArrowLeft size={20} /> Back to Course</motion.button>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center flex flex-col items-center justify-center">
+          <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F] p-1 shadow-xl ring-4 ring-amber-400/30 transition-transform hover:scale-105 duration-300">
+            <div className="flex h-full w-full items-center justify-center rounded-[20px] bg-[#021C4F] text-amber-300">
+              <FiAward size={38} className="text-amber-400" />
+            </div>
+          </div>
+          <h1 className="font-sans text-3xl sm:text-4xl font-extrabold text-[#021C4F]">{courseType.toUpperCase()} — Select Year</h1>
           <p className="mt-1 text-sm text-[#6B7280]">Choose your academic year</p>
         </motion.div>
         <div className={`grid grid-cols-1 gap-6 ${courseType === "pg" ? "sm:grid-cols-2 max-w-2xl mx-auto" : "sm:grid-cols-3"}`}>
@@ -584,12 +707,19 @@ const refetch = () => {};
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setSelectedYear(null); setSelectedSemester(null); setSelectedSubject(null); }}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
-        ><FiArrowLeft size={14} /> Back to Years</motion.button>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-[#0F4C81] text-white shadow-sm"><FiLayers size={28} /></div>
-          <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">{yearData.label}</h1>
-          <p className="mt-1 text-sm text-[#6B7280]">Choose a semester</p>
+          className="mb-8 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
+        ><FiArrowLeft size={20} /> Back to Years</motion.button>
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-10 text-center flex flex-col items-center justify-center">
+          <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F] p-1.5 shadow-xl shadow-rose-950/20 ring-4 ring-amber-400/40 transition-transform hover:scale-105 duration-300">
+            <div className="flex h-full w-full items-center justify-center rounded-[20px] bg-[#021C4F] text-amber-300">
+              <FiAward size={48} className="text-amber-400 drop-shadow-md" />
+            </div>
+          </div>
+          <span className="inline-flex items-center gap-1.5 bg-amber-400 text-slate-950 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3 shadow-md">
+            <FiAward size={14} /> QUESTION PAPERS SEMESTER SELECTION
+          </span>
+          <h1 className="font-sans text-3xl sm:text-4xl font-extrabold text-[#021C4F] tracking-tight">{yearData.label}</h1>
+          <p className="mt-2 text-sm text-[#6B7280] font-medium">Choose a semester to access previous exam papers</p>
         </motion.div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {sems.map(([semKey, semData], i) => (
@@ -621,8 +751,8 @@ const refetch = () => {};
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => setSelectedSemester(null)}
-          className="mb-8 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
-        ><FiArrowLeft size={14} /> Back to Semesters</motion.button>
+          className="mb-8 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
+        ><FiArrowLeft size={20} /> Back to Semesters</motion.button>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="flex items-center gap-2 text-sm text-[#6B7280] mb-3">
             <span className="uppercase font-semibold text-[#6B7280]">{courseType.toUpperCase()}</span><FiChevronRight size={10} />
@@ -681,8 +811,9 @@ const refetch = () => {};
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 bg-[#F8FAFC]">
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-6">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          onClick={() => setSelectedSubject(null)} className="mb-4 inline-flex items-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-xs font-semibold text-[#4B5563] hover:bg-[#F8FAFC] transition-all"
-        ><FiArrowLeft size={14} /> Back to Subjects</motion.button>
+          onClick={() => setSelectedSubject(null)}
+          className="mb-4 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
+        ><FiArrowLeft size={20} /> Back to Subjects</motion.button>
         <div className="flex items-center gap-2 text-xs text-[#6B7280]">
           <span className="uppercase font-semibold text-[#6B7280]">{courseType.toUpperCase()}</span><FiChevronRight size={10} />
           <span className={ys.text}>{yearData.label}</span><FiChevronRight size={10} /><span className={ys.text}>{semesterData.label}</span><FiChevronRight size={10} />
