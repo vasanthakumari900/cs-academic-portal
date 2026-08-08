@@ -49,6 +49,7 @@ const FACULTY_MAP = {
   "OPERATING SYSTEM": "Ms. Dr. DHARANI", "DATA MINING TECHNIQUES": "Ms. V. PONNILA",
   "ASP.NET": "Ms. R. SARANYA", "DATABASE MANAGEMENT SYSTEM": "Ms. M.P. SUDHA",
   "SOFTWARE ENGINEERING": "Ms. V. PONNILA",
+  "Ethical Hacking": "Mrs. R. Poojitha Shree",
 };
 
 // Placeholder subjects in 2nd Year that share names with higher years — show name only, no content
@@ -1542,6 +1543,50 @@ const NOTES_DATA = {
         title: "MODULE V",
         subtitle: "Image Compression & Wavelet Analysis",
         syllabus: "Image Compression: Fundamentals, Redundancy (Coding, Interpixel, Psychovisual). Fidelity criteria, Image compression models. Lossless Compression: Huffman coding, Run-length coding, Arithmetic coding. Lossy Compression: Predictive coding, Transform coding, JPEG compression standard. Wavelet Transform: Continuous and Discrete Wavelet Transform.",
+        hrs: 9,
+        co: "CO5",
+        files: []
+      }
+    }
+  },
+  "Ethical Hacking": {
+    units: {
+      1: {
+        title: "MODULE I",
+        subtitle: "Introduction",
+        syllabus: "Ethical Hacking Overview – Role of Security and Penetration Testers - Penetration-Testing Methodologies - Laws of the Land – Overview of TCP/IP - The Application Layer – The Transport Layer – The Internet Layer – IP Addressing - Network and Computer Attacks – Malware – Protecting Against Malware Attacks - Intruder Attacks – Addressing Physical Security.",
+        hrs: 9,
+        co: "CO1",
+        files: []
+      },
+      2: {
+        title: "MODULE II",
+        subtitle: "Footprinting, Reconnaissance and Scanning Networks",
+        syllabus: "Footprinting Concepts – Footprinting through Search Engines, Web Services, Social Networking Sites, Website, Email – Competitive Intelligence – Footprinting through Social Engineering - Footprinting Tools – Network Scanning Concepts – Port-Scanning Tools – Scanning Techniques – Scanning Beyond IDS and Firewall.",
+        hrs: 9,
+        co: "CO2",
+        files: []
+      },
+      3: {
+        title: "MODULE III",
+        subtitle: "Enumeration and Vulnerability Analysis",
+        syllabus: "Enumeration Concepts – NetBIOS Enumeration – SNMP, LDAP, NTP, SMTP and DNS Enumeration – Vulnerability Assessment Concepts – Desktop and Server OS Vulnerabilities - Windows OS Vulnerabilities – Tools for Identifying Vulnerabilities in Windows - Linux OS Vulnerabilities - Vulnerabilities of Embedded OSs.",
+        hrs: 9,
+        co: "CO3",
+        files: []
+      },
+      4: {
+        title: "MODULE IV",
+        subtitle: "System Hacking",
+        syllabus: "Hacking Web Servers – Web Application Components - Vulnerabilities – Tools for Web Attackers and Security Testers. Hacking Wireless Networks – Components of a Wireless Network – Wardriving Wireless Hacking – Tools of the Trade.",
+        hrs: 9,
+        co: "CO4",
+        files: []
+      },
+      5: {
+        title: "MODULE V",
+        subtitle: "Network Protection Systems",
+        syllabus: "Access Control Lists – Cisco Adaptive Security Appliance Firewall – Configuration and Risk Analysis Tools for Firewalls and Routers – Intrusion Detection and Prevention Systems – Network-Based and Host-Based IDSs and IPSs – Web Filtering – Security Incident Response Teams – Honeypots.",
         hrs: 9,
         co: "CO5",
         files: []
