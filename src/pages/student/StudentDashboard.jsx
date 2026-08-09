@@ -258,9 +258,6 @@ export default function StudentDashboard() {
                 </div>
               </div>
             )}
-
-            {/* Left-Side Birthday Notification Card */}
-            <BirthdayWishCard user={user} />
           </div>
 
           {/* Top-Right CIA Examination Notification Card */}
@@ -269,18 +266,23 @@ export default function StudentDashboard() {
           </div>
         </div>
 
+        {/* Birthday Countdown Notification Card — Above Academic Options */}
+        <div className="mb-6">
+          <BirthdayWishCard user={user} />
+        </div>
+
         {/* Options Section directly down to Student Information */}
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 className="font-sans text-xl font-bold text-[#021C4F]">Academic Options</h2>
-            <p className="mt-0.5 text-xs text-slate-500">
+            <h2 className="font-mono text-xl font-bold text-[#134E4A] dark:text-[#CCFBF1]">Academic Options</h2>
+            <p className="mt-0.5 text-xs text-[#64748B] dark:text-[#5EEAD4]/80">
               Select an option below to access course content
             </p>
           </div>
         </div>
 
         {/* Options Grid directly down to Student Information */}
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="card-grid">
           {optionsToRender.map((option, idx) => {
             const IconComponent = option.icon;
             const isRed = option.color === "#C50337";
@@ -293,14 +295,16 @@ export default function StudentDashboard() {
                 whileHover={{ y: -6, scale: 1.02, boxShadow: "0 16px 32px -8px rgba(2, 28, 79, 0.12)" }}
                 whileTap={{ scale: 0.96 }}
                 onClick={() => (option.isExternal ? window.open(option.href, "_blank") : navigate(option.to))}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white border border-slate-200 p-6 shadow-sm transition-all duration-300 hover:border-[#C50337] text-left"
+                style={{ padding: 'var(--fluid-pad-card)' }}
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white border border-slate-200 shadow-sm transition-all duration-300 hover:border-[#C50337] text-left"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div
-                      className={`flex h-14 w-14 items-center justify-center rounded-2xl ${
+                      style={{ height:'var(--fluid-icon-lg)', width:'var(--fluid-icon-lg)' }}
+                      className={`flex items-center justify-center rounded-2xl ${
                         option.emblemGradient || "bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F]"
-                      } p-1 shadow-md ring-2 ring-amber-400/40 transition-transform duration-300 group-hover:scale-110`}
+                      } p-1 shadow-md ring-2 ring-amber-400/40 transition-transform duration-300 group-hover:scale-110 shrink-0`}
                     >
                       <div className="flex h-full w-full items-center justify-center rounded-xl bg-black/25 backdrop-blur-xs">
                         <IconComponent size={24} className={option.iconColor || "text-amber-300"} />

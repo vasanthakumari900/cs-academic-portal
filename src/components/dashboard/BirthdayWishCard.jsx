@@ -51,35 +51,35 @@ export default function BirthdayWishCard({ user }) {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="w-full mt-4 rounded-2xl bg-gradient-to-r from-[#FAF7F2] via-rose-50/70 to-[#FFF9F0] border-2 border-amber-400/90 p-4 sm:p-5 shadow-md text-left space-y-3"
+      className="w-full mt-4 rounded-2xl bg-gradient-to-r from-[#F0FDFA] via-[#CCFBF1]/30 to-[#F0FDFA] dark:bg-teal-950/80 border-2 border-[#D97706]/70 p-4 sm:p-5 shadow-neu-raised text-left space-y-3"
     >
       {/* Left-Side Notification Header */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-amber-200/80 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#5EEAD4]/40 pb-3">
         <div className="flex items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#C50337] text-amber-300 shadow-sm shrink-0">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#D97706] text-white shadow-sm shrink-0">
             <FiGift size={20} className="animate-bounce" />
           </span>
           <div>
-            <h3 className="text-xs sm:text-sm font-extrabold text-[#021C4F] tracking-tight">
+            <h3 className="text-xs sm:text-sm font-mono font-extrabold text-[#134E4A] dark:text-[#CCFBF1] tracking-tight">
               {isToday
                 ? "🎉 Department Birthday Wishes"
                 : isOneDayBefore
                 ? "🎂 1 Day Before Birthday - Advance Wish"
                 : `⏳ Birthday Countdown (${daysLeft} Days Remaining)`}
             </h3>
-            <p className="text-[10px] font-bold text-[#C50337]">
+            <p className="text-[10px] font-mono font-bold text-[#D97706]">
               Department of Computer Science (DDGDVC)
             </p>
           </div>
         </div>
 
         <span
-          className={`rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider border shadow-xs ${
+          className={`rounded-full px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider border shadow-xs ${
             isToday
-              ? "bg-[#C50337] text-white animate-pulse"
+              ? "bg-[#D97706] text-white animate-pulse"
               : isOneDayBefore
-              ? "bg-rose-600 text-white"
-              : "bg-amber-100 text-amber-950 border-amber-300"
+              ? "bg-amber-600 text-white"
+              : "bg-amber-100 dark:bg-amber-950/60 text-[#D97706] dark:text-amber-200 border-amber-300"
           }`}
         >
           {isToday
@@ -91,29 +91,29 @@ export default function BirthdayWishCard({ user }) {
       </div>
 
       {/* Birthday Structured Content */}
-      <div className="bg-white p-3.5 sm:p-4 rounded-xl border border-amber-200 shadow-2xs space-y-2">
+      <div className="bg-white dark:bg-teal-950 p-3.5 sm:p-4 rounded-xl border border-[#5EEAD4]/50 dark:border-teal-800 shadow-2xs space-y-2">
         <div className="flex items-center justify-between text-xs">
-          <span className="text-[10px] uppercase font-bold text-slate-500 flex items-center gap-1">
-            <FiCalendar size={12} className="text-[#C50337]" /> Date of Birth
+          <span className="text-[10px] uppercase font-mono font-bold text-[#64748B] dark:text-[#5EEAD4]/80 flex items-center gap-1">
+            <FiCalendar size={12} className="text-[#D97706]" /> Date of Birth
           </span>
-          <span className="font-extrabold text-[#021C4F] bg-amber-100/90 px-2.5 py-0.5 rounded-md border border-amber-300 text-xs">
+          <span className="font-mono font-bold text-[#0D9488] dark:text-[#2DD4BF] bg-[#CCFBF1]/40 dark:bg-teal-900/40 px-2.5 py-0.5 rounded-md border border-[#5EEAD4]/50 text-xs">
             {formattedDobDate}
           </span>
         </div>
 
         {/* Structured Message */}
-        <div className="pt-2 border-t border-slate-100 space-y-1">
-          <h4 className="text-xs sm:text-sm font-black text-[#021C4F] leading-snug">
+        <div className="pt-2 border-t border-[#5EEAD4]/20 space-y-1">
+          <h4 className="text-xs sm:text-sm font-mono font-bold text-[#134E4A] dark:text-[#CCFBF1] leading-snug">
             {isToday ? (
-              <>🎉 Happy Birthday, <span className="text-[#C50337]">{user.name}</span>! 🎂</>
+              <>🎉 Happy Birthday, <span className="text-[#D97706]">{user.name}</span>! 🎂</>
             ) : isOneDayBefore ? (
-              <>🎂 Advance Happy Birthday, <span className="text-[#C50337]">{user.name}</span>! 🎉</>
+              <>🎂 Advance Happy Birthday, <span className="text-[#D97706]">{user.name}</span>! 🎉</>
             ) : (
-              <>⏳ Birthday Countdown for <span className="text-[#C50337]">{user.name}</span></>
+              <>⏳ Birthday Countdown for <span className="text-[#D97706]">{user.name}</span></>
             )}
           </h4>
 
-          <p className="text-xs text-slate-700 font-medium leading-relaxed">
+          <p className="text-xs text-[#134E4A]/80 dark:text-[#CCFBF1]/80 font-medium leading-relaxed">
             {isToday ? (
               <>
                 <strong>Happy Birthday from the Department of Computer Science!</strong> The department wishes you a wonderful birthday turning <strong>{nextAge}</strong> and blessings for a brilliant, successful year ahead! 🚀🎁
@@ -136,10 +136,10 @@ export default function BirthdayWishCard({ user }) {
         <button
           onClick={handleThankClick}
           disabled={thanked}
-          className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold shadow-xs transition-all active:scale-98 cursor-pointer ${
+          className={`inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-mono font-bold shadow-neu-raised transition-all active:scale-98 cursor-pointer ${
             thanked
-              ? "bg-emerald-600 text-white cursor-default"
-              : "bg-[#021C4F] hover:bg-[#C50337] text-white"
+              ? "bg-[#16A34A] text-white cursor-default"
+              : "bg-[#0D9488] hover:bg-[#0F766E] text-white"
           }`}
         >
           {thanked ? (
@@ -149,7 +149,7 @@ export default function BirthdayWishCard({ user }) {
             </>
           ) : (
             <>
-              <FiHeart size={14} className="text-rose-400 fill-rose-400" />
+              <FiHeart size={14} className="text-amber-300 fill-amber-300" />
               <span>
                 {isToday
                   ? "Thank You CS Department! 🎉"

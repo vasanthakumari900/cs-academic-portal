@@ -16,12 +16,12 @@ export default function DashboardLayout({ title, items = [] }) {
   return (
     <div className="flex min-h-screen flex-col bg-[#F5EBD0] text-[#7F011F]">
       {displayItems.length > 0 && (
-        <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
+        <div style={{ width: 'clamp(240px, 75vw, 288px)' }} className="hidden lg:fixed lg:inset-y-0 lg:flex lg:flex-col">
           <Sidebar items={displayItems} open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         </div>
       )}
 
-      <div className={`flex flex-1 flex-col ${displayItems.length > 0 ? 'lg:pl-64' : ''}`}>
+      <div className={`flex flex-1 flex-col ${displayItems.length > 0 ? 'lg:pl-[clamp(240px,75vw,288px)]' : ''}`}>
         <DashboardTopbar onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />
         <main className="relative z-10 flex-1">
           <Outlet />

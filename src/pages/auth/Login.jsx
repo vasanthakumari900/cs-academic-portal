@@ -169,7 +169,8 @@ export default function Login() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="w-full max-w-md lg:w-1/2"
+            style={{ maxWidth:'var(--fluid-container-sm)' }}
+            className="w-full lg:w-1/2 mx-auto"
           >
             {/* Mobile branding */}
             <div className="lg:hidden mb-4 text-center">
@@ -178,7 +179,7 @@ export default function Login() {
                 alt="DGVC College Logo"
                 className="mx-auto mb-3 h-auto w-full max-w-[22rem] sm:max-w-[24rem] object-contain rounded-lg border border-[#E6DAB8] shadow-sm bg-white p-2"
               />
-              <h2 className="font-sans text-2xl font-bold text-[#7F011F]">
+              <h2 style={{ fontSize:'clamp(1.4rem,3vw,1.875rem)' }} className="font-sans font-bold text-[#7F011F]">
                 CS Academic Portal
               </h2>
               <p className="mt-0.5 text-xs text-[#7F011F] font-semibold">
@@ -190,7 +191,7 @@ export default function Login() {
             </div>
 
             {/* Login Card */}
-            <div className="rounded-xl border border-[#E6DAB8] bg-white shadow-md p-5 sm:p-7 text-left">
+            <div style={{ padding:'var(--fluid-pad-page)' }} className="rounded-xl border border-[#E6DAB8] bg-white shadow-md text-left">
               <div className="relative">
                 {/* Tab Switcher */}
                 <div className="mb-4 flex rounded-lg bg-[#F5EBD0] p-1 border border-[#E6DAB8]">
@@ -220,7 +221,7 @@ export default function Login() {
 
                 {/* Header */}
                 <div className="mb-6 text-center">
-                  <h2 className="font-sans text-xl font-bold text-[#7F011F]">
+                  <h2 style={{ fontSize:'clamp(1.4rem,3vw,1.875rem)' }} className="font-sans font-bold text-[#7F011F]">
                     {activeTab === "student" ? "Student Login" : "Faculty Login"}
                   </h2>
                   <p className="mt-1 text-xs text-[#6B4F45]">

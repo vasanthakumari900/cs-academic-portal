@@ -425,12 +425,70 @@ const PG_PYTHON_PAPERS = [
   { id: "pg-py-4", title: "Python for Data Science - Paper 4", subject: "Python for Data Science", description: "Previous year question paper (Set 4)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627102", driveFileId: "1rKrNPPNBxOUIOgj6fbesICpedgdqj3Ut", academicYear: 1, semester: 1 },
 ];
 
+// PG 1st Year Semester 2 Question Papers
+const PG_ADBMS_PAPERS = [
+  { id: "pg-adbms-1", title: "Advanced Database Management System - Paper 1", subject: "Advanced Database Management System", description: "PG 1st Year Sem 2 Question Paper (Set 1)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627204(A)", driveFileId: "1PFskDcIdUMC_itZONAC4XqFGn_VByOEx", academicYear: 1, semester: 2 },
+  { id: "pg-adbms-2", title: "Advanced Database Management System - Paper 2", subject: "Advanced Database Management System", description: "PG 1st Year Sem 2 Question Paper (Set 2)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627204(A)", driveFileId: "1_IYQkZD-6EpQjjp5vRfAQHYgm3xTam-K", academicYear: 1, semester: 2 },
+  { id: "pg-adbms-3", title: "Advanced Database Management System - Paper 3", subject: "Advanced Database Management System", description: "PG 1st Year Sem 2 Question Paper (Set 3)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627204(A)", driveFileId: "1N6AUSiAQgU1TL6a5t0gd9IXw4HKKi70V", academicYear: 1, semester: 2 },
+  { id: "pg-adbms-4", title: "Advanced Database Management System - Paper 4", subject: "Advanced Database Management System", description: "PG 1st Year Sem 2 Question Paper (Set 4)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627204(A)", driveFileId: "16eUiDlC9WRyAyeP2C96yWJOEJW53lzBq", academicYear: 1, semester: 2 },
+  { id: "pg-adbms-5", title: "Advanced Database Management System - Paper 5", subject: "Advanced Database Management System", description: "PG 1st Year Sem 2 Question Paper (Set 5)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627204(A)", driveFileId: "1qkDPdcfmv88Eov3MxALkVy2KCKG6UXcZ", academicYear: 1, semester: 2 },
+  { id: "pg-adbms-6", title: "Advanced Database Management System - Paper 6", subject: "Advanced Database Management System", description: "PG 1st Year Sem 2 Question Paper (Set 6)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627204(A)", driveFileId: "1CUkj7f3I_1koEKA9YHr5jSm4W5780rQU", academicYear: 1, semester: 2 },
+];
+
+const PG_DIP_PAPERS = [
+  { id: "pg-dip-1", title: "Digital Image Processing - Paper 1", subject: "Digital Image Processing", description: "PG 1st Year Sem 2 Question Paper (Set 1)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627201", driveFileId: "1iOLFfC-YhtNBdyjSqKRJ-auQjhfAMQY6", academicYear: 1, semester: 2 },
+  { id: "pg-dip-2", title: "Digital Image Processing - Paper 2", subject: "Digital Image Processing", description: "PG 1st Year Sem 2 Question Paper (Set 2)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627201", driveFileId: "1Zyd_g8Xqpl7wNAKziEe8XOhdiB2XTKoc", academicYear: 1, semester: 2 },
+  { id: "pg-dip-3", title: "Digital Image Processing - Paper 3", subject: "Digital Image Processing", description: "PG 1st Year Sem 2 Question Paper (Set 3)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627201", driveFileId: "1NKdyOAgcSQMh5Qbv6Cr0kw3wDTlw4NSJ", academicYear: 1, semester: 2 },
+  { id: "pg-dip-4", title: "Digital Image Processing - Paper 4", subject: "Digital Image Processing", description: "PG 1st Year Sem 2 Question Paper (Set 4)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627201", driveFileId: "1kopc_jY2rmdaLUxv0rFPlYQqwyrDMNJX", academicYear: 1, semester: 2 },
+  { id: "pg-dip-5", title: "Digital Image Processing - Paper 5", subject: "Digital Image Processing", description: "PG 1st Year Sem 2 Question Paper (Set 5)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627201", driveFileId: "1KzX-0C8xnRd_1fyuQYygkLBS7glURIRA", academicYear: 1, semester: 2 },
+];
+
+const PG_DMT_PAPERS = [
+  { id: "pg-dmt-1", title: "Data Mining Techniques - Paper 1", subject: "Data Mining Techniques", description: "PG 1st Year Sem 2 Question Paper (Set 1)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627203", driveFileId: "1U5bCcL0ACI4m83yWNdgJs95rLJhJsFSl", academicYear: 1, semester: 2 },
+  { id: "pg-dmt-2", title: "Data Mining Techniques - Paper 2", subject: "Data Mining Techniques", description: "PG 1st Year Sem 2 Question Paper (Set 2)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627203", driveFileId: "1MrN0uiJLuX_s68aPoOzX6dQYInNibQKo", academicYear: 1, semester: 2 },
+  { id: "pg-dmt-3", title: "Data Mining Techniques - Paper 3", subject: "Data Mining Techniques", description: "PG 1st Year Sem 2 Question Paper (Set 3)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627203", driveFileId: "13ocMvwFuRpVHePQ6lHHh38QIdq8ck6y2", academicYear: 1, semester: 2 },
+  { id: "pg-dmt-4", title: "Data Mining Techniques - Paper 4", subject: "Data Mining Techniques", description: "PG 1st Year Sem 2 Question Paper (Set 4)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627203", driveFileId: "1Vy5mjeg3qXI2g6TLCS4qCQt5tptprNRi", academicYear: 1, semester: 2 },
+];
+
+const PG_JEE_PAPERS = [
+  { id: "pg-jee-1", title: "Java Enterprise Edition - Paper 1", subject: "Java Enterprise Edition", description: "PG 1st Year Sem 2 Question Paper", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627202", driveFileId: "1L0_AD2N1XhLwIdr1V1larcEOU1WxdPGq", academicYear: 1, semester: 2 },
+];
+
+// PG 2nd Year Semester 1 Question Papers
+const PG_AIML_PAPERS = [
+  { id: "pg-aiml-1", title: "Artificial Intelligence and Machine Learning Techniques - Paper 1", subject: "Artificial Intelligence and Machine Learning Techniques", description: "PG 2nd Year Sem 1 Question Paper (Set 1)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627301", driveFileId: "1-2T_Wv7rL7sYLGp2VnYZo3aeYXrq8J1V", academicYear: 2, semester: 1 },
+  { id: "pg-aiml-2", title: "Artificial Intelligence and Machine Learning Techniques - Paper 2", subject: "Artificial Intelligence and Machine Learning Techniques", description: "PG 2nd Year Sem 1 Question Paper (Set 2)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627301", driveFileId: "11ZSb-n8gEyYl2OnP6wdL73ohoVAt45Lm", academicYear: 2, semester: 1 },
+  { id: "pg-aiml-3", title: "Artificial Intelligence and Machine Learning Techniques - Paper 3", subject: "Artificial Intelligence and Machine Learning Techniques", description: "PG 2nd Year Sem 1 Question Paper (Set 3)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627301", driveFileId: "1KSBGyCrptbQujDrRfefQlosQ79rWKpKJ", academicYear: 2, semester: 1 },
+];
+
+const PG_DOTNET_PAPERS = [
+  { id: "pg-dotnet-1", title: "DOT NET Technology - Paper 1", subject: "DOT NET Technology", description: "PG 2nd Year Sem 1 Question Paper (Set 1)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627302", driveFileId: "17a4Hvznc-UTxZ8jv2bpNpqQqlA7NVOCy", academicYear: 2, semester: 1 },
+  { id: "pg-dotnet-2", title: "DOT NET Technology - Paper 2", subject: "DOT NET Technology", description: "PG 2nd Year Sem 1 Question Paper (Set 2)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627302", driveFileId: "1BhtMBEExYVpcN3VGdvIppLsgB1quQy2H", academicYear: 2, semester: 1 },
+  { id: "pg-dotnet-3", title: "DOT NET Technology - Paper 3", subject: "DOT NET Technology", description: "PG 2nd Year Sem 1 Question Paper (Set 3)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627302", driveFileId: "1ZC7VriXVkPuf4j9NmgueiaVJcVH2oFR9", academicYear: 2, semester: 1 },
+  { id: "pg-dotnet-4", title: "DOT NET Technology - Paper 4", subject: "DOT NET Technology", description: "PG 2nd Year Sem 1 Question Paper (Set 4)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627302", driveFileId: "1PmtI3yPiiHPFOilCPtYryo4XeabXKqic", academicYear: 2, semester: 1 },
+];
+
+const PG_BDA_PAPERS = [
+  { id: "pg-bda-1", title: "Big Data Analytics - Paper 1", subject: "Big Data Analytics", description: "PG 2nd Year Sem 1 Question Paper (Set 1)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627303", driveFileId: "17nMz93SmEkf9hUUv2D3gUJOkVL58FJdZ", academicYear: 2, semester: 1 },
+  { id: "pg-bda-2", title: "Big Data Analytics - Paper 2", subject: "Big Data Analytics", description: "PG 2nd Year Sem 1 Question Paper (Set 2)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627303", driveFileId: "17OfyUvvgwvWoQYu0KEmXAiRs3djrqSku", academicYear: 2, semester: 1 },
+  { id: "pg-bda-3", title: "Big Data Analytics - Paper 3", subject: "Big Data Analytics", description: "PG 2nd Year Sem 1 Question Paper (Set 3)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627303", driveFileId: "1ldKllqzjdp5onj4BqPTzdHAld-e--THB", academicYear: 2, semester: 1 },
+  { id: "pg-bda-4", title: "Big Data Analytics - Paper 4", subject: "Big Data Analytics", description: "PG 2nd Year Sem 1 Question Paper (Set 4)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627303", driveFileId: "1bKmOKPeqChuPyglLggz3uIhHpcaGecns", academicYear: 2, semester: 1 },
+  { id: "pg-bda-5", title: "Big Data Analytics - Paper 5", subject: "Big Data Analytics", description: "PG 2nd Year Sem 1 Question Paper (Set 5)", pages: 3, downloads: 0, year: "2024", courseType: "pg", regulation: "2627303", driveFileId: "1GzPH7ZbZEAGZ5lfRzFoXOK0yPoj-kItS", academicYear: 2, semester: 1 },
+];
+
 const allPapers = [
   ...PG_CWT_PAPERS,
   ...PG_ASE_PAPERS,
   ...PG_ADAA_PAPERS,
   ...PG_DCN_PAPERS,
   ...PG_PYTHON_PAPERS,
+  ...PG_ADBMS_PAPERS,
+  ...PG_DIP_PAPERS,
+  ...PG_DMT_PAPERS,
+  ...PG_JEE_PAPERS,
+  ...PG_AIML_PAPERS,
+  ...PG_DOTNET_PAPERS,
+  ...PG_BDA_PAPERS,
   ...DBMS_PAPERS,
   ...OS_PAPERS,
   ...TAMIL_PAPERS,
@@ -774,10 +832,10 @@ const refetch = () => {};
               const code = SUBJECT_CODES[subject];
               return (
                 <motion.button key={subject}
-                  initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-                  whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }}
+                  initial={{ opacity: 0, y: 20, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: i * 0.05, type: "spring", stiffness: 300, damping: 24 }}
+                  whileHover={{ y: -5, scale: 1.02 }} whileTap={{ scale: 0.97 }}
                   onClick={() => setSelectedSubject(subject)}
-                  className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-sm hover:border-[#1E88E5]/40"
+                  className="group relative overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 glow-amber-hover cursor-pointer"
                 >
                   <div className="relative flex items-start gap-4 p-5 text-left">
                     <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#FAF7F2] border border-[#E6DAB8] shadow-sm transition-all">
@@ -933,9 +991,9 @@ const refetch = () => {};
 
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
         <div className="flex items-center gap-4">
-          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiAward size={28} /></div>
+          {getSubjectIcon(selectedSubject, 36, "w-16 h-16 shadow-neu-raised rounded-2xl border-2 border-[#D97706]")}
           <div>
-            <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">{selectedSubject}</h1>
+            <h1 className="font-mono text-2xl font-bold text-[#134E4A] dark:text-[#CCFBF1]">{selectedSubject}</h1>
             <div className="flex items-center gap-3 mt-1">
               <span className="text-xs text-[#6B7280]">{courseType.toUpperCase()} · {yearData.label} · {semesterData.label}</span>
               <span className="badge-primary">{filtered.length} paper{filtered.length !== 1 ? "s" : ""}</span>

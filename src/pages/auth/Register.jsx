@@ -28,13 +28,13 @@ export default function Register() {
   return (
     <div className="flex min-h-[85vh] items-center justify-center px-4 py-12">
       <div className="fixed inset-0 pointer-events-none bg-mesh-deep" />
-      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="relative w-full max-w-md">
-        <div className="relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass p-8">
+      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} style={{ maxWidth:'var(--fluid-container-sm)' }} className="relative w-full mx-auto">
+        <div style={{ padding:'var(--fluid-pad-page)' }} className="relative overflow-hidden rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-glass">
           <div className="mb-6 text-center">
             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow-sm">
               <FiUser size={24} />
             </div>
-            <h1 className="font-display text-2xl font-bold text-white">Create your account</h1>
+            <h1 style={{ fontSize:'clamp(1.4rem,3vw,1.875rem)' }} className="font-display font-bold text-white">Create your account</h1>
             <p className="mt-1 text-sm text-white/60">Join the CS Academic Portal.</p>
           </div>
 

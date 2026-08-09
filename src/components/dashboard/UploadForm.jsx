@@ -57,10 +57,10 @@ export default function UploadForm({
   }
 
   return (
-    <div className="max-w-2xl bg-white border border-[#E5E7EB] rounded-xl p-6 shadow-sm text-left">
+    <div className="max-w-2xl bg-white dark:bg-slate-900 border border-[#99F6E4] dark:border-slate-800 rounded-xl p-6 shadow-sm text-left">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Title</label>
+          <label className="mb-1 block text-sm font-semibold text-[#134E4A]/70">Title</label>
           <input
             {...register("title", { required: "Title is required" })}
             className="input-premium"
@@ -70,7 +70,7 @@ export default function UploadForm({
         </div>
 
         <div>
-          <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Description</label>
+          <label className="mb-1 block text-sm font-semibold text-[#134E4A]/70">Description</label>
           <textarea
             {...register("description")}
             rows={3}
@@ -81,7 +81,7 @@ export default function UploadForm({
 
         {showVideoType && (
           <div>
-            <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Video Type</label>
+            <label className="mb-1 block text-sm font-semibold text-[#134E4A]/70">Video Type</label>
             <select
               {...register("videoType", { required: true })}
               className="input-premium bg-white"
@@ -93,7 +93,7 @@ export default function UploadForm({
 
         {showYear && (
           <div>
-            <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Year</label>
+            <label className="mb-1 block text-sm font-semibold text-[#134E4A]/70">Year</label>
             <select
               {...register("year", { required: true })}
               className="input-premium bg-white"
@@ -105,7 +105,7 @@ export default function UploadForm({
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Semester</label>
+            <label className="mb-1 block text-sm font-semibold text-[#134E4A]/70">Semester</label>
             <select
               {...register("semester", { required: true })}
               className="input-premium bg-white"
@@ -114,7 +114,7 @@ export default function UploadForm({
             </select>
           </div>
           <div>
-            <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Subject</label>
+            <label className="mb-1 block text-sm font-semibold text-[#134E4A]/70">Subject</label>
             <select
               {...register("subject", { required: true })}
               className="input-premium bg-white"
@@ -126,7 +126,7 @@ export default function UploadForm({
 
         {extraFields?.map((f) => (
           <div key={f.name}>
-            <label className="mb-1 block text-sm font-semibold text-[#4B5563]">{f.label}</label>
+            <label className="mb-1 block text-sm font-semibold text-[#134E4A]/70">{f.label}</label>
             <input
               type={f.type || "text"}
               {...register(f.name, { required: f.required })}
@@ -137,10 +137,10 @@ export default function UploadForm({
 
         {showThumbnail && (
           <div>
-            <label className="mb-1 block text-sm font-semibold text-[#4B5563]">Thumbnail (optional)</label>
-            <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-[#F8FAFC] px-4 py-6 text-center transition-all hover:border-[#C50337]/50 hover:bg-slate-100">
-              <FiUploadCloud size={22} className="text-[#021C4F]" />
-              <span className="text-sm text-[#6B7280]">
+            <label className="mb-1 block text-sm font-semibold text-[#134E4A]/70">Thumbnail (optional)</label>
+            <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#99F6E4] bg-[#F0FDFA] px-4 py-6 text-center transition-all hover:border-[#D97706]/50 hover:bg-[#CCFBF1]/30">
+              <FiUploadCloud size={22} className="text-[#0D9488]" />
+              <span className="text-sm text-[#64748B]">
                 {thumbnail ? thumbnail.name : "Click to choose a thumbnail image"}
               </span>
               <input
@@ -154,10 +154,10 @@ export default function UploadForm({
         )}
 
         <div>
-          <label className="mb-1 block text-sm font-semibold text-[#4B5563]">{fileLabel}</label>
-          <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#E5E7EB] bg-[#F8FAFC] px-4 py-8 text-center transition-all hover:border-[#C50337]/50 hover:bg-slate-100">
-            <FiUploadCloud size={26} className="text-[#021C4F]" />
-            <span className="text-sm text-[#6B7280]">
+          <label className="mb-1 block text-sm font-semibold text-[#134E4A]/70">{fileLabel}</label>
+          <label className="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-dashed border-[#99F6E4] bg-[#F0FDFA] px-4 py-8 text-center transition-all hover:border-[#D97706]/50 hover:bg-[#CCFBF1]/30">
+            <FiUploadCloud size={26} className="text-[#0D9488]" />
+            <span className="text-sm text-[#64748B]">
               {file ? file.name : `Click to choose a ${fileLabel.toLowerCase()}`}
             </span>
             <input
@@ -170,12 +170,12 @@ export default function UploadForm({
         </div>
 
         {progress > 0 && progress < 100 && (
-          <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100">
-            <div className="h-full bg-[#021C4F] transition-all" style={{ width: `${progress}%` }} />
+          <div className="h-2 w-full overflow-hidden rounded-full bg-[#E8F1F4]">
+            <div className="h-full bg-[#0D9488] transition-all" style={{ width: `${progress}%` }} />
           </div>
         )}
 
-        <button type="submit" disabled={isSubmitting} className="w-full rounded-lg bg-[#021C4F] hover:bg-[#C50337] py-3 text-sm font-bold text-white shadow-sm transition-all disabled:opacity-50 mt-4">
+        <button type="submit" disabled={isSubmitting} className="w-full rounded-lg bg-[#0D9488] hover:bg-[#D97706] py-3 text-sm font-bold text-white shadow-sm transition-all disabled:opacity-50 mt-4">
           {isSubmitting ? "Uploading…" : "Upload Content"}
         </button>
       </form>

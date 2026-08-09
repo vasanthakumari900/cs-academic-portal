@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
 import csPortalLogo from "../../assets/cs-portal-logo-transparent.png";
+import collegeLogo from "../../assets/college-logo.jpg";
 
 export default function StudentTopbar() {
   const { logout } = useAuth();
@@ -20,32 +21,33 @@ export default function StudentTopbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-30 border-b-4 border-[#F5EBD0] bg-[#7F011F] text-white shadow-md">
+      <header className="sticky top-0 z-30 border-b-4 border-[#D97706] bg-gradient-to-r from-[#0D9488] via-[#0F766E] to-[#115E59] text-white shadow-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-3 py-2.5 sm:px-6 lg:px-8">
           {/* Top Left Corner: DDGDVC STUDENT PORTAL */}
           <div className="flex items-center gap-2.5 shrink min-w-0">
+            {/* 3D CS Portal Emblem */}
             <button
               onClick={() => setLogoModalOpen(true)}
-              className="relative flex h-13 w-13 sm:h-16 sm:w-16 items-center justify-center rounded-xl bg-[#FAF7F2] border border-white/20 shadow-md hover:scale-105 transition-all shrink-0 overflow-hidden cursor-pointer p-1"
+              className="relative flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-xl bg-[#F0FDFA] border-2 border-[#D97706] shadow-md hover:scale-105 transition-all shrink-0 overflow-hidden cursor-pointer p-0.5"
               title="Click to view logo in full screen"
             >
               <img
                 src={csPortalLogo}
                 alt="CS Academic Portal Logo"
-                className="h-full w-full object-contain"
+                className="h-full w-full object-contain rounded-lg"
               />
             </button>
 
-            <Link to="/student/dashboard" className="leading-tight text-left min-w-0 group">
+            <Link to="/student/dashboard" className="leading-tight text-left min-w-0 group font-mono">
               <div className="flex items-center gap-1.5 min-w-0">
-                <p className="text-xs sm:text-base font-extrabold text-white tracking-wide group-hover:text-[#F5EBD0] transition-colors truncate">
+                <p className="text-xs sm:text-base font-extrabold text-white tracking-wide group-hover:text-[#CCFBF1] transition-colors truncate font-mono">
                   DDGDVC STUDENT PORTAL
                 </p>
-                <span className="hidden md:inline-flex items-center gap-1 bg-[#F5EBD0] text-[#7F011F] text-[9px] font-black px-1.5 py-0.5 rounded uppercase shrink-0">
+                <span className="hidden md:inline-flex items-center gap-1 bg-[#D97706] text-white text-[9px] font-black px-1.5 py-0.5 rounded uppercase shrink-0 font-mono">
                   <FiAward size={10} /> CS DEPT
                 </span>
               </div>
-              <p className="text-[9px] sm:text-[10px] font-semibold text-[#F5EBD0]/90 truncate hidden xs:block">
+              <p className="text-[9px] sm:text-[10px] font-semibold text-[#CCFBF1]/90 truncate hidden sm:block font-mono">
                 Department of Computer Science
               </p>
             </Link>
@@ -57,8 +59,8 @@ export default function StudentTopbar() {
             onClick={() => navigate("/student/dashboard")}
             className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-2 sm:px-4 min-h-[40px] sm:min-h-[44px] text-xs font-extrabold shadow-md transition-all active:scale-95 ${
               location.pathname === "/student/dashboard"
-                ? "bg-[#F5EBD0] text-[#7F011F] ring-2 ring-white"
-                : "bg-white/10 text-white hover:bg-[#F5EBD0] hover:text-[#7F011F] border border-white/20"
+                ? "bg-[#D97706] text-white ring-2 ring-[#F59E0B]"
+                : "bg-white/10 text-white hover:bg-[#D97706] hover:text-white border border-white/20"
             }`}
             title="Dashboard"
           >
@@ -68,7 +70,7 @@ export default function StudentTopbar() {
 
           <button
             onClick={handleLogout}
-            className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl text-white/90 bg-white/10 hover:bg-rose-700 hover:text-white transition-all border border-white/20 min-h-[40px] sm:min-h-[44px] shrink-0"
+            className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl text-white/90 bg-white/10 hover:bg-red-600 hover:text-white transition-all border border-white/20 min-h-[40px] sm:min-h-[44px] shrink-0"
             title="Sign out"
           >
             <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
@@ -92,7 +94,7 @@ export default function StudentTopbar() {
           {/* Close Button */}
           <button
             onClick={() => setLogoModalOpen(false)}
-            className="absolute top-5 right-5 p-3 rounded-full bg-white/10 text-white hover:bg-rose-600 hover:scale-110 transition-all cursor-pointer z-10"
+            className="absolute top-5 right-5 p-3 rounded-full bg-white/10 text-white hover:bg-red-600 hover:scale-110 transition-all cursor-pointer z-10"
             title="Close Full Screen"
           >
             <FiX size={26} />
@@ -110,7 +112,7 @@ export default function StudentTopbar() {
             <img
               src={csPortalLogo}
               alt="CS Academic Portal Logo Full View"
-              className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border-2 border-[#7F011F]/30 bg-[#FAF7F2] p-4"
+              className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border-2 border-[#0D9488]/30 bg-[#F0FDFA] p-4"
             />
           </motion.div>
         </motion.div>

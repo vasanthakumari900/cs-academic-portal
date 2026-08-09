@@ -30,14 +30,14 @@ import { parseUploadedDocument } from "../../utils/documentParser";
 import FormattedMessage from "../chatbot/FormattedMessage";
 import toast from "react-hot-toast";
 
-// Official 3D Notebook & Pencil Logo for Notes AI Assistant (Prominent & High-Res)
-function NotesAIBrainLogo({ size = 44 }) {
+// Official 3D Notebook & Pencil Logo for Notes AI Assistant
+function NotesAIBrainLogo({ size = 42 }) {
   return (
     <img
       src="/notes-ai-logo.jpg"
       alt="Notes AI Assistant Logo"
       style={{ width: size, height: size }}
-      className="rounded-2xl object-cover drop-shadow-md shrink-0 bg-white p-1 border-2 border-amber-400 shadow-sm"
+      className="rounded-2xl object-cover drop-shadow-md shrink-0 bg-white p-1 border-2 border-[#D97706] shadow-sm"
     />
   );
 }
@@ -91,7 +91,7 @@ export default function NotesTopAiHeader() {
     {
       role: "assistant",
       content:
-        "👋 Welcome! I am your dedicated **Notes AI Assistant**.\n\nI can help you understand Computer Science subjects, explain complex syllabus concepts, and answer questions from your uploaded PDF notes.\n\nClick **+ Upload** to index your notes or ask any subject question below!",
+        "👋 Welcome! I am your dedicated **Notes AI Assistant**.\n\nI can help you understand Computer Science subjects, explain complex syllabus concepts, and answer questions from your uploaded PDF notes.\n\nClick **+ Upload** at the top to index your notes or ask any subject question below!",
       timestamp: Date.now(),
     },
   ]);
@@ -105,7 +105,7 @@ export default function NotesTopAiHeader() {
   const chatContainerRef = useRef(null);
   const fileInputRef = useRef(null);
 
-  // Scroll inner chat container to bottom ONLY (without scrolling window/page down)
+  // Scroll inner chat container to bottom ONLY
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
@@ -315,26 +315,26 @@ If asked non-academic questions, reply ONLY: "I am the Notes AI Assistant. I can
       <div className="w-full lg:w-auto flex justify-end mb-4 lg:mb-0">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#011337] via-[#021C4F] to-[#0F4C81] px-4 py-3 text-xs font-black text-white shadow-xl border-2 border-amber-400 hover:scale-105 transition-all cursor-pointer active:scale-95 z-30"
+          className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-[#0D9488] via-[#0F766E] to-[#115E59] px-4 py-3 text-xs font-black text-white shadow-neu-raised-lg border-2 border-[#D97706] hover:scale-105 transition-all cursor-pointer active:scale-95 z-30 font-mono"
           title="Open Notes AI Assistant"
         >
           <NotesAIBrainLogo size={42} />
           <div className="text-left leading-tight">
-            <p className="text-sm font-black text-white flex items-center gap-1.5">
+            <p className="text-sm font-extrabold text-white flex items-center gap-1.5 font-mono">
               Notes AI Assistant
               {uploadedPdfs.length > 0 && (
                 <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping" />
               )}
             </p>
-            <p className="text-xs text-amber-300 font-bold">
-              {uploadedPdfs.length > 0 ? `${uploadedPdfs.length} PDF(s) Indexed` : "Ask Subject Doubts & Upload PDFs"}
+            <p className="text-xs text-[#2DD4BF] font-semibold">
+              {uploadedPdfs.length > 0 ? `${uploadedPdfs.length} PDF(s) Indexed` : "CS Subjects & Syllabus Tutor"}
             </p>
           </div>
           {isOpen ? <FiMinimize2 size={18} className="ml-1 text-white/80" /> : <FiMaximize2 size={18} className="ml-1 text-white/80" />}
         </button>
       </div>
 
-      {/* FLOATING TOP-RIGHT PANEL (Ultra Clear Contrast & High Visibility) */}
+      {/* FLOATING TOP-RIGHT PANEL */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -342,29 +342,32 @@ If asked non-academic questions, reply ONLY: "I am the Notes AI Assistant. I can
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ type: "spring", damping: 25, stiffness: 320 }}
-            className="w-full sm:w-[420px] lg:w-[440px] lg:fixed lg:top-20 lg:right-6 z-50 h-[480px] sm:h-[510px] max-h-[calc(100vh-130px)] rounded-3xl border-2 border-[#021C4F]/20 bg-white text-slate-900 shadow-2xl flex flex-col overflow-hidden text-left mb-6 lg:mb-0"
+            className="w-[calc(100vw-1.5rem)] sm:w-[420px] lg:w-[440px] fixed bottom-24 right-3 sm:bottom-28 sm:right-6 lg:top-20 lg:right-32 lg:bottom-auto z-40 h-[490px] sm:h-[520px] max-h-[calc(100vh-140px)] rounded-3xl border-2 border-[#0D9488] bg-white dark:bg-teal-950 text-[#134E4A] dark:text-[#CCFBF1] shadow-2xl flex flex-col overflow-hidden text-left"
           >
-            {/* Academic Navy & Amber Header Bar */}
-            <div className="flex items-center justify-between bg-gradient-to-r from-[#011337] via-[#021C4F] to-[#0F4C81] px-4 py-3.5 text-white border-b-2 border-amber-400 shrink-0">
-              <div className="flex items-center gap-3">
-                <NotesAIBrainLogo size={42} />
-                <div>
-                  <h3 className="text-sm font-black text-white flex items-center gap-1.5">
-                    Notes AI Assistant
-                    <span className="bg-amber-400 text-slate-950 text-[9px] font-black px-1.5 py-0.5 rounded uppercase tracking-wider shadow-xs">
+            {/* Academic Header Bar with Upload Option at Top (Perfectly Aligned) */}
+            <div className="flex items-center justify-between bg-gradient-to-r from-[#0D9488] via-[#0F766E] to-[#115E59] px-4 py-3 text-white border-b-2 border-[#D97706] shrink-0 gap-2">
+              <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                <NotesAIBrainLogo size={40} />
+                <div className="min-w-0 flex-1 leading-tight">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <h3 className="text-xs sm:text-sm font-black text-white truncate font-mono">
+                      Notes AI Assistant
+                    </h3>
+                    <span className="bg-[#D97706] text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider font-mono shrink-0 shadow-xs">
                       Academic
                     </span>
-                  </h3>
-                  <p className="text-[11px] text-amber-200 font-semibold mt-0.5">
+                  </div>
+                  <p className="text-[11px] text-[#CCFBF1] font-semibold mt-0.5 truncate font-mono">
                     {uploadedPdfs.length > 0 ? `${uploadedPdfs.length} PDF Knowledge Base Active` : "CS Subjects & Syllabus Tutor"}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-1.5">
+              {/* Upload Option & Control Buttons Aligned at Top */}
+              <div className="flex items-center gap-1.5 shrink-0">
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center gap-1 rounded-xl bg-amber-400 text-slate-950 px-2.5 py-1 text-xs font-black hover:bg-amber-300 transition-all shadow-xs cursor-pointer"
+                  className="inline-flex items-center gap-1 rounded-xl bg-[#D97706] hover:bg-[#B45309] text-white px-3 py-1.5 text-xs font-bold transition-all shadow-neu-raised cursor-pointer font-mono shrink-0 border border-amber-400/40"
                   title="Upload PDF Notes"
                 >
                   <FiPlus size={14} />
@@ -372,14 +375,14 @@ If asked non-academic questions, reply ONLY: "I am the Notes AI Assistant. I can
                 </button>
                 <button
                   onClick={handleClearChat}
-                  className="p-1.5 rounded-lg text-white/80 hover:bg-white/20 hover:text-white transition-all cursor-pointer"
+                  className="p-1.5 rounded-xl text-white/80 hover:bg-white/20 hover:text-white transition-all cursor-pointer"
                   title="Clear Chat"
                 >
                   <FiTrash2 size={16} />
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1.5 rounded-lg text-white/80 hover:bg-white/20 hover:text-white transition-all cursor-pointer"
+                  className="p-1.5 rounded-xl text-white/80 hover:bg-white/20 hover:text-white transition-all cursor-pointer"
                   title="Close Assistant"
                 >
                   <FiX size={18} />
@@ -389,15 +392,15 @@ If asked non-academic questions, reply ONLY: "I am the Notes AI Assistant. I can
 
             {/* Uploaded PDFs Manager Banner */}
             {uploadedPdfs.length > 0 && (
-              <div className="bg-blue-50 border-b border-blue-200 px-3.5 py-2 text-xs text-blue-950 flex flex-col gap-1 shrink-0">
-                <div className="flex items-center justify-between font-extrabold">
-                  <span className="flex items-center gap-1 text-[#021C4F]">
-                    <FiPaperclip size={13} className="text-[#021C4F]" />
+              <div className="bg-[#CCFBF1]/40 dark:bg-teal-900/40 border-b border-[#5EEAD4]/40 px-3.5 py-2 text-xs text-[#134E4A] dark:text-[#CCFBF1] flex flex-col gap-1 shrink-0">
+                <div className="flex items-center justify-between font-extrabold font-mono">
+                  <span className="flex items-center gap-1 text-[#0D9488] dark:text-[#2DD4BF]">
+                    <FiPaperclip size={13} />
                     Indexed PDFs ({uploadedPdfs.length})
                   </span>
                   <button
                     onClick={() => fileInputRef.current?.click()}
-                    className="text-[11px] text-[#0F4C81] hover:underline font-black cursor-pointer"
+                    className="text-[11px] text-[#D97706] hover:underline font-black cursor-pointer"
                   >
                     + Add More
                   </button>
@@ -406,15 +409,15 @@ If asked non-academic questions, reply ONLY: "I am the Notes AI Assistant. I can
                   {uploadedPdfs.map((pdf) => (
                     <div
                       key={pdf.id}
-                      className="flex items-center gap-1.5 bg-white border border-blue-200 px-2.5 py-1 rounded-lg text-[11px] shadow-2xs"
+                      className="flex items-center gap-1.5 bg-white dark:bg-teal-950 border border-[#5EEAD4]/50 px-2.5 py-1 rounded-lg text-[11px] shadow-2xs font-mono"
                     >
-                      <span className="truncate max-w-[140px] font-bold text-[#021C4F]" title={pdf.fileName}>
+                      <span className="truncate max-w-[140px] font-bold text-[#0D9488] dark:text-[#2DD4BF]" title={pdf.fileName}>
                         {pdf.fileName}
                       </span>
-                      <span className="text-slate-500 font-medium">({pdf.totalPages}p)</span>
+                      <span className="text-[#64748B] dark:text-[#5EEAD4]/70 font-medium">({pdf.totalPages}p)</span>
                       <button
                         onClick={() => handleRemovePdf(pdf.id)}
-                        className="text-rose-600 hover:text-rose-800 ml-0.5 cursor-pointer"
+                        className="text-[#DC2626] hover:text-rose-800 ml-0.5 cursor-pointer"
                         title="Remove PDF"
                       >
                         <FiX size={13} />
@@ -427,46 +430,46 @@ If asked non-academic questions, reply ONLY: "I am the Notes AI Assistant. I can
 
             {/* Upload Progress Bar */}
             {isParsingPdf && (
-              <div className="bg-amber-50 px-3.5 py-2 border-b border-amber-200 text-xs text-amber-950 flex items-center justify-between shrink-0 font-bold">
+              <div className="bg-amber-50 dark:bg-amber-950/60 px-3.5 py-2 border-b border-amber-300 text-xs text-[#D97706] dark:text-amber-200 flex items-center justify-between shrink-0 font-bold font-mono">
                 <span className="flex items-center gap-2 text-[11px]">
-                  <FiCpu className="animate-spin text-amber-700" size={15} /> Extracting PDF Knowledge Base...
+                  <FiCpu className="animate-spin text-[#D97706]" size={15} /> Extracting PDF Knowledge Base...
                 </span>
                 <span className="font-mono text-xs">{uploadProgress}%</span>
               </div>
             )}
 
-            {/* Chat Messages Container (Ultra High Contrast Dark Text) */}
-            <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 space-y-3.5 bg-[#F1F5F9]">
+            {/* Chat Messages Container */}
+            <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 space-y-3.5 bg-[#F0FDFA] dark:bg-[#042F2E]">
               {chatMessages.map((msg, idx) => (
                 <div
                   key={idx}
                   className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}
                 >
                   <div
-                    className={`max-w-[92%] rounded-2xl px-4 py-3 text-xs sm:text-sm leading-relaxed shadow-md ${
+                    className={`max-w-[92%] rounded-2xl px-4 py-3 text-xs sm:text-sm leading-relaxed shadow-neu-raised ${
                       msg.role === "user"
-                        ? "bg-[#011337] text-white font-black border-2 border-amber-400 rounded-br-xs"
-                        : "bg-white text-[#011337] border-2 border-blue-200 border-l-4 border-l-[#C50337] rounded-bl-xs font-semibold"
+                        ? "bg-[#0D9488] text-white font-semibold rounded-br-xs border border-[#0F766E]"
+                        : "bg-white dark:bg-teal-950 text-[#134E4A] dark:text-[#CCFBF1] border border-[#5EEAD4]/50 dark:border-teal-800 border-l-4 border-l-[#D97706] rounded-bl-xs font-medium"
                     }`}
                   >
                     {msg.role === "user" ? (
-                      <p className="whitespace-pre-wrap font-black text-white">{msg.content}</p>
+                      <p className="whitespace-pre-wrap font-semibold text-white">{msg.content}</p>
                     ) : (
-                      <div className="text-[#011337] font-semibold">
+                      <div className="text-[#134E4A] dark:text-[#CCFBF1]">
                         <FormattedMessage content={msg.content} />
                       </div>
                     )}
 
-                    {/* Bot Action Buttons (High Contrast Badges) */}
+                    {/* Bot Action Buttons */}
                     {msg.role === "assistant" && (
-                      <div className="mt-3 pt-2 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-600 font-medium">
-                        <span className="font-mono font-bold text-slate-500">
+                      <div className="mt-3 pt-2 border-t border-[#5EEAD4]/30 dark:border-teal-800 flex items-center justify-between text-[11px] text-[#64748B] dark:text-[#5EEAD4]/70">
+                        <span className="font-mono text-xs font-semibold text-[#64748B] dark:text-[#5EEAD4]/70">
                           {new Date(msg.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                         </span>
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => handleCopyMessage(msg.content, idx)}
-                            className="inline-flex items-center gap-1 font-bold text-[#021C4F] bg-blue-100 hover:bg-[#021C4F] hover:text-white px-2.5 py-1 rounded-lg border border-blue-200 cursor-pointer transition-all shadow-2xs"
+                            className="inline-flex items-center gap-1 font-bold text-[#0D9488] dark:text-[#2DD4BF] bg-[#CCFBF1]/40 dark:bg-teal-900/50 hover:bg-[#0D9488] hover:text-white px-2.5 py-1 rounded-lg border border-[#5EEAD4]/40 cursor-pointer transition-all shadow-2xs font-mono"
                             title="Copy Answer"
                           >
                             {copiedMsgIndex === idx ? <FiCheck size={12} className="text-emerald-600" /> : <FiCopy size={12} />}
@@ -474,7 +477,7 @@ If asked non-academic questions, reply ONLY: "I am the Notes AI Assistant. I can
                           </button>
                           <button
                             onClick={() => speakText(msg.content)}
-                            className="inline-flex items-center gap-1 font-bold text-amber-900 bg-amber-100 hover:bg-amber-500 hover:text-slate-950 px-2.5 py-1 rounded-lg border border-amber-300 cursor-pointer transition-all shadow-2xs"
+                            className="inline-flex items-center gap-1 font-bold text-[#D97706] bg-amber-50 dark:bg-amber-950/50 hover:bg-[#D97706] hover:text-white px-2.5 py-1 rounded-lg border border-amber-300/50 cursor-pointer transition-all shadow-2xs font-mono"
                             title="Read Aloud"
                           >
                             {isSpeaking ? <FiVolumeX size={12} /> : <FiVolume2 size={12} />}
@@ -489,8 +492,8 @@ If asked non-academic questions, reply ONLY: "I am the Notes AI Assistant. I can
 
               {isChatLoading && (
                 <div className="flex justify-start">
-                  <div className="rounded-2xl bg-white px-4 py-3 border-2 border-blue-200 text-xs font-black text-[#021C4F] flex items-center gap-2.5 shadow-md">
-                    <FiCpu className="animate-spin text-[#021C4F]" size={16} />
+                  <div className="rounded-2xl bg-white dark:bg-teal-950 px-4 py-3 border border-[#5EEAD4] text-xs font-bold text-[#0D9488] dark:text-[#2DD4BF] flex items-center gap-2.5 shadow-neu-raised font-mono">
+                    <FiCpu className="animate-spin text-[#0D9488]" size={16} />
                     {uploadedPdfs.length > 0
                       ? "Searching PDF knowledge base & synthesizing answer..."
                       : "Thinking & synthesizing academic answer..."}
@@ -499,15 +502,15 @@ If asked non-academic questions, reply ONLY: "I am the Notes AI Assistant. I can
               )}
             </div>
 
-            {/* Chat Input Bar (High Contrast Input) */}
+            {/* Chat Input Bar */}
             <form
               onSubmit={handleChatSend}
-              className="flex items-center gap-2 border-t-2 border-slate-200 bg-white p-3 shrink-0"
+              className="flex items-center gap-2 border-t border-[#5EEAD4]/40 bg-white dark:bg-teal-950 p-3 shrink-0"
             >
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-400 text-slate-950 hover:bg-amber-300 border border-amber-500 cursor-pointer shadow-xs font-bold"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#D97706] text-white hover:bg-[#B45309] border border-amber-400/40 cursor-pointer shadow-neu-raised font-bold"
                 title="Upload PDF Notes (+)"
               >
                 <FiPlus size={18} />
@@ -518,8 +521,8 @@ If asked non-academic questions, reply ONLY: "I am the Notes AI Assistant. I can
                 onClick={toggleMic}
                 className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all cursor-pointer border ${
                   isRecording
-                    ? "bg-rose-600 text-white animate-pulse border-rose-700"
-                    : "bg-slate-100 text-slate-800 hover:bg-slate-200 border-slate-300"
+                    ? "bg-[#DC2626] text-white animate-pulse border-red-700"
+                    : "bg-[#F0FDFA] dark:bg-teal-900/40 text-[#134E4A] dark:text-[#CCFBF1] hover:bg-[#CCFBF1]/50 border-[#5EEAD4]"
                 }`}
                 title={isRecording ? "Stop Listening" : "Voice Input"}
               >
@@ -535,13 +538,13 @@ If asked non-academic questions, reply ONLY: "I am the Notes AI Assistant. I can
                     ? `Ask about ${uploadedPdfs[0].fileName.slice(0, 14)}...`
                     : "Ask CS subject question or upload PDF..."
                 }
-                className="flex-1 rounded-xl border-2 border-slate-300 bg-white px-3.5 py-2 text-xs sm:text-sm text-slate-900 font-semibold placeholder:text-slate-400 focus:border-[#021C4F] focus:outline-none focus:ring-2 focus:ring-[#021C4F]/20"
+                className="flex-1 rounded-xl border border-[#5EEAD4] bg-white dark:bg-teal-900/30 px-3.5 py-2 text-xs sm:text-sm text-[#134E4A] dark:text-[#CCFBF1] font-medium placeholder:text-[#64748B] focus:border-[#0D9488] focus:outline-none focus:ring-2 focus:ring-[#0D9488]/20"
               />
 
               <button
                 type="submit"
                 disabled={!chatInput.trim() || isChatLoading}
-                className="flex h-10 px-4 items-center justify-center gap-1 rounded-xl bg-[#021C4F] hover:bg-[#0F4C81] text-xs sm:text-sm font-black text-white shadow-md disabled:opacity-50 cursor-pointer transition-all"
+                className="flex h-10 px-4 items-center justify-center gap-1 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] text-xs sm:text-sm font-bold text-white shadow-neu-raised disabled:opacity-50 cursor-pointer transition-all font-mono"
               >
                 <FiSend size={15} />
               </button>
@@ -552,3 +555,4 @@ If asked non-academic questions, reply ONLY: "I am the Notes AI Assistant. I can
     </>
   );
 }
+

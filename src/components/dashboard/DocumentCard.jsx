@@ -48,17 +48,17 @@ export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, m
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35 }}
     >
-      <div className="group relative flex flex-col gap-3 overflow-hidden rounded-xl bg-white border border-[#E5E7EB] shadow-sm transition-all duration-300 hover:shadow-md text-left p-5">
+      <div style={{ padding:'var(--fluid-pad-card)' }} className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl bg-white dark:bg-teal-950/80 border border-[#5EEAD4]/40 dark:border-teal-800 shadow-neu-raised transition-all duration-200 hover:shadow-neu-raised-lg hover:border-[#0D9488] dark:hover:border-[#2DD4BF] text-left">
         <div className="flex items-start gap-3">
           {/* PDF icon */}
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#0F4C81]/10 text-[#0F4C81]">
+          <div style={{ height:'var(--fluid-icon-lg)', width:'var(--fluid-icon-lg)' }} className="flex shrink-0 items-center justify-center rounded-xl bg-[#0D9488]/10 text-[#0D9488] dark:bg-teal-900/40 dark:text-teal-200">
             <FiFileText size={22} />
           </div>
           <div className="min-w-0 flex-1">
-            <h3 className="truncate font-sans text-sm font-semibold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors" title={title}>
+            <h3 style={{ fontSize: 'clamp(0.8rem, 1.5vw + 0.3rem, 1rem)' }} className="truncate font-mono font-bold text-[#134E4A] dark:text-[#CCFBF1] group-hover:text-[#0D9488] transition-colors" title={title}>
               {title}
             </h3>
-            <p className="mt-0.5 text-xs text-[#6B7280]">
+            <p className="mt-0.5 text-xs text-[#64748B] dark:text-[#5EEAD4]/80">
               {subject}
               {semStr ? ` · ${semStr}` : ""}
               {metaExtra ? ` · ${metaExtra}` : ""}
@@ -67,46 +67,46 @@ export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, m
           {onBookmark && (
             <button
               onClick={() => onBookmark(doc.id)}
-              className={`shrink-0 rounded-lg p-1.5 transition-all ${
+              className={`shrink-0 rounded-xl p-2 transition-all cursor-pointer ${
                 bookmarked
-                  ? "text-[#0F4C81] bg-[#0F4C81]/10"
-                  : "text-[#6B7280] hover:text-[#0F4C81] hover:bg-[#0F4C81]/10"
+                  ? "text-[#0D9488] bg-[#0D9488]/15 dark:bg-teal-900/60"
+                  : "text-[#64748B] hover:text-[#0D9488] hover:bg-[#0D9488]/10"
               }`}
               title={bookmarked ? "Remove bookmark" : "Bookmark"}
             >
-              <FiBookmark size={15} fill={bookmarked ? "currentColor" : "none"} />
+              <FiBookmark size={16} fill={bookmarked ? "currentColor" : "none"} />
             </button>
           )}
         </div>
 
         {doc.description && (
-          <p className="text-xs leading-relaxed text-[#6B7280] line-clamp-2">
+          <p className="text-xs leading-relaxed text-[#134E4A]/80 dark:text-[#99F6E4]/80 line-clamp-2">
             {truncate(doc.description, 100)}
           </p>
         )}
 
         {/* Detailed Metadata Grid */}
-        <div className="rounded-lg bg-slate-50 p-2.5 text-[11px] space-y-1 border border-slate-100">
-          <div className="flex items-center justify-between text-slate-600">
-            <span className="font-semibold text-slate-500">File Name:</span>
-            <span className="font-mono text-slate-800 truncate max-w-[170px]" title={fileName}>
+        <div className="rounded-xl bg-[#F0FDFA] dark:bg-teal-900/30 p-3 text-[11px] space-y-1 border border-[#5EEAD4]/30 dark:border-teal-800">
+          <div className="flex items-center justify-between text-[#134E4A] dark:text-[#CCFBF1]">
+            <span className="font-semibold text-[#64748B] dark:text-[#5EEAD4]/70">File Name:</span>
+            <span className="font-mono text-[#134E4A] dark:text-[#CCFBF1] truncate max-w-[170px]" title={fileName}>
               {fileName}
             </span>
           </div>
 
-          <div className="flex items-center justify-between text-slate-600">
-            <span className="font-semibold text-slate-500">Academic Info:</span>
-            <span className="font-medium text-[#0F4C81]">
+          <div className="flex items-center justify-between text-[#134E4A] dark:text-[#CCFBF1]">
+            <span className="font-semibold text-[#64748B] dark:text-[#5EEAD4]/70">Academic Info:</span>
+            <span className="font-semibold text-[#0D9488] dark:text-[#2DD4BF]">
               {[yearStr, semStr, unitStr].filter(Boolean).join(" · ") || "Department File"}
             </span>
           </div>
 
-          <div className="flex items-center justify-between text-slate-500 text-[10px] pt-0.5">
+          <div className="flex items-center justify-between text-[#64748B] dark:text-[#5EEAD4]/70 text-[10px] pt-1 border-t border-[#5EEAD4]/20">
             <span className="flex items-center gap-1">
-              <FiCalendar size={10} /> {formatDate(dateStr)}
+              <FiCalendar size={11} /> {formatDate(dateStr)}
             </span>
-            <span className="flex items-center gap-1 font-semibold text-slate-700">
-              <FiHardDrive size={10} /> {sizeStr}
+            <span className="flex items-center gap-1 font-bold text-[#134E4A] dark:text-[#CCFBF1]">
+              <FiHardDrive size={11} /> {sizeStr}
             </span>
           </div>
         </div>
@@ -115,14 +115,14 @@ export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, m
         <div className="flex gap-2 pt-1">
           <button
             onClick={handleView}
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-all"
+            className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-[#5EEAD4] bg-white dark:bg-teal-950/90 py-2.5 text-xs font-semibold text-[#134E4A] dark:text-[#CCFBF1] hover:bg-[#CCFBF1]/30 hover:text-[#0D9488] transition-all cursor-pointer"
           >
             <FiEye size={14} /> View PDF
           </button>
 
           <button
             onClick={handleDownload}
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-2 text-xs font-bold text-white shadow-sm transition-all active:scale-95"
+            className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] py-2.5 text-xs font-bold text-white shadow-neu-raised transition-all cursor-pointer active:scale-[0.98]"
           >
             <FiDownload size={14} /> Download PDF
           </button>
@@ -131,3 +131,4 @@ export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, m
     </motion.div>
   );
 }
+

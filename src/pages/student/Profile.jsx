@@ -1,7 +1,6 @@
 import { useAuth } from "../../context/AuthContext";
 import { initials } from "../../utils/helpers";
 import { FiShield } from "react-icons/fi";
-import BirthdayWishCard from "../../components/dashboard/BirthdayWishCard";
 
 export default function Profile() {
   const { profile, user } = useAuth();
@@ -9,11 +8,8 @@ export default function Profile() {
   const photoPath = user?.photoUrl || "/admin_photo.jpg";
 
   return (
-    <div className="max-w-xl mx-auto py-10 px-4 text-center bg-[#F8FAFC]">
-      {/* Advance Birthday Wish Celebration Banner */}
-      <BirthdayWishCard user={user} />
-
-      <h2 className="mb-6 font-sans text-2xl font-bold text-[#1E3A8A]">Student Profile</h2>
+    <div className="max-w-xl mx-auto py-10 px-4 text-center bg-[#F0FDFA] dark:bg-[#042F2E]">
+      <h2 className="mb-6 font-mono text-2xl font-bold text-[#134E4A] dark:text-[#CCFBF1]">Student Profile</h2>
       <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm flex flex-col items-center justify-center">
         {hasPhoto ? (
           /* Profile view for photo users (24E3006, 24E3007, etc.) */

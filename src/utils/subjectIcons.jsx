@@ -8,6 +8,7 @@ export function getSubjectAbbreviation(subjectName) {
   if (!subjectName) return "CS";
   const sub = String(subjectName).toUpperCase().trim();
 
+  // PG 1st & 2nd Year Subjects
   if (sub.includes("ADVANCED DESIGN") || sub.includes("DESIGN AND ANALYSIS")) return "ADAA";
   if (sub.includes("ADVANCED SOFTWARE")) return "ASE";
   if (sub.includes("MOBILE NETWORK")) return "MNS";
@@ -17,19 +18,22 @@ export function getSubjectAbbreviation(subjectName) {
   if (sub.includes("DATA COMMUNICATION")) return "DCN";
   if (sub.includes("PYTHON FOR DATA SCIENCE") && sub.includes("LAB")) return "PY LAB";
   if (sub.includes("PYTHON FOR DATA SCIENCE")) return "PY DATA";
-  if (sub.includes("PYTHON")) return "PYTHON";
-  if (sub.includes("ENTERPRISE") || sub.includes("JEE")) return "JEE";
+  if (sub.includes("ENTERPRISE") || sub.includes("JEE") || sub.includes("JAVA ENTERPRISE")) return "JEE";
   if (sub.includes("INTERNET OF THINGS") || sub.includes("IOT")) return "IOT";
   if (sub.includes("ADVANCED DATABASE")) return "ADBMS";
   if (sub.includes("DISTRIBUTED DATABASE")) return "DDB";
+  if (sub.includes("CLOUD WEB SERVICES")) return "CWS";
+  if (sub.includes("HIGH SPEED")) return "HSN";
+  if (sub.includes("SOCIAL NETWORK")) return "SNA";
   if (sub.includes("MACHINE LEARNING") || (sub.includes("ARTIFICIAL") && sub.includes("MACHINE"))) return "AIML";
-  if (sub.includes("DOT NET")) return "DOTNET";
+  if (sub.includes("DOT NET") || sub.includes(".NET TECH")) return "DOTNET";
   if (sub.includes("BIG DATA")) return "BDA";
   if (sub.includes("CYBER FORENSICS")) return "CF";
   if (sub.includes("ETHICAL HACKING")) return "EH";
   if (sub.includes("INFORMATION SECURITY")) return "IS";
-  if (sub.includes("HIGH SPEED")) return "HSN";
-  if (sub.includes("SOCIAL NETWORK")) return "SNA";
+
+  // General UG & Common Subjects
+  if (sub.includes("PYTHON")) return "PYTHON";
   if (sub.includes("JAVA") && !sub.includes("SCRIPT")) return "JAVA";
   if (sub.includes("C++") || sub.includes("CPP")) return "C++";
   if (sub.includes("DBMS") || sub.includes("DATABASE")) return "DBMS";
@@ -43,7 +47,7 @@ export function getSubjectAbbreviation(subjectName) {
   if (sub.includes("ARTIFICIAL") || sub.includes("EXPERT") || sub.includes("AI")) return "AI";
   if (sub.includes("SOFTWARE") && sub.includes("ENGINEERING")) return "SE";
   if (sub.includes("UML") || sub.includes("UNIFIED")) return "UML";
-  if (sub.includes("IMAGE") || sub.includes("DIGITAL")) return "DIP";
+  if (sub.includes("IMAGE") || sub.includes("DIGITAL IMAGE") || sub.includes("DIP")) return "DIP";
   if (sub.includes("STRUCTURES") || sub.includes("ALGORITHM")) return "DS";
   if (sub.includes("ANDROID")) return "ANDROID";
   if (sub.includes("WEB TECHNOLOGY") || sub.includes("WEB TECH")) return "WEB";
@@ -54,7 +58,7 @@ export function getSubjectAbbreviation(subjectName) {
   if (sub.includes("TAMIL")) return "TAMIL";
   if (sub.includes("ENGLISH")) return "ENG";
 
-  // Fallback: generate acronym from words (e.g. Computer Networks -> CN)
+  // Fallback acronym from words
   const words = sub.replace(/[^A-Z0-9\s]/g, "").split(/\s+/).filter(Boolean);
   if (words.length === 1) return words[0].slice(0, 6);
   if (words.length === 2) return (words[0][0] + words[1][0]).toUpperCase();
@@ -62,27 +66,27 @@ export function getSubjectAbbreviation(subjectName) {
 }
 
 /**
- * Returns a stylized subject logo emblem badge displaying the subject name/abbreviation.
+ * Returns a stylized subject logo emblem badge displaying the subject logo/abbreviation.
  */
 export function getSubjectIcon(subjectName, size = 24, className = "") {
   const abbr = getSubjectAbbreviation(subjectName);
   
-  // Choose font size based on text length to ensure clean fit inside logo badge
   const fontSizeClass =
     abbr.length <= 3
-      ? "text-sm font-black sm:text-base tracking-wider"
+      ? "text-xs sm:text-sm font-mono font-black tracking-wider"
       : abbr.length <= 5
-      ? "text-xs font-black sm:text-sm tracking-tight"
+      ? "text-[11px] sm:text-xs font-mono font-extrabold tracking-tight"
       : abbr.length <= 7
-      ? "text-[10px] font-black sm:text-xs tracking-tighter"
-      : "text-[9px] font-extrabold tracking-tighter";
+      ? "text-[9px] sm:text-[10px] font-mono font-extrabold tracking-tighter"
+      : "text-[8px] font-mono font-bold tracking-tighter";
 
   return (
     <div
-      className={`flex h-full w-full items-center justify-center rounded-xl bg-gradient-to-br from-[#7F011F] via-[#990227] to-[#590015] text-[#F5EBD0] shadow-sm border border-[#7F011F]/30 p-1 text-center select-none ${fontSizeClass} ${className}`}
+      className={`flex shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#4A1620] via-[#3B1119] to-[#2B0C12] text-white shadow-md border-2 border-[#D97706] p-1 text-center select-none ${fontSizeClass} ${className}`}
       title={subjectName}
     >
       {abbr}
     </div>
   );
 }
+

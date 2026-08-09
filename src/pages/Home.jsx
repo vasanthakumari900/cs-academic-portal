@@ -149,7 +149,10 @@ export default function Home() {
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-5 py-2 text-xs font-extrabold text-amber-300 border border-white/20 shadow-lg tracking-wider uppercase">
               <FiShield size={14} className="text-[#C50337]" />
-              Dwaraka Doss Goverdhan Doss Vaishnav College (Autonomous)
+              <span className="hidden sm:inline">
+                Dwaraka Doss Goverdhan Doss Vaishnav College (Autonomous)
+              </span>
+              <span className="sm:hidden">DDGDVC (Autonomous)</span>
             </span>
           </motion.div>
 
@@ -160,7 +163,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="space-y-4 max-w-4xl mx-auto"
           >
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.15] font-serif text-white">
+            <h1 style={{ fontSize: 'clamp(1.65rem, 4.5vw + 0.5rem, 3.75rem)' }} className="font-black tracking-tight leading-[1.15] font-serif text-white">
               {user ? (
                 <>
                   Welcome back, <span className="bg-gradient-to-r from-rose-400 via-[#C50337] to-amber-300 bg-clip-text text-transparent">{user.name}</span>!
@@ -175,7 +178,7 @@ export default function Home() {
               )}
             </h1>
 
-            <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
+            <p style={{ fontSize: 'clamp(0.875rem, 1.5vw + 0.5rem, 1.125rem)' }} className="text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
               {user ? (
                 "Access unit-wise lecture notes, video playlists, past university question papers, CIA assessments, and placement drives."
               ) : (
@@ -189,7 +192,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 pt-2 w-full sm:w-auto px-2 sm:px-0"
+            className="flex flex-col sm:flex-row items-center justify-center gap-[clamp(0.75rem,2vw,1rem)] pt-2 w-full sm:w-auto px-[clamp(0.5rem,2vw,0rem)]"
           >
             {user ? (
               <button
@@ -223,7 +226,7 @@ export default function Home() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="pt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto"
+            className="pt-12 stat-grid max-w-5xl mx-auto"
           >
             {stats.map((stat) => (
               <motion.div
@@ -245,7 +248,7 @@ export default function Home() {
 
       {/* ── QUICK ACCESS PORTAL CARDS ── */}
       <section className="relative -mt-10 z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="card-grid">
           {quickCards.map((card, i) => (
             <motion.button
               key={card.label}
