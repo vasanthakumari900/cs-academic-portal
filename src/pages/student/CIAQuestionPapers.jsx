@@ -16,7 +16,7 @@ import { uploadFile } from "../../services/storageService";
 import { STORAGE_PATHS } from "../../utils/constants";
 import { CURRICULUM } from "../../utils/curriculum";
 import toast from "react-hot-toast";
-import { downloadDriveFile } from "../../utils/downloadUtils";
+import { downloadDriveFile, getDriveViewUrl } from "../../utils/downloadUtils";
 import PdfFileCard from "../../components/common/PdfFileCard";
 
 
@@ -163,7 +163,7 @@ function PreviewModal({ paper, onClose }) {
           <div className="flex items-center justify-between border-t border-[#E5E7EB] px-5 py-3 bg-[#F8FAFC]">
             <span className="text-xs text-[#6B7280]">Google Drive preview</span>
             <a
-              href={paper.driveUrl}
+              href={getDriveViewUrl(paper.driveUrl || paper.fileUrl || paper.driveFileId)}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] px-4 py-2 text-xs font-semibold text-white shadow-sm transition-all"

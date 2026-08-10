@@ -441,7 +441,7 @@ export function AuthProvider({ children }) {
     }
 
     const userData = {
-      name: trimmedName,
+      name: name.trim(),
       type: "faculty",
       role: "faculty",
     };

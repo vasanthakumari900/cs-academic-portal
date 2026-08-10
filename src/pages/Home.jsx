@@ -5,11 +5,20 @@ import { useAuth } from "../context/AuthContext";
 import {
   FiPlayCircle, FiFileText, FiBriefcase, FiGrid, FiAward,
   FiArrowRight, FiChevronRight, FiUsers, FiLayers, FiStar,
-  FiZap, FiBookOpen, FiCompass, FiShield, FiTrendingUp
+  FiZap, FiBookOpen, FiCompass, FiShield, FiTrendingUp, FiCalendar
 } from "react-icons/fi";
 import AnimatedCounter from "../components/ui/AnimatedCounter";
 
 const quickCards = [
+  {
+    label: "College Calendar",
+    icon: FiCalendar,
+    to: "/college-calendar",
+    badge: "2026 - 2027",
+    color: "from-amber-500 to-rose-600",
+    glow: "shadow-amber-500/20",
+    desc: "Full 12-month academic calendar, working days & exam schedule."
+  },
   {
     label: "Video Lectures",
     icon: FiPlayCircle,

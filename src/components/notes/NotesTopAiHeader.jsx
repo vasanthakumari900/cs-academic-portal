@@ -91,7 +91,7 @@ export default function NotesTopAiHeader() {
     {
       role: "assistant",
       content:
-        "👋 Welcome! I am your dedicated **Notes AI Assistant**.\n\nI can help you understand Computer Science subjects, explain complex syllabus concepts, and answer questions from your uploaded PDF notes.\n\nClick **+ Upload** at the top to index your notes or ask any subject question below!",
+        "👋 Welcome! I am your dedicated **Notes AI Assistant**.\n\nI can help you understand Computer Science subjects, explain complex syllabus concepts, and answer questions from your uploaded PDF notes.\n\nClick **+** at the top or in the input bar to index your notes or ask any subject question below!",
       timestamp: Date.now(),
     },
   ]);
@@ -363,15 +363,14 @@ If asked non-academic questions, reply ONLY: "I am the Notes AI Assistant. I can
                 </div>
               </div>
 
-              {/* Upload Option & Control Buttons Aligned at Top */}
+              {/* Upload Option (+) & Control Buttons Aligned at Top */}
               <div className="flex items-center gap-1.5 shrink-0">
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="inline-flex items-center gap-1 rounded-xl bg-[#D97706] hover:bg-[#B45309] text-white px-3 py-1.5 text-xs font-bold transition-all shadow-neu-raised cursor-pointer font-mono shrink-0 border border-amber-400/40"
-                  title="Upload PDF Notes"
+                  className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#D97706] hover:bg-[#B45309] text-white transition-all shadow-neu-raised cursor-pointer shrink-0 border border-amber-400/40"
+                  title="Upload PDF Notes (+)"
                 >
-                  <FiPlus size={14} />
-                  <span>Upload</span>
+                  <FiPlus size={18} />
                 </button>
                 <button
                   onClick={handleClearChat}

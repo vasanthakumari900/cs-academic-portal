@@ -22,6 +22,7 @@ const navLinks = [
   { to: "/", label: "Home" },
   { to: "/notes", label: "Notes" },
   { to: "/e-content", label: "E-Content" },
+  { to: "/college-calendar", label: "Calendar" },
   { to: "/question-papers", label: "Q Papers" },
   { to: "/cia-question-papers", label: "CIA Papers" },
   { to: "/placements", label: "Placements" },

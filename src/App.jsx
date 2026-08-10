@@ -18,6 +18,7 @@ import {
   FiCheckSquare,
   FiMessageSquare,
   FiActivity,
+  FiCalendar,
 } from "react-icons/fi";
 
 import MainLayout from "./layouts/MainLayout";
@@ -36,6 +37,7 @@ import About from "./pages/About";
 import Search from "./pages/Search";
 import NotFound from "./pages/NotFound";
 import InterviewExperiences from "./pages/InterviewExperiences";
+import CollegeCalendar from "./pages/CollegeCalendar";
 
 // Auth
 import Login from "./pages/auth/Login";
@@ -130,6 +132,7 @@ const studentNav = [
   { to: "/student/dashboard", label: "Dashboard", icon: FiHome },
   { to: "/student/videos", label: "Videos", icon: FiPlayCircle },
   { to: "/student/notes", label: "Notes", icon: FiFileText },
+  { to: "/college-calendar", label: "College Calendar", icon: FiCalendar },
   { to: "/student/assignments", label: "Assignments", icon: FiCheckSquare },
   { to: "/student/question-papers", label: "Question Papers", icon: FiFileText },
   { to: "/student/placements", label: "Placement Details", icon: FiBriefcase },
@@ -180,6 +183,7 @@ export default function App() {
               <Route path="/question-papers" element={<AnimatedPage><QuestionPapers /></AnimatedPage>} />
               <Route path="/cia-question-papers" element={<AnimatedPage><CIAQuestionPapers /></AnimatedPage>} />
               <Route path="/placements" element={<AnimatedPage><Placements /></AnimatedPage>} />
+              <Route path="/college-calendar" element={<AnimatedPage><CollegeCalendar /></AnimatedPage>} />
               <Route path="/interview-experiences" element={<AnimatedPage><InterviewExperiences /></AnimatedPage>} />
               <Route path="/about" element={<AnimatedPage><About /></AnimatedPage>} />
               <Route path="/search" element={<AnimatedPage><Search /></AnimatedPage>} />

@@ -12,7 +12,7 @@ import { STORAGE_PATHS } from "../utils/constants";
 import { useFirestoreList } from "../hooks/useFirestoreList";
 import { uploadFile } from "../services/storageService";
 import toast from "react-hot-toast";
-import { downloadDriveFile, getDriveEmbedUrl } from "../utils/downloadUtils";
+import { downloadDriveFile, getDriveEmbedUrl, getDriveViewUrl } from "../utils/downloadUtils";
 import PdfFileCard from "../components/common/PdfFileCard";
 import { getSubjectIcon } from "../utils/subjectIcons";
 
@@ -547,8 +547,7 @@ export default function QuestionPapers() {
   const [uploadRegulation, setUploadRegulation] = useState("R2024");
   const [uploadFileObj, setUploadFileObj] = useState(null);
 
- const uploadedPapers = [];
-const refetch = () => {};
+  const { items: uploadedPapers, refetch } = useFirestoreList(questionPaperService);
   async function handleUpload(e) {
     e.preventDefault();
     if (!uploadFileObj) {
@@ -570,10 +569,11 @@ const refetch = () => {};
         regulation: uploadRegulation,
         subject: selectedSubject,
         semester: Number(selectedSemester),
+        academicYear: Number(selectedYear),
         courseType: courseType,
         fileUrl,
-        facultyName: user.name || "Faculty",
-        facultyId: user.uid || "faculty-id",
+        facultyName: user?.name || "Faculty",
+        facultyId: user?.uid || "faculty-id",
       });
 
       toast.success("Question paper uploaded successfully!");
@@ -599,12 +599,12 @@ const refetch = () => {};
   const ys = selectedYear ? yearStyles[selectedYear] : yearStyles[1];
 
   const combinedPapers = useMemo(() => {
-    const mappedFirestore = uploadedPapers
+    const mappedFirestore = (uploadedPapers || [])
       .filter((p) => {
         const matchesSubject = !selectedSubject || p.subject?.toUpperCase() === selectedSubject.toUpperCase();
         const matchesCourse = !courseType || p.courseType === courseType;
-        const matchesYear = !selectedYear || p.year === selectedYear;
-        const matchesSem = !selectedSemester || p.semester === selectedSemester;
+        const matchesYear = !selectedYear || String(p.year) === String(selectedYear) || Number(p.academicYear) === Number(selectedYear);
+        const matchesSem = !selectedSemester || Number(p.semester) === Number(selectedSemester);
         return matchesSubject && matchesCourse && matchesYear && matchesSem;
       })
       .map((p) => ({
@@ -612,10 +612,14 @@ const refetch = () => {};
         title: p.title,
         subject: p.subject,
         facultyName: p.facultyName || "Faculty",
-        description: p.description || "Previous year question paper",
-        year: p.year || "U1819",
+        description: p.description || "Uploaded question paper",
+        year: p.year || "2024",
         regulation: p.regulation || "R2024",
         fileUrl: p.fileUrl,
+        driveUrl: p.driveUrl || p.fileUrl,
+        driveFileId: p.driveFileId,
+        academicYear: p.academicYear || Number(selectedYear) || 1,
+        semester: p.semester || Number(selectedSemester) || 1,
         fromFirestore: true,
       }));
 
@@ -1085,7 +1089,7 @@ const refetch = () => {};
                 </div>
                 <div className="flex items-center gap-2">
                   <a
-                    href={previewing.fileUrl || previewing.driveUrl || (previewing.driveFileId ? `https://drive.google.com/file/d/${previewing.driveFileId}/view` : "#")}
+                    href={getDriveViewUrl(previewing.fileUrl || previewing.driveUrl || previewing.driveFileId)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="rounded-lg bg-white/15 px-3 py-1 text-xs font-semibold text-white hover:bg-white/25 transition-all flex items-center gap-1"
@@ -1099,7 +1103,7 @@ const refetch = () => {};
               </div>
               <div className="aspect-[4/3] w-full bg-slate-900 sm:aspect-[16/10] lg:aspect-[16/9]">
                 {(() => {
-                  const targetUrl = previewing.fileUrl || previewing.driveUrl || (previewing.driveFileId ? `https://drive.google.com/file/d/${previewing.driveFileId}/view` : "");
+                  const targetUrl = previewing.fileUrl || previewing.driveUrl || previewing.driveFileId || "";
                   const isLocal = typeof targetUrl === "string" && targetUrl.startsWith("/");
                   if (isLocal) {
                     return (
@@ -1111,7 +1115,7 @@ const refetch = () => {};
                         <div className="flex flex-col items-center justify-center h-full text-white p-6 text-center">
                           <p className="mb-3 text-sm">PDF Preview</p>
                           <a
-                            href={targetUrl}
+                            href={getDriveViewUrl(targetUrl)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="px-4 py-2 bg-[#1E88E5] text-white rounded-lg text-xs font-bold shadow-md hover:bg-blue-600 transition-all"
@@ -1133,9 +1137,9 @@ const refetch = () => {};
                 })()}
               </div>
               <div className="border-t border-[#E5E7EB] px-5 py-2.5 flex items-center justify-between text-[11px] text-[#6B7280] bg-[#F8FAFC]">
-                <span>{previewing.subject} · {previewing.year}</span>
+                <span>{previewing.subject} · {previewing.year || "2024"}</span>
                 <a
-                  href={previewing.fileUrl || previewing.driveUrl || "#"}
+                  href={getDriveViewUrl(previewing.fileUrl || previewing.driveUrl || previewing.driveFileId)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#0F4C81] font-bold hover:underline"

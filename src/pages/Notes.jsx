@@ -17,6 +17,7 @@ import { downloadDriveFile } from "../utils/downloadUtils";
 import PdfFileCard from "../components/common/PdfFileCard";
 import { getSubjectIcon } from "../utils/subjectIcons";
 import NotesTopAiHeader from "../components/notes/NotesTopAiHeader";
+import AudioPodcastPlayerModal from "../components/notes/AudioPodcastPlayerModal";
 
 const COURSE_OPTIONS = [
   { value: "ug", label: "UG", desc: "Bachelor of Science in Computer Science (B.Sc.)" },
@@ -2714,6 +2715,7 @@ export default function Notes() {
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [expandedUnit, setExpandedUnit] = useState(null);
   const [viewingPdf, setViewingPdf] = useState(null);
+  const [activePodcast, setActivePodcast] = useState(null);
   const [showLabModal, setShowLabModal] = useState(false);
   const [showUploadForm, setShowUploadForm] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -3334,6 +3336,19 @@ export default function Notes() {
           </div>
         </div>
 
+        <button
+          onClick={() =>
+            setActivePodcast({
+              title: "Complete Subject Revision",
+              subtitle: "Overview & Exam Key Points",
+              syllabus: syllabusData?.map((s) => s.module).join(". ") || "Core Computer Science concepts and exam revision points.",
+            })
+          }
+          className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-4 py-2.5 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer border border-amber-300/40 shrink-0 font-mono"
+          title="Listen to AI Audio Podcast Overview"
+        >
+          🎙️ AI Audio Podcast (Quick Revision)
+        </button>
       </motion.div>
 
       {!isEnglish && syllabusData ? (
@@ -3474,7 +3489,7 @@ export default function Notes() {
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {uploadedSubjectNotes.map((note) => (
               <a key={note.id}
-                href={note.fileUrl}
+                href={getDriveViewUrl(note.fileUrl)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-4 rounded-lg border border-[#E5E7EB] bg-white p-4 transition-all hover:bg-[#F8FAFC] hover:border-[#1E88E5]/30 hover:shadow-sm"
@@ -3522,6 +3537,20 @@ export default function Notes() {
                       </div>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActivePodcast({
+                            title: unit.title,
+                            subtitle: unit.subtitle,
+                            syllabus: unit.syllabus,
+                          });
+                        }}
+                        className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#0D9488] to-[#0F766E] text-white px-3 py-1 text-xs font-bold shadow-sm hover:scale-105 transition-all cursor-pointer font-mono"
+                        title="Listen to AI Unit Podcast"
+                      >
+                        🎙️ AI Podcast
+                      </button>
                       {fileCount > 0 && <span className="rounded-full bg-[#0F4C81]/10 text-[#0F4C81] px-3 py-0.5 text-[10px] font-bold">{fileCount} PDF{fileCount > 1 ? "s" : ""}</span>}
                       <FiChevronDown size={16} className={`text-slate-400 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
                     </div>
@@ -3697,6 +3726,13 @@ export default function Notes() {
           </motion.div>
         )}
       </AnimatePresence>
+      {activePodcast && (
+        <AudioPodcastPlayerModal
+          unitData={activePodcast}
+          subjectName={selectedSubject}
+          onClose={() => setActivePodcast(null)}
+        />
+      )}
     </div>
   );
 }
