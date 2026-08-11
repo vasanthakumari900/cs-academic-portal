@@ -510,7 +510,7 @@ export default function ChatBot() {
               className={`${chatWidth} ${chatMaxWidth} ${chatHeight} relative flex flex-col overflow-hidden rounded-3xl border border-white/40 bg-white shadow-2xl chatbot-window`}
             >
               {/* Creative Glassmorphic Gradient Header */}
-              <div className="relative flex shrink-0 items-center justify-between border-b border-white/20 bg-gradient-to-r from-[#021C4F] via-[#0B3C91] to-[#C50337] px-4 py-3.5 text-white shadow-md">
+              <div className="relative flex shrink-0 items-center justify-between border-b border-white/20 bg-gradient-to-r from-[#3A101A] via-[#61182A] to-[#7F011F] px-4 py-3.5 text-white shadow-md">
                 <div className="flex items-center gap-3">
                   <div className="relative">
                     <CSAIAgentLogo size={52} />
@@ -576,8 +576,8 @@ export default function ChatBot() {
                     <div
                       className={`max-w-[88%] rounded-2xl px-4 py-3 text-xs sm:text-sm leading-relaxed shadow-sm transition-all ${
                         msg.role === "user"
-                          ? "bg-gradient-to-br from-[#021C4F] to-[#0A369D] text-white shadow-blue-900/10 rounded-br-xs chat-user-bubble"
-                          : "bg-white text-slate-900 border border-slate-200/80 border-l-4 border-l-[#C50337] rounded-bl-xs chat-ai-bubble"
+                          ? "bg-gradient-to-br from-[#61182A] to-[#4A1620] text-white shadow-[0_4px_14px_rgba(74,22,32,0.25)] rounded-br-xs chat-user-bubble"
+                          : "bg-white text-slate-900 border border-slate-200/80 border-l-4 border-l-[#D97706] rounded-bl-xs chat-ai-bubble"
                       }`}
                     >
                       {msg.role === "user" ? (
@@ -616,17 +616,17 @@ export default function ChatBot() {
                 {/* Parsing Progress Bar Card */}
                 {parseProgress && (
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
-                    <div className="w-full max-w-sm rounded-2xl bg-white p-3.5 border border-blue-200 shadow-md space-y-2">
-                      <div className="flex items-center justify-between text-xs font-bold text-[#021C4F]">
+                    <div className="w-full max-w-sm rounded-2xl bg-white p-3.5 border border-[#EDC8D0] shadow-md space-y-2">
+                      <div className="flex items-center justify-between text-xs font-bold text-[#4A1620]">
                         <span className="truncate flex items-center gap-1.5">
-                          <FiFileText className="animate-bounce text-blue-600" />
+                          <FiFileText className="animate-bounce text-[#D97706]" />
                           Processing {parseProgress.fileName}
                         </span>
-                        <span className="text-blue-700">{parseProgress.percent}%</span>
+                        <span className="text-[#B45309]">{parseProgress.percent}%</span>
                       </div>
                       <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
                         <div
-                          className="h-full bg-gradient-to-r from-blue-600 to-indigo-600 transition-all duration-200 rounded-full"
+                          className="h-full bg-gradient-to-r from-[#D97706] to-[#7F011F] transition-all duration-200 rounded-full"
                           style={{ width: `${parseProgress.percent}%` }}
                         />
                       </div>
@@ -650,9 +650,9 @@ export default function ChatBot() {
                 {/* AI Thinking Animation */}
                 {isLoading && !parseProgress && (
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
-                    <div className="rounded-2xl bg-white px-4 py-3 border border-slate-200 border-l-4 border-l-[#C50337] shadow-sm">
-                      <div className="flex items-center gap-2 text-xs font-bold text-[#021C4F]">
-                        <FiCpu className="animate-spin text-[#C50337]" size={15} />
+                    <div className="rounded-2xl bg-white px-4 py-3 border border-slate-200 border-l-4 border-l-[#D97706] shadow-sm">
+                      <div className="flex items-center gap-2 text-xs font-bold text-[#4A1620]">
+                        <FiCpu className="animate-spin text-[#D97706]" size={15} />
                         {activeDocs.length > 0 ? "Searching document pages & citing citations..." : "Synthesizing response..."}
                       </div>
                     </div>
@@ -696,7 +696,7 @@ export default function ChatBot() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     onClick={() => scrollToBottom(true)}
-                    className="absolute bottom-28 right-6 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#021C4F] text-white shadow-lg transition-all hover:bg-[#C50337]"
+                    className="absolute bottom-28 right-6 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[#4A1620] text-white shadow-lg transition-all hover:bg-[#D97706]"
                   >
                     <FiChevronDown size={16} />
                   </motion.button>
@@ -784,7 +784,7 @@ export default function ChatBot() {
                   onClick={() => setShowPlusMenu(!showPlusMenu)}
                   className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl transition-all duration-300 shadow-xs ${
                     showPlusMenu
-                      ? "bg-[#021C4F] text-white rotate-45"
+                      ? "bg-[#4A1620] text-white rotate-45"
                       : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                   }`}
                   title="Document AI (+ Upload PDF/DOCX, AI Image, Web Search)"
@@ -821,13 +821,13 @@ export default function ChatBot() {
                       : "Talk to AI or ask anything..."
                   }
                   disabled={isLoading}
-                  className="flex-1 rounded-2xl border border-slate-300 bg-white px-4 py-2.5 text-xs sm:text-sm text-[#021C4F] !text-[#021C4F] placeholder-slate-500 outline-none transition-all focus:border-[#021C4F] focus:bg-white focus:ring-2 focus:ring-[#021C4F]/10 disabled:opacity-50 font-bold chat-input-field"
+                  className="flex-1 rounded-2xl border border-slate-300 bg-white px-4 py-2.5 text-xs sm:text-sm text-[#4A1620] !text-[#4A1620] placeholder-slate-500 outline-none transition-all focus:border-[#4A1620] focus:bg-white focus:ring-2 focus:ring-[#4A1620]/10 disabled:opacity-50 font-bold chat-input-field"
                 />
 
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#021C4F] text-white shadow-md transition-all hover:bg-[#C50337] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-b from-[#61182A] to-[#4A1620] text-white shadow-md transition-all hover:from-[#7E2238] hover:to-[#61182A] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <FiSend size={16} />
                 </button>
@@ -841,18 +841,18 @@ export default function ChatBot() {
           onClick={toggleOpen}
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.92 }}
-          className="relative flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full bg-slate-900 text-white shadow-2xl border-3 border-amber-400 transition-all duration-300 hover:shadow-amber-500/60 p-0.5 cursor-pointer"
+          className="relative flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full bg-gradient-to-b from-[#61182A] to-[#3A101A] text-white shadow-2xl border-3 border-[#F4C266] transition-all duration-300 hover:shadow-[0_0_40px_rgba(217,119,6,0.5)] p-0.5 cursor-pointer"
         >
           {isOpen ? (
             <FiX size={30} />
           ) : (
             <div className="relative flex items-center justify-center w-full h-full">
               <CSAIAgentLogo size={82} />
-              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-amber-400 border-2 border-white text-[10px] font-bold text-slate-900 shadow-sm">
+              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#D97706] border-2 border-white text-[10px] font-bold text-white shadow-sm">
                 <FiZap size={11} />
               </span>
               {hasNewMessage && (
-                <span className="absolute -left-1 -bottom-1 flex h-5 w-5 items-center justify-center rounded-full bg-cyan-400 text-[10px] font-bold text-slate-900 shadow-sm animate-pulse">
+                <span className="absolute -left-1 -bottom-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#D97706] text-[10px] font-bold text-white shadow-sm animate-pulse">
                   ●
                 </span>
               )}

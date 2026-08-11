@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/generate-palette-remap.mjs > src/styles/legacy-remap.css",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint ."

@@ -12,10 +12,21 @@ import {
   doc,
   serverTimestamp,
 } from "firebase/firestore";
-import { db } from "../firebase/config";
+import { db, isFirebaseConfigured } from "../firebase/config";
 import { COLLECTIONS } from "../utils/constants";
 
-const colRef = collection(db, COLLECTIONS.NOTIFICATIONS);
+// Guarded so the module never crashes at import time when Firebase env vars
+// are missing (demo mode) — `collection(db, …)` is deferred to first use.
+const colRef =
+  isFirebaseConfigured && db ? collection(db, COLLECTIONS.NOTIFICATIONS) : null;
+
+function unavailableError() {
+  const err = new Error(
+    "Firestore is not configured. Add the VITE_FIREBASE_* variables (see .env.example) to enable notifications."
+  );
+  err.name = "FirestoreUnavailable";
+  return err;
+}
 
 /**
  * Play iconic iPhone Tri-Tone notification sound using Web Audio API.
@@ -107,6 +118,7 @@ export function triggerBrowserNotification(title, options = {}) {
  * Create a new notification (Firestore + optional Push Alert & Audio Chime)
  */
 export async function createNotification({ userId, title, message, type = "info", link = "", sendPush = true }) {
+  if (!colRef) throw unavailableError();
   await addDoc(colRef, {
     userId,
     title,
@@ -123,6 +135,7 @@ export async function createNotification({ userId, title, message, type = "info"
 }
 
 export async function getUserNotifications(userId, max = 20) {
+  if (!colRef) return [];
   const q = query(
     colRef,
     where("userId", "==", userId),
@@ -134,6 +147,7 @@ export async function getUserNotifications(userId, max = 20) {
 }
 
 export async function markAsRead(notificationId) {
+  if (!isFirebaseConfigured) throw unavailableError();
   await updateDoc(doc(db, COLLECTIONS.NOTIFICATIONS, notificationId), { read: true });
 }
 

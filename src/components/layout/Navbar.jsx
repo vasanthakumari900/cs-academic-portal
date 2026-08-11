@@ -8,7 +8,6 @@ import {
   FiUser, 
   FiChevronDown, 
   FiLogOut, 
-  FiBookmark,
   FiExternalLink
 } from "react-icons/fi";
 import { FaGraduationCap } from "react-icons/fa";
@@ -16,7 +15,6 @@ import { useAuth } from "../../context/AuthContext";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import csPortalLogo from "../../assets/cs-portal-logo-transparent.png";
-import collegeLogo from "../../assets/college-logo.jpg";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -81,10 +79,12 @@ export default function Navbar() {
 
   const displayName = user ? formatName(user.name) : "Mega Nathan";
 
+  const userRole = user?.type || user?.role || "guest";
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 px-2 sm:px-4 py-2 transition-all">
-        <div className="mx-auto max-w-[1440px] bg-white/95 dark:bg-teal-950/95 backdrop-blur-md rounded-2xl shadow-neu-raised border-t-4 border-[#0D9488] border-x border-b border-[#5EEAD4]/40 dark:border-teal-800 px-[clamp(0.75rem,3vw,1.5rem)] py-[clamp(0.375rem,1vw,0.5rem)] flex items-center justify-between gap-3 sm:gap-4">
+        <div className="mx-auto max-w-[1440px] bg-white/90 dark:bg-[#190B13]/90 backdrop-blur-xl rounded-2xl shadow-[0_1px_2px_rgba(28,10,16,0.04),0_8px_28px_rgba(28,10,16,0.08)] border border-[#F0E2E6]/80 dark:border-white/10 px-[clamp(0.75rem,3vw,1.5rem)] py-[clamp(0.375rem,1vw,0.5rem)] flex items-center justify-between gap-3 sm:gap-4">
           
           {/* Left Brand: 3D CS Academic Portal Emblem */}
           <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
@@ -97,13 +97,17 @@ export default function Navbar() {
                 src={csPortalLogo}
                 alt="CS Academic Portal Logo"
                 style={{ height: 'clamp(2rem, 5vw, 3.5rem)' }}
-                className="w-auto object-contain rounded-xl shadow-md border-2 border-[#D97706] shrink-0"
+                className="w-auto object-contain rounded-xl shadow-md border-2 border-[#D97706] shrink-0 bg-[#FBF7F2]"
               />
             </button>
             
             <Link to={getHomePath(user)} className="flex flex-col leading-none shrink-0 group cursor-pointer">
-              <span style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.25rem)' }} className="font-black text-[#0D9488] dark:text-[#2DD4BF] tracking-tight group-hover:text-[#0F766E] transition-colors font-mono">DDGDVC</span>
-              <span className="text-[10px] sm:text-[11px] font-bold text-[#64748B] dark:text-[#5EEAD4]/80 mt-0.5 tracking-wide">CS Portal</span>
+              <span style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.25rem)' }} className="font-black text-[#4A1620] dark:text-[#F3E4E8] tracking-tight group-hover:text-[#7E2238] dark:group-hover:text-[#F4C266] transition-colors font-heading">
+                DDGDVC
+              </span>
+              <span className="text-[10px] sm:text-[11px] font-bold text-[#9C6D7F] dark:text-[#D9C2CA] mt-0.5 tracking-widest uppercase">
+                CS Portal
+              </span>
             </Link>
           </div>
 
@@ -117,8 +121,8 @@ export default function Navbar() {
                   to={link.to}
                   className={`relative py-1 text-sm font-semibold whitespace-nowrap transition-colors duration-150 cursor-pointer ${
                     active
-                      ? "text-[#0D9488] dark:text-[#2DD4BF] font-bold"
-                      : "text-[#134E4A] dark:text-[#CCFBF1] hover:text-[#0D9488] dark:hover:text-[#2DD4BF]"
+                      ? "text-[#4A1620] dark:text-[#F4C266] font-bold"
+                      : "text-[#7C4B5E] dark:text-[#D9C2CA] hover:text-[#4A1620] dark:hover:text-[#F3E4E8]"
                   }`}
                 >
                   {link.label}
@@ -140,7 +144,7 @@ export default function Navbar() {
             {/* Search Button */}
             <Link
               to="/search"
-              className="flex items-center justify-center w-9 h-9 rounded-xl border border-[#5EEAD4] dark:border-teal-800 text-[#134E4A] dark:text-[#CCFBF1] hover:text-[#0D9488] hover:bg-[#CCFBF1]/50 dark:hover:bg-teal-900/50 transition-colors shadow-2xs shrink-0 cursor-pointer"
+              className="flex items-center justify-center w-9 h-9 rounded-xl border border-[#EDC8D0] dark:border-white/15 text-[#7C4B5E] dark:text-[#D9C2CA] hover:text-[#4A1620] hover:bg-[#F6E4E8]/60 dark:hover:bg-white/10 transition-colors shrink-0 cursor-pointer"
               title="Search"
               aria-label="Search"
             >
@@ -152,7 +156,7 @@ export default function Navbar() {
               href="https://dgvc.in/lms/login.php"
               target="_blank"
               rel="noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl bg-[#D97706] hover:bg-[#B45309] active:scale-98 px-3.5 py-2 text-xs font-bold text-white uppercase tracking-wider shadow-neu-raised transition-all border border-amber-400/40 shrink-0 whitespace-nowrap cursor-pointer font-mono"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-b from-[#E08813] to-[#D97706] hover:from-[#F4C266] hover:to-[#E08813] active:scale-98 px-3.5 py-2 text-xs font-bold text-white uppercase tracking-wider shadow-[0_1px_2px_rgba(28,10,16,0.2),0_4px_14px_rgba(217,119,6,0.3)] transition-all border border-[#F4C266]/50 shrink-0 whitespace-nowrap cursor-pointer font-heading"
             >
               <FaGraduationCap className="w-4 h-4 text-white" />
               <span>VAISHNAV LMS</span>
@@ -161,7 +165,7 @@ export default function Navbar() {
             {/* Dashboard Button */}
             <Link
               to={getDashboardPath(user)}
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] active:scale-98 px-3.5 py-2 text-xs font-bold text-white uppercase tracking-wider shadow-neu-raised transition-all border border-[#0D9488] shrink-0 whitespace-nowrap cursor-pointer font-mono"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl bg-[#4A1620] hover:bg-[#61182A] active:scale-98 px-3.5 py-2 text-xs font-bold text-white uppercase tracking-wider shadow-[0_1px_2px_rgba(28,10,16,0.2),0_4px_14px_rgba(74,22,32,0.3)] transition-all border border-[#C96A7E]/40 shrink-0 whitespace-nowrap cursor-pointer font-heading"
             >
               <FiGrid className="w-3.5 h-3.5 text-white" />
               <span>DASHBOARD</span>
@@ -171,20 +175,20 @@ export default function Navbar() {
             <div className="relative shrink-0" ref={dropdownRef}>
               <button
                 onClick={() => setProfileOpen(!profileOpen)}
-                className="flex items-center gap-1.5 p-1 pl-1.5 pr-2 rounded-full hover:bg-[#CCFBF1]/50 dark:hover:bg-teal-900/50 transition-colors cursor-pointer shrink-0 max-w-[120px] sm:max-w-[180px]"
+                className="flex items-center gap-1.5 p-1 pl-1.5 pr-2 rounded-full hover:bg-[#F6E4E8]/60 dark:hover:bg-white/10 transition-colors cursor-pointer shrink-0 max-w-[120px] sm:max-w-[180px]"
                 aria-label="User menu"
               >
-                <div className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#0D9488] text-[#0D9488] bg-[#CCFBF1]/50 overflow-hidden shrink-0">
+                <div className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#D97706] text-[#4A1620] bg-[#FCEED0] overflow-hidden shrink-0">
                   {user?.photoUrl ? (
                     <img src={user.photoUrl} alt="Avatar" className="w-full h-full object-cover" />
                   ) : (
                     <FiUser className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
                   )}
                 </div>
-                <span className="hidden md:inline-block text-xs font-bold text-[#134E4A] dark:text-[#CCFBF1] tracking-tight truncate max-w-[clamp(60px,8vw,120px)]">
+                <span className="hidden md:inline-block text-xs font-bold text-[#4A1620] dark:text-[#F3E4E8] tracking-tight truncate max-w-[clamp(60px,8vw,120px)]">
                   {displayName}
                 </span>
-                <FiChevronDown className={`w-3.5 h-3.5 text-[#64748B] dark:text-[#5EEAD4] shrink-0 transition-transform ${profileOpen ? "rotate-180" : ""}`} />
+                <FiChevronDown className={`w-3.5 h-3.5 text-[#9C6D7F] dark:text-[#D9C2CA] shrink-0 transition-transform ${profileOpen ? "rotate-180" : ""}`} />
               </button>
 
               {/* Profile Dropdown Panel */}
@@ -195,23 +199,23 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.96 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute right-0 mt-2 w-56 rounded-2xl bg-white dark:bg-teal-950 p-2 shadow-neu-raised-lg border border-[#5EEAD4]/50 dark:border-teal-800 text-[#134E4A] dark:text-[#CCFBF1] z-50"
+                    className="absolute right-0 mt-2 w-60 rounded-2xl bg-white dark:bg-[#22101A] p-2 shadow-[0_2px_4px_rgba(28,10,16,0.05),0_12px_36px_rgba(28,10,16,0.14)] border border-[#F0E2E6]/80 dark:border-white/10 text-[#2A0D13] dark:text-[#F0E2E6] z-50"
                   >
                     {user ? (
                       <>
-                        <div className="px-3 py-2 border-b border-[#5EEAD4]/30 dark:border-teal-800 mb-1">
-                          <p className="text-xs font-bold text-[#0D9488] dark:text-[#2DD4BF] truncate">{user.name}</p>
-                          <p className="text-[11px] text-[#64748B] dark:text-[#5EEAD4]/80 truncate mt-0.5 font-mono">
-                            {user.rollNumber ? `Roll: ${user.rollNumber}` : user.type?.toUpperCase() || "USER"}
+                        <div className="px-3 py-2 border-b border-[#F0E2E6]/70 dark:border-white/10 mb-1">
+                          <p className="text-xs font-bold text-[#4A1620] dark:text-[#F4C266] truncate font-heading">{user.name}</p>
+                          <p className="text-[11px] text-[#9C6D7F] dark:text-[#D9C2CA] truncate mt-0.5 font-mono">
+                            {user.rollNumber ? `Roll: ${user.rollNumber}` : userRole.toUpperCase() || "USER"}
                           </p>
                         </div>
                         <Link
                           to="/student/profile"
-                          className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-[#134E4A] dark:text-[#CCFBF1] hover:bg-[#CCFBF1]/30 dark:hover:bg-teal-900/50 hover:text-[#0D9488] rounded-xl transition-colors cursor-pointer"
+                          className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-[#2A0D13] dark:text-[#F0E2E6] hover:bg-[#F6E4E8]/60 dark:hover:bg-white/10 hover:text-[#4A1620] rounded-xl transition-colors cursor-pointer"
                         >
                           <FiUser size={14} /> Profile Details
                         </Link>
-                        <div className="h-px bg-[#5EEAD4]/30 dark:bg-teal-800 my-1" />
+                        <div className="h-px bg-[#F0E2E6]/70 dark:bg-white/10 my-1" />
                         <button
                           onClick={logout}
                           className="w-full flex items-center gap-2 px-3 py-2 text-xs font-bold text-[#DC2626] hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-xl transition-colors cursor-pointer"
@@ -221,13 +225,13 @@ export default function Navbar() {
                       </>
                     ) : (
                       <>
-                        <div className="px-3 py-2 border-b border-[#5EEAD4]/30 dark:border-teal-800 mb-1">
-                          <p className="text-xs font-bold text-[#134E4A] dark:text-[#CCFBF1]">Welcome Guest</p>
-                          <p className="text-[11px] text-[#64748B] dark:text-[#5EEAD4]/80 mt-0.5">Access your CS Academic Portal</p>
+                        <div className="px-3 py-2 border-b border-[#F0E2E6]/70 dark:border-white/10 mb-1">
+                          <p className="text-xs font-bold text-[#4A1620] dark:text-[#F3E4E8] font-heading">Welcome Guest</p>
+                          <p className="text-[11px] text-[#9C6D7F] dark:text-[#D9C2CA] mt-0.5">Access your CS Academic Portal</p>
                         </div>
                         <Link
                           to="/login"
-                          className="flex items-center justify-center gap-2 px-3 py-2 text-xs font-bold text-white bg-[#0D9488] hover:bg-[#0F766E] rounded-xl transition-colors cursor-pointer"
+                          className="flex items-center justify-center gap-2 px-3 py-2 text-xs font-bold text-white bg-[#4A1620] hover:bg-[#61182A] rounded-xl transition-colors cursor-pointer"
                         >
                           Login to Portal
                         </Link>
@@ -241,7 +245,7 @@ export default function Navbar() {
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="xl:hidden p-2 rounded-xl border border-[#5EEAD4] dark:border-teal-800 text-[#134E4A] dark:text-[#CCFBF1] hover:bg-[#CCFBF1]/50 dark:hover:bg-teal-900/50 transition-colors shrink-0 cursor-pointer"
+              className="xl:hidden p-2 rounded-xl border border-[#EDC8D0] dark:border-white/15 text-[#4A1620] dark:text-[#F3E4E8] hover:bg-[#F6E4E8]/60 dark:hover:bg-white/10 transition-colors shrink-0 cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Toggle navigation"
             >
               {mobileOpen ? <FiX size={20} /> : <FiMenu size={20} />}
@@ -255,13 +259,20 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="fixed inset-0 z-40 xl:hidden"
           >
-            <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-xs" onClick={() => setMobileOpen(false)} />
-            <div style={{ top: 'clamp(4.5rem, 10vw, 6rem)' }} className="absolute left-3 right-3 rounded-2xl bg-white dark:bg-slate-900 border border-[#99F6E4] dark:border-slate-800 shadow-2xl overflow-hidden p-3 text-slate-800 dark:text-slate-200">
+            <div className="absolute inset-0 bg-[#190B13]/50 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 380, damping: 32 }}
+              style={{ top: 'clamp(4.5rem, 10vw, 6rem)' }}
+              className="absolute right-3 left-3 rounded-2xl bg-white dark:bg-[#22101A] border border-[#F0E2E6]/80 dark:border-white/10 shadow-2xl overflow-hidden p-3 text-[#2A0D13] dark:text-[#F0E2E6]"
+            >
               <div className="space-y-1">
                 {navLinks.map((link) => {
                   const active = isActive(link.to);
@@ -271,8 +282,8 @@ export default function Navbar() {
                       to={link.to}
                       className={`flex items-center px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
                         active
-                          ? "bg-[#CCFBF1]/40 text-[#0D9488] font-bold border-l-4 border-[#D97706]"
-                          : "text-slate-700 hover:bg-[#CCFBF1]/20"
+                          ? "bg-[#F6E4E8]/70 dark:bg-white/10 text-[#4A1620] dark:text-[#F4C266] font-bold border-l-4 border-[#D97706]"
+                          : "text-[#2A0D13]/80 dark:text-[#F0E2E6]/80 hover:bg-[#F6E4E8]/50 dark:hover:bg-white/5"
                       }`}
                     >
                       {link.label}
@@ -281,14 +292,14 @@ export default function Navbar() {
                 })}
               </div>
 
-              <div className="h-px bg-[#99F6E4]/50 my-3" />
+              <div className="h-px bg-[#F0E2E6]/70 dark:bg-white/10 my-3" />
 
               <div className="space-y-2">
                 <a
                   href="https://dgvc.in/lms/login.php"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#D97706] text-xs font-bold text-white uppercase tracking-wider shadow-2xs"
+                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-gradient-to-b from-[#E08813] to-[#D97706] text-xs font-bold text-white uppercase tracking-wider shadow-sm"
                 >
                   <FaGraduationCap className="w-4 h-4" />
                   VAISHNAV LMS
@@ -296,13 +307,13 @@ export default function Navbar() {
 
                 <Link
                   to={getDashboardPath(user)}
-                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#0D9488] text-xs font-bold text-white uppercase tracking-wider shadow-2xs"
+                  className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#4A1620] text-xs font-bold text-white uppercase tracking-wider shadow-sm"
                 >
                   <FiGrid className="w-4 h-4" />
                   DASHBOARD
                 </Link>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -314,7 +325,7 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-4 sm:p-8"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#190B13]/90 backdrop-blur-md p-4 sm:p-8"
             onClick={() => setLogoModalOpen(false)}
           >
             {/* Close Button */}
@@ -338,8 +349,12 @@ export default function Navbar() {
               <img
                 src={csPortalLogo}
                 alt="CS Academic Portal Logo Full View"
-                className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border-2 border-[#0D9488]/30 bg-[#F0FDFA] p-4"
+                className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl border-2 border-[#D97706]/40 bg-[#FBF7F2] p-4"
               />
+              <p className="mt-4 text-xs text-white/70 flex items-center gap-1.5 font-heading tracking-wide">
+                <FiExternalLink className="hidden" />
+                DDGDVC · CS Academic Portal
+              </p>
             </motion.div>
           </motion.div>
         )}

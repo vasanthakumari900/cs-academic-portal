@@ -93,7 +93,7 @@ export default function AdminManageContent({ title, service }) {
       ) : filtered.length === 0 ? (
         <EmptyState title="Nothing found" description="No items match your search." />
       ) : (
-        <div className="overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-sm">
+        <div className="overflow-x-auto rounded-xl border border-[#F0E2E6] dark:border-white/10 bg-white dark:bg-[#22101A] shadow-sm">
           <table className="w-full text-left text-sm">
             <thead className="bg-[#F8FAFC] border-b border-[#E5E7EB] text-xs uppercase text-[#6B7280] font-semibold">
               <tr>

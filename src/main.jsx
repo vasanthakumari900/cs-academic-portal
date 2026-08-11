@@ -8,6 +8,7 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import { ThemeProvider } from "./context/ThemeContext.jsx";
 import ErrorBoundary from "./components/common/ErrorBoundary.jsx";
 import "./styles/index.css";
+import "./styles/legacy-remap.css"; // loaded AFTER index.css so it wins the cascade
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
