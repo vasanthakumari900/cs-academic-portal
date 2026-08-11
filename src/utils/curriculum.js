@@ -129,7 +129,6 @@ export const CURRICULUM_PG = {
           "DOT NET Technology",
           "Big Data Analytics",
           "Cyber Forensics",
-          "Ethical Hacking",
           "Information Security"
         ]
       },

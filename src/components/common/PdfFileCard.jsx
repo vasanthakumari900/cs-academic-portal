@@ -18,12 +18,14 @@ import {
 import { formatDate } from "../../utils/helpers";
 import { getSubjectIcon } from "../../utils/subjectIcons";
 
+import { usePdfPageCount } from "../../hooks/usePdfPageCount";
+
 export default function PdfFileCard({ file, onView }) {
   if (!file) return null;
 
   // Extract properties with fallbacks
   const title = file.title || file.name || "PDF Document";
-  const targetUrl = file.fileUrl || file.driveUrl || file.fileId || file.link || file.url || "";
+  const targetUrl = file.fileUrl || file.driveUrl || file.driveFileId || file.fileId || file.link || file.url || "";
   const subject = file.subject || file.category || "Computer Science";
 
   // Clean File Name display (e.g. "tamil", "dbms", "operating system")
@@ -50,17 +52,9 @@ export default function PdfFileCard({ file, onView }) {
 
   const uploadDate = file.uploadedDate || file.uploadDate || file.date || "2024-05-15";
 
-  // Display exact number of pages per PDF (differing dynamically per paper)
-  let calcPages = file.pages;
-  if (!calcPages) {
-    if (file.id) {
-      const hash = String(file.id).split("").reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
-      calcPages = (hash % 4) + 2; // Generates 2, 3, 4, or 5 pages dynamically
-    } else {
-      calcPages = 2;
-    }
-  }
-  const pagesText = `${calcPages} pages`;
+  // Dynamic exact page count fetching using react-pdf hook
+  const pdfState = usePdfPageCount(file);
+  const pagesText = pdfState.text;
 
   function handleView() {
     if (onView) {

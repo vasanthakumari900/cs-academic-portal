@@ -18,6 +18,7 @@ import {
   FiBookOpen,
   FiEye,
   FiExternalLink,
+  FiCalendar,
 } from "react-icons/fi";
 import CiaExamNotificationCard from "../../components/dashboard/CiaExamNotificationCard";
 import BirthdayWishCard from "../../components/dashboard/BirthdayWishCard";
@@ -100,8 +101,18 @@ const STUDENT_OPTIONS = [
     to: "/student/placements",
     badge: "Career Drives",
     desc: "Placement updates, company eligibility & mock aptitude.",
+    color: "#7F011F",
+    emblemGradient: "bg-gradient-to-tr from-[#580017] via-[#8B0024] to-[#C50337]",
+    iconColor: "text-amber-300 drop-shadow-xs",
+  },
+  {
+    label: "Smart AI Exam Study Planner & Countdown",
+    icon: FiCalendar,
+    to: "/student/exam-study-planner",
+    badge: "AI Study Planner",
+    desc: "Calculate unit revision timetables & track daily exam prep progress.",
     color: "#021C4F",
-    emblemGradient: "bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#1E3A8A]",
+    emblemGradient: "bg-gradient-to-tr from-[#0D9488] via-[#0F766E] to-[#115E59]",
     iconColor: "text-amber-400 drop-shadow-xs",
   },
   {
@@ -147,7 +158,7 @@ export default function StudentDashboard() {
   const studentQuote = getStudentCsQuote(user?.rollNumber || user?.name || "CS_STUDENT");
 
   return (
-    <div className="mx-auto min-h-[80vh] max-w-6xl px-4 py-8 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+    <div className="mx-auto min-h-screen max-w-6xl px-4 py-8 sm:px-6 lg:px-8 bg-[#FAF0F2] text-[#2D060E]">
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -167,65 +178,52 @@ export default function StudentDashboard() {
                     className="relative h-60 w-48 sm:h-64 sm:w-52 object-cover rounded-2xl border-4 border-[#021C4F] shadow-md mx-auto"
                   />
                 </div>
-
-                <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-[#021C4F] tracking-wider uppercase">
-                  {user?.name || "STUDENT"}
-                </h1>
-
-                <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
-                  {user?.adminBadge && (
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#C50337] px-4 py-1 text-xs font-bold text-white shadow-sm tracking-wider uppercase">
-                      <FiShield size={13} /> {user.adminBadge}
+                <h2 className="font-mono text-xl sm:text-2xl font-black text-[#021C4F]">
+                  Welcome back, {user?.name || "Student"}! 👋
+                </h2>
+                <p className="mt-1 text-xs sm:text-sm text-[#475569] font-medium max-w-md">
+                  {yearLabel} · {semesterLabel} · B.Sc. Computer Science
+                </p>
+                <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs font-mono font-bold">
+                  <span className="rounded-full bg-[#021C4F] text-amber-300 px-3 py-1 shadow-xs border border-amber-400/40">
+                    Roll No: {user?.rollNumber || "24E2901"}
+                  </span>
+                  {user?.section && (
+                    <span className="rounded-full bg-[#0D9488] text-white px-3 py-1 shadow-xs">
+                      Section {user.section}
                     </span>
                   )}
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#021C4F]/10 border border-[#021C4F]/20 px-3.5 py-1 text-xs font-bold text-[#021C4F]">
-                    Roll No: {user?.rollNumber}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold text-[#021C4F] border border-slate-200">
-                    Department of Computer Science · {user?.section ? `Sec ${user.section}` : "Sec B"} · {yearLabel} · {semesterLabel}
-                  </span>
-                </div>
-
-                {/* CS Quote for Student */}
-                <div className="mt-5 max-w-xl rounded-xl bg-[#F8FAFC] border border-slate-200 p-3.5 text-center">
-                  <p className="text-xs font-medium text-slate-700 italic">
-                    “{studentQuote.text}”
-                  </p>
-                  <p className="text-[11px] font-bold text-[#C50337] mt-1">
-                    — {studentQuote.author}
-                  </p>
                 </div>
               </div>
             ) : (
-              /* Student Information Banner for all Students */
-              <div className="relative overflow-hidden rounded-2xl bg-[#021C4F] p-6 sm:p-8 text-white shadow-md border border-[#021C4F]">
-                <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                  <div>
-                    <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-bold text-white border border-white/20 mb-3">
-                      <FiCheckCircle size={13} className="text-[#C50337]" />
-                      DDGDVC Student Academic Portal
+              /* Standard Banner for Students without Profile Photo */
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#011337] via-[#021C4F] to-[#7F011F] p-6 sm:p-8 text-white shadow-lg border-2 border-amber-400/40">
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                  <div className="space-y-3 max-w-xl">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-400 text-slate-950 px-3 py-1 text-[11px] font-black uppercase tracking-widest shadow-md">
+                        🎓 Student Dashboard
+                      </span>
+                      {isAdmin && (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-rose-500 text-white px-3 py-1 text-[11px] font-black uppercase tracking-widest shadow-md animate-pulse">
+                          ⚡ Portal Admin
+                        </span>
+                      )}
                     </div>
-                    <h1 className="font-sans text-2xl sm:text-3xl font-black text-white tracking-tight">
-                      Welcome back, {user?.name || "Student"}!
+                    <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-white">
+                      Welcome back, {user?.name || "Student"}! 👋
                     </h1>
+                    <p className="text-xs sm:text-sm text-teal-100 font-medium leading-relaxed">
+                      Department of Computer Science — Dwaraka Doss Goverdhan Doss Vaishnav College
+                    </p>
 
-                    {/* Individual Computer Science Quote */}
-                    <div className="mt-3 max-w-xl rounded-xl bg-white/10 backdrop-blur-md p-3.5 border border-white/20">
-                      <div className="flex items-start gap-2">
-                        <FiMessageSquare size={16} className="text-[#C50337] shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-xs sm:text-sm font-medium text-slate-100 italic leading-relaxed">
-                            “{studentQuote.text}”
-                          </p>
-                          <p className="text-[11px] font-bold text-[#C50337] mt-1">
-                            — {studentQuote.author}
-                          </p>
-                        </div>
-                      </div>
+                    {/* Personal CS Quote */}
+                    <div className="mt-3 rounded-xl bg-black/30 backdrop-blur-md p-3.5 border border-white/20 text-xs italic text-amber-200">
+                      &quot;{studentQuote}&quot;
                     </div>
                   </div>
 
-                  {/* Student Information Summary Card */}
+                  {/* Student Details Card */}
                   <div className="rounded-xl bg-white/10 backdrop-blur-md p-4 border border-white/20 shrink-0 text-left w-full md:w-auto md:min-w-[240px]">
                     <p className="text-[11px] uppercase font-extrabold tracking-wider text-white border-b border-white/20 pb-1 mb-2">
                       Student Information
@@ -266,26 +264,25 @@ export default function StudentDashboard() {
           </div>
         </div>
 
-        {/* Birthday Countdown Notification Card — Above Academic Options */}
+        {/* Birthday Countdown Notification Card */}
         <div className="mb-6">
           <BirthdayWishCard user={user} />
         </div>
 
-        {/* Options Section directly down to Student Information */}
+        {/* Options Section Header */}
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 className="font-mono text-xl font-bold text-[#134E4A] dark:text-[#CCFBF1]">Academic Options</h2>
-            <p className="mt-0.5 text-xs text-[#64748B] dark:text-[#5EEAD4]/80">
+            <h2 className="font-sans text-xl font-extrabold text-[#021C4F]">Academic Options</h2>
+            <p className="mt-0.5 text-xs text-[#475569] font-medium">
               Select an option below to access course content
             </p>
           </div>
         </div>
 
-        {/* Options Grid directly down to Student Information */}
+        {/* Options Grid with High Contrast Readable Cards */}
         <div className="card-grid">
           {optionsToRender.map((option, idx) => {
             const IconComponent = option.icon;
-            const isRed = option.color === "#C50337";
             return (
               <motion.button
                 key={option.label}
@@ -296,7 +293,7 @@ export default function StudentDashboard() {
                 whileTap={{ scale: 0.96 }}
                 onClick={() => (option.isExternal ? window.open(option.href, "_blank") : navigate(option.to))}
                 style={{ padding: 'var(--fluid-pad-card)' }}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white border border-slate-200 shadow-sm transition-all duration-300 hover:border-[#C50337] text-left"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white border-2 border-slate-200 shadow-md transition-all duration-300 hover:border-[#021C4F] text-left"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -312,32 +309,24 @@ export default function StudentDashboard() {
                     </div>
 
                     <span
-                      className={`rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider border shadow-2xs ${
-                        isRed
-                          ? "bg-[#C50337]/10 text-[#C50337] border-[#C50337]/30"
-                          : "bg-[#021C4F]/10 text-[#021C4F] border-[#021C4F]/30"
-                      }`}
+                      className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider border shadow-2xs bg-teal-50 text-[#0F766E] border-teal-200"
                     >
                       {option.badge}
                     </span>
                   </div>
 
                   <h3
-                    className={`font-sans text-base font-bold transition-colors leading-snug ${
-                      isRed ? "text-[#C50337]" : "text-[#021C4F]"
-                    }`}
+                    className="font-sans text-base font-bold text-[#021C4F] transition-colors leading-snug group-hover:text-[#0D9488]"
                   >
                     {option.label}
                   </h3>
-                  <p className="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                  <p className="mt-1.5 text-xs text-[#334155] font-medium leading-relaxed">
                     {option.desc}
                   </p>
                 </div>
 
                 <div
-                  className={`mt-5 flex items-center gap-1.5 text-xs font-bold transition-colors pt-3 border-t border-slate-100 ${
-                    isRed ? "text-[#C50337]" : "text-[#021C4F]"
-                  }`}
+                  className="mt-5 flex items-center gap-1.5 text-xs font-extrabold text-[#021C4F] transition-colors pt-3 border-t border-slate-100 group-hover:text-[#0D9488]"
                 >
                   <span>Open Section</span>
                   <FiChevronRight

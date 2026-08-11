@@ -51,6 +51,7 @@ import Bookmarks from "./pages/student/Bookmarks";
 import RecentlyViewed from "./pages/student/RecentlyViewed";
 import Profile from "./pages/student/Profile";
 import StudentAssignments from "./pages/student/Assignments";
+import ExamStudyPlanner from "./pages/student/ExamStudyPlanner";
 
 // Public pages also accessible from student dashboard
 import StudentEContent from "./pages/EContent";
@@ -82,33 +83,24 @@ import ChatBot from "./components/chatbot/ChatBot";
 const pageVariants = {
   initial: { 
     opacity: 0, 
-    rotateY: 65, 
-    x: "40%",
-    scale: 0.85,
-    transformPerspective: 1200,
-    transformOrigin: "right center"
+    scale: 0.97,
+    y: 8,
   },
   enter: { 
     opacity: 1, 
-    rotateY: 0, 
-    x: 0,
     scale: 1,
-    transformPerspective: 1200,
-    transformOrigin: "center center",
+    y: 0,
     transition: { 
-      duration: 0.5, 
+      duration: 0.35, 
       ease: [0.25, 1, 0.5, 1] 
     } 
   },
   exit: { 
     opacity: 0, 
-    rotateY: -65, 
-    x: "-40%",
-    scale: 0.85,
-    transformPerspective: 1200,
-    transformOrigin: "left center",
+    scale: 0.97,
+    y: -8,
     transition: { 
-      duration: 0.4, 
+      duration: 0.25, 
       ease: [0.5, 0, 0.75, 0] 
     } 
   },
@@ -121,7 +113,7 @@ function AnimatedPage({ children }) {
       initial="initial" 
       animate="enter" 
       exit="exit"
-      className="w-full h-full [perspective:1200px]"
+      className="w-full h-full max-w-full overflow-x-hidden"
     >
       {children}
     </motion.div>
@@ -201,6 +193,7 @@ export default function App() {
               <Route path="/student/bookmarks" element={<AnimatedPage><Bookmarks /></AnimatedPage>} />
               <Route path="/student/recently-viewed" element={<AnimatedPage><RecentlyViewed /></AnimatedPage>} />
               <Route path="/student/profile" element={<AnimatedPage><Profile /></AnimatedPage>} />
+              <Route path="/student/exam-study-planner" element={<AnimatedPage><ExamStudyPlanner /></AnimatedPage>} />
             </Route>
 
             {/* Faculty dashboard */}

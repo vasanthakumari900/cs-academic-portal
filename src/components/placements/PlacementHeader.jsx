@@ -90,7 +90,7 @@ export default function PlacementHeader({
       </div>
 
       {/* Streamlined 5 Sub-Tabs Navigation Bar - Horizontal Scroll on Mobile */}
-      <div className="overflow-x-auto pb-1 scrollbar-none border-b border-[#E6DAB8]">
+      <div className="overflow-x-auto pb-1 scrollbar-none border-b border-[#E5C3C8]">
         <div className="flex items-center gap-2 min-w-max">
           {PLACEMENT_TABS.map((tab) => {
             const Icon = tab.icon;
@@ -99,19 +99,19 @@ export default function PlacementHeader({
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`relative flex items-center gap-2 rounded-xl px-4 py-3 text-xs font-bold transition-all duration-200 min-h-[44px] ${
+                className={`relative flex items-center gap-2 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold transition-all duration-200 min-h-[44px] ${
                   isActive
-                    ? "bg-[#7F011F] text-white shadow-md"
-                    : "text-[#7F011F] bg-white hover:bg-[#F5EBD0] border border-[#E6DAB8]"
+                    ? "bg-[#7F011F] text-white shadow-md border-2 border-amber-400"
+                    : "text-[#7F011F] bg-white hover:bg-[#F7EBEF] border border-[#E5C3C8]"
                 }`}
               >
-                <Icon size={16} className={isActive ? "text-white" : "text-[#7F011F]"} />
+                <Icon size={16} className={isActive ? "text-amber-300" : "text-[#7F011F]"} />
                 {tab.label}
 
                 {isActive && (
                   <motion.div
                     layoutId="placement-tab-indicator"
-                    className="absolute -bottom-1 left-2 right-2 h-0.5 rounded-full bg-[#7F011F]"
+                    className="absolute -bottom-1 left-2 right-2 h-0.5 rounded-full bg-amber-400"
                   />
                 )}
               </button>

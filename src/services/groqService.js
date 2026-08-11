@@ -159,3 +159,81 @@ export function generateAiImageUrl(prompt) {
 export function isAiConfigured() {
   return !!import.meta.env.VITE_GROQ_API_KEY;
 }
+
+/**
+ * Generates dynamic teacher-style syllabus lessons from Groq AI API
+ */
+export async function generateSyllabusPodcastLesson({ subject, year, semester, unitTitle, unitSubtitle, syllabusText }) {
+  const apiKey = import.meta.env.VITE_GROQ_API_KEY;
+  if (!apiKey) return null;
+
+  const prompt = `You are a distinguished Computer Science Professor teaching a university lecture for:
+Subject: ${subject}
+Year: ${year} | Semester: ${semester}
+Unit: ${unitTitle} - ${unitSubtitle}
+Exact Unit Syllabus: ${syllabusText}
+
+REQUIREMENTS:
+1. Identify EVERY topic mentioned in the syllabus. Do NOT invent unrelated topics outside this syllabus.
+2. Teach EACH topic like a real teacher:
+   - Topic name
+   - Simple definition
+   - Detailed explanation & working mechanism
+   - Code syntax & runnable example (if programming subject) OR principles, diagrams & advantages (if theory)
+   - Real-world application & common mistakes
+3. Generate 2-Mark, 5-Mark, and 10-Mark exam questions with model teacher answers.
+4. Generate spoken lesson scripts for TTS audio:
+   - English spoken script (clear, educational)
+   - Tamil spoken script (தமிழ் உரையாடல் / கற்பித்தல்)
+
+Return strictly valid JSON with this exact structure:
+{
+  "topics": [
+    {
+      "name": "Topic Name",
+      "definition": "Simple definition",
+      "explanation": "Detailed explanation",
+      "codeOrDiagram": "Code snippet or diagram description",
+      "importance": "Why it is important",
+      "commonMistakes": "Common mistake to avoid",
+      "speechEn": "Audio text in English for this topic",
+      "speechTa": "Audio text in Tamil for this topic"
+    }
+  ],
+  "short2Mark": ["1. Q... - Ans..."],
+  "medium5Mark": ["1. Q... - Ans..."],
+  "long10Mark": ["1. Q... - Ans..."],
+  "englishScript": ["Welcome...", "Topic 1...", "Summary..."],
+  "tamilScript": ["வணக்கம்...", "தலைப்பு 1...", "சுருக்கம்..."]
+}`;
+
+  try {
+    const response = await fetch(GROQ_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        messages: [
+          { role: "system", content: "You are a university Computer Science professor. Always output valid JSON only." },
+          { role: "user", content: prompt },
+        ],
+        temperature: 0.5,
+        max_tokens: 2500,
+        response_format: { type: "json_object" },
+      }),
+    });
+
+    if (!response.ok) return null;
+    const data = await response.json();
+    const contentText = data?.choices?.[0]?.message?.content;
+    if (!contentText) return null;
+    return JSON.parse(contentText);
+  } catch (err) {
+    console.error("Groq podcast fetch error:", err);
+    return null;
+  }
+}
+

@@ -14,7 +14,7 @@ export default function DashboardLayout({ title, items = [] }) {
   );
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F5EBD0] text-[#7F011F]">
+    <div className="flex min-h-screen flex-col bg-[#FAF0F2] text-[#2D060E]">
       {displayItems.length > 0 && (
         <div style={{ width: 'clamp(240px, 75vw, 288px)' }} className="hidden lg:fixed lg:inset-y-0 lg:flex lg:flex-col">
           <Sidebar items={displayItems} open={sidebarOpen} onClose={() => setSidebarOpen(false)} />

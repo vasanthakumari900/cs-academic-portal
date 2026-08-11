@@ -389,6 +389,25 @@ function normalizeDate(str) {
   return clean;
 }
 
+const EXISTING_STUDENT_PHOTOS = new Set([
+  "24E3001", "24E3002", "24E3003", "24E3004", "24E3005", "24E3007", "24E3008",
+  "24E3010", "24E3011", "24E3012", "24E3013", "24E3014", "24E3015", "24E3017",
+  "24E3018", "24E3019", "24E3020", "24E3021", "24E3022", "24E3023", "24E3024",
+  "24E3025", "24E3026", "24E3027", "24E3028", "24E3029", "24E3030", "24E3031",
+  "24E3032", "24E3033", "24E3034", "24E3035", "24E3036", "24E3038", "24E3039",
+  "24E3040", "24E3041", "24E3042", "24E3043", "24E3044", "24E3045", "24E3046",
+  "24E3047", "24E3048", "24E3049", "24E3050", "24E3051", "24E3053", "24E3054",
+  "24E3055", "24E3056", "24E3057"
+]);
+
+export function getStudentPhotoUrl(rollNumber) {
+  if (!rollNumber) return null;
+  const roll = String(rollNumber).toUpperCase().trim();
+  if (roll === "24E3006") return "/admin_photo.jpg";
+  if (EXISTING_STUDENT_PHOTOS.has(roll)) return `/student_${roll}.jpg`;
+  return null;
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null); // { name, rollNumber, type, ... }
   const [loading, setLoading] = useState(true);
@@ -398,8 +417,11 @@ export function AuthProvider({ children }) {
       const saved = localStorage.getItem("ddgdvc_user");
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (parsed?.rollNumber && STUDENTS[parsed.rollNumber] && !parsed.dob) {
-          parsed.dob = STUDENTS[parsed.rollNumber].dob;
+        if (parsed?.rollNumber) {
+          if (STUDENTS[parsed.rollNumber] && !parsed.dob) {
+            parsed.dob = STUDENTS[parsed.rollNumber].dob;
+          }
+          parsed.photoUrl = getStudentPhotoUrl(parsed.rollNumber) || parsed.photoUrl || null;
         }
         setUser(parsed);
       }
@@ -420,7 +442,10 @@ export function AuthProvider({ children }) {
       throw new Error("Date of birth does not match our records.");
     }
 
-    const userData = { ...record };
+    const userData = {
+      ...record,
+      photoUrl: getStudentPhotoUrl(normalizedRoll) || record.photoUrl || null,
+    };
     setUser(userData);
     localStorage.setItem("ddgdvc_user", JSON.stringify(userData));
     return userData;

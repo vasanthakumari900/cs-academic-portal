@@ -15,9 +15,12 @@ import {
   ensurePdfExtension,
   getDriveEmbedUrl,
 } from "../../utils/downloadUtils";
+import { usePdfPageCount } from "../../hooks/usePdfPageCount";
 
 export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, metaExtra }) {
   if (!doc) return null;
+
+  const pdfState = usePdfPageCount(doc);
 
   const targetUrl = doc.fileUrl || doc.driveUrl || doc.fileId || doc.id || "";
 
@@ -28,7 +31,7 @@ export default function DocumentCard({ doc, onPreview, onBookmark, bookmarked, m
   const semStr = doc.semester ? `Sem ${doc.semester}` : null;
   const unitStr = doc.unit ? (typeof doc.unit === "number" ? `Unit ${doc.unit}` : doc.unit) : null;
   const dateStr = doc.uploadedDate || doc.uploadDate || doc.createdAt || "2024-05-15";
-  const sizeStr = formatFileSize(doc.size || doc.fileSize || (doc.pages ? `${doc.pages} pages` : null));
+  const sizeStr = doc.size || doc.fileSize ? formatFileSize(doc.size || doc.fileSize) : pdfState.text;
 
   function handleView() {
     if (onPreview) {

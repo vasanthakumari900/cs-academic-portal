@@ -685,11 +685,7 @@ const NOTES_DATA = {
     }
   },
   "OPERATING SYSTEM": { units: { 1: { title: "Unit I", subtitle: "Introduction to OS", syllabus: "INTRODUCTION - VIEWS AND GOALS - OPERATING-SYSTEM SERVICES - USER AND OPERATING-SYSTEM INTERFACE - SYSTEM CALL - TYPES OF SYSTEM CALLS", files: [{ id: "os-u1-1", title: "OS Introduction", fileName: "OS-INTRO.pptx", fileId: "1GixI9_7uxRNzbf5qSe_wf4McmWaylQDS", type: "pptx" },{ id: "os-u1-2", title: "Session 2 - OS Basics", fileName: "ses-2.pptx", fileId: "1Zny7cAR4GR0YTRr3sIZT-u-FAOIQvQ-d", type: "pptx" },{ id: "os-u1-3", title: "OS Structures - Unit 1", fileName: "os structures-unit 1.pdf", fileId: "1O8-gnDMSgXurNN6O99N4S26z-UlONUbu", type: "pdf" },{ id: "os-u1-4", title: "OS Structures", fileName: "OSStructures.ppt", fileId: "1xqoPAFz_xavBAX8RR8nNErwANXnce-3B", type: "ppt" },{ id: "os-u1-5", title: "Processes", fileName: "os-processes.ppt", fileId: "1MoiwrzKonwOc4MH9wuO_sxKm92coXyYM", type: "ppt" },{ id: "os-u1-6", title: "Interprocess Communication", fileName: "interprocesscommunication-180721182943.pptx", fileId: "14mf_5YIS0TZB00phmq2kTSN8gT1gpfJY", type: "pptx" },{ id: "os-u1-7", title: "Threads - Unit 1", fileName: "threads-unit 1.pdf", fileId: "172mi8UGGUnGPAPF7zOeSKEBkqFucF5SM", type: "pdf" },{ id: "os-u1-8", title: "THREADS", fileName: "THREADS.pptx", fileId: "1uU4O05stk5cg2AVhfQBdC1VifAd_nrgJ", type: "pptx" }] }, 2: { title: "Unit II", subtitle: "Process Scheduling & Synchronization", syllabus: "PROCESS SCHEDULING: BASIC CONCEPTS - SCHEDULING CRITERIA - SCHEDULING ALGORITHON - MULTIPLE-PROCESSOR SCHEDULING - CPU SCHEDULING. SYNCHRONIZATION: THE CRITICAL-SECTION PROBLEM - SYNCHRONIZATION HARDWARE - SEMAPHORES",          files: [
-            { id: "os-u2-1", title: "OS Unit 2 - Process Scheduling & Synchronization", fileName: "OS_Unit2.pdf", fileId: "1J8M3d7mVSU4oxkyp6q_Dq-m4tuhdVmLV", type: "pdf" },
-            { id: "os-u2-2", title: "CPU Scheduling Algorithms", fileName: "CPU_Scheduling_Algorithms.pdf", fileId: "1_XELBrqMfKayUaj3iU_SqpwY_NQv55Kt", type: "pdf" },
-            { id: "os-u2-3", title: "Process Scheduling - Basic Concepts & Criteria", fileName: "Process_Scheduling_Concepts.pdf", fileId: "1G25fBzDLCLnCHNu_dby65kRLi5IUyJRW", type: "pdf" },
-            { id: "os-u2-4", title: "Multiple-Processor Scheduling", fileName: "Multiple_Processor_Scheduling.pdf", fileId: "18GbhNE-Or0GQCk-Y3-bYNzbV8JbEFX7J", type: "pdf" },
-            { id: "os-u2-5", title: "Process Synchronization & Semaphores", fileName: "Process_Synchronization.pdf", fileId: "1KzBX3DYJipevwk5eYTBU6uv52NZX7F8C", type: "pdf" }
+            { id: "os-u2-1", title: "OS Unit 2 - Process Scheduling & Synchronization", fileName: "OS_Unit2.pdf", fileId: "1J8M3d7mVSU4oxkyp6q_Dq-m4tuhdVmLV", type: "pdf" }
           ]
         }, 3: { title: "Unit III", subtitle: "Deadlocks", syllabus: "DEADLOCKS: DEADLOCK CHARACTERIZATION - METHODS FOR HANDLING DEADLOCKS - DEADLOCK PREVENTION - DEADLOCK AVOIDANCE - DEADLOCK DETECTION - RECOVERY FROM DEADLOCK", files: [
             { id: "os-u3-1", title: "Deadlocks - Characterization, Prevention & Avoidance", fileName: "Deadlocks_Unit3.pdf", fileId: "1KEvkmZURClibxejv1uiRlpAENXP9mlSE", type: "pdf" }
@@ -2819,7 +2815,7 @@ export default function Notes() {
 
   if (!courseType) {
     return (
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 bg-[#FAF0F2]">
         <NotesTopAiHeader />
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center flex flex-col items-center justify-center">
           <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F] p-1.5 shadow-xl shadow-rose-950/20 ring-4 ring-amber-400/40 transition-transform hover:scale-105 duration-300">
@@ -2889,7 +2885,7 @@ export default function Notes() {
   if (!selectedYear) {
     const yearsList = courseType === "pg" ? [1, 2] : [1, 2, 3];
     return (
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 bg-[#FAF0F2]">
         <NotesTopAiHeader />
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setCourseType(null); setSelectedYear(null); setSelectedSubject(null); }}
@@ -3223,7 +3219,7 @@ export default function Notes() {
   const currentSemesterNumber = selectedSemester;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 min-h-screen bg-[#FAF0F2] text-[#2D060E]">
       <NotesTopAiHeader />
       {/* ─── Faculty Upload Section ─── */}
       {isFaculty && selectedSubject && (
@@ -3342,6 +3338,9 @@ export default function Notes() {
               title: "Complete Subject Revision",
               subtitle: "Overview & Exam Key Points",
               syllabus: syllabusData?.map((s) => s.module).join(". ") || "Core Computer Science concepts and exam revision points.",
+              subject: selectedSubject,
+              year: selectedYear,
+              semester: selectedSemester,
             })
           }
           className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-4 py-2.5 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer border border-amber-300/40 shrink-0 font-mono"
@@ -3544,6 +3543,10 @@ export default function Notes() {
                             title: unit.title,
                             subtitle: unit.subtitle,
                             syllabus: unit.syllabus,
+                            files: unit.files,
+                            subject: selectedSubject,
+                            year: selectedYear,
+                            semester: selectedSemester,
                           });
                         }}
                         className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#0D9488] to-[#0F766E] text-white px-3 py-1 text-xs font-bold shadow-sm hover:scale-105 transition-all cursor-pointer font-mono"

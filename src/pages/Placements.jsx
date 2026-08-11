@@ -392,8 +392,8 @@ export default function Placements() {
   }
 
   return (
-    <div className={isDarkMode ? "dark" : ""}>
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+    <div className="dark">
+      <div className="min-h-screen bg-[#FAF0F2] text-[#2D060E] transition-colors duration-300">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-8">
           {/* Main Top Placement Header & Navigation */}
           <PlacementHeader

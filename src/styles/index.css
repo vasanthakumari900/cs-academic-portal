@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,28 +6,28 @@
 
 @layer base {
   :root {
-    --fluid-text-xs: clamp(0.8rem, 0.75rem + 0.3vw, 0.925rem);
-    --fluid-text-sm: clamp(0.925rem, 0.85rem + 0.4vw, 1.075rem);
-    --fluid-text-base: clamp(1.075rem, 0.975rem + 0.5vw, 1.225rem);
-    --fluid-text-lg: clamp(1.225rem, 1.1rem + 0.6vw, 1.425rem);
-    --fluid-text-xl: clamp(1.375rem, 1.225rem + 0.8vw, 1.675rem);
-    --fluid-text-2xl: clamp(1.625rem, 1.425rem + 1.2vw, 2.125rem);
-    --fluid-text-3xl: clamp(1.95rem, 1.65rem + 1.8vw, 2.8rem);
-    --fluid-text-4xl: clamp(2.3rem, 1.9rem + 2.5vw, 3.6rem);
-    --fluid-text-5xl: clamp(2.8rem, 2.25rem + 3.3vw, 4.35rem);
+    --fluid-text-xs: clamp(0.75rem, 0.7rem + 0.3vw, 0.875rem);
+    --fluid-text-sm: clamp(0.85rem, 0.8rem + 0.4vw, 1rem);
+    --fluid-text-base: clamp(0.95rem, 0.9rem + 0.5vw, 1.125rem);
+    --fluid-text-lg: clamp(1.1rem, 1rem + 0.6vw, 1.3rem);
+    --fluid-text-xl: clamp(1.25rem, 1.15rem + 0.8vw, 1.5rem);
+    --fluid-text-2xl: clamp(1.45rem, 1.3rem + 1.2vw, 1.85rem);
+    --fluid-text-3xl: clamp(1.75rem, 1.5rem + 1.6vw, 2.3rem);
+    --fluid-text-4xl: clamp(2rem, 1.7rem + 2.2vw, 2.9rem);
+    --fluid-text-5xl: clamp(2.4rem, 2rem + 3vw, 3.8rem);
 
     /* Container widths */
-    --fluid-container-sm:  clamp(20rem, 90vw, 36rem);
-    --fluid-container-md:  clamp(20rem, 92vw, 48rem);
-    --fluid-container-lg:  clamp(20rem, 94vw, 64rem);
-    --fluid-container-xl:  clamp(20rem, 96vw, 80rem);
-    --fluid-container-max: clamp(20rem, 98vw, 90rem);
+    --fluid-container-sm:  clamp(18rem, 90vw, 36rem);
+    --fluid-container-md:  clamp(18rem, 92vw, 48rem);
+    --fluid-container-lg:  clamp(18rem, 94vw, 64rem);
+    --fluid-container-xl:  clamp(18rem, 96vw, 80rem);
+    --fluid-container-max: clamp(18rem, 98vw, 90rem);
 
     /* Gap / padding for grids and sections */
-    --fluid-gap-card:    clamp(0.75rem, 1.5vw, 1.5rem);
-    --fluid-gap-section: clamp(2rem, 5vw, 5rem);
-    --fluid-pad-page:    clamp(1rem, 4vw, 2rem);
-    --fluid-pad-card:    clamp(0.875rem, 2vw, 1.5rem);
+    --fluid-gap-card:    clamp(0.625rem, 2vw, 1.5rem);
+    --fluid-gap-section: clamp(1.5rem, 4vw, 3.5rem);
+    --fluid-pad-page:    clamp(0.75rem, 2.5vw, 2rem);
+    --fluid-pad-card:    clamp(0.75rem, 2vw, 1.5rem);
 
     /* Icon sizes */
     --fluid-icon-sm: clamp(14px, 1.5vw, 18px);
@@ -35,12 +35,12 @@
     --fluid-icon-lg: clamp(22px, 2.5vw, 32px);
 
     /* Logo size */
-    --fluid-logo: clamp(2.5rem, 8vw, 5rem);
+    --fluid-logo: clamp(2.2rem, 6vw, 4.5rem);
 
-    --color-bg-light: #F1F5F9;
-    --color-text-light: #0F172A;
-    --color-bg-dark: #0A192F;
-    --color-text-dark: #F1F5F9;
+    --color-bg-light: #FAF0F2;
+    --color-text-light: #2D060E;
+    --color-bg-dark: #FAF0F2;
+    --color-text-dark: #2D060E;
   }
 
   html {
@@ -48,39 +48,42 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    font-family: 'Fira Sans', sans-serif !important;
-    font-size: clamp(15px, 1vw + 13px, 17px) !important;
-    overflow-x: hidden !important;
+    font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
+    font-size: clamp(14px, 0.6vw + 13px, 16px) !important;
+    overflow-x: clip !important;
     width: 100%;
     max-width: 100vw;
-    background-color: #F1F5F9 !important;
+    background-color: #FAF0F2 !important;
+    color: #2D060E !important;
   }
 
   html.dark {
-    background-color: #0A192F !important;
-    color: #F1F5F9 !important;
+    background-color: #FAF0F2 !important;
+    color: #2D060E !important;
   }
 
   * {
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Outfit', 'Inter', system-ui, sans-serif;
     box-sizing: border-box;
     max-width: 100%;
   }
 
   body {
-    font-family: 'Fira Sans', sans-serif !important;
-    font-size: clamp(15px, 1vw + 13px, 17px) !important;
-    @apply text-base leading-relaxed antialiased bg-[#F1F5F9] dark:bg-[#0A192F] text-[#0F172A] dark:text-[#F1F5F9];
-    overflow-x: hidden !important;
+    font-family: 'Outfit', 'Inter', system-ui, sans-serif !important;
+    font-size: clamp(14px, 0.6vw + 13px, 16px) !important;
+    @apply text-base leading-relaxed antialiased bg-[#FAF0F2] text-[#2D060E];
+    overflow-x: clip !important;
     width: 100%;
     max-width: 100vw;
+    margin: 0;
+    padding: 0;
   }
 
   #root {
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
     max-width: 100vw;
     width: 100%;
-    @apply bg-[#F1F5F9] dark:bg-[#0A192F];
+    @apply bg-[#FAF0F2];
   }
 
   /* ─── Mobile Media & Touch Optimizations ─── */
@@ -100,61 +103,61 @@
     cursor: pointer;
   }
 
-  /* ─── Global Typography Hierarchy (Fira Code headings + Fira Sans body) ─── */
+  /* ─── Global Typography Hierarchy (Outfit headings + Inter body) ─── */
   h1, .h1 {
-    font-family: 'Fira Code', monospace !important;
+    font-family: 'Outfit', sans-serif !important;
     font-size: var(--fluid-text-4xl);
-    @apply font-extrabold text-[#4A1620] dark:text-[#F7CAD3] tracking-tight leading-tight;
+    @apply font-extrabold text-[#2D060E] dark:text-[#F7CAD3] tracking-tight leading-tight;
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
   h2, .h2 {
-    font-family: 'Fira Code', monospace !important;
+    font-family: 'Outfit', sans-serif !important;
     font-size: var(--fluid-text-3xl);
-    @apply font-bold text-[#4A1620] dark:text-[#F7CAD3] tracking-tight leading-snug;
+    @apply font-bold text-[#2D060E] dark:text-[#F7CAD3] tracking-tight leading-snug;
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
   h3, .h3 {
-    font-family: 'Fira Code', monospace !important;
+    font-family: 'Outfit', sans-serif !important;
     font-size: var(--fluid-text-2xl);
-    @apply font-bold text-[#4A1620] dark:text-[#F7CAD3] tracking-tight leading-snug;
+    @apply font-bold text-[#2D060E] dark:text-[#F7CAD3] tracking-tight leading-snug;
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
   h4, .h4 {
-    font-family: 'Fira Code', monospace !important;
+    font-family: 'Outfit', sans-serif !important;
     font-size: var(--fluid-text-xl);
-    @apply font-bold text-[#4A1620] dark:text-[#F7CAD3] tracking-tight;
+    @apply font-bold text-[#2D060E] dark:text-[#F7CAD3] tracking-tight;
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
   h5, h6 {
-    font-family: 'Fira Code', monospace !important;
+    font-family: 'Outfit', sans-serif !important;
     font-size: var(--fluid-text-sm);
-    @apply font-semibold text-[#4A1620] dark:text-[#F7CAD3] tracking-normal;
+    @apply font-semibold text-[#2D060E] dark:text-[#F7CAD3] tracking-normal;
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
   p {
     font-size: var(--fluid-text-base);
-    @apply text-[#4A1620]/80 dark:text-[#F7CAD3]/90;
+    @apply text-[#2D060E]/90 dark:text-[#F7CAD3]/90;
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
   code, pre, .font-mono {
-    font-family: 'Fira Code', monospace !important;
+    font-family: 'Inter', monospace !important;
     letter-spacing: -0.02em;
   }
 
   button, input, select, textarea {
-    font-family: 'Fira Sans', sans-serif !important;
+    font-family: 'Outfit', 'Inter', sans-serif !important;
   }
 
   :focus-visible {

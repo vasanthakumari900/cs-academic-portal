@@ -96,7 +96,7 @@ export default function Navbar() {
               <img
                 src={csPortalLogo}
                 alt="CS Academic Portal Logo"
-                style={{ height: 'clamp(2.5rem, 6vw, 5rem)' }}
+                style={{ height: 'clamp(2rem, 5vw, 3.5rem)' }}
                 className="w-auto object-contain rounded-xl shadow-md border-2 border-[#D97706] shrink-0"
               />
             </button>

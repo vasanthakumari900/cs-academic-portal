@@ -493,7 +493,7 @@ export default function EContent() {
 
   if (!courseType && selectedYear !== "dgvc") {
     return (
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 min-h-screen bg-[#FAF0F2] text-[#2D060E]">
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-12 text-center flex flex-col items-center justify-center">
           <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F] p-1.5 shadow-xl shadow-rose-950/20 ring-4 ring-amber-400/40 transition-transform hover:scale-105 duration-300">
             <div className="flex h-full w-full items-center justify-center rounded-[20px] bg-[#021C4F] text-amber-300">
@@ -585,7 +585,7 @@ export default function EContent() {
   if (!selectedYear) {
     const yearsList = courseType === "pg" ? [1, 2] : [1, 2, 3];
     return (
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8 min-h-screen bg-[#FAF0F2] text-[#2D060E]">
         <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           onClick={() => { setCourseType(null); setSelectedYear(null); setSelectedSubject(null); }}
           className="mb-8 inline-flex items-center gap-2 rounded-xl border-2 border-[#D1D5DB] bg-white px-5 py-2.5 text-sm sm:text-base font-extrabold text-[#374151] shadow-md hover:bg-[#F3F4F6] hover:scale-105 transition-all"
