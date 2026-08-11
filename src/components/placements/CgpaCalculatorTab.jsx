@@ -103,7 +103,7 @@ function buildOcrTextVariants(rawText) {
   // OCR may turn ":" into ";" or a comma into the decimal separator
   add((s) => s.replace(/;/g, ":").replace(/\b([0-9]),( [0-9])/g, "$1.$2"));
   // Drop spaces that broke up a label:value pair e.g. "CGPA : 7.60" -> "CGPA: 7.60"
-  add((s) => s.replace(/(cgpa|gpa|sgpa)\s+([.:_-])\s+/gi, "$1$2"));
+  add((s) => s.replace(/(cgpa|gpa|sgpa)\s+((?:\:|\.|_|\-))\s+/gi, "$1$2"));
 
   return variants;
 }
@@ -175,7 +175,7 @@ function looksLikeMarksheet(text) {
   if (/\bPART\s+(?:I{1,3}|IV|V)\b/.test(clean)) score += 1;
   if (/\bREG(?:ISTER)?\s*(?:NO|NUMBER)?\b|\bEXAM(?:INATION)?\b/.test(clean)) score += 1;
   // An explicit CGPA value is strong academic evidence
-  if (/CGPA\s*[:=\-]?\s*[0-9]/.test(clean) || /[4-9]\.[0-9]{1,2}\s*\/\s*10\b/.test(clean)) score += 2;
+  if (/CGPA\s*((?:\:|=|\-))?\s*[0-9]/.test(clean) || /[4-9]\.[0-9]{1,2}\s*\/\s*10\b/.test(clean)) score += 2;
   return score >= 2;
 }
 
@@ -195,7 +195,7 @@ function extractMarksheetIdentity(rawText) {
   // Label-anchored ONLY — a bare 7-char digit string elsewhere (date, phone, ID fragment)
   // must never be mistaken for a register number, or it would falsely reject an owner.
   const rollMatch = clean.match(
-    new RegExp(`(?:reg(?:ister)?|roll|adm(?:ission)?|enrol(?:l)?ment)\\s*\\.?\\s*(?:no\\.?|number)?\\s*[:.\\-]?\\s*(\\d{2}\\s*[EO0]\\s*${rollTailClass}{4})`, "i")
+    new RegExp(`(?:reg(?:ister)?|roll|adm(?:ission)?|enrol(?:l)?ment)\\s*\\.?\\s*(?:no\\.?|number)?\\s*((?:\\:|\.|\\-))?\\s*(\\d{2}\\s*[EO0]\\s*${rollTailClass}{4})`, "i")
   );
   if (rollMatch) {
     registerNumber = (rollMatch[1] || rollMatch[0]).replace(/\s+/g, "");
@@ -223,8 +223,8 @@ function extractMarksheetIdentity(rawText) {
   };
 
   let studentName = null;
-  const specificNameRx = /(?:students?\s*['’]?s?\s+name|student\s+name|name\s+of\s+the\s+candidate|candidate\s*['’]?s?\s*name)\s*[:.\-]?\s*/gi;
-  const genericNameRx = /\bname\b\s*[:.\-]?\s*/gi;
+  const specificNameRx = /(?:students?\s*['’]?s?\s+name|student\s+name|name\s+of\s+the\s+candidate|candidate\s*['’]?s?\s*name)\s*((?:\:|\.|\-))?\s*/gi;
+  const genericNameRx = /\bname\b\s*((?:\:|\.|\-))?\s*/gi;
   for (const rx of [specificNameRx, genericNameRx]) {
     let nm;
     while ((nm = rx.exec(clean)) !== null) {
@@ -354,7 +354,7 @@ function extractPart3Cgpa(clean) {
 
   // 1. Label-based summary table parser (Pattern: Part III [credits] [GPA], e.g., Part III 30 7.60)
   // Matches "Part III 30 7.60", "PART III 30 7.60", "PART-III 30 7.60"
-  const summaryTableRx = /\bpart[\s\-:_.]*(?:iii|3|111|i\s*i\s*i)\s+(\d+)\s+(\d+\.\d+)\b/i;
+  const summaryTableRx = /\bpart(?:\s|\-|\:|\.|_)*(?:iii|3|111|i\s*i\s*i)\s+(\d+)\s+(\d+\.\d+)\b/i;
   const matchTable = clean.match(summaryTableRx);
   if (matchTable && matchTable[2]) {
     const val = parseFloat(matchTable[2]);
@@ -365,9 +365,9 @@ function extractPart3Cgpa(clean) {
 
   // 2. Direct Part III label match with colon/dash or direct decimal (e.g. "Part III : 7.60", "PART III 7.60")
   const directLabelRxes = [
-    /\bpart[\s\-:_.]*(?:iii|3|111|i\s*i\s*i)\b[^\n\r\d]*?(\d{1,3})\s+([0-9]\.\d{1,2}|10\.00)\b/i,
-    /\bpart[\s\-:_.]*(?:iii|3|111|i\s*i\s*i)\b[^\n\r\d]*?[:=\-]?\s*([0-9]\.\d{1,2}|10\.00)\b/i,
-    /\b(?:core|major)\s*(?:subjects?|courses?|part)?\b[^\n\r\d]*?[:=\-]?\s*([0-9]\.\d{1,2}|10\.00)\b/i
+    /\bpart(?:\s|\-|\:|\.|_)*(?:iii|3|111|i\s*i\s*i)\b[^\n\r\d]*?(\d{1,3})\s+([0-9]\.\d{1,2}|10\.00)\b/i,
+    /\bpart(?:\s|\-|\:|\.|_)*(?:iii|3|111|i\s*i\s*i)\b[^\n\r\d]*?((?:\:|=|\-))?\s*([0-9]\.\d{1,2}|10\.00)\b/i,
+    /\b(?:core|major)\s*(?:subjects?|courses?|part)?\b[^\n\r\d]*?((?:\:|=|\-))?\s*([0-9]\.\d{1,2}|10\.00)\b/i
   ];
 
   for (const rx of directLabelRxes) {
@@ -383,15 +383,15 @@ function extractPart3Cgpa(clean) {
 
   // 3. Locate PART III section heading position in full text
   const part3Patterns = [
-    /\bpart[\s\-:_.]*(?:iii|3|111|i\s*i\s*i|l\s*l\s*l|1\s*1\s*1)\b/i,
-    /\bp\s*a\s*r\s*t\s*[-:_.]*\s*(?:iii|3|i\s*i\s*i)\b/i,
+    /\bpart(?:\s|\-|\:|\.|_)*(?:iii|3|111|i\s*i\s*i|l\s*l\s*l|1\s*1\s*1)\b/i,
+    /\bp\s*a\s*r\s*t\s*(?:\-|\:|\.|_)*\s*(?:iii|3|i\s*i\s*i)\b/i,
     /\b(?:core|major)\s*(?:subjects?|courses?|part)?\b/i,
   ];
 
   let part3Index = -1;
 
   // Search for PART III after PART I / PART II if present
-  const part1Or2Idx = clean.search(/\bpart[\s\-:_.]*(?:i|1|ii|2)\b(?![\s\-]*[iv3])/i);
+  const part1Or2Idx = clean.search(/\bpart(?:\s|\-|\:|\.|_)*(?:i|1|ii|2)\b(?![\s\-]*[iv3])/i);
   if (part1Or2Idx !== -1) {
     const afterPart12 = clean.substring(part1Or2Idx + 6);
     for (const rx of part3Patterns) {
@@ -418,7 +418,7 @@ function extractPart3Cgpa(clean) {
 
   // Extract region starting strictly from PART III up to PART IV, PART V, or OVERALL
   const afterPart3 = clean.substring(part3Index);
-  let regionEnd = afterPart3.search(/\bpart[\s\-:_.]*(?:iv|4|v|5)\b/i);
+  let regionEnd = afterPart3.search(/\bpart(?:\s|\-|\:|\.|_)*(?:iv|4|v|5)\b/i);
   if (regionEnd === -1) regionEnd = afterPart3.search(/\b(?:overall|consolidated|grand\s+total)\b/i);
   const region = regionEnd !== -1 ? afterPart3.substring(0, regionEnd) : afterPart3.substring(0, 400);
 

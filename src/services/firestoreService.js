@@ -18,13 +18,24 @@ import {
   increment,
   onSnapshot,
 } from "firebase/firestore";
-import { db } from "../firebase/config";
+import { db, isFirebaseConfigured } from "../firebase/config";
+
+function unavailableError(collectionName) {
+  const err = new Error(
+    `Firestore is not configured. Add the VITE_FIREBASE_* variables (see .env.example) to enable \`${collectionName}\`.`
+  );
+  err.name = "FirestoreUnavailable";
+  return err;
+}
 
 export function createCollectionService(collectionName) {
-  const colRef = collection(db, collectionName);
+  // `collection(db, …)` must never run at module-load time when Firebase is
+  // unavailable — that would crash every page that imports these services.
+  const colRef = isFirebaseConfigured && db ? collection(db, collectionName) : null;
 
   return {
     async create(data) {
+      if (!colRef) throw unavailableError(collectionName);
       const docRef = await addDoc(colRef, {
         ...data,
         views: 0,
@@ -35,19 +46,23 @@ export function createCollectionService(collectionName) {
     },
 
     async update(id, data) {
+      if (!colRef) throw unavailableError(collectionName);
       await updateDoc(doc(db, collectionName, id), data);
     },
 
     async remove(id) {
+      if (!colRef) throw unavailableError(collectionName);
       await deleteDoc(doc(db, collectionName, id));
     },
 
     async getById(id) {
+      if (!colRef) throw unavailableError(collectionName);
       const snap = await getDoc(doc(db, collectionName, id));
       return snap.exists() ? { id: snap.id, ...snap.data() } : null;
     },
 
     async list({ semester, subject, year, videoType, sortBy = "createdAt", max = 50 } = {}) {
+      if (!colRef) return [];
       const clauses = [];
       if (semester) clauses.push(where("semester", "==", Number(semester)));
       if (subject) clauses.push(where("subject", "==", subject));
@@ -62,6 +77,12 @@ export function createCollectionService(collectionName) {
      * Real-time subscription listener for student content mapping
      */
     subscribe({ semester, subject, year, videoType, callback }) {
+      if (!colRef) {
+        // Offline mode: resolve immediately with an empty list and a no-op
+        // unsubscribe so consumers (hooks) settle cleanly.
+        callback([]);
+        return () => {};
+      }
       const clauses = [];
       if (semester) clauses.push(where("semester", "==", Number(semester)));
       if (subject) clauses.push(where("subject", "==", subject));
@@ -82,6 +103,7 @@ export function createCollectionService(collectionName) {
     },
 
     async incrementField(id, field, by = 1) {
+      if (!colRef) throw unavailableError(collectionName);
       await updateDoc(doc(db, collectionName, id), { [field]: increment(by) });
     },
   };

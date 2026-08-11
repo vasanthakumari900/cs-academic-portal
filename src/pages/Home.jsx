@@ -15,8 +15,8 @@ const quickCards = [
     icon: FiCalendar,
     to: "/college-calendar",
     badge: "2026 - 2027",
-    color: "from-amber-500 to-rose-600",
-    glow: "shadow-amber-500/20",
+    color: "from-[#E08813] to-[#D97706]",
+    glow: "hover:shadow-[0_20px_60px_rgba(217,119,6,0.15)]",
     desc: "Full 12-month academic calendar, working days & exam schedule."
   },
   {
@@ -24,8 +24,8 @@ const quickCards = [
     icon: FiPlayCircle,
     to: "/e-content",
     badge: "E-Content",
-    color: "from-blue-600 to-indigo-700",
-    glow: "shadow-blue-500/20",
+    color: "from-[#7E2238] to-[#4A1620]",
+    glow: "hover:shadow-[0_20px_60px_rgba(74,22,32,0.3)]",
     desc: "Watch subject-wise video lectures & tutorial playlists."
   },
   {
@@ -33,8 +33,8 @@ const quickCards = [
     icon: FiFileText,
     to: "/notes",
     badge: "PDF Notes",
-    color: "from-[#C50337] to-rose-700",
-    glow: "shadow-rose-500/20",
+    color: "from-[#C50337] to-[#7F011F]",
+    glow: "hover:shadow-[0_20px_60px_rgba(197,3,55,0.15)]",
     desc: "Comprehensive unit-wise lecture notes & study materials."
   },
   {
@@ -42,8 +42,8 @@ const quickCards = [
     icon: FiGrid,
     to: "/question-papers",
     badge: "Semester Exams",
-    color: "from-emerald-600 to-teal-700",
-    glow: "shadow-emerald-500/20",
+    color: "from-[#61182A] to-[#3A101A]",
+    glow: "hover:shadow-[0_20px_60px_rgba(74,22,32,0.25)]",
     desc: "University semester question papers with subject filters."
   },
   {
@@ -51,19 +51,19 @@ const quickCards = [
     icon: FiBriefcase,
     to: "/placements",
     badge: "Career Hub",
-    color: "from-[#021C4F] to-cyan-800",
-    glow: "shadow-cyan-500/20",
+    color: "from-[#E08813] to-[#B45309]",
+    glow: "hover:shadow-[0_20px_60px_rgba(217,119,6,0.18)]",
     desc: "Top recruiter drives, mock aptitude & alumni stories."
   },
 ];
 
 const stats = [
-  { label: "Video Lectures", value: 50, suffix: "+", icon: FiPlayCircle, color: "text-cyan-300" },
-  { label: "Lecture Notes", value: 30, suffix: "+", icon: FiFileText, color: "text-[#C50337]" },
-  { label: "Question Papers", value: 100, suffix: "+", icon: FiGrid, color: "text-amber-300" },
-  { label: "Placement Drives", value: 15, suffix: "+", icon: FiBriefcase, color: "text-emerald-400" },
-  { label: "Students Enrolled", value: 200, suffix: "+", icon: FiUsers, color: "text-purple-300" },
-  { label: "CS Subjects", value: 20, suffix: "+", icon: FiLayers, color: "text-rose-300" },
+  { label: "Video Lectures", value: 50, suffix: "+", icon: FiPlayCircle, color: "text-[#F4C266]" },
+  { label: "Lecture Notes", value: 30, suffix: "+", icon: FiFileText, color: "text-[#F3E4E8]" },
+  { label: "Question Papers", value: 100, suffix: "+", icon: FiGrid, color: "text-[#F4C266]" },
+  { label: "Placement Drives", value: 15, suffix: "+", icon: FiBriefcase, color: "text-[#F3E4E8]" },
+  { label: "Students Enrolled", value: 200, suffix: "+", icon: FiUsers, color: "text-[#F4C266]" },
+  { label: "CS Subjects", value: 20, suffix: "+", icon: FiLayers, color: "text-[#F3E4E8]" },
 ];
 
 const features = [
@@ -71,29 +71,29 @@ const features = [
     icon: FiPlayCircle,
     title: "Curated Video Lectures",
     desc: "Faculty-curated video playlists covering the entire CS syllabus with practical code walkthroughs.",
-    color: "from-[#021C4F] to-indigo-900",
-    accent: "text-cyan-400"
+    color: "from-[#7E2238] to-[#4A1620]",
+    accent: "text-[#F4C266]"
   },
   {
     icon: FiFileText,
     title: "Unit-wise PDF Notes",
     desc: "Instant download unit notes prepared by expert faculty for quick revision and deep subject learning.",
-    color: "from-[#C50337] to-rose-900",
-    accent: "text-amber-300"
+    color: "from-[#C50337] to-[#7F011F]",
+    accent: "text-[#F4C266]"
   },
   {
     icon: FiGrid,
     title: "Past University Papers",
     desc: "Extensive bank of semester examination question papers with multiple sets per subject.",
-    color: "from-[#021C4F] to-slate-900",
-    accent: "text-emerald-400"
+    color: "from-[#61182A] to-[#250A11]",
+    accent: "text-[#F3E4E8]"
   },
   {
     icon: FiBriefcase,
     title: "Placement & Career Hub",
     desc: "Live placement alerts, top IT recruiter insights, eligibility criteria, and alumni interview experiences.",
-    color: "from-[#C50337] to-rose-900",
-    accent: "text-yellow-300"
+    color: "from-[#E08813] to-[#B45309]",
+    accent: "text-[#F4C266]"
   },
 ];
 
@@ -129,21 +129,21 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans overflow-hidden">
+    <div className="min-h-screen bg-[#14070D] text-[#F3E4E8] font-sans overflow-hidden">
       
       {/* ── HERO SECTION ── */}
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#011337] via-[#021C4F] to-slate-950 text-white py-20 px-4 sm:px-6 lg:px-8 border-b border-amber-400/20">
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#3A101A] via-[#250A11] to-[#0F060B] text-white py-20 px-4 sm:px-6 lg:px-8 border-b border-[#D97706]/25">
         
         {/* Animated Background Glowing Orbs */}
         <motion.div
           animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[#C50337]/30 blur-[100px] pointer-events-none"
+          className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[#C50337]/25 blur-[100px] pointer-events-none"
         />
         <motion.div
           animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-1/2 -right-32 w-[500px] h-[500px] rounded-full bg-[#021C4F] blur-[120px] pointer-events-none"
+          className="absolute top-1/2 -right-32 w-[500px] h-[500px] rounded-full bg-[#D97706]/15 blur-[120px] pointer-events-none"
         />
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
 
@@ -156,8 +156,8 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="flex justify-center"
           >
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-5 py-2 text-xs font-extrabold text-amber-300 border border-white/20 shadow-lg tracking-wider uppercase">
-              <FiShield size={14} className="text-[#C50337]" />
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-5 py-2 text-xs font-extrabold text-[#F4C266] border border-[#F4C266]/30 shadow-lg tracking-wider uppercase font-heading">
+              <FiShield size={14} className="text-[#F4C266]" />
               <span className="hidden sm:inline">
                 Dwaraka Doss Goverdhan Doss Vaishnav College (Autonomous)
               </span>
@@ -172,22 +172,22 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="space-y-4 max-w-4xl mx-auto"
           >
-            <h1 style={{ fontSize: 'clamp(1.65rem, 4.5vw + 0.5rem, 3.75rem)' }} className="font-black tracking-tight leading-[1.15] font-serif text-white">
+            <h1 style={{ fontSize: 'clamp(1.65rem, 4.5vw + 0.5rem, 3.75rem)' }} className="font-black tracking-tight leading-[1.15] font-heading text-white">
               {user ? (
                 <>
-                  Welcome back, <span className="bg-gradient-to-r from-rose-400 via-[#C50337] to-amber-300 bg-clip-text text-transparent">{user.name}</span>!
+                  Welcome back, <span className="bg-gradient-to-r from-[#F4C266] via-[#E08813] to-[#F3E4E8] bg-clip-text text-transparent">{user.name}</span>!
                 </>
               ) : (
                 <>
                   Department of Computer Science <br />
-                  <span className="bg-gradient-to-r from-rose-400 via-[#C50337] to-amber-300 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-[#F4C266] via-[#D97706] to-[#F3E4E8] bg-clip-text text-transparent">
                     Academic Learning Portal
                   </span>
                 </>
               )}
             </h1>
 
-            <p style={{ fontSize: 'clamp(0.875rem, 1.5vw + 0.5rem, 1.125rem)' }} className="text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
+            <p style={{ fontSize: 'clamp(0.875rem, 1.5vw + 0.5rem, 1.125rem)' }} className="text-[#D9C2CA] max-w-2xl mx-auto font-medium leading-relaxed">
               {user ? (
                 "Access unit-wise lecture notes, video playlists, past university question papers, CIA assessments, and placement drives."
               ) : (
@@ -203,29 +203,19 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-[clamp(0.75rem,2vw,1rem)] pt-2 w-full sm:w-auto px-[clamp(0.5rem,2vw,0rem)]"
           >
-            {user ? (
-              <button
-                onClick={() => navigate(getDashboardPath())}
-                className="group relative inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#C50337] to-rose-700 px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-black text-white shadow-xl shadow-rose-950/40 transition-all hover:scale-105 hover:shadow-2xl active:scale-95 w-full sm:w-auto"
-              >
-                <span>Go to Student Dashboard</span>
-                <FiArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-              </button>
-            ) : (
-              <button
-                onClick={() => navigate("/login")}
-                className="group relative inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#C50337] to-rose-700 px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-black text-white shadow-xl shadow-rose-950/40 transition-all hover:scale-105 hover:shadow-2xl active:scale-95 w-full sm:w-auto"
-              >
-                <span>Access Student Portal</span>
-                <FiArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-              </button>
-            )}
+            <button
+              onClick={() => navigate(user ? getDashboardPath() : "/login")}
+              className="group relative inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#C50337] to-[#7F011F] px-6 sm:px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-black text-white shadow-[0_8px_30px_rgba(197,3,55,0.35)] transition-all hover:scale-105 hover:shadow-[0_12px_40px_rgba(197,3,55,0.45)] active:scale-95 w-full sm:w-auto font-heading"
+            >
+              <span>{user ? "Go to Dashboard" : "Access Student Portal"}</span>
+              <FiArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+            </button>
 
             <button
               onClick={() => navigate("/about")}
               className="group inline-flex items-center justify-center gap-2 rounded-2xl bg-white/10 backdrop-blur-md px-6 sm:px-7 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white border border-white/20 hover:bg-white/20 transition-all hover:scale-105 active:scale-95 shadow-md w-full sm:w-auto"
             >
-              <FiCompass size={16} className="text-amber-300" />
+              <FiCompass size={16} className="text-[#F4C266]" />
               <span>Explore About DGVC</span>
             </button>
           </motion.div>
@@ -241,13 +231,13 @@ export default function Home() {
               <motion.div
                 key={stat.label}
                 variants={itemVariants}
-                className="bg-white/5 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-lg hover:border-amber-400/40 transition-all"
+                className="bg-white/5 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-lg hover:border-[#F4C266]/40 transition-all"
               >
                 <stat.icon size={22} className={`mx-auto mb-1.5 ${stat.color}`} />
                 <p className="text-2xl sm:text-3xl font-black text-white font-mono">
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                 </p>
-                <p className="text-[11px] font-bold text-slate-300 mt-1 uppercase tracking-wider">{stat.label}</p>
+                <p className="text-[11px] font-bold text-[#D9C2CA] mt-1 uppercase tracking-wider">{stat.label}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -268,25 +258,25 @@ export default function Home() {
               whileHover={{ y: -6, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => navigate(card.to)}
-              className={`group relative overflow-hidden rounded-3xl bg-gradient-to-b from-slate-900 to-slate-950 p-6 border border-slate-800 shadow-xl text-left transition-all duration-300 hover:border-amber-400/50 ${card.glow}`}
+              className={`group relative overflow-hidden rounded-3xl bg-gradient-to-b from-[#22101A] to-[#14070D] p-6 border border-white/10 shadow-xl text-left transition-all duration-300 hover:border-[#F4C266]/50 ${card.glow}`}
             >
               <div className="flex items-center justify-between mb-4">
                 <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${card.color} text-white shadow-md transition-transform duration-300 group-hover:scale-110`}>
                   <card.icon size={26} />
                 </div>
-                <span className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider bg-white/10 text-amber-300 border border-white/15">
+                <span className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider bg-white/10 text-[#F4C266] border border-white/15 font-heading">
                   {card.badge}
                 </span>
               </div>
 
-              <h3 className="text-lg font-extrabold text-white group-hover:text-amber-300 transition-colors">
+              <h3 className="text-lg font-extrabold text-white group-hover:text-[#F4C266] transition-colors font-heading">
                 {card.label}
               </h3>
-              <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
+              <p className="text-xs text-[#C09DAA] mt-1.5 leading-relaxed">
                 {card.desc}
               </p>
 
-              <div className="mt-5 flex items-center gap-1.5 text-xs font-bold text-cyan-400 group-hover:text-rose-400 transition-colors pt-3 border-t border-slate-800">
+              <div className="mt-5 flex items-center gap-1.5 text-xs font-bold text-[#F4C266] group-hover:text-[#F3E4E8] transition-colors pt-3 border-t border-white/10">
                 <span>Access Section</span>
                 <FiChevronRight size={14} className="transition-transform group-hover:translate-x-1" />
               </div>
@@ -303,13 +293,13 @@ export default function Home() {
           viewport={{ once: true }}
           className="text-center space-y-2 max-w-2xl mx-auto"
         >
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20 px-4 py-1 text-xs font-extrabold uppercase tracking-widest">
-            <FiZap size={14} className="text-[#C50337]" /> Core Academic Suite
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#D97706]/10 text-[#F4C266] border border-[#D97706]/25 px-4 py-1 text-xs font-extrabold uppercase tracking-widest font-heading">
+            <FiZap size={14} className="text-[#D97706]" /> Core Academic Suite
           </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-white">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-heading">
             Everything You Need To Excel
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400">
+          <p className="text-xs sm:text-sm text-[#C09DAA]">
             A comprehensive digital ecosystem built for Computer Science students &amp; faculty
           </p>
         </motion.div>
@@ -322,17 +312,17 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="bg-slate-900/80 rounded-3xl p-6 border border-slate-800 shadow-md hover:border-slate-700 transition-all flex flex-col justify-between"
+              className="bg-[#22101A]/80 rounded-3xl p-6 border border-white/10 shadow-md hover:border-[#F4C266]/40 transition-all flex flex-col justify-between"
             >
               <div>
                 <div className={`h-12 w-12 rounded-2xl bg-gradient-to-br ${feature.color} text-white flex items-center justify-center shadow-md mb-4`}>
                   <feature.icon size={22} />
                 </div>
-                <h3 className="text-base font-extrabold text-white mb-2">{feature.title}</h3>
-                <p className="text-xs text-slate-400 leading-relaxed">{feature.desc}</p>
+                <h3 className="text-base font-extrabold text-white mb-2 font-heading">{feature.title}</h3>
+                <p className="text-xs text-[#C09DAA] leading-relaxed">{feature.desc}</p>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-800 flex items-center gap-1 text-[11px] font-bold text-slate-400">
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center gap-1 text-[11px] font-bold text-[#D9C2CA]">
                 <FiTrendingUp className={feature.accent} size={14} />
                 <span>Semester Ready</span>
               </div>
@@ -347,24 +337,25 @@ export default function Home() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#011337] via-[#021C4F] to-[#7F011F] p-8 sm:p-14 text-white text-center shadow-2xl border border-amber-400/30"
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#3A101A] via-[#61182A] to-[#250A11] p-8 sm:p-14 text-white text-center shadow-2xl border border-[#F4C266]/30"
         >
+          <div className="absolute -top-20 left-1/3 h-64 w-64 rounded-full bg-[#D97706]/20 blur-[90px] pointer-events-none" />
           <div className="relative z-10 space-y-5 max-w-2xl mx-auto">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 border border-white/20 text-amber-300 shadow-lg">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-b from-[#E08813] to-[#D97706] border border-[#F4C266]/50 text-white shadow-lg">
               <FiAward size={32} />
             </div>
 
-            <h2 className="text-2xl sm:text-4xl font-black text-white font-serif">
+            <h2 className="text-2xl sm:text-4xl font-black text-white font-heading">
               Empowering Your Future in Tech
             </h2>
-            <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">
+            <p className="text-xs sm:text-sm text-[#EDC8D0] leading-relaxed font-medium">
               Every note you read, every video you watch, and every past paper you solve brings you closer to technical mastery and career success.
             </p>
 
             <div className="pt-4">
               <button
                 onClick={() => navigate(getDashboardPath())}
-                className="group inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#C50337] to-rose-700 px-8 py-4 text-sm font-black text-white shadow-xl hover:scale-105 active:scale-95 transition-all"
+                className="group inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#C50337] to-[#7F011F] px-8 py-4 text-sm font-black text-white shadow-[0_8px_30px_rgba(197,3,55,0.35)] hover:scale-105 active:scale-95 transition-all font-heading"
               >
                 <span>{user ? "Go to Dashboard" : "Get Started Now"}</span>
                 <FiArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
