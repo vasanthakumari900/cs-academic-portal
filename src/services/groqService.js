@@ -237,3 +237,60 @@ Return strictly valid JSON with this exact structure:
   }
 }
 
+/**
+ * Interactive Q&A for "Ask AI Teacher" tab grounded in the selected unit's syllabus & notes
+ */
+export async function askAiTeacherForUnit({ question, subject, unitTitle, unitSubtitle, syllabusText }) {
+  const apiKey = import.meta.env.VITE_GROQ_API_KEY;
+
+  const sysPrompt = `You are an expert, encouraging university Computer Science Professor.
+You are currently teaching:
+Subject: ${subject}
+Unit: ${unitTitle} - ${unitSubtitle}
+Syllabus Content: ${syllabusText}
+
+Instructions:
+1. Answer the student's question clearly, simply, and accurately, grounded in this unit's subject content.
+2. If requested, provide step-by-step breakdowns, code snippets, block diagrams, or 10-mark exam answer formats.
+3. Use an encouraging, warm academic tone suitable for an undergraduate CS student.
+4. FORMATTING RULE: DO NOT use raw '***', '---', or '###' dividers. Use clean text with clear bullet points ('•') and bold section headers like 'Concept:'.`;
+
+  if (!apiKey) {
+    return `🎓 **AI Teacher Explanation** (${unitTitle}):\n\nGreat question regarding "${question}"!\n\nKey Breakdown:\n• **Core Concept**: In ${unitTitle}, "${question}" relates directly to ${syllabusText.slice(0, 100)}...\n• **Key Point**: Focus on definitions, step-by-step workflow, and drawing clear block diagrams for exams.\n• **Exam Tip**: State the core definition first, followed by working steps and advantages.`;
+  }
+
+  try {
+    const response = await fetch(GROQ_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        messages: [
+          { role: "system", content: sysPrompt },
+          { role: "user", content: question },
+        ],
+        temperature: 0.7,
+        max_tokens: 1200,
+      }),
+    });
+
+    if (!response.ok) throw new Error("API request failed");
+    const data = await response.json();
+    const rawText = data?.choices?.[0]?.message?.content || "I couldn't generate an answer at this moment. Please try asking again!";
+    
+    // Clean any triple asterisks or horizontal rule markers
+    return rawText
+      .replace(/\*{3,}/g, "")
+      .replace(/^[-*_]{3,}\s*$/gm, "")
+      .trim();
+  } catch (err) {
+    console.error("Ask AI Teacher error:", err);
+    return `🎓 **AI Teacher Explanation**:\n\nRegarding "${question}": In ${unitTitle}, remember to review the primary definitions, block diagrams, and step-by-step mechanisms in your unit syllabus!`;
+  }
+}
+
+
+

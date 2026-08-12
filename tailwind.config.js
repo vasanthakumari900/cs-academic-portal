@@ -104,15 +104,17 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "sans-serif"],
-        heading: ["Outfit", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Outfit", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        serif: ["Outfit", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Consolas", "Liberation Mono", "monospace"],
+        sans: ["Plus Jakarta Sans", "Inter", "Outfit", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+        heading: ["Outfit", "Plus Jakarta Sans", "Inter", "system-ui", "sans-serif"],
+        display: ["Outfit", "Plus Jakarta Sans", "Inter", "system-ui", "sans-serif"],
+        serif: ["Outfit", "Plus Jakarta Sans", "Inter", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "Fira Code", "ui-monospace", "SFMono-Regular", "Menlo", "Consolas", "Liberation Mono", "monospace"],
         // Aliases kept for backwards compatibility
-        jakarta: ["Outfit", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        grotesk: ["Outfit", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        jakarta: ["Plus Jakarta Sans", "Inter", "sans-serif"],
+        grotesk: ["Outfit", "Plus Jakarta Sans", "sans-serif"],
+        outfit: ["Outfit", "sans-serif"],
       },
+
       borderRadius: {
         xs: "0.125rem",
         xl: "12px",

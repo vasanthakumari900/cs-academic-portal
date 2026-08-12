@@ -18,6 +18,7 @@ import PdfFileCard from "../components/common/PdfFileCard";
 import { getSubjectIcon } from "../utils/subjectIcons";
 import NotesTopAiHeader from "../components/notes/NotesTopAiHeader";
 import AudioPodcastPlayerModal from "../components/notes/AudioPodcastPlayerModal";
+import { loadUnitProgress } from "../services/aiTeacherPodcastEngine";
 
 const COURSE_OPTIONS = [
   { value: "ug", label: "UG", desc: "Bachelor of Science in Computer Science (B.Sc.)" },
@@ -3521,6 +3522,9 @@ export default function Notes() {
               const uc = unitColors[idx % unitColors.length];
               const isExpanded = expandedUnit === unitKey;
               const fileCount = unit.files.length;
+              const unitProgressData = loadUnitProgress(selectedSubject, unit.title);
+              const completedCount = unitProgressData?.completedTopics?.length || 0;
+
               return (
                 <motion.div key={unitKey} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 * idx }}
                   className="bg-white border border-[#E5E7EB] rounded-lg overflow-hidden shadow-sm"
@@ -3531,7 +3535,14 @@ export default function Notes() {
                     <div className="flex items-center gap-3 min-w-0">
                       <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${uc.from} ${uc.to} text-xs font-bold shadow-sm transition-transform duration-300 ${isExpanded ? 'scale-105' : ''}`}>{idx + 1}</div>
                       <div className="min-w-0">
-                        <h3 className="text-sm font-bold text-[#0F4C81]">{unit.title}</h3>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h3 className="text-sm font-bold text-[#0F4C81]">{unit.title}</h3>
+                          {completedCount > 0 && (
+                            <span className="rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-0.5 text-[10px] font-black font-mono">
+                              ✓ {completedCount} Taught
+                            </span>
+                          )}
+                        </div>
                         <p className="text-[11px] text-[#6B7280]">{unit.subtitle}</p>
                       </div>
                     </div>
@@ -3558,6 +3569,7 @@ export default function Notes() {
                       <FiChevronDown size={16} className={`text-slate-400 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
                     </div>
                   </button>
+
                   <AnimatePresence initial={false}>
                     {isExpanded && (
                       <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden bg-[#F8FAFC]">

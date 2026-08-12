@@ -1,6 +1,8 @@
-// src/App.jsx
+import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import CommandPalette from "./components/common/CommandPalette";
+
 import {
   FiHome,
   FiPlayCircle,
@@ -154,12 +156,30 @@ const facultyNav = [
 ];
 
 export default function App() {
+
   const location = useLocation();
+  const [isGlobalPaletteOpen, setIsGlobalPaletteOpen] = useState(false);
+
+  useEffect(() => {
+    const handleGlobalKey = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setIsGlobalPaletteOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleGlobalKey);
+    return () => window.removeEventListener("keydown", handleGlobalKey);
+  }, []);
 
   return (
     <AnimatePresence mode="wait">
       <>
         <ChatBot />
+        <CommandPalette
+          isOpen={isGlobalPaletteOpen}
+          onClose={() => setIsGlobalPaletteOpen(false)}
+        />
+
         <Routes location={location} key={location.pathname}>
           {/* ─── Auth pages ─── */}
           <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />

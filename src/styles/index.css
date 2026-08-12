@@ -50,7 +50,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    font-family: 'Inter', 'Outfit', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Inter', 'Outfit', system-ui, sans-serif;
     font-size: clamp(14px, 0.6vw + 13px, 16px);
     overflow-x: clip !important;
     width: 100%;
@@ -65,7 +65,7 @@
   }
 
   body {
-    font-family: 'Inter', 'Outfit', system-ui, sans-serif !important;
+    font-family: 'Plus Jakarta Sans', 'Inter', 'Outfit', system-ui, sans-serif !important;
     font-size: clamp(14px, 0.6vw + 13px, 16px) !important;
     @apply leading-relaxed antialiased bg-[#FBF7F2] text-[#2A0D13];
     overflow-x: clip !important;
