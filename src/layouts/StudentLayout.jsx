@@ -1,6 +1,7 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import StudentTopbar from "../components/layout/StudentTopbar";
 import Footer from "../components/layout/Footer";
+import FocusStudio from "../components/common/FocusStudio";
 import { FiArrowLeft } from "react-icons/fi";
 
 export default function StudentLayout() {
@@ -11,6 +12,7 @@ export default function StudentLayout() {
   return (
     <div className="flex min-h-screen flex-col bg-[#FBF7F2] dark:bg-[#190B13] text-[#2A0D13] dark:text-[#F0E2E6]">
       <StudentTopbar />
+      <FocusStudio />
       <main className="relative z-10 flex-1">
         {/* Left Side Back Button (<- Back) for Every Sub-Page (Notes, Videos, Papers, etc.) */}
         {!isDashboard && (

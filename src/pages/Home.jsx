@@ -8,6 +8,8 @@ import {
   FiZap, FiBookOpen, FiCompass, FiShield, FiTrendingUp, FiCalendar
 } from "react-icons/fi";
 import AnimatedCounter from "../components/ui/AnimatedCounter";
+import BentoCard3D from "../components/ui/BentoCard3D";
+import InteractiveKnowledgeGraph from "../components/ui/InteractiveKnowledgeGraph";
 
 const quickCards = [
   {
@@ -245,20 +247,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── QUICK ACCESS PORTAL CARDS ── */}
+      {/* ── 3D BENTO GRID PORTAL CARDS ── */}
       <section className="relative -mt-10 z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="card-grid">
           {quickCards.map((card, i) => (
-            <motion.button
+            <BentoCard3D
               key={card.label}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              whileHover={{ y: -6, scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
               onClick={() => navigate(card.to)}
-              className={`group relative overflow-hidden rounded-3xl bg-gradient-to-b from-[#22101A] to-[#14070D] p-6 border border-white/10 shadow-xl text-left transition-all duration-300 hover:border-[#F4C266]/50 ${card.glow}`}
+              glowColor="rgba(244, 194, 102, 0.25)"
+              conicColor="from-[#F4C266] via-[#C50337] to-[#D97706]"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${card.color} text-white shadow-md transition-transform duration-300 group-hover:scale-110`}>
@@ -280,9 +277,14 @@ export default function Home() {
                 <span>Access Section</span>
                 <FiChevronRight size={14} className="transition-transform group-hover:translate-x-1" />
               </div>
-            </motion.button>
+            </BentoCard3D>
           ))}
         </div>
+      </section>
+
+      {/* ── INTERACTIVE SUBJECT KNOWLEDGE GRAPH SECTION ── */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <InteractiveKnowledgeGraph />
       </section>
 
       {/* ── FEATURES & ACADEMIC HIGHLIGHTS ── */}

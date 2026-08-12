@@ -145,19 +145,72 @@ function generateLocalFallbackResponse(message, extraContext = "") {
   return `🤖 **CS Assistant**: That's a great question about "${message}"!\n\nKey insights:\n1. Check the relevant subject notes & e-content on our portal.\n2. For coding queries, practice implementing sample snippets and testing execution logic.\n\nAsk me if you need specific notes, videos, or practice questions!`;
 }
 
-/**
- * Dynamic AI Image Generation URL helper (Pollinations AI generator)
- */
-export function generateAiImageUrl(prompt) {
-  const cleanPrompt = encodeURIComponent(prompt.trim());
-  return `https://image.pollinations.ai/prompt/${cleanPrompt}?width=800&height=600&nologo=true&seed=${Math.floor(Math.random() * 100000)}`;
-}
+
 
 /**
  * Check if Groq is configured
  */
 export function isAiConfigured() {
   return !!import.meta.env.VITE_GROQ_API_KEY;
+}
+
+/**
+ * Real-time Web Search Engine fetching live online web search snippets
+ */
+export async function performWebSearch(query) {
+  try {
+    const cleanQuery = query.replace(/^🌐\s*\[Web Search Query\]:\s*/i, "").trim();
+    const wikiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(cleanQuery)}&format=json&origin=*`;
+    const ddgUrl = `https://api.duckduckgo.com/?q=${encodeURIComponent(cleanQuery)}&format=json&no_html=1&skip_disambig=1`;
+
+    const [wikiRes, ddgRes] = await Promise.allSettled([
+      fetch(wikiUrl).then((r) => r.json()),
+      fetch(ddgUrl).then((r) => r.json()),
+    ]);
+
+    let searchSnippets = [];
+    let sources = [];
+
+    // Parse DuckDuckGo Instant Answer
+    if (ddgRes.status === "fulfilled" && ddgRes.value) {
+      const ddg = ddgRes.value;
+      if (ddg.AbstractText) {
+        searchSnippets.push(`• **${ddg.Heading || "DuckDuckGo Overview"}**: ${ddg.AbstractText}`);
+        if (ddg.AbstractURL) sources.push(`[${ddg.Heading || "DuckDuckGo Source"}](${ddg.AbstractURL})`);
+      }
+      if (ddg.RelatedTopics && Array.isArray(ddg.RelatedTopics)) {
+        ddg.RelatedTopics.slice(0, 3).forEach((topic) => {
+          if (topic.Text && topic.FirstURL) {
+            searchSnippets.push(`• ${topic.Text}`);
+            sources.push(`[${topic.Text.slice(0, 30)}...](${topic.FirstURL})`);
+          }
+        });
+      }
+    }
+
+    // Parse Wikipedia Search Snippets
+    if (wikiRes.status === "fulfilled" && wikiRes.value?.query?.search) {
+      const results = wikiRes.value.query.search.slice(0, 3);
+      results.forEach((item) => {
+        const snippetText = item.snippet.replace(/<[^>]*>/g, "");
+        searchSnippets.push(`• **${item.title}**: ${snippetText}...`);
+        sources.push(`[Wikipedia: ${item.title}](https://en.wikipedia.org/wiki/${encodeURIComponent(item.title)})`);
+      });
+    }
+
+    const webContext = searchSnippets.join("\n\n");
+    const uniqueSources = Array.from(new Set(sources)).slice(0, 4);
+
+    return {
+      success: true,
+      query: cleanQuery,
+      snippets: webContext,
+      sources: uniqueSources,
+    };
+  } catch (err) {
+    console.error("Web search engine error:", err);
+    return { success: false, query, snippets: "", sources: [] };
+  }
 }
 
 /**

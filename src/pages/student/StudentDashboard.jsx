@@ -25,6 +25,7 @@ import BirthdayWishCard from "../../components/dashboard/BirthdayWishCard";
 import ProjectFeedbackModal from "../../components/feedback/ProjectFeedbackModal";
 import AdminFeedbackModal from "../../components/admin/AdminFeedbackModal";
 import useActivityTracker from "../../hooks/useActivityTracker";
+import InteractiveKnowledgeGraph from "../../components/ui/InteractiveKnowledgeGraph";
 
 const CS_QUOTES = [
   { text: "First, solve the problem. Then, write the code.", author: "John Johnson" },
@@ -269,14 +270,24 @@ export default function StudentDashboard() {
           <BirthdayWishCard user={user} />
         </div>
 
-        {/* Options Section Header */}
+        {/* Options Section Header with Student Focus Timer Activation */}
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 className="font-sans text-xl font-extrabold text-[#021C4F]">Academic Options</h2>
-            <p className="mt-0.5 text-xs text-[#475569] font-medium">
+            <h2 className="font-sans text-xl font-extrabold text-[#021C4F] dark:text-white">Academic Options</h2>
+            <p className="mt-0.5 text-xs text-[#475569] dark:text-[#D9C2CA] font-medium">
               Select an option below to access course content
             </p>
           </div>
+
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent("activate-focus-timer", { detail: { duration: 25 } }))}
+            className="group flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#C50337] to-[#7F011F] px-4 py-2.5 text-xs font-black text-white shadow-lg hover:scale-105 active:scale-95 transition-all font-heading border border-[#F4C266]/40 cursor-pointer"
+          >
+            <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#F4C266] text-[#2A0D13]">
+              ⚡
+            </span>
+            <span>Activate 25-Min Study Timer</span>
+          </button>
         </div>
 
         {/* Options Grid with High Contrast Readable Cards */}
@@ -337,6 +348,11 @@ export default function StudentDashboard() {
               </motion.button>
             );
           })}
+        </div>
+
+        {/* ── Interactive CS Knowledge Graph ── */}
+        <div className="mt-10">
+          <InteractiveKnowledgeGraph />
         </div>
 
         {/* CS Academic Portal Project Feedback Options */}
