@@ -20,6 +20,10 @@ import {
   FiExternalLink,
   FiCalendar,
   FiUsers,
+  FiArrowRight,
+  FiFilter,
+  FiZap,
+  FiLayers,
 } from "react-icons/fi";
 import CiaExamNotificationCard from "../../components/dashboard/CiaExamNotificationCard";
 import BirthdayWishCard from "../../components/dashboard/BirthdayWishCard";
@@ -56,8 +60,16 @@ function getStudentCsQuote(identifier = "") {
   return CS_QUOTES[index];
 }
 
+const CATEGORY_TABS = [
+  { id: "all", label: "All Options", count: 8 },
+  { id: "materials", label: "Study Materials", count: 4 },
+  { id: "career", label: "Career & Hub", count: 2 },
+  { id: "tools", label: "Tools & Portals", count: 2 },
+];
+
 const STUDENT_OPTIONS = [
   {
+    id: "videos",
     label: "Video Lectures",
     icon: FiPlayCircle,
     to: "/student/videos",
@@ -65,9 +77,12 @@ const STUDENT_OPTIONS = [
     desc: "Watch subject-wise video lectures, playlists & tutorials.",
     color: "#021C4F",
     emblemGradient: "bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F]",
+    cardBgGradient: "bg-gradient-to-br from-[#011438] via-[#021C4F] to-[#0A369D] text-white border-2 border-[#0A369D]/60 hover:border-amber-400 hover:shadow-[0_16px_36px_-8px_rgba(2,28,79,0.5)]",
     iconColor: "text-amber-400 drop-shadow-xs",
+    category: "materials",
   },
   {
+    id: "notes",
     label: "Notes",
     icon: FiBookOpen,
     to: "/student/notes",
@@ -75,9 +90,12 @@ const STUDENT_OPTIONS = [
     desc: "Unit-wise lecture notes & downloadable study materials.",
     color: "#C50337",
     emblemGradient: "bg-gradient-to-tr from-[#7F011F] via-[#C50337] to-[#A0022B]",
+    cardBgGradient: "bg-gradient-to-br from-[#470012] via-[#7F011F] to-[#C50337] text-white border-2 border-[#A0022B]/60 hover:border-amber-300 hover:shadow-[0_16px_36px_-8px_rgba(197,3,55,0.5)]",
     iconColor: "text-amber-300 drop-shadow-xs",
+    category: "materials",
   },
   {
+    id: "question-papers",
     label: "Previous Year Question Papers",
     icon: FiAward,
     to: "/student/question-papers",
@@ -85,9 +103,12 @@ const STUDENT_OPTIONS = [
     desc: "Browse & download past university question papers.",
     color: "#021C4F",
     emblemGradient: "bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#0A369D]",
+    cardBgGradient: "bg-gradient-to-br from-[#011438] via-[#0A2D69] to-[#0544B3] text-white border-2 border-[#0A369D]/60 hover:border-amber-400 hover:shadow-[0_16px_36px_-8px_rgba(10,54,157,0.5)]",
     iconColor: "text-amber-400 drop-shadow-xs",
+    category: "materials",
   },
   {
+    id: "cia-papers",
     label: "CIA Question Papers",
     icon: FiCheckCircle,
     to: "/student/cia-question-papers",
@@ -95,9 +116,12 @@ const STUDENT_OPTIONS = [
     desc: "Continuous Internal Assessment (CIA 1 & CIA 2) papers.",
     color: "#C50337",
     emblemGradient: "bg-gradient-to-tr from-[#C50337] via-[#A0022B] to-[#7F011F]",
+    cardBgGradient: "bg-gradient-to-br from-[#3D0010] via-[#660019] to-[#A0022B] text-white border-2 border-[#C50337]/60 hover:border-amber-300 hover:shadow-[0_16px_36px_-8px_rgba(160,2,43,0.5)]",
     iconColor: "text-amber-300 drop-shadow-xs",
+    category: "materials",
   },
   {
+    id: "placements",
     label: "Placement Details",
     icon: FiBriefcase,
     to: "/student/placements",
@@ -105,19 +129,25 @@ const STUDENT_OPTIONS = [
     desc: "Placement updates, company eligibility & mock aptitude.",
     color: "#7F011F",
     emblemGradient: "bg-gradient-to-tr from-[#580017] via-[#8B0024] to-[#C50337]",
+    cardBgGradient: "bg-gradient-to-br from-[#2E000C] via-[#580017] to-[#8B0024] text-white border-2 border-[#7F011F]/60 hover:border-amber-400 hover:shadow-[0_16px_36px_-8px_rgba(127,1,31,0.5)]",
     iconColor: "text-amber-300 drop-shadow-xs",
+    category: "career",
   },
   {
+    id: "study-planner",
     label: "Smart AI Exam Study Planner & Countdown",
     icon: FiCalendar,
     to: "/student/exam-study-planner",
     badge: "AI Study Planner",
     desc: "Calculate unit revision timetables & track daily exam prep progress.",
-    color: "#021C4F",
+    color: "#0D9488",
     emblemGradient: "bg-gradient-to-tr from-[#0D9488] via-[#0F766E] to-[#115E59]",
+    cardBgGradient: "bg-gradient-to-br from-[#022C2B] via-[#0D9488] to-[#115E59] text-white border-2 border-[#0D9488]/60 hover:border-amber-300 hover:shadow-[0_16px_36px_-8px_rgba(13,148,136,0.5)]",
     iconColor: "text-amber-400 drop-shadow-xs",
+    category: "tools",
   },
   {
+    id: "project-hub",
     label: "Department Hackathon & Project Partner Finder",
     icon: FiUsers,
     to: "/student/project-hub",
@@ -125,18 +155,23 @@ const STUDENT_OPTIONS = [
     desc: "Showcase GitHub projects, find hackathon teammates & recruit skills across sections.",
     color: "#C50337",
     emblemGradient: "bg-gradient-to-tr from-[#7F011F] via-[#C50337] to-[#D97706]",
+    cardBgGradient: "bg-gradient-to-br from-[#450C00] via-[#7F011F] to-[#D97706] text-white border-2 border-[#D97706]/60 hover:border-amber-300 hover:shadow-[0_16px_36px_-8px_rgba(217,119,6,0.5)]",
     iconColor: "text-amber-300 drop-shadow-xs",
+    category: "career",
   },
   {
+    id: "vaishnav-lms",
     label: "Vaishnav LMS Portal",
     icon: FiExternalLink,
     href: "https://dgvc.in/lms/login.php",
     isExternal: true,
     badge: "Official LMS",
     desc: "Access the official Vaishnav Learning Management System portal.",
-    color: "#C50337",
-    emblemGradient: "bg-gradient-to-tr from-[#7F011F] via-[#C50337] to-[#990000]",
+    color: "#021C4F",
+    emblemGradient: "bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#990000]",
+    cardBgGradient: "bg-gradient-to-br from-[#050D24] via-[#021C4F] to-[#7F011F] text-white border-2 border-[#021C4F]/60 hover:border-amber-400 hover:shadow-[0_16px_36px_-8px_rgba(2,28,79,0.5)]",
     iconColor: "text-amber-300 drop-shadow-xs",
+    category: "tools",
   },
 ];
 
@@ -147,12 +182,15 @@ export default function StudentDashboard() {
 
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isAdminFeedbackOpen, setIsAdminFeedbackOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("all");
 
   const isAdmin = user?.rollNumber === "24E3006" || user?.rollNumber === "24E3013" || user?.role === "admin" || user?.type === "admin" || Boolean(user?.adminBadge);
   const hasPhoto = Boolean(user?.photoUrl);
   const photoPath = user?.photoUrl || "/admin_photo.jpg";
 
-  const optionsToRender = STUDENT_OPTIONS;
+  const optionsToRender = activeCategory === "all"
+    ? STUDENT_OPTIONS
+    : STUDENT_OPTIONS.filter((opt) => opt.category === activeCategory);
 
   const yearLabel = user?.year
     ? user.year === 1
@@ -281,80 +319,149 @@ export default function StudentDashboard() {
           <BirthdayWishCard user={user} />
         </div>
 
-        {/* Options Section Header with Student Focus Timer Activation */}
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <h2 className="font-sans text-xl font-extrabold text-[#021C4F] dark:text-white">Academic Options</h2>
-            <p className="mt-0.5 text-xs text-[#475569] dark:text-[#D9C2CA] font-medium">
-              Select an option below to access course content
-            </p>
+        {/* ── Redesigned Academic Options Header & Category Filters ── */}
+        <div className="mb-6 rounded-3xl bg-gradient-to-r from-[#011337] via-[#021C4F] to-[#580017] p-6 sm:p-7 border-2 border-amber-400/40 shadow-xl text-white transition-all">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-400 text-slate-950 px-3 py-0.5 text-[10px] font-black uppercase tracking-wider shadow-md">
+                  <FiLayers size={12} className="text-slate-950" /> Academic Hub
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-white/15 text-amber-300 border border-white/20 px-2.5 py-0.5 text-[10px] font-bold backdrop-blur-md">
+                  <FiZap size={11} className="text-amber-400 animate-pulse" /> 8 Modules Available
+                </span>
+              </div>
+              <h2 className="font-sans text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-2">
+                Academic Options
+              </h2>
+              <p className="text-xs sm:text-sm text-teal-100/90 font-medium leading-relaxed max-w-xl">
+                Access subject video lectures, PDF notes, previous university &amp; internal CIA question papers, placement drives &amp; AI planners.
+              </p>
+            </div>
+
+            {/* Study Timer Activation Button */}
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent("activate-focus-timer", { detail: { duration: 25 } }))}
+              className="group relative overflow-hidden flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-[#C50337] via-[#A0022B] to-[#7F011F] px-5 py-3 text-xs font-black text-white shadow-lg hover:shadow-2xl hover:scale-[1.03] active:scale-[0.98] transition-all font-heading border-2 border-amber-400/50 cursor-pointer shrink-0"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-amber-400 text-slate-950 shadow-md text-sm font-extrabold group-hover:rotate-12 transition-transform">
+                ⚡
+              </span>
+              <div className="text-left">
+                <span className="block text-[11px] font-black uppercase tracking-wider text-amber-300">Focus Mode</span>
+                <span className="block text-xs font-extrabold text-white">25-Min Study Timer</span>
+              </div>
+            </button>
           </div>
 
-          <button
-            onClick={() => window.dispatchEvent(new CustomEvent("activate-focus-timer", { detail: { duration: 25 } }))}
-            className="group flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#C50337] to-[#7F011F] px-4 py-2.5 text-xs font-black text-white shadow-lg hover:scale-105 active:scale-95 transition-all font-heading border border-[#F4C266]/40 cursor-pointer"
-          >
-            <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#F4C266] text-[#2A0D13]">
-              ⚡
+          {/* Category Navigation Pills */}
+          <div className="mt-6 pt-4 border-t border-white/15 flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none w-full sm:w-auto">
+              {CATEGORY_TABS.map((tab) => {
+                const isActive = activeCategory === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveCategory(tab.id)}
+                    className={`relative flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                      isActive
+                        ? "bg-gradient-to-r from-[#C50337] to-[#7F011F] text-white shadow-lg ring-2 ring-amber-400/50"
+                        : "bg-white/10 hover:bg-white/20 text-slate-200 border border-white/15"
+                    }`}
+                  >
+                    <span>{tab.label}</span>
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-[10px] font-black ${
+                        isActive
+                          ? "bg-amber-400 text-slate-950"
+                          : "bg-black/30 text-amber-300"
+                      }`}
+                    >
+                      {tab.count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <span className="hidden lg:flex items-center gap-1.5 text-xs font-bold text-amber-300/80">
+              <FiFilter size={13} /> Interactive Hub View
             </span>
-            <span>Activate 25-Min Study Timer</span>
-          </button>
+          </div>
         </div>
 
-        {/* Options Grid with High Contrast Readable Cards */}
-        <div className="card-grid">
+        {/* ── Ultra-Premium Academic Option Cards Grid ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {optionsToRender.map((option, idx) => {
             const IconComponent = option.icon;
+            const indexFormatted = String(idx + 1).padStart(2, "0");
+
             return (
               <motion.button
                 key={option.label}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.06, type: "spring", stiffness: 260, damping: 20 }}
-                whileHover={{ y: -6, scale: 1.02, boxShadow: "0 16px 32px -8px rgba(2, 28, 79, 0.12)" }}
+                transition={{ delay: idx * 0.05, type: "spring", stiffness: 280, damping: 22 }}
+                whileHover={{ y: -7, scale: 1.025 }}
                 whileTap={{ scale: 0.96 }}
                 onClick={() => (option.isExternal ? window.open(option.href, "_blank") : navigate(option.to))}
-                style={{ padding: 'var(--fluid-pad-card)' }}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-white border-2 border-slate-200 shadow-md transition-all duration-300 hover:border-[#021C4F] text-left"
+                className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl ${option.cardBgGradient} p-5 shadow-lg transition-all duration-300 text-left cursor-pointer`}
               >
+                {/* Glossy Top Accent Bar */}
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-400 via-amber-200 to-amber-400 opacity-90 group-hover:h-2 transition-all duration-300" />
+
+                {/* Glass Light Overlay on Hover */}
+                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
                 <div>
-                  <div className="flex items-center justify-between mb-4">
+                  {/* Top Row: Icon + Watermark & Badge */}
+                  <div className="flex items-start justify-between mb-4">
                     <div
-                      style={{ height:'var(--fluid-icon-lg)', width:'var(--fluid-icon-lg)' }}
-                      className={`flex items-center justify-center rounded-2xl ${
+                      className={`relative flex h-13 w-13 items-center justify-center rounded-2xl ${
                         option.emblemGradient || "bg-gradient-to-tr from-[#011337] via-[#021C4F] to-[#7F011F]"
-                      } p-1 shadow-md ring-2 ring-amber-400/40 transition-transform duration-300 group-hover:scale-110 shrink-0`}
+                      } p-1 shadow-lg ring-2 ring-amber-400/60 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 shrink-0`}
                     >
-                      <div className="flex h-full w-full items-center justify-center rounded-xl bg-black/25 backdrop-blur-xs">
+                      {/* Glossy inner container */}
+                      <div className="flex h-full w-full items-center justify-center rounded-xl bg-black/35 backdrop-blur-xs">
                         <IconComponent size={24} className={option.iconColor || "text-amber-300"} />
                       </div>
                     </div>
 
-                    <span
-                      className="rounded-full px-3 py-1 text-[10px] font-black uppercase tracking-wider border shadow-2xs bg-teal-50 text-[#0F766E] border-teal-200"
-                    >
-                      {option.badge}
-                    </span>
+                    <div className="flex flex-col items-end gap-1">
+                      <span className="font-mono text-xs font-black text-amber-300/80 tracking-widest drop-shadow-xs">
+                        #{indexFormatted}
+                      </span>
+                      <span className="rounded-full px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider bg-amber-400 text-slate-950 shadow-md">
+                        {option.badge}
+                      </span>
+                    </div>
                   </div>
 
-                  <h3
-                    className="font-sans text-base font-bold text-[#021C4F] transition-colors leading-snug group-hover:text-[#0D9488]"
-                  >
+                  {/* Option Title */}
+                  <h3 className="font-sans text-base font-extrabold text-white leading-snug group-hover:text-amber-300 transition-colors drop-shadow-xs">
                     {option.label}
                   </h3>
-                  <p className="mt-1.5 text-xs text-[#334155] font-medium leading-relaxed">
+
+                  {/* Option Description */}
+                  <p className="mt-2 text-xs text-slate-200 font-medium leading-relaxed line-clamp-3">
                     {option.desc}
                   </p>
                 </div>
 
-                <div
-                  className="mt-5 flex items-center gap-1.5 text-xs font-extrabold text-[#021C4F] transition-colors pt-3 border-t border-slate-100 group-hover:text-[#0D9488]"
-                >
-                  <span>Open Section</span>
-                  <FiChevronRight
-                    size={14}
-                    className="transition-transform group-hover:translate-x-1"
-                  />
+                {/* Bottom Action Bar */}
+                <div className="mt-5 pt-3.5 border-t border-white/20 flex items-center justify-between text-xs font-black text-amber-300 group-hover:text-white transition-colors">
+                  <span className="inline-flex items-center gap-1 text-[11px] tracking-wide uppercase font-black">
+                    {option.isExternal ? "Launch Portal" : "Explore Section"}
+                  </span>
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/20 text-white group-hover:bg-amber-400 group-hover:text-slate-950 transition-all duration-300 shadow-sm">
+                    {option.isExternal ? (
+                      <FiExternalLink size={13} className="transition-transform group-hover:scale-110" />
+                    ) : (
+                      <FiArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
+                    )}
+                  </div>
                 </div>
               </motion.button>
             );
