@@ -19,6 +19,7 @@ import {
   FiEye,
   FiExternalLink,
   FiCalendar,
+  FiUsers,
 } from "react-icons/fi";
 import CiaExamNotificationCard from "../../components/dashboard/CiaExamNotificationCard";
 import BirthdayWishCard from "../../components/dashboard/BirthdayWishCard";
@@ -115,6 +116,16 @@ const STUDENT_OPTIONS = [
     color: "#021C4F",
     emblemGradient: "bg-gradient-to-tr from-[#0D9488] via-[#0F766E] to-[#115E59]",
     iconColor: "text-amber-400 drop-shadow-xs",
+  },
+  {
+    label: "Department Hackathon & Project Partner Finder",
+    icon: FiUsers,
+    to: "/student/project-hub",
+    badge: "Student Innovation Hub",
+    desc: "Showcase GitHub projects, find hackathon teammates & recruit skills across sections.",
+    color: "#C50337",
+    emblemGradient: "bg-gradient-to-tr from-[#7F011F] via-[#C50337] to-[#D97706]",
+    iconColor: "text-amber-300 drop-shadow-xs",
   },
   {
     label: "Vaishnav LMS Portal",

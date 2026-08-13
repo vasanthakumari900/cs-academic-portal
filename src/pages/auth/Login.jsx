@@ -3,10 +3,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FiCalendar, FiClock, FiBookOpen, FiStar, FiArrowRight,
-  FiShield, FiUser, FiLock, FiChevronRight,
+  FiShield, FiUser, FiLock, FiChevronRight, FiCheckCircle,
 } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
 import { logStudentLogin } from "../../services/activityLoggerService";
@@ -21,6 +21,22 @@ function generateCaptcha() {
   return code;
 }
 
+function getRollRecognition(roll) {
+  const clean = roll.trim().toUpperCase();
+  if (!clean || clean.length < 7) return null;
+
+  const match = clean.match(/^(24|25|26)E/);
+  if (!match) return null;
+
+  const yr = match[1];
+  let yearStr = yr === "24" ? "3rd Year" : yr === "25" ? "2nd Year" : "1st Year";
+
+  return {
+    year: yearStr,
+    full: `${yearStr} UG · B.Sc. Computer Science`,
+  };
+}
+
 export default function Login() {
   const [activeTab, setActiveTab] = useState("student");
   const [rollNumber, setRollNumber] = useState("");
@@ -33,6 +49,8 @@ export default function Login() {
   const { login, facultyLogin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const rollInfo = getRollRecognition(rollNumber);
 
   const refreshCaptcha = useCallback(() => {
     setCaptchaCode(generateCaptcha());
@@ -267,6 +285,22 @@ export default function Login() {
                             autoFocus
                           />
                         </div>
+
+                        {/* Real-Time Roll Recognition Pill */}
+                        <AnimatePresence>
+                          {rollInfo && (
+                            <motion.div
+                              initial={{ opacity: 0, y: -6, scale: 0.95 }}
+                              animate={{ opacity: 1, y: 0, scale: 1 }}
+                              exit={{ opacity: 0, y: -6, scale: 0.95 }}
+                              className="mt-2 flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#4A1620]/10 to-[#D97706]/15 border border-[#D97706]/40 px-3 py-1.5 text-[11px] font-extrabold text-[#4A1620] dark:text-[#F4C266] shadow-2xs backdrop-blur-xs"
+                            >
+                              <FiCheckCircle size={13} className="text-[#D97706] shrink-0 animate-pulse" />
+                              <span>🎓 {rollInfo.full}</span>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+
                         <p className="mt-1.5 text-[10px] text-[#9C6D7F]">
                           Formats: 24E2901-24E3060, 25E2901-25E3060, 26E3001-26E3160
                         </p>

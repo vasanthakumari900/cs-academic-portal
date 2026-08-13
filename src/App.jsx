@@ -54,6 +54,7 @@ import RecentlyViewed from "./pages/student/RecentlyViewed";
 import Profile from "./pages/student/Profile";
 import StudentAssignments from "./pages/student/Assignments";
 import ExamStudyPlanner from "./pages/student/ExamStudyPlanner";
+import StudentProjectHub from "./pages/student/StudentProjectHub";
 
 // Public pages also accessible from student dashboard
 import StudentEContent from "./pages/EContent";
@@ -124,6 +125,7 @@ function AnimatedPage({ children }) {
 
 const studentNav = [
   { to: "/student/dashboard", label: "Dashboard", icon: FiHome },
+  { to: "/student/project-hub", label: "Project & Teammate Hub", icon: FiUsers },
   { to: "/student/videos", label: "Videos", icon: FiPlayCircle },
   { to: "/student/notes", label: "Notes", icon: FiFileText },
   { to: "/college-calendar", label: "College Calendar", icon: FiCalendar },
@@ -204,6 +206,7 @@ export default function App() {
             {/* Student dashboard layout */}
             <Route element={<StudentLayout />}>
               <Route path="/student/dashboard" element={<AnimatedPage><StudentDashboard /></AnimatedPage>} />
+              <Route path="/student/project-hub" element={<AnimatedPage><StudentProjectHub /></AnimatedPage>} />
               <Route path="/student/videos" element={<AnimatedPage><StudentEContent /></AnimatedPage>} />
               <Route path="/student/notes" element={<AnimatedPage><StudentNotes /></AnimatedPage>} />
               <Route path="/student/assignments" element={<AnimatedPage><StudentAssignments /></AnimatedPage>} />

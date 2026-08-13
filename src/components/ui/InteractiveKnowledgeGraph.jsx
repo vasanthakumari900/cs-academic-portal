@@ -33,13 +33,13 @@ const GRAPH_NODES = [
   {
     id: "py",
     year: 1,
-    label: "Python Programming Essentials",
+    label: "Python Essentials",
     code: "CS101",
     semester: "Sem 1",
     category: "Core",
     icon: FiCode,
-    x: 200,
-    y: 130,
+    x: 220,
+    y: 140,
     color: "#0284C7",
     glow: "#38BDF8",
     topics: ["Variables & Control Flow", "Functions & Modules", "File I/O Handling", "Lists, Tuples & Dictionaries"],
@@ -54,8 +54,8 @@ const GRAPH_NODES = [
     semester: "Sem 1",
     category: "Math",
     icon: FiPieChart,
-    x: 570,
-    y: 130,
+    x: 575,
+    y: 140,
     color: "#D97706",
     glow: "#F4C266",
     topics: ["Matrices & Eigenvalues", "Calculus & Derivatives", "Trigonometry", "Analytical Geometry"],
@@ -70,8 +70,8 @@ const GRAPH_NODES = [
     semester: "Sem 1",
     category: "Core",
     icon: FiCode,
-    x: 940,
-    y: 130,
+    x: 930,
+    y: 140,
     color: "#C50337",
     glow: "#F4C266",
     topics: ["Arrays & Stacks", "Queues & Linked Lists", "Searching (Binary Search)", "Sorting Algorithms"],
@@ -86,8 +86,8 @@ const GRAPH_NODES = [
     semester: "Sem 2",
     category: "Core",
     icon: FiCode,
-    x: 200,
-    y: 380,
+    x: 220,
+    y: 420,
     color: "#7E2238",
     glow: "#E08813",
     topics: ["Classes & Objects", "Inheritance & Polymorphism", "Operator Overloading", "Constructors & Destructors"],
@@ -102,8 +102,8 @@ const GRAPH_NODES = [
     semester: "Sem 2",
     category: "Web",
     icon: FiGlobe,
-    x: 570,
-    y: 380,
+    x: 575,
+    y: 420,
     color: "#0EA5E9",
     glow: "#38BDF8",
     topics: ["HTML5 & CSS3 Layouts", "JavaScript DOM Manipulation", "Responsive UI", "Form Validation"],
@@ -118,8 +118,8 @@ const GRAPH_NODES = [
     semester: "Sem 2",
     category: "Math",
     icon: FiPieChart,
-    x: 940,
-    y: 380,
+    x: 930,
+    y: 420,
     color: "#B45309",
     glow: "#F59E0B",
     topics: ["Differential Equations", "Fourier Series", "Vector Calculus", "Integral Calculus"],
@@ -133,13 +133,13 @@ const GRAPH_NODES = [
   {
     id: "java",
     year: 2,
-    label: "OOP Concepts using JAVA",
+    label: "OOP using JAVA",
     code: "CS201",
     semester: "Sem 1",
     category: "Core",
     icon: FiCode,
-    x: 180,
-    y: 110,
+    x: 220,
+    y: 130,
     color: "#EA580C",
     glow: "#F97316",
     topics: ["JVM Architecture & Bytecode", "Multithreading & Synchronization", "Exception Handling", "Java Collections Framework"],
@@ -149,13 +149,13 @@ const GRAPH_NODES = [
   {
     id: "web_dev_angular",
     year: 2,
-    label: "Web Dev (AngularJS & Node.js)",
+    label: "Web Dev (Angular & Node)",
     code: "CS202",
     semester: "Sem 1",
     category: "Web",
     icon: FiGlobe,
-    x: 570,
-    y: 110,
+    x: 575,
+    y: 130,
     color: "#DD1B16",
     glow: "#F87171",
     topics: ["Angular Directives & Controllers", "Node.js REST Services", "Two-way Data Binding", "Express Middleware"],
@@ -165,13 +165,13 @@ const GRAPH_NODES = [
   {
     id: "stat1",
     year: 2,
-    label: "Statistical Methods for CS - I",
+    label: "Statistical Methods I",
     code: "CS203",
     semester: "Sem 1",
     category: "Math",
     icon: FiPieChart,
-    x: 950,
-    y: 110,
+    x: 930,
+    y: 130,
     color: "#4A5568",
     glow: "#CBD5E0",
     topics: ["Probability Distributions", "Measures of Central Tendency", "Correlation & Regression", "Sampling Theory"],
@@ -181,13 +181,13 @@ const GRAPH_NODES = [
   {
     id: "os_y2",
     year: 2,
-    label: "Principles of Operating Systems",
+    label: "Operating Systems",
     code: "CS204",
     semester: "Sem 1",
     category: "Systems",
     icon: FiCpu,
-    x: 375,
-    y: 240,
+    x: 397,
+    y: 270,
     color: "#D97706",
     glow: "#F4C266",
     topics: ["CPU Scheduling Algorithms", "Deadlock Prevention & Banker's Alg", "Semaphores & Mutexes", "Virtual Memory & Paging"],
@@ -197,13 +197,13 @@ const GRAPH_NODES = [
   {
     id: "web_dev_react",
     year: 2,
-    label: "Web Dev (ReactJS & Node.js)",
+    label: "Web Dev (React & Node)",
     code: "CS205",
     semester: "Sem 1",
     category: "Web",
     icon: FiGlobe,
-    x: 760,
-    y: 240,
+    x: 752,
+    y: 270,
     color: "#0D9488",
     glow: "#2DD4BF",
     topics: ["React Components & JSX", "Hooks (useState, useEffect)", "Context API & Redux", "Node.js Async I/O"],
@@ -213,13 +213,13 @@ const GRAPH_NODES = [
   {
     id: "android",
     year: 2,
-    label: "Android App Development",
+    label: "Android App Dev",
     code: "CS206",
     semester: "Sem 2",
     category: "Mobile",
     icon: FiGlobe,
-    x: 200,
-    y: 390,
+    x: 220,
+    y: 420,
     color: "#16A34A",
     glow: "#4ADE80",
     topics: ["Android Activity Lifecycle", "UI XML Layouts & Adapters", "Intents & Broadcast Receivers", "SQLite & Room DB"],
@@ -234,8 +234,8 @@ const GRAPH_NODES = [
     semester: "Sem 2",
     category: "Core",
     icon: FiLayers,
-    x: 570,
-    y: 390,
+    x: 575,
+    y: 420,
     color: "#8B5CF6",
     glow: "#C084FC",
     topics: ["Agile & SDLC Frameworks", "Software Requirement Specification (SRS)", "Blackbox & Whitebox Testing", "Design Patterns"],
@@ -245,13 +245,13 @@ const GRAPH_NODES = [
   {
     id: "ai_expert",
     year: 2,
-    label: "Artificial Intelligence & Expert Systems",
+    label: "AI & Expert Systems",
     code: "CS208",
     semester: "Sem 2",
     category: "AI/ML",
     icon: FiZap,
-    x: 940,
-    y: 390,
+    x: 930,
+    y: 420,
     color: "#9333EA",
     glow: "#C084FC",
     topics: ["Heuristic Search (A*, Alpha-Beta)", "Knowledge Representation & Logic", "Expert System Rules & Inference Engine", "Fuzzy Logic"],
@@ -260,7 +260,7 @@ const GRAPH_NODES = [
   },
 
   // ─────────────────────────────────────────────────────────────
-  // ── 3RD YEAR SUBJECTS (PERFECT SPACING & DBMS VISIBLE) ───────
+  // ── 3RD YEAR SUBJECTS (CONCISE NAMES & PERFECT CLEARANCE) ────
   // ─────────────────────────────────────────────────────────────
   {
     id: "os_y3",
@@ -270,8 +270,8 @@ const GRAPH_NODES = [
     semester: "Sem 1",
     category: "Systems",
     icon: FiCpu,
-    x: 160,
-    y: 120,
+    x: 175,
+    y: 130,
     color: "#D97706",
     glow: "#F4C266",
     topics: ["Process CPU Scheduling", "Deadlocks & Resource Allocation", "Virtual Memory & Page Replacement", "File Systems & I/O"],
@@ -286,8 +286,8 @@ const GRAPH_NODES = [
     semester: "Sem 1",
     category: "AI/ML",
     icon: FiZap,
-    x: 420,
-    y: 120,
+    x: 440,
+    y: 130,
     color: "#8B5CF6",
     glow: "#C084FC",
     topics: ["Data Preprocessing & ETL", "Decision Tree Classification", "K-Means Clustering", "Apriori Association Mining"],
@@ -297,13 +297,13 @@ const GRAPH_NODES = [
   {
     id: "asp_net_y3",
     year: 3,
-    label: "ASP.NET",
+    label: "ASP.NET Programming",
     code: "CS303",
     semester: "Sem 1",
     category: "Web",
     icon: FiServer,
-    x: 680,
-    y: 120,
+    x: 705,
+    y: 130,
     color: "#2563EB",
     glow: "#60A5FA",
     topics: ["ASP.NET Web Forms & MVC", "C# Server Side Scripts", "ADO.NET Database Access", "ViewState & Session State"],
@@ -313,20 +313,20 @@ const GRAPH_NODES = [
   {
     id: "dbms_y3",
     year: 3,
-    label: "Database Management System",
+    label: "Database System",
     code: "CS304",
     semester: "Sem 1",
     category: "Core",
     icon: FiDatabase,
-    x: 940,
-    y: 120,
+    x: 975,
+    y: 130,
     color: "#7E2238",
     glow: "#E08813",
     topics: ["ER Models & Relational Schema", "Complex SQL Queries & Joins", "Normalization (1NF to BCNF)", "ACID Transactions & Locks"],
     aiTakeaway: "B-Tree indexing drastically reduces disk I/O seek overhead for relational queries.",
     link: "/notes?search=DATABASE",
   },
-  // Semester 2 - Staggered Row 2A (y = 270px)
+  // Semester 2 - Staggered Row 2A (y = 280px)
   {
     id: "php_y3",
     year: 3,
@@ -335,8 +335,8 @@ const GRAPH_NODES = [
     semester: "Sem 2",
     category: "Web",
     icon: FiCode,
-    x: 230,
-    y: 270,
+    x: 307,
+    y: 280,
     color: "#4F46E5",
     glow: "#818CF8",
     topics: ["PHP Syntax & Form Handling", "MySQL Database Integration", "Sessions & Cookie Management", "REST API Endpoint Design"],
@@ -351,8 +351,8 @@ const GRAPH_NODES = [
     semester: "Sem 2",
     category: "Cloud",
     icon: FiGlobe,
-    x: 570,
-    y: 270,
+    x: 575,
+    y: 280,
     color: "#0284C7",
     glow: "#38BDF8",
     topics: ["Virtualization & Hypervisors", "IaaS, PaaS, SaaS Cloud Models", "AWS & Azure Infrastructure", "Serverless Microservices"],
@@ -367,15 +367,15 @@ const GRAPH_NODES = [
     semester: "Sem 2",
     category: "Networks",
     icon: FiGlobe,
-    x: 910,
-    y: 270,
+    x: 842,
+    y: 280,
     color: "#0EA5E9",
     glow: "#38BDF8",
     topics: ["OSI & TCP/IP 7 Layers", "IP Subnetting & CIDR", "Routing Protocols (OSPF, BGP)", "TCP vs UDP Flow Control"],
     aiTakeaway: "Understanding the TCP 3-way handshake and sliding window congestion control is vital for high-speed systems.",
     link: "/notes?search=NETWORKS",
   },
-  // Semester 2 - Staggered Row 2B (y = 410px)
+  // Semester 2 - Staggered Row 2B (y = 430px)
   {
     id: "data_sci_y3",
     year: 3,
@@ -384,8 +384,8 @@ const GRAPH_NODES = [
     semester: "Sem 2",
     category: "AI/ML",
     icon: FiPieChart,
-    x: 230,
-    y: 410,
+    x: 307,
+    y: 430,
     color: "#059669",
     glow: "#34D399",
     topics: ["Data Wrangling with Pandas", "Exploratory Data Analysis (EDA)", "Data Visualization (Matplotlib, Seaborn)", "Predictive Modeling"],
@@ -400,8 +400,8 @@ const GRAPH_NODES = [
     semester: "Sem 2",
     category: "Core",
     icon: FiLayout,
-    x: 570,
-    y: 410,
+    x: 575,
+    y: 430,
     color: "#9333EA",
     glow: "#C084FC",
     topics: ["Image Enhancement & Histogram Equalization", "Spatial Filtering & Convolution", "Edge Detection (Sobel, Canny)", "Image Compression Standards"],
@@ -416,8 +416,8 @@ const GRAPH_NODES = [
     semester: "Sem 2",
     category: "Core",
     icon: FiCompass,
-    x: 910,
-    y: 410,
+    x: 842,
+    y: 430,
     color: "#B45309",
     glow: "#F59E0B",
     topics: ["Use Case & Class Diagrams", "Sequence & State Diagrams", "Component & Deployment Diagrams", "Object-Oriented Analysis"],
@@ -471,6 +471,7 @@ export default function InteractiveKnowledgeGraph() {
 
   const categories = ["All", "Core", "Systems", "Networks", "Web", "AI/ML", "Math", "Cloud"];
 
+  // Filter nodes according to year, search, category
   const filteredNodes = GRAPH_NODES.filter((node) => {
     const matchesYear = selectedYear === 0 || node.year === selectedYear;
     const matchesSearch =
@@ -480,6 +481,25 @@ export default function InteractiveKnowledgeGraph() {
     return matchesYear && matchesSearch && matchesCat;
   });
 
+  // Calculate dynamic node position to avoid overlaps when "All Years Curriculum" is active
+  const getNodePosition = (node) => {
+    if (selectedYear === 0) {
+      // Group nodes into 3 distinct horizontal bands when viewing all years
+      let bandOffset = 0;
+      if (node.year === 1) bandOffset = 50;
+      else if (node.year === 2) bandOffset = 310;
+      else if (node.year === 3) bandOffset = 570;
+
+      // Scale y down slightly within each band
+      const yInBand = bandOffset + (node.y * 0.42);
+      return { x: node.x, y: Math.round(yInBand) };
+    }
+    return { x: node.x, y: node.y };
+  };
+
+  const canvasHeight = selectedYear === 0 ? "h-[840px]" : "h-[560px]";
+  const containerHeight = selectedYear === 0 ? "h-[860px]" : "h-[580px]";
+
   return (
     <div className="relative w-full rounded-3xl bg-gradient-to-b from-[#1E0B16] via-[#14070D] to-[#0A0307] border border-[#F4C266]/30 shadow-2xl p-4 sm:p-6 overflow-hidden font-sans text-white">
       
@@ -488,43 +508,42 @@ export default function InteractiveKnowledgeGraph() {
 
       {/* ── Header Toolbar ── */}
       <div className="relative z-20 flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5 pb-4 border-b border-white/10">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-r from-[#C50337] to-[#7F011F] text-[#F4C266]">
-              <FiLayers size={18} />
-            </span>
-            <div>
-              <h3 className="text-lg font-black font-heading text-white tracking-wide flex items-center gap-2">
-                <span>Interactive Subject Knowledge Graph</span>
-                {user?.year && (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-[#F4C266]/15 border border-[#F4C266]/40 px-2.5 py-0.5 text-[10px] font-extrabold text-[#F4C266] uppercase">
-                    <FiCheckCircle size={12} /> Auto-Filtered: Year {user.year}
-                  </span>
-                )}
-              </h3>
-              <p className="text-xs text-[#D9C2CA] mt-0.5">
-                Staggered, non-overlapping subject node grid with laser connection paths
-              </p>
-            </div>
+        <div className="flex items-center gap-3">
+          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-r from-[#C50337] to-[#7F011F] text-[#F4C266] shadow-lg border border-[#F4C266]/30 shrink-0">
+            <FiLayers size={20} />
+          </span>
+          <div>
+            <h3 className="text-lg sm:text-xl font-black font-heading text-white tracking-wide flex flex-wrap items-center gap-2">
+              <span>Interactive Subject Knowledge Graph</span>
+              {user?.year && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-[#F4C266]/15 border border-[#F4C266]/40 px-2.5 py-0.5 text-[10px] font-extrabold text-[#F4C266] uppercase">
+                  <FiCheckCircle size={12} /> Auto-Filtered: Year {user.year}
+                </span>
+              )}
+            </h3>
+            <p className="text-xs text-[#D9C2CA] mt-0.5">
+              Staggered, non-overlapping subject node grid with laser connection paths
+            </p>
           </div>
         </div>
 
         {/* Search Bar */}
-        <div className="relative w-full md:w-60">
-          <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-[#D9C2CA]" size={14} />
+        <div className="relative w-full md:w-64 shrink-0">
+          <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#D9C2CA]" size={14} />
           <input
             type="text"
             placeholder="Search subjects (e.g. ASP.NET)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-xl bg-white/5 border border-white/15 pl-9 pr-3 py-2 text-xs text-white placeholder-[#D9C2CA]/60 focus:outline-none focus:border-[#F4C266]"
+            className="w-full rounded-xl bg-white/5 border border-white/15 pl-9 pr-3.5 py-2 text-xs text-white placeholder-[#D9C2CA]/60 focus:outline-none focus:border-[#F4C266] transition-colors"
           />
         </div>
       </div>
 
-      {/* ── Year Selection Tabs ── */}
-      <div className="relative z-20 flex flex-wrap items-center justify-between gap-3 mb-5">
-        <div className="flex flex-wrap gap-1.5 bg-white/5 p-1.5 rounded-2xl border border-white/10">
+      {/* ── Year Selection Tabs & Controls Bar ── */}
+      <div className="relative z-20 flex flex-col lg:flex-row lg:items-center justify-between gap-3 mb-5">
+        {/* Year Tabs */}
+        <div className="flex flex-wrap items-center gap-1.5 bg-white/5 p-1.5 rounded-2xl border border-white/10">
           {yearTabs.map((tab) => (
             <button
               key={tab.value}
@@ -532,7 +551,7 @@ export default function InteractiveKnowledgeGraph() {
                 setSelectedYear(tab.value);
                 setSelectedNode(null);
               }}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold transition-all font-heading ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-extrabold transition-all font-heading whitespace-nowrap h-9 ${
                 selectedYear === tab.value
                   ? "bg-gradient-to-r from-[#C50337] to-[#7F011F] text-white shadow-lg border border-[#F4C266]/40"
                   : "text-[#D9C2CA] hover:bg-white/10 hover:text-white"
@@ -544,14 +563,15 @@ export default function InteractiveKnowledgeGraph() {
           ))}
         </div>
 
-        {/* Zoom & Category Controls */}
-        <div className="flex items-center gap-2">
-          <div className="flex flex-wrap gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
+        {/* Category Filters & Zoom Controls */}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Category Pills (Scrollable horizontally on smaller screens) */}
+          <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10 overflow-x-auto max-w-full scrollbar-none">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase transition-all ${
+                className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase transition-all whitespace-nowrap h-7 ${
                   activeCategory === cat
                     ? "bg-[#D97706] text-white shadow-sm"
                     : "text-[#D9C2CA] hover:text-white"
@@ -562,24 +582,25 @@ export default function InteractiveKnowledgeGraph() {
             ))}
           </div>
 
-          <div className="flex gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
+          {/* Zoom Buttons */}
+          <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10 shrink-0 h-9">
             <button
               onClick={() => setZoomLevel((z) => Math.min(z + 0.15, 1.4))}
-              className="p-1.5 text-[#D9C2CA] hover:text-white transition-colors"
+              className="p-1.5 text-[#D9C2CA] hover:text-white transition-colors rounded-lg hover:bg-white/10"
               title="Zoom In"
             >
               <FiZoomIn size={14} />
             </button>
             <button
               onClick={() => setZoomLevel((z) => Math.max(z - 0.15, 0.7))}
-              className="p-1.5 text-[#D9C2CA] hover:text-white transition-colors"
+              className="p-1.5 text-[#D9C2CA] hover:text-white transition-colors rounded-lg hover:bg-white/10"
               title="Zoom Out"
             >
               <FiZoomOut size={14} />
             </button>
             <button
               onClick={() => setZoomLevel(1)}
-              className="p-1.5 text-[#D9C2CA] hover:text-white transition-colors"
+              className="p-1.5 text-[#D9C2CA] hover:text-white transition-colors rounded-lg hover:bg-white/10"
               title="Reset View"
             >
               <FiMaximize2 size={14} />
@@ -588,27 +609,51 @@ export default function InteractiveKnowledgeGraph() {
         </div>
       </div>
 
-      {/* ── Interactive SVG/Canvas Graph Area (Scrollable container for small screens) ── */}
-      <div className="relative w-full h-[520px] overflow-x-auto overflow-y-hidden rounded-2xl bg-black/40 border border-white/5 flex items-center justify-center scrollbar-thin">
+      {/* ── Interactive SVG/Canvas Graph Area ── */}
+      <div className={`relative w-full ${containerHeight} overflow-x-auto overflow-y-auto rounded-2xl bg-black/40 border border-white/5 flex items-center justify-center scrollbar-thin transition-all duration-300`}>
         <motion.div
           animate={{ scale: zoomLevel }}
           transition={{ type: "spring", stiffness: 200, damping: 25 }}
-          className="relative min-w-[1150px] w-[1150px] h-[500px] shrink-0"
+          className={`relative min-w-[1150px] w-[1150px] ${canvasHeight} shrink-0 origin-center transition-all duration-300`}
         >
           {/* Semester Labels Dividers */}
-          <div className="absolute top-3 left-6 pointer-events-none z-10 flex items-center gap-2">
-            <span className="rounded-full bg-[#C50337]/30 border border-[#C50337] px-3 py-1 text-[10px] font-black uppercase text-[#F4C266]">
-              Semester 1 Subjects (Top Row)
-            </span>
-          </div>
-          <div className="absolute bottom-3 left-6 pointer-events-none z-10 flex items-center gap-2">
-            <span className="rounded-full bg-[#D97706]/30 border border-[#D97706] px-3 py-1 text-[10px] font-black uppercase text-[#F4C266]">
-              Semester 2 Subjects (Bottom Staggered Rows)
-            </span>
-          </div>
+          {selectedYear !== 0 && (
+            <>
+              <div className="absolute top-4 left-10 pointer-events-none z-10 flex items-center gap-2">
+                <span className="rounded-full bg-[#C50337]/30 border border-[#C50337] px-3.5 py-1 text-[11px] font-black uppercase text-[#F4C266] shadow-sm backdrop-blur-md">
+                  Semester 1 Subjects (Top Row)
+                </span>
+              </div>
+              <div className="absolute bottom-4 left-10 pointer-events-none z-10 flex items-center gap-2">
+                <span className="rounded-full bg-[#D97706]/30 border border-[#D97706] px-3.5 py-1 text-[11px] font-black uppercase text-[#F4C266] shadow-sm backdrop-blur-md">
+                  Semester 2 Subjects (Bottom Staggered Rows)
+                </span>
+              </div>
+            </>
+          )}
 
-          {/* SVG Connection Laser Lines */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none">
+          {selectedYear === 0 && (
+            <>
+              <div className="absolute top-3 left-10 pointer-events-none z-10">
+                <span className="rounded-full bg-[#0284C7]/30 border border-[#0284C7] px-3.5 py-1 text-[11px] font-black uppercase text-[#38BDF8] shadow-sm backdrop-blur-md">
+                  1st Year Curriculum
+                </span>
+              </div>
+              <div className="absolute top-[290px] left-10 pointer-events-none z-10">
+                <span className="rounded-full bg-[#EA580C]/30 border border-[#EA580C] px-3.5 py-1 text-[11px] font-black uppercase text-[#F97316] shadow-sm backdrop-blur-md">
+                  2nd Year Curriculum
+                </span>
+              </div>
+              <div className="absolute top-[550px] left-10 pointer-events-none z-10">
+                <span className="rounded-full bg-[#C50337]/30 border border-[#C50337] px-3.5 py-1 text-[11px] font-black uppercase text-[#F4C266] shadow-sm backdrop-blur-md">
+                  3rd Year Curriculum
+                </span>
+              </div>
+            </>
+          )}
+
+          {/* SVG Connection Laser Lines (Rendered BEHIND cards) */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
             <defs>
               <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#F4C266" stopOpacity="0.6" />
@@ -621,16 +666,19 @@ export default function InteractiveKnowledgeGraph() {
               const targetNode = filteredNodes.find((n) => n.id === edge.to);
               if (!sourceNode || !targetNode) return null;
 
+              const sourcePos = getNodePosition(sourceNode);
+              const targetPos = getNodePosition(targetNode);
+
               const isHighlighted =
                 selectedNode && (selectedNode.id === edge.from || selectedNode.id === edge.to);
 
               return (
                 <line
                   key={idx}
-                  x1={sourceNode.x}
-                  y1={sourceNode.y}
-                  x2={targetNode.x}
-                  y2={targetNode.y}
+                  x1={sourcePos.x}
+                  y1={sourcePos.y}
+                  x2={targetPos.x}
+                  y2={targetPos.y}
                   stroke={isHighlighted ? "#F4C266" : "url(#lineGrad)"}
                   strokeWidth={isHighlighted ? 3 : 1.5}
                   strokeDasharray={isHighlighted ? "6 6" : "none"}
@@ -640,24 +688,25 @@ export default function InteractiveKnowledgeGraph() {
             })}
           </svg>
 
-          {/* Render Nodes with Staggered Non-Overlapping Coordinates */}
+          {/* Render Subject Cards with Uniform Dimensions & Precise Alignment */}
           {filteredNodes.map((node) => {
             const Icon = node.icon;
             const isSelected = selectedNode?.id === node.id;
+            const pos = getNodePosition(node);
 
             return (
               <motion.button
                 key={node.id}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                whileHover={{ scale: 1.1, y: -4 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05, y: -3 }}
+                whileTap={{ scale: 0.96 }}
                 onClick={() => setSelectedNode(node)}
                 style={{
-                  left: `${node.x}px`,
-                  top: `${node.y}px`,
+                  left: `${pos.x}px`,
+                  top: `${pos.y}px`,
                 }}
-                className={`absolute -translate-x-1/2 -translate-y-1/2 flex items-center gap-2.5 rounded-2xl px-3.5 py-2.5 border shadow-2xl transition-all duration-300 max-w-[220px] ${
+                className={`absolute -translate-x-1/2 -translate-y-1/2 flex items-center gap-2.5 rounded-2xl px-3 py-2 border shadow-2xl transition-all duration-300 w-[215px] h-[66px] ${
                   isSelected
                     ? "bg-gradient-to-r from-[#C50337] to-[#7F011F] border-[#F4C266] shadow-[0_0_30px_rgba(244,194,102,0.4)] z-30"
                     : "bg-[#22101A]/95 border-white/20 hover:border-[#F4C266]/70 z-20"
@@ -667,19 +716,22 @@ export default function InteractiveKnowledgeGraph() {
                   className="flex h-9 w-9 items-center justify-center rounded-xl text-white shadow-md shrink-0"
                   style={{ backgroundColor: node.color }}
                 >
-                  <Icon size={18} />
+                  <Icon size={17} />
                 </div>
 
-                <div className="text-left overflow-hidden">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-[9px] font-black uppercase tracking-wider text-[#F4C266] font-mono">
+                <div className="text-left overflow-hidden flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#F4C266] font-mono">
                       {node.code}
                     </span>
-                    <span className="rounded-full bg-white/10 px-1.5 py-0.2 text-[8px] text-[#D9C2CA] font-medium">
+                    <span className="rounded-full bg-white/10 px-1.5 py-0.5 text-[8px] text-[#D9C2CA] font-medium shrink-0">
                       {node.semester}
                     </span>
                   </div>
-                  <h4 className="text-[11px] font-extrabold text-white font-heading truncate leading-tight mt-0.5">
+                  <h4
+                    className="text-[11px] font-extrabold text-white font-heading truncate leading-tight mt-0.5"
+                    title={node.label}
+                  >
                     {node.label}
                   </h4>
                 </div>
@@ -716,7 +768,7 @@ export default function InteractiveKnowledgeGraph() {
 
                 <button
                   onClick={() => setSelectedNode(null)}
-                  className="rounded-lg p-1 text-[#D9C2CA] hover:bg-white/10 hover:text-white"
+                  className="rounded-lg p-1 text-[#D9C2CA] hover:bg-white/10 hover:text-white transition-colors"
                 >
                   <FiX size={18} />
                 </button>
@@ -733,7 +785,7 @@ export default function InteractiveKnowledgeGraph() {
                       key={i}
                       className="flex items-center gap-2 rounded-xl bg-white/5 p-2 text-xs text-[#E5D2D8] border border-white/5"
                     >
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#F4C266]" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#F4C266] shrink-0" />
                       <span>{topic}</span>
                     </li>
                   ))}
@@ -754,7 +806,7 @@ export default function InteractiveKnowledgeGraph() {
             {/* Action Link Button */}
             <button
               onClick={() => navigate(selectedNode.link)}
-              className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#C50337] to-[#7F011F] px-4 py-3 text-xs font-extrabold text-white shadow-lg hover:scale-105 transition-all font-heading cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#C50337] to-[#7F011F] px-4 py-3 text-xs font-extrabold text-white shadow-lg hover:scale-105 transition-all font-heading cursor-pointer border border-[#F4C266]/30"
             >
               <FiFileText size={16} />
               <span>Explore {selectedNode.code} Lecture Notes</span>
