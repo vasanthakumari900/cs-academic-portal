@@ -94,7 +94,7 @@ function SelectionGrid({ items, onSelect, isCrimson }) {
 }
 
 // ─── Paper Card ───
-function PaperCard({ paper, onPreview }) {
+function PaperCard({ paper, onPreview, onDelete }) {
   return (
     <PdfFileCard
       file={{
@@ -106,6 +106,7 @@ function PaperCard({ paper, onPreview }) {
         driveUrl: paper.driveUrl || paper.fileUrl,
       }}
       onView={(p) => onPreview(p)}
+      onDelete={onDelete}
     />
   );
 }
@@ -327,6 +328,8 @@ export default function CIAQuestionPapers() {
     setShowUploadForm(false);
   }
 
+  const [uploadCompleted, setUploadCompleted] = useState(false);
+
   async function handleUpload(e) {
     e.preventDefault();
     if (!uploadFileObj) {
@@ -343,6 +346,7 @@ export default function CIAQuestionPapers() {
     }
 
     setUploading(true);
+    setUploadCompleted(false);
     try {
       const fileUrl = await uploadFile(STORAGE_PATHS.CIA_QUESTION_PAPERS, uploadFileObj, setProgress);
       await ciaQuestionPaperService.create({
@@ -358,19 +362,35 @@ export default function CIAQuestionPapers() {
         facultyId: user.uid || "faculty-id",
       });
 
-      toast.success("CIA question paper uploaded successfully!");
-      setUploadTitle("");
-      setUploadDescription("");
-      setUploadFileObj(null);
-      setShowUploadForm(false);
-      refetch();
+      setUploadCompleted(true);
+      toast.success("✅ Upload Completed!");
+
+      setTimeout(() => {
+        setUploadTitle("");
+        setUploadDescription("");
+        setUploadFileObj(null);
+        setShowUploadForm(false);
+        setUploading(false);
+        setUploadCompleted(false);
+        setProgress(0);
+        refetch();
+      }, 1500);
     } catch (err) {
       toast.error(err.message || "Failed to upload CIA paper");
-    } finally {
       setUploading(false);
       setProgress(0);
     }
   }
+
+  const handleDeleteCiaPaper = async (paper) => {
+    try {
+      await ciaQuestionPaperService.remove(paper.id);
+      toast.success(`Deleted CIA paper "${paper.title}" successfully!`);
+      refetch();
+    } catch (err) {
+      toast.error("Failed to delete CIA paper: " + err.message);
+    }
+  };
 
   return (
     <div className="mx-auto min-h-screen max-w-5xl px-4 py-8 sm:px-6 bg-[#FAF0F2] text-[#2D060E]">
@@ -565,10 +585,26 @@ export default function CIAQuestionPapers() {
 
                   <button
                     type="submit"
-                    disabled={uploading}
-                    className="w-full rounded-lg bg-[#0F4C81] hover:bg-[#1E88E5] py-2 text-xs font-bold text-white shadow-sm transition-all disabled:opacity-50"
+                    disabled={uploading || uploadCompleted}
+                    className={`w-full rounded-xl py-3 text-xs font-extrabold text-white shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                      uploadCompleted
+                        ? "bg-emerald-600 hover:bg-emerald-700 shadow-emerald-900/30 scale-[1.01]"
+                        : "bg-[#0F4C81] hover:bg-[#1E88E5]"
+                    }`}
                   >
-                    {uploading ? `Uploading (${Math.round(progress)}%)` : "Upload Paper"}
+                    {uploadCompleted ? (
+                      <>
+                        <FiCheckCircle size={16} className="text-white animate-bounce" />
+                        <span>✅ Upload Completed!</span>
+                      </>
+                    ) : uploading ? (
+                      <>
+                        <FiUploadCloud size={16} className="animate-pulse" />
+                        <span>{progress >= 100 ? "Finalizing..." : `Uploading (${Math.round(progress)}%)...`}</span>
+                      </>
+                    ) : (
+                      "Upload Paper"
+                    )}
                   </button>
                 </form>
               </motion.div>
@@ -584,10 +620,11 @@ export default function CIAQuestionPapers() {
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {currentPapers.map((paper) => (
                   <PaperCard
-                      key={paper.id}
-                      paper={paper}
-                      onPreview={setPreviewPaper}
-                    />
+                    key={paper.id}
+                    paper={paper}
+                    onPreview={setPreviewPaper}
+                    onDelete={isFaculty ? (p) => handleDeleteCiaPaper(p) : null}
+                  />
                 ))}
               </div>
             )}

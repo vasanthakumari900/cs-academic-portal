@@ -8,6 +8,7 @@ import {
   FiCalendar,
   FiHardDrive,
   FiBookOpen,
+  FiTrash2,
 } from "react-icons/fi";
 import {
   downloadDriveFile,
@@ -20,7 +21,7 @@ import { getSubjectIcon } from "../../utils/subjectIcons";
 
 import { usePdfPageCount } from "../../hooks/usePdfPageCount";
 
-export default function PdfFileCard({ file, onView }) {
+export default function PdfFileCard({ file, onView, onDelete, canDelete }) {
   if (!file) return null;
 
   // Extract properties with fallbacks
@@ -102,6 +103,21 @@ export default function PdfFileCard({ file, onView }) {
               {subject}
             </p>
           </div>
+
+          {(onDelete || canDelete) && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                if (confirm(`Are you sure you want to delete "${title}"?`)) {
+                  onDelete?.(file);
+                }
+              }}
+              className="shrink-0 p-2 rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white transition-all border border-rose-200 cursor-pointer"
+              title="Delete PDF (Faculty Management)"
+            >
+              <FiTrash2 size={14} />
+            </button>
+          )}
         </div>
 
         {/* Detailed Metadata Grid */}
@@ -135,14 +151,14 @@ export default function PdfFileCard({ file, onView }) {
       <div className="flex gap-2 pt-1">
         <button
           onClick={handleView}
-          className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-[#99F6E4] dark:border-slate-700 bg-[#F0FDFA] dark:bg-slate-800 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-[#CCFBF1]/50 dark:hover:bg-slate-700 hover:text-[#134E4A] transition-all"
+          className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-[#99F6E4] dark:border-slate-700 bg-[#F0FDFA] dark:bg-slate-800 px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-[#CCFBF1]/50 dark:hover:bg-slate-700 hover:text-[#134E4A] transition-all cursor-pointer"
         >
           <FiEye size={14} /> View PDF
         </button>
 
         <button
           onClick={handleDownload}
-          className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] px-3 py-2 text-xs font-bold text-white shadow-sm transition-all active:scale-95"
+          className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] px-3 py-2 text-xs font-bold text-white shadow-sm transition-all active:scale-95 cursor-pointer"
         >
           <FiDownload size={14} /> Download PDF
         </button>

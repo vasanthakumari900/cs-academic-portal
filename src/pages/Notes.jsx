@@ -2752,19 +2752,35 @@ export default function Notes() {
         facultyName: user.name || "Faculty",
         facultyId: user.uid || "faculty-id",
       });
-      toast.success("Note uploaded successfully!");
-      setUploadTitle("");
-      setUploadDescription("");
-      setUploadFileObj(null);
-      setShowUploadForm(false);
-      refetch();
+      setUploadCompleted(true);
+      toast.success("✅ Upload Completed!");
+
+      setTimeout(() => {
+        setUploadTitle("");
+        setUploadDescription("");
+        setUploadFileObj(null);
+        setShowUploadForm(false);
+        setUploading(false);
+        setUploadCompleted(false);
+        setProgress(0);
+        refetch();
+      }, 1500);
     } catch (err) {
       toast.error(err.message || "Failed to upload");
-    } finally {
       setUploading(false);
       setProgress(0);
     }
   }
+
+  const handleDeleteNote = async (note) => {
+    try {
+      await noteService.remove(note.id);
+      toast.success(`Deleted "${note.title}" successfully!`);
+      refetch();
+    } catch (err) {
+      toast.error("Failed to delete note: " + err.message);
+    }
+  };
 
   const activeCurriculum = courseType === "pg" ? CURRICULUM_PG : CURRICULUM;
   const yearData = selectedYear ? activeCurriculum[selectedYear] : null;
@@ -3309,10 +3325,26 @@ export default function Notes() {
 
                 <button
                   type="submit"
-                  disabled={uploading}
-                  className="w-full rounded-lg bg-[#0F4C81] py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#1E88E5] disabled:opacity-50"
+                  disabled={uploading || uploadCompleted}
+                  className={`w-full rounded-xl py-3.5 text-sm font-extrabold text-white shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                    uploadCompleted
+                      ? "bg-emerald-600 hover:bg-emerald-700 shadow-emerald-900/30 scale-[1.01]"
+                      : "bg-[#0F4C81] hover:bg-[#1E88E5]"
+                  }`}
                 >
-                  {uploading ? `Uploading (${progress}%)...` : "Upload note"}
+                  {uploadCompleted ? (
+                    <>
+                      <FiCheckCircle size={20} className="text-white animate-bounce" />
+                      <span>✅ Upload Completed!</span>
+                    </>
+                  ) : uploading ? (
+                    <>
+                      <FiUploadCloud size={18} className="animate-pulse" />
+                      <span>{progress >= 100 ? "Finalizing upload..." : `Uploading (${progress}%)...`}</span>
+                    </>
+                  ) : (
+                    "Upload note"
+                  )}
                 </button>
               </div>
             </form>
@@ -3615,6 +3647,7 @@ export default function Notes() {
                                     unit: unit.title,
                                   }}
                                   onView={(fileToView) => setViewingPdf(fileToView)}
+                                  onDelete={isFaculty ? (n) => handleDeleteNote(n) : null}
                                 />
                               ))}
                             </div>

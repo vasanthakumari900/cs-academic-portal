@@ -547,6 +547,8 @@ export default function QuestionPapers() {
   const [uploadRegulation, setUploadRegulation] = useState("R2024");
   const [uploadFileObj, setUploadFileObj] = useState(null);
 
+  const [uploadCompleted, setUploadCompleted] = useState(false);
+
   const { items: uploadedPapers, refetch } = useFirestoreList(questionPaperService);
   async function handleUpload(e) {
     e.preventDefault();
@@ -560,6 +562,7 @@ export default function QuestionPapers() {
     }
 
     setUploading(true);
+    setUploadCompleted(false);
     try {
       const fileUrl = await uploadFile(STORAGE_PATHS.QUESTION_PAPERS, uploadFileObj, setProgress);
       await questionPaperService.create({
@@ -576,21 +579,37 @@ export default function QuestionPapers() {
         facultyId: user?.uid || "faculty-id",
       });
 
-      toast.success("Question paper uploaded successfully!");
-      setUploadTitle("");
-      setUploadDescription("");
-      setUploadYearVal("U1819");
-      setUploadRegulation("R2024");
-      setUploadFileObj(null);
-      setShowUploadForm(false);
-      refetch();
+      setUploadCompleted(true);
+      toast.success("✅ Upload Completed!");
+
+      setTimeout(() => {
+        setUploadTitle("");
+        setUploadDescription("");
+        setUploadYearVal("U1819");
+        setUploadRegulation("R2024");
+        setUploadFileObj(null);
+        setShowUploadForm(false);
+        setUploading(false);
+        setUploadCompleted(false);
+        setProgress(0);
+        refetch();
+      }, 1500);
     } catch (err) {
       toast.error(err.message || "Failed to upload question paper");
-    } finally {
       setUploading(false);
       setProgress(0);
     }
   }
+
+  const handleDeletePaper = async (paper) => {
+    try {
+      await questionPaperService.remove(paper.id);
+      toast.success(`Deleted "${paper.title}" successfully!`);
+      refetch();
+    } catch (err) {
+      toast.error("Failed to delete paper: " + err.message);
+    }
+  };
 
   const activeCurriculum = courseType === "pg" ? CURRICULUM_PG : CURRICULUM;
   const yearData = selectedYear ? activeCurriculum[selectedYear] : null;
@@ -601,11 +620,10 @@ export default function QuestionPapers() {
   const combinedPapers = useMemo(() => {
     const mappedFirestore = (uploadedPapers || [])
       .filter((p) => {
-        const matchesSubject = !selectedSubject || p.subject?.toUpperCase() === selectedSubject.toUpperCase();
+        const matchesSubject = !selectedSubject || p.subject?.trim().toUpperCase() === selectedSubject.trim().toUpperCase();
         const matchesCourse = !courseType || p.courseType === courseType;
-        const matchesYear = !selectedYear || String(p.year) === String(selectedYear) || Number(p.academicYear) === Number(selectedYear);
-        const matchesSem = !selectedSemester || Number(p.semester) === Number(selectedSemester);
-        return matchesSubject && matchesCourse && matchesYear && matchesSem;
+        const matchesSem = !selectedSemester || !p.semester || Number(p.semester) === Number(selectedSemester);
+        return matchesSubject && matchesCourse && matchesSem;
       })
       .map((p) => ({
         id: p.id,
@@ -982,10 +1000,26 @@ export default function QuestionPapers() {
 
                 <button
                   type="submit"
-                  disabled={uploading}
-                  className="w-full rounded-lg bg-[#0F4C81] py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#1E88E5] disabled:opacity-50"
+                  disabled={uploading || uploadCompleted}
+                  className={`w-full rounded-xl py-3.5 text-sm font-extrabold text-white shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                    uploadCompleted
+                      ? "bg-emerald-600 hover:bg-emerald-700 shadow-emerald-900/30 scale-[1.01]"
+                      : "bg-[#0F4C81] hover:bg-[#1E88E5]"
+                  }`}
                 >
-                  {uploading ? `Uploading (${progress}%)...` : "Upload question paper"}
+                  {uploadCompleted ? (
+                    <>
+                      <FiCheckCircle size={20} className="text-white animate-bounce" />
+                      <span>✅ Upload Completed!</span>
+                    </>
+                  ) : uploading ? (
+                    <>
+                      <FiUploadCloud size={18} className="animate-pulse" />
+                      <span>{progress >= 100 ? "Finalizing upload..." : `Uploading (${progress}%)...`}</span>
+                    </>
+                  ) : (
+                    "Upload question paper"
+                  )}
                 </button>
               </div>
             </form>
@@ -1054,6 +1088,7 @@ export default function QuestionPapers() {
                 driveUrl: paper.driveFileId || paper.fileUrl,
               }}
               onView={(p) => setPreviewing(p)}
+              onDelete={isFaculty ? (p) => handleDeletePaper(p) : null}
             />
           ))}
           {filtered.length === 0 && (

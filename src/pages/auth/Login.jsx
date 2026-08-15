@@ -1,5 +1,5 @@
 // src/pages/auth/Login.jsx
-// Premium split-screen login — brand maroon/gold. All logic preserved.
+// Futuristic Developer Dark Mode (Midnight Dark Obsidian) — All logic & functionality preserved.
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -60,10 +60,30 @@ export default function Login() {
   function formatRoll(value) {
     return value.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
   }
+
+  function handleDobChange(e) {
+    const rawVal = e.target.value;
+    let digits = rawVal.replace(/[^\d]/g, "");
+    if (digits.length > 8) digits = digits.slice(0, 8);
+
+    let formatted = digits;
+    if (digits.length >= 5) {
+      formatted = `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`;
+    } else if (digits.length >= 3) {
+      formatted = `${digits.slice(0, 2)}/${digits.slice(2)}`;
+    }
+    setDob(formatted);
+  }
+
   function toDisplayDate(dateStr) {
     if (!dateStr) return "";
-    const [y, m, d] = dateStr.split("-");
-    return `${d}/${m}/${y}`;
+    const clean = dateStr.trim();
+    if (/^\d{2}\/\d{2}\/\d{4}$/.test(clean)) return clean;
+    if (/^\d{4}-\d{2}-\d{2}$/.test(clean)) {
+      const [y, m, d] = clean.split("-");
+      return `${d}/${m}/${y}`;
+    }
+    return clean;
   }
 
   async function handleStudentSubmit(e) {
@@ -76,7 +96,7 @@ export default function Login() {
 
     const displayDob = toDisplayDate(dob);
     if (!displayDob || !/^\d{2}\/\d{2}\/\d{4}$/.test(displayDob)) {
-      toast.error("Please select your date of birth");
+      toast.error("Please enter or select a valid date of birth (e.g. 15/08/2004)");
       return;
     }
     if (captcha.trim() !== captchaCode) {
@@ -127,23 +147,24 @@ export default function Login() {
   }
 
   const tabBtn = (active) =>
-    `flex-1 rounded-lg py-2.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 font-heading ${
+    `flex-1 rounded-lg py-2.5 text-xs font-black uppercase tracking-wider transition-all duration-200 font-heading cursor-pointer ${
       active
-        ? "bg-[#4A1620] text-white shadow-[0_2px_8px_rgba(74,22,32,0.3)]"
-        : "text-[#7C4B5E] hover:text-[#4A1620] hover:bg-white/60"
+        ? "bg-gradient-to-r from-[#06B6D4] to-[#0891B2] text-[#090D16] shadow-[0_0_15px_rgba(6,182,212,0.4)]"
+        : "text-slate-400 hover:text-cyan-300 hover:bg-slate-800/60"
     }`;
 
   const inputCls =
-    "w-full rounded-xl border border-[#EDC8D0] dark:border-white/15 bg-white dark:bg-[#22101A] px-11 py-3 text-sm text-[#2A0D13] dark:text-[#F0E2E6] placeholder:text-[#9C6D7F] outline-none transition-all focus:border-[#4A1620] focus:ring-2 focus:ring-[#4A1620]/15";
+    "w-full rounded-xl border border-slate-700 bg-[#1E293B] px-11 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-all focus:border-[#06B6D4] focus:ring-2 focus:ring-[#06B6D4]/30";
 
   return (
-    <div className="relative flex min-h-screen overflow-hidden bg-[#FBF7F2] dark:bg-[#190B13]">
-      {/* Ambient background orbs */}
-      <div className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full bg-[#D97706]/10 blur-[110px]" />
-      <div className="pointer-events-none absolute -bottom-32 -right-24 h-[28rem] w-[28rem] rounded-full bg-[#4A1620]/15 blur-[130px]" />
+    <div className="relative flex min-h-screen overflow-hidden bg-[#090D16] text-[#F3F4F6]">
+      {/* Ambient Cyber Obsidian Orbs */}
+      <div className="pointer-events-none absolute -top-24 -left-24 h-96 w-96 rounded-full bg-[#06B6D4]/15 blur-[120px]" />
+      <div className="pointer-events-none absolute -bottom-32 -right-24 h-[28rem] w-[28rem] rounded-full bg-[#F59E0B]/15 blur-[140px]" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-80 w-80 rounded-full bg-cyan-500/5 blur-[100px]" />
 
       {/* Main Content */}
-      <div className="relative z-10 flex w-full min-h-screen items-center justify-center px-3 py-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 flex w-full min-h-screen items-center justify-center px-3 py-6 sm:px-6 lg:px-8">
         <div className="flex w-full max-w-6xl flex-col lg:flex-row items-center justify-center gap-6 lg:gap-12 text-left">
 
           {/* Left: Welcome Section (Desktop) */}
@@ -164,28 +185,29 @@ export default function Login() {
                 <img
                   src={collegeLogo}
                   alt="DGVC College Logo"
-                  className="h-auto w-full max-w-[26rem] object-contain rounded-2xl border border-[#F0E2E6] shadow-[0_2px_4px_rgba(28,10,16,0.05),0_16px_48px_rgba(28,10,16,0.12)] bg-white p-3"
+                  className="h-auto w-full max-w-[26rem] object-contain rounded-2xl border border-cyan-500/30 shadow-[0_0_30px_rgba(6,182,212,0.15)] bg-white p-3"
                 />
               </motion.div>
 
               {/* Title */}
-              <h1 className="font-heading text-3xl xl:text-4xl font-bold leading-tight text-[#3A101A] dark:text-[#F3E4E8]">
-                CS Academic Portal
+              <h1 className="font-heading text-3xl xl:text-4xl font-extrabold leading-tight text-white flex items-center gap-2">
+                <span>CS Academic Portal</span>
+                <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#06B6D4] animate-ping" />
               </h1>
 
-              <p className="mt-1 text-sm xl:text-base text-[#7E2238] dark:text-[#F4C266] font-semibold font-heading">
+              <p className="mt-1 text-sm xl:text-base text-[#06B6D4] font-bold font-heading">
                 Department of Computer Science
               </p>
 
-              <p className="mt-3 text-sm xl:text-base text-[#7C4B5E] dark:text-[#D9C2CA] max-w-md leading-relaxed">
+              <p className="mt-3 text-sm xl:text-base text-slate-300 max-w-md leading-relaxed">
                 Your single home for lecture notes, video lessons, question papers, and placement resources — all in one organized, searchable system.
               </p>
 
               {/* Feature chips */}
               <div className="mt-5 flex flex-wrap gap-2">
                 {["Lecture Notes", "Video Lessons", "Question Papers", "Placement Drives"].map((item) => (
-                  <span key={item} className="inline-flex items-center gap-1.5 rounded-full bg-white dark:bg-[#22101A] border border-[#F0E2E6] dark:border-white/10 px-3 py-1.5 text-[11px] font-semibold text-[#4A1620] dark:text-[#F3E4E8] shadow-[0_1px_2px_rgba(28,10,16,0.04)]">
-                    <FiStar size={10} className="text-[#D97706]" />
+                  <span key={item} className="inline-flex items-center gap-1.5 rounded-full bg-[#1E293B] border border-cyan-500/30 px-3 py-1.5 text-[11px] font-bold text-cyan-300 shadow-sm">
+                    <FiStar size={10} className="text-[#F59E0B]" />
                     {item}
                   </span>
                 ))}
@@ -197,14 +219,14 @@ export default function Login() {
               </div>
 
               {/* Trust strip */}
-              <div className="mt-6 flex items-center gap-2 text-[11px] font-semibold text-[#9C6D7F] dark:text-[#C09DAA]">
-                <FiShield size={13} className="text-[#D97706]" />
+              <div className="mt-6 flex items-center gap-2 text-[11px] font-semibold text-slate-400">
+                <FiShield size={13} className="text-[#F59E0B]" />
                 Secure portal · NAAC A++ · University of Madras
               </div>
             </div>
           </motion.div>
 
-          {/* Right: Login Form */}
+          {/* Right: Login Form (Frosted Dark Glass #111827) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -217,12 +239,12 @@ export default function Login() {
               <img
                 src={collegeLogo}
                 alt="DGVC College Logo"
-                className="mx-auto mb-3 h-auto w-full max-w-[22rem] sm:max-w-[24rem] object-contain rounded-2xl border border-[#F0E2E6] shadow-md bg-white p-2"
+                className="mx-auto mb-3 h-auto w-full max-w-[22rem] sm:max-w-[24rem] object-contain rounded-2xl border border-cyan-500/30 shadow-md bg-white p-2"
               />
-              <h2 style={{ fontSize: 'clamp(1.4rem,3vw,1.875rem)' }} className="font-heading font-bold text-[#3A101A] dark:text-[#F3E4E8]">
+              <h2 style={{ fontSize: 'clamp(1.4rem,3vw,1.875rem)' }} className="font-heading font-extrabold text-white">
                 CS Academic Portal
               </h2>
-              <p className="mt-0.5 text-xs text-[#7E2238] dark:text-[#F4C266] font-semibold font-heading">
+              <p className="mt-0.5 text-xs text-[#06B6D4] font-bold font-heading">
                 Department of Computer Science
               </p>
               <div className="mt-3 flex justify-center w-full">
@@ -230,11 +252,11 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Login Card */}
-            <div style={{ padding: 'var(--fluid-pad-page)' }} className="rounded-2xl border border-[#F0E2E6]/80 dark:border-white/10 bg-white dark:bg-[#22101A] shadow-[0_2px_4px_rgba(28,10,16,0.05),0_16px_48px_rgba(28,10,16,0.10)] text-left">
+            {/* Login Card - Frosted Dark Glass (#111827 with backdrop-blur) */}
+            <div style={{ padding: 'var(--fluid-pad-page)' }} className="rounded-3xl border border-cyan-500/30 bg-[#111827]/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(6,182,212,0.15)] text-left">
               <div className="relative">
                 {/* Tab Switcher */}
-                <div className="mb-5 flex rounded-xl bg-[#F6E4E8]/60 dark:bg-white/5 p-1 border border-[#F0E2E6] dark:border-white/10">
+                <div className="mb-5 flex rounded-xl bg-[#1E293B]/80 p-1 border border-slate-700">
                   <button
                     type="button"
                     onClick={() => { setActiveTab("student"); setCaptcha(""); refreshCaptcha(); }}
@@ -253,10 +275,10 @@ export default function Login() {
 
                 {/* Header */}
                 <div className="mb-6 text-center">
-                  <h2 style={{ fontSize: 'clamp(1.4rem,3vw,1.875rem)' }} className="font-heading font-bold text-[#3A101A] dark:text-[#F3E4E8]">
+                  <h2 style={{ fontSize: 'clamp(1.4rem,3vw,1.875rem)' }} className="font-heading font-extrabold text-white">
                     {activeTab === "student" ? "Student Login" : "Faculty Login"}
                   </h2>
-                  <p className="mt-1 text-xs text-[#9C6D7F] dark:text-[#D9C2CA]">
+                  <p className="mt-1 text-xs text-slate-400">
                     {activeTab === "student"
                       ? "Sign in with your roll number and date of birth"
                       : "Sign in with your name and password"}
@@ -270,11 +292,11 @@ export default function Login() {
                     <>
                       {/* Roll Number */}
                       <div>
-                        <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">
+                        <label className="mb-1.5 block text-[11px] font-mono font-bold uppercase tracking-widest text-[#06B6D4]">
                           Roll Number
                         </label>
                         <div className="relative">
-                          <FiUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9C6D7F] z-10" size={15} />
+                          <FiUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 z-10" size={15} />
                           <input
                             type="text"
                             value={rollNumber}
@@ -293,34 +315,59 @@ export default function Login() {
                               initial={{ opacity: 0, y: -6, scale: 0.95 }}
                               animate={{ opacity: 1, y: 0, scale: 1 }}
                               exit={{ opacity: 0, y: -6, scale: 0.95 }}
-                              className="mt-2 flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#4A1620]/10 to-[#D97706]/15 border border-[#D97706]/40 px-3 py-1.5 text-[11px] font-extrabold text-[#4A1620] dark:text-[#F4C266] shadow-2xs backdrop-blur-xs"
+                              className="mt-2 flex items-center gap-1.5 rounded-xl bg-[#06B6D4]/15 border border-[#06B6D4]/40 px-3 py-1.5 text-[11px] font-extrabold text-cyan-300 shadow-sm backdrop-blur-xs font-mono"
                             >
-                              <FiCheckCircle size={13} className="text-[#D97706] shrink-0 animate-pulse" />
+                              <FiCheckCircle size={13} className="text-[#F59E0B] shrink-0 animate-pulse" />
                               <span>🎓 {rollInfo.full}</span>
                             </motion.div>
                           )}
                         </AnimatePresence>
 
-                        <p className="mt-1.5 text-[10px] text-[#9C6D7F]">
+                        <p className="mt-1.5 text-[10px] text-slate-400 font-mono">
                           Formats: 24E2901-24E3060, 25E2901-25E3060, 26E3001-26E3160
                         </p>
                       </div>
 
-                      {/* DOB */}
+                      {/* DOB: Side-by-Side Dual Typing & Prominent Mobile Calendar Button */}
                       <div>
-                        <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">
+                        <label className="mb-1.5 block text-[11px] font-mono font-bold uppercase tracking-widest text-[#06B6D4]">
                           Date of Birth
                         </label>
-                        <div className="relative">
-                          <FiCalendar className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9C6D7F] z-10" size={15} />
-                          <input
-                            type="date"
-                            value={dob}
-                            onChange={(e) => setDob(e.target.value)}
-                            max={new Date().toISOString().split("T")[0]}
-                            className={`${inputCls} text-[#2A0D13] dark:text-[#F0E2E6]`}
-                          />
+                        <div className="flex items-center gap-2">
+                          {/* 1. Direct Numeric Keyboard Typing Input Box */}
+                          <div className="relative flex-1">
+                            <FiCalendar className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 z-10 pointer-events-none" size={15} />
+                            <input
+                              type="text"
+                              inputMode="numeric"
+                              value={dob}
+                              onChange={handleDobChange}
+                              placeholder="DD/MM/YYYY (Type here)"
+                              maxLength={10}
+                              className={`${inputCls} font-mono tracking-wider text-white text-xs sm:text-sm`}
+                            />
+                          </div>
+
+                          {/* 2. Prominent Touch-Friendly Calendar Button for Mobile Phones */}
+                          <label className="relative shrink-0 flex items-center justify-center gap-1.5 rounded-xl border border-[#06B6D4]/40 bg-[#1E293B] hover:bg-slate-700 px-3.5 py-3 text-xs font-mono font-bold text-cyan-300 shadow-sm cursor-pointer active:scale-95 transition-all">
+                            <FiCalendar size={18} className="text-[#06B6D4]" />
+                            <span className="text-[11px]">Calendar</span>
+                            <input
+                              type="date"
+                              max={new Date().toISOString().split("T")[0]}
+                              onChange={(e) => {
+                                if (e.target.value) {
+                                  const [y, m, d] = e.target.value.split("-");
+                                  setDob(`${d}/${m}/${y}`);
+                                }
+                              }}
+                              className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                            />
+                          </label>
                         </div>
+                        <p className="mt-1.5 text-[10px] text-slate-400 font-mono">
+                          ⌨️ Type <strong className="text-cyan-300">DD/MM/YYYY</strong> or tap <strong className="text-cyan-300">📅 Calendar</strong> button
+                        </p>
                       </div>
                     </>
                   )}
@@ -330,11 +377,11 @@ export default function Login() {
                     <>
                       {/* Faculty Name */}
                       <div>
-                        <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">
+                        <label className="mb-1.5 block text-[11px] font-mono font-bold uppercase tracking-widest text-[#06B6D4]">
                           Faculty Name
                         </label>
                         <div className="relative">
-                          <FiUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9C6D7F] z-10" size={15} />
+                          <FiUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 z-10" size={15} />
                           <input
                             value={facultyName}
                             onChange={(e) => setFacultyName(e.target.value.toUpperCase())}
@@ -343,18 +390,18 @@ export default function Login() {
                             autoFocus={activeTab === "faculty"}
                           />
                         </div>
-                        <p className="mt-1.5 text-[10px] text-[#9C6D7F]">
+                        <p className="mt-1.5 text-[10px] text-slate-400 font-mono">
                           Enter your full name in capital letters
                         </p>
                       </div>
 
                       {/* Password */}
                       <div>
-                        <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">
+                        <label className="mb-1.5 block text-[11px] font-mono font-bold uppercase tracking-widest text-[#06B6D4]">
                           Password
                         </label>
                         <div className="relative">
-                          <FiLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9C6D7F] z-10" size={15} />
+                          <FiLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 z-10" size={15} />
                           <input
                             type="password"
                             value={facultyPassword}
@@ -363,7 +410,7 @@ export default function Login() {
                             className={inputCls}
                           />
                         </div>
-                        <p className="mt-1.5 text-[10px] text-[#9C6D7F]">
+                        <p className="mt-1.5 text-[10px] text-slate-400 font-mono">
                           Use your assigned password (e.g. DGVC@0001)
                         </p>
                       </div>
@@ -372,15 +419,15 @@ export default function Login() {
 
                   {/* CAPTCHA */}
                   <div>
-                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">
+                    <label className="mb-1.5 block text-[11px] font-mono font-bold uppercase tracking-widest text-[#06B6D4]">
                       Enter the captcha
                     </label>
                     <div className="relative">
-                      <FiShield className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9C6D7F] z-10" size={15} />
+                      <FiShield className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 z-10" size={15} />
                       <input
                         value={captcha}
                         onChange={(e) => setCaptcha(e.target.value.replace(/[^0-9]/g, "").slice(0, 5))}
-                        placeholder="Enter the 5-digit code"
+                        placeholder="Enter 5-digit code"
                         maxLength={5}
                         inputMode="numeric"
                         className={`${inputCls} font-mono tracking-[0.3em]`}
@@ -389,8 +436,8 @@ export default function Login() {
 
                     {/* Captcha display */}
                     <div className="mt-2 flex items-center gap-3 flex-wrap">
-                      <div className="flex select-none items-center gap-2 rounded-xl border border-[#F0E2E6] dark:border-white/10 bg-[#FBF4F5] dark:bg-[#2E1622] px-5 py-3">
-                        <span className="text-xl font-bold tracking-[0.4em] text-[#4A1620] dark:text-[#F3E4E8] font-heading">
+                      <div className="flex select-none items-center gap-2 rounded-xl border border-cyan-500/30 bg-[#1E293B] px-5 py-3 shadow-inner">
+                        <span className="text-xl font-bold tracking-[0.4em] text-cyan-300 font-mono">
                           {captchaCode.split("").map((d, i) => (
                             <span
                               key={i}
@@ -408,7 +455,7 @@ export default function Login() {
                       <button
                         type="button"
                         onClick={refreshCaptcha}
-                        className="flex items-center gap-1.5 rounded-xl border border-[#F0E2E6] dark:border-white/15 bg-white dark:bg-[#22101A] px-3.5 py-3 text-[11px] font-semibold text-[#4A1620] dark:text-[#F3E4E8] hover:bg-[#F6E4E8]/60 dark:hover:bg-white/10 transition-all"
+                        className="flex items-center gap-1.5 rounded-xl border border-slate-700 bg-[#1E293B] px-3.5 py-3 text-[11px] font-extrabold text-cyan-300 hover:bg-slate-700 hover:text-white transition-all cursor-pointer font-mono"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <polyline points="23 4 23 10 17 10" />
@@ -424,9 +471,9 @@ export default function Login() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="group w-full rounded-xl bg-gradient-to-b from-[#61182A] to-[#4A1620] hover:from-[#7E2238] hover:to-[#61182A] px-6 py-3.5 text-sm font-bold text-white shadow-[0_1px_2px_rgba(28,10,16,0.2),0_6px_20px_rgba(74,22,32,0.35)] transition-all hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed mt-2 font-heading"
+                    className="group w-full rounded-xl bg-gradient-to-r from-[#06B6D4] via-[#0891B2] to-[#F59E0B] hover:from-[#22D3EE] hover:to-[#FBBF24] px-6 py-3.5 text-sm font-extrabold text-[#090D16] shadow-[0_0_25px_rgba(6,182,212,0.4)] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed mt-2 font-heading cursor-pointer"
                   >
-                    <span className="inline-flex items-center gap-2">
+                    <span className="inline-flex items-center justify-center gap-2 w-full">
                       {loading ? (
                         <>
                           <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
@@ -446,7 +493,7 @@ export default function Login() {
                 </form>
 
                 {/* Footer */}
-                <p className="mt-5 text-center text-[11px] font-medium text-[#9C6D7F] dark:text-[#C09DAA]">
+                <p className="mt-5 text-center text-[11px] font-medium text-slate-400">
                   {activeTab === "student"
                     ? "Enter your roll number, date of birth, and the captcha to sign in"
                     : "Enter your name, password, and the captcha to sign in"}

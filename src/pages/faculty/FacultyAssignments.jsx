@@ -91,18 +91,19 @@ export default function FacultyAssignments() {
     }
   }
 
+  const [uploadCompleted, setUploadCompleted] = useState(false);
+
   const handleCreateAssignment = async (e) => {
     e.preventDefault();
     setSubmitting(true);
+    setUploadCompleted(false);
     try {
       let attachmentUrl = null;
       let attachmentName = null;
 
       if (attachment) {
-        toast.loading("Uploading attachment...", { id: "attach" });
-        attachmentUrl = await uploadFile(attachment, `assignments/${Date.now()}_${attachment.name}`);
+        attachmentUrl = await uploadFile("assignments/", attachment);
         attachmentName = attachment.name;
-        toast.dismiss("attach");
       }
 
       await createAssignment({
@@ -113,23 +114,28 @@ export default function FacultyAssignments() {
         createdByName: user.displayName || user.email?.split("@")[0] || "Faculty",
       });
 
-      toast.success("Assignment published successfully! 🚀");
-      setShowCreateModal(false);
-      setFormData({
-        title: "",
-        subject: "DATA STRUCTURES",
-        year: "1",
-        semester: "2",
-        description: "",
-        dueDate: "",
-        maxMarks: "100",
-      });
-      setAttachment(null);
-      fetchAssignments();
+      setUploadCompleted(true);
+      toast.success("✅ Upload Completed!");
+
+      setTimeout(() => {
+        setShowCreateModal(false);
+        setFormData({
+          title: "",
+          subject: "DATA STRUCTURES",
+          year: "1",
+          semester: "2",
+          description: "",
+          dueDate: "",
+          maxMarks: "100",
+        });
+        setAttachment(null);
+        setSubmitting(false);
+        setUploadCompleted(false);
+        fetchAssignments();
+      }, 1500);
     } catch (err) {
       console.error("Error creating assignment:", err);
       toast.error("Failed to create assignment");
-    } finally {
       setSubmitting(false);
     }
   };
@@ -358,7 +364,15 @@ export default function FacultyAssignments() {
 
                 <div className="flex justify-end gap-2 pt-2 border-t">
                   <Button type="button" variant="outline" onClick={() => setShowCreateModal(false)}>Cancel</Button>
-                  <Button type="submit" disabled={submitting}>{submitting ? "Publishing..." : "Publish Assignment"}</Button>
+                  <Button
+                    type="submit"
+                    disabled={submitting || uploadCompleted}
+                    className={`font-extrabold transition-all cursor-pointer ${
+                      uploadCompleted ? "bg-emerald-600 hover:bg-emerald-700 text-white" : ""
+                    }`}
+                  >
+                    {uploadCompleted ? "✅ Upload Completed!" : submitting ? "Publishing..." : "Publish Assignment"}
+                  </Button>
                 </div>
               </form>
             </motion.div>
