@@ -2785,29 +2785,10 @@ export default function Notes() {
   const subjectLabRecords = useMemo(() => {
     if (!selectedYear || !selectedSemester || !selectedSubject) return [];
     const upperSub = selectedSubject.toUpperCase();
-    const matches = currentLabRecords.filter((lab) => {
+    return currentLabRecords.filter((lab) => {
       const labSub = lab.subject.toUpperCase();
       return labSub === upperSub || labSub.includes(upperSub) || upperSub.includes(labSub);
     });
-
-    if (matches.length > 0) return matches;
-
-    // Associate subject with semester's main lab file & enable AI Voice Viva
-    const semDefaultFile = currentLabRecords[0] || {
-      fileId: "1tCqpPAL_KYoQkEO1ksNbeLyxTbxBYV-N",
-      fileName: `${selectedSubject.replace(/[^a-zA-Z0-9]/g, "_")}_Lab_Record.pdf`,
-    };
-
-    return [
-      {
-        id: `gen-sub-lab-${selectedSubject}`,
-        title: `${selectedSubject} Practical Lab Record & Viva Manual`,
-        subject: selectedSubject,
-        fileName: semDefaultFile.fileName,
-        fileId: semDefaultFile.fileId,
-        type: "pdf",
-      },
-    ];
   }, [selectedYear, selectedSemester, selectedSubject, currentLabRecords]);
 
   const activeLabRecords = selectedSubject ? subjectLabRecords : currentLabRecords;
@@ -3365,12 +3346,14 @@ export default function Notes() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2 shrink-0">
-          <button
-            onClick={() => setShowLabModal(true)}
-            className="inline-flex items-center gap-2 rounded-2xl bg-[#0F4C81] hover:bg-[#1E88E5] px-4 py-2.5 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer border border-white/20"
-          >
-            <FiCode size={16} /> 🧪 Lab Record &amp; AI Viva
-          </button>
+          {subjectLabRecords.length > 0 && (
+            <button
+              onClick={() => setVivaSubject(selectedSubject)}
+              className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-[#7F011F] to-[#990227] hover:from-[#990227] hover:to-[#021C4F] px-4 py-2.5 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer border border-white/20"
+            >
+              <FiMic size={16} /> 🎙️ AI Voice Viva
+            </button>
+          )}
           <button
             onClick={() =>
               setActivePodcast({
@@ -3702,83 +3685,7 @@ export default function Notes() {
             </motion.div>
           </motion.div>
         )}
-        {showLabModal && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-3 sm:p-4 text-left"
-            onClick={() => setShowLabModal(false)}
-          >
-            <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="flex w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white border border-[#E5E7EB] shadow-2xl"
-            >
-              <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-r from-[#021C4F] via-[#0F4C81] to-[#C50337] text-white">
-                <div>
-                  <h3 className="text-base font-extrabold text-white flex items-center gap-2">
-                    <FiCode size={18} /> Laboratory Practical Records & Manuals
-                  </h3>
-                  <p className="text-xs text-white/80 mt-0.5">
-                    {yearData?.label || "UG Course"} · {semesterData?.label || "Semester View"}
-                  </p>
-                </div>
-                <button onClick={() => setShowLabModal(false)} className="rounded-full bg-white/10 p-2 text-white/80 hover:bg-white/20 hover:text-white transition-all">
-                  <FiX size={16} />
-                </button>
-              </div>
 
-              <div className="p-6 max-h-[70vh] overflow-y-auto space-y-3 bg-[#F8FAFC]">
-                {activeLabRecords.length > 0 ? (
-                  activeLabRecords.map((lab) => (
-                    <div key={lab.id} className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 rounded-xl border border-[#E5E7EB] bg-white p-4 shadow-sm hover:border-[#0F4C81]/40 transition-all">
-                      <div className="flex items-center gap-3 min-w-0">
-                        <div className="flex h-12 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700 font-bold text-xs shadow-sm">
-                          LAB
-                        </div>
-                        <div className="min-w-0">
-                          <h4 className="text-sm font-bold text-[#0F4C81] truncate">{lab.title}</h4>
-                          <p className="text-[11px] text-[#6B7280]">{lab.subject} · {lab.fileName}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
-                        <button
-                          onClick={() => setViewingPdf({ ...lab, unit: "Lab Record" })}
-                          className="inline-flex items-center gap-1 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-3 py-1.5 text-xs font-semibold text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white transition-all"
-                        >
-                          Preview
-                        </button>
-                        <a
-                          href={getDriveViewUrl(lab.fileId)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 rounded-lg border border-[#0F4C81]/30 bg-white px-3 py-1.5 text-xs font-bold text-[#0F4C81] hover:bg-slate-100 transition-all cursor-pointer"
-                        >
-                          <FiExternalLink size={12} /> Open Drive
-                        </a>
-                        <button
-                          onClick={() => downloadDriveFile(lab.fileId, lab.title)}
-                          className="inline-flex items-center gap-1 rounded-lg bg-[#0F4C81] px-3.5 py-1.5 text-xs font-bold text-white shadow-sm hover:bg-[#1E88E5] transition-all cursor-pointer"
-                        >
-                          <FiDownload size={14} /> Download
-                        </button>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="py-12 text-center text-slate-400">
-                    <FiFileText size={32} className="mx-auto mb-2 opacity-50" />
-                    <p className="text-xs font-medium">No lab records uploaded for this semester yet.</p>
-                  </div>
-                )}
-              </div>
-
-              <div className="border-t border-[#E5E7EB] bg-white px-6 py-3 text-right">
-                <button onClick={() => setShowLabModal(false)} className="rounded-lg bg-slate-100 px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-200">
-                  Close
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
       </AnimatePresence>
       {activePodcast && (
         <AudioPodcastPlayerModal
