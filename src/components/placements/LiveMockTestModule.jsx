@@ -303,15 +303,15 @@ export default function LiveMockTestModule() {
       {/* ── STAGE 1: Test Selection Dashboard ── */}
       {!testActive && (
         <div className="space-y-6">
-          <div className="rounded-2xl border border-[#E6DAB8] bg-white p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-[#F5EBD0] text-[#7F011F] px-3 py-1 text-xs font-black mb-2 border border-[#E6DAB8]">
+              <div className="inline-flex items-center gap-2 rounded-full bg-rose-500/10 text-[#7F011F] dark:text-rose-400 px-3 py-1 text-xs font-black mb-2 border border-rose-500/20">
                 <FiAward size={14} /> Official Campus Recruitment Simulator
               </div>
-              <h2 className="text-xl font-extrabold text-[#7F011F]">
+              <h2 className="text-xl font-black text-[#7F011F] dark:text-rose-400">
                 Live Placement Mock Tests
               </h2>
-              <p className="text-xs text-[#6B4F45] mt-0.5 font-medium">
+              <p className="text-xs text-slate-800 dark:text-slate-200 mt-0.5 font-bold">
                 Timed adaptive mock exams covering Aptitude, Logical Reasoning, Verbal Ability, and 14 Technical CS Subjects.
               </p>
             </div>
@@ -323,27 +323,27 @@ export default function LiveMockTestModule() {
               <motion.div
                 key={suite.id}
                 whileHover={{ y: -3 }}
-                className="flex flex-col justify-between rounded-2xl border border-[#E6DAB8] bg-white p-6 shadow-sm hover:shadow-md transition-all space-y-4"
+                className="flex flex-col justify-between rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm hover:shadow-xl transition-all space-y-4"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between gap-2 flex-wrap">
-                    <span className="rounded-full bg-[#F5EBD0] text-[#7F011F] border border-[#E6DAB8] px-2.5 py-0.5 text-[10px] font-black uppercase">
+                    <span className="rounded-full bg-rose-500/10 text-[#7F011F] dark:text-rose-300 border border-rose-500/20 px-2.5 py-0.5 text-[10px] font-black uppercase">
                       {suite.category}
                     </span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
                       {suite.difficulty}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-bold text-[#7F011F] leading-snug">
+                  <h3 className="text-base font-black text-[#7F011F] dark:text-rose-400 leading-snug">
                     {suite.title}
                   </h3>
 
-                  <p className="text-xs text-[#6B4F45]">
+                  <p className="text-xs font-medium text-slate-700 dark:text-slate-300 leading-relaxed">
                     {suite.description}
                   </p>
 
-                  <div className="flex items-center gap-4 text-xs font-bold text-[#7F011F] pt-1">
+                  <div className="flex items-center gap-4 text-xs font-bold text-[#7F011F] dark:text-rose-400 pt-1">
                     <span className="flex items-center gap-1.5">
                       <FiHelpCircle size={14} /> {suite.questionCount} Questions
                     </span>
@@ -355,7 +355,7 @@ export default function LiveMockTestModule() {
 
                 <button
                   onClick={() => handleStartSuite(suite)}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#7F011F] to-[#990227] hover:from-[#660119] hover:to-[#7F011F] text-white font-extrabold text-xs py-3 shadow-md transition-all active:scale-[0.98] min-h-[44px]"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#7F011F] hover:bg-[#990227] text-white font-black text-xs py-3 shadow-md transition-all cursor-pointer min-h-[44px]"
                 >
                   <FiPlay size={15} /> Start Live Test Now
                 </button>

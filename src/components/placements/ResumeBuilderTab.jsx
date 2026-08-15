@@ -19,8 +19,28 @@ import { jsPDF } from "jspdf";
 import { LOGO_TRANS_BASE64 } from "../../assets/logoBase64";
 import { RESUME_TEMPLATES, DEMO_STUDENT_PROFILE } from "../../utils/placementMockData";
 
+const JOB_ROLES = {
+  sde: {
+    title: "Software Development Engineer (SDE-1)",
+    keywords: ["DSA", "Python", "Java", "C++", "Data Structures", "Algorithms", "OOPs", "Git", "REST API", "SQL", "DBMS", "Problem Solving"],
+  },
+  webdev: {
+    title: "Full-Stack Web Developer",
+    keywords: ["React", "JavaScript", "HTML5", "CSS3", "Node.js", "Express", "MongoDB", "REST API", "Git", "Tailwind", "Web Technology"],
+  },
+  data: {
+    title: "Data Analyst & Data Scientist",
+    keywords: ["Python", "SQL", "Pandas", "NumPy", "Data Mining", "Data Science", "Machine Learning", "Statistics", "PowerBI", "Matplotlib"],
+  },
+  cloud: {
+    title: "Cloud & DevOps Engineer",
+    keywords: ["AWS", "Cloud Computing", "Docker", "Kubernetes", "Linux", "CI/CD", "Git", "Python", "Networking", "Security"],
+  },
+};
+
 export default function ResumeBuilderTab() {
   const [selectedTemplate, setSelectedTemplate] = useState("modern");
+  const [targetRoleKey, setTargetRoleKey] = useState("sde");
   const [resumeData, setResumeData] = useState({
     fullName: DEMO_STUDENT_PROFILE.name,
     email: DEMO_STUDENT_PROFILE.email,
@@ -35,6 +55,18 @@ export default function ResumeBuilderTab() {
     certifications: "• AWS Certified Cloud Practitioner\n• NPTEL Data Structures & Algorithms (Gold Medalist)",
   });
 
+  const selectedRole = JOB_ROLES[targetRoleKey];
+
+  // ATS Matching Engine
+  const fullResumeText = `${resumeData.summary} ${resumeData.skills} ${resumeData.projects} ${resumeData.certifications}`.toLowerCase();
+  const matchedKeywords = selectedRole.keywords.filter((kw) =>
+    fullResumeText.includes(kw.toLowerCase())
+  );
+  const missingKeywords = selectedRole.keywords.filter(
+    (kw) => !fullResumeText.includes(kw.toLowerCase())
+  );
+  const atsScore = Math.round((matchedKeywords.length / selectedRole.keywords.length) * 100);
+
   function handleChange(field, value) {
     setResumeData((prev) => ({ ...prev, [field]: value }));
   }
@@ -44,7 +76,7 @@ export default function ResumeBuilderTab() {
       const doc = new jsPDF();
 
       // Top Accent Line
-      doc.setFillColor(2, 28, 79); // #021C4F
+      doc.setFillColor(127, 1, 31); // #7F011F
       doc.rect(0, 0, 210, 15, "F");
 
       // Department Seal Logo on Top Right
@@ -73,7 +105,7 @@ export default function ResumeBuilderTab() {
       doc.line(20, 42, 190, 42);
 
       // Section: Summary
-      doc.setTextColor(197, 3, 55); // #C50337
+      doc.setTextColor(127, 1, 31);
       doc.setFont("helvetica", "bold");
       doc.setFontSize(12);
       doc.text("PROFESSIONAL SUMMARY", 20, 52);
@@ -84,7 +116,7 @@ export default function ResumeBuilderTab() {
       doc.text(resumeData.summary, 20, 60, { maxWidth: 170 });
 
       // Section: Technical Skills
-      doc.setTextColor(197, 3, 55);
+      doc.setTextColor(127, 1, 31);
       doc.setFont("helvetica", "bold");
       doc.setFontSize(12);
       doc.text("TECHNICAL SKILLS", 20, 80);
@@ -95,7 +127,7 @@ export default function ResumeBuilderTab() {
       doc.text(resumeData.skills, 20, 88, { maxWidth: 170 });
 
       // Section: Projects
-      doc.setTextColor(197, 3, 55);
+      doc.setTextColor(127, 1, 31);
       doc.setFont("helvetica", "bold");
       doc.setFontSize(12);
       doc.text("KEY PROJECTS", 20, 105);
@@ -111,7 +143,7 @@ export default function ResumeBuilderTab() {
       });
 
       // Section: Certifications
-      doc.setTextColor(197, 3, 55);
+      doc.setTextColor(127, 1, 31);
       doc.setFont("helvetica", "bold");
       doc.setFontSize(12);
       doc.text("CERTIFICATIONS & ACHIEVEMENTS", 20, yPos + 10);
@@ -135,42 +167,99 @@ export default function ResumeBuilderTab() {
 
   return (
     <div className="space-y-6 text-left">
-      {/* Top Header */}
-      <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-4">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <FiFileText className="text-[#0F4C81] dark:text-sky-400" /> Professional Resume Builder
+      {/* Top Header & Real-time ATS Scanner Ribbon */}
+      <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm space-y-6">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="space-y-1">
+            <h2 className="text-xl font-black text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <FiFileText className="text-[#7F011F] dark:text-rose-400" /> Standardized Resume Builder &amp; Real-Time ATS Scanner
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              Create ATS-friendly resumes with live preview and instant 1-click PDF download.
+            <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">
+              Create single-page IT resumes formatted for campus drives with live ATS keyword matching against tech roles.
             </p>
           </div>
 
           <button
             onClick={handleDownloadPDF}
-            className="inline-flex items-center gap-2 rounded-xl bg-[#C50337] hover:bg-[#a0022b] px-6 py-2.5 text-xs font-bold text-white shadow-md transition-all active:scale-95 shrink-0"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#7F011F] hover:bg-[#990227] px-6 py-3 text-xs font-black text-white shadow-md transition-all cursor-pointer shrink-0"
           >
             <FiDownload size={16} /> Download Resume PDF
           </button>
         </div>
 
-        {/* Template Selector */}
-        <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-slate-100 dark:border-slate-800 text-xs">
-          <span className="font-bold text-slate-500">Choose Template:</span>
-          {RESUME_TEMPLATES.map((tmpl) => (
-            <button
-              key={tmpl.id}
-              onClick={() => setSelectedTemplate(tmpl.id)}
-              className={`rounded-xl border px-3.5 py-1.5 font-bold transition-all ${
-                selectedTemplate === tmpl.id
-                  ? "border-[#0F4C81] bg-[#0F4C81]/10 text-[#0F4C81] dark:text-sky-300"
-                  : "border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300"
-              }`}
-            >
-              {tmpl.name}
-            </button>
-          ))}
+        {/* ATS Score Meter & Target Role Selector */}
+        <div className="rounded-2xl bg-slate-50 dark:bg-slate-800/80 p-5 border border-slate-200 dark:border-slate-700 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          {/* Target Role Selector */}
+          <div className="lg:col-span-7 space-y-3">
+            <label className="text-xs font-black uppercase text-slate-500 tracking-wider block">
+              Target Job Role for ATS Scan:
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {Object.entries(JOB_ROLES).map(([key, role]) => (
+                <button
+                  key={key}
+                  onClick={() => setTargetRoleKey(key)}
+                  className={`rounded-xl px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${
+                    targetRoleKey === key
+                      ? "bg-[#7F011F] text-white shadow-sm font-black"
+                      : "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:border-[#7F011F]"
+                  }`}
+                >
+                  {role.title}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* ATS Gauge Badge & Keywords */}
+          <div className="lg:col-span-5 flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div className="relative flex items-center justify-center h-16 w-16 shrink-0 rounded-2xl bg-[#7F011F]/10 border border-[#7F011F]/20 text-[#7F011F] dark:text-rose-400">
+              <span className="text-xl font-black">{atsScore}%</span>
+            </div>
+
+            <div className="space-y-1 text-xs">
+              <span className="font-black text-slate-800 dark:text-slate-100 block">
+                ATS Compatibility Score
+              </span>
+              <div className="flex flex-wrap gap-1">
+                <span className="text-[10px] font-extrabold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
+                  ✓ {matchedKeywords.length} Matched
+                </span>
+                <span className="text-[10px] font-extrabold text-rose-600 dark:text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded">
+                  ! {missingKeywords.length} Missing
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Matched vs Recommended Missing Keywords Chips */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div className="space-y-1.5">
+            <span className="font-black text-emerald-600 dark:text-emerald-400 uppercase text-[10px] tracking-wider">
+              Matched Keywords in Resume ({matchedKeywords.length}):
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {matchedKeywords.map((kw) => (
+                <span key={kw} className="rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20 px-2.5 py-1 text-[11px] font-black">
+                  ✓ {kw}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-1.5">
+            <span className="font-black text-amber-600 dark:text-amber-400 uppercase text-[10px] tracking-wider">
+              Recommended Keywords to Add ({missingKeywords.length}):
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {missingKeywords.map((kw) => (
+                <span key={kw} className="rounded-lg bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20 px-2.5 py-1 text-[11px] font-bold">
+                  + {kw}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -282,33 +371,35 @@ export default function ResumeBuilderTab() {
         </div>
 
         {/* Right Live Resume Preview (6 cols) */}
-        <div className="lg:col-span-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white text-slate-900 p-8 shadow-xl space-y-6">
-          <div className="border-b-2 border-[#021C4F] pb-3 text-left">
-            <h2 className="text-2xl font-extrabold text-[#021C4F] tracking-tight">
+        <div className="lg:col-span-6 rounded-3xl border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-8 shadow-2xl space-y-6 text-left">
+          <div className="border-b-2 border-[#7F011F] dark:border-rose-400 pb-3 text-left">
+            <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
               {resumeData.fullName || "YOUR NAME"}
             </h2>
-            <p className="text-xs text-slate-600 font-medium mt-0.5">
+            <p className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">
               {resumeData.email} · {resumeData.phone} · {resumeData.department} (CGPA: {resumeData.cgpa})
             </p>
           </div>
 
-          <div className="space-y-4 text-left text-xs">
+          <div className="space-y-5 text-left text-xs">
             <div>
-              <h3 className="font-bold text-[#C50337] uppercase text-[11px] tracking-wider border-b border-slate-200 pb-1 mb-1">
+              <h3 className="font-black text-[#7F011F] dark:text-rose-400 uppercase text-xs tracking-wider border-b-2 border-[#7F011F]/30 dark:border-rose-400/30 pb-1 mb-2">
                 Professional Summary
               </h3>
-              <p className="text-slate-700 leading-relaxed">{resumeData.summary}</p>
+              <p className="text-xs font-bold text-slate-900 dark:text-slate-100 leading-relaxed">
+                {resumeData.summary}
+              </p>
             </div>
 
             <div>
-              <h3 className="font-bold text-[#C50337] uppercase text-[11px] tracking-wider border-b border-slate-200 pb-1 mb-1">
+              <h3 className="font-black text-[#7F011F] dark:text-rose-400 uppercase text-xs tracking-wider border-b-2 border-[#7F011F]/30 dark:border-rose-400/30 pb-1 mb-2">
                 Technical Skills
               </h3>
-              <div className="flex flex-wrap gap-1 mt-1">
+              <div className="flex flex-wrap gap-1.5 mt-1">
                 {resumeData.skills.split(",").map((s, idx) => (
                   <span
                     key={idx}
-                    className="rounded bg-slate-100 text-slate-800 px-2 py-0.5 text-[10px] font-semibold"
+                    className="rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-extrabold px-2.5 py-1 text-xs border border-slate-300 dark:border-slate-700"
                   >
                     {s.trim()}
                   </span>
@@ -317,19 +408,19 @@ export default function ResumeBuilderTab() {
             </div>
 
             <div>
-              <h3 className="font-bold text-[#C50337] uppercase text-[11px] tracking-wider border-b border-slate-200 pb-1 mb-1">
+              <h3 className="font-black text-[#7F011F] dark:text-rose-400 uppercase text-xs tracking-wider border-b-2 border-[#7F011F]/30 dark:border-rose-400/30 pb-1 mb-2">
                 Academic Projects
               </h3>
-              <p className="text-slate-700 whitespace-pre-line font-mono text-[11px] leading-relaxed">
+              <p className="text-xs font-bold text-slate-900 dark:text-slate-100 whitespace-pre-line font-mono leading-relaxed bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
                 {resumeData.projects}
               </p>
             </div>
 
             <div>
-              <h3 className="font-bold text-[#C50337] uppercase text-[11px] tracking-wider border-b border-slate-200 pb-1 mb-1">
-                Certifications
+              <h3 className="font-black text-[#7F011F] dark:text-rose-400 uppercase text-xs tracking-wider border-b-2 border-[#7F011F]/30 dark:border-rose-400/30 pb-1 mb-2">
+                Certifications &amp; Achievements
               </h3>
-              <p className="text-slate-700 whitespace-pre-line font-mono text-[11px] leading-relaxed">
+              <p className="text-xs font-bold text-slate-900 dark:text-slate-100 whitespace-pre-line font-mono leading-relaxed bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
                 {resumeData.certifications}
               </p>
             </div>

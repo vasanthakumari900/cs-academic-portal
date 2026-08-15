@@ -71,6 +71,35 @@ const SUBJECT_PLAYLISTS = {
   "INTRODUCTION TO DATA SCIENCE": "https://youtu.be/N6BghzuFLIg?si=L_TCwxN5H8IYhjgR",
   "DIGITAL IMAGE PROCESSING": "https://youtube.com/playlist?list=PL3rE2jS8zxAykFjinlf6EsucLv5EA03_m&si=ta5Kk3KVB12u0mu3",
   "UNIFIED MODELING LANGUAGE": "https://youtube.com/playlist?list=PLA_LG2oFbzOnY9M8mjCByYvnSjoleNTrJ&si=cJ3VG3_wFAEuWez0",
+
+  // PG 1st Year Semester 1
+  "ADVANCED DESIGN AND ANALYSIS OF ALGORITHMS": "https://youtube.com/playlist?list=PLBlnK6fEyqRhoF3cPp0mgOZPuXeu84nAd&si=4SUJ3zsiAmv2Id0a",
+  "Advanced Design and Analysis of Algorithms": "https://youtube.com/playlist?list=PLBlnK6fEyqRhoF3cPp0mgOZPuXeu84nAd&si=4SUJ3zsiAmv2Id0a",
+  "1-1-ADVANCED DESIGN AND ANALYSIS OF ALGORITHMS": "https://youtube.com/playlist?list=PLBlnK6fEyqRhoF3cPp0mgOZPuXeu84nAd&si=4SUJ3zsiAmv2Id0a",
+
+  "ADVANCED SOFTWARE ENGINEERING": "https://youtube.com/playlist?list=PLxCzCOWd7aiEed7SKZBnC6ypFDWYLRvB2&si=XzIouE_nwXYoTbiw",
+  "Advanced Software Engineering": "https://youtube.com/playlist?list=PLxCzCOWd7aiEed7SKZBnC6ypFDWYLRvB2&si=XzIouE_nwXYoTbiw",
+  "1-1-ADVANCED SOFTWARE ENGINEERING": "https://youtube.com/playlist?list=PLxCzCOWd7aiEed7SKZBnC6ypFDWYLRvB2&si=XzIouE_nwXYoTbiw",
+
+  "CONTEMPORARY WEB TECHNOLOGIES": "https://youtube.com/playlist?list=PLVlQHNRLflP_hIZuBNjr6rZzqa2HZFkny&si=oCNlyq96zP7GBgNt",
+  "Contemporary Web Technologies": "https://youtube.com/playlist?list=PLVlQHNRLflP_hIZuBNjr6rZzqa2HZFkny&si=oCNlyq96zP7GBgNt",
+  "1-1-CONTEMPORARY WEB TECHNOLOGIES": "https://youtube.com/playlist?list=PLVlQHNRLflP_hIZuBNjr6rZzqa2HZFkny&si=oCNlyq96zP7GBgNt",
+
+  "DATA COMMUNICATION AND NETWORKING": "https://youtube.com/playlist?list=PLiBvgS5MGf05_0mitNoB3fi_RYH0s_0B9&si=9jDe0pzSVtfYlHyK",
+  "Data Communication and Networking": "https://youtube.com/playlist?list=PLiBvgS5MGf05_0mitNoB3fi_RYH0s_0B9&si=9jDe0pzSVtfYlHyK",
+  "1-1-DATA COMMUNICATION AND NETWORKING": "https://youtube.com/playlist?list=PLiBvgS5MGf05_0mitNoB3fi_RYH0s_0B9&si=9jDe0pzSVtfYlHyK",
+
+  "PYTHON FOR DATA SCIENCE": "https://youtu.be/LHBE6Q9XlzI?si=guzLzmOfOv9MJi8f",
+  "Python for Data Science": "https://youtu.be/LHBE6Q9XlzI?si=guzLzmOfOv9MJi8f",
+  "1-1-PYTHON FOR DATA SCIENCE": "https://youtu.be/LHBE6Q9XlzI?si=guzLzmOfOv9MJi8f",
+
+  "MOBILE NETWORK SYSTEM": "https://youtube.com/playlist?list=PLm_MSClsnwm9u9UCi58RsSx9VnbvHh6OQ&si=2-DxSyvTfIx77y62",
+  "Mobile Network System": "https://youtube.com/playlist?list=PLm_MSClsnwm9u9UCi58RsSx9VnbvHh6OQ&si=2-DxSyvTfIx77y62",
+  "1-1-MOBILE NETWORK SYSTEM": "https://youtube.com/playlist?list=PLm_MSClsnwm9u9UCi58RsSx9VnbvHh6OQ&si=2-DxSyvTfIx77y62",
+
+  "ARTIFICIAL NEURAL NETWORK": "https://youtube.com/playlist?list=PLuhqtP7jdD8CftMk831qdE8BlIteSaNzD&si=ZK6mUQ16c2A0V_ru",
+  "Artificial Neural Network": "https://youtube.com/playlist?list=PLuhqtP7jdD8CftMk831qdE8BlIteSaNzD&si=ZK6mUQ16c2A0V_ru",
+  "1-1-ARTIFICIAL NEURAL NETWORK": "https://youtube.com/playlist?list=PLuhqtP7jdD8CftMk831qdE8BlIteSaNzD&si=ZK6mUQ16c2A0V_ru",
 };
 
 const MATH1_VIDEOS = [

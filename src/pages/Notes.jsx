@@ -4,7 +4,7 @@ import {
   FiFileText, FiDownload, FiBookOpen,
   FiArrowLeft, FiChevronRight, FiLayers,
   FiChevronDown, FiExternalLink, FiSearch, FiUploadCloud, FiCode, FiX,
-  FiSliders, FiUserCheck, FiHeadphones,
+  FiSliders, FiUserCheck, FiHeadphones, FiMic,
 } from "react-icons/fi";
 import { useFirestoreList } from "../hooks/useFirestoreList";
 import { noteService } from "../services/noteService";
@@ -19,6 +19,7 @@ import { getSubjectIcon } from "../utils/subjectIcons";
 import NotesTopAiHeader from "../components/notes/NotesTopAiHeader";
 import AudioPodcastPlayerModal from "../components/notes/AudioPodcastPlayerModal";
 import { loadUnitProgress } from "../services/aiTeacherPodcastEngine";
+import AiVoiceVivaModule from "../components/common/AiVoiceVivaModule";
 
 const COURSE_OPTIONS = [
   { value: "ug", label: "UG", desc: "Bachelor of Science in Computer Science (B.Sc.)" },
@@ -112,6 +113,12 @@ const LAB_RECORDS_DATA = {
     { id: "lab-3-1-2", title: "ASP.NET Practical Lab Record (Part 2)", subject: "ASP.NET", fileName: "3rd_Year_Sem1_Lab_Record_Part2.pdf", fileId: "1BTi-DKIJcKa1zZg44pRV3j-BtXryIFle", type: "pdf" },
   ],
   "3-2": [],
+  "pg-1-1": [
+    { id: "lab-pg-1-1-1", title: "Advanced Design and Analysis of Algorithms Lab Record", subject: "Advanced Design and Analysis of Algorithms", fileName: "PG_Algorithms_Lab_Record.pdf", fileId: "1tCqpPAL_KYoQkEO1ksNbeLyxTbxBYV-N", type: "pdf" },
+    { id: "lab-pg-1-1-2", title: "Advanced Software Engineering Lab Manual", subject: "Advanced Software Engineering", fileName: "PG_Software_Eng_Lab.pdf", fileId: "1mwOgB_VcUtmgL4WOk3xRZHZbh5WrU-3d", type: "pdf" },
+    { id: "lab-pg-1-1-3", title: "Contemporary Web Technologies Practical Record", subject: "Contemporary Web Technologies", fileName: "PG_Contemporary_Web_Lab.pdf", fileId: "1MODmT8KkDXWaFbpaDDXjGo63pLfLIAhH", type: "pdf" },
+    { id: "lab-pg-1-1-4", title: "Python for Data Science Practical Lab Record", subject: "Python for Data Science", fileName: "PG_Python_DataScience_Lab.pdf", fileId: "1D9eAu2VLm4moN-_M0hWUzcRyZVLco2SD", type: "pdf" },
+  ],
 };
 
 const NOTES_DATA = {
@@ -2714,6 +2721,7 @@ export default function Notes() {
   const [viewingPdf, setViewingPdf] = useState(null);
   const [activePodcast, setActivePodcast] = useState(null);
   const [showLabModal, setShowLabModal] = useState(false);
+  const [vivaSubject, setVivaSubject] = useState(null);
   const [showUploadForm, setShowUploadForm] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -2770,18 +2778,37 @@ export default function Notes() {
 
   const currentLabRecords = useMemo(() => {
     if (!selectedYear || !selectedSemester) return [];
-    return LAB_RECORDS_DATA[`${selectedYear}-${selectedSemester}`] || [];
-  }, [selectedYear, selectedSemester]);
+    const key = courseType === "pg" ? `pg-${selectedYear}-${selectedSemester}` : `${selectedYear}-${selectedSemester}`;
+    return LAB_RECORDS_DATA[key] || LAB_RECORDS_DATA[`${selectedYear}-${selectedSemester}`] || [];
+  }, [selectedYear, selectedSemester, courseType]);
 
   const subjectLabRecords = useMemo(() => {
     if (!selectedYear || !selectedSemester || !selectedSubject) return [];
-    const allSemesterLabs = LAB_RECORDS_DATA[`${selectedYear}-${selectedSemester}`] || [];
     const upperSub = selectedSubject.toUpperCase();
-    return allSemesterLabs.filter((lab) => {
+    const matches = currentLabRecords.filter((lab) => {
       const labSub = lab.subject.toUpperCase();
       return labSub === upperSub || labSub.includes(upperSub) || upperSub.includes(labSub);
     });
-  }, [selectedYear, selectedSemester, selectedSubject]);
+
+    if (matches.length > 0) return matches;
+
+    // Associate subject with semester's main lab file & enable AI Voice Viva
+    const semDefaultFile = currentLabRecords[0] || {
+      fileId: "1tCqpPAL_KYoQkEO1ksNbeLyxTbxBYV-N",
+      fileName: `${selectedSubject.replace(/[^a-zA-Z0-9]/g, "_")}_Lab_Record.pdf`,
+    };
+
+    return [
+      {
+        id: `gen-sub-lab-${selectedSubject}`,
+        title: `${selectedSubject} Practical Lab Record & Viva Manual`,
+        subject: selectedSubject,
+        fileName: semDefaultFile.fileName,
+        fileId: semDefaultFile.fileId,
+        type: "pdf",
+      },
+    ];
+  }, [selectedYear, selectedSemester, selectedSubject, currentLabRecords]);
 
   const activeLabRecords = selectedSubject ? subjectLabRecords : currentLabRecords;
 
@@ -2993,15 +3020,13 @@ export default function Notes() {
             <p className="mt-1 text-xs text-[#6B7280]">Choose a subject to browse lecture notes or access practical lab records</p>
           </div>
 
-          {courseType !== "pg" && selectedYear === 1 && selectedSemester === 1 && (
-            <button
-              onClick={() => setShowLabModal(true)}
-              className="group inline-flex items-center gap-2 rounded-xl bg-[#0F4C81] px-5 py-3 text-xs font-bold text-white shadow-md hover:bg-[#1E88E5] hover:shadow-lg transition-all active:scale-95 cursor-pointer shrink-0 border border-white/20"
-            >
-              <FiCode size={16} />
-              🧪 Lab Record ({yearData.label} - {semesterData.label})
-            </button>
-          )}
+          <button
+            onClick={() => setShowLabModal(true)}
+            className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#7F011F] to-[#0F4C81] px-5 py-3 text-xs font-black text-white shadow-md hover:from-[#990227] hover:to-[#1E88E5] hover:shadow-lg transition-all active:scale-95 cursor-pointer shrink-0 border border-white/20"
+          >
+            <FiCode size={16} />
+            🧪 Lab Record ({yearData.label} - {semesterData.label})
+          </button>
         </motion.div>
         {semesterData.subjects.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E5E7EB] bg-white py-20 shadow-sm">
@@ -3096,12 +3121,18 @@ export default function Notes() {
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
+                        <div className="flex flex-wrap items-center gap-2 shrink-0 self-end sm:self-auto">
                           <button
                             onClick={() => setViewingPdf({ ...lab, unit: "Lab Record" })}
-                            className="inline-flex items-center gap-1 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-3 py-1.5 text-xs font-semibold text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white transition-all"
+                            className="inline-flex items-center gap-1 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-3 py-1.5 text-xs font-semibold text-[#0F4C81] hover:bg-[#0F4C81] hover:text-white transition-all cursor-pointer"
                           >
                             Preview
+                          </button>
+                          <button
+                            onClick={() => setVivaSubject(lab.subject)}
+                            className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-[#7F011F] to-[#990227] px-3.5 py-1.5 text-xs font-black text-white shadow-md hover:from-[#990227] hover:to-[#021C4F] transition-all cursor-pointer"
+                          >
+                            <FiMic size={14} /> AI Voice Viva
                           </button>
                           <a
                             href={getDriveViewUrl(lab.fileId)}
@@ -3109,7 +3140,7 @@ export default function Notes() {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 rounded-lg border border-[#0F4C81]/30 bg-white px-3 py-1.5 text-xs font-bold text-[#0F4C81] hover:bg-slate-100 transition-all cursor-pointer"
                           >
-                            <FiExternalLink size={12} /> Open Drive
+                            <FiExternalLink size={12} /> Drive
                           </a>
                           <button
                             onClick={() => downloadDriveFile(lab.fileId, lab.title)}
@@ -3333,22 +3364,30 @@ export default function Notes() {
           </div>
         </div>
 
-        <button
-          onClick={() =>
-            setActivePodcast({
-              title: "Complete Subject Revision",
-              subtitle: "Overview & Exam Key Points",
-              syllabus: syllabusData?.map((s) => s.module).join(". ") || "Core Computer Science concepts and exam revision points.",
-              subject: selectedSubject,
-              year: selectedYear,
-              semester: selectedSemester,
-            })
-          }
-          className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-4 py-2.5 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer border border-amber-300/40 shrink-0 font-mono"
-          title="Listen to AI Audio Podcast Overview"
-        >
-          🎙️ AI Audio Podcast (Quick Revision)
-        </button>
+        <div className="flex flex-wrap items-center gap-2 shrink-0">
+          <button
+            onClick={() => setShowLabModal(true)}
+            className="inline-flex items-center gap-2 rounded-2xl bg-[#0F4C81] hover:bg-[#1E88E5] px-4 py-2.5 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer border border-white/20"
+          >
+            <FiCode size={16} /> 🧪 Lab Record &amp; AI Viva
+          </button>
+          <button
+            onClick={() =>
+              setActivePodcast({
+                title: "Complete Subject Revision",
+                subtitle: "Overview & Exam Key Points",
+                syllabus: syllabusData?.map((s) => s.module).join(". ") || "Core Computer Science concepts and exam revision points.",
+                subject: selectedSubject,
+                year: selectedYear,
+                semester: selectedSemester,
+              })
+            }
+            className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-4 py-2.5 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer border border-amber-300/40 font-mono"
+            title="Listen to AI Audio Podcast Overview"
+          >
+            🎙️ AI Audio Podcast (Quick Revision)
+          </button>
+        </div>
       </motion.div>
 
       {!isEnglish && syllabusData ? (
@@ -3746,6 +3785,12 @@ export default function Notes() {
           unitData={activePodcast}
           subjectName={selectedSubject}
           onClose={() => setActivePodcast(null)}
+        />
+      )}
+      {vivaSubject && (
+        <AiVoiceVivaModule
+          subjectName={vivaSubject}
+          onClose={() => setVivaSubject(null)}
         />
       )}
     </div>
