@@ -3037,15 +3037,16 @@ export default function Notes() {
               const isNameOnly = (selectedYear === 2 && PLACEHOLDER_SUBJECTS.has(subject)) ||
                 (NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(subject));
               const subjectData = isNameOnly ? null : NOTES_DATA[subject];
-              const hasNotes = subjectData && Object.values(subjectData.units).some(u => u.files.length > 0);
+              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || (courseType === "pg" && subject === "Advanced Design and Analysis of Algorithms");
               const semesterFilter = NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(subject)
                 ? null : SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[subject];
               const filteredSubjectUnits = subjectData && semesterFilter
                 ? Object.entries(subjectData.units).filter(([key]) => semesterFilter.has(Number(key)))
                 : subjectData ? Object.entries(subjectData.units) : [];
-              const totalFiles = filteredSubjectUnits.length > 0
+              const isPgCombinedSubject = courseType === "pg" && subject === "Advanced Design and Analysis of Algorithms";
+              const totalFiles = isPgCombinedSubject ? 1 : (filteredSubjectUnits.length > 0
                 ? filteredSubjectUnits.reduce((s, [, u]) => s + u.files.length, 0)
-                : 0;
+                : 0);
               const facultyName = courseType === "pg" && selectedYear === 1 && selectedSemester === 1
                 ? PG_FIRST_YEAR_SEM1_FACULTY[subject]
                 : selectedYear === 1 && selectedSemester === 1
@@ -3069,7 +3070,7 @@ export default function Notes() {
                       {facultyName && <p className="mt-0.5 text-[11px] font-semibold tracking-wide text-[#6B7280]">{facultyName}</p>}
                       <div className="mt-3 flex items-center gap-2">
                         <span className="inline-flex items-center gap-1 rounded-full bg-[#0F4C81]/10 text-[#0F4C81] px-2.5 py-0.5 text-[10px] font-bold"><FiFileText size={10} /> VIEW NOTES</span>
-                        {hasNotes && <span className="inline-flex items-center rounded-full bg-[#2E7D32]/10 text-[#2E7D32] px-2 py-0.5 text-[9px] font-bold">{totalFiles} PDFs</span>}
+                        {hasNotes && <span className="inline-flex items-center rounded-full bg-[#2E7D32]/10 text-[#2E7D32] px-2 py-0.5 text-[9px] font-bold">{totalFiles} PDF{totalFiles !== 1 ? "s" : ""}</span>}
                         <FiChevronRight size={14} className="text-slate-400 group-hover:text-[#1E88E5] transition-colors ml-auto" />
                       </div>
                     </div>
@@ -3244,6 +3245,17 @@ export default function Notes() {
     type: "pdf"
   } : null;
 
+  // PG Combined PDF — all 5 units in a single PDF
+  const isPgCombined = courseType === "pg" && selectedSubject === "Advanced Design and Analysis of Algorithms";
+  const pgCombinedPdf = isPgCombined ? {
+    id: "pg-adaa-complete-pdf",
+    title: "Advanced Design and Analysis of Algorithms — Complete Notes (Module I to V)",
+    fileName: "PG_Advanced_Design_Analysis_Algorithms_Complete.pdf",
+    fileId: "1y2q8sXuc7g5ZV0YSiJ__duYoVfnJzURx",
+    type: "pdf",
+    pageCount: 348,
+  } : null;
+
   // Determine the current subject's semester number for pre-filling upload form
   const currentSemesterNumber = selectedSemester;
 
@@ -3372,7 +3384,7 @@ export default function Notes() {
             <div className="flex items-center gap-3 mt-1">
               <span className="text-xs text-[#6B7280]">{yearData.label} · {semesterData.label}</span>
               {syllabusData && <span className="badge-primary">{syllabusData.length} modules</span>}
-              {totalFiles > 0 && <span className="badge-success">{totalFiles} PDFs</span>}
+              {totalFiles > 0 && <span className="badge-success">{totalFiles} PDF{totalFiles !== 1 ? "s" : ""}</span>}
             </div>
           </div>
         </div>
@@ -3530,6 +3542,63 @@ export default function Notes() {
         </motion.div>
       )}
 
+      {/* PG Combined Notes — All Modules in 1 PDF */}
+      {isPgCombined && pgCombinedPdf && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
+          <div className="mb-5 flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#0F4C81] to-[#7F011F] text-white shadow-sm"><FiLayers size={18} /></div>
+            <div>
+              <h2 className="font-sans text-lg font-bold text-[#0F4C81]">
+                PG Complete Notes — Module I to V
+              </h2>
+              <p className="text-[11px] text-[#6B7280]">
+                Single combined PDF · {pgCombinedPdf.pageCount} pages · All 5 modules in one document
+              </p>
+            </div>
+          </div>
+          <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden shadow-sm">
+            <div className="p-5">
+              <motion.button
+                initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
+                onClick={() => setViewingPdf({ ...pgCombinedPdf, subject: selectedSubject, unit: "Module I to V Complete Notes" })}
+                className="group flex w-full items-center gap-4 rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] p-5 text-left transition-all hover:bg-[#F0F4F8] hover:border-[#1E88E5]/30 hover:shadow-sm"
+              >
+                <div className="flex h-16 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#0F4C81] to-[#7F011F] shadow-md">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-base font-bold text-[#0F4C81] group-hover:text-[#1E88E5] transition-colors">{pgCombinedPdf.title}</p>
+                  <p className="text-xs text-[#6B7280] mt-0.5">PDF · Module I to V Combined · {pgCombinedPdf.pageCount} pages</p>
+                  <div className="flex items-center gap-2 mt-2 flex-wrap">
+                    <span className="inline-flex items-center rounded-full bg-[#0F4C81]/10 text-[#0F4C81] px-2.5 py-0.5 text-[10px] font-bold">Module I</span>
+                    <span className="inline-flex items-center rounded-full bg-[#0F4C81]/10 text-[#0F4C81] px-2.5 py-0.5 text-[10px] font-bold">Module II</span>
+                    <span className="inline-flex items-center rounded-full bg-[#0F4C81]/10 text-[#0F4C81] px-2.5 py-0.5 text-[10px] font-bold">Module III</span>
+                    <span className="inline-flex items-center rounded-full bg-[#0F4C81]/10 text-[#0F4C81] px-2.5 py-0.5 text-[10px] font-bold">Module IV</span>
+                    <span className="inline-flex items-center rounded-full bg-[#0F4C81]/10 text-[#0F4C81] px-2.5 py-0.5 text-[10px] font-bold">Module V</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      downloadDriveFile(pgCombinedPdf.fileId, pgCombinedPdf.title);
+                    }}
+                    className="rounded-full bg-[#0F4C81]/10 text-[#0F4C81] p-2.5 hover:bg-[#0F4C81] hover:text-white transition-all cursor-pointer"
+                    title="Download complete PDF"
+                  >
+                    <FiDownload size={18} />
+                  </button>
+                  <div className="rounded-full bg-white border border-[#E5E7EB] p-2.5 text-[#4B5563] hover:bg-slate-100 hover:text-slate-900 transition-all">
+                    <FiExternalLink size={16} />
+                  </div>
+                </div>
+              </motion.button>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
       {/* Uploaded Notes from Firestore */}
       {uploadedSubjectNotes.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
@@ -3562,7 +3631,7 @@ export default function Notes() {
         </motion.div>
       )}
 
-      {!isEnglish && !isPhp && subjectNotesData && units.length > 0 && (
+      {!isEnglish && !isPhp && !isPgCombined && subjectNotesData && units.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>
