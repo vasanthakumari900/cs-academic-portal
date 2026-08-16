@@ -1,14 +1,19 @@
-// src/components/layout/Footer.jsx
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   FiGithub, FiLinkedin, FiMail, FiChevronRight, FiBookOpen,
   FiFileText, FiBriefcase, FiMapPin, FiPhone, FiInstagram,
-  FiTwitter, FiAward, FiFacebook, FiYoutube, FiExternalLink, FiGlobe
+  FiTwitter, FiAward, FiFacebook, FiYoutube, FiExternalLink, FiGlobe,
+  FiX, FiMaximize2
 } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
+import collegeLogo from "../../assets/college-logo.jpg";
+import csPortalLogo from "../../assets/cs-portal-logo-transparent.png";
 
 export default function Footer() {
   const { user } = useAuth();
+  const [selectedLogoModal, setSelectedLogoModal] = useState(null);
 
   const getDashboardPath = () => {
     if (!user) return "/login";
@@ -84,7 +89,7 @@ export default function Footer() {
           {/* Col 1 & 2: Brand & Contact Info */}
           <div className="lg:col-span-2 space-y-6">
             <div className="leading-tight">
-              <h3 className="text-base font-extrabold text-white tracking-wide font-heading">
+              <h3 className="text-base sm:text-lg font-extrabold text-white tracking-wide font-heading">
                 DDGD Vaishnav College
               </h3>
               <p className="text-xs text-[#F4C266] font-semibold mt-0.5">
@@ -117,7 +122,7 @@ export default function Footer() {
             </div>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-2.5 pt-2">
+            <div className="flex items-center gap-2.5 pt-1">
               {[
                 { icon: FiFacebook, href: "https://www.facebook.com/profile.php?id=100093526835295", label: "Facebook" },
                 { icon: FiYoutube, href: "https://www.youtube.com/channel/UCXFUIZUZs4oPgu2-hOF46Tw", label: "YouTube" },
@@ -136,6 +141,82 @@ export default function Footer() {
                   <Icon size={15} />
                 </a>
               ))}
+            </div>
+
+            {/* Bottom-Left Logos Showcase (Above Focus Studio) */}
+            <div className="pt-4 border-t-2 border-white/20 w-full">
+              <p className="text-[11px] font-black uppercase tracking-widest text-[#F4C266] mb-2.5 font-heading flex items-center gap-1.5">
+                <span className="h-2 w-2 rounded-full bg-[#F4C266] animate-pulse" />
+                Institutional &amp; Department Emblems
+              </p>
+
+              <div className="grid grid-cols-2 gap-3 max-w-md w-full">
+                {/* 1. DDGD Vaishnav College Logo */}
+                <button
+                  type="button"
+                  onClick={() => setSelectedLogoModal({
+                    src: collegeLogo,
+                    title: "Dwaraka Doss Goverdhan Doss Vaishnav College",
+                    subtitle: "Official College Seal · Est. 1964 · Reaccredited A++ by NAAC",
+                    badge: "Official College Emblem",
+                    url: "https://www.dgvaishnavcollege.edu.in/"
+                  })}
+                  className="flex items-center gap-2 sm:gap-2.5 bg-white p-2.5 rounded-2xl shadow-xl border-2 border-[#F4C266] hover:border-amber-400 hover:scale-105 transition-all duration-300 group cursor-pointer text-left w-full min-w-0"
+                  title="Click to view DDGDVC Official Seal in full screen"
+                >
+                  <div className="relative shrink-0">
+                    <img
+                      src={collegeLogo}
+                      alt="DDGD Vaishnav College Logo"
+                      className="h-12 w-12 sm:h-14 sm:w-14 object-contain rounded-xl drop-shadow-sm"
+                    />
+                    <span className="absolute -top-1 -right-1 bg-[#D97706] text-white p-0.5 rounded-full opacity-90 group-hover:scale-110 transition-all shadow-sm">
+                      <FiMaximize2 size={9} />
+                    </span>
+                  </div>
+                  <div className="min-w-0 leading-tight">
+                    <span className="text-xs sm:text-sm font-black text-[#2D060E] block font-heading truncate">
+                      DDGDVC
+                    </span>
+                    <span className="text-[9px] sm:text-[10px] font-extrabold text-[#800020] uppercase tracking-wider block mt-0.5 truncate">
+                      Official Seal 🔍
+                    </span>
+                  </div>
+                </button>
+
+                {/* 2. CS Academic Portal Emblem */}
+                <button
+                  type="button"
+                  onClick={() => setSelectedLogoModal({
+                    src: csPortalLogo,
+                    title: "CS Academic Portal",
+                    subtitle: "Department of Computer Science Official Emblem",
+                    badge: "Department Emblem",
+                    url: "/"
+                  })}
+                  className="flex items-center gap-2 sm:gap-2.5 bg-[#FBF7F2] p-2.5 rounded-2xl shadow-xl border-2 border-[#D97706] hover:border-amber-400 hover:scale-105 transition-all duration-300 group cursor-pointer text-left w-full min-w-0"
+                  title="Click to view CS Academic Portal Emblem in full screen"
+                >
+                  <div className="relative shrink-0">
+                    <img
+                      src={csPortalLogo}
+                      alt="CS Academic Portal Logo"
+                      className="h-12 w-12 sm:h-14 sm:w-14 object-contain rounded-xl drop-shadow-sm"
+                    />
+                    <span className="absolute -top-1 -right-1 bg-[#D97706] text-white p-0.5 rounded-full opacity-90 group-hover:scale-110 transition-all shadow-sm">
+                      <FiMaximize2 size={9} />
+                    </span>
+                  </div>
+                  <div className="min-w-0 leading-tight">
+                    <span className="text-xs sm:text-sm font-black text-[#4A1620] block font-heading truncate">
+                      CS PORTAL
+                    </span>
+                    <span className="text-[9px] sm:text-[10px] font-extrabold text-[#D97706] uppercase tracking-wider block mt-0.5 truncate">
+                      Dept Emblem 🔍
+                    </span>
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -227,6 +308,62 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Full Screen Logo Viewer Lightbox Modal */}
+      <AnimatePresence>
+        {selectedLogoModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-[#0F060B]/90 backdrop-blur-md p-4 sm:p-8"
+            onClick={() => setSelectedLogoModal(null)}
+          >
+            <button
+              type="button"
+              onClick={() => setSelectedLogoModal(null)}
+              className="absolute top-5 right-5 p-3 rounded-full bg-white/10 text-white hover:bg-[#C50337] hover:scale-110 transition-all cursor-pointer z-10"
+              title="Close Full Screen"
+            >
+              <FiX size={26} />
+            </button>
+
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              className="relative flex flex-col items-center justify-center max-w-3xl max-h-[90vh] bg-[#250A11] p-6 sm:p-8 rounded-3xl border-2 border-[#F4C266]/50 shadow-2xl text-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span className="bg-[#D97706] text-white text-[11px] font-black uppercase tracking-wider px-3.5 py-1 rounded-full mb-4 shadow-sm">
+                {selectedLogoModal.badge}
+              </span>
+              <img
+                src={selectedLogoModal.src}
+                alt={selectedLogoModal.title}
+                className="max-w-full max-h-[55vh] object-contain rounded-2xl shadow-2xl border-4 border-[#F4C266] bg-white p-4"
+              />
+              <h3 className="mt-5 text-xl sm:text-2xl font-black text-white font-heading">
+                {selectedLogoModal.title}
+              </h3>
+              <p className="mt-1.5 text-xs sm:text-sm text-[#F4C266] font-semibold">
+                {selectedLogoModal.subtitle}
+              </p>
+              {selectedLogoModal.url.startsWith("http") ? (
+                <a
+                  href={selectedLogoModal.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-5 inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs px-5 py-2.5 rounded-xl transition-all shadow-lg hover:scale-105 uppercase tracking-wider"
+                >
+                  Visit Official College Website <FiExternalLink size={14} />
+                </a>
+              ) : null}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </footer>
   );
 }

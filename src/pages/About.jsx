@@ -25,9 +25,10 @@ const mission = [
 ];
 
 const notices = [
+  "🇮🇳 80th Independence Day Celebrations — Grand Flag Hoisting & Patriotic Cultural Events at Main Campus Quadrangle",
   "🎓 59th Graduation Day — Eligible Candidate List & Download Photos",
   "📢 Circular: MCA Admission 2026 Through TANCET Counselling",
-  "📰 DGVC Times January 2026 Edition Released",
+  "📰 DGVC Times Edition Released — Official Campus Updates",
   "🏆 NAAC Accredited 'A++' Grade (CGPA 3.54/4) Autonomous Institution",
   "📜 Scholarship Circular for Academic Year 2026-2027"
 ];
@@ -362,6 +363,50 @@ export default function About() {
             <p className="text-white">
               Founded on the principles of Vaishnavism, the college combines academic excellence with cultural heritage, empowering students to achieve intellectual growth, moral integrity, and social responsibility.
             </p>
+          </div>
+        </motion.section>
+
+        {/* ── Official Independence Day Celebration Bulletin ── */}
+        <motion.section
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#011438] via-[#1E293B] to-[#7F011F] p-6 sm:p-8 border-2 border-amber-400/40 shadow-2xl"
+        >
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="space-y-3 max-w-2xl">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="bg-gradient-to-r from-orange-500 via-white to-green-600 text-slate-950 font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider shadow-sm flex items-center gap-1.5">
+                  <span>🇮🇳</span> Official Campus Bulletin
+                </span>
+                <span className="bg-amber-400/20 text-amber-300 border border-amber-400/40 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                  15th August Celebration
+                </span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black text-white tracking-wide font-heading">
+                80th Independence Day Celebrations at DDGDVC Main Campus
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                Dwaraka Doss Goverdhan Doss Vaishnav College celebrated the <strong>80th Independence Day</strong> with patriotic fervor and grand enthusiasm. The solemn Flag Hoisting ceremony was held at the <strong>Main Campus Quadrangle</strong>, followed by NCC March Past, NSS Salute, and inspiring addresses by College Secretary <strong>Shri Ashok Kumar Mundhra</strong> and Principal <strong>Dr. S. Santhosh Baboo</strong>.
+              </p>
+              <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-amber-200/90 pt-1">
+                <span>📍 Venue: Main Quadrangle</span>
+                <span>•</span>
+                <span>⏱️ Flag Hoisting: 8:00 AM</span>
+                <span>•</span>
+                <span>🎉 Cultural &amp; Award Ceremony</span>
+              </div>
+            </div>
+            <div className="shrink-0 w-full md:w-auto text-right">
+              <a
+                href="https://www.dgvaishnavcollege.edu.in/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black px-5 py-3 rounded-2xl transition-all shadow-lg hover:scale-105 text-xs uppercase tracking-wider"
+              >
+                View Official Website Notice <FiExternalLink size={14} />
+              </a>
+            </div>
           </div>
         </motion.section>
 
