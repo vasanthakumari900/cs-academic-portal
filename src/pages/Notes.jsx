@@ -113,12 +113,6 @@ const LAB_RECORDS_DATA = {
     { id: "lab-3-1-2", title: "ASP.NET Practical Lab Record (Part 2)", subject: "ASP.NET", fileName: "3rd_Year_Sem1_Lab_Record_Part2.pdf", fileId: "1BTi-DKIJcKa1zZg44pRV3j-BtXryIFle", type: "pdf" },
   ],
   "3-2": [],
-  "pg-1-1": [
-    { id: "lab-pg-1-1-1", title: "Advanced Design and Analysis of Algorithms Lab Record", subject: "Advanced Design and Analysis of Algorithms", fileName: "PG_Algorithms_Lab_Record.pdf", fileId: "1tCqpPAL_KYoQkEO1ksNbeLyxTbxBYV-N", type: "pdf" },
-    { id: "lab-pg-1-1-2", title: "Advanced Software Engineering Lab Manual", subject: "Advanced Software Engineering", fileName: "PG_Software_Eng_Lab.pdf", fileId: "1mwOgB_VcUtmgL4WOk3xRZHZbh5WrU-3d", type: "pdf" },
-    { id: "lab-pg-1-1-3", title: "Contemporary Web Technologies Practical Record", subject: "Contemporary Web Technologies", fileName: "PG_Contemporary_Web_Lab.pdf", fileId: "1MODmT8KkDXWaFbpaDDXjGo63pLfLIAhH", type: "pdf" },
-    { id: "lab-pg-1-1-4", title: "Python for Data Science Practical Lab Record", subject: "Python for Data Science", fileName: "PG_Python_DataScience_Lab.pdf", fileId: "1D9eAu2VLm4moN-_M0hWUzcRyZVLco2SD", type: "pdf" },
-  ],
 };
 
 const NOTES_DATA = {
@@ -742,7 +736,7 @@ const NOTES_DATA = {
       { id: "dmt-u5-1", title: "DMT Unit 5 - Cluster Analysis & Outlier Detection", fileName: "DMT_Unit5.docx", fileId: "1MctHUSXAcVlRozM-aLbvm4qzQSDBOLFv", type: "doc" }
     ] }
   } },
-  "ENGLISH": { units: { 1: { title: "Unit I", subtitle: "1st Year - English Complete Notes", syllabus: "", files: [{ id: "eng-u1-1", title: "English Course Book - Semester II", fileName: "English_Sem2_Complete_Notes.pdf", fileId: "/English_Sem2_Complete_Notes.pdf", type: "pdf" }] }, 2: { title: "Unit II", subtitle: "2nd Year - English Complete Notes", syllabus: "", files: [{ id: "eng-u2-1", title: "2nd Year English - Complete Notes", fileName: "English_2ndYear.pdf", fileId: "1YzMj4-aF3A3g_J6mVV3VRwXzaWl9XKkk", type: "pdf" }] }, 3: { title: "Unit III", subtitle: "", syllabus: "", files: [] }, 4: { title: "Unit IV", subtitle: "", syllabus: "", files: [] }, 5: { title: "Unit V", subtitle: "", syllabus: "", files: [] } } },
+  "ENGLISH": { units: { 1: { title: "Unit I", subtitle: "1st Year - English Complete Notes", syllabus: "PROSE, GRAMMAR AND VOCABULARY - LISTENING SKILLS - READING COMPREHENSION - VOCABULARY BUILDING - PARTS OF SPEECH - TENSES AND ARTICLES", files: [{ id: "eng-u1-1", title: "English Course Book - Semester II", fileName: "English_Sem2_Complete_Notes.pdf", fileId: "/English_Sem2_Complete_Notes.pdf", type: "pdf" }] }, 2: { title: "Unit II", subtitle: "2nd Year - English Complete Notes", syllabus: "POETRY AND COMMUNICATION SKILLS - POETRY APPRECIATION - EFFECTIVE COMMUNICATION - SENTENCE CONSTRUCTION - PARAGRAPH WRITING - TECHNICAL VOCABULARY", files: [{ id: "eng-u2-1", title: "2nd Year English - Complete Notes", fileName: "English_2ndYear.pdf", fileId: "1YzMj4-aF3A3g_J6mVV3VRwXzaWl9XKkk", type: "pdf" }] }, 3: { title: "Unit III", subtitle: "Short Stories & Writing Skills", syllabus: "SHORT STORIES AND WRITING SKILLS - LITERARY ANALYSIS - ESSAY WRITING - LETTER WRITING - RESUME PREPARATION - BUSINESS CORRESPONDENCE", files: [] }, 4: { title: "Unit IV", subtitle: "Drama & Presentation Skills", syllabus: "DRAMA AND PRESENTATION SKILLS - DRAMATIC LITERATURE - ORAL PRESENTATIONS - GROUP DISCUSSIONS - PUBLIC SPEAKING SKILLS - REPORT WRITING", files: [] }, 5: { title: "Unit V", subtitle: "Functional English & Soft Skills", syllabus: "FUNCTIONAL ENGLISH AND SOFT SKILLS - SOFT SKILLS DEVELOPMENT - INTERVIEW SKILLS - PROFESSIONAL ETIQUETTE - SUMMARIZING - PRECISE WRITING", files: [] } } },
   "ASP.NET": { units: { 1: { title: "Unit I", subtitle: "Overview of ASP.NET Framework", syllabus: "OVERVIEW OF ASP.NET FRAMEWORK - PAGE STRUCTURE - COMPILER DIRECTIVES - NAMESPACE", files: [{ id: "u1-1", title: "Overview of ASP.Net Framework", fileName: "Overview of ASP.Net Framework.pdf", fileId: "173-KUv6pOGV8o8ihTckpLwvkvDyKv9nj", type: "pdf" },{ id: "u1-2", title: "ASP Page Structure", fileName: "ASP page structure.pdf", fileId: "1OcVM4CDJTvGvdT9WfqLHFd1Sz61kEO3a", type: "pdf" },{ id: "u1-3", title: "Compiler Directives", fileName: "Compiler Directives.pdf", fileId: "14CpNpp7OVns3R6Kj4dWy81Io4FiFVvYi", type: "pdf" },{ id: "u1-4", title: "NAMESPACE", fileName: "NAMESPACE.pdf", fileId: "1cbb7Mt3m7MKXJkW_Hu_YsR4tWKDJanP3", type: "pdf" },{ id: "u1-5", title: "Overview of ASP.Net Framework (Notes)", fileName: "Overview of ASP.Net Framework (Notes)", fileId: "1VjVHcuCldGrTi6trGyb5gf4Z81RwpzsmsEqKm4Tajfg", type: "doc" }] }, 2: { title: "Unit II", subtitle: "ASP.NET Controls", syllabus: "UNDERSTANDING ASP.NET CONTROLS - STANDARD CONTROLS - DISPLAYING INFORMATION - ACCEPTING USER INPUT", files: [{ id: "u2-1", title: "ASP.NET UNIT - 2", fileName: "ASP.NET UNIT -2.pptx", fileId: "1t4g4ab9d5HdKZGuGxmYpWcAwTkjmoqjm", type: "pptx" }] }, 3: { title: "Unit III", subtitle: "Validation & Rich Controls", syllabus: "VALIDATION CONTROLS - REQUIRED FIELD VALIDATOR - RANGE VALIDATOR - RICH CONTROLS - ADROTATOR, CALENDAR", files: [{ id: "u3-1", title: "Validation Controls", fileName: "Validation Controls.docx", fileId: "1z-1R0gaqaVaSIvgRybN5AiA8ExYGsJfY", type: "docx" },{ id: "u3-2", title: "Calendar Control in ASP.NET", fileName: "Calendar Control in ASP.pdf", fileId: "1DInHlyYjC7OpG7sY1i0l987_uZLjo5iY", type: "pdf" },{ id: "u3-3", title: "Rich Controls", fileName: "RICH CONTROLS.pdf", fileId: "1xE1sIoFOWnkI5D7GRbm0EtgyDHpxwYg0", type: "pdf" }] }, 4: { title: "Unit IV", subtitle: "Data Access in ASP.NET", syllabus: "DATA BOUND CONTROL - SQLDATASOURCE - OLEDB - DATASET", files: [{ id: "u4-1", title: "Data Bound Controls", fileName: "data bound controls.docx", fileId: "1IXY-buceR6cV10jEbMClDXUuveYjVWUo", type: "docx" },{ id: "u4-2", title: "Simple Data Bound Controls", fileName: "Simple Data Bound Controls.pdf", fileId: "1PCHmZ2U3uUV8Ah83Do1vZ2bTk4uBArx7", type: "pdf" }] }, 5: { title: "Unit V", subtitle: "List Controls & State Management", syllabus: "LIST CONTROLS - GRID VIEW - REPEATER - STATE MANAGEMENT - COOKIES - SESSION", files: [{ id: "u5-1", title: "List Controls", fileName: "Listbox RadiobuttionList CheckboxList BulletedList.pdf", fileId: "1hGMGwEMhCFf1J_RyY3pKNKNAEVXnkwH2", type: "pdf" },{ id: "u5-2", title: "ADO.NET Architecture", fileName: "ADO.NET ARCHITECTURE.pdf", fileId: "12EETP-MtzBDgmT_ybJ0xiTebiksP5In4", type: "pdf" },{ id: "u5-3", title: "Application and Session State", fileName: "Application and Session State.pdf", fileId: "1FnobkINTlyJp4Nbi31oTLAtN6_PtLrUX", type: "pdf" },{ id: "u5-4", title: "Cookies", fileName: "COOKIES.pdf", fileId: "1Lw-RzMw2vLCAbYNxR7HzcfYs_Wt102Ob", type: "pdf" },{ id: "u5-5", title: "Web Service", fileName: "WEB SERVICE.pdf", fileId: "1lbt5Eqo79yie2GsHA6O5sgvq0j2V3xnu", type: "pdf" }] } } },
  "Object Oriented Programming Concepts using JAVA": { units: {
        1: { title: "Unit I", subtitle: "Introduction to Java", syllabus: "Introduction to Java - Features of Java - Java Environment - Tokens- Data Types - Variables - Arrays - Operators - Conditional Statements-Iterative Statements-General Structure of a Java Program - Fields and Methods Declaration-Command Line Arguments.", hrs: 12, co: "CO1", files: [{ id: "java-u1-1", title: "Java Unit 1 - Introduction to Java (Part 1)", fileName: "Java_Unit1_Part1.pdf", fileId: "1EAcmy8ppwjPZ25Ver8c6XhZuRxwh3e6l", type: "pdf" }, { id: "java-u1-2", title: "Java Unit 1 - Introduction to Java (Part 2)", fileName: "Java_Unit1_Part2.pdf", fileId: "11cymR4t4VldBQ5bRpXBmpMsqTRXncvgs", type: "pdf" }] },
@@ -1518,7 +1512,7 @@ const NOTES_DATA = {
         syllabus: "Introduction: Fundamental steps in digital image processing, components of an image processing system. Image acquisition, sampling and quantization, spatial and intensity resolution, basic relationships between pixels. Color Image Fundamentals: Color models – RGB, CMY, HSV, HIS, basics of color image processing.",
         hrs: 9,
         co: "CO1",
-        files: []
+        files: [{ id: "dip-u1-combined", title: "Digital Image Processing - Combined Notes (Module I to V)", fileName: "PG_Digital_Image_Processing_Complete.pdf", fileId: "1uG68TNwRWMzxwEVodI0tgb6oqmpU68zA", type: "pdf" }]
       },
       2: {
         title: "MODULE II",
@@ -1526,7 +1520,7 @@ const NOTES_DATA = {
         syllabus: "Spatial domain enhancement: Basic gray level intensity transformations (log, power law, contrast stretching). Histogram processing: Histogram equalization, histogram matching. Arithmetic and logic operations. Basics of spatial filtering: Smoothing spatial filters (mean, median), Sharpening spatial filters (Laplacian, Unsharp masking).",
         hrs: 9,
         co: "CO2",
-        files: []
+        files: [{ id: "dip-u2-combined", title: "Digital Image Processing - Combined Notes (Module I to V)", fileName: "PG_Digital_Image_Processing_Complete.pdf", fileId: "1uG68TNwRWMzxwEVodI0tgb6oqmpU68zA", type: "pdf" }]
       },
       3: {
         title: "MODULE III",
@@ -1534,7 +1528,7 @@ const NOTES_DATA = {
         syllabus: "Frequency domain enhancement: 2D Discrete Fourier Transform (DFT) and its properties, Fast Fourier Transform (FFT). Filtering in frequency domain: Correspondence between spatial and frequency filtering. Smoothing frequency domain filters: Ideal, Butterworth, Gaussian lowpass. Sharpening filters: Highpass Butterworth and Gaussian.",
         hrs: 9,
         co: "CO3",
-        files: []
+        files: [{ id: "dip-u3-combined", title: "Digital Image Processing - Combined Notes (Module I to V)", fileName: "PG_Digital_Image_Processing_Complete.pdf", fileId: "1uG68TNwRWMzxwEVodI0tgb6oqmpU68zA", type: "pdf" }]
       },
       4: {
         title: "MODULE IV",
@@ -1542,7 +1536,7 @@ const NOTES_DATA = {
         syllabus: "Image Restoration: Model of image degradation/restoration process, Noise models (Gaussian, Rayleigh, Impulse). Restoration in presence of noise: Mean filters, Order-statistic filters, Inverse filtering, Wiener filtering. Image Segmentation: Point, line, and edge detection, Thresholding (Otsu's method), Region-based segmentation (Region growing, splitting and merging).",
         hrs: 9,
         co: "CO4",
-        files: []
+        files: [{ id: "dip-u4-combined", title: "Digital Image Processing - Combined Notes (Module I to V)", fileName: "PG_Digital_Image_Processing_Complete.pdf", fileId: "1uG68TNwRWMzxwEVodI0tgb6oqmpU68zA", type: "pdf" }]
       },
       5: {
         title: "MODULE V",
@@ -1550,7 +1544,7 @@ const NOTES_DATA = {
         syllabus: "Image Compression: Fundamentals, Redundancy (Coding, Interpixel, Psychovisual). Fidelity criteria, Image compression models. Lossless Compression: Huffman coding, Run-length coding, Arithmetic coding. Lossy Compression: Predictive coding, Transform coding, JPEG compression standard. Wavelet Transform: Continuous and Discrete Wavelet Transform.",
         hrs: 9,
         co: "CO5",
-        files: []
+        files: [{ id: "dip-u5-combined", title: "Digital Image Processing - Combined Notes (Module I to V)", fileName: "PG_Digital_Image_Processing_Complete.pdf", fileId: "1uG68TNwRWMzxwEVodI0tgb6oqmpU68zA", type: "pdf" }]
       }
     }
   },
@@ -1694,7 +1688,9 @@ const NOTES_DATA = {
         syllabus: "What is Data Mining – What Kinds of Data can be mined- Kinds of Patterns that can be mined - Technologies used - Issues in Data Mining – Data Objects and Attribute Types- Basic Statistical Description of Data- Data Visualization.",
         hrs: 9,
         co: "CO1",
-        files: []
+        files: [
+          { id: "pg-dmt-u1-combined", title: "Data Mining Techniques - Combined Notes (Module I to V)", fileName: "PG_Data_Mining_Techniques_Complete.pdf", fileId: "1sHXJ3ynonZuQPow8iwt92n5u9ROEo3FX", type: "pdf" }
+        ]
       },
       2: {
         title: "MODULE II",
@@ -1702,7 +1698,9 @@ const NOTES_DATA = {
         syllabus: "Data Preprocessing: Why preprocess the data – Data cleaning – Data Integration – Data Transformation – Data Reduction – Data Discretization. Data Warehouse: Basic concepts-Data Warehouse Modelling:Data Cube and OLAP",
         hrs: 9,
         co: "CO2",
-        files: []
+        files: [
+          { id: "pg-dmt-u2-combined", title: "Data Mining Techniques - Combined Notes (Module I to V)", fileName: "PG_Data_Mining_Techniques_Complete.pdf", fileId: "1sHXJ3ynonZuQPow8iwt92n5u9ROEo3FX", type: "pdf" }
+        ]
       },
       3: {
         title: "MODULE III",
@@ -1710,7 +1708,9 @@ const NOTES_DATA = {
         syllabus: "Data Mining Techniques: Association Rule Mining – The Apriori Algorithm – Multilevel Association Rules – Multidimensional Association Rules – Constraint Based Association Mining.",
         hrs: 9,
         co: "CO3",
-        files: []
+        files: [
+          { id: "pg-dmt-u3-combined", title: "Data Mining Techniques - Combined Notes (Module I to V)", fileName: "PG_Data_Mining_Techniques_Complete.pdf", fileId: "1sHXJ3ynonZuQPow8iwt92n5u9ROEo3FX", type: "pdf" }
+        ]
       },
       4: {
         title: "MODULE IV",
@@ -1718,7 +1718,9 @@ const NOTES_DATA = {
         syllabus: "Classification and Prediction: Issues regarding Classification and Prediction – Decision Tree induction – Bayesian Classification – Back Propagation – Classification Methods – Prediction – Classifiers accuracy.",
         hrs: 9,
         co: "CO4",
-        files: []
+        files: [
+          { id: "pg-dmt-u4-combined", title: "Data Mining Techniques - Combined Notes (Module I to V)", fileName: "PG_Data_Mining_Techniques_Complete.pdf", fileId: "1sHXJ3ynonZuQPow8iwt92n5u9ROEo3FX", type: "pdf" }
+        ]
       },
       5: {
         title: "MODULE V",
@@ -1726,7 +1728,9 @@ const NOTES_DATA = {
         syllabus: "Clustering Techniques: cluster Analysis – Clustering Methods – Similarity and Distance Measures – Hierarchical Methods – Partitional Methods – Outlier Analysis",
         hrs: 9,
         co: "CO5",
-        files: []
+        files: [
+          { id: "pg-dmt-u5-combined", title: "Data Mining Techniques - Combined Notes (Module I to V)", fileName: "PG_Data_Mining_Techniques_Complete.pdf", fileId: "1sHXJ3ynonZuQPow8iwt92n5u9ROEo3FX", type: "pdf" }
+        ]
       }
     }
   },
@@ -1870,7 +1874,7 @@ const NOTES_DATA = {
         syllabus: "Database System Concepts And Architectures: Data Models – Schemas – Instances – Three Schema Architecture – Data Independence – Database Languages. E-R Model and EER Model: Entity Types – Entity Sets – Attributes – Key – Relationship Types – Relationship Sets – Weak Entity Types – ER Diagram – Naming Conventions – Subclasses – Super classes – Inheritance – Specialization And Generalization – Constraints and Characteristics Of Specialization and Generalization Hierarchies.",
         hrs: 9,
         co: "CO1",
-        files: []
+        files: [{ id: "adbms-u1-combined", title: "Advanced Database Management System - Combined Notes (Module I to V)", fileName: "PG_Advanced_Database_Management_System_Complete.pdf", fileId: "1lb-w3FOfs1_EIiyTE4P3hXuZtQaTzkOJ", type: "pdf" }]
       },
       2: {
         title: "MODULE II",
@@ -1878,7 +1882,7 @@ const NOTES_DATA = {
         syllabus: "Normalization: Basic Definitions – Functional Dependencies – Types of FD – Introduction to Normalization – Decomposition – Dependency Preservation – First, Second, Third Normal Forms – BCNF – Multivalued Dependencies and Fourth Normal Form – Join Dependency and Fifth Normal Form.",
         hrs: 9,
         co: "CO2",
-        files: []
+        files: [{ id: "adbms-u2-combined", title: "Advanced Database Management System - Combined Notes (Module I to V)", fileName: "PG_Advanced_Database_Management_System_Complete.pdf", fileId: "1lb-w3FOfs1_EIiyTE4P3hXuZtQaTzkOJ", type: "pdf" }]
       },
       3: {
         title: "MODULE III",
@@ -1886,7 +1890,7 @@ const NOTES_DATA = {
         syllabus: "Object And Object Relational Databases – Concepts for Object Databases: Object Identity – Object structure – Type Constructors – Encapsulation of Operations – Methods – Persistence – Type and Class Hierarchies – Inheritance – Complex Objects Object Database Standards and Languages: Overview of ODMG Model – ODL – OQL.",
         hrs: 9,
         co: "CO3",
-        files: []
+        files: [{ id: "adbms-u3-combined", title: "Advanced Database Management System - Combined Notes (Module I to V)", fileName: "PG_Advanced_Database_Management_System_Complete.pdf", fileId: "1lb-w3FOfs1_EIiyTE4P3hXuZtQaTzkOJ", type: "pdf" }]
       },
       4: {
         title: "MODULE IV",
@@ -1894,7 +1898,7 @@ const NOTES_DATA = {
         syllabus: "Data Warehousing And Distributed DBMS – Data Warehousing – Characteristics Of Data Warehouses – Data Modeling For Data Warehouses – Typical Functionality Of A Data Warehouse – Distributed DBMS – Features – Factors Encouraging DDBMS – Advantages Of Distributed Data Bases – Distributed DBMS Architecture – Types Of Distributed Data Bases.",
         hrs: 9,
         co: "CO4",
-        files: []
+        files: [{ id: "adbms-u4-combined", title: "Advanced Database Management System - Combined Notes (Module I to V)", fileName: "PG_Advanced_Database_Management_System_Complete.pdf", fileId: "1lb-w3FOfs1_EIiyTE4P3hXuZtQaTzkOJ", type: "pdf" }]
       },
       5: {
         title: "MODULE V",
@@ -1902,7 +1906,7 @@ const NOTES_DATA = {
         syllabus: "Emerging Technologies – Mobile Databases – Architecture and Data Management Issues – Multimedia Databases – Nature of Data, Data Management Issues and Applications.",
         hrs: 9,
         co: "CO5",
-        files: []
+        files: [{ id: "adbms-u5-combined", title: "Advanced Database Management System - Combined Notes (Module I to V)", fileName: "PG_Advanced_Database_Management_System_Complete.pdf", fileId: "1lb-w3FOfs1_EIiyTE4P3hXuZtQaTzkOJ", type: "pdf" }]
       }
     }
   },
@@ -1914,7 +1918,7 @@ const NOTES_DATA = {
         syllabus: "Database System Concepts And Architectures: Data Models – Schemas – Instances – Three Schema Architecture – Data Independence – Database Languages. E-R Model and EER Model: Entity Types – Entity Sets – Attributes – Key – Relationship Types – Relationship Sets – Weak Entity Types – ER Diagram – Naming Conventions – Subclasses – Super classes – Inheritance – Specialization And Generalization – Constraints and Characteristics Of Specialization and Generalization Hierarchies.",
         hrs: 9,
         co: "CO1",
-        files: []
+        files: [{ id: "adbms-u1-combined-alt", title: "Advanced Database Management System - Combined Notes (Module I to V)", fileName: "PG_Advanced_Database_Management_System_Complete.pdf", fileId: "1lb-w3FOfs1_EIiyTE4P3hXuZtQaTzkOJ", type: "pdf" }]
       },
       2: {
         title: "MODULE II",
@@ -1922,7 +1926,7 @@ const NOTES_DATA = {
         syllabus: "Normalization: Basic Definitions – Functional Dependencies – Types of FD – Introduction to Normalization – Decomposition – Dependency Preservation – First, Second, Third Normal Forms – BCNF – Multivalued Dependencies and Fourth Normal Form – Join Dependency and Fifth Normal Form.",
         hrs: 9,
         co: "CO2",
-        files: []
+        files: [{ id: "adbms-u2-combined-alt", title: "Advanced Database Management System - Combined Notes (Module I to V)", fileName: "PG_Advanced_Database_Management_System_Complete.pdf", fileId: "1lb-w3FOfs1_EIiyTE4P3hXuZtQaTzkOJ", type: "pdf" }]
       },
       3: {
         title: "MODULE III",
@@ -1930,7 +1934,7 @@ const NOTES_DATA = {
         syllabus: "Object And Object Relational Databases – Concepts for Object Databases: Object Identity – Object structure – Type Constructors – Encapsulation of Operations – Methods – Persistence – Type and Class Hierarchies – Inheritance – Complex Objects Object Database Standards and Languages: Overview of ODMG Model – ODL – OQL.",
         hrs: 9,
         co: "CO3",
-        files: []
+        files: [{ id: "adbms-u3-combined-alt", title: "Advanced Database Management System - Combined Notes (Module I to V)", fileName: "PG_Advanced_Database_Management_System_Complete.pdf", fileId: "1lb-w3FOfs1_EIiyTE4P3hXuZtQaTzkOJ", type: "pdf" }]
       },
       4: {
         title: "MODULE IV",
@@ -1938,7 +1942,7 @@ const NOTES_DATA = {
         syllabus: "Data Warehousing And Distributed DBMS – Data Warehousing – Characteristics Of Data Warehouses – Data Modeling For Data Warehouses – Typical Functionality Of A Data Warehouse – Distributed DBMS – Features – Factors Encouraging DDBMS – Advantages Of Distributed Data Bases – Distributed DBMS Architecture – Types Of Distributed Data Bases.",
         hrs: 9,
         co: "CO4",
-        files: []
+        files: [{ id: "adbms-u4-combined-alt", title: "Advanced Database Management System - Combined Notes (Module I to V)", fileName: "PG_Advanced_Database_Management_System_Complete.pdf", fileId: "1lb-w3FOfs1_EIiyTE4P3hXuZtQaTzkOJ", type: "pdf" }]
       },
       5: {
         title: "MODULE V",
@@ -1946,7 +1950,7 @@ const NOTES_DATA = {
         syllabus: "Emerging Technologies – Mobile Databases – Architecture and Data Management Issues – Multimedia Databases – Nature of Data, Data Management Issues and Applications.",
         hrs: 9,
         co: "CO5",
-        files: []
+        files: [{ id: "adbms-u5-combined-alt", title: "Advanced Database Management System - Combined Notes (Module I to V)", fileName: "PG_Advanced_Database_Management_System_Complete.pdf", fileId: "1lb-w3FOfs1_EIiyTE4P3hXuZtQaTzkOJ", type: "pdf" }]
       }
     }
   },
@@ -2266,7 +2270,7 @@ const NOTES_DATA = {
         syllabus: "Overview of Artificial Intelligence  Knowledge: General Concepts  Lisp and other AI Programming Languages. Knowledge Representation  Formalized Symbolic logics  Dealing with Inconsistencies and Uncertainties  Probabilistic Reasoning. Structured Knowledge : Graphs, Frames and Related Structures  Object  Oriented Representations",
         hrs: 9,
         co: "CO1",
-        files: []
+        files: [{ id: "aiml-u1-combined", title: "Artificial Intelligence and Machine Learning Techniques - Combined Notes", fileName: "PG_Artificial_Intelligence_Machine_Learning_Complete.pdf", fileId: "1ncnBfiMy62gIvn0mOLI1wnsGxMsnuhc3", type: "pdf" }]
       },
       2: {
         title: "MODULE II",
@@ -2274,7 +2278,7 @@ const NOTES_DATA = {
         syllabus: "Search and control Strategies - Matching Techniques - Knowledge Organization and Management. Perception and Communication: - Natural Language Processing - Pattern Recognition - visual Image Processing. Expert System Architecture: Rule-Based System Architecture - Non Production System Architecture.",
         hrs: 9,
         co: "CO2",
-        files: []
+        files: [{ id: "aiml-u2-combined", title: "Artificial Intelligence and Machine Learning Techniques - Combined Notes", fileName: "PG_Artificial_Intelligence_Machine_Learning_Complete.pdf", fileId: "1ncnBfiMy62gIvn0mOLI1wnsGxMsnuhc3", type: "pdf" }]
       },
       3: {
         title: "MODULE III",
@@ -2282,7 +2286,7 @@ const NOTES_DATA = {
         syllabus: "Introduction - Types of Machine Learning Systems - Supervised/Unsupervised Learning, Batch and Online Learning, InstanceBased Versus Model-BasedLearning - Main Challenges of Machine Learning - Nonrepresentative Training Data, Poor-Quality Data - Underfitting the Training Data - Testing and Validating - Frame the Problem - Select a Performance Measure - Check the Assumptions - Create a Test Set - Visualizing Geographical Data- correlation - Prepare the Data for Machine Learning Algorithms.",
         hrs: 9,
         co: "CO3",
-        files: []
+        files: [{ id: "aiml-u3-combined", title: "Artificial Intelligence and Machine Learning Techniques - Combined Notes", fileName: "PG_Artificial_Intelligence_Machine_Learning_Complete.pdf", fileId: "1ncnBfiMy62gIvn0mOLI1wnsGxMsnuhc3", type: "pdf" }]
       },
       4: {
         title: "MODULE IV",
@@ -2290,7 +2294,7 @@ const NOTES_DATA = {
         syllabus: "Data Cleaning - Handling Text and Categorical Attributes- Feature ScalingTransformation Pipelines- Select and Train a Model- Training and Evaluating on the Training Set- Fine-Tune Your Model- Grid Search- Randomized Search. Classification: MNIST- Training a Binary Classifier- Performance MeasuresMeasuring Accuracy Using Cross-Validation- Confusion Matrix- Precision and Recall Multiclass, multi-label and multi-output classification",
         hrs: 9,
         co: "CO4",
-        files: []
+        files: [{ id: "aiml-u4-combined", title: "Artificial Intelligence and Machine Learning Techniques - Combined Notes", fileName: "PG_Artificial_Intelligence_Machine_Learning_Complete.pdf", fileId: "1ncnBfiMy62gIvn0mOLI1wnsGxMsnuhc3", type: "pdf" }]
       }
     }
   },
@@ -2302,7 +2306,7 @@ const NOTES_DATA = {
         syllabus: "Overview of Artificial Intelligence  Knowledge: General Concepts  Lisp and other AI Programming Languages. Knowledge Representation  Formalized Symbolic logics  Dealing with Inconsistencies and Uncertainties  Probabilistic Reasoning. Structured Knowledge : Graphs, Frames and Related Structures  Object  Oriented Representations",
         hrs: 9,
         co: "CO1",
-        files: []
+        files: [{ id: "aiml-u1-combined-alt", title: "Artificial Intelligence and Machine Learning Techniques - Combined Notes", fileName: "PG_Artificial_Intelligence_Machine_Learning_Complete.pdf", fileId: "1ncnBfiMy62gIvn0mOLI1wnsGxMsnuhc3", type: "pdf" }]
       },
       2: {
         title: "MODULE II",
@@ -2310,7 +2314,7 @@ const NOTES_DATA = {
         syllabus: "Search and control Strategies - Matching Techniques - Knowledge Organization and Management. Perception and Communication: - Natural Language Processing - Pattern Recognition - visual Image Processing. Expert System Architecture: Rule-Based System Architecture - Non Production System Architecture.",
         hrs: 9,
         co: "CO2",
-        files: []
+        files: [{ id: "aiml-u2-combined-alt", title: "Artificial Intelligence and Machine Learning Techniques - Combined Notes", fileName: "PG_Artificial_Intelligence_Machine_Learning_Complete.pdf", fileId: "1ncnBfiMy62gIvn0mOLI1wnsGxMsnuhc3", type: "pdf" }]
       },
       3: {
         title: "MODULE III",
@@ -2318,7 +2322,7 @@ const NOTES_DATA = {
         syllabus: "Introduction - Types of Machine Learning Systems - Supervised/Unsupervised Learning, Batch and Online Learning, InstanceBased Versus Model-BasedLearning - Main Challenges of Machine Learning - Nonrepresentative Training Data, Poor-Quality Data - Underfitting the Training Data - Testing and Validating - Frame the Problem - Select a Performance Measure - Check the Assumptions - Create a Test Set - Visualizing Geographical Data- correlation - Prepare the Data for Machine Learning Algorithms.",
         hrs: 9,
         co: "CO3",
-        files: []
+        files: [{ id: "aiml-u3-combined-alt", title: "Artificial Intelligence and Machine Learning Techniques - Combined Notes", fileName: "PG_Artificial_Intelligence_Machine_Learning_Complete.pdf", fileId: "1ncnBfiMy62gIvn0mOLI1wnsGxMsnuhc3", type: "pdf" }]
       },
       4: {
         title: "MODULE IV",
@@ -2326,7 +2330,7 @@ const NOTES_DATA = {
         syllabus: "Data Cleaning - Handling Text and Categorical Attributes- Feature ScalingTransformation Pipelines- Select and Train a Model- Training and Evaluating on the Training Set- Fine-Tune Your Model- Grid Search- Randomized Search. Classification: MNIST- Training a Binary Classifier- Performance MeasuresMeasuring Accuracy Using Cross-Validation- Confusion Matrix- Precision and Recall Multiclass, multi-label and multi-output classification",
         hrs: 9,
         co: "CO4",
-        files: []
+        files: [{ id: "aiml-u4-combined-alt", title: "Artificial Intelligence and Machine Learning Techniques - Combined Notes", fileName: "PG_Artificial_Intelligence_Machine_Learning_Complete.pdf", fileId: "1ncnBfiMy62gIvn0mOLI1wnsGxMsnuhc3", type: "pdf" }]
       }
     }
   },
@@ -2338,7 +2342,7 @@ const NOTES_DATA = {
         syllabus: "Overview of C#, Literals, Variables, Data Types, Operators and Expressions, Branching, Looping, Methods, Arrays and Structures, Enumerations.",
         hrs: 9,
         co: "CO1",
-        files: []
+        files: [{ id: "dotnet-u1-combined", title: "DOT NET Technology - Combined Notes (Module I to V)", fileName: "DOT_NET_Technology_Combined_Units_1-5.pdf", fileId: "1ciO7YAQZAwnSojejNUJ3Vo2_Gc1KmGut", type: "pdf" }]
       },
       2: {
         title: "MODULE II",
@@ -2346,7 +2350,7 @@ const NOTES_DATA = {
         syllabus: "Classes, Objects, Inheritance, Interfaces, Delegates, Events, Errors and Exceptions.",
         hrs: 9,
         co: "CO2",
-        files: []
+        files: [{ id: "dotnet-u2-combined", title: "DOT NET Technology - Combined Notes (Module I to V)", fileName: "DOT_NET_Technology_Combined_Units_1-5.pdf", fileId: "1ciO7YAQZAwnSojejNUJ3Vo2_Gc1KmGut", type: "pdf" }]
       },
       3: {
         title: "MODULE III",
@@ -2354,7 +2358,7 @@ const NOTES_DATA = {
         syllabus: "Standard Web server Controls Label, Textbox, Button, Link Button, Image, Image map, Links, Check & Radio button. Rich controls Calendar, Ad Rotator List Controls Check box list, Radio button list, Drop down list, List box, Data controls Data grid, Repeater Validation Controls.",
         hrs: 9,
         co: "CO3",
-        files: []
+        files: [{ id: "dotnet-u3-combined", title: "DOT NET Technology - Combined Notes (Module I to V)", fileName: "DOT_NET_Technology_Combined_Units_1-5.pdf", fileId: "1ciO7YAQZAwnSojejNUJ3Vo2_Gc1KmGut", type: "pdf" }]
       },
       4: {
         title: "MODULE IV",
@@ -2362,7 +2366,7 @@ const NOTES_DATA = {
         syllabus: "OLEDB connection class, command class, data adaptor class, data reader data set class Web services.",
         hrs: 9,
         co: "CO4",
-        files: []
+        files: [{ id: "dotnet-u4-combined", title: "DOT NET Technology - Combined Notes (Module I to V)", fileName: "DOT_NET_Technology_Combined_Units_1-5.pdf", fileId: "1ciO7YAQZAwnSojejNUJ3Vo2_Gc1KmGut", type: "pdf" }]
       },
       5: {
         title: "MODULE V",
@@ -2370,7 +2374,7 @@ const NOTES_DATA = {
         syllabus: "Application Object global.asa file, Webconfig files creating & reading application variables, Session object introduction, storing session-information, contents & identifying session, controlling when session ends, creating & reading cookies.",
         hrs: 9,
         co: "CO5, CO6",
-        files: []
+        files: [{ id: "dotnet-u5-combined", title: "DOT NET Technology - Combined Notes (Module I to V)", fileName: "DOT_NET_Technology_Combined_Units_1-5.pdf", fileId: "1ciO7YAQZAwnSojejNUJ3Vo2_Gc1KmGut", type: "pdf" }]
       }
     }
   },
@@ -2382,7 +2386,7 @@ const NOTES_DATA = {
         syllabus: "Overview of C#, Literals, Variables, Data Types, Operators and Expressions, Branching, Looping, Methods, Arrays and Structures, Enumerations.",
         hrs: 9,
         co: "CO1",
-        files: []
+        files: [{ id: "dotnet-u1-combined-alt", title: "DOT NET Technology - Combined Notes (Module I to V)", fileName: "DOT_NET_Technology_Combined_Units_1-5.pdf", fileId: "1ciO7YAQZAwnSojejNUJ3Vo2_Gc1KmGut", type: "pdf" }]
       },
       2: {
         title: "MODULE II",
@@ -2390,7 +2394,7 @@ const NOTES_DATA = {
         syllabus: "Classes, Objects, Inheritance, Interfaces, Delegates, Events, Errors and Exceptions.",
         hrs: 9,
         co: "CO2",
-        files: []
+        files: [{ id: "dotnet-u2-combined-alt", title: "DOT NET Technology - Combined Notes (Module I to V)", fileName: "DOT_NET_Technology_Combined_Units_1-5.pdf", fileId: "1ciO7YAQZAwnSojejNUJ3Vo2_Gc1KmGut", type: "pdf" }]
       },
       3: {
         title: "MODULE III",
@@ -2398,7 +2402,7 @@ const NOTES_DATA = {
         syllabus: "Standard Web server Controls Label, Textbox, Button, Link Button, Image, Image map, Links, Check & Radio button. Rich controls Calendar, Ad Rotator List Controls Check box list, Radio button list, Drop down list, List box, Data controls Data grid, Repeater Validation Controls.",
         hrs: 9,
         co: "CO3",
-        files: []
+        files: [{ id: "dotnet-u3-combined-alt", title: "DOT NET Technology - Combined Notes (Module I to V)", fileName: "DOT_NET_Technology_Combined_Units_1-5.pdf", fileId: "1ciO7YAQZAwnSojejNUJ3Vo2_Gc1KmGut", type: "pdf" }]
       },
       4: {
         title: "MODULE IV",
@@ -2406,7 +2410,7 @@ const NOTES_DATA = {
         syllabus: "OLEDB connection class, command class, data adaptor class, data reader data set class Web services.",
         hrs: 9,
         co: "CO4",
-        files: []
+        files: [{ id: "dotnet-u4-combined-alt", title: "DOT NET Technology - Combined Notes (Module I to V)", fileName: "DOT_NET_Technology_Combined_Units_1-5.pdf", fileId: "1ciO7YAQZAwnSojejNUJ3Vo2_Gc1KmGut", type: "pdf" }]
       },
       5: {
         title: "MODULE V",
@@ -2414,7 +2418,7 @@ const NOTES_DATA = {
         syllabus: "Application Object global.asa file, Webconfig files creating & reading application variables, Session object introduction, storing session-information, contents & identifying session, controlling when session ends, creating & reading cookies.",
         hrs: 9,
         co: "CO5, CO6",
-        files: []
+        files: [{ id: "dotnet-u5-combined-alt", title: "DOT NET Technology - Combined Notes (Module I to V)", fileName: "DOT_NET_Technology_Combined_Units_1-5.pdf", fileId: "1ciO7YAQZAwnSojejNUJ3Vo2_Gc1KmGut", type: "pdf" }]
       }
     }
   },
@@ -2426,7 +2430,7 @@ const NOTES_DATA = {
         syllabus: "What is big data why big data convergence of key trends unstructured data industry examples of big data web analytics big data and marketing fraud and big data risk and big data credit risk management big data and algorithmic trading big data and healthcare big data in medicine.",
         hrs: 10,
         co: "CO1",
-        files: []
+        files: [{ id: "bda-u1-combined", title: "Big Data Analytics - Combined Notes (Module I to V)", fileName: "PG_Big_Data_Analytics_Complete.pdf", fileId: "1y7twYBvt7QGLVybAOFxWw-LTlWBRAgpp", type: "pdf" }]
       },
       2: {
         title: "MODULE II",
@@ -2434,7 +2438,7 @@ const NOTES_DATA = {
         syllabus: "Introduction to NoSQL aggregate data models aggregates key-value and document data models relationships graph databases schemaless databases materialized views distribution models sharding master-slave replication peer-peer replication sharding and replication consistency relaxing consistency version stamps map-reduce partitioning and combining composing map-reduce calculations.",
         hrs: 10,
         co: "CO2",
-        files: []
+        files: [{ id: "bda-u2-combined", title: "Big Data Analytics - Combined Notes (Module I to V)", fileName: "PG_Big_Data_Analytics_Complete.pdf", fileId: "1y7twYBvt7QGLVybAOFxWw-LTlWBRAgpp", type: "pdf" }]
       },
       3: {
         title: "MODULE III",
@@ -2442,7 +2446,7 @@ const NOTES_DATA = {
         syllabus: "Data format analyzing data with Hadoop scaling out Hadoop streaming Hadoop pipes design of Hadoop distributed file system (HDFS) HDFS concepts Java interface data flow Hadoop I/O data integrity compression serialization Avro file-based data structures.",
         hrs: 10,
         co: "CO3",
-        files: []
+        files: [{ id: "bda-u3-combined", title: "Big Data Analytics - Combined Notes (Module I to V)", fileName: "PG_Big_Data_Analytics_Complete.pdf", fileId: "1y7twYBvt7QGLVybAOFxWw-LTlWBRAgpp", type: "pdf" }]
       },
       4: {
         title: "MODULE IV",
@@ -2450,7 +2454,7 @@ const NOTES_DATA = {
         syllabus: "Mapreduce workflows unit tests with MRUnit test data and local tests anatomy of MapReduce job run classic Map-reduce YARN failures in classic Map-reduce and YARN job scheduling shuffle and sort task execution MapReduce types input formats output formats.",
         hrs: 10,
         co: "CO4",
-        files: []
+        files: [{ id: "bda-u4-combined", title: "Big Data Analytics - Combined Notes (Module I to V)", fileName: "PG_Big_Data_Analytics_Complete.pdf", fileId: "1y7twYBvt7QGLVybAOFxWw-LTlWBRAgpp", type: "pdf" }]
       },
       5: {
         title: "MODULE V",
@@ -2458,7 +2462,7 @@ const NOTES_DATA = {
         syllabus: "hbase data model and implementations Hbase clients Hbase examples praxis.Cassandra cassandra data model cassandra examples cassandra clients. Hadoop integration. Pig Grunt pig data model Pig Latin developing and testing Pig Latin scripts. Hive data types and file formats HiveQL data definition HiveQL data manipulation HiveQL queries.",
         hrs: 5,
         co: "CO5, CO6",
-        files: []
+        files: [{ id: "bda-u5-combined", title: "Big Data Analytics - Combined Notes (Module I to V)", fileName: "PG_Big_Data_Analytics_Complete.pdf", fileId: "1y7twYBvt7QGLVybAOFxWw-LTlWBRAgpp", type: "pdf" }]
       }
     }
   },
@@ -2470,7 +2474,7 @@ const NOTES_DATA = {
         syllabus: "What is big data why big data convergence of key trends unstructured data industry examples of big data web analytics big data and marketing fraud and big data risk and big data credit risk management big data and algorithmic trading big data and healthcare big data in medicine.",
         hrs: 10,
         co: "CO1",
-        files: []
+        files: [{ id: "bda-u1-combined-alt", title: "Big Data Analytics - Combined Notes (Module I to V)", fileName: "PG_Big_Data_Analytics_Complete.pdf", fileId: "1y7twYBvt7QGLVybAOFxWw-LTlWBRAgpp", type: "pdf" }]
       },
       2: {
         title: "MODULE II",
@@ -2478,7 +2482,7 @@ const NOTES_DATA = {
         syllabus: "Introduction to NoSQL aggregate data models aggregates key-value and document data models relationships graph databases schemaless databases materialized views distribution models sharding master-slave replication peer-peer replication sharding and replication consistency relaxing consistency version stamps map-reduce partitioning and combining composing map-reduce calculations.",
         hrs: 10,
         co: "CO2",
-        files: []
+        files: [{ id: "bda-u2-combined-alt", title: "Big Data Analytics - Combined Notes (Module I to V)", fileName: "PG_Big_Data_Analytics_Complete.pdf", fileId: "1y7twYBvt7QGLVybAOFxWw-LTlWBRAgpp", type: "pdf" }]
       },
       3: {
         title: "MODULE III",
@@ -2486,7 +2490,7 @@ const NOTES_DATA = {
         syllabus: "Data format analyzing data with Hadoop scaling out Hadoop streaming Hadoop pipes design of Hadoop distributed file system (HDFS) HDFS concepts Java interface data flow Hadoop I/O data integrity compression serialization Avro file-based data structures.",
         hrs: 10,
         co: "CO3",
-        files: []
+        files: [{ id: "bda-u3-combined-alt", title: "Big Data Analytics - Combined Notes (Module I to V)", fileName: "PG_Big_Data_Analytics_Complete.pdf", fileId: "1y7twYBvt7QGLVybAOFxWw-LTlWBRAgpp", type: "pdf" }]
       },
       4: {
         title: "MODULE IV",
@@ -2494,7 +2498,7 @@ const NOTES_DATA = {
         syllabus: "Mapreduce workflows unit tests with MRUnit test data and local tests anatomy of MapReduce job run classic Map-reduce YARN failures in classic Map-reduce and YARN job scheduling shuffle and sort task execution MapReduce types input formats output formats.",
         hrs: 10,
         co: "CO4",
-        files: []
+        files: [{ id: "bda-u4-combined-alt", title: "Big Data Analytics - Combined Notes (Module I to V)", fileName: "PG_Big_Data_Analytics_Complete.pdf", fileId: "1y7twYBvt7QGLVybAOFxWw-LTlWBRAgpp", type: "pdf" }]
       },
       5: {
         title: "MODULE V",
@@ -2502,7 +2506,7 @@ const NOTES_DATA = {
         syllabus: "hbase data model and implementations Hbase clients Hbase examples praxis.Cassandra cassandra data model cassandra examples cassandra clients. Hadoop integration. Pig Grunt pig data model Pig Latin developing and testing Pig Latin scripts. Hive data types and file formats HiveQL data definition HiveQL data manipulation HiveQL queries.",
         hrs: 5,
         co: "CO5, CO6",
-        files: []
+        files: [{ id: "bda-u5-combined-alt", title: "Big Data Analytics - Combined Notes (Module I to V)", fileName: "PG_Big_Data_Analytics_Complete.pdf", fileId: "1y7twYBvt7QGLVybAOFxWw-LTlWBRAgpp", type: "pdf" }]
       }
     }
   },
@@ -2793,9 +2797,8 @@ export default function Notes() {
   const { items: uploadedNotes, refetch } = useFirestoreList(noteService);
 
   const currentLabRecords = useMemo(() => {
-    if (!selectedYear || !selectedSemester) return [];
-    const key = courseType === "pg" ? `pg-${selectedYear}-${selectedSemester}` : `${selectedYear}-${selectedSemester}`;
-    return LAB_RECORDS_DATA[key] || LAB_RECORDS_DATA[`${selectedYear}-${selectedSemester}`] || [];
+    if (!selectedYear || !selectedSemester || courseType === "pg") return [];
+    return LAB_RECORDS_DATA[`${selectedYear}-${selectedSemester}`] || [];
   }, [selectedYear, selectedSemester, courseType]);
 
   const subjectLabRecords = useMemo(() => {
@@ -3014,16 +3017,20 @@ export default function Notes() {
               <span className={ys.text}>{yearData.label}</span><FiChevronRight size={12} /><span className={ys.text}>{semesterData.label}</span>
             </div>
             <h1 className="font-sans text-2xl font-bold text-[#0F4C81]">Select Subject</h1>
-            <p className="mt-1 text-xs text-[#6B7280]">Choose a subject to browse lecture notes or access practical lab records</p>
+            <p className="mt-1 text-xs text-[#6B7280]">
+              {courseType === "pg" ? "Choose a subject to browse lecture notes" : "Choose a subject to browse lecture notes or access practical lab records"}
+            </p>
           </div>
 
-          <button
-            onClick={() => setShowLabModal(true)}
-            className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#7F011F] to-[#0F4C81] px-5 py-3 text-xs font-black text-white shadow-md hover:from-[#990227] hover:to-[#1E88E5] hover:shadow-lg transition-all active:scale-95 cursor-pointer shrink-0 border border-white/20"
-          >
-            <FiCode size={16} />
-            🧪 Lab Record ({yearData.label} - {semesterData.label})
-          </button>
+          {courseType !== "pg" && (
+            <button
+              onClick={() => setShowLabModal(true)}
+              className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#7F011F] to-[#0F4C81] px-5 py-3 text-xs font-black text-white shadow-md hover:from-[#990227] hover:to-[#1E88E5] hover:shadow-lg transition-all active:scale-95 cursor-pointer shrink-0 border border-white/20"
+            >
+              <FiCode size={16} />
+              🧪 Lab Record ({yearData.label} - {semesterData.label})
+            </button>
+          )}
         </motion.div>
         {semesterData.subjects.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#E5E7EB] bg-white py-20 shadow-sm">
@@ -3037,13 +3044,13 @@ export default function Notes() {
               const isNameOnly = (selectedYear === 2 && PLACEHOLDER_SUBJECTS.has(subject)) ||
                 (NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(subject));
               const subjectData = isNameOnly ? null : NOTES_DATA[subject];
-              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || (courseType === "pg" && subject === "Advanced Design and Analysis of Algorithms");
+              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || (courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques"));
               const semesterFilter = NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(subject)
                 ? null : SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[subject];
               const filteredSubjectUnits = subjectData && semesterFilter
                 ? Object.entries(subjectData.units).filter(([key]) => semesterFilter.has(Number(key)))
                 : subjectData ? Object.entries(subjectData.units) : [];
-              const isPgCombinedSubject = courseType === "pg" && subject === "Advanced Design and Analysis of Algorithms";
+              const isPgCombinedSubject = courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques");
               const totalFiles = isPgCombinedSubject ? 1 : (filteredSubjectUnits.length > 0
                 ? filteredSubjectUnits.reduce((s, [, u]) => s + u.files.length, 0)
                 : 0);
@@ -3246,15 +3253,59 @@ export default function Notes() {
   } : null;
 
   // PG Combined PDF — all 5 units in a single PDF
-  const isPgCombined = courseType === "pg" && selectedSubject === "Advanced Design and Analysis of Algorithms";
-  const pgCombinedPdf = isPgCombined ? {
-    id: "pg-adaa-complete-pdf",
-    title: "Advanced Design and Analysis of Algorithms — Complete Notes (Module I to V)",
-    fileName: "PG_Advanced_Design_Analysis_Algorithms_Complete.pdf",
-    fileId: "1y2q8sXuc7g5ZV0YSiJ__duYoVfnJzURx",
-    type: "pdf",
-    pageCount: 348,
-  } : null;
+  const isPgCombined = courseType === "pg" && (selectedSubject.includes("Advanced Database Management System") || selectedSubject === "Advanced Design and Analysis of Algorithms" || selectedSubject === "DOT NET Technology" || selectedSubject === "DOT NET TECHNOLOGY" || selectedSubject === "Digital Image Processing" || selectedSubject === "Big Data Analytics" || selectedSubject === "BIG DATA ANALYTICS" || selectedSubject === "Artificial Intelligence and Machine Learning Techniques" || selectedSubject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || selectedSubject === "Data Mining Techniques");
+  const pgCombinedPdf = isPgCombined ? (
+    selectedSubject === "Data Mining Techniques" ? {
+      id: "pg-dmt-complete-pdf",
+      title: "Data Mining Techniques — Complete Notes (Module I to V)",
+      fileName: "PG_Data_Mining_Techniques_Complete.pdf",
+      fileId: "1sHXJ3ynonZuQPow8iwt92n5u9ROEo3FX",
+      type: "pdf",
+      pageCount: "Combined 5 Modules",
+    } : selectedSubject.includes("Advanced Database Management System") ? {
+      id: "pg-adbms-complete-pdf",
+      title: "Advanced Database Management System — Complete Notes (Module I to V)",
+      fileName: "PG_Advanced_Database_Management_System_Complete.pdf",
+      fileId: "1lb-w3FOfs1_EIiyTE4P3hXuZtQaTzkOJ",
+      type: "pdf",
+      pageCount: "Combined 5 Modules",
+    } : (selectedSubject === "Artificial Intelligence and Machine Learning Techniques" || selectedSubject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES") ? {
+      id: "pg-aiml-complete-pdf",
+      title: "Artificial Intelligence and Machine Learning Techniques — Complete Notes",
+      fileName: "PG_Artificial_Intelligence_Machine_Learning_Complete.pdf",
+      fileId: "1ncnBfiMy62gIvn0mOLI1wnsGxMsnuhc3",
+      type: "pdf",
+      pageCount: "Combined Notes",
+    } : (selectedSubject === "Big Data Analytics" || selectedSubject === "BIG DATA ANALYTICS") ? {
+      id: "pg-bda-complete-pdf",
+      title: "Big Data Analytics — Complete Notes (Module I to V)",
+      fileName: "PG_Big_Data_Analytics_Complete.pdf",
+      fileId: "1y7twYBvt7QGLVybAOFxWw-LTlWBRAgpp",
+      type: "pdf",
+      pageCount: "Combined 5 Modules",
+    } : selectedSubject === "Digital Image Processing" ? {
+      id: "pg-dip-complete-pdf",
+      title: "Digital Image Processing — Complete Notes (Module I to V)",
+      fileName: "PG_Digital_Image_Processing_Complete.pdf",
+      fileId: "1uG68TNwRWMzxwEVodI0tgb6oqmpU68zA",
+      type: "pdf",
+      pageCount: "Combined 5 Modules",
+    } : (selectedSubject === "DOT NET Technology" || selectedSubject === "DOT NET TECHNOLOGY") ? {
+      id: "pg-dotnet-complete-pdf",
+      title: "DOT NET Technology — Complete Notes (Module I to V)",
+      fileName: "DOT_NET_Technology_Combined_Units_1-5.pdf",
+      fileId: "1ciO7YAQZAwnSojejNUJ3Vo2_Gc1KmGut",
+      type: "pdf",
+      pageCount: "Combined 5 Units",
+    } : {
+      id: "pg-adaa-complete-pdf",
+      title: "Advanced Design and Analysis of Algorithms — Complete Notes (Module I to V)",
+      fileName: "PG_Advanced_Design_Analysis_Algorithms_Complete.pdf",
+      fileId: "1y2q8sXuc7g5ZV0YSiJ__duYoVfnJzURx",
+      type: "pdf",
+      pageCount: 348,
+    }
+  ) : null;
 
   // Determine the current subject's semester number for pre-filling upload form
   const currentSemesterNumber = selectedSemester;
@@ -3578,6 +3629,24 @@ export default function Notes() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActivePodcast({
+                        title: `${selectedSubject} — Complete PG Revision`,
+                        subtitle: "Module I to V Complete Syllabus Revision",
+                        syllabus: syllabusData?.map((s) => s.module).join(". ") || `${selectedSubject} PG syllabus concepts, algorithms, models, and exam revision points.`,
+                        subject: selectedSubject,
+                        year: selectedYear,
+                        semester: selectedSemester,
+                      });
+                    }}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-3.5 py-2 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer border border-amber-300/40 font-mono"
+                    title="Listen to AI Audio Podcast for all 5 Modules"
+                  >
+                    🎙️ AI Podcast
+                  </button>
                   <button
                     type="button"
                     onClick={(e) => {

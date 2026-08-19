@@ -53,7 +53,6 @@ import Bookmarks from "./pages/student/Bookmarks";
 import RecentlyViewed from "./pages/student/RecentlyViewed";
 import Profile from "./pages/student/Profile";
 import StudentAssignments from "./pages/student/Assignments";
-import ExamStudyPlanner from "./pages/student/ExamStudyPlanner";
 import StudentProjectHub from "./pages/student/StudentProjectHub";
 
 // Public pages also accessible from student dashboard
@@ -216,7 +215,6 @@ export default function App() {
               <Route path="/student/bookmarks" element={<AnimatedPage><Bookmarks /></AnimatedPage>} />
               <Route path="/student/recently-viewed" element={<AnimatedPage><RecentlyViewed /></AnimatedPage>} />
               <Route path="/student/profile" element={<AnimatedPage><Profile /></AnimatedPage>} />
-              <Route path="/student/exam-study-planner" element={<AnimatedPage><ExamStudyPlanner /></AnimatedPage>} />
             </Route>
 
             {/* Faculty dashboard */}

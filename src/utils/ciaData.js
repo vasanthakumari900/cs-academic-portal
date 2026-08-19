@@ -283,7 +283,40 @@ export const CIA_DATA = {
         cia: {
           1: {
             label: "CIA 1",
-            papers: [],
+            papers: [
+              {
+                id: "cia-3-1-1-os",
+                subject: "OPERATING SYSTEM",
+                title: "CIA 1 - Operating System",
+                driveUrl: "https://drive.google.com/file/d/1DcpRO1NoPePC2gxUQ-o9l1hssB8okD-_/view",
+                uploadedDate: "2025-03-01",
+                description: "CIA 1 examination question paper - Operating System",
+              },
+              {
+                id: "cia-3-1-1-dbms",
+                subject: "DATABASE MANAGEMENT SYSTEM",
+                title: "CIA 1 - Database Management System",
+                driveUrl: "https://drive.google.com/file/d/1uSHQwE_PnDPH22GiP7qZhpjhZHDHsTDs/view",
+                uploadedDate: "2025-03-01",
+                description: "CIA 1 examination question paper - Database Management System",
+              },
+              {
+                id: "cia-3-1-1-dmt",
+                subject: "DATA MINING TECHNIQUES",
+                title: "CIA 1 - Data Mining Techniques",
+                driveUrl: "https://drive.google.com/file/d/1SMrElivyOQHlrnY5rZslKm1z79LvjuLB/view",
+                uploadedDate: "2025-03-01",
+                description: "CIA 1 examination question paper - Data Mining Techniques",
+              },
+              {
+                id: "cia-3-1-1-aspnet",
+                subject: "ASP.NET",
+                title: "CIA 1 - ASP.NET",
+                driveUrl: "https://drive.google.com/file/d/1ZdmHN9zclSygmfeYkRNT6_G_b9hAgnri/view",
+                uploadedDate: "2025-03-01",
+                description: "CIA 1 examination question paper - ASP.NET",
+              },
+            ],
           },
           2: {
             label: "CIA 2",
