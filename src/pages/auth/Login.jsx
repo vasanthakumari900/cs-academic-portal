@@ -12,6 +12,7 @@ import { useAuth } from "../../context/AuthContext";
 import { logStudentLogin } from "../../services/activityLoggerService";
 import collegeLogo from "../../assets/college-logo.jpg";
 import LiveDateTime from "../../components/common/LiveDateTime";
+import PortalScreencastPlayer from "../../components/common/PortalScreencastPlayer";
 
 function generateCaptcha() {
   let code = "";
@@ -156,6 +157,24 @@ export default function Login() {
   const inputCls =
     "w-full rounded-xl border border-slate-700 bg-[#1E293B] px-11 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition-all focus:border-[#06B6D4] focus:ring-2 focus:ring-[#06B6D4]/30";
 
+  function handleDemoSelect(role) {
+    const freshCaptcha = generateCaptcha();
+    setCaptchaCode(freshCaptcha);
+    setCaptcha(freshCaptcha);
+
+    if (role === "student" || role === "admin") {
+      setActiveTab("student");
+      setRollNumber("24E3006");
+      setDob("15/08/2004");
+      toast.success(`${role === "admin" ? "Admin" : "Student"} demo credentials loaded! Click Sign In.`);
+    } else if (role === "faculty") {
+      setActiveTab("faculty");
+      setFacultyName("Faculty User");
+      setFacultyPassword("password123");
+      toast.success("Faculty demo credentials loaded! Click Sign In.");
+    }
+  }
+
   return (
     <div className="relative flex min-h-screen overflow-hidden bg-[#090D16] text-[#F3F4F6]">
       {/* Ambient Cyber Obsidian Orbs */}
@@ -165,7 +184,14 @@ export default function Login() {
 
       {/* Main Content */}
       <div className="relative z-10 flex w-full min-h-screen items-center justify-center px-3 py-6 sm:px-6 lg:px-8">
-        <div className="flex w-full max-w-6xl flex-col lg:flex-row items-center justify-center gap-6 lg:gap-12 text-left">
+        <div className="flex w-full max-w-6xl flex-col items-center justify-center gap-6 text-left">
+
+          {/* Top Website Screencast Video Tour */}
+          <div className="w-full">
+            <PortalScreencastPlayer onSelectDemoRole={handleDemoSelect} />
+          </div>
+
+          <div className="flex w-full flex-col lg:flex-row items-center justify-center gap-6 lg:gap-12 text-left">
 
           {/* Left: Welcome Section (Desktop) */}
           <motion.div
@@ -436,7 +462,7 @@ export default function Login() {
 
                     {/* Captcha display */}
                     <div className="mt-2 flex items-center gap-3 flex-wrap">
-                      <div className="flex select-none items-center gap-2 rounded-xl border border-cyan-500/30 bg-[#1E293B] px-5 py-3 shadow-inner">
+                      <div data-testid="captcha-box" className="flex select-none items-center gap-2 rounded-xl border border-cyan-500/30 bg-[#1E293B] px-5 py-3 shadow-inner">
                         <span className="text-xl font-bold tracking-[0.4em] text-cyan-300 font-mono">
                           {captchaCode.split("").map((d, i) => (
                             <span
@@ -501,6 +527,7 @@ export default function Login() {
               </div>
             </div>
           </motion.div>
+          </div>
         </div>
       </div>
     </div>

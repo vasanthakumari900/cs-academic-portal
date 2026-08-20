@@ -112,7 +112,7 @@ export default function Navbar() {
           </div>
 
           {/* Center Nav Links (Horizontal single line, no wrapping) */}
-          <nav className="hidden xl:flex items-center gap-[clamp(1rem,2vw,2rem)] shrink-0">
+          <nav className="hidden lg:flex items-center gap-[clamp(0.5rem,1.5vw,1.5rem)] shrink-0">
             {navLinks.map((link) => {
               const active = isActive(link.to);
               return (
@@ -245,7 +245,7 @@ export default function Navbar() {
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="xl:hidden p-2 rounded-xl border border-[#EDC8D0] dark:border-white/15 text-[#4A1620] dark:text-[#F3E4E8] hover:bg-[#F6E4E8]/60 dark:hover:bg-white/10 transition-colors shrink-0 cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+              className="lg:hidden p-2 rounded-xl border border-[#EDC8D0] dark:border-white/15 text-[#4A1620] dark:text-[#F3E4E8] hover:bg-[#F6E4E8]/60 dark:hover:bg-white/10 transition-colors shrink-0 cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Toggle navigation"
             >
               {mobileOpen ? <FiX size={20} /> : <FiMenu size={20} />}
@@ -262,7 +262,7 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 xl:hidden"
+            className="fixed inset-0 z-40 lg:hidden"
           >
             <div className="absolute inset-0 bg-[#190B13]/50 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
             <motion.div

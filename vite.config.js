@@ -75,7 +75,35 @@ export default defineConfig({
   server: {
     port: 5173,
     watch: {
-      ignored: ["**/*.pdf", "**/sem 1 english/**"],
+      ignored: ["**/*.pdf", "**/sem 1 english/**", "**/website-tour/**"],
+    },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            if (id.includes("react-pdf") || id.includes("pdfjs-dist")) {
+              return "vendor-pdf";
+            }
+            if (id.includes("jspdf") || id.includes("html2canvas")) {
+              return "vendor-jspdf";
+            }
+            if (id.includes("tesseract.js")) {
+              return "vendor-ocr";
+            }
+            if (id.includes("recharts")) {
+              return "vendor-charts";
+            }
+            if (id.includes("firebase")) {
+              return "vendor-firebase";
+            }
+            if (id.includes("framer-motion") || id.includes("react-icons")) {
+              return "vendor-ui";
+            }
+          }
+        },
+      },
     },
   },
 });
