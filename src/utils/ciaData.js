@@ -61,6 +61,14 @@ export const CIA_DATA = {
                 uploadedDate: "2025-03-01",
                 description: "CIA 1 examination question paper - Fundamentals of Digital Electronics",
               },
+              {
+                id: "cia-1-1-1-combined",
+                subject: "TAMIL, ENGLISH, PYTHON PROGRAMMING, MATHEMATICS PAPER - I",
+                title: "CIA 1 - Combined Question Papers (4 Subjects)",
+                driveUrl: "/question_papers/cia_1_1_1_combined.pdf",
+                uploadedDate: "2026-08-21",
+                description: "Combined CIA 1 examination question papers for Tamil, English, Python Programming & Mathematics Paper - I",
+              },
             ],
           },
           2: {
@@ -326,6 +334,91 @@ export const CIA_DATA = {
       },
       2: {
         label: "Semester 6",
+        cia: {
+          1: {
+            label: "CIA 1",
+            papers: [],
+          },
+          2: {
+            label: "CIA 2",
+            papers: [],
+          },
+        },
+      },
+    },
+  },
+};
+
+export const CIA_DATA_PG = {
+  1: {
+    label: "1st Year",
+    icon: "Ⅰ",
+    semesters: {
+      1: {
+        label: "Semester 1",
+        cia: {
+          1: {
+            label: "CIA 1",
+            papers: [
+              {
+                id: "cia-pg-1-1-1-combined",
+                subject: "DATA COMMUNICATION AND NETWORKING, ADVANCED SOFTWARE ENGINEERING, CONTEMPORARY WEB TECHNOLOGIES, PYTHON FOR DATA SCIENCE, ADVANCED DESIGN AND ANALYSIS OF ALGORITHMS",
+                title: "CIA 1 - Combined Question Papers (5 Subjects)",
+                driveUrl: "/question_papers/cia_pg_1_1_1_combined.pdf",
+                uploadedDate: "2026-08-21",
+                description: "Combined CIA 1 examination question papers for Data Communication & Networking, Advanced Software Engineering, Contemporary Web Technologies, Python for Data Science & Algorithms",
+              },
+            ],
+          },
+          2: {
+            label: "CIA 2",
+            papers: [],
+          },
+        },
+      },
+      2: {
+        label: "Semester 2",
+        cia: {
+          1: {
+            label: "CIA 1",
+            papers: [],
+          },
+          2: {
+            label: "CIA 2",
+            papers: [],
+          },
+        },
+      },
+    },
+  },
+  2: {
+    label: "2nd Year",
+    icon: "Ⅱ",
+    semesters: {
+      1: {
+        label: "Semester 1",
+        cia: {
+          1: {
+            label: "CIA 1",
+            papers: [
+              {
+                id: "cia-pg-2-1-1-combined",
+                subject: "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES, INFORMATION SECURITY, DOT NET TECHNOLOGY, BIG DATA ANALYTICS",
+                title: "CIA 1 - Combined Question Papers (4 Subjects)",
+                driveUrl: "/question_papers/cia_pg_2_1_1_combined.pdf",
+                uploadedDate: "2026-08-21",
+                description: "Combined CIA 1 examination question papers for AI & ML, Information Security, Dot Net Technology & Big Data Analytics",
+              },
+            ],
+          },
+          2: {
+            label: "CIA 2",
+            papers: [],
+          },
+        },
+      },
+      2: {
+        label: "Semester 2",
         cia: {
           1: {
             label: "CIA 1",

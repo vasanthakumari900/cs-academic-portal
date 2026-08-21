@@ -13,8 +13,13 @@
 export function cleanTextForSpeech(text) {
   if (!text) return "";
   return String(text)
+    .replace(/\bModule\s+[I|V|X]+\b/gi, "")
+    .replace(/\bModule\s+\d+\b/gi, "")
+    .replace(/\bModule\b/gi, "")
     .replace(/\bUnit\s+[I|V|X]+\b/gi, "")
     .replace(/\bUnit\s+\d+\b/gi, "")
+    .replace(/\bUnit\b/gi, "")
+    .replace(/\bChapter\s+\d+\b/gi, "")
     .replace(/\bSem\s+I\b/gi, "Semester 1")
     .replace(/\bSem\s+II\b/gi, "Semester 2")
     .replace(/\bSem\s+III\b/gi, "Semester 3")
@@ -29,14 +34,28 @@ export function cleanTextForSpeech(text) {
     .replace(/\bIPC\b/g, "Inter Process Communication")
     .replace(/\bGUI\b/g, "G U I")
     .replace(/\bAPI\b/g, "A P I")
-    .replace(/\bSQL\b/g, "S Q L");
+    .replace(/\bSQL\b/g, "S Q L")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 /**
  * Extracts EVERY syllabus topic from a raw syllabus string without skipping.
+ * Also incorporates newly added notes files if available.
  */
-export function extractSyllabusTopics(syllabusText, defaultSubject = "") {
-  if (!syllabusText || typeof syllabusText !== "string" || syllabusText.trim().length === 0) {
+export function extractSyllabusTopics(syllabusText, defaultSubject = "", files = []) {
+  let combinedText = syllabusText || "";
+  if (Array.isArray(files) && files.length > 0) {
+    const fileTitles = files
+      .map((f) => f.title || f.fileName || "")
+      .filter(Boolean)
+      .join(". ");
+    if (fileTitles) {
+      combinedText += ". " + fileTitles;
+    }
+  }
+
+  if (!combinedText || typeof combinedText !== "string" || combinedText.trim().length === 0) {
     return [
       "Introduction & Overview",
       "Core Concepts & Architecture",
@@ -47,13 +66,13 @@ export function extractSyllabusTopics(syllabusText, defaultSubject = "") {
   }
 
   // Split on delimiters (hyphen, colon, semicolon, bullet, newline, comma if topic-like)
-  const rawParts = syllabusText
-    .split(/(?:\s*[-–—:]\s*|\s*;\s*|\n+|\s*•\s*|\.\s+(?=[A-Z]))/)
+  const rawParts = combinedText
+    .split(/(?:\s*[-–—:]\s*|\s*;\s*|\n+|\s*•\s*|\.\s+(?=[A-Z])|,\s*(?=[A-Z]))/)
     .map((t) => t.trim())
     .filter(
       (t) =>
         t.length > 2 &&
-        !/^(unit|sl|no|hrs|co\d*|module|chapter|syllabus|topics|covered|introduction)$/i.test(t)
+        !/^(unit|sl|no|hrs|cos?|co\d*|module|chapter|syllabus|topics|covered|introduction|complete|notes|study|material|pdf)\b/i.test(t)
     );
 
   // De-duplicate while preserving order
@@ -217,10 +236,10 @@ export function generate7StepTeacherExplanation(
   allTopics
 ) {
   const details = getTechnicalDetailsForTopic(topicName, subjectName);
-  const prevTopic = index > 0 ? allTopics[index - 1] : "the syllabus overview";
-  const nextTopic = index < totalTopics - 1 ? allTopics[index + 1] : "Topic Summary";
+  const prevTopic = index > 0 ? allTopics[index - 1] : "the introductory section";
+  const nextTopic = index < totalTopics - 1 ? allTopics[index + 1] : "the topic summary";
 
-  const step1Intro = `Welcome to Topic ${index + 1} of ${totalTopics}: "${topicName}". Understanding ${topicName} is foundational because it forms the building block for system architecture, operational logic, and practical software design.`;
+  const step1Intro = `Welcome to Topic ${index + 1} of ${totalTopics}: ${topicName}. Understanding this concept is foundational for system architecture and software engineering.`;
   const step2Concept = details.theory;
   const syntaxRule = details.syntax;
   const step3Example = details.example;
@@ -230,27 +249,30 @@ export function generate7StepTeacherExplanation(
   const codeOrDiagram = `${codeSnippet}\n\n${codeOutput}`;
 
   const step4Terms = [
-    `1) Core Definition: Key terminology associated with ${topicName}.`,
+    `1) Core Definition: Essential terminology and specifications for this concept.`,
     `2) Memory Layout: Operational state and memory offset during runtime.`,
     `3) Boundary Conditions: Rules governing error handling and edge cases.`,
   ];
 
   const step5HowItWorks = [
     `Step 1: Request initiation and parameter setup.`,
-    `Step 2: Validation of parameters and access privileges.`,
-    `Step 3: Execution of core algorithm or system routine.`,
-    `Step 4: Return result or status code to caller.`,
+    `Step 2: Parameter validation and permission check.`,
+    `Step 3: Core algorithm execution and processing.`,
+    `Step 4: Output payload or status code returned to caller.`,
   ];
 
-  const step6Connect = `Connection to Curriculum: ${topicName} builds directly upon "${prevTopic}" and provides necessary prerequisites for understanding "${nextTopic}".`;
-  const step7Exam = `University Exam Focus: Frequently appears in 2-mark definitions ("Define ${topicName}") and 5/10-mark essay questions ("Explain ${topicName} with neat block diagrams/code examples"). Make sure to draw clear workflow diagrams and list key advantages.`;
+  const step6Connect = index > 0
+    ? `Prerequisite Check: This topic builds directly upon previous concepts like ${prevTopic} and prepares you for ${nextTopic}.`
+    : `Prerequisite Check: This topic serves as the baseline for upcoming concepts like ${nextTopic}.`;
+
+  const step7Exam = `University Exam Focus: Important for short definitions and essay questions requiring clear block diagrams, syntax, and execution flowcharts.`;
 
   const speechEn = cleanTextForSpeech(
     `Topic ${index + 1}: ${topicName}. ${step1Intro} ${step2Concept} ${step3Example} ${step6Connect} ${step7Exam}`
   );
 
   const speechTa = cleanTextForSpeech(
-    `தலைப்பு ${index + 1}: ${topicName}. ${topicName} என்பது மிகவும் முக்கியமான தலைப்பாகும். இதன் முதன்மை வரையறை, செயல்படும் முறை, மற்றும் பல்கலைக்கழகத் தேர்வுக்கான வினாக்களைத் தெளிவாகப் படியுங்கள்.`
+    `தலைப்பு ${index + 1}: ${topicName}. இந்த கருத்து மிகவும் முக்கியமானதாகும். இதன் கோட்பாடு, செயல்படும் முறை, மற்றும் தேர்வு வினாக்களைத் தெளிவாகப் படியுங்கள்.`
   );
 
   return {
@@ -278,31 +300,32 @@ export function generate7StepTeacherExplanation(
  */
 export function buildFullAudioScript(subjectName, rawUnitTitle, unitSubtitle, topics, lessons) {
   const cleanSubj = cleanTextForSpeech(subjectName);
+  const cleanSubtitle = cleanTextForSpeech(unitSubtitle);
 
   const introScript = cleanTextForSpeech(
-    `Welcome students to today's classroom lecture for ${cleanSubj}: ${unitSubtitle}. In this session, I will teach you all ${topics.length} syllabus topics in complete detail without skipping any topic: ${topics.join(", ")}. Let us begin with Topic 1.`
+    `Welcome students to today's lecture on ${cleanSubj}. In this session, we will cover ${topics.length} key syllabus topics: ${topics.join(", ")}. Let us begin with Topic 1.`
   );
 
   const topicScripts = lessons.map((l, i) =>
     cleanTextForSpeech(
-      `Topic ${i + 1}: ${l.name}. ${l.step1Intro} ${l.step2Concept} ${l.step3Example} Let us review the key steps: ${l.step5HowItWorks.join(" ")} ${l.step7Exam}`
+      `Topic ${i + 1}: ${l.name}. ${l.step1Intro} ${l.step2Concept} ${l.step3Example} Let us review the key execution steps: ${l.step5HowItWorks.join(" ")} ${l.step7Exam}`
     )
   );
 
   const quickRevisionScript = cleanTextForSpeech(
-    `Now let us conduct a Quick Revision for ${cleanSubj}. We have studied ${topics.length} topics: ${topics.join(", ")}. Remember the core definitions, system architectures, and practical code examples.`
+    `Now let us conduct a Quick Revision for ${cleanSubj}. We covered ${topics.length} topics: ${topics.join(", ")}. Make sure to review core definitions, memory layouts, and practical code snippets.`
   );
 
   const examPointsScript = cleanTextForSpeech(
-    `Important Exam Points for ${cleanSubj}: Pay close attention to 2-mark definitions, draw neat labeled diagrams for 5-mark questions, and structure 10-mark answers with introduction, architecture, step-by-step working, and advantages.`
+    `Important Exam Strategy: Focus on short definitions, draw neat labeled block diagrams for 5-mark questions, and structure 10-mark essay answers with introduction, architecture, code execution, and key advantages.`
   );
 
   const selfTestScript = cleanTextForSpeech(
-    `Self-Test Time! Question 1: Can you define ${topics[0] || "Topic 1"} in your own words? Question 2: What is the primary difference between ${topics[0] || "Topic 1"} and ${topics[1] || topics[0]}? Take a moment to think.`
+    `Self-Test Check: Question 1: How would you define ${topics[0] || "Topic 1"} in your own words? Question 2: What is the primary operational distinction between ${topics[0] || "Topic 1"} and ${topics[1] || topics[0]}? Take a moment to reflect on your answer.`
   );
 
   const finalRecapScript = cleanTextForSpeech(
-    `That concludes our complete lecture for ${cleanSubj}. All ${topics.length} syllabus topics are 100% covered. All the best for your examinations!`
+    `That concludes our complete lecture. All ${topics.length} syllabus topics are 100% covered. All the best for your preparation!`
   );
 
   return {

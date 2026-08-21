@@ -125,7 +125,8 @@ export default function AudioPodcastPlayerModal({ unitData, subjectName, onClose
   const semester = unitData.semester || 1;
 
   // 1. Syllabus & Topic Engine Setup
-  const rawTopics = extractSyllabusTopics(syllabusText, subjectName);
+  const filesList = unitData.files || [];
+  const rawTopics = extractSyllabusTopics(syllabusText, subjectName, filesList);
 
   // Load saved topic progress from localStorage
   const savedProgress = loadUnitProgress(subjectName, rawUnitTitle);

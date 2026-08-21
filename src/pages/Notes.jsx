@@ -110,10 +110,26 @@ const LAB_RECORDS_DATA = {
   ],
   "3-1": [
     { id: "lab-3-1-1", title: "Database Management System Practical Lab Record (Part 1)", subject: "DATABASE MANAGEMENT SYSTEM", fileName: "3rd_Year_Sem1_Lab_Record_Part1.pdf", fileId: "1vywg9DWpIPa6uWj71G0Gjc9dqDtD_dYr", type: "pdf" },
-    { id: "lab-3-1-2", title: "ASP.NET Practical Lab Record (Part 2)", subject: "ASP.NET", fileName: "3rd_Year_Sem1_Lab_Record_Part2.pdf", fileId: "1BTi-DKIJcKa1zZg44pRV3j-BtXryIFle", type: "pdf" },
   ],
   "3-2": [],
 };
+
+const INFO_SECURITY_PDFS = [
+  { id: "is-mod1", title: "Information Security - Module I Notes", fileName: "Information_Security_Module_1.pdf", fileId: "1rOBl2IZvrqGLfoqifWoE3n71KAVcIxGz", type: "pdf", subtitle: "Security Attacks, Services & Mechanisms" },
+  { id: "is-mod2", title: "Information Security - Module II Notes", fileName: "Information_Security_Module_2.pdf", fileId: "1gepvH3Dj_hxmlqkk5w4E_1OHiUGUHDBu", type: "pdf", subtitle: "Public Key Cryptography & Key Management" },
+  { id: "is-mod3", title: "Information Security - Module III Notes", fileName: "Information_Security_Module_3.pdf", fileId: "11pbyVnGKq-9qRvyljPptGVIU-ZT4G0P9", type: "pdf", subtitle: "Email Privacy & IP Security" },
+  { id: "is-mod4", title: "Information Security - Module IV Notes", fileName: "Information_Security_Module_4.pdf", fileId: "1PXNKKpBDZQlGNFGjOqelLyepCJupne7P", type: "pdf", subtitle: "Web Security Requirements & Protocols" },
+  { id: "is-mod5", title: "Information Security - Module V Notes", fileName: "Information_Security_Module_5.pdf", fileId: "19MGyHraoe4Y71UKG2YnIiKs2shHy-9Cr", type: "pdf", subtitle: "SNMP, Threats, Firewalls & IDS" },
+];
+
+const ADVANCED_SE_PDFS = [
+  { id: "ase-pdf-1", title: "03-11.pdf", fileName: "03-11.pdf", fileId: "1qDHHJw_SAlwPTr40NSA5vkFKl3DLg033", type: "pdf", subtitle: "Lecture Notes (Units 3 to 11)" },
+  { id: "ase-pdf-2", title: "03Jul20151007419.pdf", fileName: "03Jul20151007419.pdf", fileId: "19IMRYMfMm9SAcR-8J6TbfzdcwKkVpx62", type: "pdf", subtitle: "Software Engineering Principles & Practice Guide" },
+  { id: "ase-pdf-3", title: "A Comprehensive Review of Software Development Life Cycle methodo.pdf", fileName: "A Comprehensive Review of Software Development Life Cycle methodo.pdf", fileId: "16KlqAVVsOO4pLkLNTD0fZTSe9lb-cQAP", type: "pdf", subtitle: "SDLC Methodologies Review Paper" },
+  { id: "ase-pdf-4", title: "A3 - Arch Styles.pdf", fileName: "A3 - Arch Styles.pdf", fileId: "1Z7EWoRKlkBWx4533EdlY4eI5hpuAPq8b", type: "pdf", subtitle: "Software Architectural Styles & Patterns" },
+  { id: "ase-pdf-5", title: "Sarabjeet-Kaur_-Comparative-Study-of-Effort-Estimation-Models-in-Software-Engineering_Paper.pdf", fileName: "Sarabjeet-Kaur_-Comparative-Study-of-Effort-Estimation-Models-in-Software-Engineering_Paper.pdf", fileId: "18TsmKjmiNG8tmT6PTwUb7_f4K0JGZ7sa", type: "pdf", subtitle: "Comparative Study of Effort Estimation Models" },
+  { id: "ase-pdf-6", title: "SE_-UNIT-1-To-4-All.pptx.pdf", fileName: "SE_-UNIT-1-To-4-All.pptx.pdf", fileId: "1kYzAFuslGv6HtT2Q5qMK2BmDYO3wIeGA", type: "pdf", subtitle: "Software Engineering Units 1 to 4 Presentation Slides" },
+];
 
 const NOTES_DATA = {
   "PYTHON PROGRAMMING ESSENTIALS": {
@@ -1248,7 +1264,10 @@ const NOTES_DATA = {
         syllabus: "Software life cycle models: Waterfall, RAD,AGILE and Spiral model Process metric – Product metrics – Estimation – LOC, FP, COCOMO models – Project Management – Planning, Scheduling and Tracking Software Quality – Quality Standards, Quality Metrics.",
         hrs: 9,
         co: "CO1",
-        files: []
+        files: [
+          { id: "ase-pdf-3", title: "A Comprehensive Review of Software Development Life Cycle methodo.pdf", fileName: "A Comprehensive Review of Software Development Life Cycle methodo.pdf", fileId: "16KlqAVVsOO4pLkLNTD0fZTSe9lb-cQAP", type: "pdf", subtitle: "SDLC Methodologies Review Paper" },
+          { id: "ase-pdf-2", title: "03Jul20151007419.pdf", fileName: "03Jul20151007419.pdf", fileId: "19IMRYMfMm9SAcR-8J6TbfzdcwKkVpx62", type: "pdf", subtitle: "Software Engineering Principles & Practice Guide" }
+        ]
       },
       2: {
         title: "MODULE II",
@@ -1256,7 +1275,9 @@ const NOTES_DATA = {
         syllabus: "System Concepts for Object Modeling – Abstraction, Inheritance, Polymorphism, Encapsulation, Message Sending, Association, Aggregation – Requirement Workflow Functional, Non-functional – Characteristics of Requirements – Requirement Elicitation Techniques – Requirement Documentation – Use case specification, Activity Diagram.",
         hrs: 9,
         co: "CO2",
-        files: []
+        files: [
+          { id: "ase-pdf-1", title: "03-11.pdf", fileName: "03-11.pdf", fileId: "1qDHHJw_SAlwPTr40NSA5vkFKl3DLg033", type: "pdf", subtitle: "Lecture Notes (Units 3 to 11)" }
+        ]
       },
       3: {
         title: "MODULE III",
@@ -1264,7 +1285,9 @@ const NOTES_DATA = {
         syllabus: "Use-Case Modeling – Actors, Use Cases, Use Case Relationships. The Process of Requirements Use-Case – Identify Business Actors, Identify Business Requirements, Use Cases, Construct, Use Case Model Diagram – Class Diagrams and Object Diagrams – Package Diagrams – Sequence and Collaboration diagrams, State chart diagram.",
         hrs: 9,
         co: "CO3",
-        files: []
+        files: [
+          { id: "ase-pdf-5", title: "Sarabjeet-Kaur_-Comparative-Study-of-Effort-Estimation-Models-in-Software-Engineering_Paper.pdf", fileName: "Sarabjeet-Kaur_-Comparative-Study-of-Effort-Estimation-Models-in-Software-Engineering_Paper.pdf", fileId: "18TsmKjmiNG8tmT6PTwUb7_f4K0JGZ7sa", type: "pdf", subtitle: "Comparative Study of Effort Estimation Models" }
+        ]
       },
       4: {
         title: "MODULE IV",
@@ -1272,7 +1295,9 @@ const NOTES_DATA = {
         syllabus: "Design Workflow: System Design Concept – Coupling and Cohesion – Architectural Styles – Identifying Subsystems and Interfaces – Design Patterns Implementation Workflow – Mapping models to Code – Mapping Object Model to Database Schema Testing – Formal Technical Reviews – Walkthrough and Inspection.",
         hrs: 9,
         co: "CO4",
-        files: []
+        files: [
+          { id: "ase-pdf-4", title: "A3 - Arch Styles.pdf", fileName: "A3 - Arch Styles.pdf", fileId: "1Z7EWoRKlkBWx4533EdlY4eI5hpuAPq8b", type: "pdf", subtitle: "Software Architectural Styles & Patterns" }
+        ]
       },
       5: {
         title: "MODULE V",
@@ -1280,7 +1305,9 @@ const NOTES_DATA = {
         syllabus: "Software Configuration Management - Managing and controlling Changes – Managing and controlling versions Maintenance –Types of maintenance – Maintenance Log and defect reports – Reverse and re-engineering.",
         hrs: 9,
         co: "CO5",
-        files: []
+        files: [
+          { id: "ase-pdf-6", title: "SE_-UNIT-1-To-4-All.pptx.pdf", fileName: "SE_-UNIT-1-To-4-All.pptx.pdf", fileId: "1kYzAFuslGv6HtT2Q5qMK2BmDYO3wIeGA", type: "pdf", subtitle: "Software Engineering Units 1 to 4 Presentation Slides" }
+        ]
       }
     }
   },
@@ -1292,7 +1319,10 @@ const NOTES_DATA = {
         syllabus: "Software life cycle models: Waterfall, RAD,AGILE and Spiral model Process metric – Product metrics – Estimation – LOC, FP, COCOMO models – Project Management – Planning, Scheduling and Tracking Software Quality – Quality Standards, Quality Metrics.",
         hrs: 9,
         co: "CO1",
-        files: []
+        files: [
+          { id: "ase-pdf-3-alt", title: "A Comprehensive Review of Software Development Life Cycle methodo.pdf", fileName: "A Comprehensive Review of Software Development Life Cycle methodo.pdf", fileId: "16KlqAVVsOO4pLkLNTD0fZTSe9lb-cQAP", type: "pdf", subtitle: "SDLC Methodologies Review Paper" },
+          { id: "ase-pdf-2-alt", title: "03Jul20151007419.pdf", fileName: "03Jul20151007419.pdf", fileId: "19IMRYMfMm9SAcR-8J6TbfzdcwKkVpx62", type: "pdf", subtitle: "Software Engineering Principles & Practice Guide" }
+        ]
       },
       2: {
         title: "MODULE II",
@@ -1300,7 +1330,9 @@ const NOTES_DATA = {
         syllabus: "System Concepts for Object Modeling – Abstraction, Inheritance, Polymorphism, Encapsulation, Message Sending, Association, Aggregation – Requirement Workflow Functional, Non-functional – Characteristics of Requirements – Requirement Elicitation Techniques – Requirement Documentation – Use case specification, Activity Diagram.",
         hrs: 9,
         co: "CO2",
-        files: []
+        files: [
+          { id: "ase-pdf-1-alt", title: "03-11.pdf", fileName: "03-11.pdf", fileId: "1qDHHJw_SAlwPTr40NSA5vkFKl3DLg033", type: "pdf", subtitle: "Lecture Notes (Units 3 to 11)" }
+        ]
       },
       3: {
         title: "MODULE III",
@@ -1308,7 +1340,9 @@ const NOTES_DATA = {
         syllabus: "Use-Case Modeling – Actors, Use Cases, Use Case Relationships. The Process of Requirements Use-Case – Identify Business Actors, Identify Business Requirements, Use Cases, Construct, Use Case Model Diagram – Class Diagrams and Object Diagrams – Package Diagrams – Sequence and Collaboration diagrams, State chart diagram.",
         hrs: 9,
         co: "CO3",
-        files: []
+        files: [
+          { id: "ase-pdf-5-alt", title: "Sarabjeet-Kaur_-Comparative-Study-of-Effort-Estimation-Models-in-Software-Engineering_Paper.pdf", fileName: "Sarabjeet-Kaur_-Comparative-Study-of-Effort-Estimation-Models-in-Software-Engineering_Paper.pdf", fileId: "18TsmKjmiNG8tmT6PTwUb7_f4K0JGZ7sa", type: "pdf", subtitle: "Comparative Study of Effort Estimation Models" }
+        ]
       },
       4: {
         title: "MODULE IV",
@@ -1316,7 +1350,9 @@ const NOTES_DATA = {
         syllabus: "Design Workflow: System Design Concept – Coupling and Cohesion – Architectural Styles – Identifying Subsystems and Interfaces – Design Patterns Implementation Workflow – Mapping models to Code – Mapping Object Model to Database Schema Testing – Formal Technical Reviews – Walkthrough and Inspection.",
         hrs: 9,
         co: "CO4",
-        files: []
+        files: [
+          { id: "ase-pdf-4-alt", title: "A3 - Arch Styles.pdf", fileName: "A3 - Arch Styles.pdf", fileId: "1Z7EWoRKlkBWx4533EdlY4eI5hpuAPq8b", type: "pdf", subtitle: "Software Architectural Styles & Patterns" }
+        ]
       },
       5: {
         title: "MODULE V",
@@ -1324,7 +1360,9 @@ const NOTES_DATA = {
         syllabus: "Software Configuration Management - Managing and controlling Changes – Managing and controlling versions Maintenance –Types of maintenance – Maintenance Log and defect reports – Reverse and re-engineering.",
         hrs: 9,
         co: "CO5",
-        files: []
+        files: [
+          { id: "ase-pdf-6-alt", title: "SE_-UNIT-1-To-4-All.pptx.pdf", fileName: "SE_-UNIT-1-To-4-All.pptx.pdf", fileId: "1kYzAFuslGv6HtT2Q5qMK2BmDYO3wIeGA", type: "pdf", subtitle: "Software Engineering Units 1 to 4 Presentation Slides" }
+        ]
       }
     }
   },
@@ -2606,7 +2644,9 @@ const NOTES_DATA = {
         syllabus: "Digital Evidence and Computer Crime - History and Terminology of Computer Crime Investigation - Technology and Law - The Investigative Process - Investigative Reconstruction - Modus Operandi, Motive and Technology - Digital Evidence in the Courtroom.",
         hrs: 9,
         co: "CO1",
-        files: []
+        files: [
+          { id: "cf-notes-1", title: "Cyber Forensics - Complete Study Material & Lecture Notes", fileName: "Cyber_Forensics_Notes.pdf", fileId: "1pfhQ9xQ8nfoDqUPlVAQRxXk79Pc37qx2", type: "pdf" }
+        ]
       },
       2: {
         title: "MODULE II",
@@ -2650,7 +2690,9 @@ const NOTES_DATA = {
         syllabus: "Digital Evidence and Computer Crime - History and Terminology of Computer Crime Investigation - Technology and Law - The Investigative Process - Investigative Reconstruction - Modus Operandi, Motive and Technology - Digital Evidence in the Courtroom.",
         hrs: 9,
         co: "CO1",
-        files: []
+        files: [
+          { id: "cf-notes-1", title: "Cyber Forensics - Complete Study Material & Lecture Notes", fileName: "Cyber_Forensics_Notes.pdf", fileId: "1pfhQ9xQ8nfoDqUPlVAQRxXk79Pc37qx2", type: "pdf" }
+        ]
       },
       2: {
         title: "MODULE II",
@@ -3236,6 +3278,9 @@ export default function Notes() {
   const units = filteredUnits;
   const totalFiles = units.reduce((s, [, u]) => s + u.files.length, 0);
 
+  const isInfoSecurity = selectedSubject?.toUpperCase().includes("INFORMATION SECURITY");
+  const isAdvancedSE = selectedSubject?.toUpperCase().includes("ADVANCED SOFTWARE ENGINEERING");
+
   const isEnglish = selectedSubject === "ENGLISH" || selectedSubject === "FOUNDATION ENGLISH - I" || selectedSubject === "Foundation English - III";
   const englishPdf = selectedSubject === "FOUNDATION ENGLISH - I"
     ? NOTES_DATA["FOUNDATION ENGLISH - I"]?.units?.[1]?.files?.[0]
@@ -3506,6 +3551,115 @@ export default function Notes() {
         </div>
       ) : null}
 
+      {/* Information Security PDF Notes List (rendered directly below Syllabus Table) */}
+      {isInfoSecurity && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 mt-6">
+          <div className="mb-5 flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm">
+                <FiDownload size={18} />
+              </div>
+              <div>
+                <h2 className="font-sans text-lg font-bold text-[#0F4C81]">
+                  Information Security — Lecture Notes (Module I to V)
+                </h2>
+                <p className="text-[11px] text-[#6B7280]">
+                  Faculty-curated study material PDFs for all 5 modules
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setActivePodcast({
+                  title: "Information Security — Complete PG Revision",
+                  subtitle: "Module I to V Complete Syllabus Revision",
+                  syllabus: syllabusData?.map((s) => s.module).join(". ") || "Information Security PG syllabus concepts",
+                  subject: selectedSubject,
+                  year: selectedYear,
+                  semester: selectedSemester,
+                });
+              }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-4 py-2 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer font-mono"
+              title="Listen to AI Audio Podcast for all 5 Modules"
+            >
+              🎙️ AI Podcast
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {INFO_SECURITY_PDFS.map((file, idx) => (
+              <PdfFileCard
+                key={file.id}
+                file={{
+                  ...file,
+                  subject: selectedSubject,
+                  year: Number(selectedYear),
+                  semester: Number(selectedSemester),
+                  unit: `Module ${idx + 1}`,
+                }}
+                onView={(fileToView) => setViewingPdf(fileToView)}
+              />
+            ))}
+          </div>
+        </motion.div>
+      )}
+
+      {/* Advanced Software Engineering PDF Notes List (rendered directly below Syllabus Table) */}
+      {isAdvancedSE && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 mt-6">
+          <div className="mb-5 flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm">
+                <FiDownload size={18} />
+              </div>
+              <div>
+                <h2 className="font-sans text-lg font-bold text-[#0F4C81]">
+                  Advanced Software Engineering — Lecture Notes & Reference PDFs
+                </h2>
+                <p className="text-[11px] text-[#6B7280]">
+                  6 study material PDFs in exact order
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setActivePodcast({
+                  title: "Advanced Software Engineering — Complete PG Revision",
+                  subtitle: "Module I to V Complete Syllabus Revision",
+                  syllabus: syllabusData?.map((s) => s.module).join(". ") || "Advanced Software Engineering PG syllabus concepts",
+                  subject: selectedSubject,
+                  year: selectedYear,
+                  semester: selectedSemester,
+                  files: ADVANCED_SE_PDFS,
+                });
+              }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-4 py-2 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer font-mono"
+              title="Listen to AI Audio Podcast for all 5 Modules"
+            >
+              🎙️ AI Podcast
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {ADVANCED_SE_PDFS.map((file, idx) => (
+              <PdfFileCard
+                key={file.id}
+                file={{
+                  ...file,
+                  subject: selectedSubject,
+                  year: Number(selectedYear),
+                  semester: Number(selectedSemester),
+                  unit: `PDF ${idx + 1}`,
+                }}
+                onView={(fileToView) => setViewingPdf(fileToView)}
+              />
+            ))}
+          </div>
+        </motion.div>
+      )}
+
       {isEnglish && englishPdf && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
@@ -3700,7 +3854,7 @@ export default function Notes() {
         </motion.div>
       )}
 
-      {!isEnglish && !isPhp && !isPgCombined && subjectNotesData && units.length > 0 && (
+      {!isEnglish && !isPhp && !isPgCombined && !isInfoSecurity && subjectNotesData && units.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>

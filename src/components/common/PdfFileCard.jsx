@@ -16,7 +16,7 @@ import {
   formatFileSize,
   ensurePdfExtension,
 } from "../../utils/downloadUtils";
-import { formatDate } from "../../utils/helpers";
+import { formatDate, formatShortSubject } from "../../utils/helpers";
 import { getSubjectIcon } from "../../utils/subjectIcons";
 
 import { usePdfPageCount } from "../../hooks/usePdfPageCount";
@@ -27,10 +27,11 @@ export default function PdfFileCard({ file, onView, onDelete, canDelete }) {
   // Extract properties with fallbacks
   const title = file.title || file.name || "PDF Document";
   const targetUrl = file.fileUrl || file.driveUrl || file.driveFileId || file.fileId || file.link || file.url || "";
-  const subject = file.subject || file.category || "Computer Science";
+  const rawSubject = file.subject || file.category || file.displayFileName || file.title || "Computer Science";
+  const subject = formatShortSubject(rawSubject);
 
-  // Clean File Name display (e.g. "tamil", "dbms", "operating system")
-  const fileNameDisplay = (file.displayFileName || file.subject || file.category || "document").toLowerCase();
+  // Clean File Name display (e.g. "Python", "Digital Electronics", "Maths - I")
+  const fileNameDisplay = formatShortSubject(file.displayFileName || file.subject || rawSubject);
   const downloadFileName = ensurePdfExtension(file.fileName || file.title || `${fileNameDisplay}.pdf`);
 
   // Clean Academic Info formatting: "1st Year · Sem 1" (unique by year, sem, subject)
@@ -122,9 +123,9 @@ export default function PdfFileCard({ file, onView, onDelete, canDelete }) {
 
         {/* Detailed Metadata Grid */}
         <div className="rounded-lg bg-[#F0FDFA] dark:bg-slate-800/60 p-3 text-[11px] space-y-1.5 border border-[#99F6E4]/50 dark:border-slate-800">
-          <div className="flex items-center justify-between text-slate-600 dark:text-slate-300">
-            <span className="font-semibold text-slate-500">File Name:</span>
-            <span className="font-mono text-slate-800 dark:text-slate-200 truncate max-w-[170px]" title={fileNameDisplay}>
+          <div className="flex items-center justify-between text-slate-600 dark:text-slate-300 gap-2">
+            <span className="font-semibold text-slate-500 shrink-0">File Name:</span>
+            <span className="font-semibold text-slate-800 dark:text-slate-200 text-right truncate" title={fileNameDisplay}>
               {fileNameDisplay}
             </span>
           </div>
@@ -144,6 +145,24 @@ export default function PdfFileCard({ file, onView, onDelete, canDelete }) {
               <FiHardDrive size={11} /> {pagesText}
             </span>
           </div>
+
+          {typeof rawSubject === "string" && rawSubject.includes(",") && (
+            <div className="pt-2 mt-1.5 border-t border-[#99F6E4]/60 dark:border-slate-800 space-y-1">
+              <span className="font-bold text-[#0D9488] dark:text-[#2DD4BF] text-[10px] uppercase tracking-wider block">
+                Included Subjects:
+              </span>
+              <div className="flex flex-wrap gap-1">
+                {rawSubject.split(",").map((s) => s.trim()).filter(Boolean).map((sub, i) => (
+                  <span
+                    key={i}
+                    className="inline-flex items-center rounded-md bg-[#CCFBF1] dark:bg-slate-800 text-[#0F766E] dark:text-[#2DD4BF] text-[10px] font-bold px-2 py-0.5 border border-[#99F6E4] dark:border-slate-700"
+                  >
+                    • {formatShortSubject(sub)}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

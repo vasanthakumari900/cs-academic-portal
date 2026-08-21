@@ -100,6 +100,36 @@ const SUBJECT_PLAYLISTS = {
   "ARTIFICIAL NEURAL NETWORK": "https://youtube.com/playlist?list=PLuhqtP7jdD8CftMk831qdE8BlIteSaNzD&si=ZK6mUQ16c2A0V_ru",
   "Artificial Neural Network": "https://youtube.com/playlist?list=PLuhqtP7jdD8CftMk831qdE8BlIteSaNzD&si=ZK6mUQ16c2A0V_ru",
   "1-1-ARTIFICIAL NEURAL NETWORK": "https://youtube.com/playlist?list=PLuhqtP7jdD8CftMk831qdE8BlIteSaNzD&si=ZK6mUQ16c2A0V_ru",
+
+  // PG 1st Year Semester 2
+  "ADVANCED DATABASE MANAGEMENT SYSTEM": "https://youtube.com/playlist?list=PLBlnK6fEyqRiyryTrbKHX1Sh9luYI0dhX&si=ve1nf3mEWwgEfUoJ",
+  "Advanced Database Management System": "https://youtube.com/playlist?list=PLBlnK6fEyqRiyryTrbKHX1Sh9luYI0dhX&si=ve1nf3mEWwgEfUoJ",
+  "1-2-ADVANCED DATABASE MANAGEMENT SYSTEM": "https://youtube.com/playlist?list=PLBlnK6fEyqRiyryTrbKHX1Sh9luYI0dhX&si=ve1nf3mEWwgEfUoJ",
+
+  "DISTRIBUTED DATABASES": "https://youtube.com/playlist?list=PLduM7bkxBdOdjbMXkTRdsSlWQKR43nSmd&si=wuIDv1fc3zEfUbHh",
+  "Distributed Databases": "https://youtube.com/playlist?list=PLduM7bkxBdOdjbMXkTRdsSlWQKR43nSmd&si=wuIDv1fc3zEfUbHh",
+  "1-2-DISTRIBUTED DATABASES": "https://youtube.com/playlist?list=PLduM7bkxBdOdjbMXkTRdsSlWQKR43nSmd&si=wuIDv1fc3zEfUbHh",
+
+  "CLOUD WEB SERVICES": "https://youtube.com/playlist?list=PLEiEAq2VkUULlNtIFhEQHo8gacvme35rz&si=u1n92MJoNzs1oJF0",
+  "Cloud Web Services": "https://youtube.com/playlist?list=PLEiEAq2VkUULlNtIFhEQHo8gacvme35rz&si=u1n92MJoNzs1oJF0",
+  "1-2-CLOUD WEB SERVICES": "https://youtube.com/playlist?list=PLEiEAq2VkUULlNtIFhEQHo8gacvme35rz&si=u1n92MJoNzs1oJF0",
+
+  "SOCIAL NETWORK ANALYSIS": "https://youtube.com/playlist?list=PLyqSpQzTE6M_bqqS9VmsoFNtcS72EDhUV&si=NMWTkFAPpV08NhtM",
+  "Social Network Analysis": "https://youtube.com/playlist?list=PLyqSpQzTE6M_bqqS9VmsoFNtcS72EDhUV&si=NMWTkFAPpV08NhtM",
+  "1-2-SOCIAL NETWORK ANALYSIS": "https://youtube.com/playlist?list=PLyqSpQzTE6M_bqqS9VmsoFNtcS72EDhUV&si=NMWTkFAPpV08NhtM",
+
+  // PG 2nd Year Semester 1
+  "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES": "https://www.youtube.com/live/hhGPiDrUe1c?si=v4pFVcTpGoSxDs-q",
+  "Artificial Intelligence and Machine Learning Techniques": "https://www.youtube.com/live/hhGPiDrUe1c?si=v4pFVcTpGoSxDs-q",
+  "2-1-ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES": "https://www.youtube.com/live/hhGPiDrUe1c?si=v4pFVcTpGoSxDs-q",
+
+  "DOT NET TECHNOLOGY": "https://youtube.com/playlist?list=PLVlQHNRLflP-jc5Fbhfdhzv52AWYq836j&si=3mJExr6Hnxo3ifKv",
+  "DOT NET Technology": "https://youtube.com/playlist?list=PLVlQHNRLflP-jc5Fbhfdhzv52AWYq836j&si=3mJExr6Hnxo3ifKv",
+  "2-1-DOT NET TECHNOLOGY": "https://youtube.com/playlist?list=PLVlQHNRLflP-jc5Fbhfdhzv52AWYq836j&si=3mJExr6Hnxo3ifKv",
+
+  "INFORMATION SECURITY": "https://youtube.com/playlist?list=PLIwjtbLyaFQ6q4NtpZ3UTLYURR2BSn7IL&si=EWwxCN6SE_wLy7ec",
+  "Information Security": "https://youtube.com/playlist?list=PLIwjtbLyaFQ6q4NtpZ3UTLYURR2BSn7IL&si=EWwxCN6SE_wLy7ec",
+  "2-1-INFORMATION SECURITY": "https://youtube.com/playlist?list=PLIwjtbLyaFQ6q4NtpZ3UTLYURR2BSn7IL&si=EWwxCN6SE_wLy7ec",
 };
 
 const MATH1_VIDEOS = [

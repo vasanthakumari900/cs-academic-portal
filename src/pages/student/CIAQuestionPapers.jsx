@@ -6,7 +6,7 @@ import {
   FiExternalLink, FiCalendar, FiBookOpen, FiFolder,
   FiAward, FiX, FiUploadCloud, FiCheckSquare,
 } from "react-icons/fi";
-import { CIA_DATA, getDriveDownloadUrl, getDriveEmbedUrl } from "../../utils/ciaData";
+import { CIA_DATA, CIA_DATA_PG, getDriveDownloadUrl, getDriveEmbedUrl } from "../../utils/ciaData";
 import { formatDate } from "../../utils/helpers";
 import EmptyState from "../../components/ui/EmptyState";
 import { useAuth } from "../../context/AuthContext";
@@ -14,7 +14,7 @@ import { useFirestoreList } from "../../hooks/useFirestoreList";
 import { ciaQuestionPaperService } from "../../services/ciaQuestionPaperService";
 import { uploadFile } from "../../services/storageService";
 import { STORAGE_PATHS } from "../../utils/constants";
-import { CURRICULUM } from "../../utils/curriculum";
+import { CURRICULUM, CURRICULUM_PG } from "../../utils/curriculum";
 import toast from "react-hot-toast";
 import { downloadDriveFile, getDriveViewUrl } from "../../utils/downloadUtils";
 import PdfFileCard from "../../components/common/PdfFileCard";
@@ -183,6 +183,7 @@ export default function CIAQuestionPapers() {
   const { user } = useAuth();
   const isFaculty = user?.type === "faculty";
 
+  const [courseType, setCourseType] = useState("ug");
   const [selectedYear, setSelectedYear] = useState(null);
   const [selectedSem, setSelectedSem] = useState(null);
   const [selectedCia, setSelectedCia] = useState(null);
@@ -200,7 +201,10 @@ export default function CIAQuestionPapers() {
   // Firestore papers
   const { items: uploadedCiaPapers, refetch } = useFirestoreList(ciaQuestionPaperService);
 
-  const years = Object.entries(CIA_DATA).map(([key, val]) => ({
+  const activeCiaData = courseType === "pg" ? CIA_DATA_PG : CIA_DATA;
+  const activeCurriculum = courseType === "pg" ? CURRICULUM_PG : CURRICULUM;
+
+  const years = Object.entries(activeCiaData).map(([key, val]) => ({
     key: Number(key),
     label: val.label,
     icon: val.icon,
@@ -209,7 +213,7 @@ export default function CIAQuestionPapers() {
 
   const sems =
     selectedYear != null
-      ? Object.entries(CIA_DATA[selectedYear]?.semesters || {}).map(([key, val]) => ({
+      ? Object.entries(activeCiaData[selectedYear]?.semesters || {}).map(([key, val]) => ({
           key: Number(key),
           label: val.label,
           icon: Number(key) === 1 ? "I" : "II",
@@ -220,7 +224,7 @@ export default function CIAQuestionPapers() {
   const cias =
     selectedYear != null && selectedSem != null
       ? Object.entries(
-          CIA_DATA[selectedYear]?.semesters[selectedSem]?.cia || {}
+          activeCiaData[selectedYear]?.semesters[selectedSem]?.cia || {}
         ).map(([key, val]) => ({
           key: Number(key),
           label: val.label,
@@ -231,8 +235,8 @@ export default function CIAQuestionPapers() {
 
   const subjectsList = useMemo(() => {
     if (selectedYear == null || selectedSem == null) return [];
-    return CURRICULUM[selectedYear]?.semesters[selectedSem]?.subjects || [];
-  }, [selectedYear, selectedSem]);
+    return activeCurriculum[selectedYear]?.semesters[selectedSem]?.subjects || [];
+  }, [selectedYear, selectedSem, activeCurriculum]);
 
   // Set default subject when list changes or form opens
   useEffect(() => {
@@ -247,10 +251,11 @@ export default function CIAQuestionPapers() {
     // Filter uploaded papers matching current selection
     const firestoreFiltered = uploadedCiaPapers
       .filter((p) => {
+        const matchesCourse = p.courseType ? p.courseType === courseType : (courseType === "ug");
         const matchesYear = Number(p.year) === Number(selectedYear);
         const matchesSem = Number(p.semester) === Number(selectedSem);
         const matchesCia = Number(p.cia) === Number(selectedCia);
-        return matchesYear && matchesSem && matchesCia;
+        return matchesCourse && matchesYear && matchesSem && matchesCia;
       })
       .map((p) => ({
         id: p.id,
@@ -263,37 +268,38 @@ export default function CIAQuestionPapers() {
       }));
 
     // Static papers
-    const staticPapers = CIA_DATA[selectedYear]?.semesters[selectedSem]?.cia[selectedCia]?.papers || [];
+    const staticPapers = activeCiaData[selectedYear]?.semesters[selectedSem]?.cia[selectedCia]?.papers || [];
 
     return [...staticPapers, ...firestoreFiltered];
-  }, [selectedYear, selectedSem, selectedCia, uploadedCiaPapers]);
+  }, [selectedYear, selectedSem, selectedCia, uploadedCiaPapers, activeCiaData, courseType]);
 
-  const yearLabel = selectedYear != null ? CIA_DATA[selectedYear]?.label : "";
+  const yearLabel = selectedYear != null ? activeCiaData[selectedYear]?.label : "";
   const semLabel =
     selectedSem != null
-      ? CIA_DATA[selectedYear]?.semesters[selectedSem]?.label
+      ? activeCiaData[selectedYear]?.semesters[selectedSem]?.label
       : "";
   const ciaLabel =
     selectedCia != null
-      ? CIA_DATA[selectedYear]?.semesters[selectedSem]?.cia[selectedCia]?.label
+      ? activeCiaData[selectedYear]?.semesters[selectedSem]?.cia[selectedCia]?.label
       : "";
 
   const breadcrumbs = [
     "CIA Question Papers",
+    courseType.toUpperCase(),
     ...(yearLabel ? [yearLabel] : []),
     ...(semLabel ? [semLabel] : []),
     ...(ciaLabel ? [ciaLabel] : []),
   ];
 
   function handleNavigate(breadcrumbIndex) {
-    if (breadcrumbIndex === 0) {
+    if (breadcrumbIndex === 0 || breadcrumbIndex === 1) {
       setSelectedYear(null);
       setSelectedSem(null);
       setSelectedCia(null);
-    } else if (breadcrumbIndex === 1) {
+    } else if (breadcrumbIndex === 2) {
       setSelectedSem(null);
       setSelectedCia(null);
-    } else if (breadcrumbIndex === 2) {
+    } else if (breadcrumbIndex === 3) {
       setSelectedCia(null);
     }
     setShowUploadForm(false);
@@ -352,6 +358,7 @@ export default function CIAQuestionPapers() {
       await ciaQuestionPaperService.create({
         title: uploadTitle.trim(),
         description: uploadDescription.trim(),
+        courseType,
         year: Number(selectedYear),
         semester: Number(selectedSem),
         cia: Number(selectedCia),
@@ -420,6 +427,44 @@ export default function CIAQuestionPapers() {
             </div>
           </div>
         </motion.div>
+
+        {/* Course Type Switcher (UG / PG) */}
+        <div className="flex justify-center mb-6">
+          <div className="inline-flex rounded-2xl bg-white p-1.5 border-2 border-amber-400 shadow-md">
+            <button
+              onClick={() => {
+                setCourseType("ug");
+                setSelectedYear(null);
+                setSelectedSem(null);
+                setSelectedCia(null);
+                setShowUploadForm(false);
+              }}
+              className={`flex items-center gap-2 rounded-xl px-5 py-2.5 text-xs font-black transition-all cursor-pointer ${
+                courseType === "ug"
+                  ? "bg-gradient-to-r from-[#C50337] to-[#7F011F] text-white shadow-md"
+                  : "text-[#0F4C81] hover:bg-slate-100 font-bold"
+              }`}
+            >
+              UG — B.Sc. Computer Science
+            </button>
+            <button
+              onClick={() => {
+                setCourseType("pg");
+                setSelectedYear(null);
+                setSelectedSem(null);
+                setSelectedCia(null);
+                setShowUploadForm(false);
+              }}
+              className={`flex items-center gap-2 rounded-xl px-5 py-2.5 text-xs font-black transition-all cursor-pointer ${
+                courseType === "pg"
+                  ? "bg-gradient-to-r from-[#C50337] to-[#7F011F] text-white shadow-md"
+                  : "text-[#0F4C81] hover:bg-slate-100 font-bold"
+              }`}
+            >
+              PG — M.Sc. Computer Science
+            </button>
+          </div>
+        </div>
 
         {/* Breadcrumbs */}
         <Breadcrumb crumbs={breadcrumbs} onNavigate={handleNavigate} />
