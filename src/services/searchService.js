@@ -25,7 +25,7 @@ const STATIC_VIDEOS = [
 const STATIC_PLACEMENTS = [
   { id: "place-tcs-2025", companyName: "TCS (Tata Consultancy Services)", role: "Ninja & Digital Software Engineer", subject: "Placements 2025", package: "₹3.6 - ₹7.0 LPA", eligibility: "B.Sc CS & M.Sc CS (CGPA >= 6.0)", description: "On-campus recruitment drive for 2025 graduating batch. Registration open for CS department students." },
   { id: "place-infosys-2025", companyName: "Infosys Limited", role: "Systems Associate & Specialist Programmer", subject: "Placements 2025", package: "₹3.6 - ₹9.5 LPA", eligibility: "B.Sc CS & M.Sc CS (No active arrears)", description: "Specialist programming & systems associate recruitment for Computer Science department." },
-  { id: "place-[#D97706]", companyName: "Cognizant (CTS)", role: "Programmer Analyst Trainee (PAT)", subject: "Placements 2025", package: "₹4.0 - ₹6.5 LPA", eligibility: "B.Sc / M.Sc CS", description: "Campus hiring drive for full-stack developer & cloud infrastructure roles." },
+  { id: "place-cognizant-cts", companyName: "Cognizant (CTS)", role: "Programmer Analyst Trainee (PAT)", subject: "Placements 2025", package: "₹4.0 - ₹6.5 LPA", eligibility: "B.Sc / M.Sc CS", description: "Campus hiring drive for full-stack developer & cloud infrastructure roles." },
   { id: "place-zoho-2025", companyName: "Zoho Corporation", role: "Software Development Engineer (SDE 1)", subject: "Placements 2025", package: "₹6.0 - ₹12.0 LPA", eligibility: "Open to All CS Students with Strong Coding Skills", description: "Off-campus & campus coding test hiring for core product development team." },
 ];
 

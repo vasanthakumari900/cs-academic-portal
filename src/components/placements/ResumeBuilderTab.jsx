@@ -15,7 +15,6 @@ import {
   FiAward,
 } from "react-icons/fi";
 import toast from "react-hot-toast";
-import { jsPDF } from "jspdf";
 import { LOGO_TRANS_BASE64 } from "../../assets/logoBase64";
 import { RESUME_TEMPLATES, DEMO_STUDENT_PROFILE } from "../../utils/placementMockData";
 
@@ -71,8 +70,9 @@ export default function ResumeBuilderTab() {
     setResumeData((prev) => ({ ...prev, [field]: value }));
   }
 
-  function handleDownloadPDF() {
+  async function handleDownloadPDF() {
     try {
+      const { jsPDF } = await import("jspdf");
       const doc = new jsPDF();
 
       // Top Accent Line

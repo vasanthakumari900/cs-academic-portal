@@ -2,11 +2,6 @@
 // Client-side OCR engine for scanned marksheets (PDFs without a text layer, and image files).
 // Uses pdf.js to rasterize PDF pages, then Tesseract.js to recognize text.
 
-import { pdfjs } from "react-pdf";
-
-// pdf.js worker config (same CDN approach used across the app)
-pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
-
 const OCR_SCALE = 3.5; // render scale for better OCR accuracy on small marksheet header text
 
 /**

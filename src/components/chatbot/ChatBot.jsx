@@ -847,7 +847,8 @@ export default function ChatBot() {
               <button
                 type="submit"
                 disabled={!input.trim() || isLoading}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-b from-[#61182A] to-[#4A1620] text-white shadow-md transition-all hover:from-[#7E2238] hover:to-[#61182A] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                aria-label="Send message to AI assistant"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-b from-[#61182A] to-[#4A1620] text-white shadow-md transition-all hover:from-[#7E2238] hover:to-[#61182A] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer focus-visible:ring-2 focus-visible:ring-[#F4C266]"
               >
                 <FiSend size={15} />
               </button>
@@ -860,6 +861,7 @@ export default function ChatBot() {
       <motion.button
         type="button"
         onClick={toggleOpen}
+        aria-label={isOpen ? "Close AI Chatbot" : "Open CS AI Assistant Chatbot"}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.92 }}
         className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[90] flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full bg-gradient-to-b from-[#61182A] to-[#3A101A] text-white shadow-2xl border-3 border-[#F4C266] transition-all duration-300 hover:shadow-[0_0_40px_rgba(217,119,6,0.5)] p-0.5 cursor-pointer"

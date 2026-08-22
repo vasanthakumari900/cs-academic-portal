@@ -20,9 +20,7 @@ import {
   MONTHS_LIST,
   CALENDAR_DATA,
 } from "../data/academicCalendarData";
-import toast from "react-hot-toast";
-
-import { jsPDF } from "jspdf";
+import { exportEventToIcs } from "../utils/icsExporter";
 
 export default function CollegeCalendar() {
   const [selectedMonthId, setSelectedMonthId] = useState("aug-26"); // Default August 2026
@@ -63,8 +61,9 @@ export default function CollegeCalendar() {
     : currentMonthData.days;
 
   // Generate Official PDF File Download using jsPDF
-  const handleDownloadPdfCalendar = () => {
+  const handleDownloadPdfCalendar = async () => {
     try {
+      const { jsPDF } = await import("jspdf");
       const doc = new jsPDF({
         orientation: "portrait",
         unit: "mm",
@@ -161,6 +160,23 @@ export default function CollegeCalendar() {
     }
   };
 
+  const handleExportCiaExamsToIcs = () => {
+    let count = 0;
+    Object.entries(CALENDAR_DATA).forEach(([monthId, mData]) => {
+      mData.days?.forEach((d) => {
+        if (d.event && /CIA|Exam|Test/i.test(d.event)) {
+          count++;
+          exportEventToIcs({
+            title: `[CIA Exam] ${d.event}`,
+            description: `DGVC College Academic Calendar Exam Event: ${d.event} (${mData.month})`,
+            venue: "DGVC CS Department Examination Center",
+            date: `${mData.month} ${d.date}`,
+          });
+        }
+      });
+    });
+  };
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 bg-[#F8FAFC] dark:bg-slate-950 min-h-screen text-slate-800 dark:text-slate-100">
       {/* ─── Hero Banner ─── */}
@@ -188,7 +204,14 @@ export default function CollegeCalendar() {
             </p>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <button
+              onClick={handleExportCiaExamsToIcs}
+              className="inline-flex items-center gap-2 rounded-2xl bg-white/20 hover:bg-white/30 text-white px-4 py-2.5 text-xs font-extrabold transition-all backdrop-blur-md border border-white/30 cursor-pointer font-mono active:scale-95 shadow-md"
+              title="Export CIA exam dates to personal calendar (.ics)"
+            >
+              <FiCalendar size={16} className="text-amber-300" /> Export CIA Exams (.ics)
+            </button>
             <button
               onClick={handleDownloadPdfCalendar}
               className="inline-flex items-center gap-2 rounded-2xl bg-amber-400 text-slate-950 px-4 py-2.5 text-xs font-black hover:bg-amber-300 transition-all shadow-lg cursor-pointer font-mono active:scale-95 border border-amber-300"

@@ -51,38 +51,38 @@ export default function Register() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">Full name</label>
+                <label htmlFor="reg-name" className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">Full name</label>
                 <div className="relative">
                   <FiUser className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9C6D7F]" size={16} />
-                  <input value={form.name} onChange={(e) => handleChange("name", e.target.value)}
+                  <input id="reg-name" value={form.name} onChange={(e) => handleChange("name", e.target.value)}
                     className={inputCls}
                     placeholder="Jane Doe" />
                 </div>
               </div>
 
               <div>
-                <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">Email</label>
+                <label htmlFor="reg-email" className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">Email</label>
                 <div className="relative">
                   <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9C6D7F]" size={16} />
-                  <input type="email" value={form.email} onChange={(e) => handleChange("email", e.target.value)}
+                  <input id="reg-email" type="email" value={form.email} onChange={(e) => handleChange("email", e.target.value)}
                     className={inputCls}
                     placeholder="you@college.edu" />
                 </div>
               </div>
 
               <div>
-                <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">Password</label>
+                <label htmlFor="reg-password" className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">Password</label>
                 <div className="relative">
                   <FiLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9C6D7F]" size={16} />
-                  <input type="password" value={form.password} onChange={(e) => handleChange("password", e.target.value)}
+                  <input id="reg-password" type="password" value={form.password} onChange={(e) => handleChange("password", e.target.value)}
                     className={inputCls}
                     placeholder="••••••••" />
                 </div>
               </div>
 
               <div>
-                <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">I am a</label>
-                <select value={form.role} onChange={(e) => handleChange("role", e.target.value)}
+                <label htmlFor="reg-role" className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">I am a</label>
+                <select id="reg-role" value={form.role} onChange={(e) => handleChange("role", e.target.value)}
                   className="w-full rounded-xl border border-[#EDC8D0] dark:border-white/15 bg-white dark:bg-[#22101A] px-4 py-3 text-sm text-[#2A0D13] dark:text-[#F0E2E6] outline-none transition-all focus:border-[#4A1620] focus:ring-2 focus:ring-[#4A1620]/15"
                 >
                   <option value="student">Student</option>

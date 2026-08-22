@@ -15,9 +15,8 @@ export default function ProtectedRoute({ allowedRoles }) {
   }
 
   // Role-based access control — redirect if the user doesn't have the required role.
-  // 24E3006 and admin roles have full access to admin routes.
   const userRole = user.role || user.type;
-  const isAdminUser = userRole === "admin" || user.rollNumber === "24E3006" || user.rollNumber === "24E3013" || user.type === "admin" || !!user.adminBadge;
+  const isAdminUser = userRole === "admin" || user.type === "admin" || !!user.adminBadge;
 
   if (allowedRoles) {
     if (allowedRoles.includes("admin") && isAdminUser) {

@@ -1,4 +1,3 @@
-import { jsPDF } from "jspdf";
 import { LOGO_TRANS_BASE64 } from "../assets/logoBase64";
 
 /**
@@ -6,7 +5,8 @@ import { LOGO_TRANS_BASE64 } from "../assets/logoBase64";
  * @param {object} note - note object with title, subject, facultyName, year, pages, description
  * @returns {string} data URL string for the generated PDF
  */
-export function generateNotePdf(note) {
+export async function generateNotePdf(note) {
+  const { jsPDF } = await import("jspdf");
   const doc = new jsPDF("p", "mm", "a4");
   const pageW = 210;
   const pageH = 297;
@@ -124,7 +124,8 @@ export function generateNotePdf(note) {
 /**
  * Generate a real PDF for a question paper with actual exam content.
  */
-export function generateQuestionPaperPdf(paper) {
+export async function generateQuestionPaperPdf(paper) {
+  const { jsPDF } = await import("jspdf");
   const doc = new jsPDF("p", "mm", "a4");
   const pageW = 210;
   const pageH = 297;

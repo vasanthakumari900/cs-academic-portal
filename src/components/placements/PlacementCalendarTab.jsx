@@ -11,6 +11,8 @@ import {
 } from "react-icons/fi";
 import { PLACEMENT_CALENDAR_EVENTS } from "../../utils/placementMockData";
 
+import { exportEventToIcs } from "../../utils/icsExporter";
+
 export default function PlacementCalendarTab() {
   const [selectedType, setSelectedType] = useState("All");
 
@@ -107,10 +109,11 @@ export default function PlacementCalendarTab() {
             </div>
 
             <button
-              onClick={() => alert(`Added "${ev.title}" on ${ev.date} to personal calendar.`)}
-              className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 transition-all shrink-0"
+              onClick={() => exportEventToIcs({ title: ev.title, date: ev.date, venue: ev.venue, time: ev.time, description: `Placement Event: ${ev.type}` })}
+              aria-label={`Export ${ev.title} to calendar`}
+              className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 px-4 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 transition-all shrink-0 focus-visible:ring-2 focus-visible:ring-[#0F4C81]"
             >
-              + Add to Reminder
+              + Add to Calendar (.ics)
             </button>
           </motion.div>
         ))}

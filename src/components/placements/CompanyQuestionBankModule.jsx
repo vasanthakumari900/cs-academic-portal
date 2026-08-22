@@ -549,7 +549,15 @@ export default function CompanyQuestionBankModule() {
                     </p>
                   </div>
 
-                  <button className="rounded-full bg-slate-100 dark:bg-slate-800 p-2 text-slate-600 dark:text-slate-300 shrink-0">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setExpandedQId(isExpanded ? null : q.id);
+                    }}
+                    aria-label={isExpanded ? "Collapse question details" : "Expand question details"}
+                    className="rounded-full bg-slate-100 dark:bg-slate-800 p-2 text-slate-600 dark:text-slate-300 hover:bg-[#7F011F] hover:text-white transition-colors shrink-0 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#D97706]"
+                  >
                     {isExpanded ? <FiChevronUp size={18} /> : <FiChevronDown size={18} />}
                   </button>
                 </div>

@@ -9,21 +9,28 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        heading: ['"Plus Jakarta Sans"', 'sans-serif'],
+        body: ['"Plus Jakarta Sans"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+      },
       colors: {
         // ─── Brand: Maroon / Wine (college identity) ───
         primary: {
-          DEFAULT: "#4A1620",
-          light: "#6B2332",
-          dark: "#3B1119",
+          DEFAULT: "#7F011F",
+          hover: "#A0022B",
+          light: "#A0022B",
+          dark: "#61182A",
           50: "#FBF4F5",
           100: "#F6E4E8",
           200: "#EDC8D0",
           300: "#DF9DA9",
           400: "#C96A7E",
           500: "#AD4057",
-          600: "#7E2238",
-          700: "#61182A",
-          800: "#4A1620",
+          600: "#A0022B",
+          700: "#7F011F",
+          800: "#61182A",
           900: "#3A101A",
           950: "#250A11",
         },
@@ -103,18 +110,6 @@ export default {
           950: "#22101A",
         },
       },
-      fontFamily: {
-        sans: ["Plus Jakarta Sans", "Inter", "Outfit", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
-        heading: ["Outfit", "Plus Jakarta Sans", "Inter", "system-ui", "sans-serif"],
-        display: ["Outfit", "Plus Jakarta Sans", "Inter", "system-ui", "sans-serif"],
-        serif: ["Outfit", "Plus Jakarta Sans", "Inter", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "Fira Code", "ui-monospace", "SFMono-Regular", "Menlo", "Consolas", "Liberation Mono", "monospace"],
-        // Aliases kept for backwards compatibility
-        jakarta: ["Plus Jakarta Sans", "Inter", "sans-serif"],
-        grotesk: ["Outfit", "Plus Jakarta Sans", "sans-serif"],
-        outfit: ["Outfit", "sans-serif"],
-      },
-
       borderRadius: {
         xs: "0.125rem",
         xl: "12px",

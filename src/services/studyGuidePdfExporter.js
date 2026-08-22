@@ -1,5 +1,4 @@
 // src/services/studyGuidePdfExporter.js
-import jsPDF from "jspdf";
 
 /**
  * Clean string of non-ASCII unicode characters and remove any unit numbers (e.g. Unit I, Unit 1, Unit III).
@@ -18,7 +17,7 @@ function sanitizePdfText(text) {
  * Export Study Guide PDF Engine (No Unit Numbers Mentioned)
  * Perfectly aligned layout with High-Contrast Visible Code Boxes and Real Technical Content.
  */
-export function exportUnitStudyGuidePDF({
+export async function exportUnitStudyGuidePDF({
   subjectName = "Computer Science",
   rawUnitTitle = "",
   unitSubtitle = "Core Concepts",
@@ -27,6 +26,7 @@ export function exportUnitStudyGuidePDF({
   examBank = { short2Mark: [], medium5Mark: [], long10Mark: [] },
   quickRevision = { importantDefinitions: [], keyDifferences: [], memoryTricks: [] },
 }) {
+  const { default: jsPDF } = await import("jspdf");
   const cleanSubj = sanitizePdfText(subjectName).replace(/[^a-zA-Z0-9]/g, "_") || "Subject";
   const fileName = `${cleanSubj}_Complete_Study_Guide.pdf`;
 

@@ -38,7 +38,6 @@ export default function Navbar() {
   const getDashboardPath = (u) => {
     if (!u) return "/login";
     if (u.type === "faculty" || u.role === "faculty") return "/faculty/dashboard";
-    if (u.type === "admin" || u.role === "admin") return "/admin/dashboard";
     return "/student/dashboard";
   };
 

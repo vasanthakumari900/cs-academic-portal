@@ -68,7 +68,15 @@ export default function BentoCard3D({
         stiffness: 300,
         damping: 20,
       }}
-      className={`group relative overflow-hidden rounded-3xl bg-gradient-to-b from-[#22101A]/90 to-[#14070D]/95 border border-white/10 p-6 shadow-xl transition-shadow duration-500 cursor-pointer ${
+      tabIndex={onClick ? 0 : undefined}
+      role={onClick ? "button" : undefined}
+      onKeyDown={(e) => {
+        if (onClick && (e.key === "Enter" || e.key === " ")) {
+          e.preventDefault();
+          onClick(e);
+        }
+      }}
+      className={`group relative overflow-hidden rounded-3xl bg-gradient-to-b from-[#22101A]/90 to-[#14070D]/95 border border-white/10 p-6 shadow-xl transition-all duration-300 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#F4C266] focus-visible:ring-offset-2 focus-visible:ring-offset-[#14070D] focus:outline-none ${
         onClick ? "active:scale-[0.99]" : ""
       } ${className}`}
     >

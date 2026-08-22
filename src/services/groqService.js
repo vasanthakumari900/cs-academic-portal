@@ -1,8 +1,6 @@
 // src/services/groqService.js
 // Groq AI integration for the CS Academic Portal chatbot with multi-modal features.
-// Free tier: 30 req/min. Models: Llama 3.3, Mixtral, etc.
-
-const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
+// Secure serverless backend proxy via /api/groq
 
 const GROQ_MODELS = [
   "llama-3.3-70b-versatile",
@@ -46,55 +44,55 @@ function buildMessages(history, message, extraContext = "") {
   return messages;
 }
 
-async function tryModel(apiKey, model, history, message, extraContext = "") {
-  const response = await fetch(GROQ_API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model,
-      messages: buildMessages(history, message, extraContext),
-      temperature: 0.7,
-      max_tokens: 1000,
-      top_p: 0.9,
-    }),
-  });
+async function callGroqProxy(payload) {
+  try {
+    const response = await fetch("/api/groq", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    const status = response.status;
-    const errorMessage = errorData?.error?.message || response.statusText;
-    return { success: false, status, errorMessage };
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || !result.success) {
+      return {
+        success: false,
+        status: response.status,
+        errorMessage: result.error || response.statusText,
+      };
+    }
+
+    const text = result.data?.choices?.[0]?.message?.content;
+    return { success: true, text: text ? text.trim() : "", data: result.data };
+  } catch (err) {
+    return { success: false, status: 0, errorMessage: err.message };
   }
+}
 
-  const data = await response.json();
-  const text = data?.choices?.[0]?.message?.content;
-
-  if (!text) {
+async function tryModel(model, history, message, extraContext = "") {
+  const payload = {
+    model,
+    messages: buildMessages(history, message, extraContext),
+    temperature: 0.7,
+    max_tokens: 1000,
+    top_p: 0.9,
+  };
+  const result = await callGroqProxy(payload);
+  if (!result.success) return result;
+  if (!result.text) {
     return { success: true, text: "I couldn't process that response. Could you rephrase your question?" };
   }
-
-  return { success: true, text: text.trim() };
+  return { success: true, text: result.text };
 }
 
 /**
  * Send a message to Groq AI with optional document/file context
  */
 export async function sendMessage(history, message, extraContext = "") {
-  const apiKey = import.meta.env.VITE_GROQ_API_KEY;
-
-  if (!apiKey) {
-    // Smart local AI fallback if key is missing
-    return generateLocalFallbackResponse(message, extraContext);
-  }
-
   let lastError = null;
 
   for (const model of GROQ_MODELS) {
     try {
-      const result = await tryModel(apiKey, model, history, message, extraContext);
+      const result = await tryModel(model, history, message, extraContext);
       if (result.success) return result.text;
 
       lastError = result;
@@ -145,13 +143,11 @@ function generateLocalFallbackResponse(message, extraContext = "") {
   return `🤖 **CS Assistant**: That's a great question about "${message}"!\n\nKey insights:\n1. Check the relevant subject notes & e-content on our portal.\n2. For coding queries, practice implementing sample snippets and testing execution logic.\n\nAsk me if you need specific notes, videos, or practice questions!`;
 }
 
-
-
 /**
- * Check if Groq is configured
+ * Check if Groq AI service is active
  */
 export function isAiConfigured() {
-  return !!import.meta.env.VITE_GROQ_API_KEY;
+  return true;
 }
 
 /**
@@ -217,9 +213,6 @@ export async function performWebSearch(query) {
  * Generates dynamic teacher-style syllabus lessons from Groq AI API
  */
 export async function generateSyllabusPodcastLesson({ subject, year, semester, unitTitle, unitSubtitle, syllabusText }) {
-  const apiKey = import.meta.env.VITE_GROQ_API_KEY;
-  if (!apiKey) return null;
-
   const prompt = `You are a distinguished Computer Science Professor teaching a university lecture for:
 Subject: ${subject}
 Year: ${year} | Semester: ${semester}
@@ -261,29 +254,19 @@ Return strictly valid JSON with this exact structure:
 }`;
 
   try {
-    const response = await fetch(GROQ_API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        messages: [
-          { role: "system", content: "You are a university Computer Science professor. Always output valid JSON only." },
-          { role: "user", content: prompt },
-        ],
-        temperature: 0.5,
-        max_tokens: 2500,
-        response_format: { type: "json_object" },
-      }),
+    const res = await callGroqProxy({
+      model: "llama-3.3-70b-versatile",
+      messages: [
+        { role: "system", content: "You are a university Computer Science professor. Always output valid JSON only." },
+        { role: "user", content: prompt },
+      ],
+      temperature: 0.5,
+      max_tokens: 2500,
+      response_format: { type: "json_object" },
     });
 
-    if (!response.ok) return null;
-    const data = await response.json();
-    const contentText = data?.choices?.[0]?.message?.content;
-    if (!contentText) return null;
-    return JSON.parse(contentText);
+    if (!res.success || !res.text) return null;
+    return JSON.parse(res.text);
   } catch (err) {
     console.error("Groq podcast fetch error:", err);
     return null;
@@ -294,8 +277,6 @@ Return strictly valid JSON with this exact structure:
  * Interactive Q&A for "Ask AI Teacher" tab grounded in the selected unit's syllabus & notes
  */
 export async function askAiTeacherForUnit({ question, subject, unitTitle, unitSubtitle, syllabusText }) {
-  const apiKey = import.meta.env.VITE_GROQ_API_KEY;
-
   const sysPrompt = `You are an expert, encouraging university Computer Science Professor.
 You are currently teaching:
 Subject: ${subject}
@@ -308,34 +289,22 @@ Instructions:
 3. Use an encouraging, warm academic tone suitable for an undergraduate CS student.
 4. FORMATTING RULE: DO NOT use raw '***', '---', or '###' dividers. Use clean text with clear bullet points ('•') and bold section headers like 'Concept:'.`;
 
-  if (!apiKey) {
-    return `🎓 **AI Teacher Explanation** (${unitTitle}):\n\nGreat question regarding "${question}"!\n\nKey Breakdown:\n• **Core Concept**: In ${unitTitle}, "${question}" relates directly to ${syllabusText.slice(0, 100)}...\n• **Key Point**: Focus on definitions, step-by-step workflow, and drawing clear block diagrams for exams.\n• **Exam Tip**: State the core definition first, followed by working steps and advantages.`;
-  }
-
   try {
-    const response = await fetch(GROQ_API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        messages: [
-          { role: "system", content: sysPrompt },
-          { role: "user", content: question },
-        ],
-        temperature: 0.7,
-        max_tokens: 1200,
-      }),
+    const res = await callGroqProxy({
+      model: "llama-3.3-70b-versatile",
+      messages: [
+        { role: "system", content: sysPrompt },
+        { role: "user", content: question },
+      ],
+      temperature: 0.7,
+      max_tokens: 1200,
     });
 
-    if (!response.ok) throw new Error("API request failed");
-    const data = await response.json();
-    const rawText = data?.choices?.[0]?.message?.content || "I couldn't generate an answer at this moment. Please try asking again!";
-    
-    // Clean any triple asterisks or horizontal rule markers
-    return rawText
+    if (!res.success || !res.text) {
+      return `🎓 **AI Teacher Explanation** (${unitTitle}):\n\nGreat question regarding "${question}"!\n\nKey Breakdown:\n• **Core Concept**: In ${unitTitle}, "${question}" relates directly to ${syllabusText.slice(0, 100)}...\n• **Key Point**: Focus on definitions, step-by-step workflow, and drawing clear block diagrams for exams.\n• **Exam Tip**: State the core definition first, followed by working steps and advantages.`;
+    }
+
+    return res.text
       .replace(/\*{3,}/g, "")
       .replace(/^[-*_]{3,}\s*$/gm, "")
       .trim();
@@ -344,6 +313,3 @@ Instructions:
     return `🎓 **AI Teacher Explanation**:\n\nRegarding "${question}": In ${unitTitle}, remember to review the primary definitions, block diagrams, and step-by-step mechanisms in your unit syllabus!`;
   }
 }
-
-
-

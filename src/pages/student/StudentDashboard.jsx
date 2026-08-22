@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { getRecentlyViewed } from "../../utils/recentlyViewed";
 import {
   FiPlayCircle,
   FiFileText,
@@ -24,6 +25,7 @@ import {
   FiFilter,
   FiZap,
   FiLayers,
+  FiClock,
 } from "react-icons/fi";
 import CiaExamNotificationCard from "../../components/dashboard/CiaExamNotificationCard";
 import BirthdayWishCard from "../../components/dashboard/BirthdayWishCard";
@@ -170,8 +172,13 @@ export default function StudentDashboard() {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   const [isAdminFeedbackOpen, setIsAdminFeedbackOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("all");
+  const [recentItems, setRecentItems] = useState([]);
 
-  const isAdmin = user?.rollNumber === "24E3006" || user?.rollNumber === "24E3013" || user?.role === "admin" || user?.type === "admin" || Boolean(user?.adminBadge);
+  useEffect(() => {
+    setRecentItems(getRecentlyViewed().slice(0, 4));
+  }, []);
+
+  const isAdmin = user?.role === "admin" || user?.type === "admin" || Boolean(user?.adminBadge);
   const hasPhoto = Boolean(user?.photoUrl);
   const photoPath = user?.photoUrl || "/admin_photo.jpg";
 
@@ -195,7 +202,7 @@ export default function StudentDashboard() {
   const studentQuote = getStudentCsQuote(user?.rollNumber || user?.name || "CS_STUDENT");
 
   return (
-    <div className="mx-auto min-h-screen max-w-6xl px-4 py-8 sm:px-6 lg:px-8 bg-[#FAF0F2] text-[#2D060E]">
+    <div className="mx-auto min-h-screen max-w-7xl px-4 py-8 sm:px-6 lg:px-8 bg-[#FBF7F2] dark:bg-[#190B13] text-[#2A0D13] dark:text-[#F0E2E6]">
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -206,27 +213,27 @@ export default function StudentDashboard() {
           <div className="flex-1 w-full">
             {hasPhoto ? (
               /* Profile Photo Banner for Students with Photos (e.g. 24E3006, 24E3007) */
-              <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm flex flex-col items-center justify-center text-center">
+              <div className="rounded-2xl border border-[#EDC8D0] bg-white p-6 sm:p-8 shadow-sm flex flex-col items-center justify-center text-center">
                 <div className="relative mb-4">
-                  <div className="absolute -inset-1.5 rounded-2xl bg-[#021C4F]/20 blur-sm" />
+                  <div className="absolute -inset-1.5 rounded-2xl bg-[#7F011F]/20 blur-sm" />
                   <img
                     src={photoPath}
                     alt={user?.name || "Student"}
-                    className="relative h-60 w-48 sm:h-64 sm:w-52 object-cover rounded-2xl border-4 border-[#021C4F] shadow-md mx-auto"
+                    className="relative h-60 w-48 sm:h-64 sm:w-52 object-cover rounded-2xl border-4 border-[#7F011F] shadow-md mx-auto"
                   />
                 </div>
-                <h2 className="font-mono text-xl sm:text-2xl font-black text-[#021C4F]">
-                  Welcome back, {user?.name || "Student"}! 👋
+                <h2 className="font-heading text-xl sm:text-2xl font-extrabold text-[#7F011F]">
+                  Good morning, {user?.name || "Student"} 👋
                 </h2>
-                <p className="mt-1 text-xs sm:text-sm text-[#475569] font-medium max-w-md">
-                  {yearLabel} · {semesterLabel} · B.Sc. Computer Science
+                <p className="mt-1 text-xs sm:text-sm text-[#6B7280] font-medium max-w-md">
+                  B.Sc. Computer Science · {yearLabel} · {semesterLabel}
                 </p>
                 <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs font-mono font-bold">
-                  <span className="rounded-full bg-[#021C4F] text-amber-300 px-3 py-1 shadow-xs border border-amber-400/40">
+                  <span className="rounded-full bg-[#7F011F] text-[#F4C266] px-3 py-1 shadow-xs border border-[#F4C266]/40">
                     Roll No: {user?.rollNumber || "24E2901"}
                   </span>
                   {user?.section && (
-                    <span className="rounded-full bg-[#0D9488] text-white px-3 py-1 shadow-xs">
+                    <span className="rounded-full bg-[#D97706] text-white px-3 py-1 shadow-xs">
                       Section {user.section}
                     </span>
                   )}
@@ -234,28 +241,23 @@ export default function StudentDashboard() {
               </div>
             ) : (
               /* Standard Banner for Students without Profile Photo */
-              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#011337] via-[#021C4F] to-[#7F011F] p-6 sm:p-8 text-white shadow-lg border-2 border-amber-400/40">
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#250A11] via-[#7F011F] to-[#A0022B] p-6 sm:p-8 text-white shadow-lg border-2 border-[#D97706]/40">
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                   <div className="space-y-3 max-w-xl">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-400 text-slate-950 px-3 py-1 text-[11px] font-black uppercase tracking-widest shadow-md">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#D97706] text-white px-3 py-1 text-[11px] font-black uppercase tracking-widest shadow-md">
                         🎓 Student Dashboard
                       </span>
-                      {isAdmin && (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-rose-500 text-white px-3 py-1 text-[11px] font-black uppercase tracking-widest shadow-md animate-pulse">
-                          ⚡ Portal Admin
-                        </span>
-                      )}
                     </div>
-                    <h1 className="font-sans text-2xl sm:text-3xl font-extrabold text-white">
-                      Welcome back, {user?.name || "Student"}! 👋
+                    <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-white">
+                      Good morning, {user?.name || "Student"} 👋
                     </h1>
-                    <p className="text-xs sm:text-sm text-teal-100 font-medium leading-relaxed">
-                      Department of Computer Science — Dwaraka Doss Goverdhan Doss Vaishnav College
+                    <p className="text-xs sm:text-sm text-[#F3E4E8] font-medium leading-relaxed">
+                      B.Sc. Computer Science · {yearLabel} · {semesterLabel} · Dwaraka Doss Goverdhan Doss Vaishnav College
                     </p>
 
                     {/* Personal CS Quote */}
-                    <div className="mt-3 rounded-xl bg-black/30 backdrop-blur-md p-3.5 border border-white/20 text-xs italic text-amber-200">
+                    <div className="mt-3 rounded-xl bg-black/30 backdrop-blur-md p-3.5 border border-white/20 text-xs italic text-[#F4C266]">
                       &quot;{studentQuote}&quot;
                     </div>
                   </div>
@@ -305,6 +307,37 @@ export default function StudentDashboard() {
         <div className="mb-6">
           <BirthdayWishCard user={user} />
         </div>
+
+        {/* Continue Where You Left Off Section */}
+        {recentItems.length > 0 && (
+          <div className="mb-8 rounded-3xl bg-white p-6 border border-slate-200 shadow-sm space-y-4 text-left">
+            <div className="flex items-center justify-between">
+              <h3 className="font-sans text-base font-extrabold text-[#021C4F] flex items-center gap-2">
+                <FiClock className="text-[#D97706]" size={18} /> Continue Where You Left Off
+              </h3>
+              <Link to="/student/recently-viewed" className="text-xs font-bold text-[#0F4C81] hover:underline flex items-center gap-1">
+                View All <FiArrowRight size={13} />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {recentItems.map((item, i) => (
+                <Link
+                  key={`${item.id}_${i}`}
+                  to={item.type === "video" ? "/student/videos" : item.type === "question-paper" ? "/student/question-papers" : "/student/notes"}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 hover:bg-slate-100 p-4 transition-all flex flex-col justify-between hover:border-[#0F4C81]/40 focus-visible:ring-2 focus-visible:ring-[#0F4C81]"
+                >
+                  <div className="space-y-1.5">
+                    <span className="inline-block rounded-md bg-[#0F4C81] text-white text-[10px] font-extrabold px-2 py-0.5 uppercase">
+                      {item.type || "Resource"}
+                    </span>
+                    <h4 className="text-xs font-bold text-slate-900 line-clamp-2">{item.title}</h4>
+                  </div>
+                  <p className="text-[11px] text-slate-500 mt-2 font-medium">{item.subject || "Computer Science"}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* ── Redesigned Academic Options Header & Category Filters ── */}
         <div className="mb-6 rounded-3xl bg-gradient-to-r from-[#011337] via-[#021C4F] to-[#580017] p-6 sm:p-7 border-2 border-amber-400/40 shadow-xl text-white transition-all">

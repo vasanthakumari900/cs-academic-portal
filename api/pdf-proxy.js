@@ -1,4 +1,26 @@
-// api/pdf-proxy.js (Vercel Serverless Function Proxy)
+// api/pdf-proxy.js (Vercel Serverless Function Proxy with SSRF Protection)
+const ALLOWED_DOMAINS = [
+  "drive.google.com",
+  "docs.google.com",
+  "googleusercontent.com",
+  "firebasestorage.googleapis.com",
+  "dgvc.in",
+  "raw.githubusercontent.com",
+];
+
+function isAllowedUrl(urlString) {
+  try {
+    const parsed = new URL(urlString);
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") return false;
+    const hostname = parsed.hostname.toLowerCase();
+    return ALLOWED_DOMAINS.some(
+      (domain) => hostname === domain || hostname.endsWith("." + domain)
+    );
+  } catch {
+    return false;
+  }
+}
+
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
@@ -12,13 +34,17 @@ export default async function handler(req, res) {
   let targetUrl = "";
 
   if (id) {
-    targetUrl = `https://drive.google.com/uc?export=download&id=${id}&confirm=t`;
+    targetUrl = `https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}&confirm=t`;
   } else if (url) {
     targetUrl = decodeURIComponent(url);
   }
 
   if (!targetUrl) {
     return res.status(400).json({ error: "Missing PDF id or url parameter" });
+  }
+
+  if (!isAllowedUrl(targetUrl)) {
+    return res.status(403).json({ error: "Target domain is not allowed by proxy security policy" });
   }
 
   try {

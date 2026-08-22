@@ -1,8 +1,6 @@
 // src/services/aiCodeReviewerService.js
 // AI Code Quality & Vulnerability Reviewer for Student Projects
 
-const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
-
 /**
  * Extract GitHub owner and repo from URL
  */
@@ -59,10 +57,9 @@ export async function analyzeProjectCode({ title, githubUrl, techStack, descript
 - Has Open License: ${repoInfo.hasLicense ? "Yes" : "No"}`
     : `GitHub Repository Inspection: Standard Repository Structure (URL: ${githubUrl || "N/A"})`;
 
-  // 2. Groq LLM Evaluation
-  if (apiKey) {
-    try {
-      const prompt = `You are a Senior Principal Software Architect and Cybersecurity Inspector evaluating a student project for a hackathon.
+  // 2. Groq LLM Evaluation via Serverless Endpoint
+  try {
+    const prompt = `You are a Senior Principal Software Architect and Cybersecurity Inspector evaluating a student project for a hackathon.
 Project Details:
 - Title: ${title}
 - Category: ${category || "Full Stack Web"}
@@ -101,35 +98,31 @@ Perform an in-depth code audit based on the inspected project parameters. Respon
   }
 }`;
 
-      const res = await fetch(GROQ_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          model: "llama-3.3-70b-versatile",
-          messages: [{ role: "user", content: prompt }],
-          temperature: 0.3,
-          max_tokens: 900,
-        }),
-      });
+    const res = await fetch("/api/groq", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.3,
+        max_tokens: 900,
+      }),
+    });
 
-      if (res.ok) {
-        const data = await res.json();
-        const content = data.choices?.[0]?.message?.content;
-        if (content) {
-          const jsonMatch = content.match(/\{[\s\S]*\}/);
-          if (jsonMatch) {
-            const parsed = JSON.parse(jsonMatch[0]);
-            parsed.repoInfo = repoInfo;
-            return parsed;
-          }
+    if (res.ok) {
+      const result = await res.json();
+      const content = result.data?.choices?.[0]?.message?.content;
+      if (content) {
+        const jsonMatch = content.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          const parsed = JSON.parse(jsonMatch[0]);
+          parsed.repoInfo = repoInfo;
+          return parsed;
         }
       }
-    } catch (err) {
-      console.warn("[AICodeReviewer] Groq AI fallback:", err.message);
     }
+  } catch (err) {
+    console.warn("[AICodeReviewer] Groq AI fallback:", err.message);
   }
 
   // 3. Fallback Calculated Audit based on inspected parameters

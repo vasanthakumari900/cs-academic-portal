@@ -1,16 +1,14 @@
 // src/utils/documentParser.js
 // Optimized Client-Side Document Parsing Engine with Concurrent Batch Extraction & Non-blocking UI Yielding.
 
-import { pdfjs } from "react-pdf";
-
-// Worker configuration
-pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
-
 /**
  * Fast Concurrent PDF Parsing Engine with UI Thread Yielding
  */
 export async function parsePdfDocument(file, onProgress) {
   try {
+    const { pdfjs } = await import("react-pdf");
+    pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
+
     const arrayBuffer = await file.arrayBuffer();
     const pdf = await pdfjs.getDocument({
       data: arrayBuffer,

@@ -409,3 +409,20 @@
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-6px); }
 }
+
+/* ─── Global Accessibility: Prefers Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-bounce,
+  .animate-pulse,
+  .animate-spin,
+  .floating-orb,
+  .shine-sweep {
+    animation: none !important;
+  }
+}

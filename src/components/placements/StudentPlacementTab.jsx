@@ -15,7 +15,6 @@ import {
   FiExternalLink,
 } from "react-icons/fi";
 import toast from "react-hot-toast";
-import { jsPDF } from "jspdf";
 import { LOGO_TRANS_BASE64 } from "../../assets/logoBase64";
 import {
   DEMO_STUDENT_PROFILE,
@@ -28,8 +27,9 @@ export default function StudentPlacementTab({ onApplyCompany }) {
   const [activeSubTab, setActiveSubTab] = useState("applications");
 
   // Generate Sample Offer Letter PDF
-  function handleDownloadOffer(offer) {
+  async function handleDownloadOffer(offer) {
     try {
+      const { jsPDF } = await import("jspdf");
       const doc = new jsPDF();
 
       // Header

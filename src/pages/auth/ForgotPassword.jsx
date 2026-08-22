@@ -36,10 +36,11 @@ export default function ForgotPassword() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">Email</label>
+              <label htmlFor="reset-email" className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-[#4A1620] dark:text-[#F4C266] font-heading">Email</label>
               <div className="relative">
                 <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#9C6D7F]" size={16} />
                 <input
+                  id="reset-email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}

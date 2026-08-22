@@ -91,8 +91,16 @@ export default function NotificationsTab() {
               <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{n.details}</p>
             </div>
 
-            <button className="text-slate-400 hover:text-slate-600 shrink-0">
-              {n.unread ? <FiCheckCircle size={18} className="text-[#0F4C81]" /> : <FiCheck size={18} />}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleToggleRead(n.id);
+              }}
+              aria-label={n.unread ? "Mark notification as read" : "Mark notification as unread"}
+              className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-700 dark:hover:text-slate-200 transition-colors shrink-0 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#D97706]"
+            >
+              {n.unread ? <FiCheckCircle size={18} className="text-[#7F011F]" /> : <FiCheck size={18} />}
             </button>
           </motion.div>
         ))}

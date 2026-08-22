@@ -70,8 +70,64 @@ function pdfPageCountPlugin() {
   };
 }
 
+function groqApiPlugin() {
+  return {
+    name: "groq-api-plugin",
+    configureServer(server) {
+      server.middlewares.use("/api/groq", async (req, res) => {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+        if (req.method === "OPTIONS") {
+          res.statusCode = 200;
+          res.end();
+          return;
+        }
+
+        const apiKey = process.env.GROQ_API_KEY || process.env.VITE_GROQ_API_KEY;
+        if (!apiKey) {
+          res.statusCode = 533;
+          res.end(JSON.stringify({ error: "Groq API key missing on server", success: false }));
+          return;
+        }
+
+        try {
+          let bodyStr = "";
+          req.on("data", (chunk) => { bodyStr += chunk; });
+          req.on("end", async () => {
+            try {
+              const payload = JSON.parse(bodyStr || "{}");
+              const groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${apiKey}`,
+                },
+                body: JSON.stringify(payload),
+              });
+              const data = await groqRes.json().catch(() => ({}));
+              res.statusCode = groqRes.status;
+              res.setHeader("Content-Type", "application/json");
+              res.end(JSON.stringify(groqRes.ok ? { success: true, data } : { error: data?.error?.message || groqRes.statusText, success: false }));
+            } catch (e) {
+              res.statusCode = 500;
+              res.setHeader("Content-Type", "application/json");
+              res.end(JSON.stringify({ error: e.message, success: false }));
+            }
+          });
+        } catch (err) {
+          res.statusCode = 500;
+          res.setHeader("Content-Type", "application/json");
+          res.end(JSON.stringify({ error: err.message, success: false }));
+        }
+      });
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), pdfPageCountPlugin()],
+  plugins: [react(), pdfPageCountPlugin(), groqApiPlugin()],
   server: {
     port: 5173,
     watch: {
