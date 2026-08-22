@@ -3086,13 +3086,13 @@ export default function Notes() {
               const isNameOnly = (selectedYear === 2 && PLACEHOLDER_SUBJECTS.has(subject)) ||
                 (NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(subject));
               const subjectData = isNameOnly ? null : NOTES_DATA[subject];
-              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || (courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques"));
+              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || (courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM"));
               const semesterFilter = NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(subject)
                 ? null : SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[subject];
               const filteredSubjectUnits = subjectData && semesterFilter
                 ? Object.entries(subjectData.units).filter(([key]) => semesterFilter.has(Number(key)))
                 : subjectData ? Object.entries(subjectData.units) : [];
-              const isPgCombinedSubject = courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques");
+              const isPgCombinedSubject = courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM");
               const totalFiles = isPgCombinedSubject ? 1 : (filteredSubjectUnits.length > 0
                 ? filteredSubjectUnits.reduce((s, [, u]) => s + u.files.length, 0)
                 : 0);
@@ -3298,7 +3298,7 @@ export default function Notes() {
   } : null;
 
   // PG Combined PDF — all 5 units in a single PDF
-  const isPgCombined = courseType === "pg" && (selectedSubject.includes("Advanced Database Management System") || selectedSubject === "Advanced Design and Analysis of Algorithms" || selectedSubject === "DOT NET Technology" || selectedSubject === "DOT NET TECHNOLOGY" || selectedSubject === "Digital Image Processing" || selectedSubject === "Big Data Analytics" || selectedSubject === "BIG DATA ANALYTICS" || selectedSubject === "Artificial Intelligence and Machine Learning Techniques" || selectedSubject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || selectedSubject === "Data Mining Techniques");
+  const isPgCombined = courseType === "pg" && (selectedSubject.includes("Advanced Database Management System") || selectedSubject === "Advanced Design and Analysis of Algorithms" || selectedSubject === "DOT NET Technology" || selectedSubject === "DOT NET TECHNOLOGY" || selectedSubject === "Digital Image Processing" || selectedSubject === "Big Data Analytics" || selectedSubject === "BIG DATA ANALYTICS" || selectedSubject === "Artificial Intelligence and Machine Learning Techniques" || selectedSubject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || selectedSubject === "Data Mining Techniques" || selectedSubject === "Mobile Network System" || selectedSubject === "MOBILE NETWORK SYSTEM");
   const pgCombinedPdf = isPgCombined ? (
     selectedSubject === "Data Mining Techniques" ? {
       id: "pg-dmt-complete-pdf",
@@ -3342,6 +3342,13 @@ export default function Notes() {
       fileId: "1ciO7YAQZAwnSojejNUJ3Vo2_Gc1KmGut",
       type: "pdf",
       pageCount: "Combined 5 Units",
+    } : (selectedSubject === "Mobile Network System" || selectedSubject === "MOBILE NETWORK SYSTEM") ? {
+      id: "pg-mns-complete-pdf",
+      title: "Mobile Network System — Complete Notes (Module I to V)",
+      fileName: "Mobile Network System Complete.pdf",
+      fileId: "/Mobile Network System Complete.pdf",
+      type: "pdf",
+      pageCount: "Combined 5 Modules",
     } : {
       id: "pg-adaa-complete-pdf",
       title: "Advanced Design and Analysis of Algorithms — Complete Notes (Module I to V)",
