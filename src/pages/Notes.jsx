@@ -131,6 +131,31 @@ const ADVANCED_SE_PDFS = [
   { id: "ase-pdf-6", title: "SE_-UNIT-1-To-4-All.pptx.pdf", fileName: "SE_-UNIT-1-To-4-All.pptx.pdf", fileId: "1kYzAFuslGv6HtT2Q5qMK2BmDYO3wIeGA", type: "pdf", subtitle: "Software Engineering Units 1 to 4 Presentation Slides" },
 ];
 
+const ARTIFICIAL_NEURAL_NETWORKS_PDFS = [
+  { id: "ann-pdf-1", title: "Lecture Note 1 (1406.2661v1.pdf)", fileName: "1406.2661v1.pdf", fileId: "/artificial neural networks/1406.2661v1.pdf", type: "pdf" },
+  { id: "ann-pdf-2", title: "Lecture Note 2 (1412.5474v4.pdf)", fileName: "1412.5474v4.pdf", fileId: "/artificial neural networks/1412.5474v4.pdf", type: "pdf" },
+  { id: "ann-pdf-3", title: "Lecture Note 3 (1511.08458v2.pdf)", fileName: "1511.08458v2.pdf", fileId: "/artificial neural networks/1511.08458v2.pdf", type: "pdf" },
+  { id: "ann-pdf-4", title: "Lecture Note 4 (2006.05338v3.pdf)", fileName: "2006.05338v3.pdf", fileId: "/artificial neural networks/2006.05338v3.pdf", type: "pdf" },
+  { id: "ann-pdf-5", title: "Lecture Note 5 (2009.07485v1.pdf)", fileName: "2009.07485v1.pdf", fileId: "/artificial neural networks/2009.07485v1.pdf", type: "pdf" },
+  { id: "ann-pdf-6", title: "Lecture Note 6 (2410.16711v1.pdf)", fileName: "2410.16711v1.pdf", fileId: "/artificial neural networks/2410.16711v1.pdf", type: "pdf" },
+  { id: "ann-pdf-7", title: "Lecture Note 7 (2511.05131v1.pdf)", fileName: "2511.05131v1.pdf", fileId: "/artificial neural networks/2511.05131v1.pdf", type: "pdf" },
+  { id: "ann-pdf-8", title: "Lecture Note 8 (5c14c827541f449a17b4bf402eafc7cbde9c.pdf)", fileName: "5c14c827541f449a17b4bf402eafc7cbde9c.pdf", fileId: "/artificial neural networks/5c14c827541f449a17b4bf402eafc7cbde9c.pdf", type: "pdf" },
+  { id: "ann-pdf-9", title: "Lecture Note 9 (a-review-on-neural-networks-3sncfbhc2j.pdf)", fileName: "a-review-on-neural-networks-3sncfbhc2j.pdf", fileId: "/artificial neural networks/a-review-on-neural-networks-3sncfbhc2j.pdf", type: "pdf" },
+  { id: "ann-pdf-10", title: "Lecture Note 10 (an-overview-of-convolutional-neural-network-its-architecture-uho6rnzc1y.pdf)", fileName: "an-overview-of-convolutional-neural-network-its-architecture-uho6rnzc1y.pdf", fileId: "/artificial neural networks/an-overview-of-convolutional-neural-network-its-architecture-uho6rnzc1y.pdf", type: "pdf" },
+  { id: "ann-pdf-11", title: "Lecture Note 11 (regularization.pdf)", fileName: "regularization.pdf", fileId: "/artificial neural networks/regularization.pdf", type: "pdf" }
+];
+
+const PYTHON_FOR_DATA_SCIENCE_PDFS = [
+  { id: "pyds-pdf-1", title: "Lecture Note 1 (6.Introduction-to-NumPy.pdf)", fileName: "6.Introduction-to-NumPy.pdf", fileId: "/python for datascience.pdf/6.Introduction-to-NumPy.pdf", type: "pdf" },
+  { id: "pyds-pdf-2", title: "Lecture Note 2 (Data-Visualization-using-Matplotlib.pdf)", fileName: "Data-Visualization-using-Matplotlib-_-by-Badreesh-Shetty-_-Towards-Data-Science.pdf", fileId: "/python for datascience.pdf/Data-Visualization-using-Matplotlib-_-by-Badreesh-Shetty-_-Towards-Data-Science.pdf", type: "pdf" },
+  { id: "pyds-pdf-3", title: "Lecture Note 3 (L9.slides.pdf)", fileName: "L9.slides.pdf", fileId: "/python for datascience.pdf/L9.slides.pdf", type: "pdf" },
+  { id: "pyds-pdf-4", title: "Lecture Note 4 (PYTHON PROGRAMMING NOTES.pdf)", fileName: "PYTHON PROGRAMMING NOTES.pdf", fileId: "/python for datascience.pdf/PYTHON PROGRAMMING NOTES.pdf", type: "pdf" },
+  { id: "pyds-pdf-5", title: "Lecture Note 5 (numericalpython.pdf)", fileName: "numericalpython.pdf", fileId: "/python for datascience.pdf/numericalpython.pdf", type: "pdf" },
+  { id: "pyds-pdf-6", title: "Lecture Note 6 (pandas1-pdf.pdf)", fileName: "pandas1-pdf.pdf", fileId: "/python for datascience.pdf/pandas1-pdf.pdf", type: "pdf" },
+  { id: "pyds-pdf-7", title: "Lecture Note 7 (pandas22020-pdf.pdf)", fileName: "pandas22020-pdf.pdf", fileId: "/python for datascience.pdf/pandas22020-pdf.pdf", type: "pdf" },
+  { id: "pyds-pdf-8", title: "Lecture Note 8 (rsl2024DB006E6BF3D0BD7.pdf)", fileName: "rsl2024DB006E6BF3D0BD7.pdf", fileId: "/python for datascience.pdf/rsl2024DB006E6BF3D0BD7.pdf", type: "pdf" }
+];
+
 const NOTES_DATA = {
   "PYTHON PROGRAMMING ESSENTIALS": {
     units: {
@@ -3086,14 +3111,16 @@ export default function Notes() {
               const isNameOnly = (selectedYear === 2 && PLACEHOLDER_SUBJECTS.has(subject)) ||
                 (NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(subject));
               const subjectData = isNameOnly ? null : NOTES_DATA[subject];
-              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || (courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM"));
+              const isAnn = subject === "Artificial Neural Network" || subject === "ARTIFICIAL NEURAL NETWORK" || subject === "Artificial Neural Networks" || subject === "ARTIFICIAL NEURAL NETWORKS";
+              const isPyDs = subject === "Python for Data Science" || subject === "PYTHON FOR DATA SCIENCE";
+              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || isAnn || isPyDs || (courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM"));
               const semesterFilter = NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(subject)
                 ? null : SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[subject];
               const filteredSubjectUnits = subjectData && semesterFilter
                 ? Object.entries(subjectData.units).filter(([key]) => semesterFilter.has(Number(key)))
                 : subjectData ? Object.entries(subjectData.units) : [];
               const isPgCombinedSubject = courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM");
-              const totalFiles = isPgCombinedSubject ? 1 : (filteredSubjectUnits.length > 0
+              const totalFiles = isAnn ? 11 : isPyDs ? 8 : isPgCombinedSubject ? 1 : (filteredSubjectUnits.length > 0
                 ? filteredSubjectUnits.reduce((s, [, u]) => s + u.files.length, 0)
                 : 0);
               const facultyName = courseType === "pg" && selectedYear === 1 && selectedSemester === 1
@@ -3276,10 +3303,15 @@ export default function Notes() {
   const semesterUnitFilter = selectedSubject && !isPlaceholder ? SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[selectedSubject] : null;
   const filteredUnits = semesterUnitFilter ? allUnits.filter(([key]) => semesterUnitFilter.has(Number(key))) : allUnits;
   const units = filteredUnits;
-  const totalFiles = units.reduce((s, [, u]) => s + u.files.length, 0);
+  
+  const isAnn = selectedSubject === "Artificial Neural Network" || selectedSubject === "ARTIFICIAL NEURAL NETWORK" || selectedSubject === "Artificial Neural Networks" || selectedSubject === "ARTIFICIAL NEURAL NETWORKS";
+  const isPyDs = selectedSubject === "Python for Data Science" || selectedSubject === "PYTHON FOR DATA SCIENCE";
+  const totalFiles = isAnn ? 11 : isPyDs ? 8 : units.reduce((s, [, u]) => s + u.files.length, 0);
 
   const isInfoSecurity = selectedSubject?.toUpperCase().includes("INFORMATION SECURITY");
   const isAdvancedSE = selectedSubject?.toUpperCase().includes("ADVANCED SOFTWARE ENGINEERING");
+  const isArtificialNeuralNetwork = selectedSubject?.toUpperCase().includes("ARTIFICIAL NEURAL NETWORK") || selectedSubject?.toUpperCase().includes("ARTIFICIAL NEURAL NETWORKS");
+  const isPythonForDataScience = selectedSubject?.toUpperCase().includes("PYTHON FOR DATA SCIENCE");
 
   const isEnglish = selectedSubject === "ENGLISH" || selectedSubject === "FOUNDATION ENGLISH - I" || selectedSubject === "Foundation English - III";
   const englishPdf = selectedSubject === "FOUNDATION ENGLISH - I"
@@ -3667,6 +3699,114 @@ export default function Notes() {
         </motion.div>
       )}
 
+      {/* Artificial Neural Networks PDF Notes List (rendered directly below Syllabus Table) */}
+      {isArtificialNeuralNetwork && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 mt-6">
+          <div className="mb-5 flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm">
+                <FiDownload size={18} />
+              </div>
+              <div>
+                <h2 className="font-sans text-lg font-bold text-[#0F4C81]">
+                  Artificial Neural Networks — Lecture Notes
+                </h2>
+                <p className="text-[11px] text-[#6B7280]">
+                  11 individual lecture note PDFs
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setActivePodcast({
+                  title: "Artificial Neural Networks — Complete PG Revision",
+                  subtitle: "Module I to V Complete Syllabus Revision",
+                  syllabus: syllabusData?.map((s) => s.module).join(". ") || "Artificial Neural Networks PG syllabus concepts",
+                  subject: selectedSubject,
+                  year: selectedYear,
+                  semester: selectedSemester,
+                });
+              }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-4 py-2 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer font-mono"
+              title="Listen to AI Audio Podcast for all 5 Modules"
+            >
+              🎙️ AI Podcast
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {ARTIFICIAL_NEURAL_NETWORKS_PDFS.map((file, idx) => (
+              <PdfFileCard
+                key={file.id}
+                file={{
+                  ...file,
+                  subject: selectedSubject,
+                  year: Number(selectedYear),
+                  semester: Number(selectedSemester),
+                  unit: `Lecture ${idx + 1}`,
+                }}
+                onView={(fileToView) => setViewingPdf(fileToView)}
+              />
+            ))}
+          </div>
+        </motion.div>
+      )}
+
+      {/* Python for Data Science PDF Notes List (rendered directly below Syllabus Table) */}
+      {isPythonForDataScience && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 mt-6">
+          <div className="mb-5 flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm">
+                <FiDownload size={18} />
+              </div>
+              <div>
+                <h2 className="font-sans text-lg font-bold text-[#0F4C81]">
+                  Python for Data Science — Lecture Notes
+                </h2>
+                <p className="text-[11px] text-[#6B7280]">
+                  8 individual lecture note PDFs
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setActivePodcast({
+                  title: "Python for Data Science — Complete PG Revision",
+                  subtitle: "Module I to V Complete Syllabus Revision",
+                  syllabus: syllabusData?.map((s) => s.module).join(". ") || "Python for Data Science PG syllabus concepts",
+                  subject: selectedSubject,
+                  year: selectedYear,
+                  semester: selectedSemester,
+                });
+              }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-4 py-2 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer font-mono"
+              title="Listen to AI Audio Podcast for all 5 Modules"
+            >
+              🎙️ AI Podcast
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {PYTHON_FOR_DATA_SCIENCE_PDFS.map((file, idx) => (
+              <PdfFileCard
+                key={file.id}
+                file={{
+                  ...file,
+                  subject: selectedSubject,
+                  year: Number(selectedYear),
+                  semester: Number(selectedSemester),
+                  unit: `Lecture ${idx + 1}`,
+                }}
+                onView={(fileToView) => setViewingPdf(fileToView)}
+              />
+            ))}
+          </div>
+        </motion.div>
+      )}
+
       {isEnglish && englishPdf && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
@@ -3861,7 +4001,7 @@ export default function Notes() {
         </motion.div>
       )}
 
-      {!isEnglish && !isPhp && !isPgCombined && !isInfoSecurity && subjectNotesData && units.length > 0 && (
+      {!isEnglish && !isPhp && !isPgCombined && !isInfoSecurity && !isArtificialNeuralNetwork && !isPythonForDataScience && subjectNotesData && units.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>
