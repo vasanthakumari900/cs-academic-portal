@@ -115,11 +115,11 @@ const LAB_RECORDS_DATA = {
 };
 
 const INFO_SECURITY_PDFS = [
-  { id: "is-mod1", title: "Information Security - Module I Notes", fileName: "Information_Security_Module_1.pdf", fileId: "1rOBl2IZvrqGLfoqifWoE3n71KAVcIxGz", type: "pdf", subtitle: "Security Attacks, Services & Mechanisms" },
-  { id: "is-mod2", title: "Information Security - Module II Notes", fileName: "Information_Security_Module_2.pdf", fileId: "1gepvH3Dj_hxmlqkk5w4E_1OHiUGUHDBu", type: "pdf", subtitle: "Public Key Cryptography & Key Management" },
-  { id: "is-mod3", title: "Information Security - Module III Notes", fileName: "Information_Security_Module_3.pdf", fileId: "11pbyVnGKq-9qRvyljPptGVIU-ZT4G0P9", type: "pdf", subtitle: "Email Privacy & IP Security" },
-  { id: "is-mod4", title: "Information Security - Module IV Notes", fileName: "Information_Security_Module_4.pdf", fileId: "1PXNKKpBDZQlGNFGjOqelLyepCJupne7P", type: "pdf", subtitle: "Web Security Requirements & Protocols" },
-  { id: "is-mod5", title: "Information Security - Module V Notes", fileName: "Information_Security_Module_5.pdf", fileId: "19MGyHraoe4Y71UKG2YnIiKs2shHy-9Cr", type: "pdf", subtitle: "SNMP, Threats, Firewalls & IDS" },
+  { id: "is-pdf-1", title: "Lecture Note 1 (IEEE__00663326.pdf)", fileName: "IEEE__00663326.pdf", fileId: "/Information Security/IEEE__00663326.pdf", type: "pdf" },
+  { id: "is-pdf-2", title: "Lecture Note 2 (rzainpdf.pdf)", fileName: "rzainpdf.pdf", fileId: "/Information Security/rzainpdf.pdf", type: "pdf" },
+  { id: "is-pdf-3", title: "Lecture Note 3 (unit-1-introduction-to-information-security.pdf)", fileName: "unit-1-introduction-to-information-security.pdf", fileId: "/Information Security/unit-1-introduction-to-information-security.pdf", type: "pdf" },
+  { id: "is-pdf-4", title: "Lecture Note 4 (unit-2_bis_final-1.pdf)", fileName: "unit-2_bis_final-1.pdf", fileId: "/Information Security/unit-2_bis_final-1.pdf", type: "pdf" },
+  { id: "is-pdf-5", title: "Lecture Note 5 (unit-3-public-key-cryptography.pdf)", fileName: "unit-3-public-key-cryptography.pdf", fileId: "/Information Security/unit-3-public-key-cryptography.pdf", type: "pdf" }
 ];
 
 const ADVANCED_SE_PDFS = [
@@ -3208,14 +3208,15 @@ export default function Notes() {
               const isIot = subject === "IoT and its Applications" || subject === "IOT AND ITS APPLICATIONS" || subject === "IoT and Its Applications" || subject === "IOT AND ITS APPLICATIONS";
               const isJee = subject === "Java Enterprise Edition" || subject === "JAVA ENTERPRISE EDITION";
               const isDdb = subject === "Distributed Databases" || subject === "DISTRIBUTED DATABASES";
-              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || isAnn || isPyDs || isDcn || isCwt || isHsn || isSna || isCws || isIot || isJee || isDdb || (courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM"));
+              const isInfoSec = subject === "Information Security" || subject === "INFORMATION SECURITY";
+              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || isAnn || isPyDs || isDcn || isCwt || isHsn || isSna || isCws || isIot || isJee || isDdb || isInfoSec || (courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM"));
               const semesterFilter = NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(subject)
                 ? null : SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[subject];
               const filteredSubjectUnits = subjectData && semesterFilter
                 ? Object.entries(subjectData.units).filter(([key]) => semesterFilter.has(Number(key)))
                 : subjectData ? Object.entries(subjectData.units) : [];
               const isPgCombinedSubject = courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM");
-              const totalFiles = isAnn ? 11 : isPyDs ? 8 : isDcn ? 2 : isCwt ? 7 : isHsn ? 9 : isSna ? 9 : isCws ? 9 : isIot ? 9 : isJee ? 9 : isDdb ? 9 : isPgCombinedSubject ? 1 : (filteredSubjectUnits.length > 0
+              const totalFiles = isAnn ? 11 : isPyDs ? 8 : isDcn ? 2 : isCwt ? 7 : isHsn ? 9 : isSna ? 9 : isCws ? 9 : isIot ? 9 : isJee ? 9 : isDdb ? 9 : isInfoSec ? 5 : isPgCombinedSubject ? 1 : (filteredSubjectUnits.length > 0
                 ? filteredSubjectUnits.reduce((s, [, u]) => s + u.files.length, 0)
                 : 0);
               const facultyName = courseType === "pg" && selectedYear === 1 && selectedSemester === 1
@@ -3409,9 +3410,8 @@ export default function Notes() {
   const isIotSubject = selectedSubject === "IoT and its Applications" || selectedSubject === "IOT AND ITS APPLICATIONS" || selectedSubject === "IoT and Its Applications" || selectedSubject === "IOT AND ITS APPLICATIONS";
   const isJeeSubject = selectedSubject === "Java Enterprise Edition" || selectedSubject === "JAVA ENTERPRISE EDITION";
   const isDdbSubject = selectedSubject === "Distributed Databases" || selectedSubject === "DISTRIBUTED DATABASES";
-  const totalFiles = isAnn ? 11 : isPyDs ? 8 : isDcnSubject ? 2 : isCwtSubject ? 7 : isHsnSubject ? 9 : isSnaSubject ? 9 : isCwsSubject ? 9 : isIotSubject ? 9 : isJeeSubject ? 9 : isDdbSubject ? 9 : units.reduce((s, [, u]) => s + u.files.length, 0);
-
   const isInfoSecurity = selectedSubject?.toUpperCase().includes("INFORMATION SECURITY");
+  const totalFiles = isAnn ? 11 : isPyDs ? 8 : isDcnSubject ? 2 : isCwtSubject ? 7 : isHsnSubject ? 9 : isSnaSubject ? 9 : isCwsSubject ? 9 : isIotSubject ? 9 : isJeeSubject ? 9 : isDdbSubject ? 9 : isInfoSecurity ? 5 : units.reduce((s, [, u]) => s + u.files.length, 0);
   const isAdvancedSE = selectedSubject?.toUpperCase().includes("ADVANCED SOFTWARE ENGINEERING");
   const isArtificialNeuralNetwork = selectedSubject?.toUpperCase().includes("ARTIFICIAL NEURAL NETWORK") || selectedSubject?.toUpperCase().includes("ARTIFICIAL NEURAL NETWORKS");
   const isPythonForDataScience = selectedSubject?.toUpperCase().includes("PYTHON FOR DATA SCIENCE");
