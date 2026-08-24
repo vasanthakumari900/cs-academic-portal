@@ -195,6 +195,30 @@ const SOCIAL_NETWORK_ANALYSIS_PDFS = [
   { id: "sna-pdf-9", title: "Lecture Note 9 (bw-vavsn-04.pdf)", fileName: "bw-vavsn-04.pdf", fileId: "/Social network analysis/bw-vavsn-04.pdf", type: "pdf" }
 ];
 
+const CLOUD_WEB_SERVICES_PDFS = [
+  { id: "cws-pdf-1", title: "Lecture Note 1 (10Vol9No1.pdf)", fileName: "10Vol9No1.pdf", fileId: "/Cloud web services/10Vol9No1.pdf", type: "pdf" },
+  { id: "cws-pdf-2", title: "Lecture Note 2 (AWS_Overview.pdf)", fileName: "AWS_Overview.pdf", fileId: "/Cloud web services/AWS_Overview.pdf", type: "pdf" },
+  { id: "cws-pdf-3", title: "Lecture Note 3 (CIPS-2014-0178.pdf)", fileName: "CIPS-2014-0178.pdf", fileId: "/Cloud web services/CIPS-2014-0178.pdf", type: "pdf" },
+  { id: "cws-pdf-4", title: "Lecture Note 4 (IAM_SLICKSHEET_V2.pdf)", fileName: "IAM_SLICKSHEET_V2.pdf", fileId: "/Cloud web services/IAM_SLICKSHEET_V2.pdf", type: "pdf" },
+  { id: "cws-pdf-5", title: "Lecture Note 5 (NET206_Amazon-Route-53-Whats-in-a-domain-name-A-lot!.pdf)", fileName: "NET206_Amazon-Route-53-Whats-in-a-domain-name-A-lot!.pdf", fileId: "/Cloud web services/NET206_Amazon-Route-53-Whats-in-a-domain-name-A-lot!.pdf", type: "pdf" },
+  { id: "cws-pdf-6", title: "Lecture Note 6 (VyOS—AWS-Site-to-Site-VPN-and-static-routing.pdf)", fileName: "VyOS—AWS-Site-to-Site-VPN-and-static-routing.pdf", fileId: "/Cloud web services/VyOS—AWS-Site-to-Site-VPN-and-static-routing.pdf", type: "pdf" },
+  { id: "cws-pdf-7", title: "Lecture Note 7 (active-directory-domain-services.pdf)", fileName: "active-directory-domain-services.pdf", fileId: "/Cloud web services/active-directory-domain-services.pdf", type: "pdf" },
+  { id: "cws-pdf-8", title: "Lecture Note 8 (aws_solutions_architect_associate_storage_amazon_s3_basics_en.pdf)", fileName: "aws_solutions_architect_associate_storage_amazon_s3_basics_en.pdf", fileId: "/Cloud web services/aws_solutions_architect_associate_storage_amazon_s3_basics_en.pdf", type: "pdf" },
+  { id: "cws-pdf-9", title: "Lecture Note 9 (rds-lab-manual.pdf)", fileName: "rds-lab-manual.pdf", fileId: "/Cloud web services/rds-lab-manual.pdf", type: "pdf" }
+];
+
+const IOT_AND_ITS_APPLICATIONS_PDFS = [
+  { id: "iot-pdf-1", title: "Lecture Note 1 (01a89c5647b05fbf7238b99f6665d243.pdf)", fileName: "01a89c5647b05fbf7238b99f6665d243.pdf", fileId: "/Iot and its applications/01a89c5647b05fbf7238b99f6665d243.pdf", type: "pdf" },
+  { id: "iot-pdf-2", title: "Lecture Note 2 (Domain specific potential applications of IoT.pdf)", fileName: "Domain specific potential applications of IoT.pdf", fileId: "/Iot and its applications/Domain specific potential applications of IoT.pdf", type: "pdf" },
+  { id: "iot-pdf-3", title: "Lecture Note 3 (IJCRT1133995.pdf)", fileName: "IJCRT1133995.pdf", fileId: "/Iot and its applications/IJCRT1133995.pdf", type: "pdf" },
+  { id: "iot-pdf-4", title: "Lecture Note 4 (IJSTEV3I11049.pdf)", fileName: "IJSTEV3I11049.pdf", fileId: "/Iot and its applications/IJSTEV3I11049.pdf", type: "pdf" },
+  { id: "iot-pdf-5", title: "Lecture Note 5 (IOT_Question_Bank.pdf)", fileName: "IOT_Question_Bank.pdf", fileId: "/Iot and its applications/IOT_Question_Bank.pdf", type: "pdf" },
+  { id: "iot-pdf-6", title: "Lecture Note 6 (Session 1 IntroIoTMZ-new template.pdf)", fileName: "Session 1 IntroIoTMZ-new template.pdf", fileId: "/Iot and its applications/Session 1 IntroIoTMZ-new template.pdf", type: "pdf" },
+  { id: "iot-pdf-7", title: "Lecture Note 7 (embedded-iot-platform-design-methodology.pdf)", fileName: "embedded-iot-platform-design-methodology.pdf", fileId: "/Iot and its applications/embedded-iot-platform-design-methodology.pdf", type: "pdf" },
+  { id: "iot-pdf-8", title: "Lecture Note 8 (m_15sdnz.pdf)", fileName: "m_15sdnz.pdf", fileId: "/Iot and its applications/m_15sdnz.pdf", type: "pdf" },
+  { id: "iot-pdf-9", title: "Lecture Note 9 (rsl2024DD765CCD5F43295.pdf)", fileName: "rsl2024DD765CCD5F43295.pdf", fileId: "/Iot and its applications/rsl2024DD765CCD5F43295.pdf", type: "pdf" }
+];
+
 const NOTES_DATA = {
   "PYTHON PROGRAMMING ESSENTIALS": {
     units: {
@@ -3156,14 +3180,16 @@ export default function Notes() {
               const isCwt = subject === "Contemporary Web Technologies" || subject === "CONTEMPORARY WEB TECHNOLOGIES" || subject === "Contemporary Web Technology" || subject === "CONTEMPORARY WEB TECHNOLOGY";
               const isHsn = subject === "High Speed Networks" || subject === "HIGH SPEED NETWORKS";
               const isSna = subject === "Social Network Analysis" || subject === "SOCIAL NETWORK ANALYSIS";
-              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || isAnn || isPyDs || isDcn || isCwt || isHsn || isSna || (courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM"));
+              const isCws = subject === "Cloud Web Services" || subject === "CLOUD WEB SERVICES";
+              const isIot = subject === "IoT and its Applications" || subject === "IOT AND ITS APPLICATIONS" || subject === "IoT and Its Applications" || subject === "IOT AND ITS APPLICATIONS";
+              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || isAnn || isPyDs || isDcn || isCwt || isHsn || isSna || isCws || isIot || (courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM"));
               const semesterFilter = NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(subject)
                 ? null : SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[subject];
               const filteredSubjectUnits = subjectData && semesterFilter
                 ? Object.entries(subjectData.units).filter(([key]) => semesterFilter.has(Number(key)))
                 : subjectData ? Object.entries(subjectData.units) : [];
               const isPgCombinedSubject = courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM");
-              const totalFiles = isAnn ? 11 : isPyDs ? 8 : isDcn ? 2 : isCwt ? 7 : isHsn ? 9 : isSna ? 9 : isPgCombinedSubject ? 1 : (filteredSubjectUnits.length > 0
+              const totalFiles = isAnn ? 11 : isPyDs ? 8 : isDcn ? 2 : isCwt ? 7 : isHsn ? 9 : isSna ? 9 : isCws ? 9 : isIot ? 9 : isPgCombinedSubject ? 1 : (filteredSubjectUnits.length > 0
                 ? filteredSubjectUnits.reduce((s, [, u]) => s + u.files.length, 0)
                 : 0);
               const facultyName = courseType === "pg" && selectedYear === 1 && selectedSemester === 1
@@ -3353,7 +3379,9 @@ export default function Notes() {
   const isCwtSubject = selectedSubject === "Contemporary Web Technologies" || selectedSubject === "CONTEMPORARY WEB TECHNOLOGIES" || selectedSubject === "Contemporary Web Technology" || selectedSubject === "CONTEMPORARY WEB TECHNOLOGY";
   const isHsnSubject = selectedSubject === "High Speed Networks" || selectedSubject === "HIGH SPEED NETWORKS";
   const isSnaSubject = selectedSubject === "Social Network Analysis" || selectedSubject === "SOCIAL NETWORK ANALYSIS";
-  const totalFiles = isAnn ? 11 : isPyDs ? 8 : isDcnSubject ? 2 : isCwtSubject ? 7 : isHsnSubject ? 9 : isSnaSubject ? 9 : units.reduce((s, [, u]) => s + u.files.length, 0);
+  const isCwsSubject = selectedSubject === "Cloud Web Services" || selectedSubject === "CLOUD WEB SERVICES";
+  const isIotSubject = selectedSubject === "IoT and its Applications" || selectedSubject === "IOT AND ITS APPLICATIONS" || selectedSubject === "IoT and Its Applications" || selectedSubject === "IOT AND ITS APPLICATIONS";
+  const totalFiles = isAnn ? 11 : isPyDs ? 8 : isDcnSubject ? 2 : isCwtSubject ? 7 : isHsnSubject ? 9 : isSnaSubject ? 9 : isCwsSubject ? 9 : isIotSubject ? 9 : units.reduce((s, [, u]) => s + u.files.length, 0);
 
   const isInfoSecurity = selectedSubject?.toUpperCase().includes("INFORMATION SECURITY");
   const isAdvancedSE = selectedSubject?.toUpperCase().includes("ADVANCED SOFTWARE ENGINEERING");
@@ -3363,6 +3391,8 @@ export default function Notes() {
   const isContemporaryWebTechnology = selectedSubject?.toUpperCase().includes("CONTEMPORARY WEB TECHNOLOGY") || selectedSubject?.toUpperCase().includes("CONTEMPORARY WEB TECHNOLOGIES");
   const isHighSpeedNetworks = selectedSubject?.toUpperCase().includes("HIGH SPEED NETWORKS");
   const isSocialNetworkAnalysis = selectedSubject?.toUpperCase().includes("SOCIAL NETWORK ANALYSIS");
+  const isCloudWebServices = selectedSubject?.toUpperCase().includes("CLOUD WEB SERVICES");
+  const isIotAndItsApplications = selectedSubject?.toUpperCase().includes("IOT AND ITS APPLICATIONS") || selectedSubject?.toUpperCase().includes("IOT AND ITS APPLICATIONS");
 
   const isEnglish = selectedSubject === "ENGLISH" || selectedSubject === "FOUNDATION ENGLISH - I" || selectedSubject === "Foundation English - III";
   const englishPdf = selectedSubject === "FOUNDATION ENGLISH - I"
@@ -4074,6 +4104,114 @@ export default function Notes() {
         </motion.div>
       )}
 
+      {/* Cloud Web Services PDF Notes List (rendered directly below Syllabus Table) */}
+      {isCloudWebServices && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 mt-6">
+          <div className="mb-5 flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm">
+                <FiDownload size={18} />
+              </div>
+              <div>
+                <h2 className="font-sans text-lg font-bold text-[#0F4C81]">
+                  Cloud Web Services — Lecture Notes
+                </h2>
+                <p className="text-[11px] text-[#6B7280]">
+                  9 individual lecture note PDFs
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setActivePodcast({
+                  title: "Cloud Web Services — Complete PG Revision",
+                  subtitle: "Module I to V Complete Syllabus Revision",
+                  syllabus: syllabusData?.map((s) => s.module).join(". ") || "Cloud Web Services PG syllabus concepts",
+                  subject: selectedSubject,
+                  year: selectedYear,
+                  semester: selectedSemester,
+                });
+              }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-4 py-2 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer font-mono"
+              title="Listen to AI Audio Podcast for all 5 Modules"
+            >
+              🎙️ AI Podcast
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {CLOUD_WEB_SERVICES_PDFS.map((file, idx) => (
+              <PdfFileCard
+                key={file.id}
+                file={{
+                  ...file,
+                  subject: selectedSubject,
+                  year: Number(selectedYear),
+                  semester: Number(selectedSemester),
+                  unit: `Lecture ${idx + 1}`,
+                }}
+                onView={(fileToView) => setViewingPdf(fileToView)}
+              />
+            ))}
+          </div>
+        </motion.div>
+      )}
+
+      {/* IoT and its Applications PDF Notes List (rendered directly below Syllabus Table) */}
+      {isIotAndItsApplications && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 mt-6">
+          <div className="mb-5 flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm">
+                <FiDownload size={18} />
+              </div>
+              <div>
+                <h2 className="font-sans text-lg font-bold text-[#0F4C81]">
+                  IoT and its Applications — Lecture Notes
+                </h2>
+                <p className="text-[11px] text-[#6B7280]">
+                  9 individual lecture note PDFs
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setActivePodcast({
+                  title: "IoT and its Applications — Complete PG Revision",
+                  subtitle: "Module I to V Complete Syllabus Revision",
+                  syllabus: syllabusData?.map((s) => s.module).join(". ") || "IoT and its Applications PG syllabus concepts",
+                  subject: selectedSubject,
+                  year: selectedYear,
+                  semester: selectedSemester,
+                });
+              }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-4 py-2 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer font-mono"
+              title="Listen to AI Audio Podcast for all 5 Modules"
+            >
+              🎙️ AI Podcast
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {IOT_AND_ITS_APPLICATIONS_PDFS.map((file, idx) => (
+              <PdfFileCard
+                key={file.id}
+                file={{
+                  ...file,
+                  subject: selectedSubject,
+                  year: Number(selectedYear),
+                  semester: Number(selectedSemester),
+                  unit: `Lecture ${idx + 1}`,
+                }}
+                onView={(fileToView) => setViewingPdf(fileToView)}
+              />
+            ))}
+          </div>
+        </motion.div>
+      )}
+
       {isEnglish && englishPdf && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
@@ -4268,7 +4406,7 @@ export default function Notes() {
         </motion.div>
       )}
 
-      {!isEnglish && !isPhp && !isPgCombined && !isInfoSecurity && !isArtificialNeuralNetwork && !isPythonForDataScience && !isDataCommunicationNetworking && !isContemporaryWebTechnology && !isHighSpeedNetworks && !isSocialNetworkAnalysis && subjectNotesData && units.length > 0 && (
+      {!isEnglish && !isPhp && !isPgCombined && !isInfoSecurity && !isArtificialNeuralNetwork && !isPythonForDataScience && !isDataCommunicationNetworking && !isContemporaryWebTechnology && !isHighSpeedNetworks && !isSocialNetworkAnalysis && !isCloudWebServices && !isIotAndItsApplications && subjectNotesData && units.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>
