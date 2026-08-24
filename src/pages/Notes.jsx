@@ -219,6 +219,30 @@ const IOT_AND_ITS_APPLICATIONS_PDFS = [
   { id: "iot-pdf-9", title: "Lecture Note 9 (rsl2024DD765CCD5F43295.pdf)", fileName: "rsl2024DD765CCD5F43295.pdf", fileId: "/Iot and its applications/rsl2024DD765CCD5F43295.pdf", type: "pdf" }
 ];
 
+const JAVA_ENTERPRISE_EDITION_PDFS = [
+  { id: "jee-pdf-1", title: "Lecture Note 1 (5-Components-J2EE.pdf)", fileName: "5-Components-J2EE.pdf", fileId: "/Java Enterprise Edition/5-Components-J2EE.pdf", type: "pdf" },
+  { id: "jee-pdf-2", title: "Lecture Note 2 (567155.567157.pdf)", fileName: "567155.567157.pdf", fileId: "/Java Enterprise Edition/567155.567157.pdf", type: "pdf" },
+  { id: "jee-pdf-3", title: "Lecture Note 3 (JEEFC.pdf)", fileName: "JEEFC.pdf", fileId: "/Java Enterprise Edition/JEEFC.pdf", type: "pdf" },
+  { id: "jee-pdf-4", title: "Lecture Note 4 (Lect15.pdf)", fileName: "Lect15.pdf", fileId: "/Java Enterprise Edition/Lect15.pdf", type: "pdf" },
+  { id: "jee-pdf-5", title: "Lecture Note 5 (Les17 Introduction to Spring framework.pdf)", fileName: "Les17 Introduction to Spring framework.pdf", fileId: "/Java Enterprise Edition/Les17 Introduction to Spring framework.pdf", type: "pdf" },
+  { id: "jee-pdf-6", title: "Lecture Note 6 (overview.pdf)", fileName: "overview.pdf", fileId: "/Java Enterprise Edition/overview.pdf", type: "pdf" },
+  { id: "jee-pdf-7", title: "Lecture Note 7 (rmi.v9.pdf)", fileName: "rmi.v9.pdf", fileId: "/Java Enterprise Edition/rmi.v9.pdf", type: "pdf" },
+  { id: "jee-pdf-8", title: "Lecture Note 8 (spring-data-jpa-reference.pdf)", fileName: "spring-data-jpa-reference.pdf", fileId: "/Java Enterprise Edition/spring-data-jpa-reference.pdf", type: "pdf" },
+  { id: "jee-pdf-9", title: "Lecture Note 9 (unit-3.pdf)", fileName: "unit-3.pdf", fileId: "/Java Enterprise Edition/unit-3.pdf", type: "pdf" }
+];
+
+const DISTRIBUTED_DATABASES_PDFS = [
+  { id: "ddb-pdf-1", title: "Lecture Note 1 (0911.4395v1.pdf)", fileName: "0911.4395v1.pdf", fileId: "/Distributed Databases/0911.4395v1.pdf", type: "pdf" },
+  { id: "ddb-pdf-2", title: "Lecture Note 2 (1_2h_Reliability_ozsu_ch12.pdf)", fileName: "1_2h_Reliability_ozsu_ch12.pdf", fileId: "/Distributed Databases/1_2h_Reliability_ozsu_ch12.pdf", type: "pdf" },
+  { id: "ddb-pdf-3", title: "Lecture Note 3 (2e_Query_Optimization_ozsu_ch8.pdf)", fileName: "2e_Query_Optimization_ozsu_ch8.pdf", fileId: "/Distributed Databases/2e_Query_Optimization_ozsu_ch8.pdf", type: "pdf" },
+  { id: "ddb-pdf-4", title: "Lecture Note 4 (45.pdf)", fileName: "45.pdf", fileId: "/Distributed Databases/45.pdf", type: "pdf" },
+  { id: "ddb-pdf-5", title: "Lecture Note 5 (DistributedTransactionManagement.pdf)", fileName: "DistributedTransactionManagement.pdf", fileId: "/Distributed Databases/DistributedTransactionManagement.pdf", type: "pdf" },
+  { id: "ddb-pdf-6", title: "Lecture Note 6 (Infor_Ma_2001_EFolmer.CV.pdf)", fileName: "Infor_Ma_2001_EFolmer.CV.pdf", fileId: "/Distributed Databases/Infor_Ma_2001_EFolmer.CV.pdf", type: "pdf" },
+  { id: "ddb-pdf-7", title: "Lecture Note 7 (ch02-ts-tk-architectures.pdf)", fileName: "ch02-ts-tk-architectures.pdf", fileId: "/Distributed Databases/ch02-ts-tk-architectures.pdf", type: "pdf" },
+  { id: "ddb-pdf-8", title: "Lecture Note 8 (ch19-4.pdf)", fileName: "ch19-4.pdf", fileId: "/Distributed Databases/ch19-4.pdf", type: "pdf" },
+  { id: "ddb-pdf-9", title: "Lecture Note 9 (computersurveys84.pdf)", fileName: "computersurveys84.pdf", fileId: "/Distributed Databases/computersurveys84.pdf", type: "pdf" }
+];
+
 const NOTES_DATA = {
   "PYTHON PROGRAMMING ESSENTIALS": {
     units: {
@@ -3182,14 +3206,16 @@ export default function Notes() {
               const isSna = subject === "Social Network Analysis" || subject === "SOCIAL NETWORK ANALYSIS";
               const isCws = subject === "Cloud Web Services" || subject === "CLOUD WEB SERVICES";
               const isIot = subject === "IoT and its Applications" || subject === "IOT AND ITS APPLICATIONS" || subject === "IoT and Its Applications" || subject === "IOT AND ITS APPLICATIONS";
-              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || isAnn || isPyDs || isDcn || isCwt || isHsn || isSna || isCws || isIot || (courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM"));
+              const isJee = subject === "Java Enterprise Edition" || subject === "JAVA ENTERPRISE EDITION";
+              const isDdb = subject === "Distributed Databases" || subject === "DISTRIBUTED DATABASES";
+              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || isAnn || isPyDs || isDcn || isCwt || isHsn || isSna || isCws || isIot || isJee || isDdb || (courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM"));
               const semesterFilter = NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(subject)
                 ? null : SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[subject];
               const filteredSubjectUnits = subjectData && semesterFilter
                 ? Object.entries(subjectData.units).filter(([key]) => semesterFilter.has(Number(key)))
                 : subjectData ? Object.entries(subjectData.units) : [];
               const isPgCombinedSubject = courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM");
-              const totalFiles = isAnn ? 11 : isPyDs ? 8 : isDcn ? 2 : isCwt ? 7 : isHsn ? 9 : isSna ? 9 : isCws ? 9 : isIot ? 9 : isPgCombinedSubject ? 1 : (filteredSubjectUnits.length > 0
+              const totalFiles = isAnn ? 11 : isPyDs ? 8 : isDcn ? 2 : isCwt ? 7 : isHsn ? 9 : isSna ? 9 : isCws ? 9 : isIot ? 9 : isJee ? 9 : isDdb ? 9 : isPgCombinedSubject ? 1 : (filteredSubjectUnits.length > 0
                 ? filteredSubjectUnits.reduce((s, [, u]) => s + u.files.length, 0)
                 : 0);
               const facultyName = courseType === "pg" && selectedYear === 1 && selectedSemester === 1
@@ -3381,7 +3407,9 @@ export default function Notes() {
   const isSnaSubject = selectedSubject === "Social Network Analysis" || selectedSubject === "SOCIAL NETWORK ANALYSIS";
   const isCwsSubject = selectedSubject === "Cloud Web Services" || selectedSubject === "CLOUD WEB SERVICES";
   const isIotSubject = selectedSubject === "IoT and its Applications" || selectedSubject === "IOT AND ITS APPLICATIONS" || selectedSubject === "IoT and Its Applications" || selectedSubject === "IOT AND ITS APPLICATIONS";
-  const totalFiles = isAnn ? 11 : isPyDs ? 8 : isDcnSubject ? 2 : isCwtSubject ? 7 : isHsnSubject ? 9 : isSnaSubject ? 9 : isCwsSubject ? 9 : isIotSubject ? 9 : units.reduce((s, [, u]) => s + u.files.length, 0);
+  const isJeeSubject = selectedSubject === "Java Enterprise Edition" || selectedSubject === "JAVA ENTERPRISE EDITION";
+  const isDdbSubject = selectedSubject === "Distributed Databases" || selectedSubject === "DISTRIBUTED DATABASES";
+  const totalFiles = isAnn ? 11 : isPyDs ? 8 : isDcnSubject ? 2 : isCwtSubject ? 7 : isHsnSubject ? 9 : isSnaSubject ? 9 : isCwsSubject ? 9 : isIotSubject ? 9 : isJeeSubject ? 9 : isDdbSubject ? 9 : units.reduce((s, [, u]) => s + u.files.length, 0);
 
   const isInfoSecurity = selectedSubject?.toUpperCase().includes("INFORMATION SECURITY");
   const isAdvancedSE = selectedSubject?.toUpperCase().includes("ADVANCED SOFTWARE ENGINEERING");
@@ -3393,6 +3421,8 @@ export default function Notes() {
   const isSocialNetworkAnalysis = selectedSubject?.toUpperCase().includes("SOCIAL NETWORK ANALYSIS");
   const isCloudWebServices = selectedSubject?.toUpperCase().includes("CLOUD WEB SERVICES");
   const isIotAndItsApplications = selectedSubject?.toUpperCase().includes("IOT AND ITS APPLICATIONS") || selectedSubject?.toUpperCase().includes("IOT AND ITS APPLICATIONS");
+  const isJavaEnterpriseEdition = selectedSubject?.toUpperCase().includes("JAVA ENTERPRISE EDITION");
+  const isDistributedDatabases = selectedSubject?.toUpperCase().includes("DISTRIBUTED DATABASES");
 
   const isEnglish = selectedSubject === "ENGLISH" || selectedSubject === "FOUNDATION ENGLISH - I" || selectedSubject === "Foundation English - III";
   const englishPdf = selectedSubject === "FOUNDATION ENGLISH - I"
@@ -4212,6 +4242,114 @@ export default function Notes() {
         </motion.div>
       )}
 
+      {/* Java Enterprise Edition PDF Notes List (rendered directly below Syllabus Table) */}
+      {isJavaEnterpriseEdition && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 mt-6">
+          <div className="mb-5 flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm">
+                <FiDownload size={18} />
+              </div>
+              <div>
+                <h2 className="font-sans text-lg font-bold text-[#0F4C81]">
+                  Java Enterprise Edition — Lecture Notes
+                </h2>
+                <p className="text-[11px] text-[#6B7280]">
+                  9 individual lecture note PDFs
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setActivePodcast({
+                  title: "Java Enterprise Edition — Complete PG Revision",
+                  subtitle: "Module I to V Complete Syllabus Revision",
+                  syllabus: syllabusData?.map((s) => s.module).join(". ") || "Java Enterprise Edition PG syllabus concepts",
+                  subject: selectedSubject,
+                  year: selectedYear,
+                  semester: selectedSemester,
+                });
+              }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-4 py-2 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer font-mono"
+              title="Listen to AI Audio Podcast for all 5 Modules"
+            >
+              🎙️ AI Podcast
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {JAVA_ENTERPRISE_EDITION_PDFS.map((file, idx) => (
+              <PdfFileCard
+                key={file.id}
+                file={{
+                  ...file,
+                  subject: selectedSubject,
+                  year: Number(selectedYear),
+                  semester: Number(selectedSemester),
+                  unit: `Lecture ${idx + 1}`,
+                }}
+                onView={(fileToView) => setViewingPdf(fileToView)}
+              />
+            ))}
+          </div>
+        </motion.div>
+      )}
+
+      {/* Distributed Databases PDF Notes List (rendered directly below Syllabus Table) */}
+      {isDistributedDatabases && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 mt-6">
+          <div className="mb-5 flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm">
+                <FiDownload size={18} />
+              </div>
+              <div>
+                <h2 className="font-sans text-lg font-bold text-[#0F4C81]">
+                  Distributed Databases — Lecture Notes
+                </h2>
+                <p className="text-[11px] text-[#6B7280]">
+                  9 individual lecture note PDFs
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setActivePodcast({
+                  title: "Distributed Databases — Complete PG Revision",
+                  subtitle: "Module I to V Complete Syllabus Revision",
+                  syllabus: syllabusData?.map((s) => s.module).join(". ") || "Distributed Databases PG syllabus concepts",
+                  subject: selectedSubject,
+                  year: selectedYear,
+                  semester: selectedSemester,
+                });
+              }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-4 py-2 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer font-mono"
+              title="Listen to AI Audio Podcast for all 5 Modules"
+            >
+              🎙️ AI Podcast
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {DISTRIBUTED_DATABASES_PDFS.map((file, idx) => (
+              <PdfFileCard
+                key={file.id}
+                file={{
+                  ...file,
+                  subject: selectedSubject,
+                  year: Number(selectedYear),
+                  semester: Number(selectedSemester),
+                  unit: `Lecture ${idx + 1}`,
+                }}
+                onView={(fileToView) => setViewingPdf(fileToView)}
+              />
+            ))}
+          </div>
+        </motion.div>
+      )}
+
       {isEnglish && englishPdf && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
@@ -4406,7 +4544,7 @@ export default function Notes() {
         </motion.div>
       )}
 
-      {!isEnglish && !isPhp && !isPgCombined && !isInfoSecurity && !isArtificialNeuralNetwork && !isPythonForDataScience && !isDataCommunicationNetworking && !isContemporaryWebTechnology && !isHighSpeedNetworks && !isSocialNetworkAnalysis && !isCloudWebServices && !isIotAndItsApplications && subjectNotesData && units.length > 0 && (
+      {!isEnglish && !isPhp && !isPgCombined && !isInfoSecurity && !isArtificialNeuralNetwork && !isPythonForDataScience && !isDataCommunicationNetworking && !isContemporaryWebTechnology && !isHighSpeedNetworks && !isSocialNetworkAnalysis && !isCloudWebServices && !isIotAndItsApplications && !isJavaEnterpriseEdition && !isDistributedDatabases && subjectNotesData && units.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>
