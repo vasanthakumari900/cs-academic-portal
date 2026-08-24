@@ -156,6 +156,21 @@ const PYTHON_FOR_DATA_SCIENCE_PDFS = [
   { id: "pyds-pdf-8", title: "Lecture Note 8 (rsl2024DB006E6BF3D0BD7.pdf)", fileName: "rsl2024DB006E6BF3D0BD7.pdf", fileId: "/python for datascience.pdf/rsl2024DB006E6BF3D0BD7.pdf", type: "pdf" }
 ];
 
+const DATA_COMMUNICATION_NETWORKING_PDFS = [
+  { id: "dcn-pdf-1", title: "Lecture Note 1 (COMPUTER NETWORKS NOTES.pdf)", fileName: "COMPUTER NETWORKS NOTES.pdf", fileId: "/Data communication and networking/COMPUTER NETWORKS NOTES.pdf", type: "pdf" },
+  { id: "dcn-pdf-2", title: "Lecture Note 2 (SITA1401.pdf)", fileName: "SITA1401.pdf", fileId: "/Data communication and networking/SITA1401.pdf", type: "pdf" }
+];
+
+const CONTEMPORARY_WEB_TECHNOLOGY_PDFS = [
+  { id: "cwt-pdf-1", title: "Lecture Note 1 (1435061496Web Technologies.pdf)", fileName: "1435061496Web Technologies.pdf", fileId: "/Contemporary web technologies/1435061496Web Technologies.pdf", type: "pdf" },
+  { id: "cwt-pdf-2", title: "Lecture Note 2 (CSS Box Shadow.pdf)", fileName: "CSS Box Shadow.pdf", fileId: "/Contemporary web technologies/CSS Box Shadow.pdf", type: "pdf" },
+  { id: "cwt-pdf-3", title: "Lecture Note 3 (HTML-CSS-Box-Shadow.pdf)", fileName: "HTML-CSS-Box-Shadow.pdf", fileId: "/Contemporary web technologies/HTML-CSS-Box-Shadow.pdf", type: "pdf" },
+  { id: "cwt-pdf-4", title: "Lecture Note 4 (Introduction_to_HTML_5.pdf)", fileName: "Introduction_to_HTML_5.pdf", fileId: "/Contemporary web technologies/Introduction_to_HTML_5.pdf", type: "pdf" },
+  { id: "cwt-pdf-5", title: "Lecture Note 5 (Unit-8.pdf)", fileName: "Unit-8.pdf", fileId: "/Contemporary web technologies/Unit-8.pdf", type: "pdf" },
+  { id: "cwt-pdf-6", title: "Lecture Note 6 (WEB DESIGNING module2.pdf)", fileName: "WEB DESIGNING module2.pdf", fileId: "/Contemporary web technologies/WEB DESIGNING module2.pdf", type: "pdf" },
+  { id: "cwt-pdf-7", title: "Lecture Note 7 (a-comparison-between-nosql-and-rdbms-storage-and-retrieva20230705011623.pdf)", fileName: "a-comparison-between-nosql-and-rdbms-storage-and-retrieva20230705011623.pdf", fileId: "/Contemporary web technologies/a-comparison-between-nosql-and-rdbms-storage-and-retrieva20230705011623.pdf", type: "pdf" }
+];
+
 const NOTES_DATA = {
   "PYTHON PROGRAMMING ESSENTIALS": {
     units: {
@@ -3113,14 +3128,16 @@ export default function Notes() {
               const subjectData = isNameOnly ? null : NOTES_DATA[subject];
               const isAnn = subject === "Artificial Neural Network" || subject === "ARTIFICIAL NEURAL NETWORK" || subject === "Artificial Neural Networks" || subject === "ARTIFICIAL NEURAL NETWORKS";
               const isPyDs = subject === "Python for Data Science" || subject === "PYTHON FOR DATA SCIENCE";
-              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || isAnn || isPyDs || (courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM"));
+              const isDcn = subject === "Data Communication and Networking" || subject === "DATA COMMUNICATION AND NETWORKING";
+              const isCwt = subject === "Contemporary Web Technologies" || subject === "CONTEMPORARY WEB TECHNOLOGIES" || subject === "Contemporary Web Technology" || subject === "CONTEMPORARY WEB TECHNOLOGY";
+              const hasNotes = (subjectData && Object.values(subjectData.units).some(u => u.files.length > 0)) || isAnn || isPyDs || isDcn || isCwt || (courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM"));
               const semesterFilter = NAME_ONLY_MAP[`${selectedYear}-${selectedSemester}`]?.has(subject)
                 ? null : SEMESTER_UNITS[`${selectedYear}-${selectedSemester}`]?.[subject];
               const filteredSubjectUnits = subjectData && semesterFilter
                 ? Object.entries(subjectData.units).filter(([key]) => semesterFilter.has(Number(key)))
                 : subjectData ? Object.entries(subjectData.units) : [];
               const isPgCombinedSubject = courseType === "pg" && (subject.includes("Advanced Database Management System") || subject === "Advanced Design and Analysis of Algorithms" || subject === "DOT NET Technology" || subject === "DOT NET TECHNOLOGY" || subject === "Digital Image Processing" || subject === "Big Data Analytics" || subject === "BIG DATA ANALYTICS" || subject === "Artificial Intelligence and Machine Learning Techniques" || subject === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING TECHNIQUES" || subject === "Data Mining Techniques" || subject === "Mobile Network System" || subject === "MOBILE NETWORK SYSTEM");
-              const totalFiles = isAnn ? 11 : isPyDs ? 8 : isPgCombinedSubject ? 1 : (filteredSubjectUnits.length > 0
+              const totalFiles = isAnn ? 11 : isPyDs ? 8 : isDcn ? 2 : isCwt ? 7 : isPgCombinedSubject ? 1 : (filteredSubjectUnits.length > 0
                 ? filteredSubjectUnits.reduce((s, [, u]) => s + u.files.length, 0)
                 : 0);
               const facultyName = courseType === "pg" && selectedYear === 1 && selectedSemester === 1
@@ -3306,12 +3323,16 @@ export default function Notes() {
   
   const isAnn = selectedSubject === "Artificial Neural Network" || selectedSubject === "ARTIFICIAL NEURAL NETWORK" || selectedSubject === "Artificial Neural Networks" || selectedSubject === "ARTIFICIAL NEURAL NETWORKS";
   const isPyDs = selectedSubject === "Python for Data Science" || selectedSubject === "PYTHON FOR DATA SCIENCE";
-  const totalFiles = isAnn ? 11 : isPyDs ? 8 : units.reduce((s, [, u]) => s + u.files.length, 0);
+  const isDcnSubject = selectedSubject === "Data Communication and Networking" || selectedSubject === "DATA COMMUNICATION AND NETWORKING";
+  const isCwtSubject = selectedSubject === "Contemporary Web Technologies" || selectedSubject === "CONTEMPORARY WEB TECHNOLOGIES" || selectedSubject === "Contemporary Web Technology" || selectedSubject === "CONTEMPORARY WEB TECHNOLOGY";
+  const totalFiles = isAnn ? 11 : isPyDs ? 8 : isDcnSubject ? 2 : isCwtSubject ? 7 : units.reduce((s, [, u]) => s + u.files.length, 0);
 
   const isInfoSecurity = selectedSubject?.toUpperCase().includes("INFORMATION SECURITY");
   const isAdvancedSE = selectedSubject?.toUpperCase().includes("ADVANCED SOFTWARE ENGINEERING");
   const isArtificialNeuralNetwork = selectedSubject?.toUpperCase().includes("ARTIFICIAL NEURAL NETWORK") || selectedSubject?.toUpperCase().includes("ARTIFICIAL NEURAL NETWORKS");
   const isPythonForDataScience = selectedSubject?.toUpperCase().includes("PYTHON FOR DATA SCIENCE");
+  const isDataCommunicationNetworking = selectedSubject?.toUpperCase().includes("DATA COMMUNICATION AND NETWORKING");
+  const isContemporaryWebTechnology = selectedSubject?.toUpperCase().includes("CONTEMPORARY WEB TECHNOLOGY") || selectedSubject?.toUpperCase().includes("CONTEMPORARY WEB TECHNOLOGIES");
 
   const isEnglish = selectedSubject === "ENGLISH" || selectedSubject === "FOUNDATION ENGLISH - I" || selectedSubject === "Foundation English - III";
   const englishPdf = selectedSubject === "FOUNDATION ENGLISH - I"
@@ -3807,6 +3828,114 @@ export default function Notes() {
         </motion.div>
       )}
 
+      {/* Data Communication and Networking PDF Notes List (rendered directly below Syllabus Table) */}
+      {isDataCommunicationNetworking && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 mt-6">
+          <div className="mb-5 flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm">
+                <FiDownload size={18} />
+              </div>
+              <div>
+                <h2 className="font-sans text-lg font-bold text-[#0F4C81]">
+                  Data Communication and Networking — Lecture Notes
+                </h2>
+                <p className="text-[11px] text-[#6B7280]">
+                  2 individual lecture note PDFs
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setActivePodcast({
+                  title: "Data Communication and Networking — Complete PG Revision",
+                  subtitle: "Module I to V Complete Syllabus Revision",
+                  syllabus: syllabusData?.map((s) => s.module).join(". ") || "Data Communication and Networking PG syllabus concepts",
+                  subject: selectedSubject,
+                  year: selectedYear,
+                  semester: selectedSemester,
+                });
+              }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-4 py-2 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer font-mono"
+              title="Listen to AI Audio Podcast for all 5 Modules"
+            >
+              🎙️ AI Podcast
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {DATA_COMMUNICATION_NETWORKING_PDFS.map((file, idx) => (
+              <PdfFileCard
+                key={file.id}
+                file={{
+                  ...file,
+                  subject: selectedSubject,
+                  year: Number(selectedYear),
+                  semester: Number(selectedSemester),
+                  unit: `Lecture ${idx + 1}`,
+                }}
+                onView={(fileToView) => setViewingPdf(fileToView)}
+              />
+            ))}
+          </div>
+        </motion.div>
+      )}
+
+      {/* Contemporary Web Technology PDF Notes List (rendered directly below Syllabus Table) */}
+      {isContemporaryWebTechnology && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 mt-6">
+          <div className="mb-5 flex items-center justify-between flex-wrap gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm">
+                <FiDownload size={18} />
+              </div>
+              <div>
+                <h2 className="font-sans text-lg font-bold text-[#0F4C81]">
+                  Contemporary Web Technology — Lecture Notes
+                </h2>
+                <p className="text-[11px] text-[#6B7280]">
+                  7 individual lecture note PDFs
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setActivePodcast({
+                  title: "Contemporary Web Technologies — Complete PG Revision",
+                  subtitle: "Module I to V Complete Syllabus Revision",
+                  syllabus: syllabusData?.map((s) => s.module).join(". ") || "Contemporary Web Technologies PG syllabus concepts",
+                  subject: selectedSubject,
+                  year: selectedYear,
+                  semester: selectedSemester,
+                });
+              }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500 via-rose-500 to-[#C50337] px-4 py-2 text-xs font-black text-white shadow-md hover:scale-105 transition-all cursor-pointer font-mono"
+              title="Listen to AI Audio Podcast for all 5 Modules"
+            >
+              🎙️ AI Podcast
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {CONTEMPORARY_WEB_TECHNOLOGY_PDFS.map((file, idx) => (
+              <PdfFileCard
+                key={file.id}
+                file={{
+                  ...file,
+                  subject: selectedSubject,
+                  year: Number(selectedYear),
+                  semester: Number(selectedSemester),
+                  unit: `Lecture ${idx + 1}`,
+                }}
+                onView={(fileToView) => setViewingPdf(fileToView)}
+              />
+            ))}
+          </div>
+        </motion.div>
+      )}
+
       {isEnglish && englishPdf && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
@@ -4001,7 +4130,7 @@ export default function Notes() {
         </motion.div>
       )}
 
-      {!isEnglish && !isPhp && !isPgCombined && !isInfoSecurity && !isArtificialNeuralNetwork && !isPythonForDataScience && subjectNotesData && units.length > 0 && (
+      {!isEnglish && !isPhp && !isPgCombined && !isInfoSecurity && !isArtificialNeuralNetwork && !isPythonForDataScience && !isDataCommunicationNetworking && !isContemporaryWebTechnology && subjectNotesData && units.length > 0 && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <div className="mb-5 flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0F4C81] text-white shadow-sm"><FiDownload size={18} /></div>
